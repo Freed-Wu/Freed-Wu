@@ -1,0 +1,7 @@
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+if [[ $OSTYPE == linux-android ]]; then
+	xfce4-session &
+else
+	gnome-session &
+fi

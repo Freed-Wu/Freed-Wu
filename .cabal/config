@@ -10,8 +10,8 @@
 -- Cabal library version: 1.24.2.0
 -- cabal-install version: 1.24.0.2
 
-repository mirrors.tuna.tsinghua.edu.cn
-  url: http://mirrors.tuna.tsinghua.edu.cn/hackage
+repository mirrors.bfsu.edu.cn
+  url: http://mirrors.bfsu.edu.cn/hackage
 -- repository hackage.haskell.org
   -- url: http://hackage.haskell.org/
   -- secure: False

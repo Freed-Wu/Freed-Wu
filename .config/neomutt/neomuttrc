@@ -1,71 +1,139 @@
-source `echo $XDG_CONFIG_HOME`/neomutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+source `[[ -n $DISPLAY ]] && echo /dev/null || ([[ $TERM == linux ]] && echo $XDG_CONFIG_HOME/neomutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc || echo $XDG_CONFIG_HOME/neomutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc)`
 
-set use_from = yes
-set envelope_from = yes
-set move = yes
+set shell = ''
+set attach_save_dir = ~/Downloads
+set digest_collapse = no
+set use_envelope_from
+set move
 set include
-set charset = 'utf-8'
-set ascii_chars = yes
-set quit = ask-yes
-set edit_headers = yes
-set mbox_type = Maildir
-set rfc2047_parameters = yes
+set menu_scroll
+set ispell = aspell
+set charset = utf-8
+set edit_headers
+set rfc2047_parameters
+set signature = 'figlet $USER|'
 set sort = reverse-date
-set indent_str = '> '
-set sidebar_visible = yes
+set query_command = 'mutt_ldap_query.pl %s'
+set quit = ask-yes
+set abort_unmodified = ask-yes
+set auto_tag
+set x_comment_to
 auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
 
-set sendmail = '/usr/bin/msmtp'
-set realname = `git config --global user.name`
-set from = `git config --global user.email`
+set folder = imaps://imap.qq.com:993
+set imap_user = $EMAIL
+set imap_pass = $EMAIL_PASS
+set sendmail = msmtp
 
-set folder = `echo ${XDG_DATA_HOME:-$HOME/.local/share}/mail`
-set mbox = +mbox
-set spoolfile = +inbox
-set record = +sent
-set postponed = +drafts
-mailboxes +inbox +mbox +drafts +sent
+set mail_check_stats
+set sidebar_visible
+set sidebar_format = '%B%* %n%o/%S'
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_indent_string = '├── '
+set postponed = +Drafts
+set record = '+Sent Messages'
+set trash = '+Deleted Messages'
+mailboxes +INBOX +Drafts '+Sent Messages' '+Deleted Messages' +Junk \
++其他文件夹 +其他文件夹/github +其他文件夹/bugzilla +其他文件夹/wakatime \
++其他文件夹/people +其他文件夹/class +其他文件夹/vertification \
++其他文件夹/QQ邮件订阅
 
-# Moving around
-bind attach,browser,index g noop
-bind attach,browser,index gg first-entry
-bind attach,browser,index G last-entry
-bind pager g noop
+# Handler for gzip compressed mailboxes
+open-hook   '\.gz$' "gzip --stdout --decompress '%f' >  '%t'"
+close-hook  '\.gz$' "gzip --stdout              '%t' >  '%f'"
+append-hook '\.gz$' "gzip --stdout              '%t' >> '%f'"
+# Handler for bzip2 compressed mailboxes
+open-hook   '\.bz2$' "bzip2 --stdout --decompress '%f' >  '%t'"
+close-hook  '\.bz2$' "bzip2 --stdout              '%t' >  '%f'"
+append-hook '\.bz2$' "bzip2 --stdout              '%t' >> '%f'"
+# Handler for xz compressed mailboxes
+open-hook   '\.xz$' "xz --stdout --decompress '%f' >  '%t'"
+close-hook  '\.xz$' "xz --stdout              '%t' >  '%f'"
+append-hook '\.xz$' "xz --stdout              '%t' >> '%f'"
+# Handler for pgp encrypted mailboxes
+# PGP does not support appending to an encrypted file
+open-hook   '\.pgp$' "pgp -f < '%f' > '%t'"
+close-hook  '\.pgp$' "pgp -fe YourPgpUserIdOrKeyId < '%t' > '%f'"
+# Handler for gpg encrypted mailboxes
+# gpg does not support appending to an encrypted file
+open-hook   '\.gpg$' "gpg --decrypt < '%f' > '%t'"
+close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId < '%t' > '%f'"
+
+bind pager,index,attach,browser g noop
+bind pager,index,attach,browser z noop
+bind pager,index,attach,browser [ noop
+bind pager,index,attach,browser ] noop
 bind pager gg top
 bind pager G bottom
+bind index,attach,browser gg first-entry
+bind index,attach,browser G last-entry
 bind pager k previous-line
 bind pager j next-line
-
-# Scrolling
-bind attach,browser,pager,index D next-page
-bind attach,browser,pager,index U previous-page
-bind attach,browser,pager,index u half-up
-bind attach,browser,pager,index d half-down
-bind browser,pager \Ce next-line
-bind browser,pager \Cy previous-line
-bind index \Ce next-line
-bind index \Cy previous-line
-
-bind pager,index x noop
-bind pager,index X delete-message
-
-# Mail & Reply
-bind index gp list-reply # Doesn't work currently
-
-# Threads
-bind browser,pager,index N search-opposite
-bind pager,index xT delete-thread
-bind pager,index xt delete-subthread
-bind pager,index gt next-thread
-bind pager,index gT previous-thread
+bind index,attach,browser k previous-entry
+bind index,attach,browser j next-entry
+bind pager,index \cK previous-entry
+bind pager,index \cJ next-entry
+bind pager,index gK previous-undeleted
+bind pager,index gJ next-undeleted
+bind pager,index [[ previous-unread
+bind pager,index ]] next-unread
+bind pager,index [] previous-new
+bind pager,index ][ next-new
+bind pager,index,compose gE edit-type
+bind pager,index,compose gd edit-description
+bind pager,index,compose gu toggle-unlink
+bind pager,index,attach,browser,compose \ce next-line
+bind pager,index,attach,browser,compose \cy previous-line
+bind pager,index,attach,browser,compose u half-up
+bind pager,index,attach,browser,compose d half-down
+bind pager,index,attach,browser D next-page
+bind pager,index,attach,browser U previous-page
+bind pager,index,attach,browser g? help
+bind pager,index,attach,browser ? search-opposite
+bind pager,index K sidebar-prev
+bind pager,index J sidebar-next
+bind pager,index gk sidebar-prev-new
+bind pager,index gj sidebar-next-new
+bind pager,index \cu sidebar-page-up
+bind pager,index \cd sidebar-page-down
+bind pager,index O sidebar-open
+bind pager,index \ch sidebar-toggle-visible
+bind pager,index <BackSpace> sidebar-toggle-visible
+bind pager,index gK what-key
+bind index gx extract-keys
 bind index za collapse-thread
-bind index zA collapse-all # Missing :folddisable/foldenable
+bind index zA collapse-all
+bind index \cr sync-mailbox
+bind index gJ next-unread-mailbox
+bind index \co previous-new-then-unread
+bind index gr group-reply
+bind index gR list-reply
+unbind index,attach L
+bind index I show-log-messages
+unbind index,attach M
+bind index C edit-label
+bind index y copy-message
+bind index o display-message
+bind browser + sort
+bind browser - sort-reverse
+bind index = check-stats
+bind index gf fetch-mail
+bind index gu undelete-message
+bind index gU undelete-pattern
+bind index g\cu undelete-thread
+bind index x delete-message
+bind index X delete-pattern
+bind index \cx delete-thread
+bind index <Esc>x delete-subthread
+bind index gm mark-message
+bind index g/ root-message
+bind index ~ toggle-read
+bind pager,index gs compose-to-sender
 
-bind index,pager \Cp sidebar-prev
-bind index,pager \Cn sidebar-next
-bind index,pager \Co sidebar-open
-bind index,pager \Cu sidebar-page-up
-bind index,pager \Cd sidebar-page-down
-bind index,pager \Cb sidebar-prev-new
-bind index,pager \Cf sidebar-next-new
-bind index,pager 0 sidebar-toggle-visible
+macro pager,index,attach \cb "\
+				<enter-command> set my_pdsave=\$pipe_decode<enter>\
+				<enter-command> unset pipe_decode<enter>\
+				<pipe-message>extract_url<enter>\
+				<enter-command> set pipe_decode=\$my_pdsave<enter>" \
+				"get URLs"

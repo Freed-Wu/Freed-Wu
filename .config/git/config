@@ -23,6 +23,7 @@
 [diff]
 	submodule = log
 	tool = vimdiff
+	colorMoved = default
 [status]
 	submodulesummary = 1
 [submodule]
@@ -31,4 +32,16 @@
 	helper = store --file $XDG_DATA_HOME/git-credentials
 [core]
 	autocrlf = input
-	excludesfile = /home/wzy/.config/git/.gitignore_global
+[pager]
+	diff = delta
+	log = delta
+	reflog = delta
+	show = delta
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = true
+[interactive]
+	diffFilter = delta --color-only
+[url "https://hub.fastgit.org/"]
+	insteadOf = https://github.com/

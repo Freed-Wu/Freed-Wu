@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/env expect
+set timeout 30
+spawn telnet 192.168.1.1
+expect "tc login: "
+send "admin\r"
+expect "Password: "
+send "s2@We3%Dc#\r"
+interact

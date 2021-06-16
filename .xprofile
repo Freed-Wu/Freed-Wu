@@ -1,27 +1,92 @@
-if [[ `uname -o` == 'Msys' ]]; then
-	export SHELL=/bin/zsh
-elif [[ `uname -o` == 'Android' ]]; then
-	source ~/.termux/boot/zshrc
-fi
-# system
-export PATH=$HOME/.local/bin:$HOME/.cabal/bin:$HOME/go/bin:$HOME/.gem/ruby/2.7.0/bin:$PATH
-export CACA_DRIVER=ncurses
-export EDITOR=/usr/bin/vi
-export PAGER='/usr/bin/vi -c PAGER -'
-export MANPAGER='/usr/bin/vi -c MANPAGER -'
-# xdg
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CACHE_HOME=$HOME/.cache
-export WAKATIME_HOME=$XDG_DATA_HOME/nvim
-export GNUPGHOME=$XDG_CONFIG_HOME/gnupg
-# vim
-export GITHUBWORKSPACE=$HOME/.vim/repos/github.com
+# any X program like gvim will source this file.
+# this file cannot include `if/then/fi`,
+# because X don't support.
+# posix
+# the following line will be ineffective in tty
+export PATH=$HOME/Applications:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/perl5/bin:$PATH
+export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
+export VISUAL=vi
+export EDITOR=$VISUAL
+export BROWSER=xdg-open
+# kitty
+export GLFW_IM_MODULE=ibus
 # zsh
-export ZSH=$HOME/.zinit/plugins/ohmyzsh---ohmyzsh
-# julia
-export JULIA_NUM_THREADS=4
-export JULIA_PKG_SERVER=https://kr.pkg.julialang.org
-export GKS_ENCODING=utf-8
+export WORDCHARS=
+# less
+export LESS='-R -M --mouse'
+export LESSOPEN='|lesspipe %s'
+# lesspipe
+export LESSCOLOR=yes
+export LESSCOLORIZER='bat --color always'
+# man
+export MANPAGER="sh -c 'col -bx|bat -plman'"
+export MANPATH=$HOME/.local/share/man:$MANPATH
+# enhancd
+export ENHANCD_COMMAND=__enhancd::cd
+# fzf
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_OPTS='-m
+--preview "[[ -f {} ]] && bat --color=always {} || ([[ -d {} ]] && exa --git -hl --color=always --icons {})"
+--bind=ctrl-k:kill-line
+--bind=ctrl-j:first
+--bind=ctrl-alt-r:toggle-preview
+--bind=ctrl-alt-R:toggle-preview-wrap
+--bind=alt-s:toggle-search
+--bind=alt-S:toggle-sort
+--bind=ctrl-alt-i:toggle
+--bind=ctrl-alt-I:toggle-all
+--bind=alt-p:preview-up
+--bind=alt-n:preview-down
+--bind=ctrl-v:preview-page-down
+--bind=alt-v:preview-page-up
+--bind=ctrl-alt-v:preview-half-page-down
+--bind=alt-V:preview-half-page-up
+--bind=alt-a:preview-top
+--bind=alt-e:preview-bottom'
+# emoji-fzf.zsh
+export EMOJI_FZF_BINDKEY=^X^I
+# forgit
+export FORGIT_COPY_CMD='xsel -ib'
+# has
+export HAS_ALLOW_UNSAFE=y
+# zsh-vim-mode
+export MODE_CURSOR_VIINS='blinking bar'
+export MODE_CURSOR_REPLACE='blinking underline'
+export MODE_CURSOR_VICMD='blinking block'
+export MODE_CURSOR_SEARCH=underline
+export MODE_CURSOR_VISUAL=block
+export MODE_CURSOR_VLINE=bar
+# zsh-system-clipboard
+export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
+# todo.sh
+export TODO_DIR=~/.local/share/todo.txt
+# hub
+export GITHUB_USER=`git config --global user.name`
+# ls
+export LS_COLORS=`vivid generate molokai`
+# mutt
+export MAIL=+inbox
+export EMAIL=`git config --global user.email`
+# minicom
+export MINICOM='-m -w -8 -c on -C /tmp/minicom.log'
+# trans
+export TARGET_LANG=zh
+# libcaca
+export CACA_DRIVER=ncurses
+# ccache
+export USE_CCACHE=1
 # python
 export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
+# pylint
+export PYTHONPATH=$HOME/.local/lib/python3.8/site-packages
+# pudb
+export PYTHONBREAKPOINT=pudb.forked.set_trace
+# julia
+export JULIA_NUM_THREADS=4
+export JULIA_PKG_SERVER=https://mirrors.bfsu.edu.cn/julia
+export GKS_ENCODING=utf-8

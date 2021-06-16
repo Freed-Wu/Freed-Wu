@@ -1,24 +1,17 @@
-my-dotfiles
-===========
+# my-dotfiles
 
-A backup of the configuration files.
+Keep all my computers' configurations same.
+
+`~/.config/nvim` is not included because it is too heavy.
 
 - Gentoo/Linux
-- termux/Android/Linux
-- Ubuntu/wsl2/NT
-- Msys2/NT
-- Windows/NT
+- Deepin/Linux
+- Android/Linux (Termux)
+- Windows/NT (Cygwin|Msys)
 
-See [.gitignore](.gitignore).
+## Others
 
-[my-init.vim](https://github.com/Freed-Wu/my-init.vim): Configure nvim.
-
-[my-keymaps](https://github.com/Freed-Wu/my-keymaps): Configure keymaps in
-console.
-
-[my-x11-keymaps](https://github.com/Freed-Wu/my-x11-keymaps): Configure
-keymaps in X11.
-
-[my-etc](https://github.com/Freed-Wu/my-etc): Configure `/etc`.
-
-[my-misc](http://github.com/Freed-Wu/my-misc): The miscellaneous.
+- [my-init.vim](https://github.com/Freed-Wu/my-init.vim)
+- [my-keymaps](https://github.com/Freed-Wu/my-keymaps)
+- [my-x11-keymaps](https://github.com/Freed-Wu/my-x11-keymaps)
+- [my-portage](https://github.com/Freed-Wu/my-portage)

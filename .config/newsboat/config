@@ -1,0 +1,27 @@
+bind-key k up
+bind-key j down
+bind-key u pageup
+bind-key d pagedown
+bind-key U pageup
+bind-key D pagedown
+bind-key g home
+bind-key G end
+bind-key + sort
+bind-key - rev-sort
+bind-key = show-urls
+bind-key [ prev-dialog
+bind-key ] next-dialog
+bind-key ; macro-prefix
+bind-key x delete-article
+bind-key X delete-all-articles
+
+bookmark-cmd "echo -e \"$1\t$2\t$3\t$4\" >> ~/.config/newsboat/bookmarks.txt"
+error-log ~/.local/share/newsboat/error.log
+include ~/.config/newsboat/colorschems/solarized-dark
+save-path ~/Downloads
+
+urls-source oldreader
+oldreader-login `echo $EMAIL`
+oldreader-passwordfile ~/.config/newsboat/oldreader-password.txt
+oldreader-flag-share @
+oldreader-flag-star *

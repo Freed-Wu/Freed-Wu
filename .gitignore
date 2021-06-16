@@ -5,12 +5,15 @@
 !/README.md
 
 # dotfile
+!/.profile
 !/.xprofile
-!/.bashrc
+!/.xinitrc
 !/.bash_profile
-!/.zshrc
+!/.bashrc
 !/.zprofile
+!/.zshrc
 !/.p10k.zsh
+!/.Rprofile
 !/.fbtermrc
 !/.astylerc
 !/.octaverc
@@ -20,17 +23,18 @@
 !/.ccls
 !/.mailcap
 !/.signature
-!/.tmux.conf
 !/.bastetrc
 !/.npmrc
 !/.spacemacs
+!/.condarc
+!/.screenrc
+!/.pylintrc
+!/.lesskey
 
 # dotfiles
-!/.emacs.d
-!/.pandoc/
 !/.dosbox/
 /.dosbox/*
-!/.dosbox/dosbox-0.74-3.conf
+!/.dosbox/dosbox-*.conf
 !/.ctags.d/
 /.ctags.d/*
 !/.ctags.d/*.ctags
@@ -40,13 +44,9 @@
 !/.vim/
 /.vim/*
 !/.vim/vimrc
-!/.vim/gvimrc
 !/.w3m/
 /.w3m/*
 !/.w3m/keymap
-!/.pip/
-/.pip/*
-!/.pip/pip3.conf
 !/.cabal/
 /.cabal/*
 !/.cabal/config
@@ -54,6 +54,7 @@
 /.ipython/*
 !/.ipython/profile_default/
 /.ipython/profile_default/*
+!/.ipython/profile_default/*_config.py
 !/.ipython/profile_default/startup
 /.ipython/profile_default/startup/*
 !/.ipython/profile_default/startup/*.py
@@ -71,12 +72,14 @@
 !/.wgetpaste.d/
 /.wgetpaste.d/*
 !/.wgetpaste.d/*.conf
-!/.termux/
-/.termux/*
-!/.termux/boot/
-!/.termux/termux.properties
+!/.vnc/
+/.vnc/*
+!/.vnc/xstartup
+!/.cargo/
+/.cargo/*
+!/.cargo/config
 
-# XDG
+# $XDG_CONFIG_HOME
 !/.config/
 /.config/*
 !/.config/mimeapps.list
@@ -90,6 +93,16 @@
 !/.config/aria2/
 /.config/aria2/*
 !/.config/aria2/aria2.conf
+!/.config/ppsspp/
+/.config/ppsspp/*
+!/.config/ppsspp/PSP/
+/.config/ppsspp/PSP/*
+!/.config/ppsspp/PSP/SYSTEM/
+/.config/ppsspp/PSP/SYSTEM/*
+!/.config/ppsspp/PSP/SYSTEM/controls.ini
+!/.config/newsboat/
+/.config/newsboat/*
+!/.config/newsboat/config
 !/.config/cmus/
 /.config/cmus/*
 !/.config/cmus/rc
@@ -110,14 +123,48 @@
 !/.config/coc/extensions/
 /.config/coc/extensions/*
 !/.config/coc/extensions/package.json
+!/.config/pip/
+/.config/pip/*
+!/.config/pip/pip.conf
+!/.config/matplotlib/
+/.config/matplotlib/*
+!/.config/matplotlib/matplotlibrc
+!/.config/translate-shell/
+/.config/translate-shell/*
+!/.config/translate-shell/init.trans
+!/.config/mypy/
+/.config/mypy/*
+!/.config/mypy/config
+!/.config/alacritty/
+/.config/alacritty/*
+!/.config/alacritty/alacritty.yml
+!/.config/kitty/
+/.config/kitty/*
+!/.config/kitty/kitty.conf
+!/.config/tmux/
+/.config/tmux/*
+!/.config/tmux/tmux.conf
+!/.config/browsh/
+/.config/browsh/*
+!/.config/browsh/conf.toml
+!/.config/qterminal.org/
+/.config/qterminal.org/*
+!/.config/qterminal.org/qterminal.ini
+!/.config/go/
+/.config/go/*
+!/.config/go/env
+!/.config/neofetch/
+/.config/neofetch/*
+!/.config/neofetch/config.conf
+!/.config/lftp/
+/.config/lftp/*
+!/.config/lftp/rc
 !/.config/bat/
 /.config/bat/*
 !/.config/bat/config
-!/.config/PowerShell/
-/.config/PowerShell/*
-!/.config/PowerShell/Microsoft.PowerShell_profile.ps1
+!/.config/powerline/
 
-# submodules
+# $XDG_DATA_HOME
 !/.local/
 /.local/*
 !/.local/share/
@@ -125,8 +172,30 @@
 !/.local/share/icons/
 /.local/share/icons/hicolor
 !/.local/share/themes/
+/.local/share/themes/*
+!/.local/share/themes/luZorin
+!/.local/share/nautilus/
+/.local/share/nautilus/*
+!/.local/share/nautilus/scripts
+!/.local/share/pandoc/
 
 # Windows
+!/.minttyrc
 !/.config/sharpkeys/
 /.config/sharpkeys/*
 !/.config/sharpkeys/My\ Keys.skl
+!/.config/PowerShell/
+/.config/PowerShell/*
+!/.config/PowerShell/Microsoft.PowerShell_profile.ps1
+
+# Android
+!/.termux/
+/.termux/*
+!/.termux/termux.properties
+!/.termux/colors.properties
+!/.termux/boot
+!/bin/
+/bin/*
+!/bin/termux-file-editor
+!/bin/termux-url-opener
+!/.shortcuts/

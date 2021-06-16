@@ -1,0 +1,5 @@
+{
+	:verbose false
+	:engine "bing"
+	:theme "random"
+}

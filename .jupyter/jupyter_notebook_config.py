@@ -96,7 +96,9 @@
 #  If not specified, the default browser will be determined by the `webbrowser`
 #  standard library module, which allows setting of the BROWSER environment
 #  variable to override it.
-#c.NotebookApp.browser = ''
+import webbrowser
+webbrowser.register('termux-open', None, webbrowser.GenericBrowser(r'/data/data/com.termux/files/usr/bin/termux-open'))
+#c.NotebookApp.browser = 'xdg-open'
 
 ## SSL/TLS 认证文件所在全路径.
 #c.NotebookApp.certfile = ''
@@ -255,13 +257,13 @@
 #c.NotebookApp.nbserver_extensions = {}
 
 ## 用于笔记本和内核的目录。
-c.NotebookApp.notebook_dir = '/home/wzy/Documents'
+# c.NotebookApp.notebook_dir = r'/'
 
 ## Whether to open in a browser after starting. The specific browser used is
 #  platform dependent and determined by the python standard library `webbrowser`
 #  module, unless it is overridden using the --browser (NotebookApp.browser)
 #  configuration option.
-c.NotebookApp.open_browser = False
+c.NotebookApp.open_browser = True
 
 ## Hashed password to use for web authentication.
 #

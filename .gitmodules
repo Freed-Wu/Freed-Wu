@@ -22,3 +22,9 @@
 [submodule ".local/share/themes/Windows-10"]
 	path = .local/share/themes/Windows-10
 	url = https://github.com/B00merang-Project/Windows-10
+[submodule ".local/share/pandoc/styles"]
+	path = .local/share/pandoc/styles
+	url = https://github.com/citation-style-language/styles
+[submodule "/home/wzy/.local/share/pandoc/styles"]
+	path = /home/wzy/.local/share/pandoc/styles
+	url = https://github.com/citation-style-language/styles

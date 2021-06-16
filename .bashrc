@@ -14,5 +14,6 @@ if [[ $- != *i* ]] ; then
 fi
 
 # Put your fun stuff here.
-source $ZSH/../riobard---bash-powerline/bash-powerline.sh
-
+PS1='\[\e[37;44m\d\t\e[34;41m\e[30m\s\e[31;42m\e[30m\u\e[32;43m\e[30m\h\e[33;45m\e[30m\w\e[35;40m\e[37m\]\n\#\$ '
+PS2='\[\e[35;40m\]\[\e[37m\] '
+PS3='? '

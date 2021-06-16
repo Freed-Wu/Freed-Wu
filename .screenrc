@@ -1,0 +1,14 @@
+altscreen on
+startup_message off
+autodetach on
+nonblock on
+defutf8 on
+defscrollback 10000
+vbell off
+vbell_msg "Bell on %t (%n)"
+hardstatus off
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rY}%n %t%{-}%+w %=%{..G} %H(%l) %{..Y} %Y/%m/%d %c:%s "
+vbell off
+default windows
+escape ^\\

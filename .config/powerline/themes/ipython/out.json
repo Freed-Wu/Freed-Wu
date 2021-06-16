@@ -1,0 +1,7 @@
+{
+	"default_module": "powerline.segments.ipython",
+	"segments": {
+		"left": [
+		]
+	}
+}

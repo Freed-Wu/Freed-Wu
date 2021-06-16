@@ -1,0 +1,21 @@
+{
+	"segments": {
+		"left": [
+			{
+				"function": "powerline.segments.ipython.prompt_count"
+			},
+			{
+				"function": "powerline.segments.common.time.date"
+			},
+			{
+				"function": "powerline.segments.common.bat.battery"
+			},
+			{
+				"function": "powerline.segments.shell.cwd"
+			},
+			{
+				"function": "powerline.segments.common.env.virtualenv"
+			}
+		]
+	}
+}
