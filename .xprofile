@@ -3,6 +3,7 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 export PATH=$HOME/Applications:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
@@ -15,6 +16,9 @@ export EDITOR=$VISUAL
 export BROWSER=xdg-open
 # kitty
 export GLFW_IM_MODULE=ibus
+# brew's tmux's latest version is 3.2a which cannot support kitty
+# because exec, it must be added to `~/.xprofile`
+export TERM=xterm-256color
 # zsh
 export WORDCHARS=
 # less
@@ -26,6 +30,9 @@ export LESSCOLORIZER='bat --color always'
 # man
 export MANPAGER="sh -c 'col -bx|bat -plman'"
 export MANPATH=$HOME/.local/share/man:$MANPATH
+export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
+# info
+export INFOPATH=/home/linuxbrew/.linuxbrew/share/info:$INFOPATH
 # enhancd
 export ENHANCD_COMMAND=__enhancd::cd
 # fzf

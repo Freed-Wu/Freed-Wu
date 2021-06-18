@@ -1,5 +1,14 @@
 # PluginManage {{{1 #
-source ~/.zinit/plugins/zinit/zinit.zsh
+if [[ -z $CODESTATS_API_KEY ]]; then
+	source ~/.zprofile
+fi
+if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
+	source ~/.zinit/plugins/zinit/zinit.zsh
+elif [[ -x $commands[git] ]]; then
+	git clone https://github.com/zdharma/zinit ~/.zinit/plugins/zinit
+else
+	return
+fi
 # cannot wait
 zinit id-as null for zdharma/zinit
 # 1}}} PluginManage #
@@ -112,10 +121,10 @@ zinit id-as wait lucid as'completion' \
 	if'[[ -z $OSTYPE || $OSTYPE == linux-android ]]' \
 	for zsh-users/zsh-completions
 zinit id-as wait lucid \
-	atclone'./setup.py install' \
+	atclone'./setup.py install --user' \
 	pick'shell/pinyin-comp.zsh' \
 	if'[[ -n $OSTYPE && -x $commands[python2] ]]' \
-		for petronny/pinyin-completion
+	for petronny/pinyin-completion
 # 1}}} Complete #
 
 # Alias {{{1 #
@@ -147,7 +156,7 @@ zinit id-as wait lucid for Tarrasch/zsh-command-not-found
 
 # FileManage {{{1 #
 zinit id-as wait lucid for peterhurford/git-it-on.zsh
-zinit id-as wait lucid as'program' for benliton/slugify
+zinit id-as wait lucid as'program' for benlinton/slugify
 zinit id-as wait lucid as'program' for holman/spark
 # 1}}} FileManage #
 
@@ -203,7 +212,7 @@ zinit id-as wait lucid pick'nvm.sh' for nvm-sh/nvm
 # PackageManage {{{1 #
 zinit id-as wait lucid as'program' \
 	if'[[ $OSTYPE == cygwin ]]' \
-		for transcode-open/apt-cyg
+	for transcode-open/apt-cyg
 # 1}}} PackageManage #
 
 # Tool {{{1 #
@@ -250,7 +259,7 @@ zinit id-as wait lucid \
 	for bigH/auto-sized-fzf
 zinit id-as wait lucid \
 	if'[[ $OSTYPE == darwin ]]' \
-		for zackintosh/fixnumpad-osx.plugin.zsh
+	for zackintosh/fixnumpad-osx.plugin.zsh
 # after loading completions
 zinit id-as wait lucid for 3v1n0/zsh-bash-completions-fallback
 # use nvim completions not busybox vi

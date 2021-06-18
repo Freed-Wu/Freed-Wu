@@ -15,9 +15,10 @@ if [[ -z $DISPLAY ]]; then
 	export BROWSER=w3m
 fi
 # paths must be loaded here
-if [[ -z $DISPLAY && -f ~/.xprofile ]]; then
+if [[ ($XDG_SESSION_DESKTOP == deepin || -z $DISPLAY) && -f ~/.xprofile ]]; then
 	source ~/.xprofile
 else
+	export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 	export PATH=$HOME/Applications:$PATH
 	export PATH=$HOME/.local/bin:$PATH
 	export PATH=$HOME/.cargo/bin:$PATH
@@ -26,6 +27,8 @@ else
 	export PATH=$HOME/perl5/bin:$PATH
 	export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
 	export MANPATH=$HOME/.local/share/man:$MANPATH
+	export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
+	export INFOPATH=/home/linuxbrew/.linuxbrew/share/info:$INFOPATH
 fi
 # user customize
 if [[ -f ~/.bash_login ]]; then
