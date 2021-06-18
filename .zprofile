@@ -1,19 +1,3 @@
-# tmux in android (termux) will source `~/.zprofile` again,
-# so we don't source `~/.xprofile` when `[[ -z $TMUX ]]` is false.
-if [[ -n $TMUX && $OSTYPE == linux-android ]]; then
-	return
-fi
-if [[ $OSTYPE == linux-android ]]; then
-	export PATH=$PATH:/system/bin:/system/xbin:/vendor/bin/product/bin:/sbin
-fi
-# adb shell don't have $LANG
-if [[ -n $LANG ]]; then
-	export LANG=en_US.UTF-8
-fi
-# tty
-if [[ -z $DISPLAY ]]; then
-	export BROWSER=w3m
-fi
 # paths must be loaded here
 if [[ ($XDG_SESSION_DESKTOP == deepin || -z $DISPLAY) && -f ~/.xprofile ]]; then
 	source ~/.xprofile
@@ -29,6 +13,34 @@ else
 	export MANPATH=$HOME/.local/share/man:$MANPATH
 	export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
 	export INFOPATH=/home/linuxbrew/.linuxbrew/share/info:$INFOPATH
+fi
+# tmux in android (termux) will source `~/.zprofile` again,
+# so we don't source `~/.xprofile` when `[[ -z $TMUX ]]` is false.
+if [[ -n $TMUX && $OSTYPE == linux-android ]]; then
+	return
+fi
+if [[ $OSTYPE == linux-android ]]; then
+	export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin:/vendor/bin/product/bin:/sbin
+fi
+# adb shell don't have $LANG
+if [[ -n $LANG ]]; then
+	export LANG=en_US.UTF-8
+fi
+# since now vivid doesn't be transplanted to android 
+if [[ $OSTYPE != linux-android ]]; then
+	export LS_COLORS=`vivid generate molokai`
+fi
+# see <https://github.com/termux/termux-packages/issues/4781>
+if [[ $OSTYPE == linux-android ]]; then
+	export MANPAGER=batman
+else
+	export MANPAGER="sh -c 'col -bx|bat -plman'"
+fi
+# tty
+if [[ -z $DISPLAY ]]; then
+	export BROWSER=xdg-open
+else
+	export BROWSER=w3m
 fi
 # user customize
 if [[ -f ~/.bash_login ]]; then

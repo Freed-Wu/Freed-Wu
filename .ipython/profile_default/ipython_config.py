@@ -36,8 +36,7 @@ c.InteractiveShellApp.exec_PYTHONSTARTUP = False
 
 ## A list of dotted module names of IPython extensions to load.
 #  Default: []
-c.InteractiveShellApp.extensions = [
-    'line_profiler', 'memory_profiler', 'oct2py.ipython', 'autoreload']
+c.InteractiveShellApp.extensions = ['autoreload']
 
 ## DEPRECATED. Dotted module name of a single extra IPython extension to load.
 #  
@@ -424,7 +423,7 @@ c.InteractiveShell.enable_html_pager = True
 
 ## The name of the logfile to use.
 #  Default: ''
-c.InteractiveShell.logfile = '~/.cache/ipython/ipython.py'
+c.InteractiveShell.logfile = '~/.cache/ipython.py'
 
 ## Start logging to the default log file in overwrite mode. Use `logappend` to
 #  specify a log file to **append** logs to.

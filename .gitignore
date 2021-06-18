@@ -195,7 +195,4 @@
 !/.termux/colors.properties
 !/.termux/boot
 !/bin/
-/bin/*
-!/bin/termux-file-editor
-!/bin/termux-url-opener
 !/.shortcuts/

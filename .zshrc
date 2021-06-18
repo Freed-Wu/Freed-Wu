@@ -6,6 +6,7 @@ if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
 	source ~/.zinit/plugins/zinit/zinit.zsh
 elif [[ -x $commands[git] ]]; then
 	git clone https://github.com/zdharma/zinit ~/.zinit/plugins/zinit
+	source ~/.zinit/plugins/zinit/zinit.zsh
 else
 	return
 fi
@@ -135,12 +136,6 @@ if [[ -z $TMUX && -x $commands[tmux] ]]; then
 		exec tmux new -A
 	fi
 fi
-# see <https://github.com/termux/termux-packages/issues/4781>
-if [[ $OSTYPE == linux-android && -x $commands[bat] && -x $commands[col] ]]
-then
-	batman(){col -bx < $1|bat -plman}
-	export MANPAGER=batman
-fi
 
 alias mv='mv -i'
 alias cp='cp -ri'
@@ -170,7 +165,7 @@ zinit id-as wait lucid \
 zinit id-as wait lucid \
 	if'[[ -x $commands[fzf] ]]' \
 	for b4b4r07/enhancd
-alias ...='__enhancd::cd ..'
+alias ..='__enhancd::cd ..'
 zinit id-as wait lucid \
 	if'[[ -x $commands[emoji-fzf] && -x $commands[fzf] ]]' \
 	for pschmitt/emoji-fzf.zsh
@@ -205,7 +200,9 @@ zinit id-as wait lucid \
 # 1}}} Colorize #
 
 # VirtualEnv {{{1 #
-zinit id-as wait lucid pack for pyenv
+zinit id-as wait lucid null \
+	atclone'ln -s ~/.zinit/plugins/pyenv/bin/pyenv $ZPFX/bin' \
+	for pyenv/pyenv
 zinit id-as wait lucid pick'nvm.sh' for nvm-sh/nvm
 # 1}}} VirtualEnv #
 
@@ -253,6 +250,12 @@ zinit id-as wait lucid as'program' \
 # 1}}} Tool #
 
 # Compatible {{{1 #
+# since now vivid doesn't be transplanted to android 
+zinit id-as wait lucid null\
+	if'[[ $OSTYPE == linux-android ]]' \
+	atclone'./install.sh' \
+	atload'source ~/.local/share/lscolors.sh' \
+	for trapd00r/LS_COLORS
 zinit id-as wait lucid \
 	atload'export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS `fzf_sizer_preview_window_settings`"' \
 	if'[[ -x $commands[fzf] ]]' \

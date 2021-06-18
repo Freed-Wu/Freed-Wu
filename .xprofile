@@ -13,7 +13,6 @@ export PATH=$HOME/perl5/bin:$PATH
 export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
 export VISUAL=vi
 export EDITOR=$VISUAL
-export BROWSER=xdg-open
 # kitty
 export GLFW_IM_MODULE=ibus
 # brew's tmux's latest version is 3.2a which cannot support kitty
@@ -28,7 +27,6 @@ export LESSOPEN='|lesspipe %s'
 export LESSCOLOR=yes
 export LESSCOLORIZER='bat --color always'
 # man
-export MANPAGER="sh -c 'col -bx|bat -plman'"
 export MANPATH=$HOME/.local/share/man:$MANPATH
 export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
 # info
@@ -74,8 +72,6 @@ export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
 export TODO_DIR=~/.local/share/todo.txt
 # hub
 export GITHUB_USER=`git config --global user.name`
-# ls
-export LS_COLORS=`vivid generate molokai`
 # mutt
 export MAIL=+inbox
 export EMAIL=`git config --global user.email`
