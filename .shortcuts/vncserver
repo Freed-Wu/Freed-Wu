@@ -1,0 +1,7 @@
+#! /data/data/com.termux/files/usr/bin/env zsh
+source ~/.zprofile
+if [[ `vncserver -list|wc -l` == 4 ]]; then
+	vncserver &
+else
+	vncserver -kill :1
+fi

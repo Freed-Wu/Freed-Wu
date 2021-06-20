@@ -94,7 +94,9 @@ zinit id-as wait lucid for zsh-vi-more/vi-increment
 # zinit id-as wait lucid \
 	# atload'bindkey -Mvicmd " " vi-easy-motion' \
 	# for IngoHeimbach/zsh-easy-motion
-zinit id-as wait lucid for kutsan/zsh-system-clipboard
+zinit id-as wait lucid \
+	if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]' \
+	for kutsan/zsh-system-clipboard
 
 zinit id-as wait lucid for psprint/zsh-editing-workbench
 zinit id-as wait lucid for zdharma/zui
@@ -133,15 +135,17 @@ if [[ -z $TMUX && -x $commands[tmux] ]]; then
 	if [[ $OSTYPE == linux-android ]]; then
 		tmux new -A
 	else
-		exec tmux new -A
+		#exec tmux new -A
 	fi
 fi
 
 alias mv='mv -i'
 alias cp='cp -ri'
 alias rm='rm -i'
-alias ls='exa --icons --git'
-alias tree='exa --icons --git -T'
+if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
+	alias ls='exa --icons --git'
+	alias tree='exa --icons --git -T'
+fi
 if [[ $OSTYPE != linux-android ]]; then
 	alias man='man -L zh_CN.utf8'
 fi
@@ -225,7 +229,7 @@ zinit id-as wait lucid \
 	kitty +complete setup zsh > kitty.sh' \
 	for zdharma/null
 zinit id-as wait lucid null \
-	if'[[ $OS == Windows ]]' \
+	if'[[ $OSTYPE == cygwin || $OSTYPE == msys2 ]]' \
 	atclone'ln -s ~/.zinit/plugin/win-sudo/s/sudo $ZPFX/bin' \
 	for imachug/win-sudo
 zinit id-as wait lucid \
@@ -250,15 +254,15 @@ zinit id-as wait lucid as'program' \
 # 1}}} Tool #
 
 # Compatible {{{1 #
-# since now vivid doesn't be transplanted to android 
+# since now vivid doesn't be transplanted to android and windows
 zinit id-as wait lucid null\
-	if'[[ $OSTYPE == linux-android ]]' \
+	if'[[ $OSTYPE != linux-gnu ]]' \
 	atclone'./install.sh' \
 	atload'source ~/.local/share/lscolors.sh' \
 	for trapd00r/LS_COLORS
 zinit id-as wait lucid \
 	atload'export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS `fzf_sizer_preview_window_settings`"' \
-	if'[[ -x $commands[fzf] ]]' \
+	if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 && -x $commands[fzf] && -x $commands[bc] ]]' \
 	for bigH/auto-sized-fzf
 zinit id-as wait lucid \
 	if'[[ $OSTYPE == darwin ]]' \
@@ -266,5 +270,7 @@ zinit id-as wait lucid \
 # after loading completions
 zinit id-as wait lucid for 3v1n0/zsh-bash-completions-fallback
 # use nvim completions not busybox vi
-alias vi=nvim
+if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
+	alias vi=nvim
+fi
 # 1}}} Compatible #

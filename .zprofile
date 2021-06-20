@@ -27,7 +27,7 @@ if [[ -n $LANG ]]; then
 	export LANG=en_US.UTF-8
 fi
 # since now vivid doesn't be transplanted to android 
-if [[ $OSTYPE != linux-android ]]; then
+if [[ $OSTYPE == linux-gnu ]]; then
 	export LS_COLORS=`vivid generate molokai`
 fi
 # see <https://github.com/termux/termux-packages/issues/4781>
@@ -41,6 +41,29 @@ if [[ -z $DISPLAY ]]; then
 	export BROWSER=xdg-open
 else
 	export BROWSER=w3m
+fi
+# windows's softwares are outdated
+if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
+	export FZF_DEFAULT_COMMAND='rg --files'
+	export FZF_DEFAULT_OPTS='-m
+	--preview "[[ -f {} ]] && bat --color=always {} || ([[ -d {} ]] && exa --git -hl --color=always --icons {})"
+	--bind=ctrl-k:kill-line
+	--bind=ctrl-j:first
+	--bind=ctrl-alt-r:toggle-preview
+	--bind=ctrl-alt-R:toggle-preview-wrap
+	--bind=alt-s:toggle-search
+	--bind=alt-S:toggle-sort
+	--bind=ctrl-alt-i:toggle
+	--bind=ctrl-alt-I:toggle-all
+	--bind=alt-p:preview-up
+	--bind=alt-n:preview-down
+	--bind=ctrl-v:preview-page-down
+	--bind=alt-v:preview-page-up
+	--bind=ctrl-alt-v:preview-half-page-down
+	--bind=alt-V:preview-half-page-up
+	--bind=alt-a:preview-top
+	--bind=alt-e:preview-bottom'
+	export LESSOPEN='|lesspipe %s'
 fi
 # user customize
 if [[ -f ~/.bash_login ]]; then

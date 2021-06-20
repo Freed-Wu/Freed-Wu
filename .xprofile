@@ -22,7 +22,6 @@ export TERM=xterm-256color
 export WORDCHARS=
 # less
 export LESS='-R -M --mouse'
-export LESSOPEN='|lesspipe %s'
 # lesspipe
 export LESSCOLOR=yes
 export LESSCOLORIZER='bat --color always'
@@ -33,26 +32,6 @@ export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
 export INFOPATH=/home/linuxbrew/.linuxbrew/share/info:$INFOPATH
 # enhancd
 export ENHANCD_COMMAND=__enhancd::cd
-# fzf
-export FZF_DEFAULT_COMMAND='rg --files'
-export FZF_DEFAULT_OPTS='-m
---preview "[[ -f {} ]] && bat --color=always {} || ([[ -d {} ]] && exa --git -hl --color=always --icons {})"
---bind=ctrl-k:kill-line
---bind=ctrl-j:first
---bind=ctrl-alt-r:toggle-preview
---bind=ctrl-alt-R:toggle-preview-wrap
---bind=alt-s:toggle-search
---bind=alt-S:toggle-sort
---bind=ctrl-alt-i:toggle
---bind=ctrl-alt-I:toggle-all
---bind=alt-p:preview-up
---bind=alt-n:preview-down
---bind=ctrl-v:preview-page-down
---bind=alt-v:preview-page-up
---bind=ctrl-alt-v:preview-half-page-down
---bind=alt-V:preview-half-page-up
---bind=alt-a:preview-top
---bind=alt-e:preview-bottom'
 # emoji-fzf.zsh
 export EMOJI_FZF_BINDKEY=^X^I
 # forgit
