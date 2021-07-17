@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+if [[ -d $1 ]]; then
+	exa --git -hl --color=always --icons $1
+elif [[ `file -b --mime-type $1 | cut -d/ -f1` == image ]]; then
+	chafa $1
+	exiftool $1
+elif [[ `file -b --mime-type $1 | cut -d/ -f2` == pdf ]]; then
+	pdftotext $1 - | sed "s/\f/`hr ─`\n/"
+elif [[ `file -b --mime-type $1 | cut -d/ -f2` == vnd.openxmlformats-officedocument.spreadsheetml.sheet ]]; then
+	in2csv $1 | xsv table | bat -ltsv --color=always
+elif [[ `file -b --mime-type $1 | cut -d/ -f2` == vnd.ms-excel ]]; then
+	in2csv $1 | xsv table | bat -ltsv --color=always
+elif [[ `file -b --mime-type $1 | cut -d/ -f2` == plain && `echo $1 | cut -d. -f2` == csv ]]; then
+	xsv table $1 | bat -ltsv --color=always
+elif [[ `file -b --mime-type $1 | cut -d/ -f2` == plain && `echo $1 | cut -d. -f2` == tsv ]]; then
+	xsv table $1 | bat -ltsv --color=always
+elif [[ `file -b --mime-type $1 | cut -d/ -f2` == json ]]; then
+	jq -r . $1 --color-output
+else
+	exit 1
+fi

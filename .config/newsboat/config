@@ -17,11 +17,11 @@ bind-key X delete-all-articles
 
 bookmark-cmd "echo -e \"$1\t$2\t$3\t$4\" >> ~/.config/newsboat/bookmarks.txt"
 error-log ~/.local/share/newsboat/error.log
-include ~/.config/newsboat/colorschems/solarized-dark
+include `[[ -f ~/.config/newsboat/colorschemes/solarized-dark ]] && echo ~/.config/newsboat/colorschemes/solarized-dark`
 save-path ~/Downloads
 
 urls-source oldreader
 oldreader-login `echo $EMAIL`
-oldreader-passwordfile ~/.config/newsboat/oldreader-password.txt
+oldreader-password `echo $GITHUB_PASSWORD`
 oldreader-flag-share @
 oldreader-flag-star *

@@ -30,6 +30,9 @@
 !/.screenrc
 !/.pylintrc
 !/.lesskey
+!/.lessfilter
+!/.wgetrc
+!/.curlrc
 
 # dotfiles
 !/.dosbox/
@@ -41,6 +44,9 @@
 !/.jupyter/
 /.jupyter/*
 !/.jupyter/jupyter_notebook_config.py
+!/.jupyter/lab/
+/.jupyter/lab/*
+!/.jupyter/lab/user-settings/
 !/.vim/
 /.vim/*
 !/.vim/vimrc
@@ -58,9 +64,6 @@
 !/.ipython/profile_default/startup
 /.ipython/profile_default/startup/*
 !/.ipython/profile_default/startup/*.py
-!/.mutt/
-/.mutt/*
-!/.mutt/muttrc
 !/.julia/
 /.julia/*
 !/.julia/config/
@@ -87,6 +90,7 @@
 !/.config/user-dirs.locale
 !/.config/zathura/
 !/.config/neomutt/
+!/.config/mutt/
 !/.config/git/
 /.config/git/*
 !/.config/git/config
@@ -163,6 +167,9 @@
 /.config/bat/*
 !/.config/bat/config
 !/.config/powerline/
+!/.config/gh/
+/.config/gh/*
+!/.config/gh/config.yml
 
 # $XDG_DATA_HOME
 !/.local/

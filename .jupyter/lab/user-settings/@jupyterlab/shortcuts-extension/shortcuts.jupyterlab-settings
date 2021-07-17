@@ -1,0 +1,79 @@
+{
+    "shortcuts": [
+        {
+            "command": "application:toggle-left-area",
+            "keys": [
+                "Accel Shift B"
+            ],
+            "selector": "body"
+        },
+        {
+            "command": "application:toggle-left-area",
+            "keys": [
+                "Accel B"
+            ],
+            "selector": "body",
+            "disabled": true
+        },
+        {
+            "command": "apputils:print",
+            "keys": [
+                "Accel Shift P"
+            ],
+            "selector": "body"
+        },
+        {
+            "command": "apputils:print",
+            "keys": [
+                "Accel P"
+            ],
+            "selector": "body",
+            "disabled": true
+        },
+        {
+            "command": "docmanager:save",
+            "keys": [
+                "Accel Shift X"
+            ],
+            "selector": "body"
+        },
+        {
+            "command": "docmanager:save",
+            "keys": [
+                "Accel S"
+            ],
+            "selector": "body",
+            "disabled": true
+        },
+        {
+            "command": "inspector:open",
+            "keys": [
+                "Accel Shift I"
+            ],
+            "selector": "body"
+        },
+        {
+            "command": "inspector:open",
+            "keys": [
+                "Accel I"
+            ],
+            "selector": "body",
+            "disabled": true
+        },
+        {
+            "command": "application:close",
+            "keys": [
+                "Alt Shift W"
+            ],
+            "selector": ".jp-Activity"
+        },
+        {
+            "command": "application:close",
+            "keys": [
+                "Alt W"
+            ],
+            "selector": ".jp-Activity",
+            "disabled": true
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+set folder = imaps://imap.gmail.com:993
+set imap_user = wuzy001@gmail.com
+set imap_pass = $GMAIL_PASS
+
+set postponed = +[Gmail]/Drafts
+set record = '+[Gmail]/Sent Mail'
+set trash = +[Gmail]/Trash
+unmailboxes *
+mailboxes +INBOX +[Gmail] \
++[Gmail]/Drafts '+[Gmail]/Sent Mail' +[Gmail]/Trash +[Gmail]/Spam \
++[Gmail]/Starred +[Gmail]/Important '+[Gmail]/All Mail'
+set smtp_url = smtps://wuzy001@smtp.gmail.com:587
+set smtp_pass = $GMAIL_PASS

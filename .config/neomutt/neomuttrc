@@ -1,5 +1,9 @@
 source `[[ -n $DISPLAY ]] && echo /dev/null || ([[ $TERM == linux ]] && echo $XDG_CONFIG_HOME/neomutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc || echo $XDG_CONFIG_HOME/neomutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc)`
+source ~/.config/neomutt/neomuttrc.qq
+folder-hook imaps://imap.qq.com:993 'source ~/.config/neomutt/neomuttrc.qq'
+folder-hook imaps://imap.gmail.com:993 'source ~/.config/neomutt/neomuttrc.gmail'
 
+set sleep_time = 0
 set shell = ''
 set attach_save_dir = ~/Downloads
 set digest_collapse = no
@@ -11,33 +15,24 @@ set ispell = aspell
 set charset = utf-8
 set edit_headers
 set rfc2047_parameters
-set signature = 'figlet $USER|'
+set signature = 'echo Best Regards from $USER|'
 set sort = reverse-date
 set query_command = 'mutt_ldap_query.pl %s'
 set quit = ask-yes
 set abort_unmodified = ask-yes
 set auto_tag
 set x_comment_to
-auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
-
-set folder = imaps://imap.qq.com:993
-set imap_user = $EMAIL
-set imap_pass = $EMAIL_PASS
-set sendmail = msmtp
-
+set header_cache = ~/.cache/neomutt
+set message_cachedir = ~/.cache/neomutt
+set ssl_starttls = yes
+set ssl_force_tls = yes
 set mail_check_stats
 set sidebar_visible
 set sidebar_format = '%B%* %n%o/%S'
 set sidebar_short_path
 set sidebar_folder_indent
 set sidebar_indent_string = '├── '
-set postponed = +Drafts
-set record = '+Sent Messages'
-set trash = '+Deleted Messages'
-mailboxes +INBOX +Drafts '+Sent Messages' '+Deleted Messages' +Junk \
-+其他文件夹 +其他文件夹/github +其他文件夹/bugzilla +其他文件夹/wakatime \
-+其他文件夹/people +其他文件夹/class +其他文件夹/vertification \
-+其他文件夹/QQ邮件订阅
+auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
 
 # Handler for gzip compressed mailboxes
 open-hook   '\.gz$' "gzip --stdout --decompress '%f' >  '%t'"
@@ -131,6 +126,8 @@ bind index g/ root-message
 bind index ~ toggle-read
 bind pager,index gs compose-to-sender
 
+macro index g1 '<sync-mailbox><enter-command>source ~/.config/neomutt/qq.neomuttrc<enter><change-folder>!<enter>'
+macro index g2 '<sync-mailbox><enter-command>source ~/.config/neomutt/gmail.neomuttrc<enter><change-folder>!<enter>'
 macro pager,index,attach \cb "\
 				<enter-command> set my_pdsave=\$pipe_decode<enter>\
 				<enter-command> unset pipe_decode<enter>\

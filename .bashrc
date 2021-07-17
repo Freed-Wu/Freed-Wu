@@ -12,8 +12,13 @@ if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
 	return
 fi
+shopt -s histverify
+shopt -s globstar
+shopt -s checkhash
+shopt -s mailwarn
 
 # Put your fun stuff here.
+HISTIGNORE='&: *'
 PS1='\[\e[37;44m\d\t\e[34;41m\e[30m\s\e[31;42m\e[30m\u\e[32;43m\e[30m\h\e[33;45m\e[30m\w\e[35;40m\e[37m\]\n\#\$ '
 PS2='\[\e[35;40m\]\[\e[37m\] '
 PS3='? '

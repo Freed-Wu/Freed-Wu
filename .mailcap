@@ -1,4 +1,3 @@
-image/*; chafa %s; copiousoutput
 text/plain; iconv -f gbk -t utf-8 %s; test=echo %{charset} | grep -ic gb2312; copiousoutput
 text/html; w3m -dump -I `echo %{charset} | sed s/gb2312/gbk/I` %s; nametemplate=%s.html; copiousoutput
-*; lesspipe %s; copiousoutput
+*; less %s; copiousoutput

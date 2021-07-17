@@ -1,7 +1,14 @@
 # PluginManage {{{1 #
+# tmux firstly avoid load ~/.zshrc again
+# exec tmux will met bug in Android
 if [[ -z $CODESTATS_API_KEY ]]; then
 	source ~/.zprofile
 fi
+
+if [[ -z $TMUX && -x $commands[tmux] ]]; then
+	tmux new -A && exit
+fi
+
 if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
 	source ~/.zinit/plugins/zinit/zinit.zsh
 elif [[ -x $commands[git] ]]; then
@@ -16,7 +23,10 @@ zinit id-as null for zdharma/zinit
 
 # Default {{{1 #
 # must load firstly
-zinit id-as for okuramasafumi/zsh-sensible
+zinit id-as \
+	atload'HISTSIZE=100000
+	SAVEHIST=$HISTSIZE' \
+	for okuramasafumi/zsh-sensible
 unsetopt autocd
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 autoload -Uz compinit
@@ -39,6 +49,14 @@ zinit id-as wait lucid from'gitlab' for code-stats/code-stats-zsh
 zinit id-as wait lucid for wbingli/zsh-wakatime
 # 1}}} Log #
 
+# Syntax {{{1 #
+# See <fzf-tab/README.md>
+zinit id-as wait lucid \
+	if'[[ -x $commands[fzf] ]]' \
+	for Aloxaf/fzf-tab
+zinit id-as wait lucid for zdharma/fast-syntax-highlighting
+# 1}}} Syntax #
+
 # Suggest {{{1 #
 # must load before zsh-autosuggestions
 zinit id-as wait lucid \
@@ -55,7 +73,7 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-find-next-char
 	vi-forward-word vi-forward-word-end vi-forward-blank-word
 	vi-forward-blank-word-end vi-find-next-char vi-find-next-char-skip
 )
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(kill-line
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
 	history-search-forward history-search-backward
 	history-beginning-search-forward history-beginning-search-backward
 	history-substring-search-up history-substring-search-down
@@ -63,13 +81,10 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(kill-line
 	up-line-or-history down-line-or-history accept-line copy-earlier-word
 	)
 zinit id-as wait lucid \
-	atload'_zsh_autosuggest_start' \
+	atload'_zsh_autosuggest_start
+	bindkey "^\\" autosuggest-toggle' \
 	for zsh-users/zsh-autosuggestions
 # 1}}} Suggest #
-
-# Syntax {{{1 #
-zinit id-as wait lucid for zdharma/fast-syntax-highlighting
-# 1}}} Syntax #
 
 # HotKey {{{1 #
 bindkey ^U backward-kill-line
@@ -81,7 +96,7 @@ bindkey '^[l' down-case-word
 bindkey '^[_' redo
 bindkey ^O vi-cmd-mode
 bindkey '^[' vi-cmd-mode
-# visual cannot highlight
+# visual mode cannot be highlighted
 zinit id-as wait lucid \
 	atload'vim_mode_set_keymap `vim-mode-initial-keymap`
 	bindkey -e' \
@@ -130,39 +145,12 @@ zinit id-as wait lucid \
 	for petronny/pinyin-completion
 # 1}}} Complete #
 
-# Alias {{{1 #
-if [[ -z $TMUX && -x $commands[tmux] ]]; then
-	if [[ $OSTYPE == linux-android ]]; then
-		tmux new -A
-	else
-		#exec tmux new -A
-	fi
-fi
-
-alias mv='mv -i'
-alias cp='cp -ri'
-alias rm='rm -i'
-if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
-	alias ls='exa --icons --git'
-	alias tree='exa --icons --git -T'
-fi
-if [[ $OSTYPE != linux-android ]]; then
-	alias man='man -L zh_CN.utf8'
-fi
-alias pandoc='pandoc -s --pdf-engine=xelatex'
-zinit id-as wait lucid for Tarrasch/zsh-command-not-found
-# 1}}} Alias #
-
 # FileManage {{{1 #
-zinit id-as wait lucid for peterhurford/git-it-on.zsh
 zinit id-as wait lucid as'program' for benlinton/slugify
 zinit id-as wait lucid as'program' for holman/spark
 # 1}}} FileManage #
 
 # Fuzzy {{{1 #
-zinit id-as wait lucid \
-	if'[[ -x $commands[fzf] ]]' \
-	for Aloxaf/fzf-tab
 zinit id-as wait lucid \
 	if'[[ -x $commands[fzf] ]]' \
 	for joshskidmore/zsh-fzf-history-search
@@ -204,9 +192,7 @@ zinit id-as wait lucid \
 # 1}}} Colorize #
 
 # VirtualEnv {{{1 #
-zinit id-as wait lucid null \
-	atclone'ln -s ~/.zinit/plugins/pyenv/bin/pyenv $ZPFX/bin' \
-	for pyenv/pyenv
+zinit id-as wait lucid null pack for pyenv
 zinit id-as wait lucid pick'nvm.sh' for nvm-sh/nvm
 # 1}}} VirtualEnv #
 
@@ -218,7 +204,6 @@ zinit id-as wait lucid as'program' \
 
 # Tool {{{1 #
 zinit id-as wait lucid as'program' for kdabir/has
-zinit id-as wait lucid for sineto/web-search
 zinit id-as wait lucid as'program' \
 	atclone'cloudclip -i $GITHUB_TOKEN' \
 	if'[[ -x $commands[python2] ]]' \
@@ -254,12 +239,11 @@ zinit id-as wait lucid as'program' \
 # 1}}} Tool #
 
 # Compatible {{{1 #
+zinit id-as wait lucid for Tarrasch/zsh-command-not-found
 # since now vivid doesn't be transplanted to android and windows
-zinit id-as wait lucid null\
+zinit id-as wait lucid null pack \
 	if'[[ $OSTYPE != linux-gnu ]]' \
-	atclone'./install.sh' \
-	atload'source ~/.local/share/lscolors.sh' \
-	for trapd00r/LS_COLORS
+	for LS_COLORS
 zinit id-as wait lucid \
 	atload'export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS `fzf_sizer_preview_window_settings`"' \
 	if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 && -x $commands[fzf] && -x $commands[bc] ]]' \
@@ -273,4 +257,18 @@ zinit id-as wait lucid for 3v1n0/zsh-bash-completions-fallback
 if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
 	alias vi=nvim
 fi
+alias mv='mv -i'
+alias cp='cp -ri'
+alias rm='rm -i'
+alias rename='rename -i'
+if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
+	alias ls='exa --icons'
+	alias vdir='exa -lh --icons --git'
+	alias tree='exa -Tlh --icons --git'
+fi
+if [[ $OSTYPE != linux-android ]]; then
+	alias man='man -L zh_CN.UTF-8'
+fi
+alias pandoc='pandoc -s --pdf-engine=xelatex'
+export GPG_TTY=`tty`
 # 1}}} Compatible #

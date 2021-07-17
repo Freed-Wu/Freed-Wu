@@ -21,7 +21,7 @@ export TERM=xterm-256color
 # zsh
 export WORDCHARS=
 # less
-export LESS='-R -M --mouse'
+export LESS='-R -M -S --mouse'
 # lesspipe
 export LESSCOLOR=yes
 export LESSCOLORIZER='bat --color always'
@@ -58,8 +58,6 @@ export EMAIL=`git config --global user.email`
 export MINICOM='-m -w -8 -c on -C /tmp/minicom.log'
 # trans
 export TARGET_LANG=zh
-# libcaca
-export CACA_DRIVER=ncurses
 # ccache
 export USE_CCACHE=1
 # python

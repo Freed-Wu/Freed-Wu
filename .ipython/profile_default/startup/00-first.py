@@ -1,26 +1,22 @@
 import sys
 import os
-import datetime
+from datetime import datetime
 import colorama
+from colorama import Fore, Back, Style
+from rich import print
 from rich import pretty
+from rich import traceback
+if sys.platform == 'windows':
+    colorama.init()
 pretty.install()
-colorama.init(autoreset=True)
-sys.ps1 = '{0}{d}{1}{t}{2}{s}{3}{u}{4}{h}{5}{w}{6}{sharp}{7}{dollar}{8}'.format(
-    colorama.Fore.LIGHTBLACK_EX,
-    ' ',
-    colorama.Fore.LIGHTRED_EX + ' ',
-    colorama.Fore.LIGHTGREEN_EX + ' ',
-    colorama.Fore.LIGHTYELLOW_EX + '@' + colorama.Fore.LIGHTBLUE_EX,
-    colorama.Fore.LIGHTMAGENTA_EX + ':' + colorama.Fore.LIGHTCYAN_EX,
-    colorama.Fore.LIGHTWHITE_EX + '\n',
-    '',
-    ' ',
-    d = datetime.datetime.now().strftime('%Y-%m-%d'),
-    t = datetime.datetime.now().strftime('%H-%M-%S'),
-    s = sys.executable,
-    u = os.environ.get('USER'),
-    h = 'localhost',
-    w = os.getcwd(),
-    sharp = '',
-    dollar = '$',
-)
+traceback.install()
+sys.ps1 = \
+    Fore.WHITE + Back.BLUE + datetime.now().strftime('%w%Y%m%d%T') + \
+    Fore.BLUE + Back.RED + '' + Fore.BLACK + Back.RED + \
+    sys.executable + Fore.RED + Back.GREEN + '' + Fore.BLACK + \
+    os.environ.get('USER') + Fore.GREEN + Back.MAGENTA + '' + Fore.BLACK + \
+    {'linux': '', 'darwin': '', 'windows': ''}[sys.platform] + \
+    Fore.MAGENTA + Back.YELLOW + '' + Fore.BLACK + \
+    os.getcwd() + Fore.YELLOW + Back.BLACK + '' + Style.RESET_ALL + '\n' + \
+    '❯❯❯ '
+sys.ps2 = Fore.MAGENTA + '██ ' + Style.RESET_ALL

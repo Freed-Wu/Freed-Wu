@@ -1,47 +1,84 @@
 [user]
 	name = Freed-Wu
 	email = Wuzy01@qq.com
-	signingkey = A92B02E693A6EEAF713F432DD8B56C1C204A49E4
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [pull]
 	rebase = true
 [push]
-	tags = true
-[describe]
 	tags = true
 [receive]
 	denyCurrentBranch = ignore
 [merge]
 	conflictstyle = diff3
 	tool = vimdiff
+[mergetool]
+	keepBackup = false
+	hideResolved = true
 [rerere]
 	enabled = true
 [diff]
 	submodule = log
-	tool = vimdiff
 	colorMoved = default
 [status]
-	submodulesummary = 1
+	submodulesummary = true
 [submodule]
 	recurse = true
 [credential]
-	helper = store --file $XDG_DATA_HOME/git-credentials
+	helper = store --file ${XDG_DATA_HOME:-$HOME/.local/share}/git-credentials
 [core]
 	autocrlf = input
+	pager = bat
 [pager]
 	diff = delta
 	log = delta
 	reflog = delta
-	show = delta
-[delta]
-	navigate = true
-	line-numbers = true
-	side-by-side = true
+	config = bat -lini
 [interactive]
 	diffFilter = delta --color-only
 [url "https://hub.fastgit.org/"]
 	insteadOf = https://github.com/
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = true
+	paging = always
+	syntax-theme = GitHub
+[tig]
+	mailmap = true
+	mouse = true
+[tig "bind"]
+	generic = g move-first-line
+	generic = G move-last-line
+	generic = <Ctrl-B> move-page-up
+	generic = <Ctrl-F> move-page-down
+	generic = <Ctrl-G> view-grep
+	main = T :toggle commit-title-graph
+	main = G move-last-line
+	generic = x view-diff
+	status = u move-half-page-up
+	stage = u move-half-page-up
+	generic = u move-half-page-up
+	generic = d move-half-page-down
+[difftool]
+	prompt = false
+[init]
+	defaultBranch = master
+[fetch]
+	prune = true
+	pruneTags = true
+[grep]
+	lineNumber = true
+	extendedRegexp = true
+[blame]
+	showEmail = true
+[rebase]
+	autoSquash = true
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[diff "daff-csv"]
+	command = daff diff --git
+[merge "daff-csv"]
+	name = daff tabular csv merge
+	driver = daff merge --output %A %O %A %B

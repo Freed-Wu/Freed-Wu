@@ -26,7 +26,7 @@ fi
 if [[ -n $LANG ]]; then
 	export LANG=en_US.UTF-8
 fi
-# since now vivid doesn't be transplanted to android 
+# since now vivid doesn't be transplanted to android
 if [[ $OSTYPE == linux-gnu ]]; then
 	export LS_COLORS=`vivid generate molokai`
 fi
@@ -38,15 +38,15 @@ else
 fi
 # tty
 if [[ -z $DISPLAY ]]; then
-	export BROWSER=xdg-open
-else
 	export BROWSER=w3m
+else
+	export BROWSER=xdg-open
 fi
 # windows's softwares are outdated
 if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
 	export FZF_DEFAULT_COMMAND='rg --files'
 	export FZF_DEFAULT_OPTS='-m
-	--preview "[[ -f {} ]] && bat --color=always {} || ([[ -d {} ]] && exa --git -hl --color=always --icons {})"
+	--preview "less {}"
 	--bind=ctrl-k:kill-line
 	--bind=ctrl-j:first
 	--bind=ctrl-alt-r:toggle-preview
@@ -65,6 +65,7 @@ if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
 	--bind=alt-e:preview-bottom'
 	export LESSOPEN='|lesspipe %s'
 fi
+export LESS='-R -M -S --mouse'
 # user customize
 if [[ -f ~/.bash_login ]]; then
 	source ~/.bash_login
