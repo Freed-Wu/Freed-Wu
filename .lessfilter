@@ -1,21 +1,21 @@
-#!/usr/bin/env bash
-if [[ -d $1 ]]; then
-	exa --git -hl --color=always --icons $1
-elif [[ `file -b --mime-type $1 | cut -d/ -f1` == image ]]; then
-	chafa $1
-	exiftool $1
-elif [[ `file -b --mime-type $1 | cut -d/ -f2` == pdf ]]; then
-	pdftotext $1 - | sed "s/\f/`hr ─`\n/"
-elif [[ `file -b --mime-type $1 | cut -d/ -f2` == vnd.openxmlformats-officedocument.spreadsheetml.sheet ]]; then
-	in2csv $1 | xsv table | bat -ltsv --color=always
-elif [[ `file -b --mime-type $1 | cut -d/ -f2` == vnd.ms-excel ]]; then
-	in2csv $1 | xsv table | bat -ltsv --color=always
-elif [[ `file -b --mime-type $1 | cut -d/ -f2` == plain && `echo $1 | cut -d. -f2` == csv ]]; then
-	xsv table $1 | bat -ltsv --color=always
-elif [[ `file -b --mime-type $1 | cut -d/ -f2` == plain && `echo $1 | cut -d. -f2` == tsv ]]; then
-	xsv table $1 | bat -ltsv --color=always
-elif [[ `file -b --mime-type $1 | cut -d/ -f2` == json ]]; then
-	jq -r . $1 --color-output
+#! /usr/bin/env sh
+mime=$(file -Lb --mime-type "$1")
+category=${mime%%/*}
+kind=${mime##*/}
+if [ -d "$1" ]; then
+	exa --git -hl --color=always --icons "$1"
+elif [ "$category" = text ]; then
+	bat --color=always "$1"
+elif [ "$category" = image ]; then
+	chafa "$1"
+	exiftool "$1"
+elif [ "$kind" = json ]; then
+	jq -r . "$1" --color-output
+elif [ "$kind" = pdf ]; then
+	pdftotext "$1" - | sed "s/\f/$(hr ─)\n/"
+elif [ "$kind" = vnd.openxmlformats-officedocument.spreadsheetml.sheet ] || \
+	[ "$kind" = vnd.ms-excel ]; then
+	in2csv "$1" | xsv table | bat -ltsv --color=always
 else
-	exit 1
+	lesspipe.sh "$1" | bat --color=always
 fi

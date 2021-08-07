@@ -1,65 +1,147 @@
+# Default {{{1 #
+setopt autopushd
+setopt chaselinks
+setopt pushdignoredups
+setopt cdsilent
+
+setopt globstarshort
+setopt magicequalsubst
+setopt numericglobsort
+setopt rematchpcre
+
+setopt incappendhistory
+setopt extendedhistory
+setopt histignorespace
+setopt histignorealldups
+setopt histreduceblanks
+setopt histverify
+
+setopt noflowcontrol
+setopt interactivecomments
+
+zmodload zsh/pcre
+autoload -Uz compinit && compinit
+autoload -Uz run-help && unalias run-help
+autoload -Uz zcalc
+autoload -Uz zmv
+# 1}}} Default #
+
 # PluginManage {{{1 #
-# tmux firstly avoid load ~/.zshrc again
-# exec tmux will met bug in Android
 if [[ -z $CODESTATS_API_KEY ]]; then
-	source ~/.zprofile
+	. ~/.zprofile
 fi
 
-if [[ -z $TMUX && -x $commands[tmux] ]]; then
+# tmux firstly avoid load ~/.zshrc again
+# exec tmux will met bug in Android
+if [[ -z $TMUX && -n $commands[tmux] ]]; then
 	tmux new -A && exit
 fi
 
 if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
-	source ~/.zinit/plugins/zinit/zinit.zsh
-elif [[ -x $commands[git] ]]; then
+	. ~/.zinit/plugins/zinit/zinit.zsh
+elif [[ -n $commands[git] ]]; then
 	git clone https://github.com/zdharma/zinit ~/.zinit/plugins/zinit
-	source ~/.zinit/plugins/zinit/zinit.zsh
+	. ~/.zinit/plugins/zinit/zinit.zsh
 else
 	return
 fi
 # cannot wait
-zinit id-as null for zdharma/zinit
+zinit id-as depth'1' null for zdharma/zinit
 # 1}}} PluginManage #
 
-# Default {{{1 #
-# must load firstly
-zinit id-as \
-	atload'HISTSIZE=100000
-	SAVEHIST=$HISTSIZE' \
-	for okuramasafumi/zsh-sensible
-unsetopt autocd
+# ChangeDirectory {{{1 #
+zinit id-as depth'1' for mdumitru/last-working-dir
+zinit id-as depth'1' wait lucid for RobSis/zsh-reentry-hook
+# 1}}} ChangeDirectory #
+
+# Complete {{{1 #
+zstyle ':completion::complete:*' use-cache true
+zstyle ':completion::complete:*' call-command true
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-autoload -Uz compinit
-compinit
-zinit id-as for mdumitru/last-working-dir
-zinit id-as wait lucid for RobSis/zsh-reentry-hook
-# 1}}} Default #
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-separator ''
+zstyle ':completion:*' muttrc ${XDG_CONFIG_HOME:-$HOME/.config}/neomutt/neomuttrc
+zstyle ':completion:*' mail-directory ${XDG_CACHE_HOME:-$HOME/.cache}/neomutt
+zstyle ':completion:*' word true
+zstyle ':completion:*:descriptions' format '%d'
+zstyle ':completion:*:git-checkout:*' sort false
+
+if [[ -f /usr/share/pinyin-completion/shell/pinyin-comp.zsh ]]; then
+	. /usr/share/pinyin-completion/shell/pinyin-comp.zsh
+fi
+
+zinit id-as depth'1' wait lucid \
+	if'[[ -n $commands[fzf] ]]' \
+	for Aloxaf/fzf-tab
+zstyle ':fzf-tab:*' prefix ''
+zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
+zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
+zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
+zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
+zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
+	'SYSTEMD_COLORS=1 systemctl status $word'
+zstyle ':completion:*:processes' command \
+	"ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-preview \
+	'[ "$group" = "process ID" ] && ps -p$word -wocmd --no-headers'
+zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-flags \
+	--preview-window=down:3:wrap
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+	fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+	'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
+	'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
+	'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+	'case "$group" in
+	"commit tag") git show --color=always $word ;;
+	*) git show --color=always $word | delta ;;
+	esac'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+	'case "$group" in
+	"modified file") git diff $word | delta ;;
+	"recent commit object name") git show --color=always $word | delta ;;
+	*) git log --color=always $word ;;
+	esac'
+
+zinit id-as depth'1' wait lucid as'completion' \
+	if'[[ ! -d /usr/share/zsh/site-functions ]]' \
+	for zsh-users/zsh-completions
+# 1}}} Complete #
 
 # StatusLine {{{1 #
-zinit id-as \
+zinit id-as depth'1' \
 	src"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" \
+	if'[[ ! -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]' \
 	for romkatv/powerlevel10k
+if [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
+	. /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+fi
 # p10k cannot support any ice, see its README.md
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || . ~/.p10k.zsh
 # 1}}} StatusLine #
 
 # Log {{{1 #
 # must before suggest, see its README.md
-zinit id-as wait lucid from'gitlab' for code-stats/code-stats-zsh
-zinit id-as wait lucid for wbingli/zsh-wakatime
+zinit id-as depth'1' wait lucid from'gitlab' for code-stats/code-stats-zsh
+zinit id-as depth'1' wait lucid \
+	if'[[ -n $commands[wakatime] ]]' \
+	for wbingli/zsh-wakatime
 # 1}}} Log #
 
 # Syntax {{{1 #
-# See <fzf-tab/README.md>
-zinit id-as wait lucid \
-	if'[[ -x $commands[fzf] ]]' \
-	for Aloxaf/fzf-tab
-zinit id-as wait lucid for zdharma/fast-syntax-highlighting
+zinit id-as depth'1' wait lucid \
+	atload'autoload -U edit-command-line && bindkey "^X^E" edit-command-line' \
+	for zdharma/fast-syntax-highlighting
 # 1}}} Syntax #
 
 # Suggest {{{1 #
 # must load before zsh-autosuggestions
-zinit id-as wait lucid \
+zinit id-as depth'1' wait lucid \
 	atload'bindkey "^[p" history-substring-search-up
 	bindkey "^[n" history-substring-search-down
 	bindkey -Mvicmd gk history-substring-search-up
@@ -73,202 +155,177 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-find-next-char
 	vi-forward-word vi-forward-word-end vi-forward-blank-word
 	vi-forward-blank-word-end vi-find-next-char vi-find-next-char-skip
 )
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(yank yank-pop
 	history-search-forward history-search-backward
 	history-beginning-search-forward history-beginning-search-backward
 	history-substring-search-up history-substring-search-down
 	up-line-or-beginning-search down-line-or-beginning-search
 	up-line-or-history down-line-or-history accept-line copy-earlier-word
 	)
-zinit id-as wait lucid \
+ZSH_AUTOSUGGEST_IGNORE_WIDGETS=(
+	orig-\*
+	beep
+	run-help
+	set-local-history
+	which-command
+	zle-\*
+)
+zinit id-as depth'1' wait lucid \
 	atload'_zsh_autosuggest_start
 	bindkey "^\\" autosuggest-toggle' \
 	for zsh-users/zsh-autosuggestions
 # 1}}} Suggest #
 
 # HotKey {{{1 #
+bindkey -e
 bindkey ^U backward-kill-line
-bindkey ^G push-line
 bindkey ^Q vi-quoted-insert
 bindkey '^]' vi-find-next-char
+bindkey '^[]' vi-find-prev-char
 bindkey '^[W' copy-region-as-kill
 bindkey '^[l' down-case-word
-bindkey '^[_' redo
 bindkey ^O vi-cmd-mode
 bindkey '^[' vi-cmd-mode
-# visual mode cannot be highlighted
-zinit id-as wait lucid \
-	atload'vim_mode_set_keymap `vim-mode-initial-keymap`
+bindkey '^[i' expand-or-complete-prefix
+bindkey -Mvicmd cc vi-change-whole-line
+# add-surround in visual mode cannot be highlighted
+zinit id-as depth'1' wait lucid \
+	atload'vim_mode_set_keymap $(vim-mode-initial-keymap)
+ 	bindkey -Mvisual s add-surround
 	bindkey -e' \
 	for softmoth/zsh-vim-mode
+# cursor cannot display correctly after start zsh, quit neovim, switch tmux
+# zinit id-as depth'1' wait lucid \
+# 	atload'bindkey -sMvisual s S
+# 	bindkey -e' \
+# 	for jeffreytse/zsh-vi-mode
+
 # tmux selectw will result in wrong cursor in insert mode
 # and cannot work when bindkey -e
-# zinit id-as for jeffreytse/zsh-vi-mode
-zinit id-as wait lucid for zsh-vi-more/vi-increment
+# zinit id-as depth'1' for jeffreytse/zsh-vi-mode
+zinit id-as depth'1' wait lucid for zsh-vi-more/vi-increment
 # conflict with zsh-system-clipboard
-# zinit id-as wait lucid \
+# zinit id-as depth'1' wait lucid \
 	# atload'bindkey -Mvicmd " " vi-easy-motion' \
 	# for IngoHeimbach/zsh-easy-motion
-zinit id-as wait lucid \
+zinit id-as depth'1' wait lucid \
 	if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]' \
 	for kutsan/zsh-system-clipboard
 
-zinit id-as wait lucid for psprint/zsh-editing-workbench
-zinit id-as wait lucid for zdharma/zui
-zinit id-as wait lucid for psprint/zsh-cmd-architect
-zinit id-as wait lucid null \
-	atload'autoload -Uz ~/.zinit/plugins/zsh-sed-sub/autoload/basicSedSub
-	zle -N basicSedSub
-	bindkey ^S basicSedSub' \
-	for MenkeTechnologies/zsh-sed-sub
+zinit id-as depth'1' wait lucid \
+	atload'bindkey "^[/" redo
+	bindkey "^[y" yank-pop' \
+	for psprint/zsh-editing-workbench
+zinit id-as depth'1' wait lucid for zdharma/zui
+zinit id-as depth'1' wait lucid for psprint/zsh-cmd-architect
+zinit id-as depth'1' wait lucid \
+	if'[[ -n $commands[fzf] ]]' \
+	atload'bindkey -Mvicmd / fzf_history_seach' \
+	for joshskidmore/zsh-fzf-history-search
+zinit id-as depth'1' wait lucid \
+	if'[[ -n $commands[emoji-fzf] && -n $commands[fzf] ]]' \
+	for pschmitt/emoji-fzf.zsh
+autoload -Uz replace-string
+zle -N replace-regex replace-string
+bindkey '^^' replace-regex
+autoload -Uz narrow-to-region
+zle -N narrow-to-region
+bindkey -Mvicmd ' ' narrow-to-region
+autoload -Uz transpose-lines
+zle -N transpose-lines
+bindkey '^[T' transpose-lines
 # 1}}} HotKey #
 
 # Insert {{{1 #
-zinit id-as wait lucid for MenkeTechnologies/zsh-expand
-zinit id-as wait lucid for hlissner/zsh-autopair
+zinit id-as depth'1' wait lucid for MenkeTechnologies/zsh-expand
+zinit id-as depth'1' wait lucid for hlissner/zsh-autopair
 # 1}}} Insert #
 
-# Print {{{1 #
-zinit id-as wait lucid for MichaelAquilina/zsh-emojis
-zinit id-as wait lucid as'program' for LuRsT/hr
-zinit id-as wait lucid for pfahlr/zsh_plugin_loremipsum
-# 1}}} Print #
-
-# Complete {{{1 #
-zinit id-as wait lucid as'completion' \
-	if'[[ -z $OSTYPE || $OSTYPE == linux-android ]]' \
-	for zsh-users/zsh-completions
-zinit id-as wait lucid \
-	atclone'./setup.py install --user' \
-	pick'shell/pinyin-comp.zsh' \
-	if'[[ -n $OSTYPE && -x $commands[python2] ]]' \
-	for petronny/pinyin-completion
-# 1}}} Complete #
-
-# FileManage {{{1 #
-zinit id-as wait lucid as'program' for benlinton/slugify
-zinit id-as wait lucid as'program' for holman/spark
-# 1}}} FileManage #
-
-# Fuzzy {{{1 #
-zinit id-as wait lucid \
-	if'[[ -x $commands[fzf] ]]' \
-	for joshskidmore/zsh-fzf-history-search
-zinit id-as wait lucid \
-	if'[[ -x $commands[fzf] ]]' \
-	for b4b4r07/enhancd
-alias ..='__enhancd::cd ..'
-zinit id-as wait lucid \
-	if'[[ -x $commands[emoji-fzf] && -x $commands[fzf] ]]' \
-	for pschmitt/emoji-fzf.zsh
-zinit id-as wait lucid \
-	if'[[ -x $commands[git] && -x $commands[fzf] ]]' \
-	for wfxr/forgit
-zinit id-as wait lucid \
-	atclone'ln -s ~/.zinit/plugins/git-fuzzy/bin/git-fuzzy $ZPFX/bin' \
-	if'[[ -x $commands[git] && -x $commands[fzf] ]]' \
-	for bigH/git-fuzzy
-zinit id-as wait lucid \
-	if'[[ -x $commands[git] && -x $commands[fzf] ]]' \
-	for Bhupesh-V/ugit
-zinit id-as wait lucid \
-	if'[[ -x $commands[systemctl] && -x $commands[fzf] ]]' \
-	for NullSense/fuzzy-sys
-zinit id-as wait lucid as'program' \
-	if'[[ -x $commands[fd] && -x $commands[fzf] ]]' \
-	for seifferth/cite
-zinit id-as wait lucid \
-	atclone'ln -s ~/.zinit/plugins/interactively/bin/interactively $ZPFX/bin' \
-	if'[[ -x $commands[fzf] ]]' \
-	for bigH/interactively
-# 1}}} Fuzzy #
-
 # Colorize {{{1 #
-zinit id-as wait lucid for zpm-zsh/colorize
-zinit id-as wait lucid for zpm-zsh/mysql-colorize
-zinit id-as wait lucid \
-	if'[[ -x commands[ack] ]]' \
-	for paoloantinori/hhighlighter
+# android's ip from termux-tools is old
+zinit id-as depth'1' wait lucid for zpm-zsh/colorize
+zinit id-as depth'1' wait lucid \
+	if'[[ -n $commands[mysql] ]]' \
+	for zpm-zsh/mysql-colorize
 # 1}}} Colorize #
 
-# VirtualEnv {{{1 #
-zinit id-as wait lucid null pack for pyenv
-zinit id-as wait lucid pick'nvm.sh' for nvm-sh/nvm
-# 1}}} VirtualEnv #
-
 # PackageManage {{{1 #
-zinit id-as wait lucid as'program' \
+zinit id-as depth'1' wait lucid as'program' \
 	if'[[ $OSTYPE == cygwin ]]' \
 	for transcode-open/apt-cyg
 # 1}}} PackageManage #
 
+# VirtualEnv {{{1 #
+zinit id-as depth'1' wait lucid null pack \
+	if'[[ -z $commands[pyenv] ]]' \
+	for pyenv
+zinit id-as depth'1' wait lucid pick'nvm.sh' \
+	if'[[ ! -f /usr/share/nvm/init-nvm.sh ]]' \
+	for nvm-sh/nvm
+if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
+	. /usr/share/nvm/init-nvm.sh
+fi
+# 1}}} VirtualEnv #
+
 # Tool {{{1 #
-zinit id-as wait lucid as'program' for kdabir/has
-zinit id-as wait lucid as'program' \
-	atclone'cloudclip -i $GITHUB_TOKEN' \
-	if'[[ -x $commands[python2] ]]' \
-	for skywind3000/CloudClip
-zinit id-as wait lucid \
-	atclone'thefuck -a > fuck.sh
-	direnv hook zsh > direnv.sh
-	kitty +complete setup zsh > kitty.sh' \
+zinit id-as depth'1' wait lucid \
+	if'[[ -n $commands[git] && -n $commands[fzf] ]]' \
+	for Bhupesh-V/ugit
+zinit id-as depth'1' wait lucid as'program' for benlinton/slugify
+zinit id-as depth'1' wait lucid as'program' for holman/spark
+zinit id-as depth'1' wait lucid as'program' for LuRsT/hr
+zinit id-as depth'1' wait lucid as'program' \
+	atload'. completions/bash/_h' \
+	for Freed-Wu/hhighlighter-rg
+zinit id-as depth'1' wait lucid null \
+	atclone'./install.sh' \
+	for labbots/google-drive-upload
+zinit id-as depth'1' wait lucid null \
+	atclone'./install.sh' \
+	for Akianonymus/gdrive-downloader
+zinit id-as depth'1' wait lucid \
+	atclone'direnv hook zsh > direnv.sh' \
 	for zdharma/null
-zinit id-as wait lucid null \
+zinit id-as depth'1' wait lucid null \
 	if'[[ $OSTYPE == cygwin || $OSTYPE == msys2 ]]' \
 	atclone'ln -s ~/.zinit/plugin/win-sudo/s/sudo $ZPFX/bin' \
 	for imachug/win-sudo
-zinit id-as wait lucid \
-	if'[[ $OSTYPE == darwin ]]' \
-	for zsh-users/zsh-apple-touchbar
-zinit id-as wait lucid as'program' \
-	if'[[ -x $commands[git] ]]' \
-	for qw3rtman/git-fire
-zinit id-as wait lucid as'program' for fakeNetflix/facebook-repo-PathPicker
-zinit id-as wait lucid null \
-	if'[[ -x $commands[vi] ]]' \
-	atclone'python setup.py config
-	python setup.py build
-	python setup.py install --user' \
+zinit id-as depth'1' wait lucid as'program' \
+	if'[[ -z $commands[has] ]]' \
+	for kdabir/has
+zinit id-as depth'1' wait lucid null \
+	if'[[ -z $commands[vimdoc] ]]' \
+	atclone'setup.py config
+	setup.py build
+	setup.py install --user' \
 	for google/vimdoc
-zinit id-as wait lucid as'program' pick'firepwned.py' \
-	if'[[ -x $commands[firefox] ]]' \
-	for christophetd/firepwned
-zinit id-as wait lucid as'program' \
-	if'[[ -x $commands[firefox] ]]' \
-	for unode/firefox_decrypt
 # 1}}} Tool #
 
 # Compatible {{{1 #
-zinit id-as wait lucid for Tarrasch/zsh-command-not-found
+zinit id-as depth'1' wait lucid for Tarrasch/zsh-command-not-found
 # since now vivid doesn't be transplanted to android and windows
-zinit id-as wait lucid null pack \
-	if'[[ $OSTYPE != linux-gnu ]]' \
+zinit id-as depth'1' wait lucid null pack \
+	if'[[ -z $commands[vivid] ]]' \
 	for LS_COLORS
-zinit id-as wait lucid \
-	atload'export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS `fzf_sizer_preview_window_settings`"' \
-	if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 && -x $commands[fzf] && -x $commands[bc] ]]' \
+# window's fzf is too old
+zinit id-as depth'1' wait lucid \
+	atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
+	if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 && -n $commands[fzf] && -n $commands[bc] ]]' \
 	for bigH/auto-sized-fzf
-zinit id-as wait lucid \
-	if'[[ $OSTYPE == darwin ]]' \
-	for zackintosh/fixnumpad-osx.plugin.zsh
+compdef _vim vi
 # after loading completions
-zinit id-as wait lucid for 3v1n0/zsh-bash-completions-fallback
-# use nvim completions not busybox vi
-if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
-	alias vi=nvim
-fi
+zinit id-as depth'1' wait lucid \
+	for 3v1n0/zsh-bash-completions-fallback
 alias mv='mv -i'
 alias cp='cp -ri'
 alias rm='rm -i'
 alias rename='rename -i'
 if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
 	alias ls='exa --icons'
-	alias vdir='exa -lh --icons --git'
-	alias tree='exa -Tlh --icons --git'
+	alias vdir='exa --icons --git -lh'
 fi
 if [[ $OSTYPE != linux-android ]]; then
 	alias man='man -L zh_CN.UTF-8'
 fi
-alias pandoc='pandoc -s --pdf-engine=xelatex'
-export GPG_TTY=`tty`
+export GPG_TTY=$(tty)
 # 1}}} Compatible #

@@ -1,34 +1,20 @@
 # paths must be loaded here
-if [[ ($XDG_SESSION_DESKTOP == deepin || -z $DISPLAY) && -f ~/.xprofile ]]; then
-	source ~/.xprofile
-else
-	export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-	export PATH=$HOME/Applications:$PATH
-	export PATH=$HOME/.local/bin:$PATH
-	export PATH=$HOME/.cargo/bin:$PATH
-	export PATH=$HOME/.cabal/bin:$PATH
-	export PATH=$HOME/go/bin:$PATH
-	export PATH=$HOME/perl5/bin:$PATH
-	export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
-	export MANPATH=$HOME/.local/share/man:$MANPATH
-	export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
-	export INFOPATH=/home/linuxbrew/.linuxbrew/share/info:$INFOPATH
+if [[ ($XDG_SESSION_DESKTOP == deepin || $WAYLAND_DISPLAY || -z $DISPLAY) && -f ~/.xprofile ]]; then
+	. ~/.xprofile
 fi
-# tmux in android (termux) will source `~/.zprofile` again,
-# so we don't source `~/.xprofile` when `[[ -z $TMUX ]]` is false.
-if [[ -n $TMUX && $OSTYPE == linux-android ]]; then
-	return
+if [[ -d /usr/share/texmf-dist/scripts/texlive ]]; then
+	export PATH=/usr/share/texmf-dist/scripts/texlive:$PATH
+fi
+# adb shell doesn't have $LANG
+if [[ -z $LANG ]]; then
+	export LANG=en_US.UTF-8
 fi
 if [[ $OSTYPE == linux-android ]]; then
 	export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin:/vendor/bin/product/bin:/sbin
 fi
-# adb shell don't have $LANG
-if [[ -n $LANG ]]; then
-	export LANG=en_US.UTF-8
-fi
 # since now vivid doesn't be transplanted to android
-if [[ $OSTYPE == linux-gnu ]]; then
-	export LS_COLORS=`vivid generate molokai`
+if [[ -n $commands[vivid] ]]; then
+	export LS_COLORS=$(vivid generate molokai)
 fi
 # see <https://github.com/termux/termux-packages/issues/4781>
 if [[ $OSTYPE == linux-android ]]; then
@@ -37,36 +23,47 @@ else
 	export MANPAGER="sh -c 'col -bx|bat -plman'"
 fi
 # tty
-if [[ -z $DISPLAY ]]; then
-	export BROWSER=w3m
-else
+if [[ -n $DISPLAY || -n $WAYLAND_DISPLAY ]]; then
 	export BROWSER=xdg-open
+else
+	export BROWSER=w3m
 fi
 # windows's softwares are outdated
 if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
 	export FZF_DEFAULT_COMMAND='rg --files'
 	export FZF_DEFAULT_OPTS='-m
-	--preview "less {}"
+	-d$"\0"
+	--preview="less {+1}"
+	--bind=tab:down
+	--bind=btab:up
+	--bind=ctrl-j:jump
 	--bind=ctrl-k:kill-line
-	--bind=ctrl-j:first
-	--bind=ctrl-alt-r:toggle-preview
-	--bind=ctrl-alt-R:toggle-preview-wrap
-	--bind=alt-s:toggle-search
-	--bind=alt-S:toggle-sort
-	--bind=ctrl-alt-i:toggle
-	--bind=ctrl-alt-I:toggle-all
+	--bind=ctrl-q:clear-query
+	--bind=alt-a:first
+	--bind=alt-e:last
+	--bind=alt-N:toggle-in
+	--bind=alt-P:toggle-out
+	--bind=ctrl-space:toggle
+	--bind=ctrl-o:toggle-all
+	--bind=ctrl-g:deselect-all
+	--bind=alt-g:select-all
+	--bind=ctrl-s:toggle-search
+	--bind=ctrl-\\:toggle-sort
+	--bind=ctrl-^:toggle-preview-wrap
+	--bind=esc:toggle-preview
 	--bind=alt-p:preview-up
 	--bind=alt-n:preview-down
 	--bind=ctrl-v:preview-page-down
 	--bind=alt-v:preview-page-up
-	--bind=ctrl-alt-v:preview-half-page-down
-	--bind=alt-V:preview-half-page-up
-	--bind=alt-a:preview-top
-	--bind=alt-e:preview-bottom'
-	export LESSOPEN='|lesspipe %s'
+	--bind=ctrl-r:preview-half-page-down
+	--bind=alt-r:preview-half-page-up
+	--bind=alt-\<:preview-top
+	--bind=alt-\>:preview-bottom'
+	export FZF_TMUX_HEIGHT=$(($LINES/2))
 fi
 export LESS='-R -M -S --mouse'
+export LESSOPEN='|~/.lessfilter %s'
 # user customize
 if [[ -f ~/.bash_login ]]; then
-	source ~/.bash_login
+	. ~/.bash_login
 fi

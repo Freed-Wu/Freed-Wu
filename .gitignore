@@ -5,15 +5,15 @@
 !/README.md
 
 # dotfile
-!/.profile
 !/.xprofile
-!/.xinitrc
 !/.bash_profile
 !/.bashrc
 !/.zprofile
 !/.zshrc
 !/.p10k.zsh
 !/.Rprofile
+!/.pam_environment
+!/.inputrc
 !/.fbtermrc
 !/.astylerc
 !/.octaverc
@@ -38,9 +38,6 @@
 !/.dosbox/
 /.dosbox/*
 !/.dosbox/dosbox-*.conf
-!/.ctags.d/
-/.ctags.d/*
-!/.ctags.d/*.ctags
 !/.jupyter/
 /.jupyter/*
 !/.jupyter/jupyter_notebook_config.py
@@ -81,6 +78,7 @@
 !/.cargo/
 /.cargo/*
 !/.cargo/config
+!/.nix-channels
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -88,6 +86,7 @@
 !/.config/mimeapps.list
 !/.config/user-dirs.dirs
 !/.config/user-dirs.locale
+!/.config/electron-flags.conf
 !/.config/zathura/
 !/.config/neomutt/
 !/.config/mutt/
@@ -170,20 +169,31 @@
 !/.config/gh/
 /.config/gh/*
 !/.config/gh/config.yml
+!/.config/yay/
+/.config/yay/*
+!/.config/yay/config.json
+!/.config/nix/
+/.config/nix/*
+!/.config/nix/nix.conf
+!/.config/ctags.d/
+/.config/ctags.d/*
+!/.config/ctags.d/*.ctags
 
 # $XDG_DATA_HOME
 !/.local/
 /.local/*
 !/.local/share/
 /.local/share/*
+!/.local/share/flatpak/
+/.local/share/flatpak/*
+!/.local/share/flatpak/repo/
+/.local/share/flatpak/repo/*
+!/.local/share/flatpak/repo/config
 !/.local/share/icons/
 /.local/share/icons/hicolor
 !/.local/share/themes/
 /.local/share/themes/*
 !/.local/share/themes/luZorin
-!/.local/share/nautilus/
-/.local/share/nautilus/*
-!/.local/share/nautilus/scripts
 !/.local/share/pandoc/
 
 # Windows
@@ -201,5 +211,5 @@
 !/.termux/termux.properties
 !/.termux/colors.properties
 !/.termux/boot
-!/bin/
 !/.shortcuts/
+!/bin/

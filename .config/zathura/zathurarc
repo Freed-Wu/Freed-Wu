@@ -1,4 +1,4 @@
 include zathura-gruvbox/zathura-gruvbox-light
-set recolor-keephue true
+set recolor false
 set window-title-page true
 set selection-clipboard clipboard

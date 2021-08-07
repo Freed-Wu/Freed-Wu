@@ -3,39 +3,38 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-export PATH=$HOME/Applications:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.cabal/bin:$PATH
-export PATH=$HOME/go/bin:$PATH
-export PATH=$HOME/perl5/bin:$PATH
-export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
+PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+PATH=$HOME/Applications:$PATH
+PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/.cargo/bin:$PATH
+PATH=$HOME/.cabal/bin:$PATH
+PATH=$HOME/go/bin:$PATH
+PATH=$HOME/perl5/bin:$PATH
+PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
+PATH=$HOME/.google-drive-upload/bin:$PATH
+PATH=$HOME/.gdrive-downloader:$PATH
 export VISUAL=vi
 export EDITOR=$VISUAL
 # kitty
 export GLFW_IM_MODULE=ibus
-# brew's tmux's latest version is 3.2a which cannot support kitty
-# because exec, it must be added to `~/.xprofile`
-export TERM=xterm-256color
 # zsh
 export WORDCHARS=
+export READNULLCMD=bat
+export ZLE_RPROMPT_INDENT=0
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=$HISTSIZE
 # less
 export LESS='-R -M -S --mouse'
-# lesspipe
-export LESSCOLOR=yes
-export LESSCOLORIZER='bat --color always'
 # man
-export MANPATH=$HOME/.local/share/man:$MANPATH
-export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
+MANPATH=$HOME/.local/share/man:$MANPATH
+MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
 # info
 export INFOPATH=/home/linuxbrew/.linuxbrew/share/info:$INFOPATH
-# enhancd
-export ENHANCD_COMMAND=__enhancd::cd
 # emoji-fzf.zsh
 export EMOJI_FZF_BINDKEY=^X^I
-# forgit
-export FORGIT_COPY_CMD='xsel -ib'
+# zsh-wakatime
+export ZSH_WAKATIME_PROJECT_DETECTION=true
 # has
 export HAS_ALLOW_UNSAFE=y
 # zsh-vim-mode
@@ -47,13 +46,13 @@ export MODE_CURSOR_VISUAL=block
 export MODE_CURSOR_VLINE=bar
 # zsh-system-clipboard
 export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
-# todo.sh
-export TODO_DIR=~/.local/share/todo.txt
 # hub
-export GITHUB_USER=`git config --global user.name`
+GITHUB_USER=$(git config --global user.name)
+export GITHUB_USER
 # mutt
 export MAIL=+inbox
-export EMAIL=`git config --global user.email`
+EMAIL=$(git config --global user.email)
+export EMAIL
 # minicom
 export MINICOM='-m -w -8 -c on -C /tmp/minicom.log'
 # trans
@@ -62,8 +61,6 @@ export TARGET_LANG=zh
 export USE_CCACHE=1
 # python
 export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
-# pylint
-export PYTHONPATH=$HOME/.local/lib/python3.8/site-packages
 # pudb
 export PYTHONBREAKPOINT=pudb.forked.set_trace
 # julia

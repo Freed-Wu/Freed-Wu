@@ -9,7 +9,6 @@
 	denyCurrentBranch = ignore
 [merge]
 	conflictstyle = diff3
-	tool = vimdiff
 [mergetool]
 	keepBackup = false
 	hideResolved = true
@@ -18,12 +17,11 @@
 [diff]
 	submodule = log
 	colorMoved = default
+	tool = vimdiff
 [status]
 	submodulesummary = true
 [submodule]
 	recurse = true
-[credential]
-	helper = store --file ${XDG_DATA_HOME:-$HOME/.local/share}/git-credentials
 [core]
 	autocrlf = input
 	pager = bat
@@ -41,7 +39,6 @@
 	line-numbers = true
 	side-by-side = true
 	paging = always
-	syntax-theme = GitHub
 [tig]
 	mailmap = true
 	mouse = true

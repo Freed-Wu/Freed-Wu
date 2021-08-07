@@ -1,0 +1,18 @@
+[core]
+repo_version=1
+mode=bare-user-only
+min-free-space-size=500MB
+xa.applied-remotes=flathub;
+xa.languages=en
+xa.extra-languages=zh_CN
+
+[remote "flathub"]
+url=https://mirror.sjtu.edu.cn/flathub
+xa.title=Flathub
+gpg-verify=true
+gpg-verify-summary=true
+xa.comment=Central repository of Flatpak applications
+xa.description=Central repository of Flatpak applications
+xa.icon=https://dl.flathub.org/repo/logo.svg
+xa.homepage=https://flathub.org/
+url-is-set=true

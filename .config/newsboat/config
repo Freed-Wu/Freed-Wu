@@ -17,7 +17,7 @@ bind-key X delete-all-articles
 
 bookmark-cmd "echo -e \"$1\t$2\t$3\t$4\" >> ~/.config/newsboat/bookmarks.txt"
 error-log ~/.local/share/newsboat/error.log
-include `[[ -f ~/.config/newsboat/colorschemes/solarized-dark ]] && echo ~/.config/newsboat/colorschemes/solarized-dark`
+include `[[ -f ~/.config/newsboat/colorschemes/solarized-dark ]] && echo ~/.config/newsboat/colorschemes/solarized-dark || echo /dev/null`
 save-path ~/Downloads
 
 urls-source oldreader

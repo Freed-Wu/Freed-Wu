@@ -1,7 +1,7 @@
-source `[[ -n $DISPLAY ]] && echo /dev/null || ([[ $TERM == linux ]] && echo $XDG_CONFIG_HOME/neomutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc || echo $XDG_CONFIG_HOME/neomutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc)`
 source ~/.config/neomutt/neomuttrc.qq
 folder-hook imaps://imap.qq.com:993 'source ~/.config/neomutt/neomuttrc.qq'
 folder-hook imaps://imap.gmail.com:993 'source ~/.config/neomutt/neomuttrc.gmail'
+folder-hook imaps://202.38.64.8 'source ~/.config/neomutt/neomuttrc.ustc'
 
 set sleep_time = 0
 set shell = ''
@@ -126,8 +126,9 @@ bind index g/ root-message
 bind index ~ toggle-read
 bind pager,index gs compose-to-sender
 
-macro index g1 '<sync-mailbox><enter-command>source ~/.config/neomutt/qq.neomuttrc<enter><change-folder>!<enter>'
-macro index g2 '<sync-mailbox><enter-command>source ~/.config/neomutt/gmail.neomuttrc<enter><change-folder>!<enter>'
+macro index g1 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.qq<enter><change-folder>!<enter>'
+macro index g2 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.gmail<enter><change-folder>!<enter>'
+macro index g3 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.ustc<enter><change-folder>!<enter>'
 macro pager,index,attach \cb "\
 				<enter-command> set my_pdsave=\$pipe_decode<enter>\
 				<enter-command> unset pipe_decode<enter>\

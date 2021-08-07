@@ -1,3 +1,3 @@
 unset SESSION_MANAGER
 unset DBUS_SESSION_BUS_ADDRESS
-xfce4-session &
+test -x $commands[xfce4-session] && (xfce4-session &) || (test -x $commands[gnome-shell] && (gnome-shell &))

@@ -1,0 +1,11 @@
+set folder = imaps://202.38.64.8
+set imap_user = wuzy01
+set imap_pass = $EMAIL_PASS
+
+# set postponed = +Drafts
+# set record = '+Sent Messages'
+# set trash = '+Deleted Messages'
+set smtp_url = smtps://202.38.64.8
+set smtp_pass = $EMAIL_PASS
+unmailboxes *
+mailboxes +INBOX
