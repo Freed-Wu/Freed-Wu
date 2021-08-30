@@ -261,10 +261,7 @@ zinit id-as depth'1' wait lucid for hlissner/zsh-autopair
 # 1}}} Insert #
 
 # Colorize {{{1 #
-# android's ip from termux-tools is old
-zinit id-as depth'1' wait lucid \
-  atload'unfunction diff' \
-  for zpm-zsh/colorize
+zinit id-as depth'1' wait lucid for zpm-zsh/colorize
 zinit id-as depth'1' wait lucid \
   if'[[ -n $commands[mysql] ]]' \
   for zpm-zsh/mysql-colorize
