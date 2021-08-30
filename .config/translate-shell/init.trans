@@ -1,4 +1,5 @@
 {
-	:verbose false
-	:theme "random"
+  :verbose false
+  :theme "random"
+  :tl "zh"
 }

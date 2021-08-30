@@ -1,1 +1,1 @@
-vncserver -kill $vnc
+vncserver -kill :1

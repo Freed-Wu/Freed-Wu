@@ -1,8 +1,3 @@
-source ~/.config/neomutt/neomuttrc.qq
-folder-hook imaps://imap.qq.com:993 'source ~/.config/neomutt/neomuttrc.qq'
-folder-hook imaps://imap.gmail.com:993 'source ~/.config/neomutt/neomuttrc.gmail'
-folder-hook imaps://202.38.64.8 'source ~/.config/neomutt/neomuttrc.ustc'
-
 set sleep_time = 0
 set shell = ''
 set attach_save_dir = ~/Downloads
@@ -15,7 +10,7 @@ set ispell = aspell
 set charset = utf-8
 set edit_headers
 set rfc2047_parameters
-set signature = 'echo Best Regards from $USER|'
+set signature = 'echo -n Best Regards from $USER|'
 set sort = reverse-date
 set query_command = 'mutt_ldap_query.pl %s'
 set quit = ask-yes
@@ -24,8 +19,6 @@ set auto_tag
 set x_comment_to
 set header_cache = ~/.cache/neomutt
 set message_cachedir = ~/.cache/neomutt
-set ssl_starttls = yes
-set ssl_force_tls = yes
 set mail_check_stats
 set sidebar_visible
 set sidebar_format = '%B%* %n%o/%S'
@@ -126,12 +119,15 @@ bind index g/ root-message
 bind index ~ toggle-read
 bind pager,index gs compose-to-sender
 
+source ~/.config/neomutt/neomuttrc.qq
+folder-hook imaps://imap.qq.com 'source ~/.config/neomutt/neomuttrc.qq'
+folder-hook imaps://imap.gmail.com 'source ~/.config/neomutt/neomuttrc.gmail'
+folder-hook imaps://imap.mail.ustc.edu.cn 'source ~/.config/neomutt/neomuttrc.ustc'
+folder-hook imaps://imap.exmail.qq.com 'source ~/.config/neomutt/neomuttrc.njust'
+# must after set folder
+set spoolfile = +INBOX
+
 macro index g1 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.qq<enter><change-folder>!<enter>'
 macro index g2 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.gmail<enter><change-folder>!<enter>'
 macro index g3 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.ustc<enter><change-folder>!<enter>'
-macro pager,index,attach \cb "\
-				<enter-command> set my_pdsave=\$pipe_decode<enter>\
-				<enter-command> unset pipe_decode<enter>\
-				<pipe-message>extract_url<enter>\
-				<enter-command> set pipe_decode=\$my_pdsave<enter>" \
-				"get URLs"
+macro index g4 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.njust<enter><change-folder>!<enter>'

@@ -33,6 +33,8 @@
 !/.lessfilter
 !/.wgetrc
 !/.curlrc
+!/.nix-channels
+!/.visidatarc
 
 # dotfiles
 !/.dosbox/
@@ -78,7 +80,9 @@
 !/.cargo/
 /.cargo/*
 !/.cargo/config
-!/.nix-channels
+!/.parallel/
+/.parallel/*
+!/.parallel/config
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -121,11 +125,6 @@
 !/.config/procps/
 /.config/procps/*
 !/.config/procps/toprc
-!/.config/coc/
-/.config/coc/*
-!/.config/coc/extensions/
-/.config/coc/extensions/*
-!/.config/coc/extensions/package.json
 !/.config/pip/
 /.config/pip/*
 !/.config/pip/pip.conf
@@ -178,6 +177,9 @@
 !/.config/ctags.d/
 /.config/ctags.d/*
 !/.config/ctags.d/*.ctags
+!/.config/youtube-dl/
+/.config/youtube-dl/*
+!/.config/youtube-dl/config
 
 # $XDG_DATA_HOME
 !/.local/

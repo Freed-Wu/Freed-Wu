@@ -7,6 +7,12 @@ $pdf_previewer = 'xdg-open %S';
 $clean_ext = 'synctex(busy) synctex.gz acn acr alg aux bbl bcf blg brf fdb_latexmk glg glo gls idx ilg ind ist loe lof log lot out run.xml toc xdv dvi upa upb pygtex pygstyle pyg fls listing cmap csvtoken gnuplot nav snm vrb mw mw.mw fmt markdown.in nlo nls mx1 mx2 md5 dpth auxlock figlist';
 $bibtex_use = 2;
 add_cus_dep('nlo', 'nls', 0, 'makenlo2nls');
+$compiling_cmd = "xdotool search --name \"%D\" " .
+"set_window --name \"%D compiling...\"";
+$success_cmd   = "xdotool search --name \"%D\" " .
+"set_window --name \"%D OK\"";
+$failure_cmd   = "xdotool search --name \"%D\" " .
+"set_window --name \"%D FAILURE\"";
 sub makenlo2nls{
 	system( "makeindex -s nomencl.ist -o \"$_[0].nls\" \"$_[0].nlo\"" );
 }
@@ -29,4 +35,3 @@ sub musixlatex {
 	}
 	return system( "pdflatex @args" );
 }
-

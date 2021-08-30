@@ -3,19 +3,23 @@ mime=$(file -Lb --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
 if [ -d "$1" ]; then
-	exa --git -hl --color=always --icons "$1"
-elif [ "$category" = text ]; then
-	bat --color=always "$1"
-elif [ "$category" = image ]; then
-	chafa "$1"
-	exiftool "$1"
+  exa --git -hl --color=always --icons "$1"
+elif [ "$kind" = plain ] && [ "${1##*.}" = tsv ]; then
+  bat -p "$1" --color=always | xsv table | bat -p --color=always
+elif [ "$kind" = csv ]; then
+  bat -p "$1" --color=always | xsv table | bat -p --color=always
 elif [ "$kind" = json ]; then
-	jq -r . "$1" --color-output
+  jq -r . "$1" --color-output
 elif [ "$kind" = pdf ]; then
-	pdftotext "$1" - | sed "s/\f/$(hr ─)\n/"
-elif [ "$kind" = vnd.openxmlformats-officedocument.spreadsheetml.sheet ] || \
-	[ "$kind" = vnd.ms-excel ]; then
-	in2csv "$1" | xsv table | bat -ltsv --color=always
+  pdftotext "$1" - | sed "s/\f/$(hr ─)\n/"
+elif [ "$kind" = vnd.openxmlformats-officedocument.spreadsheetml.sheet ] \
+  || [ "$kind" = vnd.ms-excel ]; then
+  in2csv "$1" | xsv table | bat -ltsv --color=always
+elif [ "$category" = text ]; then
+  bat --color=always "$1"
+elif [ "$category" = image ]; then
+  chafa "$1"
+  exiftool "$1"
 else
-	lesspipe.sh "$1" | bat --color=always
+  lesspipe.sh "$1" | bat --color=always
 fi

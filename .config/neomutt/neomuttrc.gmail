@@ -1,4 +1,4 @@
-set folder = imaps://imap.gmail.com:993
+set folder = imaps://imap.gmail.com
 set imap_user = wuzy001@gmail.com
 set imap_pass = $GMAIL_PASS
 

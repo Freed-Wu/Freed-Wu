@@ -31,13 +31,14 @@ fi
 # windows's softwares are outdated
 if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
 	export FZF_DEFAULT_COMMAND='rg --files'
-	export FZF_DEFAULT_OPTS='-m
+	export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
+	"'-m
 	-d$"\0"
 	--preview="less {+1}"
 	--bind=tab:down
 	--bind=btab:up
-	--bind=ctrl-j:jump
-	--bind=ctrl-k:kill-line
+	--bind=alt-j:jump
+	--bind=alt-k:kill-line
 	--bind=ctrl-q:clear-query
 	--bind=alt-a:first
 	--bind=alt-e:last
@@ -50,7 +51,7 @@ if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
 	--bind=ctrl-s:toggle-search
 	--bind=ctrl-\\:toggle-sort
 	--bind=ctrl-^:toggle-preview-wrap
-	--bind=esc:toggle-preview
+	--bind=ctrl-x:toggle-preview
 	--bind=alt-p:preview-up
 	--bind=alt-n:preview-down
 	--bind=ctrl-v:preview-page-down
@@ -67,3 +68,23 @@ export LESSOPEN='|~/.lessfilter %s'
 if [[ -f ~/.bash_login ]]; then
 	. ~/.bash_login
 fi
+# zsh
+export WORDCHARS=
+export READNULLCMD=bat
+export ZLE_RPROMPT_INDENT=0
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=$HISTSIZE
+# emoji-fzf.zsh
+export EMOJI_FZF_BINDKEY=^X^I
+# zsh-wakatime
+export ZSH_WAKATIME_PROJECT_DETECTION=true
+# zsh-vim-mode
+export MODE_CURSOR_VIINS='blinking bar'
+export MODE_CURSOR_REPLACE='blinking underline'
+export MODE_CURSOR_VICMD='blinking block'
+export MODE_CURSOR_SEARCH=underline
+export MODE_CURSOR_VISUAL=block
+export MODE_CURSOR_VLINE=bar
+# zsh-system-clipboard
+export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true

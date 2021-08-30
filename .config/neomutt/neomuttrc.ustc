@@ -1,11 +1,11 @@
-set folder = imaps://202.38.64.8
-set imap_user = wuzy01
-set imap_pass = $EMAIL_PASS
+set folder = imaps://mail.ustc.edu.cn
+set imap_user = wuzy01@mail.ustc.edu.cn
+set imap_pass = $MAIL_PASS
 
-# set postponed = +Drafts
-# set record = '+Sent Messages'
-# set trash = '+Deleted Messages'
-set smtp_url = smtps://202.38.64.8
-set smtp_pass = $EMAIL_PASS
+set postponed = +Drafts
+set record = '+Sent Items'
+set trash = +Trash
+set smtp_url = smtps://wuzy01@mail.ustc.edu.cn
+set smtp_pass = $MAIL_PASS
 unmailboxes *
-mailboxes +INBOX
+mailboxes +INBOX +Drafts '+Sent Items' +Trash '+Junk E-mail' '+Virus Items'

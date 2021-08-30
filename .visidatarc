@@ -1,0 +1,2 @@
+options.cmdlog_histfile = '~/.cache/visidata.tsv'
+# ex: filetype=python

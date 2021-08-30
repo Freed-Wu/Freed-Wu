@@ -1,11 +1,11 @@
-set folder = imaps://imap.qq.com:993
+set folder = imaps://imap.qq.com
 set imap_user = $EMAIL
 set imap_pass = $EMAIL_PASS
 
 set postponed = +Drafts
 set record = '+Sent Messages'
 set trash = '+Deleted Messages'
-set smtp_url = smtps://Wuzy01@smtp.qq.com:465
+set smtp_url = smtps://wuzy01@smtp.qq.com
 set smtp_pass = $EMAIL_PASS
 unmailboxes *
 mailboxes +INBOX +Drafts '+Sent Messages' '+Deleted Messages' +Junk \

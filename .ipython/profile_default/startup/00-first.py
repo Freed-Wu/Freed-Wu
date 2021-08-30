@@ -6,6 +6,9 @@ from colorama import Fore, Back, Style
 from rich import print
 from rich import pretty
 from rich import traceback
+
+os.environ['PYTHONBREAKPOINT'] = 'pudb.forked.set_trace'
+
 if sys.platform == 'windows':
     colorama.init()
 pretty.install()

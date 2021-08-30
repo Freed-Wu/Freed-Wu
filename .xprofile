@@ -3,67 +3,45 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
-PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-PATH=$HOME/Applications:$PATH
-PATH=$HOME/.local/bin:$PATH
-PATH=$HOME/.cargo/bin:$PATH
-PATH=$HOME/.cabal/bin:$PATH
-PATH=$HOME/go/bin:$PATH
-PATH=$HOME/perl5/bin:$PATH
-PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
-PATH=$HOME/.google-drive-upload/bin:$PATH
-PATH=$HOME/.gdrive-downloader:$PATH
+PATH=/home/linuxbrew/.linuxbrew/bin\
+:$HOME/Applications\
+:$HOME/.local/bin\
+:$HOME/.cargo/bin\
+:$HOME/.cabal/bin\
+:$HOME/go/bin\
+:$HOME/perl5/bin\
+:$HOME/.gem/ruby/2.7.0/bin\
+:$HOME/.local/share/nautilus/scripts\
+:$HOME/.google-drive-upload/bin\
+:$HOME/.gdrive-downloader\
+:$PATH
 export VISUAL=vi
 export EDITOR=$VISUAL
-# kitty
-export GLFW_IM_MODULE=ibus
-# zsh
-export WORDCHARS=
-export READNULLCMD=bat
-export ZLE_RPROMPT_INDENT=0
-export HISTFILE=$HOME/.zsh_history
-export HISTSIZE=100000
-export SAVEHIST=$HISTSIZE
-# less
-export LESS='-R -M -S --mouse'
 # man
-MANPATH=$HOME/.local/share/man:$MANPATH
-MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
+MANPATH=$HOME/.local/share/man\
+:/home/linuxbrew/.linuxbrew/share/man\
+:$MANPATH
 # info
-export INFOPATH=/home/linuxbrew/.linuxbrew/share/info:$INFOPATH
-# emoji-fzf.zsh
-export EMOJI_FZF_BINDKEY=^X^I
-# zsh-wakatime
-export ZSH_WAKATIME_PROJECT_DETECTION=true
-# has
-export HAS_ALLOW_UNSAFE=y
-# zsh-vim-mode
-export MODE_CURSOR_VIINS='blinking bar'
-export MODE_CURSOR_REPLACE='blinking underline'
-export MODE_CURSOR_VICMD='blinking block'
-export MODE_CURSOR_SEARCH=underline
-export MODE_CURSOR_VISUAL=block
-export MODE_CURSOR_VLINE=bar
-# zsh-system-clipboard
-export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
+export INFOPATH=/home/linuxbrew/.linuxbrew/share/info\
+:$INFOPATH
 # hub
 GITHUB_USER=$(git config --global user.name)
 export GITHUB_USER
 # mutt
-export MAIL=+inbox
 EMAIL=$(git config --global user.email)
 export EMAIL
+# kitty
+export GLFW_IM_MODULE=ibus
+# less
+export LESS='-R -M -S --mouse'
 # minicom
 export MINICOM='-m -w -8 -c on -C /tmp/minicom.log'
-# trans
-export TARGET_LANG=zh
+# has
+export HAS_ALLOW_UNSAFE=y
 # ccache
 export USE_CCACHE=1
+# gks
+export GKS_ENCODING=utf-8
 # python
 export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
-# pudb
-export PYTHONBREAKPOINT=pudb.forked.set_trace
-# julia
-export JULIA_NUM_THREADS=4
-export JULIA_PKG_SERVER=https://mirrors.bfsu.edu.cn/julia
-export GKS_ENCODING=utf-8
+# ex: filetype=sh
