@@ -8,7 +8,7 @@
 
 --write-description
 --write-info-json
---write-annotations 
+--write-annotations
 
 --write-thumbnail
 
