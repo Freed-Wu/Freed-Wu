@@ -8,6 +8,13 @@ fi
 if [[ -z $TMUX && -n $commands[tmux] ]]; then
   tmux new -A && exit
 fi
+
+WORDCHARS=
+READNULLCMD=bat
+ZLE_RPROMPT_INDENT=0
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
 # 1}}} Prefix #
 
 # PluginManage {{{1 #
@@ -23,6 +30,7 @@ fi
 zinit id-as depth'1' null for zdharma/zinit
 
 # must load it quickly
+ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
 zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
 # 1}}} PluginManage #
 
@@ -43,6 +51,12 @@ fi
 
 # Cursor {{{1 #
 # add-surround in visual mode cannot be highlighted
+export MODE_CURSOR_VIINS='blinking bar'
+export MODE_CURSOR_REPLACE='blinking underline'
+export MODE_CURSOR_VICMD='blinking block'
+export MODE_CURSOR_SEARCH=underline
+export MODE_CURSOR_VISUAL=block
+export MODE_CURSOR_VLINE=bar
 zinit id-as depth'1' wait lucid \
   atload'vim_mode_set_keymap $(vim-mode-initial-keymap)
   bindkey -Mvisual s add-surround
@@ -150,6 +164,7 @@ zinit id-as depth'1' wait lucid as'completion' \
 # Log {{{1 #
 # must before suggest, see its README.md
 zinit id-as depth'1' wait lucid from'gitlab' for code-stats/code-stats-zsh
+ZSH_WAKATIME_PROJECT_DETECTION=true
 zinit id-as depth'1' wait lucid \
   if'[[ -n $commands[wakatime] ]]' \
   for wbingli/zsh-wakatime
@@ -241,6 +256,7 @@ zinit id-as depth'1' wait lucid \
   if'[[ -n $commands[fzf] ]]' \
   atload'bindkey -Mvicmd / fzf_history_seach' \
   for joshskidmore/zsh-fzf-history-search
+EMOJI_FZF_BINDKEY=^X^I
 zinit id-as depth'1' wait lucid \
   if'[[ -n $commands[emoji-fzf] && -n $commands[fzf] ]]' \
   for pschmitt/emoji-fzf.zsh
