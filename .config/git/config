@@ -1,6 +1,8 @@
 [user]
   name = Freed-Wu
   email = wuzy01@qq.com
+[feature]
+  manyFiles = true
 [pull]
   rebase = true
 [push]
