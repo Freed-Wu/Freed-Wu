@@ -4,9 +4,11 @@ if [[ -z $CODESTATS_API_KEY ]]; then
 fi
 
 # tmux firstly avoid load ~/.zshrc again
-# exec tmux will met bug in Android
-if [[ -z $TMUX && -n $commands[tmux] ]]; then
-  tmux new -A && exit
+# exec tmux will met bug in android
+# tmux on android and windows is slow because it cannot run in background
+# don't run tmux on them
+if [[ -z $TMUX && -n $commands[tmux] && $OSTYPE == linux-gnu ]]; then
+  exec tmux new -A
 fi
 
 WORDCHARS=
@@ -284,12 +286,6 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Colorize #
 
 # Function {{{1 #
-# VirtualEnv {{{2 #
-zinit id-as depth'1' wait lucid \
-  if'[[ ! -f /usr/share/nvm/init-nvm.sh ]]' \
-  for nvm-sh/nvm
-# 2}}} VirtualEnv #
-
 # Tool {{{2 #
 zinit id-as depth'1' wait lucid for sineto/web-search
 # 2}}} Tool #
