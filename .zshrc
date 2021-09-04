@@ -76,7 +76,7 @@ setopt autopushd
 setopt chaselinks
 setopt pushdignoredups
 # brew's zsh is 5.8.1 < 5.8.7
-if [[ ${(k)options} =~ '.*cdsilent.*' ]]; then
+if (($+options[cdsilent])); then
   setopt cdsilent
 else
   TERM=xterm-256color
@@ -100,7 +100,7 @@ setopt interactivecomments
 zmodload zsh/pcre
 autoload -Uz run-help
 # brew's zsh is 5.8.1 < 5.8.7
-if [[ $aliases[run-help] ]]; then
+if (($+aliases[run-help])); then
   unalias run-help
 fi
 autoload -Uz zcalc
