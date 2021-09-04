@@ -1,5 +1,5 @@
 # paths must be loaded here
-if [[ ($XDG_SESSION_DESKTOP == deepin || $WAYLAND_DISPLAY || -z $DISPLAY) && -f ~/.xprofile ]]; then
+if [[ -z $PYTHONSTARTUP && -f ~/.xprofile ]]; then
   . ~/.xprofile
 fi
 if [[ -d /usr/share/texmf-dist/scripts/texlive ]]; then
@@ -70,3 +70,5 @@ fi
 # less
 export LESS='-R -M -S --mouse'
 export LESSOPEN='|~/.lessfilter %s'
+# brew
+export HOMEBREW_BOTTLE_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/linuxbrew-bottles/bottles'

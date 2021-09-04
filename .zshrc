@@ -75,7 +75,12 @@ zinit id-as depth'1' wait lucid for RobSis/zsh-reentry-hook
 setopt autopushd
 setopt chaselinks
 setopt pushdignoredups
-setopt cdsilent
+# brew's zsh is 5.8.1 < 5.8.7
+if [[ ${(k)options} =~ '.*cdsilent.*' ]]; then
+  setopt cdsilent
+else
+  TERM=xterm-256color
+fi
 
 setopt globstarshort
 setopt magicequalsubst
@@ -93,7 +98,11 @@ setopt noflowcontrol
 setopt interactivecomments
 
 zmodload zsh/pcre
-autoload -Uz run-help && unalias run-help
+autoload -Uz run-help
+# brew's zsh is 5.8.1 < 5.8.7
+if [[ $aliases[run-help] ]]; then
+  unalias run-help
+fi
 autoload -Uz zcalc
 autoload -Uz zmv
 # 1}}} Default #
