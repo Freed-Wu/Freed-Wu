@@ -71,4 +71,4 @@ fi
 export LESS='-R -M -S --mouse'
 export LESSOPEN='|~/.lessfilter %s'
 # brew
-export HOMEBREW_BOTTLE_DOMAIN='https://mirrors.tuna.tsinghua.edu.cn/linuxbrew-bottles/bottles'
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles
