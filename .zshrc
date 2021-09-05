@@ -19,7 +19,7 @@ zinit id-as depth'1' null for zdharma/zinit
 zinit id-as'.brew' depth'1' \
   atclone'brew shellenv > brew.sh
   zcompile *.sh' \
-  if'[[ -z $HOMEBREW_PREFIX ]]' \
+    if'[[ -z $HOMEBREW_PREFIX ]] && (($+commands[brew]))' \
   for zdharma/null
 
 # tmux firstly avoid load ~/.zshrc twice
@@ -122,6 +122,7 @@ autoload -Uz compinit && compinit
 zinit id-as'.vivid' depth'1' \
   atclone'echo "export LS_COLORS=\"$(vivid generate molokai)\"" > vivid.sh
   zcompile *.sh' \
+  if'(($+commands[vivid]))' \
   for zdharma/null
 
 # since now vivid doesn't be transplanted to android and windows
@@ -319,6 +320,7 @@ zinit id-as depth'1' wait lucid for sineto/web-search
 zinit id-as'.direnv' depth'1' \
   atclone'direnv hook zsh > direnv.sh
   zcompile *.sh' \
+  if'(($+commands[direnv]))' \
   for zdharma/null
 # https://github.com/Tarrasch/zsh-command-not-found/issues/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
