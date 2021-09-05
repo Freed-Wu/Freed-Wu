@@ -9,6 +9,10 @@ fi
 if [[ -z $LANG ]]; then
   export LANG=en_US.UTF-8
 fi
+# termux only set USERNAME, ssh only export USER
+if [[ -z $USER ]]; then
+  export USER=$USERNAME
+fi
 if [[ $OSTYPE == linux-android ]]; then
   export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin\
 :/vendor/bin:/product/bin:/sbin
