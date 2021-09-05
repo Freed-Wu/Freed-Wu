@@ -3,8 +3,7 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
-PATH=/home/linuxbrew/.linuxbrew/bin\
-:$HOME/Applications\
+PATH=$HOME/Applications\
 :$HOME/.local/bin\
 :$HOME/.cargo/bin\
 :$HOME/.cabal/bin\
@@ -19,11 +18,7 @@ export VISUAL=vi
 export EDITOR=$VISUAL
 # man
 MANPATH=$HOME/.local/share/man\
-:/home/linuxbrew/.linuxbrew/share/man\
 :$MANPATH
-# info
-export INFOPATH=/home/linuxbrew/.linuxbrew/share/info\
-:$INFOPATH
 # hub
 GITHUB_USER=$(git config --global user.name)
 export GITHUB_USER

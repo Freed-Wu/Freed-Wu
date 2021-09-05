@@ -13,10 +13,6 @@ if [[ $OSTYPE == linux-android ]]; then
   export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin\
 :/vendor/bin:/product/bin:/sbin
 fi
-# since now vivid doesn't be transplanted to android
-if [[ -n $commands[vivid] ]]; then
-  export LS_COLORS=$(vivid generate molokai)
-fi
 # https://github.com/termux/termux-packages/issues/4781
 if [[ $OSTYPE == linux-android ]]; then
   export MANPAGER=batman
@@ -71,4 +67,13 @@ fi
 export LESS='-R -M -S --mouse'
 export LESSOPEN='|~/.lessfilter %s'
 # brew
+export HOMEBREW_BAT
+export HOMEBREW_BOOTSNAP
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles
+export HOMEBREW_GITHUB_API_TOKEN=$GITHUB_TOKEN
+export HOMEBREW_GITHUB_PACKAGES_TOKEN=$GITHUB_TOKEN
+export HOMEBREW_GITHUB_PACKAGES_USER=$GITHUB_USER
+export HOMEBREW_GIT_EMAIL=$EMAIL
+export HOMEBREW_GIT_NAME=$GITHUB_USER
+# https://github.com/Homebrew/brew/issues/11974
+export HOMEBREW_BAT_CONFIG_PATH=$HOME/.config/bat/config

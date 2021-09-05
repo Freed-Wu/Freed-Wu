@@ -1,35 +1,34 @@
-# Prefix {{{1 #
+# PluginManage {{{1 #
 if [[ -z $CODESTATS_API_KEY ]]; then
   . ~/.zprofile
 fi
 
-# tmux firstly avoid load ~/.zshrc again
-# exec tmux will met bug in android
-# tmux on android and windows is slow because it cannot run in background
-# don't run tmux on them
-if [[ -z $TMUX && -n $commands[tmux] && $OSTYPE == linux-gnu ]]; then
-  exec tmux new -A
-fi
-
-WORDCHARS=
-READNULLCMD=bat
-ZLE_RPROMPT_INDENT=0
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=100000
-SAVEHIST=$HISTSIZE
-# 1}}} Prefix #
-
-# PluginManage {{{1 #
 if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
   . ~/.zinit/plugins/zinit/zinit.zsh
-elif [[ -n $commands[git] ]]; then
+elif (($+commands[git])); then
   git clone https://github.com/zdharma/zinit ~/.zinit/plugins/zinit
   . ~/.zinit/plugins/zinit/zinit.zsh
 else
   return
 fi
+
 # cannot wait
 zinit id-as depth'1' null for zdharma/zinit
+
+# brew add some paths which may contain tmux
+zinit id-as'.brew' depth'1' \
+  atclone'brew shellenv > brew.sh
+  zcompile *.sh' \
+  if'[[ -z $HOMEBREW_PREFIX ]]' \
+  for zdharma/null
+
+# tmux firstly avoid load ~/.zshrc twice
+# exec tmux will met bug in android
+# tmux on android and windows is slow because it cannot run in background
+# don't run tmux on them
+if [[ -z $TMUX && $OSTYPE == linux-gnu ]] && (($+commands[tmux])); then
+  exec tmux new -A
+fi
 
 # must load it quickly
 ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
@@ -72,6 +71,13 @@ zinit id-as depth'1' wait lucid for RobSis/zsh-reentry-hook
 # 1}}} ChangeDirectory #
 
 # Default {{{1 #
+WORDCHARS=
+READNULLCMD=bat
+ZLE_RPROMPT_INDENT=0
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
+
 setopt autopushd
 setopt chaselinks
 setopt pushdignoredups
@@ -108,11 +114,19 @@ autoload -Uz zmv
 # 1}}} Default #
 
 # Complete {{{1 #
+if [[ -n $HOMEBREW_PREFIX ]]; then
+  FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH
+fi
 autoload -Uz compinit && compinit
+
+zinit id-as'.vivid' depth'1' \
+  atclone'echo "export LS_COLORS=\"$(vivid generate molokai)\"" > vivid.sh
+  zcompile *.sh' \
+  for zdharma/null
 
 # since now vivid doesn't be transplanted to android and windows
 zinit id-as depth'1' null pack \
-  if'[[ -z $commands[vivid] ]]' \
+  if'[[ -z $LS_COLORS ]]' \
   for LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-separator ''
@@ -130,7 +144,7 @@ if [[ -f /usr/share/pinyin-completion/shell/pinyin-comp.zsh ]]; then
 fi
 
 zinit id-as depth'1' wait lucid \
-  if'[[ -n $commands[fzf] ]]' \
+  if'(($+commands[fzf]))' \
   for Aloxaf/fzf-tab
 zstyle ':fzf-tab:*' prefix ''
 zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
@@ -139,6 +153,7 @@ zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
 zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
 zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
   'SYSTEMD_COLORS=1 systemctl status $word'
 zstyle ':completion:*:processes' command \
@@ -177,7 +192,7 @@ zinit id-as depth'1' wait lucid as'completion' \
 zinit id-as depth'1' wait lucid from'gitlab' for code-stats/code-stats-zsh
 ZSH_WAKATIME_PROJECT_DETECTION=true
 zinit id-as depth'1' wait lucid \
-  if'[[ -n $commands[wakatime] ]]' \
+  if'(($+commands[wakatime]))' \
   for wbingli/zsh-wakatime
 # 1}}} Log #
 
@@ -264,12 +279,12 @@ zinit id-as depth'1' wait lucid \
 zinit id-as depth'1' wait lucid for zdharma/zui
 zinit id-as depth'1' wait lucid for psprint/zsh-cmd-architect
 zinit id-as depth'1' wait lucid \
-  if'[[ -n $commands[fzf] ]]' \
+  if'(($+commands[fzf]))' \
   atload'bindkey -Mvicmd / fzf_history_seach' \
   for joshskidmore/zsh-fzf-history-search
 EMOJI_FZF_BINDKEY=^X^I
 zinit id-as depth'1' wait lucid \
-  if'[[ -n $commands[emoji-fzf] && -n $commands[fzf] ]]' \
+  if'(($+commands[emoji-fzf] && $+commands[fzf]))' \
   for pschmitt/emoji-fzf.zsh
 autoload -Uz replace-string
 zle -N replace-regex replace-string
@@ -290,7 +305,7 @@ zinit id-as depth'1' wait lucid for hlissner/zsh-autopair
 # Colorize {{{1 #
 zinit id-as depth'1' wait lucid for zpm-zsh/colorize
 zinit id-as depth'1' wait lucid \
-  if'[[ -n $commands[mysql] ]]' \
+  if'(($+commands[mysql]))' \
   for zpm-zsh/mysql-colorize
 # 1}}} Colorize #
 
@@ -301,14 +316,16 @@ zinit id-as depth'1' wait lucid for sineto/web-search
 # 1}}} Function #
 
 # Compatible {{{1 #
-zinit id-as depth'1' wait lucid \
-  atclone'direnv hook zsh > direnv.sh' \
+zinit id-as'.direnv' depth'1' \
+  atclone'direnv hook zsh > direnv.sh
+  zcompile *.sh' \
   for zdharma/null
-zinit id-as depth'1' wait lucid for Tarrasch/zsh-command-not-found
+# https://github.com/Tarrasch/zsh-command-not-found/issues/1
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 # window's fzf is too old
 zinit id-as depth'1' wait lucid \
   atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
-  if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 && -n $commands[fzf] && -n $commands[bc] ]]' \
+  if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 ]] && (($+commands[fzf] && $+commands[bc]))' \
   for bigH/auto-sized-fzf
 compdef _vim vi
 # after loading completions
@@ -346,7 +363,7 @@ zinit id-as depth'1' wait lucid null \
 
 # VirtualEnv {{{2 #
 zinit id-as depth'1' wait lucid null pack \
-  if'[[ -z $commands[pyenv] ]]' \
+  if'(($+commands[pyenv]))' \
   for pyenv
 # 2}}} VirtualEnv #
 
@@ -364,16 +381,16 @@ zinit id-as depth'1' wait lucid as'program' for LuRsT/hr
 zinit id-as depth'1' wait lucid as'program' for holman/spark
 zinit id-as depth'1' wait lucid as'program' for benlinton/slugify
 zinit id-as depth'1' wait lucid as'program' \
-  if'[[ -n $commands[rg] ]]' \
+  if'(($+commands[rg]))' \
   for Freed-Wu/hhighlighter-rg
 zinit id-as depth'1' wait lucid as'program' \
-  if'[[ -n $commands[git] && -n $commands[fzf] ]]' \
+  if'(($+commands[git] && $+commands[fzf]))' \
   for Bhupesh-V/ugit
 zinit id-as depth'1' wait lucid as'program' \
-  if'[[ -z $commands[has] ]]' \
+  if'((! $+commands[has]))' \
   for kdabir/has
 zinit id-as depth'1' wait lucid null \
-  if'[[ -z $commands[vimdoc] ]]' \
+  if'((! $+commands[vimdoc]))' \
   atclone'setup.py config
   setup.py build
   setup.py install --user' \
