@@ -67,8 +67,8 @@ fi
 export LESS='-R -M -S --mouse'
 export LESSOPEN='|~/.lessfilter %s'
 # brew
-export HOMEBREW_BAT
-export HOMEBREW_BOOTSNAP
+export HOMEBREW_BAT=true
+export HOMEBREW_BOOTSNAP=true
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles
 export HOMEBREW_GITHUB_API_TOKEN=$GITHUB_TOKEN
 export HOMEBREW_GITHUB_PACKAGES_TOKEN=$GITHUB_TOKEN

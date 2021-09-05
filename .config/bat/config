@@ -1,2 +1,2 @@
---paging always
---theme OneHalfDark
+--paging=always
+--theme=OneHalfDark
