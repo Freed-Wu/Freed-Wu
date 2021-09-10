@@ -15,7 +15,7 @@ set vi-cmd-mode-string █
 set vi-ins-mode-string ▏
 set visible-stats on
 $if bash
-	set show-mode-in-prompt on
+  set show-mode-in-prompt on
 $endif
 $include function rl_custom_complete /usr/lib/librl_custom_complete.so
 C-i rl_custom_complete

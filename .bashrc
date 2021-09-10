@@ -22,8 +22,8 @@ if [[ -f /usr/share/fzf-tab-completion/bash/fzf-bash-completion.sh ]] ; then
 	bind -x '"\t": fzf_bash_completion'
 fi
 
-if [[ -f /usr/share/pinyin-completion/shell/pinyin-comp.bash ]] ; then
-	. /usr/share/pinyin-completion/shell/pinyin-comp.bash
+if [[ -f ~/.zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]] ; then
+  . ~/.zinit/plugins/pinyin-completion/shell/pinyin-comp.bash
 fi
 
 # Put your fun stuff here.

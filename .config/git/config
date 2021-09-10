@@ -1,83 +1,84 @@
 [user]
-  name = Freed-Wu
-  email = wuzy01@qq.com
+	name = Freed-Wu
+	email = wuzy01@qq.com
 [feature]
-  manyFiles = true
+	manyFiles = true
 [pull]
-  rebase = true
+	rebase = true
 [push]
-  tags = true
+	tags = true
 [receive]
-  denyCurrentBranch = ignore
+	denyCurrentBranch = ignore
 [merge]
-  conflictstyle = diff3
+	conflictstyle = diff3
+	tool = vimdiff
 [mergetool]
-  keepBackup = false
-  hideResolved = true
+	keepBackup = false
+	hideResolved = true
 [rerere]
-  enabled = true
+	enabled = true
 [diff]
-  submodule = log
-  colorMoved = default
-  tool = vimdiff
+	submodule = log
+	colorMoved = default
+	tool = vimdiff
 [status]
-  submodulesummary = true
+	submodulesummary = true
 [submodule]
-  recurse = true
+	recurse = true
 [core]
-  autocrlf = input
-  pager = bat
+	autocrlf = input
+	pager = bat
 [pager]
-  diff = delta
-  log = delta
-  reflog = delta
-  config = bat -lini
+	diff = delta
+	log = delta
+	reflog = delta
+	config = bat -lini
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
 [url "https://hub.fastgit.org/"]
-  insteadOf = https://github.com/
+	insteadOf = https://github.com/
 [delta]
-  navigate = true
-  line-numbers = true
-  side-by-side = true
-  paging = always
+	navigate = true
+	line-numbers = true
+	side-by-side = true
+	paging = always
 [tig]
-  mailmap = true
-  mouse = true
+	mailmap = true
+	mouse = true
 [tig "bind"]
-  generic = g move-first-line
-  generic = G move-last-line
-  generic = <Ctrl-B> move-page-up
-  generic = <Ctrl-F> move-page-down
-  generic = <Ctrl-G> view-grep
-  main = T :toggle commit-title-graph
-  main = G move-last-line
-  generic = x view-diff
-  status = u move-half-page-up
-  stage = u move-half-page-up
-  generic = u move-half-page-up
-  generic = d move-half-page-down
+	generic = g move-first-line
+	generic = G move-last-line
+	generic = <Ctrl-B> move-page-up
+	generic = <Ctrl-F> move-page-down
+	generic = <Ctrl-G> view-grep
+	main = T :toggle commit-title-graph
+	main = G move-last-line
+	generic = x view-diff
+	status = u move-half-page-up
+	stage = u move-half-page-up
+	generic = u move-half-page-up
+	generic = d move-half-page-down
 [difftool]
-  prompt = false
+	prompt = false
 [init]
-  defaultBranch = master
+	defaultBranch = master
 [fetch]
-  prune = true
-  pruneTags = true
+	prune = true
+	pruneTags = true
 [grep]
-  lineNumber = true
-  extendedRegexp = true
+	lineNumber = true
+	extendedRegexp = true
 [blame]
-  showEmail = true
+	showEmail = true
 [rebase]
-  autoSquash = true
+	autoSquash = true
 [filter "lfs"]
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
-  clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
 [diff "daff-csv"]
-  command = daff diff --git
+	command = daff diff --git
 [merge "daff-csv"]
-  name = daff tabular csv merge
-  driver = daff merge --output %A %O %A %B
+	name = daff tabular csv merge
+	driver = daff merge --output %A %O %A %B

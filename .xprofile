@@ -16,9 +16,6 @@ PATH=$HOME/Applications\
 :$PATH
 export VISUAL=vi
 export EDITOR=$VISUAL
-# man
-MANPATH=$HOME/.local/share/man\
-:$MANPATH
 # hub
 GITHUB_USER=$(git config --global user.name)
 export GITHUB_USER

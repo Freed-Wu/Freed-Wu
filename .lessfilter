@@ -5,7 +5,7 @@ kind=${mime##*/}
 if [ -d "$1" ]; then
   exa --git -hl --color=always --icons "$1"
 elif [ "$kind" = plain ] && [ "${1##*.}" = tsv ]; then
-  bat -p "$1" --color=always | xsv table | bat -p --color=always
+  xsv table -d'\t' "$1"
 elif [ "$kind" = csv ]; then
   bat -p "$1" --color=always | xsv table | bat -p --color=always
 elif [ "$kind" = json ]; then

@@ -1,3 +1,4 @@
+# all shells share share this file, so only use bash syntax
 # paths must be loaded here
 if [[ -z $PYTHONSTARTUP && -f ~/.xprofile ]]; then
   . ~/.xprofile

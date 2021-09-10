@@ -35,6 +35,7 @@
 !/.curlrc
 !/.nix-channels
 !/.visidatarc
+!/.tmux.conf
 
 # dotfiles
 !/.dosbox/

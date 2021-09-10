@@ -1,12 +1,12 @@
 # PluginManage {{{1 #
-if [[ -z $CODESTATS_API_KEY ]]; then
+if ((! $+HOMEBREW_BAT)); then
   . ~/.zprofile
 fi
 
 if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
   . ~/.zinit/plugins/zinit/zinit.zsh
 elif (($+commands[git])); then
-  git clone https://github.com/zdharma/zinit ~/.zinit/plugins/zinit
+  git clone --depth=1 https://github.com/zdharma/zinit ~/.zinit/plugins/zinit
   . ~/.zinit/plugins/zinit/zinit.zsh
 else
   return
@@ -19,15 +19,15 @@ zinit id-as depth'1' null for zdharma/zinit
 zinit id-as'.brew' depth'1' \
   atclone'brew shellenv > brew.sh
   zcompile *.sh' \
-    if'[[ -z $HOMEBREW_PREFIX ]] && (($+commands[brew]))' \
+    if'((! $+HOMEBREW_PREFIX && $+commands[brew]))' \
   for zdharma/null
 
 # tmux firstly avoid load ~/.zshrc twice
 # exec tmux will met bug in android
 # tmux on android and windows is slow because it cannot run in background
 # don't run tmux on them
-if [[ -z $TMUX && $OSTYPE == linux-gnu ]] && (($+commands[tmux])); then
-  exec tmux new -A
+if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux])); then
+  exec tmux new -As0
 fi
 
 # must load it quickly
@@ -52,12 +52,12 @@ fi
 
 # Cursor {{{1 #
 # add-surround in visual mode cannot be highlighted
-export MODE_CURSOR_VIINS='blinking bar'
-export MODE_CURSOR_REPLACE='blinking underline'
-export MODE_CURSOR_VICMD='blinking block'
-export MODE_CURSOR_SEARCH=underline
-export MODE_CURSOR_VISUAL=block
-export MODE_CURSOR_VLINE=bar
+MODE_CURSOR_VIINS='blinking bar'
+MODE_CURSOR_REPLACE='blinking underline'
+MODE_CURSOR_VICMD='blinking block'
+MODE_CURSOR_SEARCH=underline
+MODE_CURSOR_VISUAL=block
+MODE_CURSOR_VLINE=bar
 zinit id-as depth'1' wait lucid \
   atload'vim_mode_set_keymap $(vim-mode-initial-keymap)
   bindkey -Mvisual s add-surround
@@ -114,22 +114,24 @@ autoload -Uz zmv
 # 1}}} Default #
 
 # Complete {{{1 #
-if [[ -n $HOMEBREW_PREFIX ]]; then
+if (( $+HOMEBREW_PREFIX )); then
   FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH
 fi
 autoload -Uz compinit && compinit
 
-zinit id-as'.vivid' depth'1' \
+zinit id-as'.vivid' depth'1' wait lucid \
   atclone'echo "export LS_COLORS=\"$(vivid generate molokai)\"" > vivid.sh
   zcompile *.sh' \
+  atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
   if'(($+commands[vivid]))' \
   for zdharma/null
-
-# since now vivid doesn't be transplanted to android and windows
-zinit id-as depth'1' null pack \
-  if'[[ -z $LS_COLORS ]]' \
-  for LS_COLORS
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zinit id-as depth'1' wait lucid reset atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+  atclone"[[ -z ${commands[dircolors]} ]] && local P=g
+  \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS;
+  \${P}dircolors -b LS_COLORS > clrs.zsh" \
+  atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
+  if'((! $+commands[vivid]))' \
+  for trapd00r/LS_COLORS
 zstyle ':completion:*' list-separator ''
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' muttrc ${XDG_CONFIG_HOME:-$HOME/.config}/neomutt/neomuttrc
@@ -139,10 +141,6 @@ zstyle ':completion::complete:*' use-cache true
 zstyle ':completion::complete:*' call-command true
 zstyle ':completion:*:descriptions' format '%d'
 zstyle ':completion:*:git-checkout:*' sort false
-
-if [[ -f /usr/share/pinyin-completion/shell/pinyin-comp.zsh ]]; then
-  . /usr/share/pinyin-completion/shell/pinyin-comp.zsh
-fi
 
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
@@ -155,6 +153,7 @@ zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
+zstyle ':fzf-tab:complete:svn-help:*' fzf-preview 'svn help $word'
 zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
   'SYSTEMD_COLORS=1 systemctl status $word'
 zstyle ':completion:*:processes' command \
@@ -183,6 +182,10 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
   *) git log --color=always $word ;;
   esac'
 
+zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' \
+  if'(($+commands[pinyin-comp]))' \
+  for Freed-Wu/pinyin-completion
+
 zinit id-as depth'1' wait lucid as'completion' \
   if'[[ ! -d /usr/share/zsh/site-functions ]]' \
   for zsh-users/zsh-completions
@@ -190,7 +193,9 @@ zinit id-as depth'1' wait lucid as'completion' \
 
 # Log {{{1 #
 # must before suggest, see its README.md
-zinit id-as depth'1' wait lucid from'gitlab' for code-stats/code-stats-zsh
+zinit id-as depth'1' wait lucid from'gitlab' \
+  if'(($+CODESTATS_API_KEY))' \
+  for code-stats/code-stats-zsh
 ZSH_WAKATIME_PROJECT_DETECTION=true
 zinit id-as depth'1' wait lucid \
   if'(($+commands[wakatime]))' \
@@ -317,7 +322,7 @@ zinit id-as depth'1' wait lucid for sineto/web-search
 # 1}}} Function #
 
 # Compatible {{{1 #
-zinit id-as'.direnv' depth'1' \
+zinit id-as'.direnv' depth'1' wait lucid \
   atclone'direnv hook zsh > direnv.sh
   zcompile *.sh' \
   if'(($+commands[direnv]))' \
@@ -340,7 +345,7 @@ alias mv='mv -i'
 alias cp='cp -ri'
 alias rm='rm -i'
 alias rename='rename -i'
-if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
+if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]] && (($+commands[exa])); then
   alias ls='exa --icons'
   alias vdir='exa --icons --git -lh'
 fi
@@ -362,12 +367,6 @@ zinit id-as depth'1' wait lucid null \
   atclone'ln -s ~/.zinit/plugin/win-sudo/s/* $ZPFX/bin' \
   for imachug/win-sudo
 # 2}}} Superuser #
-
-# VirtualEnv {{{2 #
-zinit id-as depth'1' wait lucid null pack \
-  if'(($+commands[pyenv]))' \
-  for pyenv
-# 2}}} VirtualEnv #
 
 # Download {{{2 #
 zinit id-as depth'1' wait lucid null \
@@ -391,12 +390,6 @@ zinit id-as depth'1' wait lucid as'program' \
 zinit id-as depth'1' wait lucid as'program' \
   if'((! $+commands[has]))' \
   for kdabir/has
-zinit id-as depth'1' wait lucid null \
-  if'((! $+commands[vimdoc]))' \
-  atclone'setup.py config
-  setup.py build
-  setup.py install --user' \
-  for google/vimdoc
 # 2}}} Tool #
 # 1}}} Program #
 # ex: foldmethod=marker path=.,~/.zinit/plugins
