@@ -1,4 +1,4 @@
-# all shells share share this file, so only use bash syntax
+# all shells share share this file, so use bash syntax primarily
 # paths must be loaded here
 if [[ -z $PYTHONSTARTUP && -f ~/.xprofile ]]; then
   . ~/.xprofile
@@ -69,8 +69,10 @@ if [[ -f ~/.bash_login ]]; then
   . ~/.bash_login
 fi
 # less
-export LESS='-R -M -S --mouse'
-export LESSOPEN='|~/.lessfilter %s'
+if [[ -n $DISPLAY ]]; then
+  export LESS=--mouse
+  export LESSOPEN='|~/.lessfilter %s'
+fi
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

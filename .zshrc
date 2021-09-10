@@ -32,7 +32,9 @@ fi
 
 # must load it quickly
 ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT=true
-zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
+zinit id-as depth'1' \
+  if'(($+commands[xsel] || $+commands[xclip] || $+commands[wl-copy]))' \
+  for lljbash/zsh-renew-tmux-env
 # 1}}} PluginManage #
 
 # StatusLine {{{1 #
@@ -317,7 +319,9 @@ zinit id-as depth'1' wait lucid \
 
 # Function {{{1 #
 # Tool {{{2 #
-zinit id-as depth'1' wait lucid for sineto/web-search
+zinit id-as depth'1' wait lucid \
+  if'(($+commands[xdg-open] || $+commands[open]))' \
+  for sineto/web-search
 # 2}}} Tool #
 # 1}}} Function #
 
