@@ -36,14 +36,13 @@ zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
 
 # StatusLine {{{1 #
 # p10k cannot support any ice, see its README.md
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  . "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 zinit id-as depth'1' \
-  src"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" \
   if'[[ ! -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]' \
   for romkatv/powerlevel10k
 if [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
-  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-  fi
   . /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 fi
 [[ ! -f ~/.p10k.zsh ]] || . ~/.p10k.zsh
