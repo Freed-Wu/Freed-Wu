@@ -125,8 +125,8 @@ zinit id-as'.vivid' depth'1' wait lucid \
   if'(($+commands[vivid]))' \
   for zdharma/null
 zinit id-as depth'1' wait lucid reset atpull'%atclone' pick"clrs.zsh" nocompile'!' \
-  atclone"[[ -z ${commands[dircolors]} ]] && local P=g
-  \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS;
+  atclone"[[ -z $commands[dircolors] ]] && local P=g
+  \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS
   \${P}dircolors -b LS_COLORS > clrs.zsh" \
   atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
   if'((! $+commands[vivid]))' \
@@ -202,9 +202,7 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Log #
 
 # Syntax {{{1 #
-zinit id-as depth'1' wait lucid \
-  atload'autoload -U edit-command-line && bindkey "^X^E" edit-command-line' \
-  for zdharma/fast-syntax-highlighting
+zinit id-as depth'1' wait lucid for zdharma/fast-syntax-highlighting
 # 1}}} Syntax #
 
 # Suggest {{{1 #
@@ -246,6 +244,7 @@ zinit id-as depth'1' wait lucid \
 
 # HotKey {{{1 #
 bindkey -e
+autoload -U edit-command-line && bindkey '^X^E' edit-command-line
 bindkey ^U backward-kill-line
 bindkey ^Q vi-quoted-insert
 bindkey '^]' vi-find-next-char
