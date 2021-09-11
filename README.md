@@ -4,10 +4,17 @@ Keep all my computers' configurations same.
 
 `~/.config/nvim` is not included because it is too heavy.
 
-- Arch/Linux
-- Deepin/Linux
-- Android/Linux (Termux)
-- Windows/NT (Cygwin|Msys)
+- Linux
+  - GNU/Linux
+    - ~~Gentoo~~
+    - Archlinux
+    - Deepin
+    - Ubuntu
+  - Android
+    - Termux
+- Windows
+  - ~~Cygwin~~
+  - ~~Msys~~
 
 ## Related
 
