@@ -37,6 +37,7 @@
 	diffFilter = delta --color-only
 [url "https://hub.fastgit.org/"]
 	insteadOf = https://github.com/
+	insteadOf = https://git::@github.com/
 [delta]
 	navigate = true
 	line-numbers = true
