@@ -83,7 +83,7 @@ setopt pushdignoredups
 if (($+options[cdsilent])); then
   setopt cdsilent
 else
-  TERM=xterm-256color
+  TERM=screen-256color
 fi
 
 setopt globstarshort
