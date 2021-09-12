@@ -139,6 +139,8 @@ zstyle ':completion::complete:*' use-cache true
 zstyle ':completion::complete:*' call-command true
 zstyle ':completion:*:descriptions' format '%d'
 zstyle ':completion:*:git-checkout:*' sort false
+# work when fzf-tab is not installed
+zstyle ':completion:*' menu select
 
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
