@@ -26,6 +26,7 @@ image/svg+xml-compressed=org.gnome.eog.desktop;
 image/svg+xml=org.gnome.eog.desktop;
 image/tiff=org.gnome.eog.desktop;
 image/vnd.djvu=org.pwmt.zathura.desktop;
+image/vnd.djvu+multipage=org.pwmt.zathura.desktop;
 image/vnd.microsoft.icon=firefox.desktop;
 image/vnd.wap.wbmp=org.gnome.eog.desktop;
 image/webp=firefox.desktop;

@@ -10,10 +10,6 @@ fi
 if [[ -z $LANG ]]; then
   export LANG=en_US.UTF-8
 fi
-# termux only set USERNAME, ssh only export USER
-if [[ -z $USER ]]; then
-  export USER=$USERNAME
-fi
 if [[ $OSTYPE == linux-android ]]; then
   export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin\
 :/vendor/bin:/product/bin:/sbin
@@ -21,7 +17,7 @@ fi
 # https://github.com/termux/termux-packages/issues/4781
 if [[ $OSTYPE == linux-android ]]; then
   export MANPAGER=batman
-else
+elif (($+commands[col] && $+commands[bat])); then
   export MANPAGER="sh -c 'col -bx|bat -plman'"
 fi
 # tty
@@ -62,7 +58,7 @@ if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]]; then
   --bind=alt-r:preview-half-page-up
   --bind=alt-\<:preview-top
   --bind=alt-\>:preview-bottom'
-  export FZF_TMUX_HEIGHT=$(($LINES/2))
+  export FZF_TMUX_HEIGHT=$((LINES/2))
 fi
 # user customize
 if [[ -f ~/.bash_login ]]; then

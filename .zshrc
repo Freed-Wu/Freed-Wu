@@ -69,6 +69,7 @@ zinit id-as depth'1' wait lucid for RobSis/zsh-reentry-hook
 # 1}}} ChangeDirectory #
 
 # Default {{{1 #
+typeset -F SECONDS
 WORDCHARS=
 READNULLCMD=bat
 ZLE_RPROMPT_INDENT=0

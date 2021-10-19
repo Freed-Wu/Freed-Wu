@@ -1,34 +1,75 @@
-import sys
-import os
-from datetime import datetime
-import colorama
-from colorama import Fore, Back, Style
+"""$PYTHONSTARTUP."""
 from rich import print
-from rich import pretty
-from rich import traceback
+import sys
+if sys.argv[0] == '':
+    from rich import pretty
+    from rich import traceback
+    pretty.install()
+    traceback.install()
 
-pretty.install()
-traceback.install()
+    import os
+    import re
+    import getpass
+    from datetime import datetime
+    import colorama
+    from colorama import Fore, Back, Style
 
+    class _Ps1:
+        def __init__(self):
+            self.n = 0
+            if sys.platform == 'windows':
+                colorama.init()
 
-class Ps1:
-    def __init__(self):
-        if sys.platform == 'windows':
-            colorama.init()
-        if os.environ.get('PREFIX') == '/data/data/com.termux/files/usr':
-            self.os_icon = ''
-        else:
-            self.os_icon_dict = {'linux': '', 'darwin': '', 'windows': ''}
-            self.os_icon = self.os_icon_dict[sys.platform]
+            os_name = sys.platform
+            if os.access('/etc/lsb-release', os.R_OK):
+                with open('/etc/lsb-release') as f:
+                    lines = f.read().splitlines()
+                lines = list(filter(
+                    lambda line: re.search('DISTRIB_ID=', line), lines))
+                if len(lines):
+                    tokens = lines[0].split('=')
+                    if len(tokens) > 1:
+                        os_name = tokens[1].lower()
+            if os.getenv('PREFIX') == '/data/data/com.termux/files/usr':
+                os_name = 'android'
 
-    def __str__(self):
-        return Fore.WHITE + Back.BLUE \
-            + datetime.now().strftime('%Y%m%d%T') + Fore.BLUE \
-            + Back.RED + '' + Fore.BLACK + Back.RED \
-            + os.environ.get('USER', '') \
-            + Fore.RED + Back.MAGENTA + '' + Fore.BLACK + self.os_icon \
-            + Fore.MAGENTA + Back.YELLOW + '' + Fore.BLACK + os.getcwd() \
-            + Fore.YELLOW + Back.BLACK + '' + Style.RESET_ALL + '\n' + '❯❯❯ '
+            icons = {
+                'linux': '',
+                'linux2': '',
+                'linux3': '',
+                'darwin': '',
+                'dos': '',
+                'win16': '',
+                'win32': '',
+                'cygwin': '',
+                'msys': '',
+                'java': '',
+                'android': '',
+                'arch': '',
+                'gentoo': '',
+                'ubuntu': '',
+                'cent': '',
+                'debian': '',
+                'dock': '',
+            }
+            self.os_icon = icons.get(os_name, '?')
 
-sys.ps1 = Ps1()
-sys.ps2 = Fore.MAGENTA + '██ ' + Style.RESET_ALL
+        def __str__(self):
+            self.n += 1
+            path = os.getcwd()
+            if os.access(path, 7):
+                path = ' ' + path
+            else:
+                path = ' ' + path
+
+            return Fore.WHITE + Back.BLUE \
+                + datetime.now().strftime('%Y%m%d%T') + Fore.BLUE \
+                + Back.RED + '' + Fore.BLACK + Back.RED \
+                + getpass.getuser() \
+                + Fore.RED + Back.MAGENTA + '' + Fore.BLACK + self.os_icon \
+                + Fore.MAGENTA + Back.YELLOW + '' + Fore.BLACK + path \
+                + Fore.YELLOW + Back.BLACK + '' + Style.RESET_ALL + '\n' \
+                + f'{self.n:2} '
+
+    sys.ps1 = _Ps1()
+    sys.ps2 = '--> '

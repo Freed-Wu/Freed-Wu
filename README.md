@@ -6,15 +6,23 @@ Keep all my computers' configurations same.
 
 - Linux
   - GNU/Linux
-    - ~~Gentoo~~
-    - Archlinux
-    - Deepin
-    - Ubuntu
+    - Gentoo
+    - Archlinux (PC)
+    - Deepin (PC)
+    - Openwrt (router)
+    - Ubuntu (docker)
   - Android
-    - Termux
+    - Termux (mobile)
 - Windows
-  - ~~Cygwin~~
-  - ~~Msys~~
+  - Cygwin (U disk)
+  - Msys (U disk)
+
+<!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=1 -->
+
+- [my-dotfiles](#my-dotfiles)
+  - [Related](#related)
+
+<!-- mdformat-toc end -->
 
 ## Related
 

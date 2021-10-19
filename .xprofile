@@ -37,4 +37,5 @@ export USE_CCACHE=1
 export GKS_ENCODING=utf-8
 # python
 export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
+export PYTHONBREAKPOINT=pudb.set_trace
 # ex: filetype=sh

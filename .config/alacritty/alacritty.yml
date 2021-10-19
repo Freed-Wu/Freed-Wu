@@ -15,13 +15,13 @@
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 #env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+# TERM variable
+#
+# This value is used to set the `$TERM` environment variable for
+# each instance of Alacritty. If it is not present, alacritty will
+# check the local terminfo database and use `alacritty` if it is
+# available, otherwise `xterm-256color` is used.
+#TERM: alacritty
 
 window:
   # Window dimensions (changes require restart)
@@ -82,10 +82,10 @@ window:
 
   # Window class (Linux/BSD only):
   #class:
-    # Application instance name
-    #instance: Alacritty
-    # General application class
-    #general: Alacritty
+  # Application instance name
+  #instance: Alacritty
+  # General application class
+  #general: Alacritty
 
   # GTK theme variant (Linux/BSD only)
   #
@@ -94,12 +94,12 @@ window:
   #gtk_theme_variant: None
 
 #scrolling:
-  # Maximum number of lines in the scrollback buffer.
-  # Specifying '0' will disable scrolling.
-  #history: 10000
+# Maximum number of lines in the scrollback buffer.
+# Specifying '0' will disable scrolling.
+#history: 10000
 
-  # Scrolling distance multiplier.
-  #multiplier: 3
+# Scrolling distance multiplier.
+#multiplier: 3
 
 # Font configuration
 font:
@@ -118,36 +118,36 @@ font:
 
   # Bold font face
   # bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    # family: monospace
+  # Font family
+  #
+  # If the bold family is not specified, it will fall back to the
+  # value specified for the normal font.
+  # family: monospace
 
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
+  # The `style` can be specified to pick a specific face.
+  #style: Bold
 
   # Italic font face
   # italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    # family: monospace
+  # Font family
+  #
+  # If the italic family is not specified, it will fall back to the
+  # value specified for the normal font.
+  # family: monospace
 
-    # The `style` can be specified to pick a specific face.
-    #style: Italic
+  # The `style` can be specified to pick a specific face.
+  #style: Italic
 
   # Bold italic font face
   # bold_italic:
-    # Font family
-    #
-    # If the bold italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    # family: monospace
+  # Font family
+  #
+  # If the bold italic family is not specified, it will fall back to the
+  # value specified for the normal font.
+  # family: monospace
 
-    # The `style` can be specified to pick a specific face.
-    #style: Bold Italic
+  # The `style` can be specified to pick a specific face.
+  #style: Bold Italic
 
   # Point size
   size: 10.0
@@ -182,14 +182,14 @@ colors:
   #  background: '#1d1f21'
   #  foreground: '#c5c8c6'
 
-    # Bright and dim foreground colors
-    #
-    # The dimmed foreground color is calculated automatically if it is not
-    # present. If the bright foreground color is not set, or
-    # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
-    # color will be used.
-    #dim_foreground: '#828482'
-    #bright_foreground: '#eaeaea'
+  # Bright and dim foreground colors
+  #
+  # The dimmed foreground color is calculated automatically if it is not
+  # present. If the bright foreground color is not set, or
+  # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
+  # color will be used.
+  #dim_foreground: '#828482'
+  #bright_foreground: '#eaeaea'
 
   # Cursor colors
   #
@@ -208,25 +208,25 @@ colors:
   # Allowed values are CellForeground and CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   vi_mode_cursor:
-  #  text: CellBackground
-   cursor: "#ff00ff"
+    #  text: CellBackground
+    cursor: "#ff00ff"
 
   # Search colors
   #
   # Colors used for the search bar and match highlighting.
   #search:
-    # Allowed values are CellForeground and CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
-    #focused_match:
-    #  foreground: CellBackground
-    #  background: CellForeground
+  # Allowed values are CellForeground and CellBackground, which reference the
+  # affected cell, or hexadecimal colors like #ff00ff.
+  #matches:
+  #  foreground: '#000000'
+  #  background: '#ffffff'
+  #focused_match:
+  #  foreground: CellBackground
+  #  background: CellForeground
 
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+  #bar:
+  #  background: '#c5c8c6'
+  #  foreground: '#1d1f21'
 
   # Line indicator
   #
@@ -298,42 +298,42 @@ colors:
 #
 # The bell is rung every time the BEL control character is received.
 #bell:
-  # Visual Bell Animation
-  #
-  # Animation effect for flashing the screen when the visual bell is rung.
-  #
-  # Values for `animation`:
-  #   - Ease
-  #   - EaseOut
-  #   - EaseOutSine
-  #   - EaseOutQuad
-  #   - EaseOutCubic
-  #   - EaseOutQuart
-  #   - EaseOutQuint
-  #   - EaseOutExpo
-  #   - EaseOutCirc
-  #   - Linear
-  #animation: EaseOutExpo
+# Visual Bell Animation
+#
+# Animation effect for flashing the screen when the visual bell is rung.
+#
+# Values for `animation`:
+#   - Ease
+#   - EaseOut
+#   - EaseOutSine
+#   - EaseOutQuad
+#   - EaseOutCubic
+#   - EaseOutQuart
+#   - EaseOutQuint
+#   - EaseOutExpo
+#   - EaseOutCirc
+#   - Linear
+#animation: EaseOutExpo
 
-  # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
-  # disable the visual bell animation.
-  #duration: 0
+# Duration of the visual bell flash in milliseconds. A `duration` of `0` will
+# disable the visual bell animation.
+#duration: 0
 
-  # Visual bell animation color.
-  #color: '#ffffff'
+# Visual bell animation color.
+#color: '#ffffff'
 
-  # Bell Command
-  #
-  # This program is executed whenever the bell is rung.
-  #
-  # When set to `command: None`, no command will be executed.
-  #
-  # Example:
-  #   command:
-  #     program: notify-send
-  #     args: ["Hello, World!"]
-  #
-  #command: None
+# Bell Command
+#
+# This program is executed whenever the bell is rung.
+#
+# When set to `command: None`, no command will be executed.
+#
+# Example:
+#   command:
+#     program: notify-send
+#     args: ["Hello, World!"]
+#
+#command: None
 
 # Background opacity
 #
@@ -416,39 +416,39 @@ cursor:
 #alt_send_esc: true
 
 #mouse:
-  # Click settings
-  #
-  # The `double_click` and `triple_click` settings control the time
-  # alacritty should wait for accepting multiple clicks as one double
-  # or triple click.
-  #double_click: { threshold: 300 }
-  #triple_click: { threshold: 300 }
+# Click settings
+#
+# The `double_click` and `triple_click` settings control the time
+# alacritty should wait for accepting multiple clicks as one double
+# or triple click.
+#double_click: { threshold: 300 }
+#triple_click: { threshold: 300 }
 
-  # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: false
+# If this is `true`, the cursor is temporarily hidden when typing.
+#hide_when_typing: false
 
-  #url:
-    # URL launcher
-    #
-    # This program is executed when clicking on a text which is recognized as a
-    # URL. The URL is always added to the command as the last parameter.
-    #
-    # When set to `launcher: None`, URL launching will be disabled completely.
-    #
-    # Default:
-    #   - (macOS) open
-    #   - (Linux/BSD) xdg-open
-    #   - (Windows) explorer
-    #launcher:
-    #  program: xdg-open
-    #  args: []
+#url:
+# URL launcher
+#
+# This program is executed when clicking on a text which is recognized as a
+# URL. The URL is always added to the command as the last parameter.
+#
+# When set to `launcher: None`, URL launching will be disabled completely.
+#
+# Default:
+#   - (macOS) open
+#   - (Linux/BSD) xdg-open
+#   - (Windows) explorer
+#launcher:
+#  program: xdg-open
+#  args: []
 
-    # URL modifiers
-    #
-    # These are the modifiers that need to be held down for opening URLs when
-    # clicking on them. The available modifiers are documented in the key
-    # binding section.
-    #modifiers: None
+# URL modifiers
+#
+# These are the modifiers that need to be held down for opening URLs when
+# clicking on them. The available modifiers are documented in the key
+# binding section.
+#modifiers: None
 
 # Mouse bindings
 #
@@ -681,9 +681,11 @@ cursor:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-  - { key: H, mods: Shift|Control, action: Hide}
-  - { key: X, mods: Shift|Control, action: CopySelection}
-  - { key: P, mods: Shift|Control, action: PasteSelection}
+  - { key: H, mods: Shift|Control, action: Hide }
+  - { key: X, mods: Shift|Control, action: CopySelection }
+  - { key: P, mods: Shift|Control, action: PasteSelection }
+  - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
+  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -792,24 +794,23 @@ key_bindings:
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward    }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward   }
-
 #debug:
-  # Display the time it takes to redraw each frame.
-  #render_timer: false
+# Display the time it takes to redraw each frame.
+#render_timer: false
 
-  # Keep the log file after quitting Alacritty.
-  #persistent_logging: false
+# Keep the log file after quitting Alacritty.
+#persistent_logging: false
 
-  # Log level
-  #
-  # Values for `log_level`:
-  #   - Off
-  #   - Error
-  #   - Warn
-  #   - Info
-  #   - Debug
-  #   - Trace
-  #log_level: Warn
+# Log level
+#
+# Values for `log_level`:
+#   - Off
+#   - Error
+#   - Warn
+#   - Info
+#   - Debug
+#   - Trace
+#log_level: Warn
 
-  # Print all received window events.
-  #print_events: false
+# Print all received window events.
+#print_events: false

@@ -1,5 +1,5 @@
 set sleep_time = 0
-set shell = ''
+set shell =
 set attach_save_dir = ~/Downloads
 set digest_collapse = no
 set use_envelope_from
@@ -19,6 +19,7 @@ set auto_tag
 set x_comment_to
 set header_cache = ~/.cache/neomutt
 set message_cachedir = ~/.cache/neomutt
+set mbox =
 set mail_check_stats
 set sidebar_visible
 set sidebar_format = '%B%* %n%o/%S'

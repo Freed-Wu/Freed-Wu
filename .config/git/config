@@ -63,6 +63,7 @@
 	prompt = false
 [init]
 	defaultBranch = master
+	templateDir = ~/.config/git/templates
 [fetch]
 	prune = true
 	pruneTags = true
@@ -71,6 +72,7 @@
 	extendedRegexp = true
 [blame]
 	showEmail = true
+	ignoreRevsFile = .git-blame-ignore-revs
 [rebase]
 	autoSquash = true
 [filter "lfs"]
@@ -83,3 +85,5 @@
 [merge "daff-csv"]
 	name = daff tabular csv merge
 	driver = daff merge --output %A %O %A %B
+[credential]
+	helper = store

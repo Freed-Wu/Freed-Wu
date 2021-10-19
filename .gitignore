@@ -3,6 +3,8 @@
 !/.gitignore
 !/LICENSE
 !/README.md
+!/setup.cfg
+!/.pre-commit-config.yaml
 
 # dotfile
 !/.xprofile
@@ -28,7 +30,6 @@
 !/.spacemacs
 !/.condarc
 !/.screenrc
-!/.pylintrc
 !/.lesskey
 !/.lessfilter
 !/.wgetrc
@@ -92,12 +93,15 @@
 !/.config/user-dirs.dirs
 !/.config/user-dirs.locale
 !/.config/electron-flags.conf
+!/.config/black
+!/.config/pylintrc
 !/.config/zathura/
 !/.config/neomutt/
 !/.config/mutt/
 !/.config/git/
 /.config/git/*
 !/.config/git/config
+!/.config/git/templates/
 !/.config/aria2/
 /.config/aria2/*
 !/.config/aria2/aria2.conf
@@ -181,6 +185,12 @@
 !/.config/youtube-dl/
 /.config/youtube-dl/*
 !/.config/youtube-dl/config
+!/.config/bpython/
+/.config/bpython/*
+!/.config/bpython/config
+!/.config/ptpython/
+/.config/ptpython/*
+!/.config/ptpython/config.py
 
 # $XDG_DATA_HOME
 !/.local/
