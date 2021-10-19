@@ -67,6 +67,8 @@ fi
 # less
 if [[ -n $DISPLAY ]]; then
   export LESS=--mouse
+fi
+if (($+commands[lesspipe.sh] || $+commands[lesspipe])); then
   export LESSOPEN='|~/.lessfilter %s'
 fi
 # brew
