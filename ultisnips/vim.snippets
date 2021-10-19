@@ -1,0 +1,18 @@
+priority -30
+
+snippet f "" b
+function! $1() abort
+	$0
+endfunction
+endsnippet
+snippet au "" b
+augroup $1
+	autocmd!
+	autocmd $0
+augroup END
+endsnippet
+snippet warn
+echohl WarningMsg
+echomsg '$1'
+echohl None
+endsnippet

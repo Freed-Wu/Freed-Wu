@@ -1,0 +1,227 @@
+priority -30
+
+global !p
+def create_tabu(snip):
+  rows = snip.buffer[snip.line].split('x')[0]
+  cols = snip.buffer[snip.line].split('x')[1]
+  int_val = lambda string: int(''.join(s for s in string if s.isdigit()))
+  rows = int_val(rows)
+  cols = int_val(cols)
+  offset = cols + 1
+  old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+  snip.buffer[snip.line] = ''
+  final_str = old_spacing + "\\begin{tabu}to${1:.5}\linewidth{@{}" + "X[c]".join(['$' + str(i + 2) for i in range(cols + 1)]) + "@{}}\n"
+  for i in range(rows):
+    final_str += old_spacing + '\t'
+    final_str += " & ".join(['$' + str(2 + i * cols + j + offset) for j in range(cols)])
+    final_str += " \\\\\\\n"
+    final_str += old_spacing + "\\end{tabu}$0"
+    snip.expand_anon(final_str)
+
+def add_row(snip):
+  row_len = int(''.join(s for s in snip.buffer[snip.line] if s.isdigit()))
+  old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+  snip.buffer[snip.line] = ''
+  final_str = old_spacing
+  final_str += " & ".join(['$' + str(j + 1) for j in range(row_len)])
+  final_str += " \n\\\\\\$"
+  snip.expand_anon(final_str)
+endglobal
+pre_expand "create_tabu(snip)"
+snippet "tb(\d+)x(\d+)" "" r
+endsnippet
+pre_expand "add_row(snip)"
+snippet "tr(\d+)" "" r
+endsnippet
+
+snippet mulr
+\multirow{${1:2}}{*}{${VISUAL}$2}
+endsnippet
+snippet mulc
+\multicolumn{${1:2}}{c}{${VISUAL}$2}
+endsnippet
+snippet csv "" b
+\begin{table}[htbp]
+	\centering
+	\caption{$1}%
+	\label{tab:$2}
+	\csvautobooktabular[respect percent]{tables/$2.csv}
+\end{table}
+endsnippet
+snippet subt "" b
+\begin{subtable}[htbp]{0.45\linewidth}
+	\centering
+	\caption{$1}%
+	\label{tab:$2}
+	\csvautobooktabular[respect percent]{tables/$2.csv}
+\end{subtable}
+${0:\quad}
+endsnippet
+
+snippet fig "" b
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+		width=${1:0.8}\linewidth,
+	]{figures/$2.png}
+	\caption{$3}%
+	\label{fig:$2}
+\end{figure}
+endsnippet
+snippet subf "" b
+\begin{subfigure}[htbp]{${1:0.45}\linewidth}
+	\centering
+	\includegraphics[
+		width=\linewidth,
+	]{figures/$2.png}
+	\caption{$3}%
+	\label{fig:$2}
+\end{subfigure}
+${0:\quad}
+endsnippet
+snippet wrap "" b
+\begin{wrapfigure}{${1:r}}{${2:0.2}\linewidth}
+	\vspace{-10pt}
+	\centering
+	${VISUAL}\includegraphics[
+	width=\linewidth,
+	]{figures/$3.png}
+	\caption{$4}%
+	\label{$3}
+	\vspace{-10pt}
+\end{wrapfigure}
+endsnippet
+snippet ov "" b
+\begin{overpic}[
+	width=\linewidth,
+]{figures/$3.png}
+	put$0
+\end{overpic}
+endsnippet
+
+snippet subn "" b
+\begin{subnumcases}{$1}%
+	\label{eq:$2}
+	$3 & $4\\\\
+	$5 & $6
+\end{subnumcases}
+endsnippet
+
+snippet lang "" b
+\langCVfile[$1][lst:$2][$1]{$0}{lst/$2}
+endsnippet
+snippet "mint(ed)?( (\S+))?" "" br
+\begin{listing}
+	\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm]{${1:`!p snip.rv = match.group(3) if match.group(2) is not None else "language"`}}
+		${2:${VISUAL}}
+	\end{minted}
+	\caption{$3}%
+	\label{lst:$3}
+\end{listing}
+endsnippet
+
+snippet xdef "" b
+\xdefinecolor{$1}{rgb}{$2}
+endsnippet
+
+snippet answer "" b
+\usepackage{answers}
+\newtheorem{Problem}{Problem}${1:[chapter]}
+\Newassociation{answer}{Answer}{Answer}
+endsnippet
+
+global !p
+texMathZones = [
+  'texMathZone'+x for x in [
+    'A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G',
+    'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V',
+    'W', 'X', 'Y', 'Z'
+  ]
+]
+texIgnoreMathZones = ['texMathText']
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+ignore = texIgnoreMathZoneIds[0]
+def math():
+  synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+  try:
+    first = next(
+      i for i in reversed(synstackids)
+      if i in texIgnoreMathZoneIds or i in texMathZoneIds
+    )
+    return first != ignore
+  except StopIteration:
+    return False
+endglobal
+
+context "math()"
+snippet sympy "" w
+sympy $1 endsympy
+endsnippet
+context "math()"
+snippet 'sympy(.*)endsympy' "" wr
+`!p
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+snip.rv = eval('latex(' + match.group(1).replace('\\', '') \
+          .replace('^', '**') \
+          .replace('{', '(') \
+       .replace('}', ')') + ')')
+`
+endsnippet
+context "math()"
+snippet math "" w
+math $1 endmath
+endsnippet
+context "math()"
+snippet 'math(.*)endmath' "" wr
+`!p
+import subprocess
+code = 'ToString[' + match.group(1) + ', TeXForm]'
+snip.rv = subprocess.check_output(['wolframscript', '-code', code])
+`
+endsnippet
+
+context "math()"
+snippet lim "" i
+\lim_{${1:n} \to ${2:\infty}} $0
+endsnippet
+context "math()"
+snippet int "" i
+\int\nolimits_{${1:-\infty}}^${2:\infty} $0
+endsnippet
+context "math()"
+snippet sum "" i
+\sum_{${1:i} = ${2:-\infty}}^${3:\infty} $0
+endsnippet
+context "math()"
+snippet pro "" i
+\prod_{${1:i} = ${2:-\infty}}^${3:\infty} $0
+endsnippet
+context "math()"
+snippet "([A-Za-z'])(\d)" "" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+context "math()"
+snippet "([A-Za-z'])_(\d\d)" "" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+context "math()"
+snippet "([A-Za-z'])_" "" wr
+`!p snip.rv = match.group(1)`_{${1:${VISUAL}}}
+endsnippet
+context "math()"
+snippet ^ "" w
+^{${1:${VISUAL}}}
+endsnippet
+context "math()"
+snippet '([A-Za-z])\^(\d\d)' "" wrA
+`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`}
+endsnippet
+context "math()"
+snippet __ "" iA
+_\mathrm{${VISUAL}$1}
+endsnippet

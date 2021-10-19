@@ -1,0 +1,3 @@
+*%FILE* 
+%HERE
+vim:tw=78:isk=!-~,^*,^\|,^\":ts=8:noet:norl:

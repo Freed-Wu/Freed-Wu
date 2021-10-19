@@ -1,0 +1,63 @@
+priority -30
+
+snippet inc "" b
+\`include "$1.v"
+endsnippet
+snippet def "" b
+\`define $1 $0
+endsnippet
+snippet ifd "" b
+\`ifdef $1
+	$2
+\`else
+	$3
+\`endif
+endsnippet
+snippet pa "" b
+parameter $1 = $2;
+endsnippet
+snippet int "" i
+integer $1;
+endsnippet
+snippet re "" b
+reg [$1:$2] $3;
+endsnippet
+snippet wi "" b
+wire [$1:$2] $3;
+endsnippet
+snippet as "" b
+assign $1 = $2;
+endsnippet
+snippet po "" i
+posedge $0
+endsnippet
+snippet ne "" i
+negedge $0
+endsnippet
+snippet for "" b
+for($1;$2;$3)
+endsnippet
+snippet in "" b
+initial begin
+	$0
+end
+endsnippet
+snippet ta "" b
+task $1;
+	$0
+endtask
+endsnippet
+snippet f "" b
+function $1
+	$0
+endfunction
+endsnippet
+snippet di
+$display("%t: $1", $realtime, $2);
+endsnippet
+snippet mo
+$monitor("%t: $1", $realtime, $2);
+endsnippet
+snippet fi
+$finish;
+endsnippet

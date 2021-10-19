@@ -1,0 +1,19 @@
+priority -30
+extends sql
+
+snippet create "" b
+create table $1(
+	$0
+);
+endsnippet
+snippet load "" b
+load data infile '$1.csv'
+into table student
+fields terminated by ',' optionally enclosed by '"' escaped by '"'
+lines terminated by '\n';
+endsnippet
+snippet select "" b
+select ${1:*}
+into outfile '$2.tsv'
+from $0
+endsnippet
