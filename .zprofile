@@ -1,6 +1,9 @@
 # all shells share share this file, so use bash syntax primarily
 # paths must be loaded here
-if [[ -z $PYTHONSTARTUP && -f ~/.xprofile ]]; then
+if (($+DOCKER_BUILDKIT)); then
+  return
+fi
+if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
   . ~/.xprofile
 fi
 if [[ -d /usr/share/texmf-dist/scripts/texlive ]]; then
@@ -67,9 +70,6 @@ fi
 # less
 if [[ -n $DISPLAY ]]; then
   export LESS=--mouse
-fi
-if (($+commands[lesspipe.sh] || $+commands[lesspipe])); then
-  export LESSOPEN='|~/.lessfilter %s'
 fi
 # brew
 export HOMEBREW_BAT=true

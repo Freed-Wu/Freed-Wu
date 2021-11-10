@@ -6,21 +6,21 @@ fi
 if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
   . ~/.zinit/plugins/zinit/zinit.zsh
 elif (($+commands[git])); then
-  git clone --depth=1 https://github.com/zdharma/zinit ~/.zinit/plugins/zinit
+  git clone --depth=1 https://github.com/zdharma-continuum/zinit ~/.zinit/plugins/zinit
   . ~/.zinit/plugins/zinit/zinit.zsh
 else
   return
 fi
 
 # cannot wait
-zinit id-as depth'1' null for zdharma/zinit
+zinit id-as depth'1' null for zdharma-continuum/zinit
 
 # brew add some paths which may contain tmux
 zinit id-as'.brew' depth'1' \
   atclone'brew shellenv > brew.sh
   zcompile *.sh' \
     if'((! $+HOMEBREW_PREFIX && $+commands[brew]))' \
-  for zdharma/null
+  for zdharma-continuum/null
 
 # tmux firstly avoid load ~/.zshrc twice
 # exec tmux will met bug in android
@@ -32,6 +32,8 @@ fi
 
 # must load it quickly
 zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
+
+zinit id-as depth'1' for zdharma-continuum/z-a-bin-gem-node
 # 1}}} PluginManage #
 
 # StatusLine {{{1 #
@@ -123,7 +125,7 @@ zinit id-as'.vivid' depth'1' wait lucid \
   zcompile *.sh' \
   atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
   if'(($+commands[vivid]))' \
-  for zdharma/null
+  for zdharma-continuum/null
 zinit id-as depth'1' wait lucid reset atpull'%atclone' pick"clrs.zsh" nocompile'!' \
   atclone"[[ -z $commands[dircolors] ]] && local P=g
   \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS
@@ -204,7 +206,7 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Log #
 
 # Syntax {{{1 #
-zinit id-as depth'1' wait lucid for zdharma/fast-syntax-highlighting
+zinit id-as depth'1' wait lucid for zdharma-continuum/fast-syntax-highlighting
 # 1}}} Syntax #
 
 # Suggest {{{1 #
@@ -282,9 +284,9 @@ zinit id-as depth'1' wait lucid \
 zinit id-as depth'1' wait lucid \
   atload'bindkey "^[/" redo
   bindkey "^[y" yank-pop' \
-  for psprint/zsh-editing-workbench
-zinit id-as depth'1' wait lucid for zdharma/zui
-zinit id-as depth'1' wait lucid for psprint/zsh-cmd-architect
+  for zdharma-continuum/zsh-editing-workbench
+zinit id-as depth'1' wait lucid for zdharma-continuum/zui
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-cmd-architect
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   atload'bindkey -Mvicmd / fzf_history_seach' \
@@ -329,7 +331,7 @@ zinit id-as'.direnv' depth'1' wait lucid \
   atclone'direnv hook zsh > direnv.sh
   zcompile *.sh' \
   if'(($+commands[direnv]))' \
-  for zdharma/null
+  for zdharma-continuum/null
 # https://github.com/Tarrasch/zsh-command-not-found/issues/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 # window's fzf is too old
@@ -343,7 +345,12 @@ compdef _vim vi
 zinit id-as depth'1' wait lucid \
   if'[[ $OSTYPE != linux-android ]]' \
   for 3v1n0/zsh-bash-completions-fallback
-export GPG_TTY=$(tty)
+if (($+commands[gpg] && $+commands[tty])); then
+  export GPG_TTY=$(tty)
+fi
+if (($+commands[lesspipe.sh] || $+commands[lesspipe])); then
+  export LESSOPEN='|~/.lessfilter %s'
+fi
 alias mv='mv -i'
 alias cp='cp -ri'
 alias rm='rm -i'
@@ -359,7 +366,7 @@ fi
 
 # Program {{{1 #
 # PackageManage {{{2 #
-zinit id-as depth'1' wait lucid as'program' \
+zinit id-as depth'1' wait lucid as'null' sbin'apt-cyg' \
   if'[[ $OSTYPE == cygwin ]]' \
   for transcode-open/apt-cyg
 # 2}}} PackageManage #
@@ -381,16 +388,16 @@ zinit id-as depth'1' wait lucid null \
 # 2}}} Download #
 
 # Tool {{{2 #
-zinit id-as depth'1' wait lucid as'program' for LuRsT/hr
-zinit id-as depth'1' wait lucid as'program' for holman/spark
-zinit id-as depth'1' wait lucid as'program' for benlinton/slugify
-zinit id-as depth'1' wait lucid as'program' \
+zinit id-as depth'1' wait lucid as'null' sbin'hr' for LuRsT/hr
+zinit id-as depth'1' wait lucid as'null' sbin'spark' for holman/spark
+zinit id-as depth'1' wait lucid as'null' sbin'slugify' for benlinton/slugify
+zinit id-as depth'1' wait lucid as'null' sbin'h' \
   if'(($+commands[rg]))' \
   for Freed-Wu/hhighlighter-rg
-zinit id-as depth'1' wait lucid as'program' \
+zinit id-as depth'1' wait lucid as'null' sbin'ugit' sbin'git-undo' \
   if'(($+commands[git] && $+commands[fzf]))' \
   for Bhupesh-V/ugit
-zinit id-as depth'1' wait lucid as'program' \
+zinit id-as depth'1' wait lucid as'null' sbin'has' \
   if'((! $+commands[has]))' \
   for kdabir/has
 # 2}}} Tool #

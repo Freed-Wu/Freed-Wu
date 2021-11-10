@@ -95,7 +95,7 @@
 !/.config/electron-flags.conf
 !/.config/black
 !/.config/pylintrc
-!/.config/zathura/
+!/.config/zathura/zathura*
 !/.config/neomutt/
 !/.config/mutt/
 !/.config/git/
@@ -153,7 +153,7 @@
 !/.config/tmux/tmux.conf
 !/.config/browsh/
 /.config/browsh/*
-!/.config/browsh/conf.toml
+!/.config/browsh/config.toml
 !/.config/qterminal.org/
 /.config/qterminal.org/*
 !/.config/qterminal.org/qterminal.ini
@@ -179,9 +179,9 @@
 !/.config/nix/
 /.config/nix/*
 !/.config/nix/nix.conf
-!/.config/ctags.d/
-/.config/ctags.d/*
-!/.config/ctags.d/*.ctags
+!/.config/ctags/
+/.config/ctags/*
+!/.config/ctags/*.ctags
 !/.config/youtube-dl/
 /.config/youtube-dl/*
 !/.config/youtube-dl/config

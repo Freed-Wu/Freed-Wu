@@ -402,7 +402,7 @@ font.family: WenQuanYi Micro Hei
 #axes.prop_cycle: cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
                   # color cycle for plot lines as list of string colorspecs:
                   # single letter, long name, or web-style hex
-                  # As opposed to all other paramters in this file, the color
+                  # As opposed to all other parameters in this file, the color
                   # values must be enclosed in quotes for this parameter,
                   # e.g. '1f77b4', instead of 1f77b4.
                   # See also https://matplotlib.org/tutorials/intermediate/color_cycle.html
@@ -558,7 +558,7 @@ font.family: WenQuanYi Micro Hei
 #figure.autolayout: False  # When True, automatically adjust subplot
                            # parameters to make the plot fit the figure
                            # using `tight_layout`
-#figure.constrained_layout.use: False  # When True, automatically make plot
+figure.constrained_layout.use: True  # When True, automatically make plot
                                        # elements fit on the figure. (Not
                                        # compatible with `autolayout`, above).
 #figure.constrained_layout.h_pad:  0.04167  # Padding around axes objects. Float representing
@@ -702,7 +702,7 @@ savefig.transparent: True     # setting that controls whether figures are saved 
 ## See https://matplotlib.org/tutorials/text/pgf.html for more information.
 #pgf.rcfonts: True
 #pgf.preamble:  # See text.latex.preamble for documentation
-pgf.texsystem: lualatex
+#pgf.texsystem: xelatex
 
 ### docstring params
 #docstring.hardcopy: False  # set this when you want to generate hardcopy docstring
@@ -755,3 +755,4 @@ pgf.texsystem: lualatex
                                   # animation in HTML (i.e. IPython notebook)
 
 #mpl_toolkits.legacy_colorbar: True
+# ex: filetype=yaml

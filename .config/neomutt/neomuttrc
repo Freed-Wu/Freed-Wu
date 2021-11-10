@@ -10,10 +10,9 @@ set ispell = aspell
 set charset = utf-8
 set edit_headers
 set rfc2047_parameters
-set signature = 'echo -n Best Regards from $USER|'
+set signature = 'echo Best Regards from $USER|'
 set sort = reverse-date
 set query_command = 'mutt_ldap_query.pl %s'
-set quit = ask-yes
 set abort_unmodified = ask-yes
 set auto_tag
 set x_comment_to
@@ -59,10 +58,12 @@ bind index,attach,browser gg first-entry
 bind index,attach,browser G last-entry
 bind pager k previous-line
 bind pager j next-line
+bind pager <Up> previous-line
+bind pager <Down> next-line
 bind index,attach,browser k previous-entry
 bind index,attach,browser j next-entry
-bind pager,index \cK previous-entry
-bind pager,index \cJ next-entry
+bind pager,index K previous-entry
+bind pager,index J next-entry
 bind pager,index gK previous-undeleted
 bind pager,index gJ next-undeleted
 bind pager,index [[ previous-unread
@@ -80,13 +81,13 @@ bind pager,index,attach,browser D next-page
 bind pager,index,attach,browser U previous-page
 bind pager,index,attach,browser g? help
 bind pager,index,attach,browser ? search-opposite
-bind pager,index K sidebar-prev
-bind pager,index J sidebar-next
+bind pager,index \ck sidebar-prev
+bind pager,index \cj sidebar-next
 bind pager,index gk sidebar-prev-new
 bind pager,index gj sidebar-next-new
 bind pager,index \cu sidebar-page-up
 bind pager,index \cd sidebar-page-down
-bind pager,index O sidebar-open
+bind pager,index \cw sidebar-open
 bind pager,index \ch sidebar-toggle-visible
 bind pager,index <BackSpace> sidebar-toggle-visible
 bind pager,index gK what-key

@@ -35,3 +35,4 @@ sub musixlatex {
 	}
 	return system( "pdflatex @args" );
 }
+# ex: filetype=perl
