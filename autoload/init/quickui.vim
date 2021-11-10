@@ -93,6 +93,7 @@ function! init#quickui#post_source() abort
         \ ['&Vim data', 'Fern -drawer ' . $XDG_DATA_HOME . '/nvim'],
         \ ['--', ''],
         \ ['&UDISK', 'Fern -drawer /run/media/' . $USER],
+        \ ['&Phone', 'Fern -drawer /run/user/1000/gvfs'],
         \ ['&Mount', 'Fern -drawer /mnt'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Edit', map([

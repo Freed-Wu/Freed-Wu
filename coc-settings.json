@@ -3,7 +3,7 @@
     "triggerAfterInsertEnter": true,
     "echodocSupport": true,
     "snippetIndicator": "",
-    "invalidInsertCharacters": "\n,\r"
+    "invalidInsertCharacters": "\n\r"
   },
   "diagnostic": {
     "errorSign": "✗",
@@ -209,6 +209,10 @@
     "ultisnips": {
       "directories": ["UltiSnips"]
     }
+  },
+
+  "translator": {
+    "engines": ["bing", "youdao", "haici"]
   },
 
   "git": {

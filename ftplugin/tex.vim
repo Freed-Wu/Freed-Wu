@@ -10,4 +10,6 @@ setlocal foldexpr=vimtex#fold#level(v:lnum)
 setlocal foldtext=vimtex#fold#text()
 setlocal spell
 
+let b:browser_search_default_engine = 'google'
+
 call init#init#tex#main()

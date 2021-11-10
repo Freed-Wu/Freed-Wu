@@ -3,6 +3,8 @@ call init#init#tex#main()
 
 setlocal iskeyword+=-
 
+let b:browser_search_default_engine = 'google'
+
 if exists('g:started_by_firenvim')
   nnoremap <silent><buffer> <LocalLeader>P
         \ :<C-U>call firenvim#eval_js(

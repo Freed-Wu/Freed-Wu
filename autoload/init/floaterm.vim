@@ -24,7 +24,7 @@ function! init#floaterm#source() abort
   endif
   inoremap <silent> <S-CR> <ESC>:<C-U>execute 'FloatermSend' escape(getline('.'), '%#')<CR>o
   nnoremap <silent> <S-CR> :<C-U>execute 'FloatermSend' escape(getline('.'), '%#')<CR>j
-  xnoremap <silent> <S-CR> :<C-U>execute 'FloatermSend' escape(getline(line("v"),line("''>") - 1), '%#')<CR>
+  xnoremap <silent> <S-CR> y:FloatermSend escape(substitute('<C-R>0', '\r', '\n', 'g'), '%#')<CR>
   nnoremap <silent> g<S-CR> :<C-U>execute 'FloatermSend' escape('<C-R><C-W>', '%#')<CR>
   nnoremap <silent> <C-\><Bar> :<C-U>execute 'FloatermNew --wintype=vsplit' get(g:floaterms, &filetype, '')<CR>
   nnoremap <silent> <C-\>- :<C-U>execute 'FloatermNew --wintype=split' get(g:floaterms, &filetype, '')<CR>

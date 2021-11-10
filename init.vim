@@ -535,7 +535,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ })
   call dein#add('svermeulen/vim-yoink', {
         \ 'hook_source': 'call init#yoink#source()',
-        \ 'hook_post_source': 'call init#yoink#post_source()',
         \ })
   call dein#add('svermeulen/vim-subversive', {
         \ 'hook_source': 'call init#subversive#source()',

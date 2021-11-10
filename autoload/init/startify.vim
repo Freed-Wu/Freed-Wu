@@ -70,12 +70,6 @@ function! init#startify#source() abort
         \ {'type': 'commands', 'header': [' Commands']},
         \ {'type': 'bookmarks', 'header': [' Bookmarks']},
         \ ]
-  nnoremap <silent> <C-W>N <C-W>n:Startify<CR>
-  nnoremap <silent> <C-W>M :vnew<CR>:Startify<CR>
-  xnoremap <silent> <C-W>N <C-W>n:Startify<CR>
-  xnoremap <silent> <C-W>M :<C-U>vnew<CR>:Startify<CR>
-  nnoremap <silent> <C-W><S-Tab> :tabnew<CR>:Startify<CR>
-  xnoremap <silent> <C-W><S-Tab> :<C-U>tabnew<CR>:Startify<CR>
 endfunction
 
 augroup init#startify

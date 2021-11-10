@@ -53,4 +53,6 @@ endfunction
 augroup init#thematic
   autocmd!
   autocmd VimEnter * ThematicRandom
+  " ThematicRandom will make TrollStopper reset
+  autocmd VimEnter * highlight TrollStopper ctermbg=red guibg=red gui=undercurl
 augroup END

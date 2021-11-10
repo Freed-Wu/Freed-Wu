@@ -18,8 +18,3 @@ function! init#yoink#source() abort
   nmap y <Plug>(YoinkYankPreserveCursorPosition)
   xmap y <Plug>(YoinkYankPreserveCursorPosition)
 endfunction
-
-" https://github.com/svermeulen/vim-yoink/issues/28
-function! init#yoink#post_source() abort
-  autocmd VimEnter * autocmd! _Yoink VimEnter
-endfunction

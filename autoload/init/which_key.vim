@@ -344,14 +344,12 @@ function! init#which_key#source() abort
   xnoremap <C-W>= <C-W>=
   " 1}}} windowModify "
   " windowNew {{{1 "
-  if !has('nvim-0.5.0') && !has('patch-8.1.1564')
-    nnoremap <C-W>n <C-W>n
-    nnoremap <silent> <C-W>m :vnew<CR>
-    nnoremap <silent> <C-W><Tab> :tabnew<CR>
-    xnoremap <C-W>n <C-W>n
-    xnoremap <silent> <C-W>m :vnew<CR>
-    xnoremap <silent> <C-W><Tab> :tabnew<CR>
-  endif
+  nnoremap <C-W>n <C-W>n
+  nnoremap <silent> <C-W>m :vnew<CR>
+  nnoremap <silent> <C-W><Tab> :tabnew<CR>
+  xnoremap <C-W>n <C-W>n
+  xnoremap <silent> <C-W>m :vnew<CR>
+  xnoremap <silent> <C-W><Tab> :tabnew<CR>
   nnoremap <C-W>^ <C-W>^
   nnoremap <C-W>s <C-W>s
   nnoremap <C-W>v <C-W>v

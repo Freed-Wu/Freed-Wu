@@ -2,13 +2,13 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
-from pytorch_lightning import LightningModule
+import pytorch_lightning as pl
 from torchtyping import TensorType
 from typing import List
 from torch import Tensor
 
 
-class Net(LightningModule):
+class Net(pl.LightningModule):
     """Net."""
 
     def __init__(self, lr: float = 0.001):

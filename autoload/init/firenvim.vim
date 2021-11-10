@@ -6,10 +6,22 @@ function! init#firenvim#source() abort
         \ 'localSettings': {
           \ '.*': {
             \ 'cmdline': 'firenvim',
-            \ 'selector': 'textarea',
+            \ 'selector': 'textarea:not([readonly])',
             \ }}}
   nnoremap <silent> <C-\> :<C-U>call firenvim#focus_page()<CR>
   nnoremap <silent> <C-Z> :<C-U>call firenvim#hide_frame()<CR>
+endfunction
+
+function! init#firenvim#map() abort
+  " only work in browser
+  map <C-;> <C-N>
+  map <C-.> <C-T>
+  map <C--> <C-W>
+  map <C-=> <C-Q>
+  imap <C-;> <C-N>
+  imap <C-.> <C-T>
+  imap <C--> <C-W>
+  imap <C-=> <C-Q>
 endfunction
 
 if exists('g:started_by_firenvim')
@@ -20,5 +32,6 @@ if exists('g:started_by_firenvim')
     autocmd BufEnter forums.gentoo.org_*.txt set filetype=bbcode
     autocmd UIEnter * set laststatus=0
     autocmd UIEnter * set showtabline=0
+    autocmd VimEnter * call init#firenvim#map()
   augroup END
 endif

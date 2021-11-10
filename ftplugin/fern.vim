@@ -1,8 +1,6 @@
 setlocal nonumber
 setlocal norelativenumber
 
-call fern#scheme#file#mapping#git#init(0)
-
 nmap <buffer> g? <Plug>(fern-action-help)
 nmap <buffer> g: <Plug>(fern-action-choice)
 nmap <buffer> <C-W>i <Plug>(fern-action-zoom)
@@ -97,3 +95,6 @@ nmap <buffer> gs <Plug>(fern-action-save-as-bookmark)
 nmap <silent><buffer> yop <Plug>(fern-action-preview:auto:toggle)
 nmap <silent><buffer> <M-p> <Plug>(fern-action-preview:scroll:up:half)
 nmap <silent><buffer> <M-n> <Plug>(fern-action-preview:scroll:down:half)
+
+nmap <buffer><nowait> <lt> <Plug>(fern-action-git-stage)
+nmap <buffer><nowait> > <Plug>(fern-action-git-unstage)

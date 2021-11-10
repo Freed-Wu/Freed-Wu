@@ -1,0 +1,56 @@
+priority -30
+extends dot
+extends tex
+
+snippet kbd
+<kbd>${1:VISUAL}</kbd>
+endsnippet
+snippet img "" b
+![$1](${2:path}${1/.+/ "/}${1:opt title}${1/.+/"/})
+endsnippet
+snippet notes "" b
+::: notes
+$0
+:::
+endsnippet
+
+snippet ali "" i
+\begin{aligned}
+$0
+\end{aligned}
+endsnippet
+snippet cases "" i
+\begin{cases}
+$0
+\end{cases}
+endsnippet
+snippet matrix "" i
+\begin{matrix}
+$0
+\end{matrix}
+endsnippet
+snippet bmatrix "" i
+\begin{bmatrix}
+$0
+\end{bmatrix}
+endsnippet
+snippet Bmatrix "" i
+\begin{Bmatrix}
+$0
+\end{Bmatrix}
+endsnippet
+snippet pmatrix "" i
+\begin{pmatrix}
+$0
+\end{pmatrix}
+endsnippet
+snippet vmatrix "" i
+\begin{vmatrix}
+$0
+\end{vmatrix}
+endsnippet
+snippet Vmatrix "" i
+\begin{Vmatrix}
+$0
+\end{Vmatrix}
+endsnippet

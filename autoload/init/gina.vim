@@ -30,7 +30,17 @@ function! init#gina#post_source() abort
         \)
 endfunction
 
-augroup init#fugitive
+function! init#gina#map() abort
+  nmap <buffer><nowait> <lt> <Plug>(gina-index-stage)
+  nmap <buffer><nowait> > <Plug>(gina-index-unstage)
+  nmap <buffer><nowait> = <Plug>(gina-index-discard)
+  xmap <buffer><nowait> <lt> <Plug>(gina-index-stage)
+  xmap <buffer><nowait> > <Plug>(gina-index-unstage)
+  xmap <buffer><nowait> = <Plug>(gina-index-discard)
+endfunction
+
+augroup init#gina
   autocmd!
   autocmd BufEnter * Gina lcd
+  autocmd VimEnter * autocmd Filetype gina-* call init#gina#map()
 augroup END

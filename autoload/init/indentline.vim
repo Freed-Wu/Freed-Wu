@@ -8,3 +8,8 @@ function! init#indentline#source() abort
   let g:indentLine_color_term = 'blue'
   let g:indentLine_color_gui = 'blue'
 endfunction
+
+augroup init#indentline
+  autocmd!
+  autocmd VimEnter autocmd FileType * IndentLinesReset
+augroup END
