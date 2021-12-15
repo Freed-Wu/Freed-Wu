@@ -16,8 +16,12 @@ nnoremap <silent><buffer> <LocalLeader>= :<C-U>CommentBanner -w auto -1 spaces:0
 nnoremap <silent><buffer> <LocalLeader>- :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,-<CR>
 nnoremap <buffer> gf gf
 nmap <buffer> <C-W>f <Plug>(pandoc-hypertext-open-local)
-nnoremap <silent><buffer> <LocalLeader>v :<C-U>Pandoc! beamer<CR>
-nnoremap <silent><buffer> <LocalLeader>V :<C-U>Pandoc beamer<CR>
+nnoremap <silent><buffer> <LocalLeader>vb :<C-U>Pandoc beamer<CR>
+nnoremap <silent><buffer> <LocalLeader>vB :<C-U>Pandoc! beamer<CR>
+nnoremap <silent><buffer> <LocalLeader>vp :<C-U>Pandoc pdf<CR>
+nnoremap <silent><buffer> <LocalLeader>vP :<C-U>Pandoc! pdf<CR>
+nnoremap <silent><buffer> <LocalLeader>vd :<C-U>Pandoc docx<CR>
+nnoremap <silent><buffer> <LocalLeader>vD :<C-U>Pandoc! docx<CR>
 
 call textobj#user#map('markdown', {
       \ 'text': {

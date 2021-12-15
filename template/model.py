@@ -25,9 +25,10 @@ class Net(pl.LightningModule):
         """configure_optimizers."""
         return torch.optim.Adam(self.parameters(), lr=self.hparams["lr"])
 
-    def forward(self,
-                x: TensorType["batch", "x_channels", "h", "w"],
-                ) -> TensorType["batch", "y_channels"]:
+    def forward(
+        self,
+        x: TensorType["batch", "x_channels", "h", "w"],
+    ) -> TensorType["batch", "y_channels"]:
         """forward.
 
         :param x:
@@ -35,6 +36,15 @@ class Net(pl.LightningModule):
         :rtype: TensorType["batch", "y_channels"]
         """
         return torch.relu(self.l1(x.view(x.size(0), -1)))
+
+    def _calculate_loss(self, batch: List["Tensor"], mode="train"):
+        x, y = batch
+        y_hat = self(x)
+        loss = F.cross_entropy(y_hat, y)
+        acc = (y == y_hat.argmax(-1)).float().mean()
+        self.log(f"{mode}_loss", loss)
+        self.log(f"{mode}_acc", acc, on_step=False, on_epoch=True)
+        return loss, acc
 
     def training_step(self, batch: List["Tensor"], batch_idx: int):
         """training_step.
@@ -44,10 +54,7 @@ class Net(pl.LightningModule):
         :param batch_idx:
         :type batch_idx: int
         """
-        x, y = batch
-        y_hat = self(x)
-        loss = F.cross_entropy(y_hat, y)
-        self.log('train_loss', loss)
+        loss, _ = self._calculate_loss(batch, mode="train")
         return loss
 
     def validation_step(self, batch: List["Tensor"], batch_idx: int):
@@ -58,10 +65,7 @@ class Net(pl.LightningModule):
         :param batch_idx:
         :type batch_idx: int
         """
-        x, y = batch
-        y_hat = self(x)
-        loss = F.cross_entropy(y_hat, y)
-        self.log('val_loss', loss)
+        _ = self._calculate_loss(batch, mode="val")
 
     def test_step(self, batch: List["Tensor"], batch_idx: int):
         """test_step.
@@ -71,7 +75,4 @@ class Net(pl.LightningModule):
         :param batch_idx:
         :type batch_idx: int
         """
-        x, y = batch
-        y_hat = self(x)
-        loss = F.cross_entropy(y_hat, y)
-        self.log('test_loss', loss)
+        _ = self._calculate_loss(batch, mode="test")

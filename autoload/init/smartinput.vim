@@ -155,6 +155,31 @@ function! init#smartinput#post_source() abort
   " 2}}} ZH "
 
   " EN {{{2 "
+  call smartinput#define_rule({
+        \ 'at': '\%#',
+        \ 'char': '`',
+        \ 'input': "`'" . left,
+        \ 'filetype': ['tex'],
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '`\%#''',
+        \ 'char': '<BS>',
+        \ 'input': '<BS><Del>',
+        \ 'filetype': ['tex'],
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '`''\%#',
+        \ 'char': '<BS>',
+        \ 'input': '<BS><BS>',
+        \ 'filetype': ['tex'],
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '``''''\%#',
+        \ 'char': '<BS>',
+        \ 'input': '<BS><BS><BS><BS>',
+        \ 'filetype': ['tex'],
+        \ })
+
   call smartinput#map_to_trigger('i', '(', '(', '(')
   call smartinput#define_rule({
         \ 'at': '\%#',
@@ -165,12 +190,12 @@ function! init#smartinput#post_source() abort
 
   call smartinput#map_to_trigger('i', '<', '<', '<')
   call smartinput#define_rule({
-        \ 'at': '\%#',
+        \ 'at': '\S\%#',
         \ 'char': '<',
         \ 'input': ' < ',
         \ })
   call smartinput#define_rule({
-        \ 'at': '\%#',
+        \ 'at': '\S\%#',
         \ 'char': '<',
         \ 'input': ' < ',
         \ 'filetype': ['pandoc'],
@@ -316,6 +341,11 @@ function! init#smartinput#post_source() abort
         \ 'input': ', ',
         \ })
   call smartinput#define_rule({
+        \ 'at': '\%# ',
+        \ 'char': ',',
+        \ 'input': ',',
+        \ })
+  call smartinput#define_rule({
         \ 'at': '\%#',
         \ 'char': ',',
         \ 'input': ',',
@@ -422,6 +452,12 @@ function! init#smartinput#post_source() abort
   call smartinput#define_rule({
         \ 'at': '\S\%#',
         \ 'char': '=',
+        \ 'input': ' = ',
+        \ 'filetype': ['pandoc'],
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '\%#',
+        \ 'char': '=',
         \ 'input': '=',
         \ 'filetype': ['sh', 'bash', 'zsh', 'fstab', 'bib', 'python'],
         \ })
@@ -468,7 +504,7 @@ function! init#smartinput#post_source() abort
         \ 'syntax': ['pandocLaTeXMathBlock']
         \ })
   call smartinput#define_rule({
-        \ 'at': '[^ \[{(]\%#',
+        \ 'at': '[^ :\[{(]\%#',
         \ 'char': '-',
         \ 'input': ' - ',
         \ 'filetype': ['python'],

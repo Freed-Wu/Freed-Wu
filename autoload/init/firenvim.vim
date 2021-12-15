@@ -18,10 +18,12 @@ function! init#firenvim#map() abort
   map <C-.> <C-T>
   map <C--> <C-W>
   map <C-=> <C-Q>
+  map <S-lt> <lt>
   imap <C-;> <C-N>
   imap <C-.> <C-T>
   imap <C--> <C-W>
   imap <C-=> <C-Q>
+  imap <S-lt> <lt>
 endfunction
 
 if exists('g:started_by_firenvim')

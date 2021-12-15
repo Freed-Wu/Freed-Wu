@@ -7,6 +7,7 @@ if !has('nvim')
   set encoding=utf-8
   set undodir=$XDG_DATA_HOME/nvim/undo
   set directory=$XDG_DATA_HOME/nvim/swap
+  let $MYVIMRC = $XDG_CONFIG_HOME . '/nvim/init.vim'
 endif
 scriptencoding utf-8
 if has('gui_running')
@@ -33,7 +34,8 @@ set wrapscan
 set ignorecase
 set hlsearch
 set showmatch
-set foldmethod=syntax
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set showcmd
 set scrolloff=3
 set virtualedit=block
@@ -118,7 +120,7 @@ let g:html_dynamic_folds = 1
 let g:html_expand_tabs = 1
 let g:html_font = 'JetBrainsMono Nerd Font Mono'
 
-" linux's vim will not start a terminal by default
+" vim on linux will not start a server by default
 if empty(v:servername) && exists('*remote_startserver') && has('clientserver')
   call remote_startserver('VIM')
 endif
@@ -254,9 +256,10 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
 
   " Log {{{1 "
   call dein#add('wakatime/vim-wakatime', {
-        \ 'if': executable('wakatime'),
+        \ 'if': has('pythonx'),
         \ })
   call dein#add('https://gitlab.com/code-stats/code-stats-vim', {
+        \ 'if': has('pythonx'),
         \ 'hook_source': 'call init#code_stats#source()',
         \ })
   " 1}}} Log "
@@ -288,9 +291,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   call dein#add('preservim/vim-thematic', {
         \ 'hook_source': 'call init#thematic#source()',
         \ })
-  call dein#add('Godlygeek/csapprox', {
-        \ 'if': has('gui'),
-        \ })
   " 2}}} Colorscheme "
 
   " Transparent {{{2 "
@@ -313,19 +313,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'hook_source': 'call init#airline#source()',
         \ })
   call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('mattn/webapi-vim', {
-        \ 'if': executable('wget') || executable('curl'),
-        \ })
-  " error in android, so need manually copy ~/.cache/.weather
-  call dein#add('Wildog/airline-weather.vim', {
-        \ 'if': (executable('wget') || executable('curl'))
-        \ && !empty($WEATHER_APPID) && !empty($WEATHER_AREA),
-        \ 'hook_source': 'call init#airline#weather#source()',
-        \ })
-  call dein#add('Zuckonit/vim-airline-todo', {
-        \ 'merged': 0,
-        \ 'hook_source': 'call init#airline#todo#source()',
-        \ })
   call dein#add('enricobacis/vim-airline-clock', {
         \ 'hook_source': 'call init#airline#clock#source()',
         \ })
@@ -358,6 +345,11 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
 
   " Filetype {{{1 "
   " Highlight {{{2 "
+  call dein#add('nvim-treesitter/nvim-treesitter', {
+        \ 'if': has('nvim-0.5.0'),
+        \ 'hook_source': 'lua require("treesitter")',
+        \ 'hook_post_update': 'TSUpdate',
+        \ })
   call dein#add('sheerun/vim-polyglot', {
         \ 'merged': 0,
         \ 'hook_source': 'call init#polyglot#source()',
@@ -397,14 +389,8 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   call dein#add('pseewald/vim-anyfold', {
         \ 'on_cmd': 'AnyFoldActivate',
         \ })
-  call dein#add('LucHermitte/lh-vim-lib', {
-        \ 'on_ft': ['c', 'cpp', 'cs', 'java', 'arduino', 'objc', 'objcpp'],
-        \ })
-  call dein#add('LucHermitte/VimFold4C')
   call dein#add('djoshea/vim-matlab-fold')
   call dein#add('thinca/vim-ft-help_fold')
-  call dein#add('vim-utils/vim-ruby-fold')
-  call dein#add('pedrohdz/vim-yaml-folds')
   call dein#add('sgeb/vim-diff-fold')
   call dein#add('matcatc/vim-asciidoc-folding')
   " 2}}} Fold "
@@ -716,44 +702,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'hook_source': 'call init#textobj#markdown#source()',
         \ })
   call dein#add('rbonvall/vim-textobj-latex')
-  call dein#add('jasonlong/vim-textobj-css', {
-        \ 'on_ft': 'css',
-        \ })
-  call dein#add('whatyouhide/vim-textobj-erb', {
-        \ 'on_ft': 'erb',
-        \ })
   " 2}}} TextObjMarkUp "
-
-  " TextObjScript {{{2 "
-  call dein#add('akiyan/vim-textobj-php', {
-        \ 'on_ft': 'php',
-        \ 'hook_source': 'call init#textobj#php#source()',
-        \ })
-  call dein#add('bps/vim-textobj-python', {
-        \ 'hook_source': 'call init#textobj#python#source()',
-        \ })
-  call dein#add('vimtaku/vim-textobj-sigil', {
-        \ 'on_ft': 'perl',
-        \ 'hook_source': 'call init#textobj#sigil#source()',
-        \ })
-  call dein#add('tek/vim-textobj-ruby', {
-        \ 'on_ft': 'ruby',
-        \ 'hook_source': 'call init#textobj#ruby#source()',
-        \ })
-  " 2}}} TextObjScript "
-
-  " TextObjCompile {{{2 "
-  call dein#add('rhysd/libclang-vim')
-  call dein#add('libclang-vim/vim-textobj-clang', {
-        \ 'hook_source': 'call init#textobj#clang#source()',
-        \ })
-  call dein#add('andyl/vim-textobj-elixir', {
-        \ 'on_ft': 'elixir',
-        \ })
-  call dein#add('adriaanzon/vim-textobj-blade-directive', {
-        \ 'on_ft': 'blade',
-        \ })
-  " 2}}} TextObjCompile "
   " 1}}} TextObject "
 
   " Tool {{{1 "
@@ -762,9 +711,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'on_cmd': ['Delete', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir',
         \ 'Cfind', 'Clocate', 'Lfind', 'Llocate', 'Wall', 'SudoWrite',
         \ 'SudoEdit'],
-        \ })
-  call dein#add('will133/vim-dirdiff', {
-        \ 'on_cmd': 'DirDiff',
         \ })
   call dein#add('AndrewRadev/tagalong.vim')
   call dein#add('tpope/vim-projectionist', {
@@ -789,24 +735,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'n': ['<C-CR>', 'g<C-CR>', 'z<C-CR>', '<M-CR>', '<M-U>', '<M-D>']},
         \ 'hook_source': 'call init#vimux#source()',
         \ })
-  call dein#add('voldikss/vim-floaterm', {
-        \ 'hook_source': 'call init#floaterm#source()',
-        \ })
-  call dein#add('puremourning/vimspector', {
-        \ 'hook_source': 'call init#vimspector#source()',
-        \ })
   " 2}}} Debug "
-
-  " Tag {{{2 "
-  call dein#add('ludovicchabant/vim-gutentags', {
-        \ 'if': executable('ctags') || executable('cscope')
-        \ || executable('gtags-cscope'),
-        \ 'hook_source': 'call init#gutentags#source()',
-        \ })
-  call dein#add('liuchengxu/vista.vim', {
-        \ 'hook_source': 'call init#vista#source()',
-        \ })
-  " 2}}} Tag "
 
   " Async {{{2 "
   call dein#add('skywind3000/asyncrun.vim', {

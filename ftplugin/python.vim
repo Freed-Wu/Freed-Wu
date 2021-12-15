@@ -18,17 +18,3 @@ call textobj#user#map('continuous', {
         \ 'select-i': '<buffer>iL',
         \ },
         \ })
-call textobj#user#map('python', {
-      \ 'class': {
-        \ 'select-a': '<buffer>ac',
-        \ 'select-i': '<buffer>ic',
-        \ 'move-p': '<buffer>[[',
-        \ 'move-n': '<buffer>]]',
-        \ },
-        \ 'function': {
-          \ 'select-a': '<buffer>af',
-          \ 'select-i': '<buffer>if',
-          \ 'move-p': '<buffer>[m',
-          \ 'move-n': '<buffer>]m',
-          \ }
-          \ })

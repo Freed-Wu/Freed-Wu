@@ -43,7 +43,8 @@ function! init#airline#source() abort
   if !has('unix') || has('unix') && exists('*trim')
     let g:airline_filetype_overrides = {
             \ 'startify': ['startify', '%{fnamemodify(getcwd(), ":~")} '
-            \ . g:airline_left_alt_sep . ' %{wifi#component()}'],
+            \ . (empty(wifi#component()) ? '' : g:airline_left_alt_sep)
+            \ . ' %{wifi#component()}'],
             \ }
   else
     let g:airline_filetype_overrides = {
@@ -116,7 +117,9 @@ function! init#airline#source() abort
   let g:airline#extensions#whitespace#mixed_indent_file_format = '⇆%s'
   let g:airline#extensions#whitespace#conflicts_format = '✗%s'
 
-  let g:airline#extensions#battery#enabled = 1
+  if battery#value() > 0
+    let g:airline#extensions#battery#enabled = 1
+  endif
 
   let g:airline#extensions#localsearch#inverted = 1
 
@@ -124,6 +127,6 @@ function! init#airline#source() abort
 
   let g:airline#extensions#windowswap#indicator_text = '✂'
 
-  " https://github.com/vim-airline/vim-airline/issues/2425
+  let g:airline#extensions#zoomwintab#enabled = 1
   let g:airline#extensions#zoomwintab#status_zoomed_in = '🔍'
 endfunction

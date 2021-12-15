@@ -25,6 +25,7 @@ $ tree -L 1
 ├── ftplugin
 ├── init.vim
 ├── LICENSE
+├── lua
 ├── README.md
 ├── syntax
 ├── ultisnips

@@ -10,6 +10,7 @@ function! init#coc#source() abort
         \ 'mysql': 'sql',
         \ 'eelixir': 'elixir',
         \ 'bash': 'sh',
+        \ 'zsh': 'sh',
         \ }
   " https://github.com/neoclide/coc-sources/issues/56
   " coc-word cannot be loaded
@@ -24,7 +25,7 @@ function! init#coc#source() abort
         \
         \ 'coc-prettier',
         \
-        \ 'coc-floaterm', 'coc-tasks', 'coc-vimtex', 'coc-emmet',
+        \ 'coc-tasks', 'coc-vimtex', 'coc-emmet',
         \ 'coc-snippets', 'coc-translator', 'coc-zi',
         \
         \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
@@ -38,7 +39,7 @@ function! init#coc#source() abort
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',
         \ 'coc-clang-format-style-options', 'coc-docker',
         \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-texlab',
-        \ 'coc-jedi', 'coc-pyright',
+        \ 'coc-jedi', 'coc-pyright', 'coc-clangd',
         \ ]
   " tabnine don't support android
   if $PREFIX !=# '/data/data/com.termux/files/usr'
@@ -65,6 +66,8 @@ function! init#coc#source() abort
   nmap g. <Plug>(coc-codeaction-selected)
   xmap g. <Plug>(coc-codeaction-selected)
   nmap g.. <Plug>(coc-codeaction)
+  nnoremap <silent> gd :<C-U>call CocAction('jumpDefinition')<CR>
+  nnoremap <silent> gD :<C-U>call CocAction('jumpDeclaration')<CR>
 
   nmap gq <plug>(coc-format-selected)
   xmap gq <plug>(coc-format-selected)

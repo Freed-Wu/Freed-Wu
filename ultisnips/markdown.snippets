@@ -3,7 +3,7 @@ extends dot
 extends tex
 
 snippet kbd
-<kbd>${1:VISUAL}</kbd>
+<kbd>${1:${VISUAL}}</kbd>
 endsnippet
 snippet img "" b
 ![$1](${2:path}${1/.+/ "/}${1:opt title}${1/.+/"/})
@@ -29,27 +29,27 @@ snippet matrix "" i
 $0
 \end{matrix}
 endsnippet
-snippet bmatrix "" i
+snippet bmat "" i
 \begin{bmatrix}
 $0
 \end{bmatrix}
 endsnippet
-snippet Bmatrix "" i
+snippet Bmat "" i
 \begin{Bmatrix}
 $0
 \end{Bmatrix}
 endsnippet
-snippet pmatrix "" i
+snippet pmat "" i
 \begin{pmatrix}
 $0
 \end{pmatrix}
 endsnippet
-snippet vmatrix "" i
+snippet vmat "" i
 \begin{vmatrix}
 $0
 \end{vmatrix}
 endsnippet
-snippet Vmatrix "" i
+snippet Vmat "" i
 \begin{Vmatrix}
 $0
 \end{Vmatrix}

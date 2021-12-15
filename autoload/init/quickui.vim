@@ -9,21 +9,12 @@ function! init#quickui#source() abort
   let g:init#quickui#context = [
         \ ['&NR', 'NR'],
         \ ['R&ainbowDelim', 'RainbowDelim'],
-        \ ['Pre&view Tag', 'call quickui#tools#preview_tag(expand("<cword>"))'],
-        \ ['--', ''],
-        \ ['&ShowEvalBalloon', 'call vimspector#ShowEvalBalloon(0)'],
-        \ ['Toggle&Breakpoint', 'call vimspector#ToggleBreakpoint()'],
-        \ ['ToggleC&onditionBreakPoint', 'call vimspector#ToggleBreakpoint({"condition": input("Enter condition expression: "), "hitCondition": input("hit count expression: ")})'],
-        \ ['&RunToCursor', 'call vimspector#RunToCursor()'],
-        \ ['Add&FunctionBreakpoint', 'call vimspector#AddFunctionBreakpoint("<cexpr>")'],
         \ ['--', ''],
         \ ['&Table-mode ▶', 'call quickui#context#open(g:init#quickui#context_table_mode, {})'],
         \ ['&Coc ▶', 'call quickui#context#open(g:init#quickui#context_coc, {})'],
         \ ]
   let g:init#quickui#vcontext = [
         \ ['&NRV', 'NRV'],
-        \ ['Pre&view Tag', 'call quickui#tools#preview_tag(getline(".")[col("v") - 1:col("''>")])'],
-        \ ['Vim&spectorBalloonEval', 'call vimspector#ShowEvalBalloon(1)'],
         \ ['--', ''],
         \ ['&Table-mode ▶', 'call quickui#context#open(g:init#quickui#vcontext_table_mode, {})'],
         \ ['&Coc ▶', 'call quickui#context#open(g:init#quickui#vcontext_coc, {})'],
@@ -51,16 +42,11 @@ function! init#quickui#source() abort
         \ ]
 
   let g:init#quickui#context_coc = [
-        \ ['&Global Definition', 'call CocAction("jumpDefinition")'],
-        \ ['&Symbol Declaration', 'call CocAction("jumpDeclaration")'],
         \ ['&Implementation', 'call CocAction("jumpImplementation")'],
         \ ['&TypeDefinition', 'call CocAction("jumpTypeDefinition")'],
         \ ['&Called References', 'call CocAction("jumpReferences")'],
         \ ['Re&name', 'call CocAction("rename")'],
         \ ['Re&factor', 'call CocAction("refactor")'],
-        \ ['--', ''],
-        \ ['&Pick Color', 'call CocAction("pickColor")'],
-        \ ['Ch&ange Color', 'call CocAction("colorPresentation")'],
         \ ['--', ''],
         \ ['Trans&late', 'CocCommand translator.popup'],
         \ ['Translate &Replace', 'CocCommand translator.replace'],
@@ -79,7 +65,6 @@ endfunction
 
 function! init#quickui#post_source() abort
   let g:quickui_show_tip = 1
-  call quickui#menu#reset()
   call quickui#menu#install('&File', map([
         \ ['&File', 'Fern -drawer .'],
         \ ['--', ''],
@@ -97,7 +82,10 @@ function! init#quickui#post_source() abort
         \ ['&Mount', 'Fern -drawer /mnt'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Edit', map([
-        \ ['&Trail fix', 'TrailGuide fix'],
+        \ ['T&emplate', 'Template'],
+        \ ['&TemplateHere', 'TemplateHere'],
+        \ ['--', ''],
+        \ ['Trail &Fix', 'TrailGuide fix'],
         \ ['&Delete', 'Delete'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&View', map([
@@ -112,13 +100,6 @@ function! init#quickui#post_source() abort
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Git', map([
         \ ['&Git', 'Gina status'],
-        \ ['&Commit', 'Gina commit'],
-        \ ] , {_, v -> v + [get(v, 1)]}))
-  call quickui#menu#install('De&bug', map([
-        \ ['De&bugContinue', 'call vimspector#Continue()'],
-        \ ['&Stop', 'call vimspector#Stop()'],
-        \ ['&Restart', 'call vimspector#Restart()'],
-        \ ['&Pause', 'call vimspector#Pause()'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Z-fold', map([
         \ ['&Z-fold Last pattern', 'Fl'],

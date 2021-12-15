@@ -1,6 +1,4 @@
 function! init#init#c#main() abort
-  runtime ftplugin/c/c-fold.vim
-
   setlocal path+=~/.local/include
 
   nnoremap <silent><buffer> <LocalLeader>o :set paste<CR>i<C-R>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<CR><Esc>='[:set nopaste<CR>

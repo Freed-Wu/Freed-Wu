@@ -449,10 +449,6 @@ function! init#which_key#source() abort
   xnoremap gf gf
   xnoremap gF gF
   xnoremap g] g]
-  nnoremap gd gd
-  nnoremap gD gD
-  xnoremap gd gd
-  xnoremap gD gD
   " 1}}} fileSwitch "
   " virtual {{{1 "
   nnoremap gr gr
