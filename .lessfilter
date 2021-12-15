@@ -22,16 +22,24 @@ elif [ "$kind" = pdf ]; then
   if [ -x "$(which pdftotext)" ] && [ -x "$(which sed)" ]; then
     pdftotext "$1" - | sed "s/\f/$(hr ─)\n/"
   fi
+elif [ "$kind" = vnd.openxmlformats-officedocument.wordprocessingml.document ]; then
+  if [ -x "$(which pandoc)" ]; then
+    pandoc "$1" -tmarkdown
+  fi
 elif [ "$kind" = vnd.openxmlformats-officedocument.spreadsheetml.sheet ] ||
   [ "$kind" = vnd.ms-excel ]; then
   if [ -x "$(which in2csv)" ] && [ -x "$(which xsv)" ] && [ -x "$(which bat)" ]; then
     in2csv "$1" | xsv table | bat -ltsv --color=always
   fi
-elif [ "$category" = text ]; then
+elif [ "$category" = text ] || [ "$kind" = x-empty ] || [ "$kind" = pgp-keys ]; then
   if [ -x "$(which bat)" ]; then
     bat --color=always "$1"
   elif [ -x "$(which pygmentize)" ]; then
     pygmentize "$1" | less
+  fi
+elif [ "$kind" = blockdevice ]; then
+  if [ -x "$(which findmnt)" ]; then
+    findmnt "$1"
   fi
 elif [ "$category" = image ]; then
   if [ -x "$(which chafa)" ]; then

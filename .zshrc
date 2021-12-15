@@ -85,8 +85,6 @@ setopt pushdignoredups
 # brew's zsh is 5.8.1 < 5.8.7
 if (($+options[cdsilent])); then
   setopt cdsilent
-else
-  TERM=screen-256color
 fi
 
 setopt globstarshort
@@ -185,8 +183,7 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
   *) git log --color=always $word ;;
   esac'
 
-zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' \
-  if'(($+commands[pinyin-comp]))' \
+zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
   for Freed-Wu/pinyin-completion
 
 zinit id-as depth'1' wait lucid as'completion' \
@@ -286,6 +283,7 @@ zinit id-as depth'1' wait lucid \
   bindkey "^[y" yank-pop' \
   for zdharma-continuum/zsh-editing-workbench
 zinit id-as depth'1' wait lucid for zdharma-continuum/zui
+# https://github.com/zdharma-continuum/zsh-cmd-architect/pull/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-cmd-architect
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
@@ -356,8 +354,7 @@ alias cp='cp -ri'
 alias rm='rm -i'
 alias rename='rename -i'
 if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]] && (($+commands[exa])); then
-  alias ls='exa --icons'
-  alias vdir='exa --icons --git -lh'
+  alias ls='exa --icons --git -h'
 fi
 if [[ $OSTYPE != linux-android ]]; then
   alias man='man -L zh_CN.UTF-8'
@@ -379,11 +376,12 @@ zinit id-as depth'1' wait lucid null \
 # 2}}} Superuser #
 
 # Download {{{2 #
+# need access google
 zinit id-as depth'1' wait lucid null \
-  atclone'./install.sh' \
+  atclone'./install.sh -p $ZPFX/bin' \
   for labbots/google-drive-upload
 zinit id-as depth'1' wait lucid null \
-  atclone'./install.sh' \
+  atclone'./install.sh -p $ZPFX/bin' \
   for Akianonymus/gdrive-downloader
 # 2}}} Download #
 

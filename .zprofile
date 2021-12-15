@@ -6,9 +6,6 @@ fi
 if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
   . ~/.xprofile
 fi
-if [[ -d /usr/share/texmf-dist/scripts/texlive ]]; then
-  export PATH=/usr/share/texmf-dist/scripts/texlive:$PATH
-fi
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then
   export LANG=en_US.UTF-8

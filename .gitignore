@@ -19,7 +19,6 @@
 !/.fbtermrc
 !/.astylerc
 !/.octaverc
-!/.octave_packages
 !/.procmailrc
 !/.clang-format
 !/.ccls
@@ -191,6 +190,9 @@
 !/.config/ptpython/
 /.config/ptpython/*
 !/.config/ptpython/config.py
+!/.config/pudb/
+/.config/pudb/*
+!/.config/pudb/pudb.cfg
 
 # $XDG_DATA_HOME
 !/.local/
