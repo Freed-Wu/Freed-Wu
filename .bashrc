@@ -26,11 +26,11 @@ if [[ -f ~/.zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]]; then
   . "$HOME/.zinit/plugins/pinyin-completion/shell/pinyin-comp.bash"
 fi
 
-if [[ -f ~/.local/share/bash/bash-wakatime/bash-wakatime.sh ]]; then
+if [[ -f ~/.local/share/bash/bash-wakatime/bash-wakatime.sh && $(command -v wakatime) ]]; then
   . "$HOME/.local/share/bash/bash-wakatime/bash-wakatime.sh"
 fi
 
-if [[ $OSTYPE == linux-gnu && -z $TMUX && -x $(which tmux 2>/dev/null) ]]; then
+if [[ $OSTYPE == linux-gnu && -z $TMUX && $(command -v tmux) ]]; then
   exec tmux new -As0
 fi
 
@@ -42,7 +42,7 @@ PS3='? '
 
 stty -ixon
 
-if [[ -x ~/Applications/nvim.qv2ray ]]; then
+if [[ $(command -v nvim.qv2ray) ]]; then
   alias vi=nvim.qv2ray
 fi
 

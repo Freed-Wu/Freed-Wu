@@ -13,7 +13,8 @@ set rfc2047_parameters
 set signature = 'echo Best Regards from $USER|'
 set sort = reverse-date
 set query_command = 'mutt_ldap_query.pl %s'
-set abort_unmodified = ask-yes
+set abort_unmodified = no
+set abort_nosubject = no
 set auto_tag
 set x_comment_to
 set header_cache = ~/.cache/neomutt

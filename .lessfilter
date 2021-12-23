@@ -3,51 +3,51 @@ mime=$(file -Lb --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
 if [ -d "$1" ]; then
-  if [ -x "$(which exa)" ]; then
+  if [ "$(command -v exa)" ]; then
     exa --git -hl --color=always --icons "$1"
   fi
 elif [ "$kind" = plain ] && [ "${1##*.}" = tsv ]; then
-  if [ -x "$(which xsv)" ]; then
+  if [ "$(command -v xsv)" ]; then
     xsv table -d'\t' "$1"
   fi
 elif [ "$kind" = csv ]; then
-  if [ -x "$(which bat)" ]; then
+  if [ "$(command -v bat)" ]; then
     bat -p "$1" --color=always | xsv table | bat -p --color=always
   fi
 elif [ "$kind" = json ]; then
-  if [ -x "$(which jq)" ]; then
+  if [ "$(command -v jq)" ]; then
     jq -r . "$1" --color-output
   fi
 elif [ "$kind" = pdf ]; then
-  if [ -x "$(which pdftotext)" ] && [ -x "$(which sed)" ]; then
+  if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
     pdftotext "$1" - | sed "s/\f/$(hr ─)\n/"
   fi
 elif [ "$kind" = vnd.openxmlformats-officedocument.wordprocessingml.document ]; then
-  if [ -x "$(which pandoc)" ]; then
+  if [ "$(command -v pandoc)" ]; then
     pandoc "$1" -tmarkdown
   fi
 elif [ "$kind" = vnd.openxmlformats-officedocument.spreadsheetml.sheet ] ||
   [ "$kind" = vnd.ms-excel ]; then
-  if [ -x "$(which in2csv)" ] && [ -x "$(which xsv)" ] && [ -x "$(which bat)" ]; then
+  if [ "$(command -v in2csv)" ] && [ "$(command -v xsv)" ] && [ "$(command -v bat)" ]; then
     in2csv "$1" | xsv table | bat -ltsv --color=always
   fi
 elif [ "$category" = text ] || [ "$kind" = x-empty ] || [ "$kind" = pgp-keys ]; then
-  if [ -x "$(which bat)" ]; then
+  if [ "$(command -v bat)" ]; then
     bat --color=always "$1"
-  elif [ -x "$(which pygmentize)" ]; then
+  elif [ "$(command -v pygmentize)" ]; then
     pygmentize "$1" | less
   fi
 elif [ "$kind" = blockdevice ]; then
-  if [ -x "$(which findmnt)" ]; then
+  if [ "$(command -v findmnt)" ]; then
     findmnt "$1"
   fi
 elif [ "$category" = image ]; then
-  if [ -x "$(which chafa)" ]; then
+  if [ "$(command -v chafa)" ]; then
     chafa "$1"
   fi
-  if [ -x "$(which exiftool)" ]; then
+  if [ "$(command -v exiftool)" ]; then
     exiftool "$1"
   fi
-elif [ -x "$(which bat)" ]; then
+elif [ "$(command -v bat)" ]; then
   lesspipe.sh "$1" | bat --color=always
 fi

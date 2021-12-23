@@ -3,17 +3,7 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
-PATH=$HOME/Applications\
-:$HOME/.local/bin\
-:$HOME/.cargo/bin\
-:$HOME/.cabal/bin\
-:$HOME/go/bin\
-:$HOME/perl5/bin\
-:$HOME/.gem/ruby/2.7.0/bin\
-:$HOME/.local/share/nautilus/scripts\
-:$HOME/.google-drive-upload/bin\
-:$HOME/.gdrive-downloader\
-:$PATH
+PATH="$HOME/Applications:$HOME/.local/bin:$HOME/.local/share/nautilus/scripts:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
 # hub
