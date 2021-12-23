@@ -69,8 +69,6 @@ function! init#coc#source() abort
   nnoremap <silent> gd :<C-U>call CocAction('jumpDefinition')<CR>
   nnoremap <silent> gD :<C-U>call CocAction('jumpDeclaration')<CR>
 
-  nmap gq <plug>(coc-format-selected)
-  xmap gq <plug>(coc-format-selected)
   nmap gqq <plug>(coc-format)
 
   nmap w <Plug>(coc-ci-w)

@@ -5,6 +5,13 @@ extends tex
 snippet kbd
 <kbd>${1:${VISUAL}}</kbd>
 endsnippet
+snippet detail
+<details>
+<summary>${1:More}</summary>
+$0
+</details>
+endsnippet
+$0endsnippet
 snippet img "" b
 ![$1](${2:path}${1/.+/ "/}${1:opt title}${1/.+/"/})
 endsnippet

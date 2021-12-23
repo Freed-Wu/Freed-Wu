@@ -14,4 +14,20 @@ function! init#init#tex#main() abort
   xmap <buffer> SS <Plug>(vimtex-cmd-create)
 
   nmap <buffer> gK <Plug>(vimtex-doc-package)
+
+  call vimtex#imaps#add_map({
+        \ 'lhs' : 'r',
+        \ 'rhs' : 'vimtex#imaps#style_math("mathrm")',
+        \ 'expr' : 1,
+        \ 'leader' : '#',
+        \ 'wrapper' : 'vimtex#imaps#wrap_math'
+        \})
+
+  call vimtex#imaps#add_map({
+        \ 'lhs' : 's',
+        \ 'rhs' : 'vimtex#imaps#style_math("mathsf")',
+        \ 'expr' : 1,
+        \ 'leader' : '#',
+        \ 'wrapper' : 'vimtex#imaps#wrap_math'
+        \})
 endfunction

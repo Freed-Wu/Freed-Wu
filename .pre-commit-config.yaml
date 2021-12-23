@@ -43,7 +43,7 @@ repos:
       - id: check-mailmap
       - id: shellcheck
         args: ["-eSC1008,SC1113", -x]
-        exclude: ^.z(profile|shrc)|^.config/git|test.zsh
+        exclude: ^.z(profile|shrc)|^.config/git
       - id: shfmt
         args: [-i, "2"]
         exclude: ^.z(profile|shrc)|^.config/git

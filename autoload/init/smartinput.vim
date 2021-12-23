@@ -453,7 +453,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '\S\%#',
         \ 'char': '=',
         \ 'input': ' = ',
-        \ 'filetype': ['pandoc'],
+        \ 'filetype': ['pandoc', 'c', 'cpp'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',
