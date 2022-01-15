@@ -22,8 +22,8 @@ if [[ -f /usr/share/fzf-tab-completion/bash/fzf-bash-completion.sh ]]; then
   bind -x '"\t": fzf_bash_completion'
 fi
 
-if [[ -f ~/.zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]]; then
-  . "$HOME/.zinit/plugins/pinyin-completion/shell/pinyin-comp.bash"
+if [[ -f ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]]; then
+  . "$HOME/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash"
 fi
 
 if [[ -f ~/.local/share/bash/bash-wakatime/bash-wakatime.sh && $(command -v wakatime) ]]; then
@@ -41,10 +41,6 @@ PS2='--> '
 PS3='? '
 
 stty -ixon
-
-if [[ $(command -v nvim.qv2ray) ]]; then
-  alias vi=nvim.qv2ray
-fi
 
 if [[ -n $TMUX && $(tmux -V) == 'tmux 1.8' && -f ~/.config/tmux/plugins/tmux-pain-control/pain_control.tmux ]]; then
   ~/.config/tmux/plugins/tmux-pain-control/pain_control.tmux 2>/dev/null

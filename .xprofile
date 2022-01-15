@@ -6,6 +6,8 @@
 PATH="$HOME/Applications:$HOME/.local/bin:$HOME/.local/share/nautilus/scripts:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
+# man
+export MANOPT=-Lzh_CN.UTF-8
 # hub
 GITHUB_USER=$(git config --global user.name)
 export GITHUB_USER
@@ -25,6 +27,8 @@ export HAS_ALLOW_UNSAFE=y
 export USE_CCACHE=1
 # gks
 export GKS_ENCODING=utf-8
+# wine
+export WINEDEBUG=-all
 # python
 export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
 export PYTHONBREAKPOINT=pudb.set_trace

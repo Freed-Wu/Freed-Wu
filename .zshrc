@@ -3,11 +3,13 @@ if ((! $+HOMEBREW_BAT)); then
   . ~/.zprofile
 fi
 
-if [[ -f ~/.zinit/plugins/zinit/zinit.zsh ]]; then
-  . ~/.zinit/plugins/zinit/zinit.zsh
+XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+if [[ -f $XDG_DATA_HOME/zinit/plugins/zinit/zinit.zsh ]]; then
+  . $XDG_DATA_HOME/zinit/plugins/zinit/zinit.zsh
 elif (($+commands[git])); then
-  git clone --depth=1 https://github.com/zdharma-continuum/zinit ~/.zinit/plugins/zinit
-  . ~/.zinit/plugins/zinit/zinit.zsh
+  git clone --depth=1 https://github.com/zdharma-continuum/zinit \
+    $XDG_DATA_HOME/zinit/plugins/zinit
+  . $XDG_DATA_HOME/zinit/plugins/zinit/zinit.zsh
 else
   return
 fi
@@ -102,6 +104,9 @@ setopt histverify
 setopt noflowcontrol
 setopt interactivecomments
 
+# https://github.com/MenkeTechnologies/zsh-expand/issues/7
+setopt rcquotes
+
 zmodload zsh/pcre
 autoload -Uz run-help
 # brew's zsh is 5.8.1 < 5.8.7
@@ -151,6 +156,7 @@ zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
 zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
 zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
 zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|)(sudo|-command-):*' fzf-preview 'less =${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
@@ -163,7 +169,7 @@ zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-preview \
   '[ "$group" = "process ID" ] && ps -p$word -wocmd --no-headers'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-flags \
   --preview-window=down:3:wrap
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
   fzf-preview 'echo ${(P)word}'
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
   'git diff $word | delta'
@@ -356,9 +362,6 @@ alias rename='rename -i'
 if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]] && (($+commands[exa])); then
   alias ls='exa --icons --git -h'
 fi
-if [[ $OSTYPE != linux-android ]]; then
-  alias man='man -L zh_CN.UTF-8'
-fi
 # 1}}} Compatible #
 
 # Program {{{1 #
@@ -389,9 +392,6 @@ zinit id-as depth'1' wait lucid null \
 zinit id-as depth'1' wait lucid as'null' sbin'hr' for LuRsT/hr
 zinit id-as depth'1' wait lucid as'null' sbin'spark' for holman/spark
 zinit id-as depth'1' wait lucid as'null' sbin'slugify' for benlinton/slugify
-zinit id-as depth'1' wait lucid as'null' sbin'h' \
-  if'(($+commands[rg]))' \
-  for Freed-Wu/hhighlighter-rg
 zinit id-as depth'1' wait lucid as'null' sbin'ugit' sbin'git-undo' \
   if'(($+commands[git] && $+commands[fzf]))' \
   for Bhupesh-V/ugit

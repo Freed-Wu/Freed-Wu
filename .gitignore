@@ -35,6 +35,7 @@
 !/.curlrc
 !/.nix-channels
 !/.visidatarc
+!/.vintrc.yaml
 !/.tmux.conf
 
 # dotfiles
