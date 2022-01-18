@@ -11,6 +11,7 @@ function! init#coc#source() abort
         \ 'eelixir': 'elixir',
         \ 'bash': 'sh',
         \ 'zsh': 'sh',
+        \ 'latex': 'tex',
         \ }
   " https://github.com/neoclide/coc-sources/issues/56
   " coc-word cannot be loaded

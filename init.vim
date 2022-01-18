@@ -7,6 +7,12 @@ if !has('nvim')
   set encoding=utf-8
   set undodir=$XDG_DATA_HOME/nvim/undo
   set directory=$XDG_DATA_HOME/nvim/swap
+  if !isdirectory(&undodir)
+    call mkdir(&undodir, 'p')
+  endif
+  if !isdirectory(&directory)
+    call mkdir(&directory, 'p')
+  endif
   let $MYVIMRC = $XDG_CONFIG_HOME . '/nvim/init.vim'
 endif
 scriptencoding utf-8
@@ -14,6 +20,7 @@ if has('gui_running')
   set guioptions=gtaAPd
   if has('win32')
     simalt ~x
+    set guifont=JetBrainsMono\ NF:h10
   endif
 endif
 set runtimepath=$VIMRUNTIME
@@ -35,7 +42,11 @@ set ignorecase
 set hlsearch
 set showmatch
 set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+if has('nvim')
+  set foldexpr=nvim_treesitter#foldexpr()
+else
+  set foldexpr=syntax
+endif
 set showcmd
 set scrolloff=3
 set virtualedit=block
@@ -120,6 +131,9 @@ let g:html_dynamic_folds = 1
 let g:html_expand_tabs = 1
 let g:html_font = 'JetBrainsMono Nerd Font Mono'
 
+" must before sensible because sensible will load matchit
+let g:loaded_matchit = 1
+
 " vim on linux will not start a server by default
 if empty(v:servername) && exists('*remote_startserver') && has('clientserver')
   call remote_startserver('VIM')
@@ -148,6 +162,60 @@ nnoremap s cl
 xnoremap <silent> & :&<CR>
 nnoremap Y y$
 xnoremap Y $hy
+
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-H> <C-W>h
+nnoremap <C-L> <C-W>l
+xnoremap <C-J> <C-W>j
+xnoremap <C-K> <C-W>k
+xnoremap <C-H> <C-W>h
+xnoremap <C-L> <C-W>l
+nnoremap [O {O<Esc>o
+nnoremap ]O }O<Esc>o
+xnoremap <silent> g& :&&<CR>
+nnoremap <silent> <C-W>Q :<C-U>tabclose<CR>
+nnoremap <silent> <C-W><C-F> :<C-U>tabfind <C-R><C-F><CR>
+xnoremap <silent> <C-W><C-F> y:tabfind <C-R>0<CR>
+nnoremap <silent> <C-W>C :tabclose<CR>
+xnoremap <silent> <C-W>C :<C-U>tabclose<CR>
+nnoremap <silent> <C-W>O :tabonly<CR>
+xnoremap <silent> <C-W>O :<C-U>tabonly<CR>
+nnoremap <silent> <C-W>( :tabmove -<CR>
+nnoremap <silent> <C-W>) :tabmove +<CR>
+xnoremap <silent> <C-W>( :<C-U>tabmove -<CR>
+xnoremap <silent> <C-W>) :<C-U>tabmove +<CR>
+nnoremap <silent> <C-W>{ :tabfirst<CR>
+nnoremap <silent> <C-W>} :tablast<CR>
+xnoremap <silent> <C-W>{ :<C-U>tabfirst<CR>
+xnoremap <silent> <C-W>} :<C-U>tablast<CR>
+nnoremap <silent> <C-W>m :vnew<CR>
+nnoremap <silent> <C-W><Tab> :tabnew<CR>
+xnoremap <silent> <C-W>m :vnew<CR>
+xnoremap <silent> <C-W><Tab> :tabnew<CR>
+nnoremap <silent> <C-W>e :<C-U>enew<CR>
+xnoremap <silent> <C-W>e :<C-U>enew<CR>
+nnoremap <silent> <C-W>S :sall<CR>
+nnoremap <silent> <C-W>V :vertical sall<CR>
+xnoremap <silent> <C-W>S :sall<CR>
+xnoremap <silent> <C-W>V :vertical sall<CR>
+nnoremap <silent> <C-W>a :qall<CR>
+xnoremap <silent> <C-W>a :<C-U>qall<CR>
+nnoremap <silent> <C-W>u :hide<CR>
+xnoremap <silent> <C-W>u :<C-U>hide<CR>
+nnoremap <silent> <C-W>U :unhide<CR>
+xnoremap <silent> <C-W>U :<C-U>unhide<CR>
+nnoremap <silent> zq :spellrare <C-R><C-A><CR>
+nnoremap <silent> zQ :spellrare! <C-R><C-A><CR>
+nnoremap zV zMzv
+xnoremap zV zMzv
+onoremap zV zMzv
+nnoremap zJ zjzMzv
+nnoremap zK zkzMzv
+xnoremap zJ zjzMzv
+xnoremap zK zkzMzv
+onoremap zJ zjzMzv
+onoremap zK zkzMzv
 " 1}}} Prefix "
 
 " PluginPrefix {{{1 "
@@ -198,10 +266,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " 1}}} Plugin "
 
   " Setting {{{1 "
-  " load before sensible because sensible will load matchit
-  call dein#add('andymass/vim-matchup', {
-        \ 'hook_source': 'call init#matchup#source()',
-        \ })
   call dein#add('tpope/vim-sensible')
   call dein#add('farmergreg/vim-lastplace')
   call dein#add('mox-mox/vim-localsearch', {
@@ -229,7 +293,9 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   call dein#add('aperezdc/vim-template', {
         \ 'hook_source': 'call init#template#source()',
         \ })
+  " need coc.nvim
   call dein#add('Shougo/echodoc.vim', {
+        \ 'if': executable('node'),
         \ 'hook_source': 'call init#echodoc#source()',
         \ })
   call dein#add('pbrisbin/vim-mkdir')
@@ -243,23 +309,16 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   call dein#add('roxma/vim-tmux-clipboard', {
         \ 'if': !empty('$TMUX'),
         \ })
-  call dein#add('christianfosli/wsl-copy', {
-        \ 'if': executable('wsl'),
-        \ 'on_cmd': 'Wsly',
-        \ })
-  call dein#add('biosugar0/vim-popyank', {
-        \ 'if': exists('*popup_create'),
-        \ 'on_cmd': 'PopYank',
-        \ })
   call dein#add('ConradIrwin/vim-bracketed-paste')
   " 1}}} Setting "
 
   " Log {{{1 "
+  " too slow, don't enable it on msys
   call dein#add('wakatime/vim-wakatime', {
-        \ 'if': has('pythonx'),
+        \ 'if': has('pythonx') && filereadable($HOME . '/.wakatime.cfg'),
         \ })
   call dein#add('https://gitlab.com/code-stats/code-stats-vim', {
-        \ 'if': has('pythonx'),
+        \ 'if': has('pythonx') && !empty($CODESTATS_API_KEY),
         \ 'hook_source': 'call init#code_stats#source()',
         \ })
   " 1}}} Log "
@@ -316,9 +375,11 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   call dein#add('enricobacis/vim-airline-clock', {
         \ 'hook_source': 'call init#airline#clock#source()',
         \ })
-  call dein#add('lambdalisue/battery.vim')
+  call dein#add('lambdalisue/battery.vim', {
+        \ 'if': !has('win32unix'),
+        \ })
   call dein#add('lambdalisue/wifi.vim', {
-        \ 'if': !has('unix') || has('unix') && exists('*trim'),
+        \ 'if': !has('unix') || has('unix') && !has('win32unix') && exists('*trim'),
         \ })
   " 2}}} StatusBar "
 
@@ -350,7 +411,9 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'hook_source': 'lua require("treesitter")',
         \ 'hook_post_update': 'TSUpdate',
         \ })
+  " too slow
   call dein#add('sheerun/vim-polyglot', {
+        \ 'if': !has('win32unix'),
         \ 'merged': 0,
         \ 'hook_source': 'call init#polyglot#source()',
         \ })
@@ -395,10 +458,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   call dein#add('matcatc/vim-asciidoc-folding')
   " 2}}} Fold "
 
-  " Indent {{{2 "
-  call dein#add('editorconfig/editorconfig-vim')
-  " 2}}} Indent "
-
   " Conceal {{{2 "
   call dein#add('Yggdroot/indentLine', {
         \ 'hook_source': 'call init#indentline#source()',
@@ -411,6 +470,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " Ftplugin {{{2 "
   " https://github.com/lervag/vimtex/issues/237
   call dein#add('lervag/vimtex', {
+        \ 'if': executable('tex'),
         \ 'merged': 0,
         \ 'hook_source': 'call init#vimtex#source()',
         \ })
@@ -439,11 +499,10 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " Hotkey {{{1 "
   " InsertCmdline {{{2 "
   call dein#add('tpope/vim-rsi', {
-        \ 'on_event': ['InsertEnter', 'CmdlineEnter'],
         \ 'hook_post_source': 'call init#rsi#post_source()',
         \ })
   call dein#add('kana/vim-smartinput', {
-        \ 'on_event': ['InsertEnter', 'CmdlineEnter'],
+        \ 'on_event': 'InsertEnter',
         \ 'hook_source': 'call init#smartinput#source()',
         \ 'hook_post_source': 'call init#smartinput#post_source()',
         \ })
@@ -495,6 +554,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'hook_source': 'call init#grex#source()',
         \ })
   call dein#add('tyru/caw.vim', {
+        \ 'on_map': {'n': ['gc', 'gs']},
         \ 'hook_source': 'call init#caw#source()',
         \ })
   call dein#add('voldikss/vim-browser-search', {
@@ -540,11 +600,18 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " 2}}} Operator "
 
   " Search {{{2 "
+  call dein#add('andymass/vim-matchup', {
+        \ 'on_map': {'n': ['%', 'g%', 'z%'], 'x': ['%', 'g%', 'z%'],
+        \ 'o': ['%', 'g%', 'z%', 'i%', 'a%']},
+        \ 'hook_source': 'call init#matchup#source()',
+        \ })
   call dein#add('luochen1990/select-and-search', {
         \ 'on_map': {'x': 'n'},
         \ 'hook_source': 'call init#select_and_search#source()',
         \ })
+  " bug
   call dein#add('justinmk/vim-sneak', {
+        \ 'if': !has('win32unix'),
         \ 'on_map': {'n': ['f', 'F', 't', 'T'],
         \ 'o': ['f', 'F', 't', 'T', 'z', 'Z'],
         \ 'x': ['f', 'F', 't', 'T'],
@@ -588,7 +655,9 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   call dein#add('honza/vim-snippets', {
         \ 'hook_source': 'call init#snippets#source()',
         \ })
-  call dein#add('mattn/emmet-vim')
+  call dein#add('mattn/emmet-vim', {
+        \ 'on_map': {'n': '<C-y>', 'v': '<C-y>', 'i': '<C-y>'},
+        \ })
   call dein#add('dhruvasagar/vim-table-mode', {
         \ 'hook_source': 'call init#table_mode#source()',
         \ })
@@ -713,16 +782,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'SudoEdit'],
         \ })
   call dein#add('AndrewRadev/tagalong.vim')
-  call dein#add('tpope/vim-projectionist', {
-        \ 'hook_source': 'call init#projectionist#source()',
-        \ })
   " 2}}} FileCMD "
-
-  " Note {{{2 "
-  call dein#add('itchyny/calendar.vim', {
-        \ 'hook_source': 'call init#calendar#source()',
-        \ })
-  " 2}}} Note "
 
   " Debug {{{2 "
   call dein#add('preservim/vimux', {
@@ -753,6 +813,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'hook_source': 'call init#committia#source()',
         \ })
   call dein#add('lambdalisue/gina.vim', {
+        \ 'on_cmd': 'Gina',
         \ 'hook_source': 'call init#gina#source()',
         \ 'hook_post_source': 'call init#gina#post_source()',
         \ })
@@ -798,8 +859,4 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
 endif
 call dein#call_hook('source')
 call dein#call_hook('post_source')
-
-if !exists('##CmdlineEnter')
-  call dein#source(['vim-rsi', 'vim-smartinput'])
-endif
 " ex: foldmethod=marker path=.,$XDG_DATA_HOME/nvim/repos/github.com,$XDG_DATA_HOME/nvim/repos

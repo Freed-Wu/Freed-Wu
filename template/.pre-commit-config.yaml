@@ -43,10 +43,10 @@ repos:
       - id: check-mailmap
       - id: shellcheck
         args: ["-eSC1008,SC1113", -x]
-        exclude: ^.z(profile|shrc)|^.config/git
+        exclude: ^\.z(profile|shrc)|^\.config/git|^.*\.zsh
       - id: shfmt
         args: [-i, "2"]
-        exclude: ^.z(profile|shrc)|^.config/git
+        exclude: ^\.z(profile|shrc)|^\.config/git|^.*\.zsh
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.10
     hooks:

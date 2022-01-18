@@ -41,8 +41,8 @@ endfunction
 
 augroup init#gina
   autocmd!
-  if !exists('g:started_by_firenvim')
+  if !exists('g:started_by_firenvim') && !has('win32unix')
     autocmd BufEnter * Gina lcd
   endif
-  autocmd VimEnter * autocmd Filetype gina-* call init#gina#map()
+  autocmd Filetype gina-* call init#gina#map()
 augroup END

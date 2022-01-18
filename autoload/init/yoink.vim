@@ -1,8 +1,9 @@
 function! init#yoink#source() abort
+  if has('nvim')
+    let g:yoinkSavePersistently = 1
+  endif
   let g:yoinkMaxItems = 100
   let g:yoinkSyncNumberedRegisters = 1
-  let g:yoinkSavePersistently = 1
-  let g:yoinkAutoFormatPaste = 1
   let g:yoinkMoveCursorToEndOfPaste = 1
   let g:yoinkSwapClampAtEnds = 0
   nmap p <Plug>(YoinkPaste_p)

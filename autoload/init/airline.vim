@@ -40,7 +40,7 @@ function! init#airline#source() abort
         \ 'V'    : '▼',
         \ "\x16"   : '◆',
         \ }
-  if !has('unix') || has('unix') && exists('*trim')
+  if !has('unix') || has('unix') && !has('win32unix') && exists('*trim')
     let g:airline_filetype_overrides = {
             \ 'startify': ['startify', '%{fnamemodify(getcwd(), ":~")} '
             \ . (empty(wifi#component()) ? '' : g:airline_left_alt_sep)
@@ -80,6 +80,7 @@ function! init#airline#source() abort
   let g:airline#extensions#tabline#close_symbol = '⌫'
   let g:airline#extensions#tabline#overflow_marker = '…'
   let g:airline#extensions#tabline#buffer_idx_mode = 1
+  " install wqy-zenhei
   let g:airline#extensions#tabline#buffer_idx_format = {
         \ '0': '⓪ ',
         \ '1': '① ',
@@ -117,7 +118,7 @@ function! init#airline#source() abort
   let g:airline#extensions#whitespace#mixed_indent_file_format = '⇆%s'
   let g:airline#extensions#whitespace#conflicts_format = '✗%s'
 
-  if battery#value() > 0
+  if exists('*battery#value') && battery#value() > 0
     let g:airline#extensions#battery#enabled = 1
   endif
 

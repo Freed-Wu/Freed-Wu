@@ -58,9 +58,6 @@ function! init#which_key#source() abort
         \ 'name': '+local-map',
         \ }
   " noVi {{{1 "
-  nnoremap [O {O<Esc>o
-  nnoremap ]O }O<Esc>o
-  xnoremap <silent> g& :&&<CR>
   nnoremap go go
   xnoremap go go
   nnoremap g<C-G> g<C-G>
@@ -125,14 +122,6 @@ function! init#which_key#source() abort
   onoremap gj gj
   onoremap gk gk
   " 1}}} lineMoveCursor "
-  " foldMoveCursor {{{1 "
-  nnoremap zJ zjzMzv
-  nnoremap zK zkzMzv
-  xnoremap zJ zjzMzv
-  xnoremap zK zkzMzv
-  onoremap zJ zjzMzv
-  onoremap zK zkzMzv
-  " 1}}} foldMoveCursor "
   " scrollMoveCursor {{{1 "
   nnoremap zt zt
   nnoremap zb zb
@@ -269,21 +258,6 @@ function! init#which_key#source() abort
   nnoremap gt gt
   nnoremap gT gT
   nnoremap g<Tab> g<Tab>
-  nnoremap <silent> <C-W>Q :<C-U>tabclose<CR>
-  nnoremap <silent> <C-W><C-F> :<C-U>tabfind <C-R><C-F><CR>
-  xnoremap <silent> <C-W><C-F> y:tabfind <C-R>0<CR>
-  nnoremap <silent> <C-W>C :tabclose<CR>
-  xnoremap <silent> <C-W>C :<C-U>tabclose<CR>
-  nnoremap <silent> <C-W>O :tabonly<CR>
-  xnoremap <silent> <C-W>O :<C-U>tabonly<CR>
-  nnoremap <silent> <C-W>( :tabmove -<CR>
-  nnoremap <silent> <C-W>) :tabmove +<CR>
-  xnoremap <silent> <C-W>( :<C-U>tabmove -<CR>
-  xnoremap <silent> <C-W>) :<C-U>tabmove +<CR>
-  nnoremap <silent> <C-W>{ :tabfirst<CR>
-  nnoremap <silent> <C-W>} :tablast<CR>
-  xnoremap <silent> <C-W>{ :<C-U>tabfirst<CR>
-  xnoremap <silent> <C-W>} :<C-U>tablast<CR>
   " 1}}} tabMoveCursor "
   " windowMoveCursor {{{1 "
   nnoremap <C-W>j <C-W>j
@@ -296,20 +270,12 @@ function! init#which_key#source() abort
   xnoremap <C-W>l <C-W>l
   nnoremap <C-W>w <C-W>w
   nnoremap <C-W>W <C-W>W
-  nnoremap <C-J> <C-W>j
-  nnoremap <C-K> <C-W>k
-  nnoremap <C-H> <C-W>h
-  nnoremap <C-L> <C-W>l
   nnoremap <C-W>t <C-W>t
   nnoremap <C-W>b <C-W>b
   nnoremap <C-W>r <C-W>r
   nnoremap <C-W>R <C-W>R
   xnoremap <C-W>w <C-W>w
   xnoremap <C-W>W <C-W>W
-  xnoremap <C-J> <C-W>j
-  xnoremap <C-K> <C-W>k
-  xnoremap <C-H> <C-W>h
-  xnoremap <C-L> <C-W>l
   xnoremap <C-W>t <C-W>t
   xnoremap <C-W>b <C-W>b
   xnoremap <C-W>r <C-W>r
@@ -345,19 +311,13 @@ function! init#which_key#source() abort
   " 1}}} windowModify "
   " windowNew {{{1 "
   nnoremap <C-W>n <C-W>n
-  nnoremap <silent> <C-W>m :vnew<CR>
-  nnoremap <silent> <C-W><Tab> :tabnew<CR>
   xnoremap <C-W>n <C-W>n
-  xnoremap <silent> <C-W>m :vnew<CR>
-  xnoremap <silent> <C-W><Tab> :tabnew<CR>
   nnoremap <C-W>^ <C-W>^
   nnoremap <C-W>s <C-W>s
   nnoremap <C-W>v <C-W>v
   xnoremap <C-W>w <C-W>^
   xnoremap <C-W>s <C-W>s
   xnoremap <C-W>v <C-W>v
-  nnoremap <silent> <C-W>e :<C-U>enew<CR>
-  xnoremap <silent> <C-W>e :<C-U>enew<CR>
   " 1}}} windowNew "
   " tabnew {{{1 "
   nnoremap <C-W>T <C-W>T
@@ -389,10 +349,6 @@ function! init#which_key#source() abort
   nnoremap <C-W>d <C-W>d
   xnoremap <C-W>i <C-W>i
   xnoremap <C-W>d <C-W>d
-  nnoremap <silent> <C-W>S :sall<CR>
-  nnoremap <silent> <C-W>V :vertical sall<CR>
-  xnoremap <silent> <C-W>S :sall<CR>
-  xnoremap <silent> <C-W>V :vertical sall<CR>
   nnoremap <C-W>f <C-W>f
   xnoremap <C-W>f <C-W>f
   nnoremap <C-W>F <C-W>F
@@ -405,12 +361,6 @@ function! init#which_key#source() abort
   xnoremap <C-W>c <C-W>c
   xnoremap <C-W>o <C-W>o
   xnoremap <C-W>q <C-W>q
-  nnoremap <silent> <C-W>a :qall<CR>
-  xnoremap <silent> <C-W>a :<C-U>qall<CR>
-  nnoremap <silent> <C-W>u :hide<CR>
-  xnoremap <silent> <C-W>u :<C-U>hide<CR>
-  nnoremap <silent> <C-W>U :unhide<CR>
-  xnoremap <silent> <C-W>U :<C-U>unhide<CR>
   nnoremap ZZ ZZ
   xnoremap ZZ ZZ
   nnoremap ZQ ZQ
@@ -424,19 +374,12 @@ function! init#which_key#source() abort
   xnoremap zD zD
   xnoremap zE zE
   " 1}}} fold+- "
-  " fold open&close {{{1 "
-  nnoremap zV zMzv
-  xnoremap zV zMzv
-  onoremap zV zMzv
-  " 1}}} fold open&close "
   " spell {{{1 "
   nnoremap z= z=
   nnoremap zg zg
   nnoremap zG zG
   nnoremap zw zw
   nnoremap zW zW
-  nnoremap <silent> zq :spellrare <C-R><C-A><CR>
-  nnoremap <silent> zQ :spellrare! <C-R><C-A><CR>
   nnoremap zug zug
   nnoremap zuG zuG
   nnoremap zuw zuw
@@ -465,7 +408,6 @@ function! init#which_key#source() abort
   " show {{{1 "
   nnoremap ga ga
   nnoremap g8 g8
-  nnoremap 8g8 8g8
   nnoremap g< g<
   xnoremap g< g<
   " 1}}} show "

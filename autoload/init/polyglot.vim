@@ -1,3 +1,3 @@
 function! init#polyglot#source() abort
-  let g:polyglot_disabled = ['autoindent', 'csv', 'markdown']
+  let g:polyglot_disabled = ['csv', 'markdown']
 endfunction

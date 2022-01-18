@@ -10,17 +10,16 @@ INCLUDE := -I./$(INC_DIR)
 .PHONY: clean, cleanall
 
 $(BIN_DIR)/main: $(BUILD_DIR)/.o
-  @mkdir -p $(BIN_DIR)
-  $(CC) $(FLAGS) $(INCLUDE) -o $@ $^
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(FLAGS) $(INCLUDE) -o $@ $^
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c$5
-  @mkdir -p $(BUILD_DIR)
-  $(CC) $(FLAGS) $(INCLUDE) -c -o $@ $<
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(FLAGS) $(INCLUDE) -c -o $@ $<
 
 clean:
-  @$(RM) $(BUILD_DIR)
+	@$(RM) $(BUILD_DIR)
 
 cleanall:
-  @$(RM) $(BUILD_DIR)
-  @$(RM) $(BIN_DIR)
-
+	@$(RM) $(BUILD_DIR)
+	@$(RM) $(BIN_DIR)

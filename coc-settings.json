@@ -148,7 +148,11 @@
       "vint": {
         "command": "vint",
         "debounce": 100,
-        "args": ["-"],
+        "args": [
+          "-f",
+          "{file_path}:{line_number}:{column_number}: {severity}! {description}",
+          "-"
+        ],
         "offsetLine": 0,
         "offsetColumn": 0,
         "sourceName": "vint",
@@ -174,6 +178,7 @@
       "html": "alex-html",
       "vim": "vint",
       "markdown": ["write-good", "markdownlint", "alex"],
+      "mail": "languagetool",
       "sh": "shellcheck",
       "elixir": ["mix_credo", "mix_credo_compile"],
       "php": ["phpstan", "psalm"],

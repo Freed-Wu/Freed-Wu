@@ -31,8 +31,6 @@ setlocal cursorline
 setlocal cursorcolumn
 setlocal foldlevel=9
 
-AnyFoldActivate
-
 let b:startify_lists = []
 for b:startify_list in g:startify_lists
   let b:startify_lists += [b:startify_list['header'][0]]

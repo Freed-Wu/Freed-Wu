@@ -48,8 +48,8 @@ function! init#quickui#source() abort
         \ ['Re&name', 'call CocAction("rename")'],
         \ ['Re&factor', 'call CocAction("refactor")'],
         \ ['--', ''],
-        \ ['Trans&late', 'CocCommand translator.popup'],
-        \ ['Translate &Replace', 'CocCommand translator.replace'],
+        \ ['Trans&late', 'call coc#rpc#notify("doKeymap", ["translator-p"])'],
+        \ ['Translate &Replace', 'call coc#rpc#notify("doKeymap", ["translator-r"])'],
         \ ['--', ''],
         \ ['&Browser', 'CocCommand git.browserOpen'],
         \ ['C&hunk', 'CocCommand git.chunkInfo'],
@@ -95,7 +95,6 @@ function! init#quickui#post_source() abort
         \ ['S&tartify', 'Startify'],
         \ ['&Fern', 'Fern .'],
         \ ['&Undotree', 'UndotreeToggle'],
-        \ ['&Calendar', 'Calendar'],
         \ ['Filet&ype', 'execute "edit $XDG_CONFIG_HOME/nvim/ftplugin/" . split(&filetype, ''\.'')[0] . ".vim"'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Git', map([
