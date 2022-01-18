@@ -48,6 +48,6 @@ elif [ "$category" = image ]; then
   if [ "$(command -v exiftool)" ]; then
     exiftool "$1"
   fi
-elif [ "$(command -v bat)" ]; then
+elif [ "$(command -v bat)" ] && [ "$(command -v lesspipe.sh)" ]; then
   lesspipe.sh "$1" | bat --color=always
 fi

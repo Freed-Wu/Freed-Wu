@@ -65,9 +65,7 @@ if [[ -f ~/.bash_login ]]; then
   . ~/.bash_login
 fi
 # less
-if [[ -n $DISPLAY ]]; then
-  export LESS=--mouse
-fi
+export LESS=--mouse
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

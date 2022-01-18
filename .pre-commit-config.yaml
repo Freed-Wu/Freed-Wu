@@ -43,10 +43,10 @@ repos:
       - id: check-mailmap
       - id: shellcheck
         args: ["-eSC1008,SC1113", -x]
-        exclude: ^.z(profile|shrc)|^.config/git
+        exclude: ^\.z(profile|shrc)|^\.config/git|^.*\.zsh
       - id: shfmt
         args: [-i, "2"]
-        exclude: ^.z(profile|shrc)|^.config/git
+        exclude: ^\.z(profile|shrc)|^\.config/git|^.*\.zsh
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.10
     hooks:
@@ -90,15 +90,3 @@ repos:
     rev: 6.1.1
     hooks:
       - id: pydocstyle
-  # - repo: https://github.com/myint/eradicate
-  #   rev: v2.0.0
-  #   hooks:
-  #     - id: eradicate
-  # - repo: https://github.com/jendrikseipp/vulture
-  #   rev: v2.3
-  #   hooks:
-  #     - id: vulture
-  # - repo: https://github.com/regebro/pyroma
-  #   rev: "3.2"
-  #   hooks:
-  #     - id: pyroma

@@ -156,7 +156,7 @@ zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
 zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
 zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
 zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
-zstyle ':fzf-tab:complete:(\\|)(sudo|-command-):*' fzf-preview 'less =${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|)sudo:*' fzf-preview 'less =${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
@@ -193,7 +193,7 @@ zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
   for Freed-Wu/pinyin-completion
 
 zinit id-as depth'1' wait lucid as'completion' \
-  if'[[ ! -d /usr/share/zsh/site-functions ]]' \
+  if'[[ ! -f /usr/share/zsh/site-functions/_setup.py ]]' \
   for zsh-users/zsh-completions
 # 1}}} Complete #
 
@@ -338,29 +338,31 @@ zinit id-as'.direnv' depth'1' wait lucid \
   for zdharma-continuum/null
 # https://github.com/Tarrasch/zsh-command-not-found/issues/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
-# window's fzf is too old
 zinit id-as depth'1' wait lucid \
   atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
-  if'[[ $OSTYPE != cygwin && $OSTYPE != msys2 ]] && (($+commands[fzf] && $+commands[bc]))' \
+  if'(($+commands[fzf] && $+commands[bc]))' \
   for bigH/auto-sized-fzf
 compdef _vim vi
 # after loading completions
-# android's zsh don't have bashcompinit
+# android's zsh doesn't have bashcompinit
 zinit id-as depth'1' wait lucid \
   if'[[ $OSTYPE != linux-android ]]' \
   for 3v1n0/zsh-bash-completions-fallback
 if (($+commands[gpg] && $+commands[tty])); then
   export GPG_TTY=$(tty)
 fi
-if (($+commands[lesspipe.sh] || $+commands[lesspipe])); then
+# must after lesspipe export LESSOPEN
+if [[ -x ~/.lessfilter ]]; then
   export LESSOPEN='|~/.lessfilter %s'
 fi
 alias mv='mv -i'
 alias cp='cp -ri'
 alias rm='rm -i'
 alias rename='rename -i'
-if [[ $OSTYPE != cygwin && $OSTYPE != msys2 ]] && (($+commands[exa])); then
+if (($+commands[exa])); then
   alias ls='exa --icons --git -h'
+else
+  alias ls='ls --color=auto'
 fi
 # 1}}} Compatible #
 
@@ -372,19 +374,18 @@ zinit id-as depth'1' wait lucid as'null' sbin'apt-cyg' \
 # 2}}} PackageManage #
 
 # Superuser {{{2 #
-zinit id-as depth'1' wait lucid null \
-  if'[[ $OSTYPE == cygwin || $OSTYPE == msys2 ]]' \
-  atclone'ln -s ~/.zinit/plugin/win-sudo/s/* $ZPFX/bin' \
+zinit id-as depth'1' wait lucid null sbin's/sudo' sbin's/su' \
+  if'[[ $OSTYPE == cygwin || $OSTYPE == msys ]]' \
   for imachug/win-sudo
 # 2}}} Superuser #
 
 # Download {{{2 #
 # need access google
 zinit id-as depth'1' wait lucid null \
-  atclone'./install.sh -p $ZPFX/bin' \
+  atclone'./install.sh -p $ZPFX/bin -s /dev/null' \
   for labbots/google-drive-upload
 zinit id-as depth'1' wait lucid null \
-  atclone'./install.sh -p $ZPFX/bin' \
+  atclone'./install.sh -p $ZPFX/bin -s /dev/null' \
   for Akianonymus/gdrive-downloader
 # 2}}} Download #
 

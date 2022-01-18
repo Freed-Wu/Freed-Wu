@@ -1,6 +1,3 @@
-[submodule ".emacs.d"]
-	path = .emacs.d
-	url = https://github.com/syl20bnr/spacemacs
 [submodule ".config/neomutt/mutt_color_themes"]
 	path = .config/neomutt/mutt_color_themes
 	url = https://github.com/d3ckard/mutt_color_themes

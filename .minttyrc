@@ -2,3 +2,5 @@ ThemeFile=gruvbox
 Transparency=low
 FontHeight=10
 Font=JetBrainsMono NF
+Scrollbar=none
+Window=full

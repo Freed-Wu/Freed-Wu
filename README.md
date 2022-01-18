@@ -11,11 +11,11 @@ Keep all my computers' configurations same.
     - Deepin (PC)
     - Openwrt (router)
     - Ubuntu (docker)
-  - Android
-    - Termux (mobile)
-- Windows
-  - Cygwin (U disk)
-  - Msys (U disk)
+  - Android (mobile)
+    - Termux
+- Windows (VirtualBox)
+  - Cygwin
+  - Msys
 
 <!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=1 -->
 
