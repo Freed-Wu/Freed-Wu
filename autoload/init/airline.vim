@@ -1,7 +1,6 @@
 scriptencoding utf-8
 function! init#airline#source() abort
   let g:airline_highlighting_cache = 1
-  let g:airline_focuslost_inactive = 1
   let g:airline_powerline_fonts = 1
   let g:airline_section_c_only_filename = 0
   let g:airline#parts#ffenc#skip_expected_string = 'utf-8[unix]'

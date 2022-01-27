@@ -303,9 +303,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'if': executable('sudo'),
         \ 'hook_source': 'call init#suda#source()',
         \ })
-  call dein#add('tmux-plugins/vim-tmux-focus-events', {
-        \ 'if': !has('nvim'),
-        \ })
   call dein#add('roxma/vim-tmux-clipboard', {
         \ 'if': !empty('$TMUX'),
         \ })
@@ -406,6 +403,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
 
   " Filetype {{{1 "
   " Highlight {{{2 "
+  " TSUpdate need proxy
   call dein#add('nvim-treesitter/nvim-treesitter', {
         \ 'if': has('nvim-0.5.0'),
         \ 'hook_source': 'lua require("treesitter")',
@@ -813,7 +811,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'hook_source': 'call init#committia#source()',
         \ })
   call dein#add('lambdalisue/gina.vim', {
-        \ 'on_cmd': 'Gina',
         \ 'hook_source': 'call init#gina#source()',
         \ 'hook_post_source': 'call init#gina#post_source()',
         \ })

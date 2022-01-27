@@ -210,10 +210,7 @@
 
   "snippets": {
     "shortcut": "▶",
-    "userSnippetsDirectory": "~/.config/nvim/ultisnips",
-    "ultisnips": {
-      "directories": ["UltiSnips"]
-    }
+    "userSnippetsDirectory": "~/.config/nvim/ultisnips"
   },
 
   "translator": {
@@ -269,10 +266,6 @@
       "onOpenAndSave": true,
       "onEdit": true
     }
-  },
-
-  "java": {
-    "home": "/usr/bin/java"
   },
 
   "python": {

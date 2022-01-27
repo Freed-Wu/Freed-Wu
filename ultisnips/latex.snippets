@@ -1,0 +1,248 @@
+priority -30
+
+global !p
+def create_tabu(snip):
+    rows = snip.buffer[snip.line].split("x")[0]
+    cols = snip.buffer[snip.line].split("x")[1]
+    int_val = lambda string: int("".join(s for s in string if s.isdigit()))
+    rows = int_val(rows)
+    cols = int_val(cols)
+    offset = cols + 1
+    old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind("\t") + 1]
+    snip.buffer[snip.line] = ""
+    final_str = old_spacing + "\\begin{tabu}to${1:.5}\linewidth{@{}" + "X[c]".join(["$" + str(i + 2) for i in range(cols + 1)]) + "@{}}\n"
+    for i in range(rows):
+        final_str += old_spacing + "\t" + \
+            " & ".join(["$" + str(2 + i * cols + j + offset) for j in range(cols)]) + \
+            " \\\\\\\n" + old_spacing + "\\end{tabu}$0"
+        snip.expand_anon(final_str)
+
+def add_row(snip):
+    row_len = int("".join(s for s in snip.buffer[snip.line] if s.isdigit()))
+    old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind("\t") + 1]
+    snip.buffer[snip.line] = ""
+    final_str = old_spacing + \
+        " & ".join(["$" + str(j + 1) for j in range(row_len)]) + \
+        " \n\\\\\\$"
+    snip.expand_anon(final_str)
+endglobal
+pre_expand "create_tabu(snip)"
+snippet "tb(\d+)x(\d+)" "\usepackage{tabu}" r
+endsnippet
+pre_expand "add_row(snip)"
+snippet "tr(\d+)" "\usepackage{tabu}" r
+endsnippet
+
+snippet up "" b
+\usepackage$1{$2}
+endsnippet
+snippet sec "" b
+\section{${1:section name}}%
+\label{sec:${2:$1}}
+endsnippet
+snippet sec* "" b
+\section*{${1:section name}}%
+\label{sec:${2:$1}}
+endsnippet
+snippet sub "" b
+\subsection{${1:subsection name}}%
+\label{sub:${2:$1}}
+endsnippet
+snippet sub* "" b
+\subsection*{${1:subsection name}}%
+\label{sub:${2:$1}}
+endsnippet
+snippet ssub "" b
+\subsubsection{${1:subsubsection name}}%
+\label{ssub:${2:$1}}
+endsnippet
+snippet ssub* "" b
+\subsubsection*{${1:subsubsection name}}%
+\label{ssub:${2:$1}}
+endsnippet
+snippet par "" b
+\paragraph{${1:paragraph name}}%
+\label{par:${2:$1}}
+endsnippet
+snippet subp "" b
+\subparagraph{${1:subparagraph name}}%
+\label{subp:${2:$1}}
+endsnippet
+
+snippet mulr
+\multirow{${1:2}}{*}{${VISUAL}$2}
+endsnippet
+snippet mulc
+\multicolumn{${1:2}}{c}{${VISUAL}$2}
+endsnippet
+
+snippet fig "\usepackage{graphicx}" b
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[
+		width=${1:0.8}\linewidth,
+	]{figures/$2.png}
+	\caption{$3}%
+	\label{fig:$2}
+\end{figure}
+endsnippet
+snippet csv "\usepackage{csvsimple}" b
+\begin{table}[htbp]
+	\centering
+	\caption{$1}%
+	\label{tab:$2}
+	\csvautobooktabular[respect percent]{tables/$2.csv}
+\end{table}
+endsnippet
+snippet subf "\usepackage{subcaption}" b
+\begin{subfigure}[htbp]{${1:0.45}\linewidth}
+	\centering
+	\includegraphics[
+		width=\linewidth,
+	]{figures/$2.png}
+	\caption{$3}%
+	\label{fig:$2}
+\end{subfigure}
+${0:\quad}
+endsnippet
+snippet subt "\usepackage{subcaption}" b
+\begin{subtable}[htbp]{0.45\linewidth}
+	\centering
+	\caption{$1}%
+	\label{tab:$2}
+	\csvautobooktabular[respect percent]{tables/$2.csv}
+\end{subtable}
+${0:\quad}
+endsnippet
+snippet wrapf "\usepackage{wrapfig}" b
+\begin{wrapfigure}{${1:r}}{${2:0.2}\linewidth}
+	\centering
+	\includegraphics[
+		width=\linewidth,
+	]{figures/$1.png}
+	\caption{$2}%
+	\label{fig:$1}
+\end{wrapfigure}
+endsnippet
+snippet wrapt "\usepackage{wrapfig}" b
+\begin{wraptable}{${1:r}}{${2:0.2}\linewidth}
+	\centering
+	$0
+	\caption{$2}%
+	\label{tab:$1}
+\end{wraptable}
+endsnippet
+snippet overpic "\usepackage{overpic}" b
+\begin{overpic}[
+	width=\linewidth,
+	grid,
+]{figures/$1.png}
+	\put($0)
+\end{overpic}
+endsnippet
+snippet Overpic "\usepackage{overpic}" b
+\begin{Overpic}[
+	width=\linewidth,
+	grid,
+]{$1}
+	\put($0)
+\end{Overpic}
+endsnippet
+
+snippet al "\usepackage{mathtools}" b
+\begin{align}
+	\label{eq:$1}
+	$0
+\end{align}
+endsnippet
+snippet subn "\usepackage{cases}" b
+\begin{subnumcases}{$1}
+	\label{eq:$2}
+	$0
+\end{subnumcases}
+endsnippet
+
+snippet "mint(ed)?( (\S+))?" "\usepackage{minted}" br
+\begin{listing}
+	\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm]{${1:`!p
+	snip.rv = match.group(3) if match.group(2) is not None else "language"
+	`}}
+		${2:${VISUAL}}
+	\end{minted}
+	\caption{$3}%
+	\label{lst:$3}
+\end{listing}
+endsnippet
+
+global !p
+texMathZones = [
+    "texMathZone" + x for x in [
+        "A", "AS", "B", "BS", "C", "CS", "D", "DS", "E", "ES", "F", "FS", "G",
+        "GS", "H", "HS", "I", "IS", "J", "JS", "K", "KS", "L", "LS", "DS", "V",
+        "W", "X", "Y", "Z"
+    ]
+]
+texIgnoreMathZones = ["texMathText"]
+texMathZoneIds = vim.eval("map(" + str(texMathZones) + ", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval("map(" + str(texIgnoreMathZones) + ", 'hlID(v:val)')")
+ignore = texIgnoreMathZoneIds[0]
+def math():
+    synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+    try:
+        first = next(
+            i for i in reversed(synstackids)
+            if i in texIgnoreMathZoneIds or i in texMathZoneIds
+        )
+        return first != ignore
+    except StopIteration:
+        return False
+endglobal
+
+context "math()"
+snippet sym "pip install sympy" w
+sympy $1 endsympy
+endsnippet
+context "math()"
+snippet 'sympy(.*)endsympy' "\usepackage{txfonts}" wr
+`!p
+exec(__import__("sympy").interactive.session.preexec_source)
+snip.rv = latex(eval(match.group(1)))
+`
+endsnippet
+
+context "math()"
+snippet lim "\usepackage{txfonts}" i
+\lim_{${1:n} \to ${2:\infty}} $0
+endsnippet
+context "math()"
+snippet int "\usepackage{txfonts}" i
+\int_{${1:-\infty}}^${2:\infty} $0
+endsnippet
+context "math()"
+snippet sum "\usepackage{txfonts}" i
+\sum_{${1:i} = ${2:-\infty}}^${3:\infty} $0
+endsnippet
+context "math()"
+snippet pro "\usepackage{txfonts}" i
+\prod_{${1:i} = ${2:-\infty}}^${3:\infty} $0
+endsnippet
+context "math()"
+snippet "([A-Za-z'])(\d)" "" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+context "math()"
+snippet "([A-Za-z'])_(\d\d)" "" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+context "math()"
+snippet "([A-Za-z'])_" "" wr
+`!p snip.rv = match.group(1)`_{${1:${VISUAL}}}
+endsnippet
+context "math()"
+snippet ^ "" w
+^{${1:${VISUAL}}}
+endsnippet
+context "math()"
+snippet '([A-Za-z])\^(\d\d)' "" wrA
+`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`}
+endsnippet

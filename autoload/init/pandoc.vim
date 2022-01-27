@@ -3,6 +3,8 @@ function! init#pandoc#source() abort
   if !exists('g:started_by_firenvim')
     let g:pandoc#formatting#mode = 'ha'
   endif
+  " same as prettier
+  let g:pandoc#formatting#textwidth = 80
   let g:pandoc#folding#fold_yaml = 1
   let g:pandoc#folding#fold_fenced_codeblocks = 1
   let g:pandoc#folding#fastfolds = 1
