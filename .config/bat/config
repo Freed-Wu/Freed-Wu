@@ -1,2 +1,3 @@
 --paging=always
 --theme=OneHalfDark
+-m'*.ldf:LaTeX'

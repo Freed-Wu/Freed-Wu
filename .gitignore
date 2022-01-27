@@ -85,6 +85,12 @@
 !/.parallel/
 /.parallel/*
 !/.parallel/config
+!/.cgdb/
+/.cgdb/*
+!/.cgdb/cgdbrc
+!/.texlive/
+/.texlive/*
+!/.texlive/texmf-config/
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -194,6 +200,10 @@
 !/.config/pudb/
 /.config/pudb/*
 !/.config/pudb/pudb.cfg
+!/.config/gdb/
+/.config/gdb/*
+!/.config/gdb/gdbinit
+!/.config/gdb/gdbearlyinit
 
 # $XDG_DATA_HOME
 !/.local/

@@ -1,0 +1,4 @@
+viewer_txt = less
+viewer_md = less
+lang = zh-cn
+# ex: filetype=conf

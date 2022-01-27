@@ -1,38 +1,28 @@
-$pdf_mode = 1;
-$pdflatex = 'xelatex -shell-escape -file-line-error -synctex=1 -interaction=nonstopmode %O %S';
-$recorder = 1;
+$show_time = 1;
+$dependents_phony = 1;
+$do_cd = 1;
 $preview_continuous_mode = 1;
-$pdf_update_method = 0;
-$pdf_previewer = 'xdg-open %S';
-$clean_ext = 'synctex(busy) synctex.gz acn acr alg aux bbl bcf blg brf fdb_latexmk glg glo gls idx ilg ind ist loe lof log lot out run.xml toc xdv dvi upa upb pygtex pygstyle pyg fls listing cmap csvtoken gnuplot nav snm vrb mw mw.mw fmt markdown.in nlo nls mx1 mx2 md5 dpth auxlock figlist';
-$bibtex_use = 2;
-add_cus_dep('nlo', 'nls', 0, 'makenlo2nls');
-$compiling_cmd = "xdotool search --name \"%D\" " .
-"set_window --name \"%D compiling...\"";
-$success_cmd   = "xdotool search --name \"%D\" " .
-"set_window --name \"%D OK\"";
-$failure_cmd   = "xdotool search --name \"%D\" " .
-"set_window --name \"%D FAILURE\"";
-sub makenlo2nls{
-	system( "makeindex -s nomencl.ist -o \"$_[0].nls\" \"$_[0].nlo\"" );
-}
+@default_files = ('*.tex', '*.ins', '*.dtx');
+$clean_ext = 'synctex(busy) synctex.gz acn acr alg aux bbl bcf blg brf hd \
+fdb_latexmk glg glo gls idx ilg ind ist loe lof log lot out run.xml toc xdv dvi \
+upa upb pygtex pygstyle pyg fls listing cmap csvtoken gnuplot nav snm vrb mw \
+mw.mw fmt markdown.in nlo nls md5 dpth auxlock figlist';
+$clean_full_ext = 'sty cls';
 
-# $pdflatex = 'internal musixlatex %R %O %S'
-push @generated_exts,"mx2";
-push @generated_exts,"mx1";
-sub musixlatex {
-	my $root = shift;
-	my $mx = "$aux_dir1$root";
-	my @args = @_;
-	if ( $pass{$rule} <= 1 ) {
-		print "======= FIRST PASS: Deleting '$mx.mx2' =======\n";
-		unlink "$mx.mx2";
-		print "====   Generating '$mx.mx1' then '$mx.mx2' ===\n";
-		my $ret = system( "pdflatex @args" );
-		if ($ret) { return $ret; }
-		$ret = system( "musixflx $mx" );
-		if ($ret) { return $ret; }
-	}
-	return system( "pdflatex @args" );
+$pdf_mode = 5;
+$xelatex = 'xelatex -shell-escape -file-line-error -halt-on-error \
+-interaction=nonstopmode -no-pdf -synctex=1 %O %S';
+
+$pdf_previewer = 'xdg-open %S';
+$makeindex = 'makeindex -s gind.ist %O -o %D %S';
+$compiling_cmd = 'xdotool search --name "%D" set_window --name "%D "';
+$success_cmd   = 'xdotool search --name "%D" set_window --name "%D ✔"';
+$failure_cmd   = 'xdotool search --name "%D" set_window --name "%D ✗"';
+$warning_cmd   = 'xdotool search --name "%D" set_window --name "%D ⚠"';
+
+add_cus_dep('nlo', 'nls', 0, 'nlo2nls');
+push @generated_exts, 'nlo', 'nls';
+sub nlo2nls{
+	system('makeindex -s nomencl.ist -o "$_[0].nls" "$_[0].nlo"');
 }
 # ex: filetype=perl

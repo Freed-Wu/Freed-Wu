@@ -1,2 +1,1 @@
-#!/data/data/com.termux/files/usr/bin/env zsh
 col -bx < $1|bat -plman

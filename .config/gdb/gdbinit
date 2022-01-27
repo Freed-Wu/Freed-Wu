@@ -1,0 +1,7 @@
+set history save on
+set logging overwrite on
+set disable-randomization on
+set confirm off
+# https://sourceware.org/bugzilla/show_bug.cgi?id=28800
+set extended-prompt \w \f:\t\n❯
+# set extended-prompt \[\e[30;45m\w\e[35;44m\e[37m\f\e[34;43m\e[30m\t\e[33;40m\e[37m\]\n❯

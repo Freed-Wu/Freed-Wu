@@ -1,0 +1,17 @@
+set noignorecase
+set winsplitorientation=vertical
+map ZZ :quit<CR>
+map r i<C-U>run<CR><Esc>
+map R i<C-U>record<CR><Esc>
+map c i<C-U>continue<CR><Esc>
+map C i<C-U>reverse-continue<CR><Esc>
+map f i<C-U>finish<CR><Esc>
+map F i<C-U>reverse-finish<CR><Esc>
+map J i<C-U>next<CR><Esc>
+map K i<C-U>reverse-next<CR><Esc>
+map L i<C-U>step<CR><Esc>
+map H i<C-U>reverse-step<CR><Esc>
+map I i<C-U>step<CR><Esc>
+map u i<C-U>up<CR><Esc>
+map d i<C-U>down<CR><Esc>
+map S i<C-U>checkpoint<CR><Esc>
