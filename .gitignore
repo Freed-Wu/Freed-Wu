@@ -36,6 +36,7 @@
 !/.nix-channels
 !/.visidatarc
 !/.vintrc.yaml
+!/.chktexrc
 !/.tmux.conf
 
 # dotfiles
@@ -179,9 +180,6 @@
 !/.config/gh/
 /.config/gh/*
 !/.config/gh/config.yml
-!/.config/yay/
-/.config/yay/*
-!/.config/yay/config.json
 !/.config/nix/
 /.config/nix/*
 !/.config/nix/nix.conf

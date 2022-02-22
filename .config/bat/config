@@ -1,3 +1,4 @@
 --paging=always
 --theme=OneHalfDark
 -m'*.ldf:LaTeX'
+-m'*.tikz:LaTeX'

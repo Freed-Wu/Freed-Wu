@@ -31,6 +31,10 @@ zinit id-as'.brew' depth'1' \
 if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux])); then
   exec tmux new -As0
 fi
+# windows don't support screen
+if [[ $OSTYPE == Cygwin || $OSTYPE == Msys ]] && (($+TMUX)); then
+  export TERM=xterm-256color
+fi
 
 # must load it quickly
 zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
@@ -361,6 +365,7 @@ alias rm='rm -i'
 alias rename='rename -i'
 if (($+commands[exa])); then
   alias ls='exa --icons --git -h'
+  alias tree='exa --icons -T'
 else
   alias ls='ls --color=auto'
 fi

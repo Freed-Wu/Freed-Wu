@@ -311,7 +311,7 @@ def configure(repl) -> None:
     @repl.add_key_binding("c-x", "c-b", filter=ViInsertMode())
     @repl.add_key_binding("c-x", "c-b", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.cli.current_buffer.insert_text("\nimport pdb; pdb.set_trace()\n")
+        event.cli.current_buffer.insert_text("\nbreakpoint()\n")
 
     @Condition
     def suggestion_available() -> bool:
