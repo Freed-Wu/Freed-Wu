@@ -1,0 +1,3 @@
+# for ltxdoc
+$makeindex = 'makeindex -s gind.ist %O -o %D %S';
+# ex: filetype=perl

@@ -1,8 +1,10 @@
 % \iffalse
 %<*driver>
-\ProvidesFile{%FFILE%}[%DATE% 0.0.1]
+\ProvidesFile{%FFILE%}[%DATE% v0.0.1]
 \documentclass{ltxdoc}
 \usepackage{hypdoc}
+\usepackage[citations, definitionLists, fencedCode, footnotes, hashEnumerators,
+html, inlineFootnotes, pipeTables, tableCaptions]{markdown}
 \EnableCrossrefs%
 \CodelineIndex%
 \begin{document}
@@ -14,15 +16,12 @@
 % \author{%USER%}
 % \maketitle
 % \begin{abstract}
-% %HERE%
+%   \IfFileExists{README.md}{\markdownInput{README.md}}{}
 % \end{abstract}
 % \tableofcontents
 % \section{Introduction}%
 % \label{sec:Introduction}
-% \DescribeMacro{\foo}
-% \begin{verbatim}
-% \def\foo\bar
-% \end{verbatim}
+% %HERE%
 % \IndexPrologue{\section{\indexname}}
 % \StopEventually{\PrintIndex}
 % \appendix
@@ -32,10 +31,25 @@
 %<*cls|sty>
 \NeedsTeXFormat{LaTeX2e}
 %</cls|sty>
+%<*cls>
+\ProvidesClass{%FILE%}[%DATE% v0.0.1]
+%</cls>
+%<*sty>
+\ProvidesPackage{%FILE%}[%DATE% v0.0.1]
+%</sty>
+%<*cls|sty>
+\RequirePackage{kvoptions}
+\RequirePackage{kvsetkeys}
+\SetupKeyvalOptions{%
+  setkeys=\kvsetkeys,
+}
+%</cls|sty>
+%<*cls>
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{}}
+%</cls>
+%<*cls|sty>
+\ProcessKeyvalOptions*
+%</cls|sty>
 %    \end{macrocode}
-% \begin{macro}{\foo}
-%    \begin{macrocode}
-\def\foo\bar
-%    \end{macrocode}
-% \end{macro}
+% \IfFileExists{CHANGELOG.md}{\markdownInput{CHANGELOG.md}}{}
 % \Finale

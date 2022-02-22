@@ -385,14 +385,6 @@ function! init#smartinput#post_source() abort
         \ 'char': '+-',
         \ 'input': '+-',
         \ })
-
-  call smartinput#map_to_trigger('i', '--', '--', '--')
-  call smartinput#define_rule({
-        \ 'at': '\%#',
-        \ 'char': '--',
-        \ 'input': ' -- ',
-        \ 'filetype': ['tex', 'plaintex', 'context'],
-        \ })
   " 1}}} One "
 
   " Two {{{1 "

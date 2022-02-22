@@ -1,9 +1,10 @@
 if getcwd() !=# expand('%:p:h')
   setlocal foldlevel=1
 endif
-let &l:path = '.,' . substitute(join(map(['TEXMFHOME', 'TEXMFLOCAL', 'TEXMFMAIN'],
-      \ {_, v -> trim(system('kpsewhich -var-value=' . v))}), ':'),
-      \ ':', '/tex/latex/**2,', 'g')
+if executable('kpsepath')
+  let &l:path = trim(substitute(substitute(substitute(system('kpsepath tex'),
+        \ '!!', '', 'g'), '//\+', '/**/', 'g'), ':', ',', 'g'))
+endif
 " Don't let g:vimtex_fold_enabled = 1 because pandoc need vimtex, too
 setlocal foldmethod=expr
 setlocal foldexpr=vimtex#fold#level(v:lnum)

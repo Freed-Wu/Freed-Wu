@@ -3,6 +3,7 @@ let $XDG_CONFIG_HOME = $HOME . '/.config'
 let $XDG_DATA_HOME = $HOME . '/.local/share'
 let $XDG_CACHE_HOME = $HOME . '/.cache'
 if !has('nvim')
+  " vint: next-line -ProhibitSetNoCompatible
   set nocompatible
   set encoding=utf-8
   set undodir=$XDG_DATA_HOME/nvim/undo
@@ -15,6 +16,7 @@ if !has('nvim')
   endif
   let $MYVIMRC = $XDG_CONFIG_HOME . '/nvim/init.vim'
 endif
+" after set encoding
 scriptencoding utf-8
 if has('gui_running')
   set guioptions=gtaAPd

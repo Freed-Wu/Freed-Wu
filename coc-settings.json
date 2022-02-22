@@ -171,9 +171,30 @@
           "warning": "warning",
           "style_problem": "info"
         }
+      },
+      "lacheck": {
+        "command": "lacheck",
+        "args": ["%file"],
+        "debounce": 100,
+        "offsetLine": 0,
+        "offsetColumn": 0,
+        "sourceName": "lacheck",
+        "formatLines": 1,
+        "formatPattern": [
+          "\"[^\"]+\", (line) (\\d+):\\s*(.*)(\\r|\\n)*$",
+          {
+            "security": 1,
+            "line": 2,
+            "message": 3
+          }
+        ],
+        "securities": {
+          "line": "warning"
+        }
       }
     },
     "filetypes": {
+      "latex": "lacheck",
       "text": "alex-text",
       "html": "alex-html",
       "vim": "vint",

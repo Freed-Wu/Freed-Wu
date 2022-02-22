@@ -22,14 +22,24 @@ function! init#vimtex#source() abort
   " ` will avoid markdown's code quotation
   let g:vimtex_imaps_leader = g:maplocalleader
   let g:vimtex_indent_delims = {
-        \ 'open' : ['{', '['],
-        \ 'close' : ['}', ']'],
-        \ 'close_indented' : 0,
-        \ 'include_modified_math' : 1,
-        \}
+        \ 'open': ['{', '['],
+        \ 'close': ['}', ']'],
+        \ 'close_indented': 0,
+        \ 'include_modified_math': 1,
+        \ }
+  " chktexrc VerbEnvir
   let g:vimtex_indent_ignored_envs = [
-        \ 'document', 'verbatim', 'lstlisting', 'minted',
-        \ 'pygmented', 'windark', 'langPyOne',
+        \ 'document',
+        \
+        \ 'verbatim', 'comment', 'verbatimtab', 'rawhtml', 'errexam', 'texdraw',
+        \ 'filecontents', 'minted', 'lstlisting', 'IPA',
+        \
+        \ 'markdown',
+        \
+        \ 'Verbatim',
+        \
+        \ 'pycode', 'pysub', 'pyverbatim', 'pyblock', 'pyconsole',
+        \ 'pythontexcustomcode',
         \ ]
   let g:vimtex_mappings_disable = {
         \ 'n': ['<F7>', 'tsc', 'tse', 'tsd', 'tsD', 'tsf'],
@@ -37,24 +47,19 @@ function! init#vimtex#source() abort
         \ 'i': ['<F7>'],
         \ }
   let g:vimtex_mappings_override_existing = 1
-  if executable('pplatex')
-    let g:vimtex_quickfix_method = 'pplatex'
-  elseif executable('pulp')
-    let g:vimtex_quickfix_method = 'pulp'
-  endif
-    let g:vimtex_syntax_conceal = {
-          \ 'accents': 1,
-          \ 'cites': 1,
-          \ 'fancy': 1,
-          \ 'greek': 1,
-          \ 'math_bounds': 1,
-          \ 'math_delimiters': 1,
-          \ 'math_fracs': 1,
-          \ 'math_super_sub': 1,
-          \ 'math_symbols': 1,
-          \ 'sections': 1,
-          \ 'styles': 1,
-          \}
+  let g:vimtex_syntax_conceal = {
+        \ 'accents': 1,
+        \ 'cites': 1,
+        \ 'fancy': 1,
+        \ 'greek': 1,
+        \ 'math_bounds': 1,
+        \ 'math_delimiters': 1,
+        \ 'math_fracs': 1,
+        \ 'math_super_sub': 1,
+        \ 'math_symbols': 1,
+        \ 'sections': 1,
+        \ 'styles': 1,
+        \ }
   let g:vimtex_toc_config = {
         \ 'fold_enable': 1,
         \ 'hotkeys_enabled': 1,
@@ -68,13 +73,13 @@ function! init#vimtex#source() abort
           \ 'content': 1,
           \ 'label': 0,
           \ 'todo': 0,
-          \ 'include': 0
+          \ 'include': 0,
           \ },
           \ 'layer_keys': {
             \ 'content': '=c',
             \ 'label': '=l',
             \ 'todo': '=t',
-            \ 'include': '=i'
+            \ 'include': '=i',
             \ }
             \ }
   if get(g:, 'vimtex_latexmk_background') !=# 'latexrun'
@@ -82,6 +87,9 @@ function! init#vimtex#source() abort
   endif
   if executable('zathura')
     let g:vimtex_view_method = 'zathura'
+  elseif executable('okular')
+    let g:vimtex_view_general_viewer = 'okular'
+    let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
   elseif executable('SumatraPDF')
     let g:vimtex_view_general_viewer = 'SumatraPDF'
     let g:vimtex_view_general_options =
@@ -93,14 +101,6 @@ function! init#vimtex#source() abort
           \ . ':\%l^<CR^>:normal\! zzzv^<CR^>'
           \ . ':call remote_foreground('''.v:servername.''')^<CR^>^<CR^>\""'
   endif
-  let g:vimtex_compiler_latexmk = {
-        \ 'options' : [
-          \ '-verbose',
-          \ '-synctex=1',
-          \ '-interaction=nonstopmode',
-          \ '-shell-escape',
-          \ ],
-          \ }
   let g:vimtex_compiler_latexmk_engines = {
         \ '_': '-xelatex',
         \ }
