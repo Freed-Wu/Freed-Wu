@@ -2,7 +2,8 @@ $show_time = 1;
 $dependents_phony = 1;
 $do_cd = 1;
 $preview_continuous_mode = 1;
-push @default_files, '*.ins', '*.dtx';
+# *.ins cannot generate pdf
+push @default_files, '*.dtx';
 push @default_files, '*.tikz';
 
 $pdf_mode = 5;
@@ -145,5 +146,7 @@ $clean_ext .= ' markdown.in markdown.out markdown.err markdown.lua';
 $clean_ext .= ' sed';
 # autofancyhdr
 $clean_ext .= ' headfootlength';
+# docstrip
+$clean_ext .= ' hd';
 
 # ex: filetype=perl

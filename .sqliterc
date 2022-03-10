@@ -1,0 +1,6 @@
+.prompt "❯ " "… "
+.headers on
+.mode box
+.shell hr ─
+.schema
+.shell hr ─

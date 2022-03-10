@@ -12,6 +12,7 @@ from prompt_toolkit.filters import (
 from prompt_toolkit.application.current import get_app
 from prompt_toolkit.enums import EditingMode
 from prompt_toolkit.key_binding.vi_state import InputMode, ViState
+from prompt_toolkit.key_binding.bindings.named_commands import unix_word_rubout
 from prompt_toolkit.clipboard import ClipboardData
 from prompt_toolkit.selection import SelectionType
 from prompt_toolkit.keys import Keys
@@ -158,7 +159,6 @@ def configure(repl) -> None:
 
     # Use this colorscheme for the code.
     repl.use_code_colorscheme('monokai')
-    # repl.use_code_colorscheme("pastie")
 
     # Set color depth (keep in mind that not all terminals support true color).
 
@@ -186,6 +186,11 @@ def configure(repl) -> None:
                                 Style.from_dict(_custom_ui_colorscheme))
     repl.use_ui_colorscheme("my-colorscheme")
     """
+
+    @repl.add_key_binding("escape", "w", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "w", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        unix_word_rubout(event)
 
     @repl.add_key_binding("escape", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
@@ -291,9 +296,21 @@ def configure(repl) -> None:
         buffer = event.current_buffer
         buffer.join_next_line()
 
+    @repl.add_key_binding("escape", *"[13;2u", filter=ViNavigationMode())
+    @repl.add_key_binding("escape", *"[13;2u", filter=ViInsertMode())
+    @repl.add_key_binding("escape", *"[13;2u", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.validate_and_handle()
+
+    @repl.add_key_binding("escape", *"[13;5u", filter=ViNavigationMode())
+    @repl.add_key_binding("escape", *"[13;5u", filter=ViInsertMode())
+    @repl.add_key_binding("escape", *"[13;5u", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.validate_and_handle()
+
     @repl.add_key_binding("K", filter=ViNavigationMode())
-    @repl.add_key_binding("c-x", "c-_", filter=ViInsertMode())
-    @repl.add_key_binding("c-x", "c-_", filter=EmacsInsertMode())
+    @repl.add_key_binding("escape", "c-h", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-h", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
         event.current_buffer.cursor_position += (
             event.current_buffer.document.get_start_of_line_position(
@@ -307,9 +324,39 @@ def configure(repl) -> None:
         event.cli.current_buffer.insert_text(")")
         event.current_buffer.validate_and_handle()
 
+    @repl.add_key_binding("escape", "c-t", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-t", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
+        )
+        event.cli.current_buffer.insert_text("type(")
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_end_of_line_position()
+        )
+        event.cli.current_buffer.insert_text(")")
+        event.current_buffer.validate_and_handle()
+
+    @repl.add_key_binding("escape", "c-l", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-l", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
+        )
+        event.cli.current_buffer.insert_text("len(")
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_end_of_line_position()
+        )
+        event.cli.current_buffer.insert_text(")")
+        event.current_buffer.validate_and_handle()
+
     # Add custom key binding for PDB.
-    @repl.add_key_binding("c-x", "c-b", filter=ViInsertMode())
-    @repl.add_key_binding("c-x", "c-b", filter=EmacsInsertMode())
+    @repl.add_key_binding("escape", "c-b", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-b", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
         event.cli.current_buffer.insert_text("\nbreakpoint()\n")
 

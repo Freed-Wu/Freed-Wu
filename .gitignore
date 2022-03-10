@@ -37,6 +37,8 @@
 !/.visidatarc
 !/.vintrc.yaml
 !/.chktexrc
+!/.sqliterc
+!/.pdbrc
 !/.tmux.conf
 
 # dotfiles

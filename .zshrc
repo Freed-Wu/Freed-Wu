@@ -133,7 +133,8 @@ zinit id-as'.vivid' depth'1' wait lucid \
   atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
   if'(($+commands[vivid]))' \
   for zdharma-continuum/null
-zinit id-as depth'1' wait lucid reset atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+zinit id-as depth'1' wait lucid reset atpull'%atclone' pick"clrs.zsh" \
+  nocompile'!' \
   atclone"[[ -z $commands[dircolors] ]] && local P=g
   \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS
   \${P}dircolors -b LS_COLORS > clrs.zsh" \
@@ -255,6 +256,10 @@ zinit id-as depth'1' wait lucid \
 
 # HotKey {{{1 #
 bindkey -e
+bindkey "\x1b[13;2u" accept-line
+bindkey -Mvicmd "\x1b[13;2u" accept-line
+bindkey "\x1b[13;5u" accept-line
+bindkey -Mvicmd "\x1b[13;5u" accept-line
 autoload -U edit-command-line && bindkey '^X^E' edit-command-line
 bindkey ^U backward-kill-line
 bindkey ^Q vi-quoted-insert
@@ -395,12 +400,18 @@ zinit id-as depth'1' wait lucid null \
 # 2}}} Download #
 
 # Tool {{{2 #
-zinit id-as depth'1' wait lucid as'null' sbin'hr' for LuRsT/hr
-zinit id-as depth'1' wait lucid as'null' sbin'spark' for holman/spark
-zinit id-as depth'1' wait lucid as'null' sbin'slugify' for benlinton/slugify
+zinit id-as depth'1' wait lucid as'null' sbin'spark' \
+  if'((! $+commands[spark]))' \
+  for holman/spark
+zinit id-as depth'1' wait lucid as'null' sbin'slugify' \
+  if'((! $+commands[slugify]))' \
+  for benlinton/slugify
 zinit id-as depth'1' wait lucid as'null' sbin'ugit' sbin'git-undo' \
-  if'(($+commands[git] && $+commands[fzf]))' \
+  if'((! $+commands[ugit] && $+commands[git] && $+commands[fzf]))' \
   for Bhupesh-V/ugit
+zinit id-as depth'1' wait lucid as'null' sbin'hr' \
+  if'((! $+commands[hr]))' \
+  for LuRsT/hr
 zinit id-as depth'1' wait lucid as'null' sbin'has' \
   if'((! $+commands[has]))' \
   for kdabir/has
