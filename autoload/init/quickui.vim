@@ -87,7 +87,9 @@ function! init#quickui#post_source() abort
         \ ['&TemplateHere', 'TemplateHere'],
         \ ['--', ''],
         \ ['Trail &Fix', 'TrailGuide fix'],
+        \ ['--', ''],
         \ ['&Delete', 'Delete'],
+        \ ['Chmod +&x', 'Chmod +x'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&View', map([
         \ ['&Snippet', 'CocCommand snippets.editSnippets'],
@@ -100,6 +102,8 @@ function! init#quickui#post_source() abort
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Git', map([
         \ ['&Git', 'Gina status'],
+        \ ['&Add All', 'Gina add -A'],
+        \ ['Add &.', 'Gina add .'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Z-fold', map([
         \ ['&Z-fold Last pattern', 'Fl'],

@@ -409,7 +409,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '\S\%#',
         \ 'char': '..',
         \ 'input': ' .. ',
-        \ 'filetype': ['vim'],
+        \ 'filetype': ['vim', 'lua'],
         \ })
 
   call smartinput#map_to_trigger('i', '<<', '<<', '<<')
@@ -435,6 +435,7 @@ function! init#smartinput#post_source() abort
         \ })
 
   call smartinput#map_to_trigger('i', '=', '=', '=')
+  " cannot add \S
   call smartinput#define_rule({
         \ 'at': '^[^(]\+\%#',
         \ 'char': '=',
@@ -445,7 +446,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '\S\%#',
         \ 'char': '=',
         \ 'input': ' = ',
-        \ 'filetype': ['pandoc', 'c', 'cpp', 'vim', 'perl', 'make'],
+        \ 'filetype': ['pandoc', 'c', 'cpp', 'vim', 'perl', 'make', 'lua'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',

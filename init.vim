@@ -291,10 +291,6 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ && $XDG_SESSION_DESKTOP !=# 'deepin' || has('mac') || has('win32'),
         \ 'hook_source': 'call init#xkbswitch#source()',
         \ })
-  " if BufNewFile, augroup Templates will be loaded in next BufNewFile
-  call dein#add('aperezdc/vim-template', {
-        \ 'hook_source': 'call init#template#source()',
-        \ })
   " need coc.nvim
   call dein#add('Shougo/echodoc.vim', {
         \ 'if': executable('node'),
@@ -654,6 +650,10 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ })
   call dein#add('honza/vim-snippets', {
         \ 'hook_source': 'call init#snippets#source()',
+        \ })
+  " if BufNewFile, augroup Templates will be loaded in next BufNewFile
+  call dein#add('aperezdc/vim-template', {
+        \ 'hook_source': 'call init#template#source()',
         \ })
   call dein#add('mattn/emmet-vim', {
         \ 'on_map': {'n': '<C-y>', 'v': '<C-y>', 'i': '<C-y>'},

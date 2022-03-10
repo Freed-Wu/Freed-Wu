@@ -40,7 +40,7 @@ function! init#coc#source() abort
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',
         \ 'coc-clang-format-style-options', 'coc-docker',
         \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-texlab',
-        \ 'coc-jedi', 'coc-pyright', 'coc-clangd',
+        \ 'coc-jedi', 'coc-pyright', 'coc-lua', 'coc-clangd',
         \ ]
   " tabnine don't support android
   if $PREFIX !=# '/data/data/com.termux/files/usr'

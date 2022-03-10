@@ -10,3 +10,12 @@ snippet def "" b
 def $1(self, $2):
 	$0
 endsnippet
+
+snippet wrap "from functools import wraps" b
+def	$1(f):
+	@wraps(f)
+	def wrapper(*args, **kwds):
+		$0
+		return f(*args, **kwds)
+	return wrapper
+endsnippet

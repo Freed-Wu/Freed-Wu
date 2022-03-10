@@ -41,14 +41,8 @@ function! init#airline#source() abort
         \ }
   if !has('unix') || has('unix') && !has('win32unix') && exists('*trim')
     let g:airline_filetype_overrides = {
-            \ 'startify': ['startify', '%{fnamemodify(getcwd(), ":~")} '
-            \ . (empty(wifi#component()) ? '' : g:airline_left_alt_sep)
-            \ . ' %{wifi#component()}'],
+            \ 'startify': ['startify', '%{wifi#component()}'],
             \ }
-  else
-    let g:airline_filetype_overrides = {
-          \ 'startify': ['startify', '%{fnamemodify(getcwd(), ":~")}'],
-          \ }
   endif
 
   let g:airline#extensions#ale#error_symbol = '✗'
@@ -74,7 +68,8 @@ function! init#airline#source() abort
 
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#show_close_button = 1
-  let g:airline#extensions#tabline#buffers_label = ''
+  let g:airline#extensions#tabline#buffers_label =
+        \ '%{fnamemodify(getcwd(), ":~")}'
   let g:airline#extensions#tabline#tabs_label = ''
   let g:airline#extensions#tabline#close_symbol = '⌫'
   let g:airline#extensions#tabline#overflow_marker = '…'
@@ -117,9 +112,7 @@ function! init#airline#source() abort
   let g:airline#extensions#whitespace#mixed_indent_file_format = '⇆%s'
   let g:airline#extensions#whitespace#conflicts_format = '✗%s'
 
-  if exists('*battery#value') && battery#value() > 0
-    let g:airline#extensions#battery#enabled = 1
-  endif
+  let g:airline#extensions#battery#enabled = 1
 
   let g:airline#extensions#localsearch#inverted = 1
 

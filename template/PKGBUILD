@@ -1,0 +1,26 @@
+# Maintainer: %USER% <%MAIL%>
+# https://aur.archlinux.org/packages/updaurpkg-git
+# $ updaurpkg .
+_repo=%HERE%
+_source_type=github-releases
+_upstreamver=0.0.1
+_pkgname=${_repo##*/}
+
+pkgname=$_pkgname
+pkgver=${_upstreamver##v}
+pkgrel=1
+pkgdesc=''
+arch=(any)
+url=https://github.com/$_repo
+license=(GPL)
+provides=("$_pkgname-$pkgver")
+conflicts=("$_pkgname-$pkgver")
+source=("$_pkgname-$pkgver::$url/archive/$_upstreamver.tar.gz")
+# source=("$_pkgname-$pkgver::https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+sha256sums=(SKIP)
+
+package() {
+	cd "$srcdir/$_pkgname-$pkgver"
+	install -D "$_pkgname" -t "$pkgdir/usr/bin"
+	# python setup.py install --root="$pkgdir" --optimize=1 || return 1
+}

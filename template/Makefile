@@ -12,7 +12,7 @@ LD = gcc
 LDFLAGS =
 RM = rm -rf
 MKDIR = mkdir -p
-INSTALL = install
+INSTALL = install -D
 -include config.mak
 -include .depend
 vpath %.c $(srcdir)
@@ -43,7 +43,7 @@ distclean: clean
 
 .PHONY: install
 install:
-	$(INSTALL) $(builddir)/main $(bindir)
+	$(INSTALL) $(builddir)/main -t $(bindir)
 .PHONY: uninstall
 uninstall:
 	$(RM) $(bindir)/main

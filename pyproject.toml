@@ -2,4 +2,4 @@
 line-length = 79
 
 [tool.pyright]
-exclude = ['template/main.py']
+exclude = ['template/main.py', 'template/setup.py']

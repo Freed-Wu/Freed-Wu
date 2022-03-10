@@ -16,7 +16,7 @@ html, inlineFootnotes, pipeTables, tableCaptions]{markdown}
 % \author{%USER%}
 % \maketitle
 % \begin{abstract}
-%   \IfFileExists{README.md}{\markdownInput{README.md}}{}
+%   \IfFileExists{./README.md}{\markdownInput{README.md}}{}
 % \end{abstract}
 % \tableofcontents
 % \section{Introduction}%
@@ -29,27 +29,25 @@ html, inlineFootnotes, pipeTables, tableCaptions]{markdown}
 % \label{sec:Implement}
 %    \begin{macrocode}
 %<*cls|sty>
-\NeedsTeXFormat{LaTeX2e}
-%</cls|sty>
-%<*cls>
-\ProvidesClass{%FILE%}[%DATE% v0.0.1]
-%</cls>
-%<*sty>
-\ProvidesPackage{%FILE%}[%DATE% v0.0.1]
-%</sty>
-%<*cls|sty>
+\@ifundefined{NeedsTeXFormat}{% 2.09 version
+%<cls>  \def\filename{%FILE%.cls}
+%<sty>  \def\filename{%FILE%.sty}
+  \def\filedate{%DATE%}
+  \def\fileversion{v0.0.1}
+  \typeout{Package: `\filename' \fileversion<\filedate>}
+}{% 2e version
+  \NeedsTeXFormat{LaTeX2e}
+%<cls>  \ProvidesClass{%FILE%}[%DATE% v0.0.1]
+%<sty>  \ProvidesPackage{%FILE%}[%DATE% v0.0.1]
+}
 \RequirePackage{kvoptions}
 \RequirePackage{kvsetkeys}
 \SetupKeyvalOptions{%
   setkeys=\kvsetkeys,
 }
-%</cls|sty>
-%<*cls>
-\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{}}
-%</cls>
-%<*cls|sty>
+%<cls> \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{}}
 \ProcessKeyvalOptions*
 %</cls|sty>
 %    \end{macrocode}
-% \IfFileExists{CHANGELOG.md}{\markdownInput{CHANGELOG.md}}{}
+% \IfFileExists{./CHANGELOG.md}{\markdownInput{CHANGELOG.md}}{}
 % \Finale

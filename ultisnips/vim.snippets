@@ -1,11 +1,13 @@
 priority -30
 
-snippet f "" b
-function! $1() abort
+snippet fun "" b
+function! `!v
+expand('%') =~# 'autoload' ? substitute(matchstr(expand('%:p'), 'autoload/\zs.*\ze.vim'), '[/\\]', '#', 'g') . '#' : ''
+`$1() abort
 	$0
 endfunction
 endsnippet
-snippet au "" b
+snippet aug "" b
 augroup $1
 	autocmd!
 	autocmd $0

@@ -1,6 +1,4 @@
-nnoremap <silent><buffer> <LocalLeader># :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,#<CR>
-nnoremap <silent><buffer> <LocalLeader>* :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,*<CR>
-nnoremap <silent><buffer> <LocalLeader>= :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,=<CR>
-nnoremap <silent><buffer> <LocalLeader>- :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,-<CR>
-nnoremap <silent><buffer> <LocalLeader>^ :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,^<CR>
-nnoremap <silent><buffer> <LocalLeader>" :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,"<CR>
+setlocal path+=src
+setlocal includeexpr=init#init#rst#includeexpr()
+
+call init#init#rst#map()

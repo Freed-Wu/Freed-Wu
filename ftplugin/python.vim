@@ -12,6 +12,7 @@ let &l:path = join(s:path, ',')
 
 nnoremap <silent> <LocalLeader>t :<C-U>CocCommand pyright.createtypestub <C-R><C-W><CR>
 
+call init#init#rst#map()
 call textobj#user#map('continuous', {
       \ 'python': {
         \ 'select-a': '<buffer>aL',
