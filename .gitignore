@@ -204,6 +204,10 @@
 /.config/gdb/*
 !/.config/gdb/gdbinit
 !/.config/gdb/gdbearlyinit
+!/.config/pacman/
+/.config/pacman/*
+!/.config/pacman/makepkg.conf
+!/.config/ripgreprc
 
 # $XDG_DATA_HOME
 !/.local/
@@ -216,10 +220,10 @@
 /.local/share/flatpak/repo/*
 !/.local/share/flatpak/repo/config
 !/.local/share/icons/
-/.local/share/icons/hicolor
+/.local/share/icons/hicolor/
 !/.local/share/themes/
 /.local/share/themes/*
-!/.local/share/themes/luZorin
+!/.local/share/themes/luZorin/
 !/.local/share/pandoc/
 
 # Windows

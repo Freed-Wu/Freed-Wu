@@ -3,7 +3,7 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
-PATH="$HOME/Applications:$HOME/.local/bin:$HOME/.local/share/nautilus/scripts:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
 # man
@@ -14,6 +14,9 @@ export GITHUB_USER
 # mutt
 EMAIL=$(git config --global user.email)
 export EMAIL
+# rg
+RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
+export RIPGREP_CONFIG_PATH
 # kitty
 # kitty cannot work in dde:
 # Failed to enable transparency.
@@ -32,4 +35,37 @@ export WINEDEBUG=-all
 # python
 export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
 export PYTHONBREAKPOINT=pudb.set_trace
+# fzf
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
+"'-m
+-d$"\0"
+--preview="less {+1}"
+--preview-window="+{2}"
+--bind=tab:down
+--bind=btab:up
+--bind=alt-j:jump
+--bind=alt-k:kill-line
+--bind=ctrl-q:clear-query
+--bind=alt-a:first
+--bind=alt-e:last
+--bind=alt-N:toggle-in
+--bind=alt-P:toggle-out
+--bind=ctrl-space:toggle
+--bind=ctrl-o:toggle-all
+--bind=ctrl-g:deselect-all
+--bind=alt-g:select-all
+--bind=ctrl-s:toggle-search
+--bind=ctrl-\\:toggle-sort
+--bind=ctrl-^:toggle-preview-wrap
+--bind=ctrl-x:toggle-preview
+--bind=alt-p:preview-up
+--bind=alt-n:preview-down
+--bind=ctrl-v:preview-page-down
+--bind=alt-v:preview-page-up
+--bind=ctrl-r:preview-half-page-down
+--bind=alt-r:preview-half-page-up
+--bind=alt-\<:preview-top
+--bind=alt-\>:preview-bottom'
+export FZF_TMUX_HEIGHT=$((LINES/2))
 # ex: filetype=sh

@@ -161,11 +161,12 @@ zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
 zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
 zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
 zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
-zstyle ':fzf-tab:complete:(\\|)sudo:*' fzf-preview 'less =${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|*/|)sudo:*' fzf-preview 'less =${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
 zstyle ':fzf-tab:complete:svn-help:*' fzf-preview 'svn help $word'
+zstyle ':fzf-tab:complete:zinit:*' fzf-preview "less ${ZINIT[PLUGINS_DIR]}/\$word"
 zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
   'SYSTEMD_COLORS=1 systemctl status $word'
 zstyle ':completion:*:processes' command \
@@ -176,6 +177,8 @@ zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-flags \
   --preview-window=down:3:wrap
 zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
   fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:(\\|*/|)(c(make|test|pack)|ccmake|cmake-gui):*' \
+  fzf-preview '[[ $word == --help* ]] && cmake ${(Q)word}'
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
   'git diff $word | delta'
 zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
@@ -260,6 +263,7 @@ bindkey "\x1b[13;2u" accept-line
 bindkey -Mvicmd "\x1b[13;2u" accept-line
 bindkey "\x1b[13;5u" accept-line
 bindkey -Mvicmd "\x1b[13;5u" accept-line
+bindkey ^Xh _complete_help
 autoload -U edit-command-line && bindkey '^X^E' edit-command-line
 bindkey ^U backward-kill-line
 bindkey ^Q vi-quoted-insert
@@ -372,7 +376,7 @@ if (($+commands[exa])); then
   alias ls='exa --icons --git -h'
   alias tree='exa --icons -T'
 else
-  alias ls='ls --color=auto'
+  alias ls='ls --color=auto -h'
 fi
 # 1}}} Compatible #
 
@@ -390,12 +394,11 @@ zinit id-as depth'1' wait lucid null sbin's/sudo' sbin's/su' \
 # 2}}} Superuser #
 
 # Download {{{2 #
-# need access google
-zinit id-as depth'1' wait lucid null \
-  atclone'./install.sh -p $ZPFX/bin -s /dev/null' \
+zinit id-as depth'1' wait lucid null sbin'bash/release/*' \
+  if'((! $+commands[gsync] || ! $+commands[gupload] ))' \
   for labbots/google-drive-upload
-zinit id-as depth'1' wait lucid null \
-  atclone'./install.sh -p $ZPFX/bin -s /dev/null' \
+zinit id-as depth'1' wait lucid null sbin'release/bash/*' \
+  if'((! $+commands[gdl]))' \
   for Akianonymus/gdrive-downloader
 # 2}}} Download #
 
@@ -417,4 +420,4 @@ zinit id-as depth'1' wait lucid as'null' sbin'has' \
   for kdabir/has
 # 2}}} Tool #
 # 1}}} Program #
-# ex: foldmethod=marker path=.,~/.zinit/plugins
+# ex: isfname-=/ foldmethod=marker path=.,~/.local/share/zinit/plugins

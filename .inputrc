@@ -1,5 +1,8 @@
 $include /etc/inputrc
-$include ~/.rl_custom.inputrc
+$include function rl_custom_complete /usr/lib/librl_custom_complete.so
+C-i rl_custom_complete
+$include function rl_custom_isearch /usr/lib/librl_custom_isearch.so
+C-r rl_custom_isearch
 set blink-matching-paren on
 set colored-completion-prefix on
 set colored-stats on

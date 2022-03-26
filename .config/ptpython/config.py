@@ -6,29 +6,41 @@ On Linux, this is: ~/.config/ptpython/config.py
 """
 import sys
 import re
+from typing import TYPE_CHECKING
+
 from prompt_toolkit.filters import (
-    emacs_mode, in_paste_mode, Condition,
-    ViInsertMode, EmacsInsertMode, ViNavigationMode)
+    emacs_mode,
+    in_paste_mode,
+    Condition,
+    ViInsertMode,
+    EmacsInsertMode,
+    ViNavigationMode,
+)
 from prompt_toolkit.application.current import get_app
 from prompt_toolkit.enums import EditingMode
 from prompt_toolkit.key_binding.vi_state import InputMode, ViState
-from prompt_toolkit.key_binding.bindings.named_commands import unix_word_rubout
+from prompt_toolkit.key_binding.bindings.named_commands import (
+    unix_word_rubout,
+    delete_char,
+    backward_delete_char,
+    backward_char,
+    forward_char,
+)
 from prompt_toolkit.clipboard import ClipboardData
 from prompt_toolkit.selection import SelectionType
 from prompt_toolkit.keys import Keys
+
 # from prompt_toolkit.key_binding.key_processor import KeyPress
-# from prompt_toolkit.styles import Style
-
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from prompt_toolkit.key_binding.key_processor import KeyPressEvent
-
 from ptpython.layout import CompletionVisualisation
 from ptpython.completer import CompletePrivateAttributes
+
+if TYPE_CHECKING:
+    from prompt_toolkit.key_binding.key_processor import KeyPressEvent
 
 __all__ = ["configure"]
 
 
+# cursor {{{1 #
 def get_input_mode(self):
     if sys.version_info[0] == 3:
         from prompt_toolkit.application.current import get_app
@@ -59,6 +71,7 @@ def set_input_mode(self, mode):
 
 ViState._input_mode = InputMode.INSERT  # type: ignore
 ViState.input_mode = property(get_input_mode, set_input_mode)  # type: ignore
+# 1}}} cursor #
 
 
 def configure(repl) -> None:
@@ -67,6 +80,7 @@ def configure(repl) -> None:
 
     :param repl: `PythonRepl` instance.
     """
+    # repl {{{1 #
     repl.accept_input_on_enter = 1
     repl.complete_private_attributes = CompletePrivateAttributes.IF_NO_PUBLIC
     repl.enable_output_formatting = True
@@ -125,7 +139,7 @@ def configure(repl) -> None:
     repl.paste_mode = False
 
     # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
-    repl.prompt_style = 'ipython'  # 'classic' or 'ipython'
+    repl.prompt_style = "ipython"  # 'classic' or 'ipython'
 
     # Don't insert a blank line after the output.
     repl.insert_blank_line_after_output = False
@@ -158,7 +172,7 @@ def configure(repl) -> None:
     repl.enable_input_validation = True
 
     # Use this colorscheme for the code.
-    repl.use_code_colorscheme('monokai')
+    repl.use_code_colorscheme("monokai")
 
     # Set color depth (keep in mind that not all terminals support true color).
 
@@ -186,12 +200,9 @@ def configure(repl) -> None:
                                 Style.from_dict(_custom_ui_colorscheme))
     repl.use_ui_colorscheme("my-colorscheme")
     """
+    # 1}}} repl #
 
-    @repl.add_key_binding("escape", "w", filter=ViInsertMode())
-    @repl.add_key_binding("escape", "w", filter=EmacsInsertMode())
-    def _(event: "KeyPressEvent") -> None:
-        unix_word_rubout(event)
-
+    # vi {{{1 #
     @repl.add_key_binding("escape", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
         event.app.editing_mode = EditingMode.VI
@@ -254,7 +265,8 @@ def configure(repl) -> None:
         buffer = event.current_buffer
 
         deleted = buffer.delete(
-            count=buffer.document.get_end_of_line_position())
+            count=buffer.document.get_end_of_line_position()
+        )
         event.app.clipboard.set_text(deleted)
 
     @repl.add_key_binding("c", "c", filter=ViNavigationMode())
@@ -272,6 +284,27 @@ def configure(repl) -> None:
             after_whitespace=True
         )
         buffer.delete(count=buffer.document.get_end_of_line_position())
+
+    # 1}}} vi #
+
+    # emacs {{{1 #
+    @repl.add_key_binding("escape", "m", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "m", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        c: int = 0
+        while b.document.char_before_cursor == " ":
+            backward_char(event)
+            c += 1
+        w: str = b.document.get_word_before_cursor()
+        for _ in range(c):
+            forward_char(event)
+        event.cli.current_buffer.insert_text(w)
+
+    @repl.add_key_binding("escape", "w", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "w", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        unix_word_rubout(event)
 
     @repl.add_key_binding("c-x", "c-e", filter=EmacsInsertMode())
     @repl.add_key_binding("c-x", "c-e", filter=ViInsertMode())
@@ -296,6 +329,9 @@ def configure(repl) -> None:
         buffer = event.current_buffer
         buffer.join_next_line()
 
+    # 1}}} emacs #
+
+    # term {{{1 #
     @repl.add_key_binding("escape", *"[13;2u", filter=ViNavigationMode())
     @repl.add_key_binding("escape", *"[13;2u", filter=ViInsertMode())
     @repl.add_key_binding("escape", *"[13;2u", filter=EmacsInsertMode())
@@ -308,6 +344,385 @@ def configure(repl) -> None:
     def _(event: "KeyPressEvent") -> None:
         event.current_buffer.validate_and_handle()
 
+    # 1}}} term #
+
+    # autopair {{{1 #
+    @repl.add_key_binding("c-h", filter=ViInsertMode())
+    @repl.add_key_binding("c-h", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        cr: str = b.document.current_char
+        if b.document.cursor_position_col == 0:
+            cl: str = ""
+        else:
+            cl: str = b.document.char_before_cursor
+        if b.document.cursor_position_col <= 1:
+            cl2: str = ""
+        else:
+            backward_char(event)
+            cl2: str = b.document.char_before_cursor
+            forward_char(event)
+        for c0, c1 in ["[]", "()", "{}", "''", "``", '""']:
+            if cl == c0 and cr == c1:
+                delete_char(event)
+                break
+            elif cl == c1 and cl2 == c0:
+                backward_delete_char(event)
+                break
+        backward_delete_char(event)
+
+    @repl.add_key_binding("[", filter=ViInsertMode())
+    @repl.add_key_binding("[", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.cli.current_buffer.insert_text("[]")
+        backward_char(event)
+
+    @repl.add_key_binding("]", filter=ViInsertMode())
+    @repl.add_key_binding("]", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char != "]":
+            b.insert_text("]")
+        else:
+            forward_char(event)
+
+    @repl.add_key_binding("(", filter=ViInsertMode())
+    @repl.add_key_binding("(", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.cli.current_buffer.insert_text("()")
+        backward_char(event)
+
+    @repl.add_key_binding(")", filter=ViInsertMode())
+    @repl.add_key_binding(")", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char != ")":
+            b.insert_text(")")
+        else:
+            forward_char(event)
+
+    @repl.add_key_binding("{", filter=ViInsertMode())
+    @repl.add_key_binding("{", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.cli.current_buffer.insert_text("{}")
+        backward_char(event)
+
+    @repl.add_key_binding("}", filter=ViInsertMode())
+    @repl.add_key_binding("}", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char != "}":
+            b.insert_text("}")
+        else:
+            forward_char(event)
+
+    @repl.add_key_binding("'", filter=ViInsertMode())
+    @repl.add_key_binding("'", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char != "'":
+            b.insert_text("''")
+            backward_char(event)
+        else:
+            forward_char(event)
+
+    @repl.add_key_binding("`", filter=ViInsertMode())
+    @repl.add_key_binding("`", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char != "`":
+            b.insert_text("``")
+            backward_char(event)
+        else:
+            forward_char(event)
+
+    @repl.add_key_binding('"', filter=ViInsertMode())
+    @repl.add_key_binding('"', filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char != '"':
+            b.insert_text('""')
+            backward_char(event)
+        else:
+            forward_char(event)
+
+    # 1}}} autopair #
+
+    # smartinput {{{1 #
+    # One {{{2 #
+    @repl.add_key_binding(",", filter=ViInsertMode())
+    @repl.add_key_binding(",", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char == " ":
+            b.insert_text(",")
+        else:
+            b.insert_text(", ")
+
+    # 2}}} One #
+
+    # Two {{{2 #
+    # Operation {{{3 #
+    @repl.add_key_binding("+", filter=ViInsertMode())
+    @repl.add_key_binding("+", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.current_char == " ":
+            b.insert_text("+")
+        else:
+            b.insert_text(" + ")
+
+    @repl.add_key_binding("@", filter=ViInsertMode())
+    @repl.add_key_binding("@", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if (
+            b.document.char_before_cursor == " "
+            or b.document.cursor_position_col == 0
+        ):
+            b.insert_text("@")
+        else:
+            b.insert_text(" @ ")
+
+    @repl.add_key_binding("*", filter=ViInsertMode())
+    @repl.add_key_binding("*", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("*")
+        else:
+            b.insert_text(" * ")
+
+    @repl.add_key_binding("*", "*", filter=ViInsertMode())
+    @repl.add_key_binding("*", "*", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("**")
+        else:
+            b.insert_text(" ** ")
+
+    @repl.add_key_binding("/", "/", filter=ViInsertMode())
+    @repl.add_key_binding("/", "/", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("//")
+        else:
+            b.insert_text(" // ")
+
+    @repl.add_key_binding("%", filter=ViInsertMode())
+    @repl.add_key_binding("%", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if (
+            b.document.char_before_cursor == " "
+            or b.document.cursor_position_col == 0
+        ):
+            b.insert_text("%")
+        else:
+            b.insert_text(" % ")
+
+    @repl.add_key_binding("&", filter=ViInsertMode())
+    @repl.add_key_binding("&", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("&")
+        else:
+            b.insert_text(" & ")
+
+    @repl.add_key_binding("|", filter=ViInsertMode())
+    @repl.add_key_binding("|", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("|")
+        else:
+            b.insert_text(" | ")
+
+    @repl.add_key_binding("^", filter=ViInsertMode())
+    @repl.add_key_binding("^", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("^")
+        else:
+            b.insert_text(" ^ ")
+
+    # 3}}} Operation #
+
+    # Relation {{{3 #
+    @repl.add_key_binding("<", filter=ViInsertMode())
+    @repl.add_key_binding("<", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("<")
+        else:
+            b.insert_text(" < ")
+
+    @repl.add_key_binding(">", filter=ViInsertMode())
+    @repl.add_key_binding(">", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text(">")
+        else:
+            b.insert_text(" > ")
+
+    @repl.add_key_binding("=", "=", filter=ViInsertMode())
+    @repl.add_key_binding("=", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("==")
+        else:
+            b.insert_text(" == ")
+
+    @repl.add_key_binding("!", "=", filter=ViInsertMode())
+    @repl.add_key_binding("!", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("!=")
+        else:
+            b.insert_text(" != ")
+
+    @repl.add_key_binding("<", "=", filter=ViInsertMode())
+    @repl.add_key_binding("<", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("<=")
+        else:
+            b.insert_text(" <= ")
+
+    @repl.add_key_binding(">", "=", filter=ViInsertMode())
+    @repl.add_key_binding(">", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text(">=")
+        else:
+            b.insert_text(" >= ")
+
+    # 3}}} Relation #
+
+    # Assign {{{3 #
+    @repl.add_key_binding("=", filter=ViInsertMode())
+    @repl.add_key_binding("=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("=")
+        else:
+            b.insert_text(" = ")
+
+    @repl.add_key_binding("+", "=", filter=ViInsertMode())
+    @repl.add_key_binding("+", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("+=")
+        else:
+            b.insert_text(" += ")
+
+    @repl.add_key_binding("-", "=", filter=ViInsertMode())
+    @repl.add_key_binding("-", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("-=")
+        else:
+            b.insert_text(" -= ")
+
+    @repl.add_key_binding("@", "=", filter=ViInsertMode())
+    @repl.add_key_binding("@", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("@=")
+        else:
+            b.insert_text(" @= ")
+
+    @repl.add_key_binding("*", "=", filter=ViInsertMode())
+    @repl.add_key_binding("*", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("*=")
+        else:
+            b.insert_text(" *= ")
+
+    @repl.add_key_binding("/", "=", filter=ViInsertMode())
+    @repl.add_key_binding("/", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("/=")
+        else:
+            b.insert_text(" /= ")
+
+    @repl.add_key_binding("*", "*", "=", filter=ViInsertMode())
+    @repl.add_key_binding("*", "*", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("**=")
+        else:
+            b.insert_text(" **= ")
+
+    @repl.add_key_binding("/", "/", "=", filter=ViInsertMode())
+    @repl.add_key_binding("/", "/", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("//=")
+        else:
+            b.insert_text(" //= ")
+
+    @repl.add_key_binding("%", "=", filter=ViInsertMode())
+    @repl.add_key_binding("%", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("%=")
+        else:
+            b.insert_text(" %= ")
+
+    @repl.add_key_binding("&", "=", filter=ViInsertMode())
+    @repl.add_key_binding("&", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("&=")
+        else:
+            b.insert_text(" &= ")
+
+    @repl.add_key_binding("|", "=", filter=ViInsertMode())
+    @repl.add_key_binding("|", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("|=")
+        else:
+            b.insert_text(" |= ")
+
+    @repl.add_key_binding("^", "=", filter=ViInsertMode())
+    @repl.add_key_binding("^", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("^=")
+        else:
+            b.insert_text(" ^= ")
+
+    # 3}}} Assign #
+    # 2}}} Two #
+    # 1}}} smartinput #
+
+    # python {{{1 #
     @repl.add_key_binding("K", filter=ViNavigationMode())
     @repl.add_key_binding("escape", "c-h", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-h", filter=EmacsInsertMode())
@@ -318,6 +733,67 @@ def configure(repl) -> None:
             )
         )
         event.cli.current_buffer.insert_text("help(")
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_end_of_line_position()
+        )
+        event.cli.current_buffer.insert_text(")")
+        event.current_buffer.validate_and_handle()
+
+    @repl.add_key_binding("escape", "c-p", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-p", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
+        )
+        event.cli.current_buffer.insert_text("print(")
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_end_of_line_position()
+        )
+        event.cli.current_buffer.insert_text(")")
+        event.current_buffer.validate_and_handle()
+
+    @repl.add_key_binding("escape", "c-_", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-_", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
+        )
+        event.cli.current_buffer.insert_text("import numpy as np; "
+                                             'np.lookfor("')
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_end_of_line_position()
+        )
+        event.cli.current_buffer.insert_text('")')
+        backward_char(event)
+
+    @repl.add_key_binding("escape", "c-o", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-o", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
+        )
+        event.cli.current_buffer.insert_text("import numpy as np; np.source(")
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_end_of_line_position()
+        )
+        event.cli.current_buffer.insert_text(")")
+        event.current_buffer.validate_and_handle()
+
+    @repl.add_key_binding("escape", "c-l", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-l", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
+        )
+        event.cli.current_buffer.insert_text("list(")
         event.current_buffer.cursor_position += (
             event.current_buffer.document.get_end_of_line_position()
         )
@@ -339,8 +815,8 @@ def configure(repl) -> None:
         event.cli.current_buffer.insert_text(")")
         event.current_buffer.validate_and_handle()
 
-    @repl.add_key_binding("escape", "c-l", filter=ViInsertMode())
-    @repl.add_key_binding("escape", "c-l", filter=EmacsInsertMode())
+    @repl.add_key_binding("escape", "c-e", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-e", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
         event.current_buffer.cursor_position += (
             event.current_buffer.document.get_start_of_line_position(
@@ -360,6 +836,9 @@ def configure(repl) -> None:
     def _(event: "KeyPressEvent") -> None:
         event.cli.current_buffer.insert_text("\nbreakpoint()\n")
 
+    # 1}}} python #
+
+    # autosuggestions {{{1 #
     @Condition
     def suggestion_available() -> bool:
         app = get_app()
@@ -369,8 +848,9 @@ def configure(repl) -> None:
             and app.current_buffer.document.is_cursor_at_the_end
         )
 
-    @repl.add_key_binding("right",
-                          filter=suggestion_available & ViInsertMode())
+    @repl.add_key_binding(
+        "right", filter=suggestion_available & ViInsertMode()
+    )
     @repl.add_key_binding("c-f", filter=suggestion_available & ViInsertMode())
     @repl.add_key_binding("right", filter=suggestion_available & emacs_mode)
     @repl.add_key_binding("c-f", filter=suggestion_available & emacs_mode)
@@ -379,11 +859,13 @@ def configure(repl) -> None:
         suggestion = b.suggestion
 
         if suggestion and event.arg > 0:
-            b.insert_text(suggestion.text[
-                0:min(event.arg, len(suggestion.text))])
+            b.insert_text(
+                suggestion.text[0:min(event.arg, len(suggestion.text))]
+            )
 
-    @repl.add_key_binding("c-]", Keys.Any,
-                          filter=suggestion_available & emacs_mode)
+    @repl.add_key_binding(
+        "c-]", Keys.Any, filter=suggestion_available & emacs_mode
+    )
     def _(event: "KeyPressEvent") -> None:
         b = event.current_buffer
         suggestion = b.suggestion
@@ -395,22 +877,7 @@ def configure(repl) -> None:
             if len(t) != 1:
                 b.insert_text(event.data)
 
-    # Typing Control E twice should also execute the current command.
-    # (Alternative for Meta-Enter.)
-    """
-    @repl.add_key_binding("c-e", "c-e")
-    def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.validate_and_handle()
-    """
-
-    # Typing 'jj' in Vi Insert mode, should send escape. (Go back to navigation
-    # mode.)
-    """
-    @repl.add_key_binding("j", "j", filter=ViInsertMode())
-    def _(event: "KeyPressEvent") -> None:
-        " Map 'jj' to Escape. "
-        event.cli.key_processor.feed(KeyPress(Keys("escape")))
-    """
+    # 1}}} autosuggestions #
 
     # Custom key binding for some simple autocorrection while typing.
     # conflict with vi block insert mode
@@ -432,20 +899,5 @@ def configure(repl) -> None:
         b.insert_text(" ")
     """
 
-    # Add a custom title to the status bar. This is useful when ptpython is
-    # embedded in other applications.
-    """
-    repl.title = "My custom prompt."
-    """
 
-
-# Custom colorscheme for the UI. See `ptpython/layout.py` and
-# `ptpython/style.py` for all possible tokens.
-    """
-    _custom_ui_colorscheme = {
-        # Blue prompt.
-        "prompt": "bg:#eeeeff #000000 bold",
-        # Make the status toolbar red.
-        "status-toolbar": "bg:#ff0000 #000000",
-    }
-    """
+# ex: foldmethod=marker

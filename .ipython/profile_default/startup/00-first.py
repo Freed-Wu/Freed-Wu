@@ -47,7 +47,6 @@ if sys.argv[0] == "":
                 "win16": "",
                 "win32": "",
                 "cygwin": "",
-                "msys": "",
                 "java": "",
                 "android": "",
                 "arch": "",
