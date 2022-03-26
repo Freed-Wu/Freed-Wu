@@ -85,7 +85,7 @@ function! init#coc#source() abort
 
   inoremap <silent><expr> <TAB> coc#expandableOrJumpable()
         \ ? "\<C-R>=coc#rpc#request('doKeymap',
-        \ ['snippets-expand-jump',''])\<CR>"
+        \ ['snippets-expand-jump', ''])\<CR>"
         \ : "\<TAB>" . coc#refresh()
   xmap <Tab> <Plug>(coc-snippets-select)
   xmap <S-Tab> <Plug>(coc-convert-snippet)
