@@ -10,7 +10,8 @@ else
 endif
 let &l:path = join(s:path, ',')
 
-nnoremap <silent> <LocalLeader>t :<C-U>CocCommand pyright.createtypestub <C-R><C-W><CR>
+nnoremap <silent><buffer> <LocalLeader>t :<C-U>CocCommand pyright.createtypestub <C-R><C-W><CR>
+nnoremap <silent><buffer> <LocalLeader>s :<C-U>%s/^\S/# &/g<CR>:%s/^# \%(>>> \\|^\.\.\. \)//g<CR>
 
 call init#init#rst#map()
 call textobj#user#map('continuous', {

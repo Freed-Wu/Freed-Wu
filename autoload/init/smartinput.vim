@@ -455,7 +455,7 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['sh', 'bash', 'zsh', 'fstab', 'bib', 'python'],
         \ })
   call smartinput#define_rule({
-        \ 'at': 'set .*\%#',
+        \ 'at': 'set\(local\)\? .*\%#',
         \ 'char': '=',
         \ 'input': '=',
         \ 'filetype': ['vim'],
@@ -500,7 +500,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '[^ :\[{(]\%#',
         \ 'char': '-',
         \ 'input': ' - ',
-        \ 'filetype': ['python'],
+        \ 'filetype': ['python', 'c', 'cpp', 'java', 'cs', 'arduino'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',
@@ -620,6 +620,13 @@ function! init#smartinput#post_source() abort
         \ 'at': '\S\%#',
         \ 'char': '<=',
         \ 'input': ' <= ',
+        \ })
+
+  call smartinput#map_to_trigger('i', '~=', '~=', '~=')
+  call smartinput#define_rule({
+        \ 'at': '\S\%#',
+        \ 'char': '~=',
+        \ 'input': ' ~= ',
         \ })
 
   call smartinput#map_to_trigger('i', '=~', '=~', '=~')

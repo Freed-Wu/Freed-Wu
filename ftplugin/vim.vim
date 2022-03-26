@@ -1,3 +1,5 @@
+setlocal isfname-==
+
 let b:chalk_space_before = 1
 
 if expand('%:p') ==# $MYVIMRC

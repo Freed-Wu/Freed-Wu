@@ -1,0 +1,6 @@
+#compdef ${0[2, -1]}
+
+_arguments -s -S \
+  "(- *)"{-V,--version}"[Show version]" \
+  "(- *)"{-h,--help}"[Show list of command-line options]" \
+  '*:filename:_files'

@@ -346,9 +346,7 @@ function! init#which_key#source() abort
   xnoremap <C-W>g<C-]> <C-W>g<C-]>
   xnoremap <C-W>g} <C-W>g}
   nnoremap <C-W>i <C-W>i
-  nnoremap <C-W>d <C-W>d
   xnoremap <C-W>i <C-W>i
-  xnoremap <C-W>d <C-W>d
   nnoremap <C-W>f <C-W>f
   xnoremap <C-W>f <C-W>f
   nnoremap <C-W>F <C-W>F

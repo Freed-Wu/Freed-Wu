@@ -6,5 +6,4 @@ Common functions.
 """
 from typing import Final
 
-VERSION: Final = "0.0.1"
-BINNAME: Final = "main"
+__version__: Final = "0.0.1"

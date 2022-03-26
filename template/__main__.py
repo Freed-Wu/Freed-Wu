@@ -8,16 +8,20 @@ options:
     -V, --version               Show version.
     -d, --debug                 Show debug information.
 """
-from typing import Dict
+from typing import Dict, Final
 from pprint import pformat
 import logging
+import os
+import sys
 from docopt import docopt
-from . import VERSION, BINNAME
+from . import __version__ as VERSION
 
+BINNAME: Final = os.path.split(sys.argv[0])[1]
+_doc: Final = __doc__.format(binname=BINNAME)  # type: ignore
 logger = logging.getLogger(__name__)
 
 
-def main(doc: str = __doc__.format(binname=BINNAME)):  # type: ignore
+def main(doc: str = _doc):
     """Run main function."""
     try:
         args: Dict[str, str] = docopt(doc, version=VERSION)
@@ -26,6 +30,7 @@ def main(doc: str = __doc__.format(binname=BINNAME)):  # type: ignore
     if args.get("--debug"):
         try:
             from rich.logging import RichHandler
+
             logging.basicConfig(
                 level="DEBUG",
                 format="%(message)s",
@@ -36,5 +41,5 @@ def main(doc: str = __doc__.format(binname=BINNAME)):  # type: ignore
     logger.debug(pformat(args))
 
 
-if __name__ == "__main__" and __doc__:
-    main(__doc__.format(binname=BINNAME))
+if __name__ == "__main__":
+    main(_doc)

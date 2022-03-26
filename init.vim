@@ -259,17 +259,12 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'if': has('startuptime'),
         \ 'hook_source': 'call init#startuptime#source()',
         \ })
-  call dein#add('neoclide/coc.nvim', {
-        \ 'if': executable('node'),
-        \ 'merged': 0,
-        \ 'rev': 'release',
-        \ 'hook_source': 'call init#coc#source()',
-        \ })
   " 1}}} Plugin "
 
   " Setting {{{1 "
   call dein#add('tpope/vim-sensible')
   call dein#add('farmergreg/vim-lastplace')
+  call dein#add('editorconfig/editorconfig-vim')
   call dein#add('mox-mox/vim-localsearch', {
         \ 'hook_post_source': 'call init#localsearch#post_source()',
         \ })
@@ -494,11 +489,8 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
 
   " Hotkey {{{1 "
   " InsertCmdline {{{2 "
-  call dein#add('tpope/vim-rsi', {
-        \ 'hook_post_source': 'call init#rsi#post_source()',
-        \ })
-  call dein#add('kana/vim-smartinput', {
-        \ 'on_event': 'InsertEnter',
+  call dein#add('tpope/vim-rsi')
+  call dein#add('mg979/vim-smartinput', {
         \ 'hook_source': 'call init#smartinput#source()',
         \ 'hook_post_source': 'call init#smartinput#post_source()',
         \ })
@@ -775,6 +767,15 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " 1}}} TextObject "
 
   " Tool {{{1 "
+  " LSP {{{2 "
+  call dein#add('neoclide/coc.nvim', {
+        \ 'if': executable('node'),
+        \ 'merged': 0,
+        \ 'rev': 'release',
+        \ 'hook_source': 'call init#coc#source()',
+        \ })
+  " 2}}} LSP "
+
   " FileCMD {{{2 "
   call dein#add('tpope/vim-eunuch', {
         \ 'on_cmd': ['Delete', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir',
@@ -821,6 +822,9 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " File {{{2 "
   call dein#add('antoinemadec/FixCursorHold.nvim')
   " need ++nested, ++once
+  call dein#add('lambdalisue/fern-ssh', {
+        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
+        \ })
   call dein#add('lambdalisue/fern.vim', {
         \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
         \ 'hook_source': 'call init#fern#source()',

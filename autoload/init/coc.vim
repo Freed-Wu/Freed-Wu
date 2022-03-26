@@ -61,14 +61,22 @@ function! init#coc#source() abort
   if has('nvim-0.4.0') || has('patch-8.2.0750')
     nnoremap <expr> <M-n> coc#float#scroll(1)
     nnoremap <expr> <M-p> coc#float#scroll(0)
+    nnoremap <expr> <M-n> coc#float#scroll(1)
+    nnoremap <expr> <M-p> coc#float#scroll(0)
     xnoremap <expr> <M-n> coc#float#scroll(1)
     xnoremap <expr> <M-p> coc#float#scroll(0)
   endif
   nmap g. <Plug>(coc-codeaction-selected)
   xmap g. <Plug>(coc-codeaction-selected)
   nmap g.. <Plug>(coc-codeaction)
-  nnoremap <silent> gd :<C-U>call CocAction('jumpDefinition')<CR>
-  nnoremap <silent> gD :<C-U>call CocAction('jumpDeclaration')<CR>
+  nmap [k <Plug>(coc-diagnostic-prev)
+  nmap ]k <Plug>(coc-diagnostic-next)
+  nmap [K <Plug>(coc-diagnostic-prev-error)
+  nmap ]K <Plug>(coc-diagnostic-next-error)
+  nmap gd <Plug>(coc-definition)
+  nmap gD <Plug>(coc-declaration)
+  nmap <C-W>d <C-W>s<Plug>(coc-definition)
+  nmap <C-W>D <C-W>s<Plug>(coc-declaration)
 
   nmap gqq <plug>(coc-format)
 
@@ -76,7 +84,8 @@ function! init#coc#source() abort
   nmap b <Plug>(coc-ci-b)
 
   inoremap <silent><expr> <TAB> coc#expandableOrJumpable()
-        \ ? "\<C-R>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>"
+        \ ? "\<C-R>=coc#rpc#request('doKeymap',
+        \ ['snippets-expand-jump',''])\<CR>"
         \ : "\<TAB>" . coc#refresh()
   xmap <Tab> <Plug>(coc-snippets-select)
   xmap <S-Tab> <Plug>(coc-convert-snippet)
@@ -117,6 +126,11 @@ function! init#coc#source() abort
   xnoremap <silent> g[ :<C-U>call init#init#coc#grep(visualmode())<CR>
 endfunction
 
+function! init#coc#imap() abort
+  inoremap <silent><expr> <M-n> "\<C-R>=coc#float#scroll(1)\<cr>"
+  inoremap <silent><expr> <M-p> "\<C-R>=coc#float#scroll(0)\<cr>"
+endfunction
+
 augroup init#coc
   autocmd!
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
@@ -126,5 +140,6 @@ augroup init#coc
   autocmd VimLeavePre * CocCommand mru.validate
   autocmd VimLeavePre * if get(g:, 'coc_process_pid', 0)
         \ | call system('kill -9 '.g:coc_process_pid) | endif
+  autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
 " ex: path=.,$XDG_CONFIG_HOME/coc/extensions/node_modules

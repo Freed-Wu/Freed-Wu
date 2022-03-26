@@ -7,6 +7,8 @@ typesetexe = "xelatex"
 typesetopts = "-shell-escape -file-line-error -8bit -halt-on-error -interaction=nonstopmode"
 
 repository = "%GITHUB%/" .. module
+cmd = "gh repo view --json description -q .description " .. repository
+summary = io.popen(cmd):read()
 
 uploadconfig = {
   announcement = "Release the package.",
@@ -15,12 +17,12 @@ uploadconfig = {
   email = "%MAIL%",
   license = "gpl3+",
   pkg = module,
-  summary = "",
+  summary = summary,
   uploader = "%USER%",
   version = "%DATE% 0.0.1",
 
   bugtracker = repository .. "/issues",
-  description = [[%HERE%]],
+  description = summary,
   development = repository,
   home = "https://ctan.org/pkg/" .. module,
   note = [[Uploaded automatically by l3build...]],
