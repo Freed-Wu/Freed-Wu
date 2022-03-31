@@ -490,7 +490,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " Hotkey {{{1 "
   " InsertCmdline {{{2 "
   call dein#add('tpope/vim-rsi')
-  call dein#add('mg979/vim-smartinput', {
+  call dein#add('kana/vim-smartinput', {
         \ 'hook_source': 'call init#smartinput#source()',
         \ 'hook_post_source': 'call init#smartinput#post_source()',
         \ })

@@ -29,21 +29,25 @@
       }
     },
     "insertMappings": {
+      "<C-J>": "prompt:next",
+      "<C-K>": "prompt:previous",
       "<A-k>": "prompt:removetail",
       "<C-F>": "prompt:right",
       "<C-B>": "prompt:left",
       "<C-D>": "prompt:deletebackward",
       "<C-Y>": "prompt:paste",
-      "<A-g>": "do:selectall",
-      "<A-v>": "feedkeys:<PageUp>",
-      "<C-V>": "feedkeys:<PageDown>",
+      "<A-p>": "prompt:previous",
+      "<A-n>": "prompt:next",
       "<A-a>": "normal:gg",
       "<A-e>": "normal:G",
-      "<C-G>": "do:toggle",
-      "<C-Q>": "do:help",
+      "<A-v>": "feedkeys:<PageUp>",
+      "<C-V>": "feedkeys:<PageDown>",
+      "<A-g>": "do:selectall",
       "<C-X>": "do:previewtoggle",
-      "<A-p>": "do:previewup",
-      "<A-n>": "do:previewdown"
+      "<C-P>": "do:previous",
+      "<C-N>": "do:next",
+      "<C-G>": "do:toggle",
+      "<C-Q>": "do:help"
     },
     "normalMappings": {
       "u": "feedkeys:<PageUp>",
@@ -191,6 +195,5 @@
     "hint": {
       "enable": true
     }
-  },
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
+  }
 }
