@@ -13,9 +13,7 @@ fi
 if [[ $OSTYPE == linux-android ]]; then
   export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin\
 :/vendor/bin:/product/bin:/sbin
-fi
-# https://github.com/termux/termux-packages/issues/4781
-if [[ $OSTYPE == linux-android ]]; then
+  # https://github.com/termux/termux-packages/issues/4781
   export MANPAGER=batman
 elif (($+commands[col] && $+commands[bat])); then
   export MANPAGER="sh -c 'col -bx|bat -plman'"
@@ -31,7 +29,7 @@ if [[ -f ~/.bash_login ]]; then
   . ~/.bash_login
 fi
 # less
-export LESS=--mouse
+export LESS='--mouse -I'
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

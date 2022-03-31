@@ -3,7 +3,6 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
-PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
 # man
@@ -44,8 +43,12 @@ export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
 --preview-window="+{2}"
 --bind=tab:down
 --bind=btab:up
---bind=alt-j:jump
---bind=alt-k:kill-line
+--bind=ctrl-j:jump
+--bind=ctrl-k:kill-line
+--bind=ctrl-n:down
+--bind=ctrl-p:up
+--bind=alt-j:previous-history
+--bind=alt-k:next-history
 --bind=ctrl-q:clear-query
 --bind=alt-a:first
 --bind=alt-e:last

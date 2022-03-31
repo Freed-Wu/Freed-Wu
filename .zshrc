@@ -15,6 +15,7 @@ else
 fi
 
 # cannot wait
+ZPFX="$HOME/.local"
 zinit id-as depth'1' null for zdharma-continuum/zinit
 
 # brew add some paths which may contain tmux
@@ -133,14 +134,6 @@ zinit id-as'.vivid' depth'1' wait lucid \
   atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
   if'(($+commands[vivid]))' \
   for zdharma-continuum/null
-zinit id-as depth'1' wait lucid reset atpull'%atclone' pick"clrs.zsh" \
-  nocompile'!' \
-  atclone"[[ -z $commands[dircolors] ]] && local P=g
-  \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS
-  \${P}dircolors -b LS_COLORS > clrs.zsh" \
-  atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
-  if'((! $+commands[vivid]))' \
-  for trapd00r/LS_COLORS
 zstyle ':completion:*' list-separator ''
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' muttrc ${XDG_CONFIG_HOME:-$HOME/.config}/neomutt/neomuttrc
@@ -199,10 +192,6 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 
 zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
   for Freed-Wu/pinyin-completion
-
-zinit id-as depth'1' wait lucid as'completion' \
-  if'[[ ! -f /usr/share/zsh/site-functions/_setup.py ]]' \
-  for zsh-users/zsh-completions
 # 1}}} Complete #
 
 # Log {{{1 #
@@ -357,10 +346,11 @@ zinit id-as depth'1' wait lucid \
   for bigH/auto-sized-fzf
 compdef _vim vi
 # after loading completions
-# android's zsh doesn't have bashcompinit
-zinit id-as depth'1' wait lucid \
-  if'[[ $OSTYPE != linux-android ]]' \
-  for 3v1n0/zsh-bash-completions-fallback
+if [[ $OSTYPE == linux-android ]]; then
+  ZSH_BASH_COMPLETIONS_FALLBACK_PATH=$PREFIX/share/bash-completion
+  XDG_DATA_DIRS=$PREFIX/local/bin:$PREFIX/bin
+fi
+zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
 if (($+commands[gpg] && $+commands[tty])); then
   export GPG_TTY=$(tty)
 fi
@@ -392,32 +382,5 @@ zinit id-as depth'1' wait lucid null sbin's/sudo' sbin's/su' \
   if'[[ $OSTYPE == cygwin || $OSTYPE == msys ]]' \
   for imachug/win-sudo
 # 2}}} Superuser #
-
-# Download {{{2 #
-zinit id-as depth'1' wait lucid null sbin'bash/release/*' \
-  if'((! $+commands[gsync] || ! $+commands[gupload] ))' \
-  for labbots/google-drive-upload
-zinit id-as depth'1' wait lucid null sbin'release/bash/*' \
-  if'((! $+commands[gdl]))' \
-  for Akianonymus/gdrive-downloader
-# 2}}} Download #
-
-# Tool {{{2 #
-zinit id-as depth'1' wait lucid as'null' sbin'spark' \
-  if'((! $+commands[spark]))' \
-  for holman/spark
-zinit id-as depth'1' wait lucid as'null' sbin'slugify' \
-  if'((! $+commands[slugify]))' \
-  for benlinton/slugify
-zinit id-as depth'1' wait lucid as'null' sbin'ugit' sbin'git-undo' \
-  if'((! $+commands[ugit] && $+commands[git] && $+commands[fzf]))' \
-  for Bhupesh-V/ugit
-zinit id-as depth'1' wait lucid as'null' sbin'hr' \
-  if'((! $+commands[hr]))' \
-  for LuRsT/hr
-zinit id-as depth'1' wait lucid as'null' sbin'has' \
-  if'((! $+commands[has]))' \
-  for kdabir/has
-# 2}}} Tool #
 # 1}}} Program #
 # ex: isfname-=/ foldmethod=marker path=.,~/.local/share/zinit/plugins

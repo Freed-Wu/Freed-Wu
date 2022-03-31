@@ -1,0 +1,14 @@
+_JAVA_HOME="$(ls -d /usr/lib/jvm/java-*-openjdk)"
+if [ -d "$_JAVA_HOME" ]; then
+	JAVA_HOME=$_JAVA_HOME
+fi
+
+if [ "$TERMUX_PACKAGES_OFFLINE" = false ]; then
+	if [ -d /opt/android-sdk ]; then
+		ANDROID_HOME=/opt/android-sdk
+	fi
+	if [ -d /opt/android-ndk ]; then
+		NDK=/opt/android-ndk
+	fi
+fi
+# ex: filetype=bash
