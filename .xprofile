@@ -3,6 +3,7 @@
 # because X don't support.
 # posix
 # the following line will be ineffective in tty
+PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
 # man
