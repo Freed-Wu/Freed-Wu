@@ -4,5 +4,10 @@ x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
 
 [Default Applications]
 text/plain=kitty-open.desktop;
+text/html=firefox.desktop;
+application/rtf=libreoffice-writer.desktop;
 application/pdf=org.pwmt.zathura.desktop;
 inode/directory=org.gnome.Nautilus.desktop;
+image/jpeg=org.gnome.eog.desktop;
+image/png=org.gnome.eog.desktop;
+image/gif=org.gnome.eog.desktop;

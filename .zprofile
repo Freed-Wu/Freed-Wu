@@ -10,19 +10,24 @@ fi
 if [[ -z $LANG ]]; then
   export LANG=en_US.UTF-8
 fi
-if [[ $OSTYPE == linux-android ]]; then
-  export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin\
-:/vendor/bin:/product/bin:/sbin
-  # https://github.com/termux/termux-packages/issues/4781
-  export MANPAGER=batman
-elif (($+commands[col] && $+commands[bat])); then
-  export MANPAGER="sh -c 'col -bx|bat -plman'"
-fi
 # tty
 if [[ -n $DISPLAY ]]; then
   export BROWSER=xdg-open
 else
   export BROWSER=w3m
+fi
+if [[ $OSTYPE == linux-android ]]; then
+  export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin\
+:/vendor/bin:/product/bin:/sbin
+  # https://github.com/termux/termux-packages/issues/4781
+  export MANPAGER=batman
+  if [[ -n $DISPLAY ]]; then
+    export BROWSER=termux-open
+  else
+    export BROWSER=exo-open
+  fi
+elif (($+commands[col] && $+commands[bat])); then
+  export MANPAGER="sh -c 'col -bx|bat -plman'"
 fi
 # user customize
 if [[ -f ~/.bash_login ]]; then

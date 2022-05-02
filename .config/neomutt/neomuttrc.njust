@@ -1,11 +1,12 @@
 set folder = imaps://imap.exmail.qq.com
 set imap_user = 916101630117@njust.edu.cn
 set imap_pass = $MAIL_PASS
+set from = $imap_user
 
 set postponed = +Drafts
 set record = '+Sent Messages'
 set trash = '+Deleted Messages'
-set smtp_url = smtps://916101630117\@njust.edu.cn@smtp.exmail.qq.com
+set smtp_url = smtps://916101630117@njust.edu.cn@smtp.exmail.qq.com
 set smtp_pass = $MAIL_PASS
 unmailboxes *
 mailboxes +INBOX +Drafts '+Sent Messages' '+Deleted Messages' +Junk \

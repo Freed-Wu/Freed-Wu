@@ -8,12 +8,14 @@ export VISUAL=vi
 export EDITOR=$VISUAL
 # man
 export MANOPT=-Lzh_CN.UTF-8
-# hub
-GITHUB_USER=$(git config --global user.name)
-export GITHUB_USER
-# mutt
-EMAIL=$(git config --global user.email)
+# neomutt
+EMAIL="$(git config --global user.email)"
 export EMAIL
+# debmake
+DEBFULLNAME="$(git config --global user.name)"
+export DEBFULLNAME
+DEBEMAIL="$EMAIL"
+export DEBEMAIL
 # rg
 RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
 export RIPGREP_CONFIG_PATH

@@ -1,6 +1,7 @@
 set folder = imaps://imap.qq.com
 set imap_user = $EMAIL
 set imap_pass = $EMAIL_PASS
+set from = $imap_user
 
 set postponed = +Drafts
 set record = '+Sent Messages'
@@ -10,5 +11,5 @@ set smtp_pass = $EMAIL_PASS
 unmailboxes *
 mailboxes +INBOX +Drafts '+Sent Messages' '+Deleted Messages' +Junk \
 +其他文件夹 +其他文件夹/github +其他文件夹/bugzilla +其他文件夹/wakatime \
-+其他文件夹/people +其他文件夹/class +其他文件夹/vertification \
++其他文件夹/people +其他文件夹/class +其他文件夹/verification \
 +其他文件夹/QQ邮件订阅

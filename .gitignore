@@ -107,6 +107,9 @@
 !/.config/pylintrc
 !/.config/zathura/zathura*
 !/.config/neomutt/
+/.config/neomutt/*
+!/.config/neomutt/neomuttrc*
+!/.config/neomutt/*/
 !/.config/mutt/
 !/.config/git/
 /.config/git/*

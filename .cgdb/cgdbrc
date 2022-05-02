@@ -11,7 +11,7 @@ map J i<C-U>next<CR><Esc>
 map K i<C-U>reverse-next<CR><Esc>
 map L i<C-U>step<CR><Esc>
 map H i<C-U>reverse-step<CR><Esc>
-map I i<C-U>step<CR><Esc>
 map u i<C-U>up<CR><Esc>
 map d i<C-U>down<CR><Esc>
 map S i<C-U>checkpoint<CR><Esc>
+map <CR> i<C-U>start<CR><Esc>

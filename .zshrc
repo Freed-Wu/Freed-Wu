@@ -93,6 +93,9 @@ setopt pushdignoredups
 if (($+options[cdsilent])); then
   setopt cdsilent
 fi
+if (($+options[pushdsilent])); then
+  setopt pushdsilent
+fi
 
 setopt globstarshort
 setopt magicequalsubst
@@ -141,6 +144,7 @@ zstyle ':completion:*' mail-directory ${XDG_CACHE_HOME:-$HOME/.cache}/neomutt
 zstyle ':completion:*' word true
 zstyle ':completion::complete:*' use-cache true
 zstyle ':completion::complete:*' call-command true
+zstyle ':completion:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':completion:*:descriptions' format '%d'
 zstyle ':completion:*:git-checkout:*' sort false
 # work when fzf-tab is not installed
@@ -149,29 +153,48 @@ zstyle ':completion:*' menu select
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   for Aloxaf/fzf-tab
+# general
 zstyle ':fzf-tab:*' prefix ''
 zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
 zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
-zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
 zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
-zstyle ':fzf-tab:complete:(\\|*/|)sudo:*' fzf-preview 'less =${(Q)word}'
+zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
+zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
+  fzf-preview 'echo ${(P)word}'
+
+# alias
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
+zstyle ':fzf-tab:complete:(\\|)zinit:*' fzf-preview \
+  "less ${ZINIT[PLUGINS_DIR]}/"'${(Q)word}/README*'
+
+# command
+zstyle ':fzf-tab:complete:(\\|*/|)pip:*' fzf-preview \
+  'pip show ${(Q)word}|bat --color=always -lyaml'
+zstyle ':fzf-tab:complete:(\\|*/|)(pacman|yay):*' \
+  fzf-preview 'pacman -Qi ${(Q)word}|bat --color=always -lyaml'
+zstyle ':fzf-tab:complete:(\\|*/|)apt:*' fzf-preview \
+  'apt show ${(Q)word}|bat --color=always -lyaml'
+zstyle ':fzf-tab:complete:(\\|*/|)apt-cache:*' fzf-preview \
+  'apt-cache show ${(Q)word}|bat --color=always -lyaml'
+zstyle ':fzf-tab:complete:(\\|*/|)dpkg:*' fzf-preview 'dpkg -L ${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
-zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
-zstyle ':fzf-tab:complete:svn-help:*' fzf-preview 'svn help $word'
-zstyle ':fzf-tab:complete:zinit:*' fzf-preview "less ${ZINIT[PLUGINS_DIR]}/\$word"
-zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
-  'SYSTEMD_COLORS=1 systemctl status $word'
-zstyle ':completion:*:processes' command \
-  "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:(\\|*/|)sudo:*' fzf-preview 'less =${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|*/|)gh:*' fzf-preview \
+  "less ~/.local/share/gh/extensions/gh-\$word/manifest.yml"
+zstyle ':fzf-tab:complete:(\\|*/|)pygmentize:*' fzf-preview \
+  'pygmentize -L $word|bat -plrst --color=always'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-preview \
   '[ "$group" = "process ID" ] && ps -p$word -wocmd --no-headers'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-flags \
   --preview-window=down:3:wrap
-zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
-  fzf-preview 'echo ${(P)word}'
 zstyle ':fzf-tab:complete:(\\|*/|)(c(make|test|pack)|ccmake|cmake-gui):*' \
   fzf-preview '[[ $word == --help* ]] && cmake ${(Q)word}'
+
+# subcommand
+zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
+  'SYSTEMD_COLORS=1 systemctl status $word'
+zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
+zstyle ':fzf-tab:complete:svn-help:*' fzf-preview 'svn help $word'
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
   'git diff $word | delta'
 zstyle ':fzf-tab:complete:git-log:*' fzf-preview \

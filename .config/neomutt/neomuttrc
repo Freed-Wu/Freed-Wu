@@ -1,5 +1,5 @@
 set sleep_time = 0
-set shell =
+set realname = $DEBFULLNAME
 set attach_save_dir = ~/Downloads
 set digest_collapse = no
 set use_envelope_from
@@ -10,7 +10,7 @@ set ispell = aspell
 set charset = utf-8
 set edit_headers
 set rfc2047_parameters
-set signature = "echo Best Regards$'\n'$AUTHOR|"
+set signature = "echo Best Regards$'\n'$DEBFULLNAME|"
 set sort = reverse-date
 set query_command = 'mutt_ldap_query.pl %s'
 set abort_unmodified = no
@@ -27,6 +27,9 @@ set sidebar_short_path
 set sidebar_folder_indent
 set sidebar_indent_string = '├── '
 auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
+
+set ssl_starttls=yes
+set ssl_force_tls=yes
 
 # Handler for gzip compressed mailboxes
 open-hook   '\.gz$' "gzip --stdout --decompress '%f' >  '%t'"

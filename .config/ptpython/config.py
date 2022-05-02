@@ -550,6 +550,23 @@ def configure(repl) -> None:
         else:
             b.insert_text(" ^ ")
 
+    @repl.add_key_binding("<", "<", filter=ViInsertMode())
+    @repl.add_key_binding("<", "<", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("<<")
+        else:
+            b.insert_text(" << ")
+
+    @repl.add_key_binding(">", ">", filter=ViInsertMode())
+    @repl.add_key_binding(">", ">", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text(">>")
+        else:
+            b.insert_text(" >> ")
     # 3}}} Operation #
 
     # Relation {{{3 #
@@ -718,6 +735,23 @@ def configure(repl) -> None:
         else:
             b.insert_text(" ^= ")
 
+    @repl.add_key_binding("<", "<", "=", filter=ViInsertMode())
+    @repl.add_key_binding("<", "<", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text("<<=")
+        else:
+            b.insert_text(" <<= ")
+
+    @repl.add_key_binding(">", ">", "=", filter=ViInsertMode())
+    @repl.add_key_binding(">", ">", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text(">>=")
+        else:
+            b.insert_text(" >>= ")
     # 3}}} Assign #
     # 2}}} Two #
     # 1}}} smartinput #
@@ -815,6 +849,21 @@ def configure(repl) -> None:
         event.cli.current_buffer.insert_text(")")
         event.current_buffer.validate_and_handle()
 
+    @repl.add_key_binding("escape", "c-n", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-n", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
+        )
+        event.cli.current_buffer.insert_text("next(iter(")
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_end_of_line_position()
+        )
+        event.cli.current_buffer.insert_text("))")
+        event.current_buffer.validate_and_handle()
+
     @repl.add_key_binding("escape", "c-e", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-e", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
@@ -876,7 +925,6 @@ def configure(repl) -> None:
             b.insert_text(next(x for x in t if x))
             if len(t) != 1:
                 b.insert_text(event.data)
-
     # 1}}} autosuggestions #
 
     # Custom key binding for some simple autocorrection while typing.
@@ -898,6 +946,4 @@ def configure(repl) -> None:
 
         b.insert_text(" ")
     """
-
-
 # ex: foldmethod=marker

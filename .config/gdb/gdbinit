@@ -1,6 +1,21 @@
+set auto-load safe-path /
 set history filename ~/.cache/gdbinit
 set history save on
+set print array on
+set output-radix 16
 set logging overwrite on
 set disable-randomization on
 set confirm off
 set extended-prompt \[\e[30;45m\w\e[35;44m\e[37m\f\e[34;43m\e[30m\t\e[33;40m\e[37m\]\n❯ 
+
+define arg
+  print *argv @ argc
+end
+
+define pp
+  set $i = 0
+  while $i < $argc
+    eval "print $arg%d", $i
+    set $i += 1
+  end
+end

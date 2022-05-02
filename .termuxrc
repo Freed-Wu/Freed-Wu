@@ -3,7 +3,7 @@ if [ -d "$_JAVA_HOME" ]; then
 	JAVA_HOME=$_JAVA_HOME
 fi
 
-if [ "$TERMUX_PACKAGES_OFFLINE" = false ]; then
+if [ "${TERMUX_PACKAGES_OFFLINE-false}" = false ]; then
 	if [ -d /opt/android-sdk ]; then
 		ANDROID_HOME=/opt/android-sdk
 	fi

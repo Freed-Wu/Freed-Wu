@@ -2,3 +2,4 @@
 --theme=OneHalfDark
 -m'*.ldf:LaTeX'
 -m'*.tikz:LaTeX'
+-m'_*:Bourne Again Shell (bash)'
