@@ -1,7 +1,7 @@
 " Prefix {{{1 "
-let $XDG_CONFIG_HOME = $HOME . '/.config'
-let $XDG_DATA_HOME = $HOME . '/.local/share'
-let $XDG_CACHE_HOME = $HOME . '/.cache'
+let $XDG_CONFIG_HOME = expand('$HOME/.config')
+let $XDG_DATA_HOME = expand('$HOME/.local/share')
+let $XDG_CACHE_HOME = expand('$HOME/.cache')
 if !has('nvim')
   " vint: next-line -ProhibitSetNoCompatible
   set nocompatible
@@ -14,7 +14,7 @@ if !has('nvim')
   if !isdirectory(&directory)
     call mkdir(&directory, 'p')
   endif
-  let $MYVIMRC = $XDG_CONFIG_HOME . '/nvim/init.vim'
+  let $MYVIMRC = expand('$XDG_CONFIG_HOME/nvim/init.vim')
 endif
 " after set encoding
 scriptencoding utf-8
@@ -120,7 +120,7 @@ let g:readline_has_bash = 1
 
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
-let g:netrw_home = $XDG_CACHE_HOME . '/nvim/netrw'
+let g:netrw_home = expand('$XDG_CACHE_HOME/nvim/netrw')
 let g:netrw_nogx = 1
 let g:netrw_altfile = 1
 let g:netrw_winsize = 30
@@ -149,7 +149,18 @@ augroup init
   if exists(':wshada')
     autocmd VimLeave * wshada!
   endif
+  " before FileType to avoid conflict with sleuth
+  autocmd BufNewFile *.{c,h} setlocal tabstop=8
+        \ | setlocal shiftwidth=8
+        \ | setlocal noexpandtab
+  autocmd BufNewFile *.snippets setlocal tabstop=4
+        \ | setlocal shiftwidth=4
+  autocmd BufNewFile *.txt setlocal tabstop=8
+        \ | setlocal shiftwidth=8
+        \ | setlocal noexpandtab
 augroup END
+
+cnoremap <C-G> <C-U><C-H>
 
 snoremap <C-B> <Left>
 snoremap <C-F> <Right>
@@ -232,20 +243,19 @@ let g:dein#install_github_api_token = $GITHUB_TOKEN
 let g:dein#notification_icon =
       \ '/usr/share/icons/hicolor/128x128/apps/nvim.png'
 let g:dein#types#git#clone_depth = 1
-if !isdirectory($XDG_DATA_HOME . '/nvim/repos/github.com/Shougo/dein.vim')
+if !isdirectory(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
   if executable('git')
-    call system('git clone --depth=1 https://github.com/Shougo/dein.vim '
-          \ . $XDG_DATA_HOME . '/nvim/repos/github.com/Shougo/dein.vim')
+    call system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim $XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
   else
     finish
   endif
 endif
-if dein#load_state($XDG_DATA_HOME . '/nvim')
-  call dein#begin($XDG_DATA_HOME . '/nvim')
+if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
+  call dein#begin(expand('$XDG_DATA_HOME/nvim'))
   " 1}}} PluginPrefix "
 
   " Plugin {{{1 "
-  call dein#add($XDG_CONFIG_HOME . '/nvim', {
+  call dein#add(expand('$XDG_CONFIG_HOME/nvim'), {
         \ 'frozen': 1,
         \ 'merged': 0,
         \ 'if': filereadable(expand('<sfile>:p:h')
@@ -305,7 +315,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
   " Log {{{1 "
   " too slow, don't enable it on msys
   call dein#add('wakatime/vim-wakatime', {
-        \ 'if': has('pythonx') && filereadable($HOME . '/.wakatime.cfg'),
+        \ 'if': has('pythonx') && filereadable(expand('$HOME/.wakatime.cfg')),
         \ })
   call dein#add('https://gitlab.com/code-stats/code-stats-vim', {
         \ 'if': has('pythonx') && !empty($CODESTATS_API_KEY),
@@ -430,6 +440,9 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ })
   " https://github.com/neoclide/coc-yank/issues/36
   call dein#add('machakann/vim-highlightedyank')
+  call dein#add('vim-scripts/ifdef-highlighting', {
+        \ 'hook_source': 'call init#ifdef_highlighting#source()',
+        \ })
   " 2}}} Highlight "
 
   " Fold {{{2 "
@@ -542,7 +555,7 @@ if dein#load_state($XDG_DATA_HOME . '/nvim')
         \ 'hook_source': 'call init#grex#source()',
         \ })
   call dein#add('tyru/caw.vim', {
-        \ 'on_map': {'n': ['gc', 'gs']},
+        \ 'on_map': {'n': ['gc', 'gs'], 'x': ['gc', 'gs']},
         \ 'hook_source': 'call init#caw#source()',
         \ })
   call dein#add('voldikss/vim-browser-search', {

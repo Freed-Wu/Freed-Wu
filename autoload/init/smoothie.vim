@@ -4,7 +4,8 @@ function! init#smoothie#source() abort
   nmap <C-U> <Plug>(SmoothieUpwards)
   nmap <C-F> <Plug>(SmoothieForwards)
   nmap <C-B> <Plug>(SmoothieBackwards)
-  nmap gg    <Plug>(Smoothie_gg)
+  " https://github.com/psliwka/vim-smoothie/issues/34
+  " nmap gg    <Plug>(Smoothie_gg)
   nmap G     <Plug>(Smoothie_G)
   if has('nvim-0.5.0') && has('patch-8.1.1564')
     xmap <C-D> <Plug>(SmoothieDownwards)

@@ -18,3 +18,5 @@ if exists('*nvim_open_win') || exists('*popup_create')
         \ ['E&xecute', 'echo system(getline(".")[col("v") - 1:col("''>")])'],
         \ ]
 endif
+
+call init#init#sh#map()

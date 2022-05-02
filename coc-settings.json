@@ -29,24 +29,24 @@
       }
     },
     "insertMappings": {
-      "<C-J>": "prompt:next",
-      "<C-K>": "prompt:previous",
-      "<A-k>": "prompt:removetail",
+      "<A-j>": "prompt:next",
+      "<A-k>": "prompt:previous",
+      "<C-k>": "prompt:removetail",
       "<C-F>": "prompt:right",
       "<C-B>": "prompt:left",
       "<C-D>": "prompt:deletebackward",
       "<C-Y>": "prompt:paste",
-      "<A-p>": "prompt:previous",
-      "<A-n>": "prompt:next",
       "<A-a>": "normal:gg",
       "<A-e>": "normal:G",
       "<A-v>": "feedkeys:<PageUp>",
       "<C-V>": "feedkeys:<PageDown>",
-      "<A-g>": "do:selectall",
+      "<A-p>": "do:previewup",
+      "<A-n>": "do:previewdown",
       "<C-X>": "do:previewtoggle",
+      "<A-g>": "do:selectall",
+      "<C-G>": "do:toggle",
       "<C-P>": "do:previous",
       "<C-N>": "do:next",
-      "<C-G>": "do:toggle",
       "<C-Q>": "do:help"
     },
     "normalMappings": {
@@ -81,7 +81,8 @@
   },
 
   "pydocstring": {
-    "enableFileAction": true
+    "enableFileAction": true,
+    "doqPath": "/usr/bin/doq"
   },
 
   "diagnostic-languageserver": {
@@ -91,7 +92,6 @@
       "html": "alex-html",
       "vim": "vint",
       "markdown": ["write-good", "markdownlint", "alex"],
-      "mail": "languagetool",
       "sh": "shellcheck",
       "elixir": ["mix_credo", "mix_credo_compile"],
       "php": ["phpstan", "psalm"],

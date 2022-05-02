@@ -118,9 +118,9 @@ function! init#coc#source() abort
   nnoremap <silent> q_ :<C-U>CocList -A --normal yank<CR>
   nnoremap <silent> z/ :<C-U>CocList files<CR>
   nnoremap <silent> z? :<C-U>CocList mru<CR>
-  nnoremap <silent> z; :<C-U>CocList -I words<CR>
-  nnoremap <silent> z, :<C-U>CocList -I lines<CR>
-  nnoremap <silent> z: :<C-U>CocList -I grep<CR>
+  nnoremap <silent> z; :<C-U>CocList -I -A grep<CR>
+  nnoremap <silent> z, :<C-U>CocList -I -A words<CR>
+  nnoremap <silent> z: :<C-U>CocList -I -A lines<CR>
   nnoremap <silent> z' :<C-U>CocList -I translators<CR>
   nnoremap <silent> g[ :<C-U>set operatorfunc=init#init#coc#grep<CR>g@
   xnoremap <silent> g[ :<C-U>call init#init#coc#grep(visualmode())<CR>

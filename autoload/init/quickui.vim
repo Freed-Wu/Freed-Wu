@@ -75,10 +75,10 @@ function! init#quickui#post_source() abort
         \ ['P&ictures', 'Fern -drawer ~/Pictures'],
         \ ['&Trash', 'Fern -drawer ~/.local/share/Trash/files'],
         \ ['--', ''],
-        \ ['Vim &config', 'Fern -drawer ' . $XDG_CONFIG_HOME . '/nvim'],
-        \ ['&Vim data', 'Fern -drawer ' . $XDG_DATA_HOME . '/nvim'],
+        \ ['Vim &config', expand('Fern -drawer $XDG_CONFIG_HOME/nvim')],
+        \ ['&Vim data', expand('Fern -drawer $XDG_DATA_HOME/nvim')],
         \ ['--', ''],
-        \ ['&UDISK', 'Fern -drawer /run/media/' . $USER],
+        \ ['&UDISK', expand('Fern -drawer /run/media/$USER')],
         \ ['&Phone', 'Fern -drawer /run/user/1000/gvfs'],
         \ ['&Mount', 'Fern -drawer /mnt'],
         \ ] , {_, v -> v + [get(v, 1)]}))

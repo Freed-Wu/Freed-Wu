@@ -11,5 +11,6 @@ endfunction
 
 augroup init#indentline
   autocmd!
+  autocmd VimEnter * IndentLinesReset
   autocmd VimEnter * autocmd FileType * IndentLinesReset
 augroup END

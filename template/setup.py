@@ -57,6 +57,7 @@ setup(
     project_urls={
         "Bug Reports": f"{VCS_URL}/issues",
         "Source": VCS_URL,
+        "Homepage": f"https://{NAME}.readthedocs.io",
     },
     author="%USER%",
     author_email="%MAIL%",

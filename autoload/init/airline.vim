@@ -20,35 +20,30 @@ function! init#airline#source() abort
         \ 'whitespace': '',
         \ }
   let g:airline_mode_map = {
-        \ '__'   : '-',
-        \ 'c'    : ':',
-        \ 'i'    : '▏',
-        \ 'ic'   : '≣',
-        \ 'ix'   : '=',
-        \ 'n'    : '█',
-        \ 'ni'   : '▌',
-        \ 'no'   : '▄',
-        \ 'multi': '…',
-        \ 'R'    : '▁',
-        \ 'Rv'   : '∿',
-        \ 's'    : '→',
-        \ 'S'    : '↓',
-        \ "\x13"   : '↘',
-        \ 't'    : '!',
-        \ 'v'    : '▶',
-        \ 'V'    : '▼',
-        \ "\x16"   : '◆',
+        \ '__':     '-',
+        \ 'c':      ':',
+        \ 'i':      '▏',
+        \ 'ic':     '≣',
+        \ 'ix':     '=',
+        \ 'n':      '█',
+        \ 'ni':     '▌',
+        \ 'no':     '▄',
+        \ 'multi':  '…',
+        \ 'R':      '▁',
+        \ 'Rv':     '∿',
+        \ 's':      '→',
+        \ 'S':      '↓',
+        \ "\<C-S>": '↘',
+        \ 't':      '!',
+        \ 'v':      '▶',
+        \ 'V':      '▼',
+        \ "\<C-V>": '◆',
         \ }
   if !has('unix') || has('unix') && !has('win32unix') && exists('*trim')
     let g:airline_filetype_overrides = {
             \ 'startify': ['startify', '%{wifi#component()}'],
             \ }
   endif
-
-  let g:airline#extensions#ale#error_symbol = '✗'
-  let g:airline#extensions#ale#warning_symbol = '⚠'
-  let g:airline#extensions#ale#open_lnum_symbol = '☰'
-  let g:airline#extensions#ale#close_lnum_symbol = ''
 
   let g:airline#extensions#coc#error_symbol = '✗'
   let g:airline#extensions#coc#warning_symbol = '⚠'

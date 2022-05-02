@@ -35,5 +35,9 @@ augroup init_filetype
   autocmd BufNewFile,BufRead .octave_hist,*.matlab setfiletype octave
   autocmd BufNewFile,BufRead *.{gnuplot,plt},.gnuplot_history setfiletype gnuplot
   " 1}}} Script "
+
+  " Compile {{{1 "
+  autocmd BufNewFile,BufRead *.cl setfiletype opencl
+  " 1}}} Compile "
 augroup END
 " ex: foldmethod=marker

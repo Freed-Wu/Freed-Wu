@@ -42,13 +42,13 @@ function! init#startify#source() abort
   let g:startify_change_to_vcs_root = 1
   let g:startify_enable_special = 0
   let g:startify_relative_path = 1
-  if filereadable($PREFIX . '/etc/issue')
-    let g:startify_custom_header = map(readfile($PREFIX . '/etc/issue'), {_, v -> substitute(v, "\x1b\[[0-9;\?]\\{-}\\a", '', 'g')})
+  if filereadable(expand('$PREFIX/etc/issue'))
+    let g:startify_custom_header = map(readfile(expand('$PREFIX/etc/issue')), {_, v -> substitute(v, "\x1b\[[0-9;\?]\\{-}\\a", '', 'g')})
   endif
   let g:startify_bookmarks = [
         \ {g:maplocalleader . 'v': fnamemodify($MYVIMRC, ':~')},
-        \ {g:maplocalleader . 'c': fnamemodify($XDG_CONFIG_HOME, ':~') . '/nvim/autoload/init/coc.vim'},
-        \ {g:maplocalleader . 'j': fnamemodify($XDG_CONFIG_HOME, ':~') . '/nvim/coc-settings.json'},
+        \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/autoload/init/coc.vim'), ':~')},
+        \ {g:maplocalleader . 'j': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/coc-settings.json'), ':~')},
         \ {g:maplocalleader . 's': '~/.zshrc'},
         \ {g:maplocalleader . 'z': '~/.zprofile'},
         \ {g:maplocalleader . 'x': '~/.xprofile'},

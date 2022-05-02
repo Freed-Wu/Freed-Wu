@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.2.0
     hooks:
       - id: check-added-large-files
       - id: fix-byte-order-marker
@@ -21,7 +21,7 @@ repos:
       - id: check-toml
       - id: check-json
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.1.11
+    rev: v1.1.13
     hooks:
       - id: remove-crlf
   - repo: https://github.com/codespell-project/codespell
@@ -48,7 +48,7 @@ repos:
         args: [-i, "2"]
         exclude: ^\.z(profile|shrc)|^\.config/git|^.*\.zsh|^template/build.sh
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.13
+    rev: 0.7.14
     hooks:
       - id: mdformat
         args: [--number]
