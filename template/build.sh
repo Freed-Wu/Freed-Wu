@@ -1,12 +1,12 @@
 TERMUX_PKG_HOMEPAGE=https://github.com/
-TERMUX_PKG_DESCRIPTION="
+TERMUX_PKG_DESCRIPTION='
 .!gh repo view --json description -q .description %HERE%
-"
+'
 TERMUX_PKG_LICENSE=GPL-3.0
 # _COMMIT=
 TERMUX_PKG_MAINTAINER=@termux
 TERMUX_PKG_VERSION=
-.!curl -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos//releases/latest" 2>/dev/null | jq -r '.tag_name'
+.!curl -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos//releases/latest 2>/dev/null | jq -r .tag_name | sed s/^v//
 TERMUX_PKG_SRCURL=$TERMUX_PKG_HOMEPAGE/archive/v$TERMUX_PKG_VERSION.tar.gz
 # TERMUX_PKG_SRCURL=$TERMUX_PKG_HOMEPAGE.git
 # TERMUX_PKG_GIT_BRANCH=master

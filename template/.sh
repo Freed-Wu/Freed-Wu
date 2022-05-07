@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 #? v0.0.1
 ##? usage: %FFILE% [options]
 ##?

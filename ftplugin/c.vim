@@ -6,6 +6,11 @@ nnoremap <silent><buffer> <LocalLeader>d :<C-U>CocCommand clangd.switchSourceHea
 nnoremap <silent><buffer> <LocalLeader>t :<C-U>CocCommand clangd.switchSourceHeader tab\ drop<CR>
 nnoremap <silent><buffer> <LocalLeader>b :<C-U>CocCommand clangd.switchSourceHeader bdelete<CR>
 
-runtime syntax/ifdef.vim
-syntax on
-Undefine \k\+
+if match(&filetype, '\.ifdef') == -1
+  let &filetype .= '.ifdef'
+  augroup init_c
+    autocmd!
+    autocmd FileType *.ifdef syntax on
+          \ | Undefine \k\+
+  augroup END
+endif

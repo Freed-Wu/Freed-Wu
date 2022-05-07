@@ -67,7 +67,7 @@ function! init#quickui#post_source() abort
   let g:quickui_show_tip = 1
   call quickui#menu#install('&File', map([
         \ ['&File', 'Fern -drawer .'],
-        \ ['&Go', 'Fern -drawer %:p:h'],
+        \ ['C&WD', 'Fern -drawer %:p:h'],
         \ ['--', ''],
         \ ['&Downloads', 'Fern -drawer ~/Downloads'],
         \ ['D&ocuments', 'Fern -drawer ~/Documents'],

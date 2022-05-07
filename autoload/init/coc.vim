@@ -78,6 +78,8 @@ function! init#coc#source() abort
   nmap <C-W>d <C-W>s<Plug>(coc-definition)
   nmap <C-W>D <C-W>s<Plug>(coc-declaration)
 
+  nmap gq <plug>(coc-format-selected)
+  xmap gq <plug>(coc-format-selected)
   nmap gqq <plug>(coc-format)
 
   nmap w <Plug>(coc-ci-w)
