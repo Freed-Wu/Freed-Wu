@@ -1,3 +1,7 @@
 unset SESSION_MANAGER
 unset DBUS_SESSION_BUS_ADDRESS
-test -x $commands[xfce4-session] && (xfce4-session &) || (test -x $commands[gnome-shell] && (gnome-shell &))
+command -v xfce4-session && xfce4-session &
+command -v lxqt-session && lxqt-session &
+command -v mate-session && mate-session &
+command -v gnome-shell && gnome-shell &
+# ex: filetype=sh

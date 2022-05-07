@@ -1,1 +1,2 @@
-vncserver &
+vncserver -kill :1 || vncserver &
+# ex: filetype=sh

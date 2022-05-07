@@ -33,7 +33,7 @@ if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux])); then
   exec tmux new -As0
 fi
 # windows don't support screen
-if [[ $OSTYPE == Cygwin || $OSTYPE == Msys ]] && (($+TMUX)); then
+if [[ $OSTYPE == cygwin || $OSTYPE == msys ]] && (($+TMUX)); then
   export TERM=xterm-256color
 fi
 
@@ -367,7 +367,12 @@ zinit id-as depth'1' wait lucid \
   atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
   if'(($+commands[fzf] && $+commands[bc]))' \
   for bigH/auto-sized-fzf
+# vi is symbolic link to (n)vim
 compdef _vim vi
+# https://github.com/msys2/MSYS2-packages/issues/2965
+if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
+  compdef _files start
+fi
 # after loading completions
 if [[ $OSTYPE == linux-android ]]; then
   ZSH_BASH_COMPLETIONS_FALLBACK_PATH=$PREFIX/share/bash-completion
