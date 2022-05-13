@@ -314,13 +314,6 @@ function! init#smartinput#post_source() abort
   " 1}}} Three "
 
   " One {{{1 "
-  call smartinput#map_to_trigger('i', '<CR>', '<CR>', '<CR>')
-  call smartinput#define_rule({
-        \ 'at': '\s\+\%#$',
-        \ 'char': '<CR>',
-        \ 'input': '<Esc>gelC<CR>',
-        \ })
-
   call smartinput#map_to_trigger('i', ':', ':', ':')
   call smartinput#define_rule({
         \ 'at': '\%#',

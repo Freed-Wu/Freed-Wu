@@ -12,5 +12,6 @@ if match(&filetype, '\.ifdef') == -1
     autocmd!
     autocmd FileType *.ifdef syntax on
           \ | Undefine \k\+
+          \ | highlight default link ifdefUndefined Comment
   augroup END
 endif

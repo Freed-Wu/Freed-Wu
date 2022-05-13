@@ -440,9 +440,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   " https://github.com/neoclide/coc-yank/issues/36
   call dein#add('machakann/vim-highlightedyank')
-  call dein#add('vim-scripts/ifdef-highlighting', {
-        \ 'hook_source': 'call init#ifdef_highlighting#source()',
-        \ })
+  call dein#add('vim-scripts/ifdef-highlighting')
   " 2}}} Highlight "
 
   " Fold {{{2 "
