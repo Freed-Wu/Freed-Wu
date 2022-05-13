@@ -127,7 +127,9 @@ autoload -Uz zmv
 
 # Complete {{{1 #
 if (( $+HOMEBREW_PREFIX )); then
-  FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH
+  fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+elif (( $+MSYSTEM_PREFIX )); then
+  fpath+=$MSYSTEM_PREFIX/share/zsh/site-functions
 fi
 autoload -Uz compinit && compinit
 
@@ -172,15 +174,17 @@ zstyle ':fzf-tab:complete:(\\|*/|)pip:*' fzf-preview \
   'pip show ${(Q)word}|bat --color=always -lyaml'
 zstyle ':fzf-tab:complete:(\\|*/|)(pacman|yay):*' \
   fzf-preview 'pacman -Qi ${(Q)word}|bat --color=always -lyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)apt:*' fzf-preview \
-  'apt show ${(Q)word}|bat --color=always -lyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)apt-cache:*' fzf-preview \
-  'apt-cache show ${(Q)word}|bat --color=always -lyaml'
 zstyle ':fzf-tab:complete:(\\|*/|)dpkg:*' fzf-preview 'dpkg -L ${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|*/|)apt-*:*' fzf-preview \
+  'apt-cache show ${(Q)word}|bat --color=always -lyaml'
+zstyle ':fzf-tab:complete:(\\|*/|)pkg:*' fzf-preview \
+  'pkg info ${(Q)word}|bat --color=always -lyaml'
+zstyle ':fzf-tab:complete:(\\|*/|)brew:*' fzf-preview \
+  'brew info ${(Q)word}|bat --color=always -lyaml'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:(\\|*/|)sudo:*' fzf-preview 'less =${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|*/|)gh:*' fzf-preview \
-  "less ~/.local/share/gh/extensions/gh-\$word/manifest.yml"
+  'less ~/.local/share/gh/extensions/gh-${(Q)word}/manifest.yml'
 zstyle ':fzf-tab:complete:(\\|*/|)pygmentize:*' fzf-preview \
   'pygmentize -L $word|bat -plrst --color=always'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-preview \
@@ -374,10 +378,6 @@ if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
   compdef _files start
 fi
 # after loading completions
-if [[ $OSTYPE == linux-android ]]; then
-  ZSH_BASH_COMPLETIONS_FALLBACK_PATH=$PREFIX/share/bash-completion
-  XDG_DATA_DIRS=$PREFIX/local/bin:$PREFIX/bin
-fi
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
 if (($+commands[gpg] && $+commands[tty])); then
   export GPG_TTY=$(tty)

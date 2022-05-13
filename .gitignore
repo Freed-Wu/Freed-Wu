@@ -232,13 +232,6 @@
 
 # Windows
 !/.minttyrc
-!/.config/sharpkeys/
-/.config/sharpkeys/*
-!/.config/sharpkeys/My\ Keys.skl
-!/.config/PowerShell/
-/.config/PowerShell/*
-!/.config/PowerShell/Microsoft.PowerShell_profile.ps1
-!/.config/msys2/
 
 # Android
 !/.termux/

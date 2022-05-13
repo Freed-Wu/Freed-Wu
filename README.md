@@ -27,8 +27,8 @@ Keep all my computers' configurations same.
 
 - Linux 
   - GNU/Linux 
-    - Gentoo (broken) 
-    - Archlinux (laptop & desktop) 
+    - [Gentoo](https://github.com/Freed-Wu/my-portage) (broken) 
+    - [Archlinux](https://github.com/Freed-Wu/my-pacman.conf) (laptop & desktop) 
     - Deepin (desktop) 
     - Openwrt (router) 泌
     - Ubuntu (docker) 
@@ -37,11 +37,10 @@ Keep all my computers' configurations same.
     - Termux
 - Windows (virtualbox) 
   - Cygwin
-  - Msys
+  - [Msys](https://github.com/Freed-Wu/my-msys2-config)
 
 ## Related
 
 - [my-init.vim](https://github.com/Freed-Wu/my-init.vim)
 - [my-keymaps](https://github.com/Freed-Wu/my-keymaps)
 - [my-x11-keymaps](https://github.com/Freed-Wu/my-x11-keymaps)
-- [my-portage](https://github.com/Freed-Wu/my-portage)

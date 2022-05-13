@@ -11,7 +11,15 @@ if [[ -z $LANG ]]; then
   export LANG=en_US.UTF-8
 fi
 # tty
-if [[ -n $DISPLAY ]]; then
+if [[ $OSTYPE == cygwin ]]; then
+  export BROWSER=start
+  export CYGWIN=winsymlinks:nativestrict
+elif [[ $OSTYPE == msys ]]; then
+  export BROWSER=start
+  export MSYS=winsymlinks:nativestrict
+elif [[ $OSTYPE == darwin ]]; then
+  export BROWSER=open
+elif [[ -n $DISPLAY ]]; then
   export BROWSER=xdg-open
 else
   export BROWSER=w3m
@@ -26,6 +34,8 @@ if [[ $OSTYPE == linux-android ]]; then
   else
     export BROWSER=exo-open
   fi
+  # ~/.local/share/zinit/plugins/zsh-bash-completions-fallback/bash-completions-getter.sh:36
+  export ZSH_BASH_COMPLETIONS_FALLBACK_PATH=$PREFIX/share/bash-completion
 elif (($+commands[col] && $+commands[bat])); then
   export MANPAGER="sh -c 'col -bx|bat -plman'"
 fi

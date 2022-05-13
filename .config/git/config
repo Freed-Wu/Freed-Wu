@@ -27,6 +27,7 @@
 	recurse = true
 [core]
 	autocrlf = input
+	symlink = true
 	pager = bat
 [pager]
 	diff = delta
@@ -59,7 +60,7 @@
 [difftool]
 	prompt = false
 [init]
-	defaultBranch = master
+	defaultBranch = main
 	templateDir = ~/.config/git/templates
 [fetch]
 	prune = true

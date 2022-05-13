@@ -17,11 +17,6 @@ shopt -s globstar
 shopt -s checkhash
 shopt -s mailwarn
 
-if [[ -f /usr/share/fzf-tab-completion/bash/fzf-bash-completion.sh ]]; then
-  . /usr/share/fzf-tab-completion/bash/fzf-bash-completion.sh
-  bind -x '"\t": fzf_bash_completion'
-fi
-
 if [[ -f ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]]; then
   . "$HOME/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash"
 fi
