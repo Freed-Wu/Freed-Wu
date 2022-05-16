@@ -14,9 +14,11 @@ fi
 if [[ $OSTYPE == cygwin ]]; then
   export BROWSER=start
   export CYGWIN=winsymlinks:nativestrict
+  export PATH=$PATH:/proc/cygdrive/c/cygwin
 elif [[ $OSTYPE == msys ]]; then
   export BROWSER=start
   export MSYS=winsymlinks:nativestrict
+  export PATH=$PATH:/proc/cygdrive/c/msys64
 elif [[ $OSTYPE == darwin ]]; then
   export BROWSER=open
 elif [[ -n $DISPLAY ]]; then

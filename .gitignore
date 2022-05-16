@@ -208,6 +208,9 @@
 /.config/gdb/*
 !/.config/gdb/gdbinit
 !/.config/gdb/gdbearlyinit
+!/.config/lsd/
+/.config/lsd/*
+!/.config/lsd/config.yaml
 !/.config/pacman/
 /.config/pacman/*
 !/.config/pacman/makepkg.conf
@@ -232,6 +235,13 @@
 
 # Windows
 !/.minttyrc
+!/AppData/
+/AppData/*
+!/AppData/Roaming/
+/AppData/Roaming/*/
+!/AppData/Local/
+/AppData/Local/*
+!/AppData/Local/nvim
 
 # Android
 !/.termux/

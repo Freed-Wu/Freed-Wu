@@ -128,6 +128,7 @@ autoload -Uz zmv
 # Complete {{{1 #
 if (( $+HOMEBREW_PREFIX )); then
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+# https://github.com/msys2/MSYS2-packages/issues/2997
 elif (( $+MSYSTEM_PREFIX )); then
   fpath+=$MSYSTEM_PREFIX/share/zsh/site-functions
 fi
@@ -151,9 +152,12 @@ zstyle ':completion:*:descriptions' format '%d'
 zstyle ':completion:*:git-checkout:*' sort false
 # work when fzf-tab is not installed
 zstyle ':completion:*' menu select
+# https://github.com/BurntSushi/ripgrep/pull/2196
+zstyle ':completion:*' extra-verbose true
 
+# https://github.com/msys2/MINGW-packages/pull/11664
 zinit id-as depth'1' wait lucid \
-  if'(($+commands[fzf]))' \
+  if'(($+commands[fzf])) && [[ $OSTYPE != msys ]]' \
   for Aloxaf/fzf-tab
 # general
 zstyle ':fzf-tab:*' prefix ''
@@ -182,6 +186,8 @@ zstyle ':fzf-tab:complete:(\\|*/|)pkg:*' fzf-preview \
 zstyle ':fzf-tab:complete:(\\|*/|)brew:*' fzf-preview \
   'brew info ${(Q)word}|bat --color=always -lyaml'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+zstyle ':fzf-tab:complete:(\\|*/|)go:*' fzf-preview \
+  'go help $word|bat --color=always -plman'
 zstyle ':fzf-tab:complete:(\\|*/|)sudo:*' fzf-preview 'less =${(Q)word}'
 zstyle ':fzf-tab:complete:(\\|*/|)gh:*' fzf-preview \
   'less ~/.local/share/gh/extensions/gh-${(Q)word}/manifest.yml'
@@ -321,12 +327,12 @@ zinit id-as depth'1' wait lucid for zdharma-continuum/zui
 # https://github.com/zdharma-continuum/zsh-cmd-architect/pull/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-cmd-architect
 zinit id-as depth'1' wait lucid \
-  if'(($+commands[fzf]))' \
+  if'(($+commands[fzf])) && [[ $OSTYPE != msys ]]' \
   atload'bindkey -Mvicmd / fzf_history_seach' \
   for joshskidmore/zsh-fzf-history-search
 EMOJI_FZF_BINDKEY=^X^I
 zinit id-as depth'1' wait lucid \
-  if'(($+commands[emoji-fzf] && $+commands[fzf]))' \
+  if'(($+commands[emoji-fzf] && $+commands[fzf])) && [[ $OSTYPE != msys ]]' \
   for pschmitt/emoji-fzf.zsh
 autoload -Uz replace-string
 zle -N replace-regex replace-string
@@ -369,13 +375,17 @@ zinit id-as'.direnv' depth'1' wait lucid \
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 zinit id-as depth'1' wait lucid \
   atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
-  if'(($+commands[fzf] && $+commands[bc]))' \
+  if'(($+commands[fzf] && $+commands[bc])) && [[ $OSTYPE != msys ]]' \
   for bigH/auto-sized-fzf
-# vi is symbolic link to (n)vim
+# ln -s =nvim /usr/bin/vi
 compdef _vim vi
 # https://github.com/msys2/MSYS2-packages/issues/2965
-if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
+if [[ $OSTYPE == cygwin ]]; then
   compdef _files start
+elif [[ $OSTYPE == msys  ]]; then
+  compdef _files start
+  # https://github.com/msys2/MSYS2-packages/issues/2996
+  compdef _pacman makepkg-mingw=makepkg pacboy=pacman
 fi
 # after loading completions
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
@@ -390,15 +400,25 @@ alias mv='mv -i'
 alias cp='cp -ri'
 alias rm='rm -i'
 alias rename='rename -i'
+_color=
+# https://github.com/ogham/exa/pull/820
+if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
+  _color=' --color always'
+fi
 if (($+commands[exa])); then
-  alias ls='exa --icons --git -h'
-  alias tree='exa --icons -T'
+  alias ls='exa --icons --git -h'$_color
+  alias tree='exa --icons -T'$_color
+elif (($+commands[lsd])); then
+  alias ls=lsd$_color
+  alias tree='lsd --tree'$_color
 else
   alias ls='ls --color=auto -h'
 fi
+unset _color
 # 1}}} Compatible #
 
 # Program {{{1 #
+# https://github.com/msys2/MSYS2-packages/issues/2998
 # PackageManage {{{2 #
 zinit id-as depth'1' wait lucid as'null' sbin'apt-cyg' \
   if'[[ $OSTYPE == cygwin ]]' \
@@ -410,5 +430,34 @@ zinit id-as depth'1' wait lucid null sbin's/sudo' sbin's/su' \
   if'[[ $OSTYPE == cygwin || $OSTYPE == msys ]]' \
   for imachug/win-sudo
 # 2}}} Superuser #
+
+# Download {{{2 #
+zinit id-as depth'1' wait lucid null sbin'bash/release/*' \
+  if'((! $+commands[gsync] || ! $+commands[gupload] ))' \
+  for labbots/google-drive-upload
+zinit id-as depth'1' wait lucid null sbin'release/bash/*' \
+  if'((! $+commands[gdl]))' \
+  for Akianonymus/gdrive-downloader
+# 2}}} Download #
+
+# Tool {{{2 #
+zinit id-as depth'1' wait lucid as'null' sbin'spark' \
+  if'((! $+commands[spark]))' \
+  for holman/spark
+zinit id-as depth'1' wait lucid as'null' sbin'slugify' \
+  if'((! $+commands[slugify]))' \
+  for benlinton/slugify
+zinit id-as depth'1' wait lucid as'null' sbin'ugit' sbin'git-undo' \
+  if'((! $+commands[ugit] && $+commands[git] && $+commands[fzf])) && [[ $OSTYPE != msys ]]' \
+  for Bhupesh-V/ugit
+zinit id-as depth'1' wait lucid as'null' sbin'hr' \
+  atclone"gzip --to-stdout *.1 > $ZPFX/man/man1/hr.1.gz" \
+  atpull"gzip --to-stdout *.1 > $ZPFX/man/man1/hr.1.gz" \
+  if'((! $+commands[hr]))' \
+  for LuRsT/hr
+zinit id-as depth'1' wait lucid as'null' sbin'has' \
+  if'((! $+commands[has]))' \
+  for kdabir/has
+# 2}}} Tool #
 # 1}}} Program #
 # ex: isfname-=/ foldmethod=marker path=.,~/.local/share/zinit/plugins

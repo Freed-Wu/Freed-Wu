@@ -7,12 +7,13 @@ PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
 # man
+MANPATH="$HOME/.local/man:$MANPATH"
 export MANOPT=-Lzh_CN.UTF-8
 # neomutt
-EMAIL="$(git config --global user.email)"
+EMAIL="$(git config user.email)"
 export EMAIL
 # debmake
-DEBFULLNAME="$(git config --global user.name)"
+DEBFULLNAME="$(git config user.name)"
 export DEBFULLNAME
 DEBEMAIL="$EMAIL"
 export DEBEMAIL
