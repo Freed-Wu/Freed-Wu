@@ -1,5 +1,8 @@
-call vimtex#init()
-call init#init#tex#main()
+try
+  call vimtex#init()
+  call init#init#tex#main()
+catch /^Vim\%((\a\+)\)\=:E117:/
+endtry
 
 setlocal iskeyword+=-
 

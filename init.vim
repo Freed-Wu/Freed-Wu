@@ -170,6 +170,9 @@ snoremap <C-A> <Home>
 snoremap <C-E> <End>
 snoremap <C-Y> <C-G>pgv<C-G>
 
+nnoremap <silent> y<C-F>
+      \ :<C-U>let @+ = join([expand('%'), line('.'), getline('.')], ':')<CR>
+
 nnoremap S ch
 nnoremap s cl
 xnoremap <silent> & :&<CR>

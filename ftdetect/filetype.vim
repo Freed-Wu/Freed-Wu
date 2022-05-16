@@ -9,6 +9,7 @@ augroup init_filetype
   " 1}}} Text "
 
   " Data_Exchange {{{1 "
+  autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*} setfiletype conf
   autocmd BufNewFile,BufRead mimeapps.list setfiletype dosini
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-project,vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype jsonc
   " 1}}} Data_Exchange "
