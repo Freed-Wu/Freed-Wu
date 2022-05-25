@@ -2,11 +2,16 @@
 mime=$(file -Lb --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
+ext=${1##*.}
 if [ -d "$1" ]; then
   if [ "$(command -v exa)" ]; then
     exa --git -hl --color=always --icons "$1"
   fi
-elif [ "$kind" = plain ] && [ "${1##*.}" = tsv ]; then
+elif [ "$kind" = octet-stream ]; then
+  if [ "$(command -v hexyl)" ]; then
+    hexyl "$1"
+  fi
+elif [ "$kind" = plain ] && [ "$ext" = tsv ]; then
   if [ "$(command -v xsv)" ]; then
     xsv table -d'\t' "$1"
   fi
@@ -15,7 +20,9 @@ elif [ "$kind" = csv ]; then
     bat -p "$1" --color=always | xsv table | bat -p --color=always
   fi
 elif [ "$kind" = json ]; then
-  if [ "$(command -v jq)" ]; then
+  if [ "$(command -v jupyter)" ] && [ "$(command -v bat)" ] && [ "$ext" = ipynb ]; then
+    jupyter nbconvert --to python --stdout "$1" | bat --color=always -plpython
+  elif [ "$(command -v jq)" ]; then
     jq -r . "$1" --color-output
   fi
 elif [ "$kind" = pdf ]; then
@@ -47,6 +54,14 @@ elif [ "$category" = image ]; then
   fi
   if [ "$(command -v exiftool)" ]; then
     exiftool "$1"
+  fi
+elif [ "$kind" = x-pie-executable ] || [ "$kind" = x-sharelib ]; then
+  if [ "$(command -v ldd)" ]; then
+    ldd "$1"
+  fi
+elif [ "$kind" = x-executable ]; then
+  if [ "$(command -v 7z)" ]; then
+    7z l "$1"
   fi
 elif [ "$(command -v bat)" ] && [ "$(command -v lesspipe.sh)" ]; then
   lesspipe.sh "$1" | bat --color=always

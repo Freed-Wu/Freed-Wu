@@ -246,6 +246,7 @@
 # Android
 !/.termux/
 /.termux/*
+!/.termux/.profile
 !/.termux/termux.properties
 !/.termux/colors.properties
 !/.termux/boot

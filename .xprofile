@@ -40,11 +40,17 @@ export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
 export PYTHONBREAKPOINT=pudb.set_trace
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files'
+# rg foo | fzf -d:
+# --preview-window="+{2}"
+# $word = {2} make a wrong --preview-window
+# https://github.com/Aloxaf/fzf-tab/issues/282
 export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
-"'-m
+"'
+-m
 -d$"\0"
---preview="less {+1}"
---preview-window="+{2}"
+--ansi
+--preview="[ $(file -Lb --mime-type {1} | cut -d/ -f1) = text ] && bat --color=always --highlight-line={2} {1} || less {1}"
+--reverse
 --bind=tab:down
 --bind=btab:up
 --bind=ctrl-j:jump
@@ -56,8 +62,8 @@ export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
 --bind=ctrl-q:clear-query
 --bind=alt-a:first
 --bind=alt-e:last
---bind=alt-N:toggle-in
---bind=alt-P:toggle-out
+--bind=alt-N:toggle-out
+--bind=alt-P:toggle-in
 --bind=ctrl-space:toggle
 --bind=ctrl-o:toggle-all
 --bind=ctrl-g:deselect-all
@@ -72,7 +78,9 @@ export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
 --bind=alt-v:preview-page-up
 --bind=ctrl-r:preview-half-page-down
 --bind=alt-r:preview-half-page-up
---bind=alt-\<:preview-top
---bind=alt-\>:preview-bottom'
+--bind="alt-<:preview-top"
+--bind="alt->:preview-bottom"
+--bind="ctrl-]:change-preview-window(bottom|right)"
+'
 export FZF_TMUX_HEIGHT=$((LINES/2))
 # ex: filetype=sh

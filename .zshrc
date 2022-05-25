@@ -141,8 +141,10 @@ zinit id-as'.vivid' depth'1' wait lucid \
   if'(($+commands[vivid]))' \
   for zdharma-continuum/null
 zstyle ':completion:*' list-separator ''
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' muttrc ${XDG_CONFIG_HOME:-$HOME/.config}/neomutt/neomuttrc
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' \
+  'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' muttrc \
+  ${XDG_CONFIG_HOME:-$HOME/.config}/neomutt/neomuttrc
 zstyle ':completion:*' mail-directory ${XDG_CACHE_HOME:-$HOME/.cache}/neomutt
 zstyle ':completion:*' word true
 zstyle ':completion::complete:*' use-cache true
@@ -159,58 +161,128 @@ zstyle ':completion:*' extra-verbose true
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf])) && [[ $OSTYPE != msys ]]' \
   for Aloxaf/fzf-tab
-# general
+
+# general {{{ #
 zstyle ':fzf-tab:*' prefix ''
 zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
 zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
-zstyle ':fzf-tab:user-expand:*' fzf-preview 'less ${(Q)word}'
-zstyle ':fzf-tab:complete:*' fzf-preview 'less ${(Q)realpath}'
-zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
+zstyle ':fzf-tab:user-expand:*' fzf-preview 'less $word'
+zstyle ':fzf-tab:complete:*' fzf-preview 'less $realpath'
+zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand|typeset|declare|local):*' \
   fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:bindkey:option-?-1' fzf-preview 'bindkey -M$word'
+# }}} general #
 
-# alias
+# alias {{{ #
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|)zinit:*' fzf-preview \
-  "less ${ZINIT[PLUGINS_DIR]}/"'${(Q)word}/README*'
+  "less ${ZINIT[PLUGINS_DIR]}/"'$word/README*'
+# }}} alias #
 
-# command
-zstyle ':fzf-tab:complete:(\\|*/|)pip:*' fzf-preview \
-  'pip show ${(Q)word}|bat --color=always -lyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)(pacman|yay):*' \
-  fzf-preview 'pacman -Qi ${(Q)word}|bat --color=always -lyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)dpkg:*' fzf-preview 'dpkg -L ${(Q)word}'
-zstyle ':fzf-tab:complete:(\\|*/|)apt-*:*' fzf-preview \
-  'apt-cache show ${(Q)word}|bat --color=always -lyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)pkg:*' fzf-preview \
-  'pkg info ${(Q)word}|bat --color=always -lyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)brew:*' fzf-preview \
-  'brew info ${(Q)word}|bat --color=always -lyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
-zstyle ':fzf-tab:complete:(\\|*/|)go:*' fzf-preview \
-  'go help $word|bat --color=always -plman'
-zstyle ':fzf-tab:complete:(\\|*/|)sudo:*' fzf-preview 'less =${(Q)word}'
-zstyle ':fzf-tab:complete:(\\|*/|)gh:*' fzf-preview \
-  'less ~/.local/share/gh/extensions/gh-${(Q)word}/manifest.yml'
-zstyle ':fzf-tab:complete:(\\|*/|)pygmentize:*' fzf-preview \
-  'pygmentize -L $word|bat -plrst --color=always'
+# command {{{ #
+cmds=(
+  {cpp,readlink,'readelf -a',size,strings,nm,'objdump -d'}' $realpath'
+  {gcc,g++,cc,c++}' -o- -S $realpath | bat --color=always -plasm'
+)
+for cmd in $cmds ; do
+  bin=${cmd%% *}
+  bins=({,{i686,x86_64}-w64-mingw32-}$bin)
+  for bin in $bins ; do
+    zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
+      '[ -f $realpath ] && '"$cmd"' || less $realpath'
+  done
+done
+
+dir=/opt/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin
+if [[ -d $dir ]]; then
+  for cmd in {,$dir/aarch64-linux-android??-}clang{,++} ; do
+    bin=${cmd##*/}
+    zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
+      '[ -f $realpath ] &&
+      '"$cmd"' -o- -S $realpath | bat --color=always -plasm || less $realpath'
+  done
+fi
+unset dir
+
+cmds=({hexdump,xxd,hexyl,'od -Ax -tx1','pandoc -tmarkdown'}' $realpath')
+for cmd in $cmds ; do
+  bin=${cmd%% *}
+  zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
+    '[ -f $realpath ] && '"$cmd"' || less $realpath'
+done
+
+cmds=(
+  {{pip,apt-cache}' show',{pkg,brew}' info'}' $word | bat --color=always -plyaml'
+  {go,yarn,luarocks,cabal,nix,gh}' help $word | bat --color=always -plman'
+  'jupyter $word --help | bat --color=always -plmarkdown'
+  'man $word'
+  'dpkg -L $word'
+  'pygmentize -L $word | bat --color=always -plrst'
+  'fc-list $word'
+)
+for cmd in $cmds ; do
+  bin=${cmd%% *}
+  zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview "$cmd"
+done
+
+zstyle ':fzf-tab:complete:(\\|*/|)journalctl:*' fzf-preview \
+  'case "$group" in
+  boot\ *) journalctl -b $word | bat --color=always -pllog;;
+  "/dev files") journalctl -b /dev/$word | bat --color=always -pllog;;
+  esac'
+zstyle ':fzf-tab:complete:(\\|*/|)(pacman|yay):*' fzf-preview \
+  '[ "$group" != repository/package ] &&
+  pacman -Qi $word | bat --color=always -plyaml'
+zstyle ':fzf-tab:complete:(\\|*/|)pkg-config:argument-rest' fzf-preview \
+  '[ "$group" = package ] && less /usr/(lib|share)/pkgconfig/$word.pc ||
+  less $word'
+zstyle ':fzf-tab:complete:(-equal-|(\\|*/|)sudo):*' fzf-preview 'less =$word'
+zstyle ':fzf-tab:complete:(\\|*/|)(c(make|test|pack)|ccmake|cmake-gui):*' \
+  fzf-preview '[[ $word == --help* ]] && cmake $word'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-preview \
   '[ "$group" = "process ID" ] && ps -p$word -wocmd --no-headers'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-flags \
   --preview-window=down:3:wrap
-zstyle ':fzf-tab:complete:(\\|*/|)(c(make|test|pack)|ccmake|cmake-gui):*' \
-  fzf-preview '[[ $word == --help* ]] && cmake ${(Q)word}'
+zstyle ':fzf-tab:complete:(\\|*/|)(pkill|killall):*' fzf-preview \
+  'grc --colour=on ps -C$word'
+zstyle ':fzf-tab:complete:(\\|*/|)df:argument-rest' fzf-preview \
+  '[ "$group" != "device label" ] && grc --colour=on df -Th $word'
+zstyle ':fzf-tab:complete:(\\|*/|)du:argument-rest' fzf-preview \
+  'grc --colour=on du -sh $realpath'
+zstyle ':fzf-tab:complete:(\\|*/|)gdu:argument-rest' fzf-preview \
+  '[ -d $realpath ] && gdu -n $realpath || grc --colour=on du -sh $realpath'
+zstyle ':fzf-tab:complete:(\\|*/|)findmnt:argument-1' fzf-preview \
+  '[ "$group" != prefix ] && grc --colour=on findmnt $word'
+# }}} command #
 
-# subcommand
+# subcommand {{{ #
+cmds=(
+  {docker,gem}' help ${word%\*} | bat --color=always -plman'
+)
+for cmd in $cmds ; do
+  bin=${cmd%% *}
+  zstyle ':fzf-tab:complete:'"$bin"'(|-help):*' fzf-preview "$cmd"
+done
+
+cmds=(
+  'gem '{check,rdoc,contents,pristine,list,which,environment,dependency}' $word'
+  'gem specification $word | bat --color=always -plyaml'
+  'docker '{image,container}' ls $word'
+  'systemctl help $word | bat --color=always -plman'
+  'systemctl '{cat,show}' $word | bat --color=always -plini'
+  {'svn help','brew '{ls,list},'git log --color=always'}' $word'
+  'git diff $word | delta'
+  'git help $word | bat -plman --color=always'
+)
+for cmd in $cmds ; do
+  bin=${${cmd/ /-}%% *}
+  zstyle ':fzf-tab:complete:'"$bin"':*' fzf-preview "$cmd"
+done
+
+zstyle ':fzf-tab:complete:gem-((|un)install|update|lock|fetch|open|yank|owner|unpack):*' \
+  fzf-preview 'gem info $word | bat --color=always -plyaml'
 zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
   'SYSTEMD_COLORS=1 systemctl status $word'
-zstyle ':fzf-tab:complete:brew-(list|ls):*' fzf-preview 'brew ls $word'
-zstyle ':fzf-tab:complete:svn-help:*' fzf-preview 'svn help $word'
-zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
-  'git diff $word | delta'
-zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
-  'git log --color=always $word'
-zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
-  'git help $word | bat -plman --color=always'
 zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
   'case "$group" in
   "commit tag") git show --color=always $word ;;
@@ -222,6 +294,9 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
   "recent commit object name") git show --color=always $word | delta ;;
   *) git log --color=always $word ;;
   esac'
+# }}} subcommand #
+
+unset cmd cmds bin bins
 
 zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
   for Freed-Wu/pinyin-completion
@@ -378,7 +453,7 @@ zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf] && $+commands[bc])) && [[ $OSTYPE != msys ]]' \
   for bigH/auto-sized-fzf
 # ln -s =nvim /usr/bin/vi
-compdef _vim vi
+compdef _vim vi edit
 # https://github.com/msys2/MSYS2-packages/issues/2965
 if [[ $OSTYPE == cygwin ]]; then
   compdef _files start
