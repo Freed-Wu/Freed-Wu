@@ -334,6 +334,13 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['python'],
         \ })
 
+  call smartinput#map_to_trigger('i', '::', '::', '::')
+  call smartinput#define_rule({
+        \ 'at': '\%#',
+        \ 'char': '::',
+        \ 'input': '::',
+        \ })
+
   call smartinput#map_to_trigger('i', ',', ',', ',')
   call smartinput#define_rule({
         \ 'at': '\%#',
@@ -434,6 +441,13 @@ function! init#smartinput#post_source() abort
         \ 'input': ' >> ',
         \ })
 
+  call smartinput#map_to_trigger('i', '>>>', '>>>', '>>>')
+  call smartinput#define_rule({
+        \ 'at': '\%#',
+        \ 'char': '>>>',
+        \ 'input': '>>> ',
+        \ })
+
   call smartinput#map_to_trigger('i', '=', '=', '=')
   " cannot add \S
   call smartinput#define_rule({
@@ -446,7 +460,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '\S\%#',
         \ 'char': '=',
         \ 'input': ' = ',
-        \ 'filetype': ['pandoc', 'c.ifdef', 'cpp.ifdef', 'vim', 'perl', 'make', 'lua'],
+        \ 'filetype': ['pandoc', 'c', 'cpp', 'vim', 'perl', 'make', 'lua'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',

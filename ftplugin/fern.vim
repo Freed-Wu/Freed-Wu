@@ -1,17 +1,26 @@
 setlocal nonumber
 setlocal norelativenumber
 
+nnoremap <silent><buffer> <LeftMouse> :<C-U>call init#init#fern#leftmouse()<CR>
+nnoremap <silent><buffer> <2-LeftMouse> :<C-U>call init#init#fern#2leftmouse()<CR>
+nnoremap <silent><buffer> <C-LeftMouse> :<C-U>call init#init#fern#cleftmouse()<CR>
+nnoremap <silent><buffer> <MiddleMouse> :<C-U>call init#init#fern#middlemouse()<CR>
+nnoremap <silent><buffer> <RightMouse> :<C-U>call init#init#fern#rightmouse()<CR>
+
 nmap <buffer> g? <Plug>(fern-action-help)
 nmap <buffer> g: <Plug>(fern-action-choice)
-nmap <buffer> <C-W>i <Plug>(fern-action-zoom)
-nmap <buffer> <C-W>d <Plug>(fern-action-zoom:reset)
+nmap <buffer> zM <Plug>(fern-action-zoom:full)
+nmap <buffer> zm <Plug>(fern-action-zoom:half)
+nmap <buffer> zr <Plug>(fern-action-zoom:reset)
+nmap <buffer> zR <Plug>(fern-action-zoom)
 nmap <buffer> <nowait> _ <Plug>(fern-action-hidden)
 nmap <buffer> <nowait> = <Plug>(fern-action-include)
 nmap <buffer> <nowait> + <Plug>(fern-action-exclude)
 nmap <buffer> <nowait> - <Plug>(fern-action-reveal)
 nmap <buffer> gq <Plug>(fern-action-mark:clear)
-nmap <buffer> s <Plug>(fern-action-mark:set)
-nmap <buffer> S <Plug>(fern-action-mark:unset)
+nmap <buffer> s <Plug>(fern-action-mark)
+nmap <buffer> S <Plug>(fern-action-mark:set)
+nmap <buffer> <C-S> <Plug>(fern-action-mark:unset)
 nmap <buffer> J <Plug>(fern-action-mark)j
 nmap <buffer> K k<Plug>(fern-action-mark)
 nmap <buffer> gJ j<Plug>(fern-action-mark)
@@ -89,8 +98,6 @@ nmap <buffer> <C-R> <Plug>(fern-action-quickfix:replace)
 nmap <buffer> g<C-N> <Plug>(fern-action-loclist)
 nmap <buffer> g<C-A> <Plug>(fern-action-loclist:add)
 nmap <buffer> g<C-R> <Plug>(fern-action-loclist:replace)
-
-nmap <buffer> gs <Plug>(fern-action-save-as-bookmark)
 
 nmap <buffer> yop <Plug>(fern-action-preview:auto:toggle)
 nmap <buffer> <M-p> <Plug>(fern-action-preview:scroll:up:half)

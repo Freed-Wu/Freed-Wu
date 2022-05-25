@@ -172,6 +172,9 @@ snoremap <C-Y> <C-G>pgv<C-G>
 
 nnoremap <silent> y<C-F>
       \ :<C-U>let @+ = join([expand('%'), line('.'), getline('.')], ':')<CR>
+nnoremap <silent> y<C-L> :<C-U>let @+ = join([expand('%'), line('.')], ':')<CR>
+nnoremap <silent> <2-LeftMouse> :call init#init#map#2leftmouse()<CR>
+nnoremap <silent> <RightMouse> :call init#init#map#rightmouse()<CR>
 
 nnoremap S ch
 nnoremap s cl
@@ -410,6 +413,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " Filetype {{{1 "
   " Highlight {{{2 "
   " TSUpdate need proxy
+  " conflict with ifdef-highlighting
   call dein#add('nvim-treesitter/nvim-treesitter', {
         \ 'if': has('nvim-0.5.0'),
         \ 'hook_source': 'lua require("treesitter")',
@@ -443,7 +447,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   " https://github.com/neoclide/coc-yank/issues/36
   call dein#add('machakann/vim-highlightedyank')
-  call dein#add('vim-scripts/ifdef-highlighting')
   " 2}}} Highlight "
 
   " Fold {{{2 "

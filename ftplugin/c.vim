@@ -5,13 +5,3 @@ nnoremap <silent><buffer> <LocalLeader>T :<C-U>CocCommand clangd.switchSourceHea
 nnoremap <silent><buffer> <LocalLeader>d :<C-U>CocCommand clangd.switchSourceHeader drop<CR>
 nnoremap <silent><buffer> <LocalLeader>t :<C-U>CocCommand clangd.switchSourceHeader tab\ drop<CR>
 nnoremap <silent><buffer> <LocalLeader>b :<C-U>CocCommand clangd.switchSourceHeader bdelete<CR>
-
-if match(&filetype, '\.ifdef') == -1
-  let &filetype .= '.ifdef'
-  augroup init_c
-    autocmd!
-    autocmd FileType *.ifdef syntax on
-          \ | Undefine \k\+
-          \ | highlight default link ifdefUndefined Comment
-  augroup END
-endif

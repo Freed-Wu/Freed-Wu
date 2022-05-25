@@ -6,3 +6,4 @@ function %HERE% = %FILE%()
 
 %%out
 
+end

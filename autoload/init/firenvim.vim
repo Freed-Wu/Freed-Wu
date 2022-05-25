@@ -13,17 +13,20 @@ function! init#firenvim#source() abort
 endfunction
 
 function! init#firenvim#map() abort
-  " only work in browser
-  map <C-;> <C-N>
-  map <C-.> <C-T>
-  map <C--> <C-W>
+  " firefox's built-in hotkeys override firenvim
+  map <C--> <C-T>
   map <C-=> <C-Q>
-  map <S-lt> <lt>
-  imap <C-;> <C-N>
-  imap <C-.> <C-T>
-  imap <C--> <C-W>
+  imap <C--> <C-T>
   imap <C-=> <C-Q>
+
+  " fixed by new version of firefox, keep the code just for compatibility
+  map <S-lt> <lt>
   imap <S-lt> <lt>
+  " cannot work in new version of firefox
+  map <C-;> <C-N>
+  map <C-.> <C-W>
+  imap <C-;> <C-N>
+  imap <C-.> <C-W>
 endfunction
 
 if exists('g:started_by_firenvim')

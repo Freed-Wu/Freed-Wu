@@ -11,6 +11,7 @@ function! init#init#vim#map() abort
           \ ['&Map', 'execute "map" expand("<cWORD>")'],
           \ ['&Function', 'execute "function" substitute(expand("<cword>"), ''|\|`\|(.*)'', "", "g")'],
           \ ['E&xecute', 'execute getline(line("."))'],
+          \ ['So&urce', 'source %'],
           \ ] , {_, v -> v + [get(v, 1)]})
     let b:context_v = map([
           \ ['&Set', 'execute "set" substitute(getline(".")[col("v") - 1:col("''>") - 1], "''", "", "g") . "?"'],
