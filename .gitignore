@@ -39,7 +39,6 @@
 !/.chktexrc
 !/.sqliterc
 !/.pdbrc
-!/.termuxrc
 !/.tmux.conf
 
 # dotfiles
@@ -211,6 +210,10 @@
 !/.config/lsd/
 /.config/lsd/*
 !/.config/lsd/config.yaml
+!/.config/powershell/
+/.config/powershell/*
+!/.config/powershell/Microsoft.PowerShell_profile.ps1
+!/.config/powershell/profile.ps1
 !/.config/pacman/
 /.config/pacman/*
 !/.config/pacman/makepkg.conf
@@ -242,8 +245,12 @@
 !/AppData/Local/
 /AppData/Local/*
 !/AppData/Local/nvim
+!/Documents/
+/Documents/*
+!/Documents/WindowsPowerShell
 
 # Android
+!/.termuxrc
 !/.termux/
 /.termux/*
 !/.termux/.profile

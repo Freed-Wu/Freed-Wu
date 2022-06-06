@@ -157,7 +157,7 @@ zstyle ':completion:*' menu select
 # https://github.com/BurntSushi/ripgrep/pull/2196
 zstyle ':completion:*' extra-verbose true
 
-# https://github.com/msys2/MINGW-packages/pull/11664
+# https://github.com/rprichard/winpty/issues/101
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf])) && [[ $OSTYPE != msys ]]' \
   for Aloxaf/fzf-tab
@@ -170,6 +170,11 @@ zstyle ':fzf-tab:user-expand:*' fzf-preview 'less $word'
 zstyle ':fzf-tab:complete:*' fzf-preview 'less $realpath'
 zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand|typeset|declare|local):*' \
   fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+  'case "$group" in
+  "external command") less =$word;;
+  "builtin command") run-help $word | bat --color=always -plman;;
+  esac'
 zstyle ':fzf-tab:complete:bindkey:option-?-1' fzf-preview 'bindkey -M$word'
 # }}} general #
 
@@ -212,7 +217,7 @@ for cmd in $cmds ; do
 done
 
 cmds=(
-  {{pip,apt-cache}' show',{pkg,brew}' info'}' $word | bat --color=always -plyaml'
+  {{pip,apt{,-cache}}' show',{pkg,brew}' info'}' $word | bat --color=always -plyaml'
   {go,yarn,luarocks,cabal,nix,gh}' help $word | bat --color=always -plman'
   'jupyter $word --help | bat --color=always -plmarkdown'
   'man $word'
@@ -225,6 +230,12 @@ for cmd in $cmds ; do
   zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview "$cmd"
 done
 
+zstyle ':fzf-tab:complete:(\\|*/|)(sudo|proxychains):*' fzf-preview 'less =$word'
+zstyle ':fzf-tab:complete:(\\|*/|)bat:*' fzf-preview \
+  'case "$group" in
+  subcommand) bat cache --help | bat --color=always -plman;;
+  file) less $realpath;;
+  esac'
 zstyle ':fzf-tab:complete:(\\|*/|)journalctl:*' fzf-preview \
   'case "$group" in
   boot\ *) journalctl -b $word | bat --color=always -pllog;;
@@ -260,7 +271,7 @@ cmds=(
   {docker,gem}' help ${word%\*} | bat --color=always -plman'
 )
 for cmd in $cmds ; do
-  bin=${cmd%% *}
+  bin=$cmd
   zstyle ':fzf-tab:complete:'"$bin"'(|-help):*' fzf-preview "$cmd"
 done
 
@@ -450,7 +461,7 @@ zinit id-as'.direnv' depth'1' wait lucid \
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 zinit id-as depth'1' wait lucid \
   atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
-  if'(($+commands[fzf] && $+commands[bc])) && [[ $OSTYPE != msys ]]' \
+  if'(($+commands[fzf] && $+commands[bc]))' \
   for bigH/auto-sized-fzf
 # ln -s =nvim /usr/bin/vi
 compdef _vim vi edit
@@ -477,8 +488,11 @@ alias rm='rm -i'
 alias rename='rename -i'
 _color=
 # https://github.com/ogham/exa/pull/820
-if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
+if [[ $OSTYPE == msys ]]; then
   _color=' --color always'
+  alias fzf='winpty fzf'
+  alias gdu='winpty gdu'
+  alias btm='winpty btm'
 fi
 if (($+commands[exa])); then
   alias ls='exa --icons --git -h'$_color

@@ -27,7 +27,7 @@ elif [ "$kind" = json ]; then
   fi
 elif [ "$kind" = pdf ]; then
   if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
-    pdftotext "$1" - | sed "s/\f/$(hr ─)\n/"
+    pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/"
   fi
 elif [ "$kind" = vnd.openxmlformats-officedocument.wordprocessingml.document ]; then
   if [ "$(command -v pandoc)" ]; then

@@ -2,6 +2,7 @@ $show_time = 1;
 $dependents_phony = 1;
 $do_cd = 1;
 $preview_continuous_mode = 1;
+$bibtex_use = 1.5;
 # *.ins cannot generate pdf
 push @default_files, '*.dtx';
 push @default_files, '*.tikz';
@@ -49,7 +50,7 @@ $clean_ext = 'aux lof log lot fls out toc fmt fot cb cb2';
 ## Intermediate documents:
 $clean_ext .= ' dvi xdv';
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
-$clean_ext .= ' bbl bcf blg run.xml';
+$clean_ext .= ' bcf blg run.xml';
 ## Build tool auxiliary files:
 $clean_ext .= ' fdb_latexmk synctex synctex(busy) synctex.gz synctex.gz(busy) pdfsync';
 ## Auxiliary and intermediate files from other packages:
