@@ -228,8 +228,13 @@ function! init#smartinput#post_source() abort
         \ 'at': '\%#\_s*>',
         \ 'char': '>',
         \ 'input': '<C-R>=smartinput#_leave_block(''>'')<Enter>' . right,
-        \ 'filetype': ['vim', 'html', 'xml', 'xhtml', 'liquid', 'text', 'pandoc',
-        \ 'rst', 'neomuttrc', 'muttrc'],
+        \ 'filetype': ['vim', 'rst', 'neomuttrc', 'muttrc'],
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '\%#',
+        \ 'char': '>',
+        \ 'input': '>',
+        \ 'filetype': ['html', 'xml', 'xhtml', 'liquid', 'pandoc'],
         \ })
   call smartinput#define_rule({
         \ 'at': '<\%#>',
@@ -242,7 +247,7 @@ function! init#smartinput#post_source() abort
         \ 'input': '<BS><BS>',
         \ })
   call smartinput#define_rule({
-        \ 'at': '\%#',
+        \ 'at': '\S\%#',
         \ 'char': '>',
         \ 'input': ' > ',
         \ })
