@@ -157,9 +157,8 @@ zstyle ':completion:*' menu select
 # https://github.com/BurntSushi/ripgrep/pull/2196
 zstyle ':completion:*' extra-verbose true
 
-# https://github.com/rprichard/winpty/issues/101
 zinit id-as depth'1' wait lucid \
-  if'(($+commands[fzf])) && [[ $OSTYPE != msys ]]' \
+  if'(($+commands[fzf]))' \
   for Aloxaf/fzf-tab
 
 # general {{{ #
@@ -174,6 +173,7 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
   'case "$group" in
   "external command") less =$word;;
   "builtin command") run-help $word | bat --color=always -plman;;
+  "parameter") echo ${(P)word}
   esac'
 zstyle ':fzf-tab:complete:bindkey:option-?-1' fzf-preview 'bindkey -M$word'
 # }}} general #
@@ -217,13 +217,13 @@ for cmd in $cmds ; do
 done
 
 cmds=(
-  {{pip,apt{,-cache}}' show',{pkg,brew}' info'}' $word | bat --color=always -plyaml'
-  {go,yarn,luarocks,cabal,nix,gh}' help $word | bat --color=always -plman'
+  {{pip,apt{,-cache}}' show',{pkg,brew}' info'}' $word \
+    | bat --color=always -plyaml'
   'jupyter $word --help | bat --color=always -plmarkdown'
-  'man $word'
-  'dpkg -L $word'
   'pygmentize -L $word | bat --color=always -plrst'
-  'fc-list $word'
+  {getconf,man,fc-list,'dpkg -L'}' $word'
+  {go,yarn,luarocks,cabal,nix,gh,git,svn,systemctl,docker,gem,pyenv}' \
+    help $word | bat --color=always -plhelp'
 )
 for cmd in $cmds ; do
   bin=${cmd%% *}
@@ -233,7 +233,7 @@ done
 zstyle ':fzf-tab:complete:(\\|*/|)(sudo|proxychains):*' fzf-preview 'less =$word'
 zstyle ':fzf-tab:complete:(\\|*/|)bat:*' fzf-preview \
   'case "$group" in
-  subcommand) bat cache --help | bat --color=always -plman;;
+  subcommand) bat cache --help | bat --color=always -plhelp;;
   file) less $realpath;;
   esac'
 zstyle ':fzf-tab:complete:(\\|*/|)journalctl:*' fzf-preview \
@@ -268,22 +268,12 @@ zstyle ':fzf-tab:complete:(\\|*/|)findmnt:argument-1' fzf-preview \
 
 # subcommand {{{ #
 cmds=(
-  {docker,gem}' help ${word%\*} | bat --color=always -plman'
-)
-for cmd in $cmds ; do
-  bin=$cmd
-  zstyle ':fzf-tab:complete:'"$bin"'(|-help):*' fzf-preview "$cmd"
-done
-
-cmds=(
   'gem '{check,rdoc,contents,pristine,list,which,environment,dependency}' $word'
   'gem specification $word | bat --color=always -plyaml'
   'docker '{image,container}' ls $word'
-  'systemctl help $word | bat --color=always -plman'
   'systemctl '{cat,show}' $word | bat --color=always -plini'
-  {'svn help','brew '{ls,list},'git log --color=always'}' $word'
+  {'brew '{ls,list},'git log --color=always'}' $word'
   'git diff $word | delta'
-  'git help $word | bat -plman --color=always'
 )
 for cmd in $cmds ; do
   bin=${${cmd/ /-}%% *}
@@ -367,10 +357,6 @@ zinit id-as depth'1' wait lucid \
 
 # HotKey {{{1 #
 bindkey -e
-bindkey "\x1b[13;2u" accept-line
-bindkey -Mvicmd "\x1b[13;2u" accept-line
-bindkey "\x1b[13;5u" accept-line
-bindkey -Mvicmd "\x1b[13;5u" accept-line
 bindkey ^Xh _complete_help
 autoload -U edit-command-line && bindkey '^X^E' edit-command-line
 bindkey ^U backward-kill-line
@@ -413,12 +399,12 @@ zinit id-as depth'1' wait lucid for zdharma-continuum/zui
 # https://github.com/zdharma-continuum/zsh-cmd-architect/pull/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-cmd-architect
 zinit id-as depth'1' wait lucid \
-  if'(($+commands[fzf])) && [[ $OSTYPE != msys ]]' \
+  if'(($+commands[fzf]))' \
   atload'bindkey -Mvicmd / fzf_history_seach' \
   for joshskidmore/zsh-fzf-history-search
 EMOJI_FZF_BINDKEY=^X^I
 zinit id-as depth'1' wait lucid \
-  if'(($+commands[emoji-fzf] && $+commands[fzf])) && [[ $OSTYPE != msys ]]' \
+  if'(($+commands[emoji-fzf] && $+commands[fzf]))' \
   for pschmitt/emoji-fzf.zsh
 autoload -Uz replace-string
 zle -N replace-regex replace-string
@@ -457,6 +443,11 @@ zinit id-as'.direnv' depth'1' wait lucid \
   zcompile *.sh' \
   if'(($+commands[direnv]))' \
   for zdharma-continuum/null
+zinit id-as'.pyenv' depth'1' wait lucid \
+  atclone'pyenv init - > pyenv.sh
+  zcompile *.sh' \
+  if'(($+commands[pyenv]))' \
+  for zdharma-continuum/null
 # https://github.com/Tarrasch/zsh-command-not-found/issues/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 zinit id-as depth'1' wait lucid \
@@ -465,10 +456,8 @@ zinit id-as depth'1' wait lucid \
   for bigH/auto-sized-fzf
 # ln -s =nvim /usr/bin/vi
 compdef _vim vi edit
-# https://github.com/msys2/MSYS2-packages/issues/2965
-if [[ $OSTYPE == cygwin ]]; then
-  compdef _files start
-elif [[ $OSTYPE == msys  ]]; then
+if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
+  # https://github.com/msys2/MSYS2-packages/issues/2965
   compdef _files start
   # https://github.com/msys2/MSYS2-packages/issues/2996
   compdef _pacman makepkg-mingw=makepkg pacboy=pacman
@@ -479,31 +468,20 @@ if (($+commands[gpg] && $+commands[tty])); then
   export GPG_TTY=$(tty)
 fi
 # must after lesspipe export LESSOPEN
+# use $HOME to replace ~ to avoid windows path bug
 if [[ -x ~/.lessfilter ]]; then
-  export LESSOPEN='|~/.lessfilter %s'
+  export LESSOPEN="|$HOME/.lessfilter %s"
 fi
 alias mv='mv -i'
 alias cp='cp -ri'
 alias rm='rm -i'
 alias rename='rename -i'
-_color=
-# https://github.com/ogham/exa/pull/820
-if [[ $OSTYPE == msys ]]; then
-  _color=' --color always'
-  alias fzf='winpty fzf'
-  alias gdu='winpty gdu'
-  alias btm='winpty btm'
-fi
 if (($+commands[exa])); then
-  alias ls='exa --icons --git -h'$_color
-  alias tree='exa --icons -T'$_color
-elif (($+commands[lsd])); then
-  alias ls=lsd$_color
-  alias tree='lsd --tree'$_color
+  alias ls='exa --icons --git -h'
+  alias tree='exa --icons -T'
 else
   alias ls='ls --color=auto -h'
 fi
-unset _color
 # 1}}} Compatible #
 
 # Program {{{1 #
@@ -537,7 +515,7 @@ zinit id-as depth'1' wait lucid as'null' sbin'slugify' \
   if'((! $+commands[slugify]))' \
   for benlinton/slugify
 zinit id-as depth'1' wait lucid as'null' sbin'ugit' sbin'git-undo' \
-  if'((! $+commands[ugit] && $+commands[git] && $+commands[fzf])) && [[ $OSTYPE != msys ]]' \
+  if'((! $+commands[ugit] && $+commands[git] && $+commands[fzf]))' \
   for Bhupesh-V/ugit
 zinit id-as depth'1' wait lucid as'null' sbin'hr' \
   atclone"gzip --to-stdout *.1 > $ZPFX/man/man1/hr.1.gz" \

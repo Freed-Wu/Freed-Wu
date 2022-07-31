@@ -30,7 +30,10 @@ if sys.argv[0] == "":
                 colorama.init()
 
             try:
-                os_name = platform.freedesktop_os_release().get("ID", "")
+                # python 3.10 support platform.freedesktop_os_release()
+                os_name = platform.freedesktop_os_release().get("ID", "")  # type: ignore
+            except AttributeError:
+                os_name = ""
             except OSError:
                 if os.getenv("PREFIX") == "/data/data/com.termux/files/usr":
                     os_name = "android"

@@ -2,4 +2,3 @@ include zathura-gruvbox/zathura-gruvbox-light
 set font 'JetBrainsMono Nerd Font regular 12'
 set recolor false
 set window-title-page true
-set selection-clipboard clipboard

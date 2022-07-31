@@ -28,11 +28,11 @@ Keep all my computers' configurations same.
 - Linux 
   - GNU/Linux 
     - [Gentoo](https://github.com/Freed-Wu/my-portage) (broken) 
-    - [Archlinux](https://github.com/Freed-Wu/my-pacman.conf) (laptop & desktop) 
+    - [Arch](https://github.com/Freed-Wu/my-pacman.conf) (laptop & desktop) 
     - Deepin (desktop) 
+    - Ubuntu (server & docker) 
+    - CentOS (cluster) 
     - Openwrt (router) 泌
-    - Ubuntu (docker) 
-    - CentOS (server) 
   - Android (mobile) 
     - Termux
 - Windows (virtualbox) 

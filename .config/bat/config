@@ -4,3 +4,5 @@
 -m'*.tikz:LaTeX'
 -m'_*:Bourne Again Shell (bash)'
 -m'*.sa:ARM Assembly'
+-m'*.cu:C'
+-m'*.cuh:C'

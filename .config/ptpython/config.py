@@ -331,21 +331,6 @@ def configure(repl) -> None:
 
     # 1}}} emacs #
 
-    # term {{{1 #
-    @repl.add_key_binding("escape", *"[13;2u", filter=ViNavigationMode())
-    @repl.add_key_binding("escape", *"[13;2u", filter=ViInsertMode())
-    @repl.add_key_binding("escape", *"[13;2u", filter=EmacsInsertMode())
-    def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.validate_and_handle()
-
-    @repl.add_key_binding("escape", *"[13;5u", filter=ViNavigationMode())
-    @repl.add_key_binding("escape", *"[13;5u", filter=ViInsertMode())
-    @repl.add_key_binding("escape", *"[13;5u", filter=EmacsInsertMode())
-    def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.validate_and_handle()
-
-    # 1}}} term #
-
     # autopair {{{1 #
     @repl.add_key_binding("c-h", filter=ViInsertMode())
     @repl.add_key_binding("c-h", filter=EmacsInsertMode())

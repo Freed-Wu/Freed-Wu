@@ -59,6 +59,9 @@ FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --ansi
 --preview="[ $(file -Lb --mime-type {1} | cut -d/ -f1) = text ] && bat --color=always --highlight-line={2} {1} || less {1}"
 --reverse
+--prompt="❯ "
+--pointer=❯
+--marker=✓
 --bind=tab:down
 --bind=btab:up
 --bind=ctrl-j:jump
