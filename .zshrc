@@ -20,16 +20,17 @@ zinit id-as depth'1' null for zdharma-continuum/zinit
 
 # brew add some paths which may contain tmux
 zinit id-as'.brew' depth'1' \
-  atclone'brew shellenv > brew.sh
+  atclone'/home/linuxbrew/.linuxbrew/bin/brew shellenv > brew.sh
   zcompile *.sh' \
-    if'((! $+HOMEBREW_PREFIX && $+commands[brew]))' \
+    if'[ -x /home/linuxbrew/.linuxbrew/bin/brew ]' \
   for zdharma-continuum/null
 
 # tmux firstly avoid load ~/.zshrc twice
 # exec tmux will met bug in android
 # tmux on android and windows is slow because it cannot run in background
 # don't run tmux on them
-if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux])); then
+if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux] && ! $+SSH_TTY));
+then
   exec tmux new -As0
 fi
 # windows don't support screen
@@ -149,8 +150,8 @@ zstyle ':completion:*' mail-directory ${XDG_CACHE_HOME:-$HOME/.cache}/neomutt
 zstyle ':completion:*' word true
 zstyle ':completion::complete:*' use-cache true
 zstyle ':completion::complete:*' call-command true
-zstyle ':completion:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':completion:*:descriptions' format '%d'
+zstyle ':completion:*:processes' command "ps -wu$USER -opid,user,comm"
+zstyle ':completion:*:descriptions' format %d
 zstyle ':completion:*:git-checkout:*' sort false
 # work when fzf-tab is not installed
 zstyle ':completion:*' menu select
@@ -187,11 +188,11 @@ zstyle ':fzf-tab:complete:(\\|)zinit:*' fzf-preview \
 # command {{{ #
 cmds=(
   {cpp,readlink,'readelf -a',size,strings,nm,'objdump -d'}' $realpath'
-  {gcc,g++,cc,c++}' -o- -S $realpath | bat --color=always -plasm'
+  {gcc,g++,cc,c++,clang{,++}}' -o- -S $realpath | bat --color=always -plasm'
 )
 for cmd in $cmds ; do
   bin=${cmd%% *}
-  bins=({,{i686,x86_64}-w64-mingw32-}$bin)
+  bins=({,{{i686,x86_64}-w64-mingw32,i386-apple-darwin,o{64{,e},32}}-}$bin)
   for bin in $bins ; do
     zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
       '[ -f $realpath ] && '"$cmd"' || less $realpath'
@@ -217,8 +218,8 @@ for cmd in $cmds ; do
 done
 
 cmds=(
-  {{pip,apt{,-cache}}' show',{pkg,brew}' info'}' $word \
-    | bat --color=always -plyaml'
+  {{pip,apt{,-cache}}' show','pkg info'}' $word | bat --color=always -plyaml'
+  'brew $word --help | bat --color=always -plhelp'
   'jupyter $word --help | bat --color=always -plmarkdown'
   'pygmentize -L $word | bat --color=always -plrst'
   {getconf,man,fc-list,'dpkg -L'}' $word'
@@ -231,6 +232,14 @@ for cmd in $cmds ; do
 done
 
 zstyle ':fzf-tab:complete:(\\|*/|)(sudo|proxychains):*' fzf-preview 'less =$word'
+zstyle ':fzf-tab:complete:(\\|*/|)ydcv:*' fzf-preview \
+  '[[ "$word" == -* ]] || ydcv --color=always --history=/dev/null $word'
+zstyle ':fzf-tab:complete:(\\|*/|)(g|b|d|p|freebsd-|)make:*' fzf-preview \
+  'case "$group" in
+  "make target") make -n $word | bat --color=always -plsh;;
+  "make variable") make -pq | rg -Ns "^$word = " | bat --color=always -plsh;;
+  file) less $realpath;;
+  esac'
 zstyle ':fzf-tab:complete:(\\|*/|)bat:*' fzf-preview \
   'case "$group" in
   subcommand) bat cache --help | bat --color=always -plhelp;;
@@ -251,7 +260,8 @@ zstyle ':fzf-tab:complete:(-equal-|(\\|*/|)sudo):*' fzf-preview 'less =$word'
 zstyle ':fzf-tab:complete:(\\|*/|)(c(make|test|pack)|ccmake|cmake-gui):*' \
   fzf-preview '[[ $word == --help* ]] && cmake $word'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-preview \
-  '[ "$group" = "process ID" ] && ps -p$word -wocmd --no-headers'
+  '[ "$group" = "process ID" ] && ps -p$word -wocmd --no-headers \
+  | bat --color=always -plsh'
 zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-flags \
   --preview-window=down:3:wrap
 zstyle ':fzf-tab:complete:(\\|*/|)(pkill|killall):*' fzf-preview \
@@ -280,6 +290,8 @@ for cmd in $cmds ; do
   zstyle ':fzf-tab:complete:'"$bin"':*' fzf-preview "$cmd"
 done
 
+zstyle ':fzf-tab:complete:brew-((|un)install|info):*' \
+  fzf-preview 'brew info $word | bat --color=always -plyaml'
 zstyle ':fzf-tab:complete:gem-((|un)install|update|lock|fetch|open|yank|owner|unpack):*' \
   fzf-preview 'gem info $word | bat --color=always -plyaml'
 zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
@@ -300,7 +312,7 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 unset cmd cmds bin bins
 
 zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
-  for Freed-Wu/pinyin-completion
+  for petronny/pinyin-completion
 # 1}}} Complete #
 
 # Log {{{1 #
@@ -474,6 +486,8 @@ if [[ -x ~/.lessfilter ]]; then
 fi
 alias mv='mv -i'
 alias cp='cp -ri'
+alias scp='scp -r'
+alias rsync='rsync -a'
 alias rm='rm -i'
 alias rename='rename -i'
 if (($+commands[exa])); then
