@@ -32,9 +32,9 @@ if [[ $OSTYPE == linux-android ]]; then
   # https://github.com/termux/termux-packages/issues/4781
   export MANPAGER=batman
   if [[ -n $DISPLAY ]]; then
-    export BROWSER=termux-open
-  else
     export BROWSER=exo-open
+  else
+    export BROWSER=termux-open
   fi
   # ~/.local/share/zinit/plugins/zsh-bash-completions-fallback/bash-completions-getter.sh:36
   export ZSH_BASH_COMPLETIONS_FALLBACK_PATH=$PREFIX/share/bash-completion
@@ -49,15 +49,17 @@ fi
 export LESS='--mouse -I'
 # fzf
 if [[ $OSTYPE == msys ]]; then
-  export FZF_DEFAULT_OPTS="--history=$(cygpath -w ${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt|sed 's=\\=\\\\=g')"
+  export FZF_DEFAULT_OPTS="--history=$(cygpath -w ${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt|sed 's=\\=\\\\=g')
+  --preview='bat --color=always --highlight-line={2} {1} 2> nul || less {1}'"
 else
-  export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt"
+  export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
+  --preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'"
 fi
+# rg foo --color=always | fzf -d:
 FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 -m
 -d$"\0"
 --ansi
---preview="[ $(file -Lb --mime-type {1} | cut -d/ -f1) = text ] && bat --color=always --highlight-line={2} {1} || less {1}"
 --reverse
 --prompt="❯ "
 --pointer=❯

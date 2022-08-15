@@ -29,8 +29,8 @@ zinit id-as'.brew' depth'1' \
 # exec tmux will met bug in android
 # tmux on android and windows is slow because it cannot run in background
 # don't run tmux on them
-if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux] && ! $+SSH_TTY));
-then
+if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux] && ! $+SSH_TTY \
+  && ! $+HOMEBREW_DEBUG_INSTALL)); then
   exec tmux new -As0
 fi
 # windows don't support screen
@@ -90,13 +90,8 @@ SAVEHIST=$HISTSIZE
 setopt autopushd
 setopt chaselinks
 setopt pushdignoredups
-# brew's zsh is 5.8.1 < 5.8.7
-if (($+options[cdsilent])); then
-  setopt cdsilent
-fi
-if (($+options[pushdsilent])); then
-  setopt pushdsilent
-fi
+setopt cdsilent
+setopt pushdsilent
 
 setopt globstarshort
 setopt magicequalsubst
@@ -118,10 +113,6 @@ setopt rcquotes
 
 zmodload zsh/pcre
 autoload -Uz run-help
-# brew's zsh is 5.8.1 < 5.8.7
-if (($+aliases[run-help])); then
-  unalias run-help
-fi
 autoload -Uz zcalc
 autoload -Uz zmv
 # 1}}} Default #
@@ -170,6 +161,8 @@ zstyle ':fzf-tab:user-expand:*' fzf-preview 'less $word'
 zstyle ':fzf-tab:complete:*' fzf-preview 'less $realpath'
 zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand|typeset|declare|local):*' \
   fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:-tilde-:*' fzf-preview \
+  '(($+commands[finger])) && finger $word || pinky $word'
 zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
   'case "$group" in
   "external command") less =$word;;
@@ -290,6 +283,8 @@ for cmd in $cmds ; do
   zstyle ':fzf-tab:complete:'"$bin"':*' fzf-preview "$cmd"
 done
 
+zstyle ':fzf-tab:complete:brew-(edit|cat|test):*' \
+  fzf-preview 'brew cat $word | bat --color=always -plruby'
 zstyle ':fzf-tab:complete:brew-((|un)install|info):*' \
   fzf-preview 'brew info $word | bat --color=always -plyaml'
 zstyle ':fzf-tab:complete:gem-((|un)install|update|lock|fetch|open|yank|owner|unpack):*' \

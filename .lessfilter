@@ -50,7 +50,7 @@ elif [ "$kind" = blockdevice ]; then
   fi
 elif [ "$category" = image ]; then
   if [ "$(command -v chafa)" ]; then
-    chafa "$1"
+    chafa -f symbols "$1"
   fi
   if [ "$(command -v exiftool)" ]; then
     exiftool "$1"
@@ -59,7 +59,7 @@ elif [ "$kind" = x-pie-executable ] || [ "$kind" = x-sharelib ]; then
   if [ "$(command -v ldd)" ]; then
     ldd "$1"
   fi
-elif [ "$kind" = x-executable ]; then
+elif [ "$kind" = x-executable ] || [ "$kind" = java-archive ]; then
   if [ "$(command -v 7z)" ]; then
     7z l "$1"
   fi
