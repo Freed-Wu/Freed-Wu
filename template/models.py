@@ -15,10 +15,10 @@ class XNet(nn.Module):
         """
         super().__init__()
         self.backbone = nn.Sequential(*list(resnet18(True).children())[1:-1])
-        out_features: int = self.backbone[0].num_features  # type: ignore
-        self.conv = nn.Conv2d(1, out_features, 7, 2, 3, bias=False)
-        in_features: int = self.backbone[-2][-1].bn2.num_features  # type: ignore
-        self.fc = nn.Linear(in_features, num_classes)
+        out_features = self.backbone[0].num_features
+        self.conv = nn.Conv2d(1, out_features, 7, 2, 3, bias=False)  # type: ignore
+        in_features = self.backbone[-2][-1].bn2.num_features  # type: ignore
+        self.fc = nn.Linear(in_features, num_classes)  # type: ignore
 
     def forward(self, x) -> "Tensor":
         """forward.

@@ -14,7 +14,6 @@ repos:
       - id: detect-private-key
       - id: check-symlinks
       - id: check-ast
-      - id: debug-statements
       - id: requirements-txt-fixer
       - id: check-xml
       - id: check-yaml

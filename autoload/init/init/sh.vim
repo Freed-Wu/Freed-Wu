@@ -1,3 +1,8 @@
+function! init#init#sh#includeexpr() abort
+  let l:fname = substitute(v:fname, '^-.', '', 'g')
+  return l:fname
+endfunction
+
 function! init#init#sh#map() abort
   nnoremap <silent><buffer> [[ ?^\s*\w\+(\s*)\_s*{<CR>:let @/ = ''<CR>
   nnoremap <silent><buffer> ]] /^\s*\w\+(\s*)\_s*{<CR>:let @/ = ''<CR>

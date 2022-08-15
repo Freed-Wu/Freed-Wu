@@ -1,22 +1,34 @@
-#!/usr/bin/env python3
-"""%HERE%.
+#!/usr/bin/env python
+"""{binname}.
 
-usage: {binname} [-hVdv]
+usage: {binname} [options]
 
 options:
-    -h, --help                  Show this screen.
-    -V, --version               Show version.
-    -d, --debug                 Show debug information.
-    -v, --verbose               Show verbose information.
+    -q, --quiet                         Don't show normal information.
+    -d, --debug                         Show debug information.
 """
-from typing import Dict, Final
+from typing import Final
 import logging
 import os
 import sys
-from docopt import docopt
+from argopt import argopt
 
 try:
-    from . import __version__ as VERSION
+    # for debug
+    import pudb
+
+    os.environ["PYTHONBREAKPOINT"] = "pudb.set_trace"
+    from pathlib import Path
+
+    # avoid warning
+    os.makedirs(os.path.expanduser("~/.config/ptpython"), exist_ok=True)
+    Path(os.path.expanduser("~/.config/ptpython/config.py")).touch()
+except ImportError:
+    pass
+
+try:
+    # when this file is __main__.py
+    from . import __version__ as VERSION  # type: ignore
 except ImportError:
     VERSION: Final = "0.0.1"
 
@@ -31,33 +43,26 @@ def main(doc: str = _doc):
     :param doc:
     :type doc: str
     """
-    try:
-        args: Dict[str, str] = docopt(doc, version=VERSION)
-    except NameError:
-        args = {}
-    if args.get("--debug"):
-        level = "DEBUG"
-    elif args.get("--verbose"):
-        level = "INFO"
+    args = argopt(doc, version=VERSION).parse_args()
+    if args.debug:
+        args.level = "DEBUG"
+    elif args.quiet:
+        args.level = "WARNING"
     else:
-        level = "WARNING"
+        args.level = "INFO"
     try:
         from rich.logging import RichHandler
 
         logging.basicConfig(
-            level=level,
+            level=args.level,
             format="%(message)s",
             handlers=[RichHandler(rich_tracebacks=True, markup=True)],
         )
     except ImportError:
-        logging.basicConfig(level=level)
+        logging.basicConfig(level=args.level)
+    del args.debug, args.quiet
     logger.debug(args)
-
-    import torch
-    import pytorch_lightning as pl
-
-    pl._logger.setLevel(level)
-    pl.seed_everything(42)
+    # %HERE%
 
 
 if __name__ == "__main__":

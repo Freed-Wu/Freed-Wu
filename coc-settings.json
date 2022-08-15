@@ -2,7 +2,8 @@
   "suggest": {
     "triggerAfterInsertEnter": true,
     "echodocSupport": true,
-    "snippetIndicator": ""
+    "snippetIndicator": "",
+    "invalidInsertCharacters": "(,<,{,[,\r,\n"
   },
   "diagnostic": {
     "errorSign": "✗",

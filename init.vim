@@ -1,7 +1,15 @@
 " Prefix {{{1 "
-let $XDG_CONFIG_HOME = expand('$HOME/.config')
-let $XDG_DATA_HOME = expand('$HOME/.local/share')
-let $XDG_CACHE_HOME = expand('$HOME/.cache')
+" compatibility for vim
+if exists('*stdpath')
+  let $XDG_CONFIG_HOME = fnamemodify(stdpath('config'), ':h')
+  let $XDG_DATA_HOME = fnamemodify(stdpath('data'), ':h')
+  let $XDG_CACHE_HOME = fnamemodify(stdpath('cache'), ':h')
+else
+  let s:expand = {var, default -> var == expand(var) ? expand(default) : var}
+  let $XDG_CONFIG_HOME = s:expand('$XDG_CONFIG_HOME', '$HOME/.config')
+  let $XDG_DATA_HOME = s:expand('$XDG_DATA_HOME', '$HOME/.local/share')
+  let $XDG_CACHE_HOME = s:expand('$XDG_CACHE_HOME', '$HOME/.cache')
+endif
 if !has('nvim')
   " vint: next-line -ProhibitSetNoCompatible
   set nocompatible
@@ -22,9 +30,10 @@ if has('gui_running')
   set guioptions=gtaAPd
   if has('win32')
     simalt ~x
-    set guifont=JetBrainsMono\ NF:h10
   endif
 endif
+" firenvim need guifont
+set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h10
 set runtimepath=$VIMRUNTIME
 set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
 set belloff=
@@ -467,6 +476,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " 2}}} Fold "
 
   " Conceal {{{2 "
+  call dein#add('Freed-Wu/emoji-conceal.vim')
   call dein#add('Yggdroot/indentLine', {
         \ 'hook_source': 'call init#indentline#source()',
         \ })
@@ -791,6 +801,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'rev': 'release',
         \ 'hook_source': 'call init#coc#source()',
         \ })
+  call dein#add('github/copilot.vim', {
+        \ 'if': has('nvim'),
+        \ })
   " 2}}} LSP "
 
   " FileCMD {{{2 "
@@ -838,13 +851,13 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
 
   " File {{{2 "
   call dein#add('antoinemadec/FixCursorHold.nvim')
-  " need ++nested, ++once
-  call dein#add('lambdalisue/fern-ssh', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
   call dein#add('lambdalisue/fern.vim', {
         \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
         \ 'hook_source': 'call init#fern#source()',
+        \ })
+  " need ++nested, ++once
+  call dein#add('lambdalisue/fern-ssh', {
+        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
         \ })
   call dein#add('lambdalisue/fern-hijack.vim', {
         \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),

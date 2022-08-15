@@ -103,7 +103,7 @@ function! init#quickui#post_source() abort
   call quickui#menu#install('&Git', map([
         \ ['&Git', 'Gina status'],
         \ ['&Add All', 'Gina add -A'],
-        \ ['Add &.', 'Gina add .'],
+        \ ['Add &.', 'Gina add %'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&Z-fold', map([
         \ ['&Z-fold Last pattern', 'Fl'],

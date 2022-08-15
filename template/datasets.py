@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from torch.utils.data import Dataset
 from torchvision import transforms
-from PIL import Image
+from jpeg4py import JPEG
 
 
 class Data(Dataset):
@@ -41,9 +41,9 @@ class Data(Dataset):
         :param index:
         :type index: int
         """
-        img = Image.open(os.path.join(self.dir,
-                                      self.df.iat[index, 0])  # type: ignore
-                         )
+        path = os.path.join(self.dir, self.df.iat[index, 0])  # type: ignore
+        img = JPEG(path).decode()
+        # img = cv2.cvtColor(cv2.imread(path), cv2.COLOR_BGR2RGB)  # type: ignore
         img = self.transform(img)
         return img, self.df.iat[index, 1]  # type: ignore
 

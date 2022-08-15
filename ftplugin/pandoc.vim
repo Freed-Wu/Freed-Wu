@@ -1,4 +1,8 @@
 try
+  call emoji#conceal()
+catch /^Vim\%((\a\+)\)\=:E117:/
+endtry
+try
   call vimtex#init()
   call init#init#tex#main()
 catch /^Vim\%((\a\+)\)\=:E117:/

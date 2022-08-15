@@ -1,5 +1,5 @@
 .!echo "\# $ uname -r\n\# $(uname -r)"%HERE%
-.!echo "\# $ has zsh\n\# $(has zsh | ansifilter)"
+.!echo "\# $ has\n\# $(has | ansifilter)"
 # $ cat test.zsh
 . ~/.zinit/plugins/
 # $ zsh -df
