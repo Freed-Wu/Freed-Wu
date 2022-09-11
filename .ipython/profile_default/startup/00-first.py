@@ -12,16 +12,17 @@ logging.basicConfig(
 if sys.argv[0] == "":
     from rich import pretty
     from rich import traceback
-
-    pretty.install()
-    traceback.install()
-
     import os
     import platform
     from getpass import getuser
     from datetime import datetime
     import colorama
     from colorama import Fore, Back, Style
+    from jedi.utils import setup_readline
+
+    pretty.install()
+    traceback.install()
+    setup_readline()
 
     class _Ps1:
         def __init__(self):

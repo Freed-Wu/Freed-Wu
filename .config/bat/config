@@ -6,3 +6,8 @@
 -m'*.sa:ARM Assembly'
 -m'*.cu:C'
 -m'*.cuh:C'
+-m'entry_points.txt:INI'
+-m'PKG-INFO:reStructuredText'
+-m'*.BUILD:Python'
+-m'BUILD:Python'
+-m'WORKSPACE:Python'

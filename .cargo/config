@@ -1,5 +1,11 @@
 [source.crates-io]
-replace-with = 'tuna'
+replace-with = 'bfsu'
+
+[source.bfsu]
+registry = 'https://mirrors.bfsu.edu.cn/git/crates.io-index.git'
 
 [source.tuna]
-registry = "https://mirrors.bfsu.edu.cn/git/crates.io-index.git"
+registry = 'https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git'
+
+[source.ustc]
+registry = 'https://mirrors.ustc.edu.cn/crates.io-index'

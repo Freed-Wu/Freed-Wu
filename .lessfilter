@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#! /usr/bin/env bash
 mime=$(file -Lb --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
@@ -8,7 +8,37 @@ if [ -d "$1" ]; then
     exa --git -hl --color=always --icons "$1"
   fi
 elif [ "$kind" = octet-stream ]; then
-  if [ "$(command -v hexyl)" ]; then
+  if [[ "$1" = *events.out.tfevents.* ]]; then
+    python <<EOF
+from contextlib import suppress
+import sys
+from time import gmtime, strftime
+
+import pandas as pd
+import plotext as plt
+from tensorboard.backend.event_processing.event_file_loader import (
+    EventFileLoader,
+)
+
+file = "$1"
+df = pd.DataFrame(columns=["Step", "Value"])
+df.index.name = "YYYY-mm-dd HH:MM:SS"
+
+for event in EventFileLoader(file).Load():
+    with suppress(IndexError):
+        df.loc[strftime("%F %H:%M:%S", gmtime(event.wall_time))] = [  # type: ignore
+            event.step,  # type: ignore
+            event.summary.value[0].tensor.float_val[0],  # type: ignore
+        ]
+df.index = pd.to_datetime(df.index)  # type: ignore
+df.Step = df.Step.astype(int)
+plt.plot(df.Step, df.Value, marker="braille")
+plt.title(event.summary.value[0].metadata.display_name)  # type: ignore
+plt.clc()
+plt.show()
+df.to_csv(sys.stdout, "\t")
+EOF
+  elif [ "$(command -v hexyl)" ]; then
     hexyl "$1"
   fi
 elif [ "$kind" = plain ] && [ "$ext" = tsv ]; then
@@ -53,16 +83,18 @@ elif [ "$category" = image ]; then
     chafa -f symbols "$1"
   fi
   if [ "$(command -v exiftool)" ]; then
-    exiftool "$1"
+    exiftool "$1" | bat --color=always -plyaml
   fi
 elif [ "$kind" = x-pie-executable ] || [ "$kind" = x-sharelib ]; then
   if [ "$(command -v ldd)" ]; then
     ldd "$1"
   fi
-elif [ "$kind" = x-executable ] || [ "$kind" = java-archive ]; then
+elif [ "$kind" = x-executable ] || [ "$kind" = java-archive ] || [ "$kind" = zstd ]; then
   if [ "$(command -v 7z)" ]; then
     7z l "$1"
   fi
-elif [ "$(command -v bat)" ] && [ "$(command -v lesspipe.sh)" ]; then
-  lesspipe.sh "$1" | bat --color=always
+elif [ -e "$1" ]; then
+  if [ "$(command -v bat)" ] && [ "$(command -v lesspipe.sh)" ]; then
+    lesspipe.sh "$1" | bat --color=always
+  fi
 fi

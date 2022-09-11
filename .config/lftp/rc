@@ -1,5 +1,4 @@
 alias ls cls
-set cmd:default-protocol sftp
 set bmk:save-passwords true
 set mirror:parallel-transfer-count 4
 set cmd:cls-default ''

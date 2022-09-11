@@ -29,8 +29,8 @@ zinit id-as'.brew' depth'1' \
 # exec tmux will met bug in android
 # tmux on android and windows is slow because it cannot run in background
 # don't run tmux on them
-if [[ $OSTYPE == linux-gnu ]] && ((! $+TMUX && $+commands[tmux] && ! $+SSH_TTY \
-  && ! $+HOMEBREW_DEBUG_INSTALL)); then
+if [[ $OSTYPE == linux-gnu && $KITTY_WINDOW_ID == 1 ]] && ((! $+TMUX \
+  && $+commands[tmux] && ! $+SSH_TTY && ! $+HOMEBREW_DEBUG_INSTALL)); then
   exec tmux new -As0
 fi
 # windows don't support screen
@@ -117,6 +117,24 @@ autoload -Uz zcalc
 autoload -Uz zmv
 # 1}}} Default #
 
+# Hook {{{1 #
+zinit id-as'.direnv' depth'1' wait lucid \
+  atclone'direnv hook zsh > direnv.sh
+  zcompile *.sh' \
+  if'(($+commands[direnv]))' \
+  for zdharma-continuum/null
+zinit id-as'.pyenv' depth'1' wait lucid \
+  atclone'pyenv init - > pyenv.sh
+  zcompile *.sh' \
+  if'(($+commands[pyenv]))' \
+  for zdharma-continuum/null
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
+zinit id-as depth'1' wait lucid \
+  atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
+  if'(($+commands[fzf] && $+commands[bc]))' \
+  for bigH/auto-sized-fzf
+# 1}}} Hook #
+
 # Complete {{{1 #
 if (( $+HOMEBREW_PREFIX )); then
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
@@ -144,6 +162,7 @@ zstyle ':completion::complete:*' call-command true
 zstyle ':completion:*:processes' command "ps -wu$USER -opid,user,comm"
 zstyle ':completion:*:descriptions' format %d
 zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*' option-stacking true
 # work when fzf-tab is not installed
 zstyle ':completion:*' menu select
 # https://github.com/BurntSushi/ripgrep/pull/2196
@@ -203,7 +222,10 @@ if [[ -d $dir ]]; then
 fi
 unset dir
 
-cmds=({hexdump,xxd,hexyl,'od -Ax -tx1','pandoc -tmarkdown'}' $realpath')
+cmds=(
+  'has $word'
+  {hexdump,xxd,hexyl,'od -Ax -tx1','pandoc -tmarkdown'}' $realpath'
+  )
 for cmd in $cmds ; do
   bin=${cmd%% *}
   zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
@@ -211,9 +233,9 @@ for cmd in $cmds ; do
 done
 
 cmds=(
-  {{pip,apt{,-cache}}' show','pkg info'}' $word | bat --color=always -plyaml'
-  'brew $word --help | bat --color=always -plhelp'
-  'jupyter $word --help | bat --color=always -plmarkdown'
+  {{pip{,3},apt{,-cache}}' show','pkg info'}' $word | bat --color=always -plyaml'
+  {jupyter,brew,plotext}' $word --help | bat --color=always -plhelp'
+  'jupyter $word --help | bat --color=always -plrst'
   'pygmentize -L $word | bat --color=always -plrst'
   {getconf,man,fc-list,'dpkg -L'}' $word'
   {go,yarn,luarocks,cabal,nix,gh,git,svn,systemctl,docker,gem,pyenv}' \
@@ -226,7 +248,24 @@ done
 
 zstyle ':fzf-tab:complete:(\\|*/|)(sudo|proxychains):*' fzf-preview 'less =$word'
 zstyle ':fzf-tab:complete:(\\|*/|)ydcv:*' fzf-preview \
-  '[[ "$word" == -* ]] || ydcv --color=always --history=/dev/null $word'
+  'case "$group" in
+  word) ydcv --color=always --history=/dev/null $word;;
+  esac'
+  zstyle ':fzf-tab:complete:(\\|*/|)(,neo)mutt:*' fzf-preview \
+  'case "$group" in
+  "file attachment") less $realpath;;
+  recipient) (($+commands[finger])) && finger $word || pinky $word;;
+  esac'
+zstyle ':fzf-tab:complete:(\\|)read:*' fzf-preview \
+  'case "$group" in
+  varprompt) echo ${(P)word};;
+  esac'
+zstyle ':fzf-tab:complete:(\\|*/|)(scp|rsync):*' fzf-preview \
+  'case "$group" in
+  file) less $realpath;;
+  user) (($+commands[finger])) && finger $word || pinky $word;;
+  *host*) grc --colour=on ping -c1 $word;;
+  esac'
 zstyle ':fzf-tab:complete:(\\|*/|)(g|b|d|p|freebsd-|)make:*' fzf-preview \
   'case "$group" in
   "make target") make -n $word | bat --color=always -plsh;;
@@ -276,7 +315,6 @@ cmds=(
   'docker '{image,container}' ls $word'
   'systemctl '{cat,show}' $word | bat --color=always -plini'
   {'brew '{ls,list},'git log --color=always'}' $word'
-  'git diff $word | delta'
 )
 for cmd in $cmds ; do
   bin=${${cmd/ /-}%% *}
@@ -285,12 +323,17 @@ done
 
 zstyle ':fzf-tab:complete:brew-(edit|cat|test):*' \
   fzf-preview 'brew cat $word | bat --color=always -plruby'
-zstyle ':fzf-tab:complete:brew-((|un)install|info):*' \
+zstyle ':fzf-tab:complete:brew-((|un)install|info|cleanup):*' \
   fzf-preview 'brew info $word | bat --color=always -plyaml'
 zstyle ':fzf-tab:complete:gem-((|un)install|update|lock|fetch|open|yank|owner|unpack):*' \
   fzf-preview 'gem info $word | bat --color=always -plyaml'
 zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
   'SYSTEMD_COLORS=1 systemctl status $word'
+zstyle ':fzf-tab:complete:git-diff:*' fzf-preview \
+  'case "$group" in
+  "tree file") less $word;;
+  *) git diff $word | delta ;;
+  esac'
 zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
   'case "$group" in
   "commit tag") git show --color=always $word ;;
@@ -364,6 +407,10 @@ zinit id-as depth'1' wait lucid \
 
 # HotKey {{{1 #
 bindkey -e
+bindkey "\x1b[13;2u" accept-line
+bindkey -Mvicmd "\x1b[13;2u" accept-line
+bindkey "\x1b[13;5u" accept-line
+bindkey -Mvicmd "\x1b[13;5u" accept-line
 bindkey ^Xh _complete_help
 autoload -U edit-command-line && bindkey '^X^E' edit-command-line
 bindkey ^U backward-kill-line
@@ -445,35 +492,8 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Function #
 
 # Compatible {{{1 #
-zinit id-as'.direnv' depth'1' wait lucid \
-  atclone'direnv hook zsh > direnv.sh
-  zcompile *.sh' \
-  if'(($+commands[direnv]))' \
-  for zdharma-continuum/null
-zinit id-as'.pyenv' depth'1' wait lucid \
-  atclone'pyenv init - > pyenv.sh
-  zcompile *.sh' \
-  if'(($+commands[pyenv]))' \
-  for zdharma-continuum/null
-# https://github.com/Tarrasch/zsh-command-not-found/issues/1
-zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
-zinit id-as depth'1' wait lucid \
-  atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
-  if'(($+commands[fzf] && $+commands[bc]))' \
-  for bigH/auto-sized-fzf
-# ln -s =nvim /usr/bin/vi
-compdef _vim vi edit
-if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
-  # https://github.com/msys2/MSYS2-packages/issues/2965
-  compdef _files start
-  # https://github.com/msys2/MSYS2-packages/issues/2996
-  compdef _pacman makepkg-mingw=makepkg pacboy=pacman
-fi
 # after loading completions
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
-if (($+commands[gpg] && $+commands[tty])); then
-  export GPG_TTY=$(tty)
-fi
 # must after lesspipe export LESSOPEN
 # use $HOME to replace ~ to avoid windows path bug
 if [[ -x ~/.lessfilter ]]; then
@@ -482,9 +502,12 @@ fi
 alias mv='mv -i'
 alias cp='cp -ri'
 alias scp='scp -r'
-alias rsync='rsync -a'
+alias rsync='rsync -avzP'
 alias rm='rm -i'
 alias rename='rename -i'
+alias perl-rename='perl-rename -i'
+alias mkdir='mkdir -p'
+alias rmdir='rmdir -p'
 if (($+commands[exa])); then
   alias ls='exa --icons --git -h'
   alias tree='exa --icons -T'
