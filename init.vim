@@ -265,6 +265,8 @@ if !isdirectory(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
     finish
   endif
 endif
+" avoid vimOperError
+let s:exclamation = '!'
 if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#begin(expand('$XDG_DATA_HOME/nvim'))
   " 1}}} PluginPrefix "
@@ -587,7 +589,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_post_source': 'call init#unimpaired#post_source()',
         \ })
   call dein#add('tommcdo/vim-express', {
-        \ 'on_map': ['g:', 'g!'],
+        \ 'on_map': ['g:', 'g' . s:exclamation],
         \ 'hook_source': 'call init#express#source()',
         \ })
   call dein#add('tpope/vim-abolish', {
@@ -822,8 +824,8 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'VimuxScrollDownInspect', 'VimuxCloseRunner', 'VimuxInterruptRunner',
         \ 'VimuxPromptCommand', 'VimuxClearTerminalScreen',
         \ 'VimuxClearRunnerHistory', 'VimuxTogglePane'],
-        \ 'on_map': {'x': ['<C-CR>'], 'i': ['<C-CR>', '<M-U>', '<M-D>'],
-        \ 'n': ['<C-CR>', 'g<C-CR>', 'z<C-CR>', '<M-CR>', '<M-U>', '<M-D>']},
+        \ 'on_map': {'x': ['<S-CR>'], 'i': ['<S-CR>', '<M-U>', '<M-D>'],
+        \ 'n': ['<S-CR>', 'g<S-CR>', 'z<S-CR>', '<M-CR>', '<M-U>', '<M-D>']},
         \ 'hook_source': 'call init#vimux#source()',
         \ })
   " 2}}} Debug "

@@ -127,7 +127,7 @@
   },
 
   "translator": {
-    "engines": ["bing", "youdao", "haici"]
+    "enableHover": true
   },
 
   "git": {

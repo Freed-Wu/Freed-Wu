@@ -15,6 +15,6 @@ class %CFILE% < Formula
   end
 
   test do
-    system "#{bin}/%FILE%"
+    assert_match "", shell_output("#{bin}/%FILE%")
   end
 end

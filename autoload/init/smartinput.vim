@@ -156,6 +156,18 @@ function! init#smartinput#post_source() abort
 
   " EN {{{2 "
   call smartinput#define_rule({
+        \ 'at': '``\%#',
+        \ 'char': '`',
+        \ 'input': '``' . left . left,
+        \ 'filetype': ['rst'],
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '``\%#``',
+        \ 'char': '<BS>',
+        \ 'input': '<BS><BS><Del><Del>',
+        \ 'filetype': ['rst'],
+        \ })
+  call smartinput#define_rule({
         \ 'at': '\%#',
         \ 'char': '`',
         \ 'input': "`'" . left,

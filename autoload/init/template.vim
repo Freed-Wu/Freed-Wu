@@ -8,5 +8,6 @@ function! init#template#source() abort
         \ ['FILE_', 'init#init#template#file_'],
         \ ['CFILE', 'init#init#template#cfile'],
         \ ['GITHUB', 'init#init#template#github'],
+        \ ['GITHUB_USER', 'init#init#template#github_user'],
         \ ]
 endfunction

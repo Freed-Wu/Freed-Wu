@@ -1,3 +1,0 @@
-#compdef %FILE_%
-
-compdef _gnu_generic %FILE_%

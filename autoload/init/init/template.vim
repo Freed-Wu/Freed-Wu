@@ -9,3 +9,7 @@ endfunction
 function! init#init#template#github() abort
   return g:snips_github
 endfunction
+
+function! init#init#template#github_user() abort
+  return $GITHUB_USER
+endfunction

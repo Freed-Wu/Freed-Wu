@@ -1,8 +1,7 @@
 argopt
-ptpython
-pudb
-pytorch_lightning
-
-# debug
-rich
-tqdm
+gpustat  # debug
+ptpython  # debug
+pudb  # debug
+pytorch_lightning  # pl.seed_everything()
+rich  # beautify
+tqdm  # https://github.com/Textualize/rich/issues/2445

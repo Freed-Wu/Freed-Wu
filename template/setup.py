@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """A setuptools based setup module.
 
 See:
@@ -13,6 +13,7 @@ from typing import Final
 from importlib import import_module
 from packaging.utils import canonicalize_name
 import os
+from os.path import dirname as dirn
 import sys
 import shlex
 import subprocess
@@ -31,9 +32,19 @@ try:
 except FileNotFoundError:
     install_requires = []
 
-PACKAGES: Final = find_packages("src")
+rootpath = dirn(os.path.abspath(__file__))
+path = os.path.join(rootpath, "src")
+packages = find_packages(path)
+if packages == []:
+    path = rootpath
+    packages = find_packages(path)
+    package_dir = {"": ""}
+else:
+    package_dir = {"": "src"}
+PACKAGE_DIR: Final = package_dir
+sys.path.insert(0, path)
+PACKAGES: Final = packages
 PACKAGE: Final = PACKAGES[0]
-sys.path.insert(0, os.path.abspath("src"))
 MODULE: Final = import_module(PACKAGE)
 VERSION: Final = MODULE.__version__
 NAME_: Final = MODULE.__name__
@@ -77,12 +88,13 @@ setup(
         for minor in range(6, 11)
     ],
     packages=PACKAGES,
-    package_dir={"": "src"},
+    package_dir=PACKAGE_DIR,
     include_package_data=True,
     python_requires=">=3.6",
     install_requires=install_requires,
     extras_require={
-        "debug": ["rich"],
+        "completion": ["shtab"],
+        "version": ["get_version"],
     },
     entry_points={
         "console_scripts": [

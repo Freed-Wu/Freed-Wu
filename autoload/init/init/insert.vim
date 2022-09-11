@@ -1,10 +1,6 @@
 function! init#init#insert#main() abort
   inoremap <C-J> <C-E>
   inoremap <C-L> <C-Y>
-  inoremap <expr><C-P> pumvisible() ? "\<C-p>" : "\<Up>"
-  inoremap <expr><C-N> pumvisible() ? "\<C-n>" : "\<Down>"
-  inoremap <expr><C-V> pumvisible() ? "\<PageDown>" : "\<C-V>"
-  inoremap <expr><M-V> pumvisible() ? "\<PageUp>" : "\<M-V>"
   " readline
   inoremap <silent> <M-.> <C-R>=split(getline(line('.') - 1))[-1]<CR>
   inoremap <M-c> <C-O>~<C-O>gue<S-Right>

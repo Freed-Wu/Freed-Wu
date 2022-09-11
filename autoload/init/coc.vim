@@ -129,8 +129,12 @@ function! init#coc#source() abort
 endfunction
 
 function! init#coc#imap() abort
-  inoremap <silent><expr> <M-n> "\<C-R>=coc#float#scroll(1)\<cr>"
   inoremap <silent><expr> <M-p> "\<C-R>=coc#float#scroll(0)\<cr>"
+  inoremap <silent><expr> <M-n> "\<C-R>=coc#float#scroll(1)\<cr>"
+  inoremap <silent><expr> <C-M-p> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
+  inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
+  inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"
+  inoremap <silent><expr> <C-\> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
 endfunction
 
 augroup init#coc

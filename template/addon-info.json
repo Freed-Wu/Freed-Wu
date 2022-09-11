@@ -1,0 +1,10 @@
+{
+  "name": "%HERE%",
+  "description": "",
+  "version": "0.0.1",
+  "author": "%USER%",
+  "repository": {
+    "type": "git",
+    "url": "%GITHUB%/"
+  }
+}
