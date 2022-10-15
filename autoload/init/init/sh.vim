@@ -14,7 +14,7 @@ function! init#init#sh#map() abort
 endfunction
 
 function! init#init#sh#includeexpr() abort
-  if v:fname[0] != '-'
+  if v:fname[0] !=# '-'
     return v:fname
   endif
   let l:fname = substitute(v:fname, '^-.', '', 'g')

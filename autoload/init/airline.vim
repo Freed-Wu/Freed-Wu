@@ -118,3 +118,18 @@ function! init#airline#source() abort
   let g:airline#extensions#zoomwintab#enabled = 1
   let g:airline#extensions#zoomwintab#status_zoomed_in = '🔍'
 endfunction
+
+function! s:init() abort
+  let g:airline_section_x = airline#section#create_right([
+        \ '%{empty(nvim_treesitter#statusline()) ? "" : '
+        \ . 'nvim_treesitter#statusline() . g:airline_right_alt_sep}',
+        \ 'filetype',
+        \ ])
+endfunction
+
+if has('nvim')
+  augroup init#airline
+    autocmd!
+    autocmd User AirlineAfterInit call s:init()
+  augroup END
+endif

@@ -88,7 +88,10 @@ function! init#quickui#post_source() abort
         \ ['--', ''],
         \ ['Trail &Fix', 'TrailGuide fix'],
         \ ['--', ''],
+        \ ['Filet&ype Detect', 'filetype detect'],
+        \ ['--', ''],
         \ ['&Delete', 'Delete'],
+        \ ['Delete&!', 'Delete!'],
         \ ['Chmod +&x', 'Chmod +x'],
         \ ] , {_, v -> v + [get(v, 1)]}))
   call quickui#menu#install('&View', map([

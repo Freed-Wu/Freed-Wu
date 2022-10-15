@@ -1,7 +1,4 @@
+#!/usr/bin/env -S pip install -r
 argopt
-gpustat  # debug
-ptpython  # debug
-pudb  # debug
-pytorch_lightning  # pl.seed_everything()
-rich  # beautify
+nvidia-dali-cuda110
 tqdm  # https://github.com/Textualize/rich/issues/2445

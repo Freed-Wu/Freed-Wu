@@ -4,18 +4,18 @@ function! init#init#vim#map() abort
     xnoremap <silent><nowait><buffer> <LocalLeader> :<C-U>call quickui#context#open(b:context_v, {})<CR>
     let b:context = map([
           \ ['&Set', 'execute "set" substitute(expand("<cword>"), "''", "", "g") . "?"'],
-          \ ['&Echo', 'execute "echo" substitute(expand("<cWORD>"), ''[|\|`]'', "", "g")'],
+          \ ['&Echo', 'execute "echo" substitute(substitute(expand("<cWORD>"), ''[|\|`]'', "", "g"), "[ls]:", "g:", "g")'],
           \ ['&Has', 'execute "echo" has(expand("<cword>"))'],
           \ ['&Autocmd', 'execute "autocmd" substitute(expand("<cword>"), ''|\|`'', "", "g")'],
           \ ['H&ighlight', 'execute "highlight" expand("<cword>")'],
           \ ['&Map', 'execute "map" expand("<cWORD>")'],
           \ ['&Function', 'execute "function" substitute(expand("<cword>"), ''|\|`\|(.*)'', "", "g")'],
-          \ ['E&xecute', 'execute getline(line("."))'],
+          \ ['E&xecute', 'execute substitute(getline(line(".")), "[ls]:", "g:", "g")'],
           \ ['So&urce', 'source %'],
           \ ] , {_, v -> v + [get(v, 1)]})
     let b:context_v = map([
           \ ['&Set', 'execute "set" substitute(getline(".")[col("v") - 1:col("''>") - 1], "''", "", "g") . "?"'],
-          \ ['&Echo', 'execute "echo" substitute(getline(".")[col("v") - 1:col("''>") - 1], ''[|\|`]'', "", "g")'],
+          \ ['&Echo', 'execute "echo" substitute(substitute(getline(".")[col("v") - 1:col("''>") - 1], ''[|\|`]'', "", "g"), "[ls]:", "g:", "g")'],
           \ ['&Has', 'execute "echo" has(getline(".")[col("v") - 1:col("''>") - 1])'],
           \ ['&Autocmd', 'execute "autocmd" substitute(getline(".")[col("v") - 1:col("''>") - 1]), ''|\|`'', "", "g")'],
           \ ['H&ighlight', 'execute "highlight" getline(".")[col("v") - 1:col("''>") - 1]'],

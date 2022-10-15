@@ -1,4 +1,5 @@
 " Prefix {{{1 "
+scriptencoding utf-8
 " compatibility for vim
 if exists('*stdpath')
   let $XDG_CONFIG_HOME = fnamemodify(stdpath('config'), ':h')
@@ -13,7 +14,6 @@ endif
 if !has('nvim')
   " vint: next-line -ProhibitSetNoCompatible
   set nocompatible
-  set encoding=utf-8
   set undodir=$XDG_DATA_HOME/nvim/undo
   set directory=$XDG_DATA_HOME/nvim/swap
   if !isdirectory(&undodir)
@@ -24,15 +24,13 @@ if !has('nvim')
   endif
   let $MYVIMRC = expand('$XDG_CONFIG_HOME/nvim/init.vim')
 endif
-" after set encoding
-scriptencoding utf-8
 if has('gui_running')
   set guioptions=gtaAPd
   if has('win32')
     simalt ~x
   endif
 endif
-" firenvim need guifont
+" firenvim use guifont although has('gui_running') == 0
 set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h10
 set runtimepath=$VIMRUNTIME
 set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
@@ -64,7 +62,6 @@ set virtualedit=block
 set whichwrap+=h,l,<,>,~,[,]
 set mouse=a
 set fillchars=vert:\|,fold:…
-set list
 set listchars=tab:\┊\ ,extends:→,precedes:←,nbsp:+
 set relativenumber
 set number
@@ -158,15 +155,6 @@ augroup init
   if exists(':wshada')
     autocmd VimLeave * wshada!
   endif
-  " before FileType to avoid conflict with sleuth
-  autocmd BufNewFile *.{c,h} setlocal tabstop=8
-        \ | setlocal shiftwidth=8
-        \ | setlocal noexpandtab
-  autocmd BufNewFile *.snippets setlocal tabstop=4
-        \ | setlocal shiftwidth=4
-  autocmd BufNewFile *.txt setlocal tabstop=8
-        \ | setlocal shiftwidth=8
-        \ | setlocal noexpandtab
 augroup END
 
 cnoremap <C-G> <C-U><C-H>
@@ -260,7 +248,8 @@ let g:dein#notification_icon =
 let g:dein#types#git#clone_depth = 1
 if !isdirectory(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
   if executable('git')
-    call system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim $XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
+    call system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim '
+          \ . '$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
   else
     finish
   endif
@@ -362,7 +351,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " UI {{{1 "
   " Colorscheme {{{2 "
   call dein#add('flazz/vim-colorschemes')
-  call dein#add('dracula/vim')
+  call dein#add('dracula/vim', {
+        \ 'merged': 0,
+        \ })
   call dein#add('jaredgorski/SpaceCamp')
   call dein#add('preservim/vim-thematic', {
         \ 'hook_source': 'call init#thematic#source()',
@@ -392,12 +383,8 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('enricobacis/vim-airline-clock', {
         \ 'hook_source': 'call init#airline#clock#source()',
         \ })
-  call dein#add('lambdalisue/battery.vim', {
-        \ 'if': !has('win32unix'),
-        \ })
-  call dein#add('lambdalisue/wifi.vim', {
-        \ 'if': !has('unix') || has('unix') && !has('win32unix') && exists('*trim'),
-        \ })
+  call dein#add('lambdalisue/battery.vim')
+  call dein#add('lambdalisue/wifi.vim')
   " 2}}} StatusBar "
 
   " Sign {{{2 "
@@ -444,12 +431,11 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('luochen1990/rainbow', {
         \ 'hook_source': 'call init#rainbow#source()',
         \ })
+  " https://github.com/vim-utils/vim-troll-stopper/pull/12
   call dein#add('vim-utils/vim-troll-stopper')
   call dein#add('Soares/trailguide.vim')
   call dein#add('Soares/longline.vim')
-  call dein#add('sakshamgupta05/vim-todo-highlight')
-  " https://github.com/neoclide/coc-highlight/issues/
-  " coc-highlight highlight.document cannot work
+  " https://github.com/neoclide/coc-highlight/issues/36
   call dein#add('dominikduda/vim_current_word', {
         \ 'hook_source': 'call init#vim_current_word#source()',
         \ })
@@ -479,6 +465,8 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
 
   " Conceal {{{2 "
   call dein#add('Freed-Wu/emoji-conceal.vim')
+  call dein#add('Freed-Wu/fontawesome-conceal.vim')
+  call dein#add('Freed-Wu/html-conceal.vim')
   call dein#add('Yggdroot/indentLine', {
         \ 'hook_source': 'call init#indentline#source()',
         \ })
@@ -502,14 +490,18 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('vim-pandoc/vim-pandoc', {
         \ 'hook_source': 'call init#pandoc#source()',
         \ })
-  call dein#add('vim-pandoc/vim-pandoc-syntax', {
-        \ 'hook_source': 'call init#pandoc#syntax#source()',
-        \ })
+  call dein#add('vim-pandoc/vim-pandoc-syntax')
   call dein#add('vim-pandoc/vim-pandoc-after', {
         \ 'hook_source': 'call init#pandoc#after#source()',
         \ })
+  " https://github.com/sheerun/vim-polyglot/issues/813
+  call dein#add('raimon49/requirements.txt.vim')
+  call dein#add('Freed-Wu/sublime-syntax.vim', {
+        \ 'build': 'vimdoc .',
+        \ })
   call dein#add('liuchengxu/graphviz.vim')
   call dein#add('tmux-plugins/vim-tmux')
+  call dein#add('neomutt/neomutt.vim')
   call dein#add('tpope/vim-scriptease')
   call dein#add('mechatroner/rainbow_csv')
   call dein#add('cmcaine/vim-uci')
@@ -719,10 +711,12 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#textobj#entire#source()',
         \ })
   call dein#add('kana/vim-textobj-indent', {
-        \ 'on_map': {'o': ['ii', 'ai', 'iI', 'aI'], 'x': ['ii', 'ai', 'iI', 'aI']},
+        \ 'on_map': {'o': ['ii', 'ai', 'iI', 'aI'],
+        \ 'x': ['ii', 'ai', 'iI', 'aI']},
         \ })
   call dein#add('glts/vim-textobj-indblock', {
-        \ 'on_map': {'o': ['io', 'ao', 'iO', 'aO'], 'x': ['io', 'ao', 'iO', 'aO']},
+        \ 'on_map': {'o': ['io', 'ao', 'iO', 'aO'],
+        \ 'x': ['io', 'ao', 'iO', 'aO']},
         \ })
   call dein#add('kana/vim-textobj-line', {
         \ 'on_map': {'o': ['il', 'al'], 'x': ['il', 'al']},
@@ -849,6 +843,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#gina#source()',
         \ 'hook_post_source': 'call init#gina#post_source()',
         \ })
+  call dein#add('APZelos/blamer.nvim')
   " 2}}} VCS "
 
   " File {{{2 "

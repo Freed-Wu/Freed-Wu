@@ -3,23 +3,19 @@ augroup init_filetype
   " Text {{{1 "
   autocmd BufNewFile,BufRead *.dat setfiletype csv_whitespace
   autocmd BufNewFile,BufRead *.ihex setfiletype hex
-  autocmd BufNewFile,BufRead *gitignore setfiletype gitignore
   autocmd BufNewFile,BufRead tags-*,*-tags setfiletype tags
   autocmd BufNewFile,BufRead *.{synctex,rpt,fdb_latexmk,fls,blg,ilg} setfiletype log
   " 1}}} Text "
 
   " Data_Exchange {{{1 "
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*} setfiletype conf
-  autocmd BufNewFile,BufRead mimeapps.list setfiletype dosini
-  autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-project,vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype jsonc
+  autocmd BufNewFile,BufRead mimeapps.list,setup.cfg,.coveragerc setfiletype dosini
+  autocmd BufNewFile,BufRead *.mplstyle setfiletype yaml
+  autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype jsonc
   " 1}}} Data_Exchange "
 
-  " Template {{{1 "
-  autocmd BufNewFile,BufRead */_layouts/*.html setfiletype liquid
-  autocmd BufNewFile,BufRead *.snippets setfiletype snippets
-  " 1}}} Template "
-
   " Mark_Up {{{1 "
+  autocmd BufNewFile,BufRead */_layouts/*.html setfiletype liquid
   autocmd BufNewFile,BufRead */doc/*.txt setfiletype help
   autocmd BufNewFile,BufRead *.{def,pgf,nlo,nls,inp,out,thm,eps_tex,pygtex,pygstyle,clo,aux,brf,ind,toc,lot,lof,loe,nav,vrb,ins,tikz,bbx,cbx,beamer} setfiletype tex
   autocmd BufNewFile,BufRead *.django setfiletype html

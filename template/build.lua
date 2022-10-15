@@ -1,4 +1,4 @@
-module = "foo"
+module = "%DIR%"
 cleanfiles = {"*.curlopt"}
 demofiles = {"latexmkrc", "Makefile"}
 docfiles = {"*.md", "*.cfg"}

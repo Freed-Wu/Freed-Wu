@@ -1,5 +1,7 @@
 function! init#surround#source() abort
-  let g:surround_{char2nr('<')} = "< \r >"
+  " https://github.com/tpope/vim-surround/issues/365
+  " let g:surround_{char2nr('<')} = "< \r >"
+  let g:surround_{char2nr('\')} = "<\r \\>"
   let g:surround_{char2nr('p')} = "<?php \r ?>"
   let g:surround_{char2nr('l')} = "\\begin{\1environment: \1}\r\\end{\1\1}"
   let g:surround_{char2nr('d')} = "<div\1id: \r..*\r id=\"&\"\1>\r</div>"

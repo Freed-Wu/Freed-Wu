@@ -1,12 +1,16 @@
-priority -30
+priority 100
 
-snippet cls "" b
+snippet #! "myUltiSnips" b
+#!/usr/bin/env python
+endsnippet
+
+snippet cls "myUltiSnips" b
 class $1:
 	def __init__(self):
 		super().__init__()
 endsnippet
 
-snippet def "" b
+snippet def "myUltiSnips" b
 def $1(self, $2):
 	$0
 endsnippet

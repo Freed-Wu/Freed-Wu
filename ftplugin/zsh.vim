@@ -1,4 +1,5 @@
 " override $VIMRUNTIME/ftplugin/zsh.vim
+setlocal path=.,~/.local/share/zinit/plugins
 nnoremap <silent><buffer> gK :echo system('zsh -ifc "autoload -Uz run-help; \run-help ' . expand('<cword>') . '"')<CR>
 let &l:path .= substitute(expand('$FPATH'), ':', ',', 'g')
 

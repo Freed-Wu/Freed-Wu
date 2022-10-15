@@ -1,3 +1,5 @@
+setlocal path=.,$TMUX_PLUGIN_MANAGER_PATH
+
 nnoremap <silent><buffer> K :<C-U>call CocAction('doHover')<CR>
 nnoremap <silent><buffer> gK :<C-U>call tmux#man()<CR>
 nnoremap <silent><buffer> gd :<C-U>execute 'edit' glob(finddir(split(expand('<cfile>'), '/')[1]) . '/README.*')<CR>

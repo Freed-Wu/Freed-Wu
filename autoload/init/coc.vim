@@ -5,13 +5,15 @@ function! init#coc#source() abort
   let g:coc_snippet_prev = '<S-Tab>'
   let g:coc_status_error_sign = '✗'
   let g:coc_status_warning_sign = ''
+  " https://github.com/neoclide/coc.nvim/issues/4282#issuecomment-1279692192
   let g:coc_filetype_map = {
+        \ 'liquid': 'html',
+        \ 'sublime_syntax': 'yaml',
         \ 'pandoc': 'markdown',
         \ 'mysql': 'sql',
         \ 'eelixir': 'elixir',
         \ 'bash': 'sh',
         \ 'zsh': 'sh',
-        \ 'latex': 'tex',
         \ }
   " https://github.com/neoclide/coc-sources/issues/56
   " coc-word cannot be loaded
@@ -140,8 +142,7 @@ endfunction
 augroup init#coc
   autocmd!
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  " https://github.com/neoclide/coc-highlight/issues/
-  " coc-highlight highlight.document cannot work
+  " https://github.com/neoclide/coc-highlight/issues/36
   " autocmd CursorHold * call CocActionAsync('highlight')
   autocmd VimLeavePre * CocCommand mru.validate
   autocmd VimLeavePre * if get(g:, 'coc_process_pid', 0)

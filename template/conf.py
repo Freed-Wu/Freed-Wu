@@ -1,20 +1,12 @@
 from contextlib import suppress
-import os
-from os.path import dirname as dirn
-import sys
 from pathlib import Path
+from typing import Final
+from importlib import import_module
 
-from setuptools import find_packages
+from . import packages
 
-rootpath = dirn(dirn(os.path.abspath(__file__)))
-path = os.path.join(rootpath, "src")
-packages = find_packages(path)
-if packages == []:
-    path = rootpath
-    packages = find_packages(path)
-sys.path.insert(0, path)
-# pyright:reportMissingImports=false
-from foo import __version__ as VERSION  # noqa: E402
+PACKAGE: Final = packages[0]
+VERSION: Final = import_module(PACKAGE).__version__
 
 with suppress(FileNotFoundError):
     readme = next(iter(Path("..").glob("README*")))

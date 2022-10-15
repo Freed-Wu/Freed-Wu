@@ -1,7 +1,8 @@
+# shellcheck shell=bash disable=SC2034
 # Maintainer: %USER% <%MAIL%>
 # https://aur.archlinux.org/packages/updaurpkg-git
-# $ updaurpkg
-_repo=%HERE%
+# $ updaurpkg --apply
+_repo=%HERE%/%DIR%
 _source_type=github-releases
 _upstreamver=$(date +%Y%m%d)
 _pkgname=$(tr A-Z a-z <<< ${_repo##*/})
@@ -11,7 +12,9 @@ _pkgname=$(tr A-Z a-z <<< ${_repo##*/})
 pkgname=$_pkgname
 pkgver=${_upstreamver##v}
 pkgrel=1
-pkgdesc="$(gh repo view --json description -q.description $_repo)"
+pkgdesc="
+.!gh repo view --json description -q.description %DIR%
+"
 arch=(any)
 # arch=(x86 x86_64 arm aarch64)
 # mingw_arch=(mingw32 mingw64 ucrt64 clang64 clang32 clangarm64)

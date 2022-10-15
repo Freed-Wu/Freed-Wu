@@ -8,10 +8,10 @@ function! init#firenvim#source() abort
             \ 'cmdline': 'firenvim',
             \ 'selector': 'textarea:not([readonly])',
             \ }}}
-  nnoremap <silent> <C-.> :<C-U>call firenvim#hide_frame()<CR>
-  inoremap <silent> <C-.> <C-O>:call firenvim#hide_frame()<CR>
-  nnoremap <silent> <C-;> :<C-U>call firenvim#focus_page()<CR>
-  inoremap <silent> <C-;> <C-O>:call firenvim#focus_page()<CR>
+  nnoremap <silent> <C-;> :<C-U>call firenvim#hide_frame()<CR>
+  inoremap <silent> <C-;> <C-O>:call firenvim#hide_frame()<CR>
+  nnoremap <silent> <C-.> :<C-U>call firenvim#focus_page()<CR>
+  inoremap <silent> <C-.> <C-O>:call firenvim#focus_page()<CR>
 endfunction
 
 function! init#firenvim#map() abort
@@ -31,6 +31,7 @@ if exists('g:started_by_firenvim')
     autocmd BufEnter www.bitahub.com_project-run_*.txt set filetype=sh
     autocmd BufEnter forums.gentoo.org_*.txt set filetype=bbcode
     autocmd BufEnter {aur.archlinux.org,github.com,www.cnblogs.com,www.jianshu.com}_*.txt set filetype=pandoc
+    autocmd BufEnter mail.*.txt set filetype=mail
     autocmd UIEnter * set laststatus=0
     autocmd UIEnter * set showtabline=0
     autocmd VimEnter * call init#firenvim#map()

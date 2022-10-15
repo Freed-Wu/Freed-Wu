@@ -1,9 +1,32 @@
 # my-init.vim
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![Gitmoji](https://img.shields.io/badge/gitmoji-%20%F0%9F%98%9C%20%F0%9F%98%8D-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/my-init.vim/master.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/my-init.vim/master)
 
-A backup for the configuration of my (neo)vim.
+[![github/downloads](https://shields.io/github/downloads/Freed-Wu/my-init.vim/total)](https://github.com/Freed-Wu/my-init.vim/releases)
+[![github/downloads/latest](https://shields.io/github/downloads/Freed-Wu/my-init.vim/latest/total)](https://github.com/Freed-Wu/my-init.vim/releases/latest)
+[![github/issues](https://shields.io/github/issues/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/issues)
+[![github/issues-closed](https://shields.io/github/issues-closed/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/issues?q=is%3Aissue+is%3Aclosed)
+[![github/issues-pr](https://shields.io/github/issues-pr/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/pulls)
+[![github/issues-pr-closed](https://shields.io/github/issues-pr-closed/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/pulls?q=is%3Apr+is%3Aclosed)
+[![github/discussions](https://shields.io/github/discussions/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/discussions)
+[![github/milestones](https://shields.io/github/milestones/all/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/milestones)
+[![github/forks](https://shields.io/github/forks/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/network/members)
+[![github/stars](https://shields.io/github/stars/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/stargazers)
+[![github/watchers](https://shields.io/github/watchers/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/watchers)
+[![github/contributors](https://shields.io/github/contributors/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/graphs/contributors)
+[![github/commit-activity](https://shields.io/github/commit-activity/w/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/graphs/commit-activity)
+[![github/last-commit](https://shields.io/github/last-commit/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/commits)
+[![github/release-date](https://shields.io/github/release-date/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/releases/latest)
+
+[![github/license](https://shields.io/github/license/Freed-Wu/my-init.vim)](https://github.com/Freed-Wu/my-init.vim/blob/master/LICENSE)
+![github/languages](https://shields.io/github/languages/count/Freed-Wu/my-init.vim)
+![github/languages/top](https://shields.io/github/languages/top/Freed-Wu/my-init.vim)
+![github/directory-file-count](https://shields.io/github/directory-file-count/Freed-Wu/my-init.vim)
+![github/code-size](https://shields.io/github/languages/code-size/Freed-Wu/my-init.vim)
+![github/repo-size](https://shields.io/github/repo-size/Freed-Wu/my-init.vim)
+![github/v](https://shields.io/github/v/release/Freed-Wu/my-init.vim)
+
+A backup of the configuration of my (neo)vim.
 
 ![android](https://user-images.githubusercontent.com/32936898/151281612-aee1f23a-b456-45bf-8291-8f012569b000.jpg)
 
@@ -15,33 +38,12 @@ A backup for the configuration of my (neo)vim.
 
 [More Screenshots](https://www.zhihu.com/question/20873523/answer/2185169992)
 
-<!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=1 -->
+<!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=2 -->
 
-- [my-init.vim](#my-initvim)
-  - [Structure](#structure)
-  - [Note](#note)
-  - [Related](#related)
+- [Note](#note)
+- [Related](#related)
 
 <!-- mdformat-toc end -->
-
-## Structure
-
-```shell
-$ tree -L 1
-.
-├── autoload
-├── bitmaps
-├── coc-settings.json
-├── ftdetect
-├── ftplugin
-├── init.vim
-├── LICENSE
-├── lua
-├── README.md
-├── syntax
-├── ultisnips
-└── template
-```
 
 ## Note
 
@@ -81,6 +83,9 @@ to contain `-`, replace `-` with `_`.
 
 If one plugin cannot work, we can find rapidly which plugin is conflict with
 it by deleting `dein#add()`.
+
+`rg '" https://github\.com/[^/]+/[^/]+/issues/\d+'` to see all found bugs of
+plugins.
 
 ## Related
 

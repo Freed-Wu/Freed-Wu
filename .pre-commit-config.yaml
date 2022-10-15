@@ -13,24 +13,33 @@ repos:
       - id: end-of-file-fixer
       - id: detect-private-key
       - id: check-symlinks
+      - id: check-ast
+        exclude: ^template/(\.yaml|_test\.py)$
+      - id: debug-statements
+        exclude: ^template/(\.yaml|(__main__|_test)\.py)$
       - id: requirements-txt-fixer
       - id: check-xml
       - id: check-yaml
+        exclude: ^template/(\.pre-commit-hooks\.yaml|python\.yml)$
       - id: check-toml
       - id: check-json
+        exclude: ^template/addon-info\.json$|^coc-settings.json$
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.3.1
     hooks:
       - id: remove-crlf
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.1
+    rev: v2.2.2
     hooks:
       - id: codespell
+        additional_dependencies:
+          - tomli
   - repo: https://github.com/jorisroovers/gitlint
     rev: v0.17.0
     hooks:
       - id: gitlint
-        args: [--ignore=body-is-missing, --msg-filename]
+        args:
+          - --msg-filename
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
     rev: 2.6.1
     hooks:
@@ -40,15 +49,18 @@ repos:
     hooks:
       - id: check-mailmap
       - id: shellcheck
-        exclude: .*\.zsh$|^template/build.sh$
+        exclude: .*\.zsh$|^template/(build\.sh|\.tmux)$
       - id: shfmt
-        args: [-i, "2"]
-        exclude: .*\.zsh$
+        args:
+          - -i
+          - "2"
+        exclude: .*\.zsh|^template/\.tmux$
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.16
     hooks:
       - id: mdformat
-        args: [--number]
+        args:
+          - --number
         additional_dependencies:
           - mdformat-gfm
           - mdformat-myst
@@ -60,10 +72,12 @@ repos:
           - mdformat-beautysh
           - mdformat-black
           - mdformat-config
+        exclude: ^template/README\.md$
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.5.1
     hooks:
       - id: markdownlint-cli2
+        exclude: ^template/README\.md$
         additional_dependencies:
           - markdown-it-texmath@0.9.1
   - repo: https://github.com/PyCQA/doc8
@@ -79,12 +93,23 @@ repos:
     hooks:
       - id: pydocstyle
         args: [--add-ignore=D100]
+        exclude: ^template/_test\.py$
   - repo: https://github.com/myint/eradicate
     rev: v2.1.0
     hooks:
       - id: eradicate
   - repo: https://github.com/vimjas/vint
-    rev: v0.4a3
+    rev: v0.4a4
     hooks:
       - id: vint
-        args: [-e]
+        exclude: ^template/.*\.vim$
+  - repo: https://github.com/Freed-Wu/vimdoc
+    rev: v0.7.1a
+    hooks:
+      - id: vimdoc
+        exclude: ^template/.*\.vim$
+
+ci:
+  skip:
+    - shellcheck
+    - shfmt

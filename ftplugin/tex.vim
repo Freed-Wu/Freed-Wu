@@ -9,8 +9,9 @@ endif
 setlocal foldmethod=expr
 setlocal foldexpr=vimtex#fold#level(v:lnum)
 setlocal foldtext=vimtex#fold#text()
+setlocal iskeyword-=:
 setlocal spell
 
-let b:browser_search_default_engine = 'google'
+let b:browser_search_default_engine = 'ctan'
 
 call init#init#tex#main()

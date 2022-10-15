@@ -10,11 +10,10 @@ Options:
 Report bugs to <%MAIL%>.
 """
 from contextlib import suppress
-from typing import Final
 import logging
 import os
 import sys
-from argopt import argopt
+from typing import Final
 
 with suppress(ImportError):
     # for debug
@@ -34,24 +33,36 @@ try:
 except ImportError:
     __version__: Final = "0.0.1"
 
+__all__ = ["get_parser", "VERSION"]
+logger: Final = logging.getLogger(__name__)
 VERSION: Final = """{version}
 Copyright (C) %YEAR%
 Written by %USER%
 """.format(
     version=__version__
 )
-BINNAME: Final = os.path.split(sys.argv[0])[1]
-_doc: Final = __doc__.format(binname=BINNAME)  # type: ignore
-logger = logging.getLogger(__name__)
 
 
-def main(doc: str = _doc):
-    """Parse options, environments, configs.
+def get_parser(prog=None):
+    """Get parser for test."""
+    from argopt import argopt
 
-    :param doc:
-    :type doc: str
-    """
-    args = argopt(doc, version=VERSION).parse_args()
+    if prog is None:
+        prog = os.path.basename(sys.argv[0])
+    BINNAME: Final = prog
+    DOC: Final = __doc__.format(binname=BINNAME)  # type: ignore
+    parser = argopt(DOC, version=VERSION)
+    with suppress(ImportError):
+        import shtab
+
+        shtab.add_argument_to(parser)
+    return parser
+
+
+def main():
+    """Parse options, environments, configs."""
+    parser = get_parser()
+    args = parser.parse_args()
     if args.debug:
         args.level = "DEBUG"
     elif args.quiet:
@@ -68,10 +79,10 @@ def main(doc: str = _doc):
         )
     except ImportError:
         logging.basicConfig(level=args.level)
-    del args.debug, args.quiet
+    del args.debug, args.quiet  # type: ignore
     logger.debug(args)
     # %HERE%
 
 
 if __name__ == "__main__":
-    main(_doc)
+    main()

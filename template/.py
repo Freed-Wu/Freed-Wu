@@ -1,7 +1,4 @@
-# noqa: D400
-"""
-%FILE%
-"""
+"""%FILE%."""
 import logging
 
 logger = logging.getLogger(__name__)

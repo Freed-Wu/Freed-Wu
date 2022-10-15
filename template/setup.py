@@ -6,17 +6,19 @@ https://packaging.python.org/guides/distributing-packages-using-setuptools/
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import setup, find_packages
-from pathlib import Path
-from mimetypes import guess_type
-from typing import Final
+from glob import glob
 from importlib import import_module
-from packaging.utils import canonicalize_name
+from mimetypes import guess_type
 import os
 from os.path import dirname as dirn
-import sys
+from pathlib import Path
 import shlex
 import subprocess
+import sys
+from typing import Final
+
+from packaging.utils import canonicalize_name
+from setuptools import find_packages, setup
 
 HERE: Final = Path(__file__).parent.resolve()
 try:
@@ -31,6 +33,11 @@ try:
     install_requires = REQUIREMENTS.read_text().splitlines()
 except FileNotFoundError:
     install_requires = []
+extras_require = {}
+for file in glob("requirements/*.txt"):
+    name = os.path.basename(file)[:-4]
+    extras_require[name] = Path(file).read_text().splitlines()
+extras_require["all"] = sum(extras_require.values(), [])
 
 rootpath = dirn(os.path.abspath(__file__))
 path = os.path.join(rootpath, "src")
@@ -38,7 +45,7 @@ packages = find_packages(path)
 if packages == []:
     path = rootpath
     packages = find_packages(path)
-    package_dir = {"": ""}
+    package_dir = {"": "."}
 else:
     package_dir = {"": "src"}
 PACKAGE_DIR: Final = package_dir
@@ -50,7 +57,7 @@ VERSION: Final = MODULE.__version__
 NAME_: Final = MODULE.__name__
 NAME: Final = canonicalize_name(NAME_)
 VCS_URL: Final = f"%GITHUB%/{NAME}"
-CMD: Final = f'gh repo view --json description -q .description {VCS_URL}'
+CMD: Final = f"gh repo view --json description -q .description {VCS_URL}"
 ARGS: Final = shlex.split(CMD)
 try:
     DESCRIPTION = subprocess.run(ARGS, capture_output=True).stdout.decode()
@@ -92,10 +99,7 @@ setup(
     include_package_data=True,
     python_requires=">=3.6",
     install_requires=install_requires,
-    extras_require={
-        "completion": ["shtab"],
-        "version": ["get_version"],
-    },
+    extras_require=extras_require,
     entry_points={
         "console_scripts": [
             f"{NAME}={NAME_}.__main__:main",

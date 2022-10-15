@@ -86,7 +86,68 @@
   },
 
   "diagnostic-languageserver": {
+    "linters": {
+      // https://github.com/iamcco/coc-diagnostic/pull/133
+      "lacheck": {
+        "command": "lacheck",
+        "args": ["%file"],
+        "debounce": 100,
+        "offsetLine": 0,
+        "offsetColumn": 0,
+        "sourceName": "lacheck",
+        "formatLines": 1,
+        "formatPattern": [
+          "\"[^\"]+\", line (\\d+):\\s*(.*)(\\r|\\n)*$",
+          {
+            "line": 1,
+            "message": 2
+          }
+        ],
+        "securities": {
+          "undefined": "warning"
+        }
+      },
+      // https://github.com/iamcco/coc-diagnostic/pull/135
+      "pip-compile": {
+        "command": "sh",
+        "args": ["-c", "pip-compile -n %file 2>&1"],
+        "debounce": 100,
+        "offsetLine": 0,
+        "offsetColumn": 0,
+        "sourceName": "pip-compile",
+        "formatLines": 1,
+        "formatPattern": [
+          "(Could not find a version that matches \\S+) \\(from -r ([^(]+) \\(line (\\d+)\\)\\)",
+          {
+            "message": 1,
+            "errorsRoot": 2,
+            "line": 3
+          }
+        ]
+      },
+      // https://github.com/iamcco/coc-diagnostic/pull/136
+      "syntest": {
+        "command": "syntest",
+        "args": ["%file", "."],
+        "debounce": 100,
+        "offsetLine": 0,
+        "offsetColumn": 0,
+        "sourceName": "syntest",
+        "formatLines": 1,
+        "formatPattern": [
+          "Assertion selector \"[^\"]+\" from line (\\d+) failed against line \\d+, column range (\\d+)-(\\d+) \\(with text \"[^\"]+\"\\) has scope \\[([^\\]]+)\\]",
+          {
+            "line": 1,
+            "column": 2,
+            "endColumn": 3,
+            "message": 4
+          }
+        ]
+      }
+    },
     "filetypes": {
+      "syntax_test": "syntest",
+      "requirements": "pip-compile",
       "latex": "lacheck",
       "text": "alex-text",
       "html": "alex-html",
@@ -95,7 +156,7 @@
       "sh": "shellcheck",
       "elixir": ["mix_credo", "mix_credo_compile"],
       "php": ["phpstan", "psalm"],
-      "yaml": ["yamllint"],
+      "yaml": "yamllint",
       "cmake": ["cmake-lint", "cmakelint"],
       "systemd": "systemd-analyze"
     },

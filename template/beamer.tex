@@ -3,7 +3,13 @@
 \usecolortheme{spruce}
 \usepackage{hyperref}
 \title{%FILE%}
-\author{%USER%\thanks{\href{https://ustc.edu.cn/}{USTC}}}
+\ExplSyntaxOn%
+\NewDocumentCommand{\Shell}{om}{\sys_get_shell:nnN{#2}{}#1}
+\ExplSyntaxOff%
+\Shell[\Name]{git config user.name}
+\Shell[\Email]{git config user.email}
+\newcommand{\Authorname}[0]{\href{mailto:\Email}{\Name}}
+\author{\Authorname\thanks{\href{https://ustc.edu.cn/}{USTC}}}
 \institute{\href{https://ustc.edu.cn/}{USTC}}}
 \begin{document}
 

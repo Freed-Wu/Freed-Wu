@@ -1,4 +1,4 @@
-priority -30
+priority 100
 
 snippet add "myUltiSnips" b
 Add $0
@@ -20,4 +20,13 @@ Initial
 endsnippet
 snippet no "myUltiSnips" i
 noreply@github.com
+endsnippet
+snippet run "myUltiSnips" i
+pre-commit.ci run
+endsnippet
+snippet auto "myUltiSnips" i
+pre-commit.ci autofix
+endsnippet
+snippet skip "myUltiSnips" i
+[pre-commit.ci skip]
 endsnippet

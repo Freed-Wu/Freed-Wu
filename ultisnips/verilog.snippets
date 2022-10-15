@@ -1,53 +1,53 @@
-priority -30
+priority 100
 
-snippet inc "" b
+snippet inc "myUltiSnips" b
 \`include "$1.v"
 endsnippet
-snippet def "" b
+snippet def "myUltiSnips" b
 \`define $1 $0
 endsnippet
-snippet ifd "" b
+snippet ifd "myUltiSnips" b
 \`ifdef $1
 	$2
 \`else
 	$3
 \`endif
 endsnippet
-snippet pa "" b
+snippet pa "myUltiSnips" b
 parameter $1 = $2;
 endsnippet
-snippet int "" i
+snippet int "myUltiSnips" i
 integer $1;
 endsnippet
-snippet re "" b
+snippet re "myUltiSnips" b
 reg [$1:$2] $3;
 endsnippet
-snippet wi "" b
+snippet wi "myUltiSnips" b
 wire [$1:$2] $3;
 endsnippet
-snippet as "" b
+snippet as "myUltiSnips" b
 assign $1 = $2;
 endsnippet
-snippet po "" i
+snippet po "myUltiSnips" i
 posedge $0
 endsnippet
-snippet ne "" i
+snippet ne "myUltiSnips" i
 negedge $0
 endsnippet
-snippet for "" b
+snippet for "myUltiSnips" b
 for($1;$2;$3)
 endsnippet
-snippet in "" b
+snippet in "myUltiSnips" b
 initial begin
 	$0
 end
 endsnippet
-snippet ta "" b
+snippet ta "myUltiSnips" b
 task $1;
 	$0
 endtask
 endsnippet
-snippet f "" b
+snippet f "myUltiSnips" b
 function $1
 	$0
 endfunction

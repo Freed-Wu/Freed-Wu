@@ -1,4 +1,4 @@
-priority -30
+priority 100
 
 snippet val "overleaf" b
 %%begin novalidate
@@ -11,45 +11,45 @@ $0
 %    \end{macro}
 endsnippet
 
-snippet use "" b
+snippet up "myUltiSnips" b
 \usepackage$1{$2}
 endsnippet
-snippet sec "" b
+snippet sec "myUltiSnips" b
 \section{${1:section name}}%
 \label{sec:${2:$1}}
 endsnippet
-snippet sec* "" b
+snippet sec* "myUltiSnips" b
 \section*{${1:section name}}%
 \label{sec:${2:$1}}
 endsnippet
-snippet sub "" b
+snippet sub "myUltiSnips" b
 \subsection{${1:subsection name}}%
 \label{sub:${2:$1}}
 endsnippet
-snippet sub* "" b
+snippet sub* "myUltiSnips" b
 \subsection*{${1:subsection name}}%
 \label{sub:${2:$1}}
 endsnippet
-snippet ssub "" b
+snippet ssub "myUltiSnips" b
 \subsubsection{${1:subsubsection name}}%
 \label{ssub:${2:$1}}
 endsnippet
-snippet ssub* "" b
+snippet ssub* "myUltiSnips" b
 \subsubsection*{${1:subsubsection name}}%
 \label{ssub:${2:$1}}
 endsnippet
-snippet par "" b
+snippet par "myUltiSnips" b
 \paragraph{${1:paragraph name}}%
 \label{par:${2:$1}}
 endsnippet
-snippet subp "" b
+snippet subp "myUltiSnips" b
 \subparagraph{${1:subparagraph name}}%
 \label{subp:${2:$1}}
 endsnippet
-snippet ft "" i
+snippet ft "myUltiSnips" i
 \footnote{$1}$0
 endsnippet
-snippet index "" i
+snippet index "myUltiSnips" i
 \index{$1}$0
 endsnippet
 
@@ -96,7 +96,7 @@ snippet fig "\usepackage{graphicx}" b
 	\centering
 	\includegraphics[
 		width=${1:0.8}\linewidth,
-	]{figures/$2.png}
+	]{images/$2.png}
 	\caption{$3}%
 	\label{fig:$2}
 \end{figure}
@@ -172,7 +172,7 @@ snippet subf "\usepackage{subcaption, graphicx}" b
 	\centering
 	\includegraphics[
 		width=\linewidth,
-	]{figures/$2.png}
+	]{images/$2.png}
 	\caption{$3}%
 	\label{fig:$2}
 \end{subfigure}
@@ -192,7 +192,7 @@ snippet wrapf "\usepackage{wrapfig}" b
 	\centering
 	\includegraphics[
 		width=\linewidth,
-	]{figures/$1.png}
+	]{images/$1.png}
 	\caption{$2}%
 	\label{fig:$1}
 \end{wrapfigure}
@@ -209,7 +209,7 @@ snippet overpic "\usepackage{overpic}" b
 \begin{overpic}[
 	width=\linewidth,
 	grid,
-]{figures/$1.png}
+]{images/$1.png}
 	\put($0)
 \end{overpic}
 endsnippet
@@ -327,22 +327,63 @@ snippet pro "\usepackage{txfonts}" i
 \prod_{${1:i} = ${2:-\infty}}^${3:\infty} $0
 endsnippet
 context "math()"
-snippet "([A-Za-z'])(\d)" "" wrA
+snippet "([A-Za-z'])(\d)" "myUltiSnips" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 context "math()"
-snippet "([A-Za-z'])_(\d\d)" "" wrA
+snippet "([A-Za-z'])_(\d\d)" "myUltiSnips" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet
 context "math()"
-snippet "([A-Za-z'])_" "" wr
+snippet "([A-Za-z'])_" "myUltiSnips" wr
 `!p snip.rv = match.group(1)`_{${1:${VISUAL}}}
 endsnippet
 context "math()"
-snippet ^ "" w
+snippet ^ "myUltiSnips" w
 ^{${1:${VISUAL}}}
 endsnippet
 context "math()"
-snippet '([A-Za-z])\^(\d\d)' "" wrA
+snippet '([A-Za-z])\^(\d\d)' "myUltiSnips" wrA
 `!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`}
+endsnippet
+
+snippet ali "myUltiSnips" i
+\begin{aligned}
+$0
+\end{aligned}
+endsnippet
+snippet cases "myUltiSnips" i
+\begin{cases}
+$0
+\end{cases}
+endsnippet
+snippet matrix "myUltiSnips" i
+\begin{matrix}
+$0
+\end{matrix}
+endsnippet
+snippet bmat "myUltiSnips" i
+\begin{bmatrix}
+$0
+\end{bmatrix}
+endsnippet
+snippet Bmat "myUltiSnips" i
+\begin{Bmatrix}
+$0
+\end{Bmatrix}
+endsnippet
+snippet pmat "myUltiSnips" i
+\begin{pmatrix}
+$0
+\end{pmatrix}
+endsnippet
+snippet vmat "myUltiSnips" i
+\begin{vmatrix}
+$0
+\end{vmatrix}
+endsnippet
+snippet Vmat "myUltiSnips" i
+\begin{Vmatrix}
+$0
+\end{Vmatrix}
 endsnippet

@@ -1,63 +1,13 @@
-priority -30
+priority 100
 extends dot
+extends html
 extends tex
 
-snippet kbd
-<kbd>${1:${VISUAL}}</kbd>
-endsnippet
-snippet details
-<details>
-	<summary>${1:More}</summary>
-	$0
-</details>
-endsnippet
-$0endsnippet
-snippet img "" b
+snippet img "myUltiSnips" b
 ![$1](${2:path}${1/.+/ "/}${1:opt title}${1/.+/"/})
 endsnippet
-snippet notes "" b
+snippet notes "myUltiSnips" b
 ::: notes
 $0
 :::
-endsnippet
-
-snippet ali "" i
-\begin{aligned}
-$0
-\end{aligned}
-endsnippet
-snippet cases "" i
-\begin{cases}
-$0
-\end{cases}
-endsnippet
-snippet matrix "" i
-\begin{matrix}
-$0
-\end{matrix}
-endsnippet
-snippet bmat "" i
-\begin{bmatrix}
-$0
-\end{bmatrix}
-endsnippet
-snippet Bmat "" i
-\begin{Bmatrix}
-$0
-\end{Bmatrix}
-endsnippet
-snippet pmat "" i
-\begin{pmatrix}
-$0
-\end{pmatrix}
-endsnippet
-snippet vmat "" i
-\begin{vmatrix}
-$0
-\end{vmatrix}
-endsnippet
-snippet Vmat "" i
-\begin{Vmatrix}
-$0
-\end{Vmatrix}
 endsnippet

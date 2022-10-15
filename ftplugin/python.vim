@@ -13,9 +13,15 @@ let &l:path = join(s:path, ',')
 nnoremap <silent><buffer> <LocalLeader>t :<C-U>CocCommand pyright.createtypestub <C-R><C-W><CR>
 nnoremap <silent><buffer> <LocalLeader>s :<C-U>%s/^\S/# &/g<CR>:%s/^# \%(>>>\\|\.\.\.\)\%( \\|$\)//g<CR>
 
+let g:browser_search_default_engine = 'pypi'
+
 " https://github.com/tpict/vim-ftplugin-python/pull/15
 let b:match_skip = 's:comment\|string\|character\|special'
-autocmd CursorMoved <buffer> let b:match_words = s:BuildMatchWords()
+
+augroup init_python
+  autocmd!
+  autocmd CursorMoved <buffer> let b:match_words = s:BuildMatchWords()
+augroup END
 
 function! s:BuildMatchWords()
   if indent('.') > 0

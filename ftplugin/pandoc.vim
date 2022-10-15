@@ -1,8 +1,4 @@
 try
-  call emoji#conceal()
-catch /^Vim\%((\a\+)\)\=:E117:/
-endtry
-try
   let s:comments = &l:comments
   let s:commentstring = &l:commentstring
   call vimtex#init()
@@ -34,7 +30,7 @@ nnoremap <silent><buffer> <LocalLeader>vP :<C-U>Pandoc! pdf<CR>
 nnoremap <silent><buffer> <LocalLeader>vd :<C-U>Pandoc docx<CR>
 nnoremap <silent><buffer> <LocalLeader>vD :<C-U>Pandoc! docx<CR>
 
-call textobj#user#map('markdown', {
+call textobj#user#map('pandoc', {
       \ 'text': {
         \ 'select-a': '<buffer>aF',
         \ 'select-i': '<buffer>iF',

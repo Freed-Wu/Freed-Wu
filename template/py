@@ -1,0 +1,8 @@
+"""%FILE%."""
+import os
+from os.path import dirname as dirn
+import sys
+from importlib import import_module
+
+rootpath = dirn(dirn(os.path.abspath(__file__)))
+sys.path.insert(0, rootpath)
