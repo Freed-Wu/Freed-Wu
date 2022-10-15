@@ -140,9 +140,6 @@
 !/.config/latexmk/
 /.config/latexmk/*
 !/.config/latexmk/latexmkrc
-!/.config/procps/
-/.config/procps/*
-!/.config/procps/toprc
 !/.config/pip/
 /.config/pip/*
 !/.config/pip/pip.conf
