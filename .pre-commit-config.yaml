@@ -9,21 +9,23 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: check-merge-conflict
       - id: trailing-whitespace
+        exclude: ^template/.*$
       - id: mixed-line-ending
       - id: end-of-file-fixer
+        exclude: ^template/.*$
       - id: detect-private-key
       - id: check-symlinks
       - id: check-ast
-        exclude: ^template/(\.yaml|_test\.py)$
+        exclude: ^template/.*$
       - id: debug-statements
-        exclude: ^template/(\.yaml|(__main__|_test)\.py)$
+        exclude: ^template/.*$
       - id: requirements-txt-fixer
       - id: check-xml
       - id: check-yaml
-        exclude: ^template/(\.pre-commit-hooks\.yaml|python\.yml)$
+        exclude: ^template/.*$
       - id: check-toml
       - id: check-json
-        exclude: ^template/addon-info\.json$|^coc-settings.json$
+        exclude: ^(coc-settings\.json|template/.*)$
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.3.1
     hooks:
@@ -44,17 +46,18 @@ repos:
     rev: 2.6.1
     hooks:
       - id: editorconfig-checker
+        exclude: ^template/.*$
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
       - id: check-mailmap
       - id: shellcheck
-        exclude: .*\.zsh$|^template/(build\.sh|\.tmux)$
+        exclude: ^template/.*$
       - id: shfmt
         args:
           - -i
           - "2"
-        exclude: .*\.zsh|^template/\.tmux$
+        exclude: ^template/.*$
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.16
     hooks:
@@ -72,12 +75,12 @@ repos:
           - mdformat-beautysh
           - mdformat-black
           - mdformat-config
-        exclude: ^template/README\.md$
+        exclude: ^template/.*$
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.5.1
     hooks:
       - id: markdownlint-cli2
-        exclude: ^template/README\.md$
+        exclude: ^template/.*$
         additional_dependencies:
           - markdown-it-texmath@0.9.1
   - repo: https://github.com/PyCQA/doc8
@@ -88,12 +91,14 @@ repos:
     rev: v1.1.270
     hooks:
       - id: pyright
+        exclude: ^template/.*$
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.1.1
     hooks:
       - id: pydocstyle
-        args: [--add-ignore=D100]
-        exclude: ^template/_test\.py$
+        additional_dependencies:
+          - toml
+        exclude: ^template/.*$
   - repo: https://github.com/myint/eradicate
     rev: v2.1.0
     hooks:
@@ -102,12 +107,12 @@ repos:
     rev: v0.4a4
     hooks:
       - id: vint
-        exclude: ^template/.*\.vim$
+        exclude: ^template/.*$
   - repo: https://github.com/Freed-Wu/vimdoc
     rev: v0.7.1a
     hooks:
       - id: vimdoc
-        exclude: ^template/.*\.vim$
+        exclude: ^template/.*$
 
 ci:
   skip:
