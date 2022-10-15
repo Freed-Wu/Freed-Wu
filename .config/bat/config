@@ -1,13 +1,33 @@
+# https://github.com/sharkdp/bat/issues/2115
 --paging=always
---theme=OneHalfDark
--m'*.ldf:LaTeX'
--m'*.tikz:LaTeX'
 -m'_*:Bourne Again Shell (bash)'
 -m'*.sa:ARM Assembly'
--m'*.cu:C'
--m'*.cuh:C'
 -m'entry_points.txt:INI'
 -m'PKG-INFO:reStructuredText'
 -m'*.BUILD:Python'
 -m'BUILD:Python'
 -m'WORKSPACE:Python'
+
+# https://github.com/sharkdp/bat/issues/2358
+-m'*.aux:LaTeX'
+-m'*.toc:LaTeX'
+-m'*.lot:LaTeX'
+-m'*.lof:LaTeX'
+-m'*.loa:LaTeX'  # algorithms
+-m'*.lox:LaTeX'  # fixme
+-m'*.bbl:LaTeX'  # bibtex
+-m'*.ins:LaTeX'  # docstrip
+-m'*.dtx:LaTeX'  # docstrip
+-m'*.idx:LaTeX'  # makeindex
+-m'*.ind:LaTeX'  # makeindex
+-m'*.nav:LaTeX'  # beamer
+-m'*.snm:LaTeX'  # beamer
+-m'*.markdown.out:LaTeX'  # markdown
+-m'*.ldf:LaTeX'  # babel
+-m'*.tikz:LaTeX'  # tikz
+-m'.condarc:YAML'
+-m'*.aux:LaTeX'
+-m'*.ldf:LaTeX'
+-m'*.tikz:LaTeX'
+-m'*.cu:C'
+-m'*.cuh:C'

@@ -1,14 +1,18 @@
-# https://mail.ustc.edu.cn/coremail/help/index.jsp
-# cannot work
-set folder = imaps://mail.ustc.edu.cn
-set imap_user = wuzy01@mail.ustc.edu.cn
-set imap_pass = $MAIL_PASS
-set from = $imap_user
+# https://qiye.163.com/help/client-profile.html
+set my_addr = $my_ustc
 
-set postponed = +Drafts
-set record = '+Sent Items'
+set folder = $my_imap_ustc
+set imap_user = wuzhenyu@ustc.edu
+set imap_pass = $MAIL_PASS
+
+set from = $imap_user
+set smtp_url = smtps://$from@smtphz.$my_addr
+set smtp_pass = $imap_pass
+
+set spool_file = +Inbox
+set postponed = +Draft
+set record = +Sent
 set trash = +Trash
-set smtp_url = smtps://wuzy01@mail.ustc.edu.cn@mail.ustc.edu.cn
-set smtp_pass = $MAIL_PASS
 unmailboxes *
-mailboxes +INBOX +Drafts '+Sent Items' +Trash '+Junk E-mail' '+Virus Items'
+mailboxes $spool_file $postponed $record $trash \
++Spam

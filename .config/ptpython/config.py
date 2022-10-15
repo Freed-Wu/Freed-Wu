@@ -1,38 +1,31 @@
-"""
-Configuration example for ``ptpython``.
-
-Copy this file to $XDG_CONFIG_HOME/ptpython/config.py
-On Linux, this is: ~/.config/ptpython/config.py
-"""
-import sys
+"""Configure ptpython."""
 import re
+import sys
 from typing import TYPE_CHECKING
 
+from prompt_toolkit.application.current import get_app
+from prompt_toolkit.clipboard import ClipboardData
+from prompt_toolkit.enums import EditingMode
 from prompt_toolkit.filters import (
+    Condition,
+    EmacsInsertMode,
+    ViInsertMode,
+    ViNavigationMode,
     emacs_mode,
     in_paste_mode,
-    Condition,
-    ViInsertMode,
-    EmacsInsertMode,
-    ViNavigationMode,
 )
-from prompt_toolkit.application.current import get_app
-from prompt_toolkit.enums import EditingMode
-from prompt_toolkit.key_binding.vi_state import InputMode, ViState
 from prompt_toolkit.key_binding.bindings.named_commands import (
-    unix_word_rubout,
-    delete_char,
-    backward_delete_char,
     backward_char,
+    backward_delete_char,
+    delete_char,
     forward_char,
+    unix_word_rubout,
 )
-from prompt_toolkit.clipboard import ClipboardData
-from prompt_toolkit.selection import SelectionType
+from prompt_toolkit.key_binding.vi_state import InputMode, ViState
 from prompt_toolkit.keys import Keys
-
-# from prompt_toolkit.key_binding.key_processor import KeyPress
-from ptpython.layout import CompletionVisualisation
+from prompt_toolkit.selection import SelectionType
 from ptpython.completer import CompletePrivateAttributes
+from ptpython.layout import CompletionVisualisation
 
 if TYPE_CHECKING:
     from prompt_toolkit.key_binding.key_processor import KeyPressEvent
@@ -41,6 +34,7 @@ __all__ = ["configure"]
 
 
 # cursor {{{1 #
+# https://github.com/prompt-toolkit/python-prompt-toolkit/issues/192
 def get_input_mode(self):
     if sys.version_info[0] == 3:
         from prompt_toolkit.application.current import get_app
@@ -72,6 +66,22 @@ def set_input_mode(self, mode):
 ViState._input_mode = InputMode.INSERT  # type: ignore
 ViState.input_mode = property(get_input_mode, set_input_mode)  # type: ignore
 # 1}}} cursor #
+
+
+# insert {{{1 #
+def insert(event, pre, post):
+    event.current_buffer.cursor_position += (
+        event.current_buffer.document.get_start_of_line_position(
+            after_whitespace=True
+        )
+    )
+    event.cli.current_buffer.insert_text(pre)
+    event.current_buffer.cursor_position += (
+        event.current_buffer.document.get_end_of_line_position()
+    )
+    event.cli.current_buffer.insert_text(post)
+    event.current_buffer.validate_and_handle()
+# 1}}} insert #
 
 
 def configure(repl) -> None:
@@ -761,123 +771,47 @@ def configure(repl) -> None:
     @repl.add_key_binding("escape", "c-h", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-h", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("help(")
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text(")")
-        event.current_buffer.validate_and_handle()
+        insert(event, "help(", ")")
 
     @repl.add_key_binding("escape", "c-p", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-p", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("print(")
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text(")")
-        event.current_buffer.validate_and_handle()
+        insert(event, "print(", ")")
 
     @repl.add_key_binding("escape", "c-_", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-_", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("import numpy as np; "
-                                             'np.lookfor("')
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text('")')
-        backward_char(event)
+        insert(event, 'import numpy as np; np.lookfor("', '")')
 
     @repl.add_key_binding("escape", "c-o", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-o", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("import numpy as np; np.source(")
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text(")")
-        event.current_buffer.validate_and_handle()
+        insert(event, 'import numpy as np; np.source("', '")')
 
     @repl.add_key_binding("escape", "c-l", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-l", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("list(")
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text(")")
-        event.current_buffer.validate_and_handle()
+        insert(event, "list(", ")")
+
+    @repl.add_key_binding("escape", "c-d", filter=ViInsertMode())
+    @repl.add_key_binding("escape", "c-d", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        insert(event, "dict(", ")")
 
     @repl.add_key_binding("escape", "c-t", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-t", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("type(")
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text(")")
-        event.current_buffer.validate_and_handle()
+        insert(event, "type(", ")")
 
     @repl.add_key_binding("escape", "c-n", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-n", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("next(iter(")
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text("))")
-        event.current_buffer.validate_and_handle()
+        insert(event, "next(iter(", "))")
 
     @repl.add_key_binding("escape", "c-e", filter=ViInsertMode())
     @repl.add_key_binding("escape", "c-e", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_start_of_line_position(
-                after_whitespace=True
-            )
-        )
-        event.cli.current_buffer.insert_text("len(")
-        event.current_buffer.cursor_position += (
-            event.current_buffer.document.get_end_of_line_position()
-        )
-        event.cli.current_buffer.insert_text(")")
-        event.current_buffer.validate_and_handle()
+        insert(event, "len(", ")")
 
     # Add custom key binding for PDB.
     @repl.add_key_binding("escape", "c-b", filter=ViInsertMode())

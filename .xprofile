@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # any X program like gvim will source this file.
 # this file cannot include `if/then/fi`,
 # because X don't support.
@@ -8,7 +9,10 @@ export VISUAL=vi
 export EDITOR=$VISUAL
 # man
 MANPATH="$HOME/.local/man:$MANPATH"
-export MANOPT=-Lzh_CN.UTF-8
+MANOPT=-Lzh_CN.UTF-8
+export MANOPT
+MANSECT='1:1p:8:3:3p:0:0p:2:5:4:9:6:7:n:l'
+export MANSECT
 # neomutt
 EMAIL="$(git config user.email)"
 export EMAIL
@@ -36,12 +40,53 @@ export GKS_ENCODING=utf-8
 # wine
 export WINEDEBUG=-all
 # python
-export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/00-first.py
+export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/init.py
 export PYTHONBREAKPOINT=pudb.set_trace
 # fzf
-# rg --color=always foo | fzf -d: --preview-window="+{2}"
+# rg foo | fzf
 # $word = {2} make a wrong --preview-window
 # https://github.com/Aloxaf/fzf-tab/issues/282
-export FZF_DEFAULT_COMMAND='rg --files'
-export FZF_TMUX_HEIGHT=$((LINES/2))
+# -d$"\0"
+export FZF_DEFAULT_COMMAND='rg --files --color=always'
+export FZF_DEFAULT_OPTS
+FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1} \
+  2> $(python -c 'import os; print(os.devnull)') || less {1}'
+-m
+-d:
+--ansi
+--reverse
+--prompt='❯ '
+--pointer=❯
+--marker=✓
+--bind=tab:down
+--bind=btab:up
+--bind=ctrl-j:jump
+--bind=ctrl-k:kill-line
+--bind=ctrl-n:down
+--bind=ctrl-p:up
+--bind=alt-j:previous-history
+--bind=alt-k:next-history
+--bind=ctrl-q:clear-query
+--bind=alt-a:first
+--bind=alt-e:last
+--bind=alt-N:toggle-out
+--bind=alt-P:toggle-in
+--bind=ctrl-space:toggle
+--bind=ctrl-o:toggle-all
+--bind=ctrl-g:deselect-all
+--bind=alt-g:select-all
+--bind=ctrl-s:toggle-search
+--bind='ctrl-\\:toggle-sort'
+--bind=ctrl-^:toggle-preview-wrap
+--bind=ctrl-x:toggle-preview
+--bind=alt-p:preview-up
+--bind=alt-n:preview-down
+--bind=ctrl-v:preview-page-down
+--bind=alt-v:preview-page-up
+--bind=ctrl-r:preview-half-page-down
+--bind=alt-r:preview-half-page-up
+--bind='alt-<:preview-top'
+--bind='alt->:preview-bottom'
+--bind='ctrl-]:change-preview-window(bottom|right)'
+--bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'"
 # ex: filetype=sh

@@ -3,4 +3,6 @@ cmdargs:
   severity: style_problem
   env:
     neovim: true
-  format: "{file_path}:{line_number}:{column_number}: {severity}! {description}({reference})"
+  format: >-
+    "{file_path}:{line_number}:{column_number}: {severity}! "
+    "{description}({reference})"

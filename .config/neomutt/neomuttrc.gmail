@@ -1,16 +1,19 @@
-set folder = imaps://imap.gmail.com
+set my_addr = $my_gmail
+
+set folder = $my_imap_gmail
 set imap_user = wuzy001@gmail.com
 set imap_pass = $GMAIL_PASS
-set from = $imap_user
 
+set from = $imap_user
+# gnutls_handshake: The TLS connection was non-properly terminated.
+set smtp_url = smtps://$from@smtp.$my_addr
+set smtp_pass = $imap_pass
+
+set spool_file = +Inbox
 set postponed = +[Gmail]/Drafts
 set record = '+[Gmail]/Sent Mail'
 set trash = +[Gmail]/Trash
 unmailboxes *
 # IMAP command failed: b0064 NO [NONEXISTENT] Invalid folder: [Gmail] (Failure)
-mailboxes +INBOX +[Gmail] \
-+[Gmail]/Drafts '+[Gmail]/Sent Mail' +[Gmail]/Trash +[Gmail]/Spam \
-+[Gmail]/Starred +[Gmail]/Important '+[Gmail]/All Mail'
-# gnutls_handshake: The TLS connection was non-properly terminated.
-set smtp_url = smtps://wuzy001@gmail.com@smtp.gmail.com
-set smtp_pass = $GMAIL_PASS
+mailboxes $spool_file $postponed $record $trash \
++[Gmail]/Spam +[Gmail]/Starred +[Gmail]/Important '+[Gmail]/All Mail'

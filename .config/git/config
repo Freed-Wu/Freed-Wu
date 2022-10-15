@@ -7,6 +7,7 @@
 	rebase = true
 [push]
 	tags = true
+	autoSetupRemote = true
 [receive]
 	denyCurrentBranch = ignore
 [merge]
@@ -28,12 +29,14 @@
 [core]
 	autocrlf = input
 	symlink = true
-	pager = bat
 [pager]
 	diff = delta
-	log = delta
-	reflog = delta
-	config = bat -lini
+	blame = delta
+	log = perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less
+	reflog = perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less
+	config = bat -plini
+	ls-files = parallel exa --color=always --icons
+	remote = bat -pltsv --paging=never
 [interactive]
 	diffFilter = delta --color-only
 [delta]
@@ -70,7 +73,7 @@
 	extendedRegexp = true
 [blame]
 	showEmail = true
-	ignoreRevsFile = .git-blame-ignore-revs
+	ignoreRevsFile = ""
 [rebase]
 	autoSquash = true
 [filter "lfs"]

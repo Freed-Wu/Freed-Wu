@@ -1,7 +1,30 @@
 # my-dotfiles
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![Gitmoji](https://img.shields.io/badge/gitmoji-%20%F0%9F%98%9C%20%F0%9F%98%8D-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/my-dotfiles/master.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/my-dotfiles/master)
+
+[![github/downloads](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/total)](https://github.com/Freed-Wu/my-dotfiles/releases)
+[![github/downloads/latest](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/latest/total)](https://github.com/Freed-Wu/my-dotfiles/releases/latest)
+[![github/issues](https://shields.io/github/issues/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/issues)
+[![github/issues-closed](https://shields.io/github/issues-closed/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/issues?q=is%3Aissue+is%3Aclosed)
+[![github/issues-pr](https://shields.io/github/issues-pr/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/pulls)
+[![github/issues-pr-closed](https://shields.io/github/issues-pr-closed/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/pulls?q=is%3Apr+is%3Aclosed)
+[![github/discussions](https://shields.io/github/discussions/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/discussions)
+[![github/milestones](https://shields.io/github/milestones/all/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/milestones)
+[![github/forks](https://shields.io/github/forks/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/network/members)
+[![github/stars](https://shields.io/github/stars/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/stargazers)
+[![github/watchers](https://shields.io/github/watchers/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/watchers)
+[![github/contributors](https://shields.io/github/contributors/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/graphs/contributors)
+[![github/commit-activity](https://shields.io/github/commit-activity/w/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/graphs/commit-activity)
+[![github/last-commit](https://shields.io/github/last-commit/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/commits)
+[![github/release-date](https://shields.io/github/release-date/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/releases/latest)
+
+[![github/license](https://shields.io/github/license/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/blob/master/LICENSE)
+![github/languages](https://shields.io/github/languages/count/Freed-Wu/my-dotfiles)
+![github/languages/top](https://shields.io/github/languages/top/Freed-Wu/my-dotfiles)
+![github/directory-file-count](https://shields.io/github/directory-file-count/Freed-Wu/my-dotfiles)
+![github/code-size](https://shields.io/github/languages/code-size/Freed-Wu/my-dotfiles)
+![github/repo-size](https://shields.io/github/repo-size/Freed-Wu/my-dotfiles)
+![github/v](https://shields.io/github/v/release/Freed-Wu/my-dotfiles)
 
 Keep all my computers' configurations same.
 
@@ -15,11 +38,10 @@ Keep all my computers' configurations same.
 
 [More Screenshots](https://www.zhihu.com/question/20873523/answer/2185169992)
 
-<!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=1 -->
+<!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=2 -->
 
-- [my-dotfiles](#my-dotfiles)
-  - [Platforms](#platforms)
-  - [Related](#related)
+- [Platforms](#platforms)
+- [Related](#related)
 
 <!-- mdformat-toc end -->
 

@@ -717,19 +717,19 @@ savefig.transparent: True     # setting that controls whether figures are saved 
 ## Leave the field(s) empty if you don't need a key-map. (i.e., fullscreen : '')
 #keymap.fullscreen: f, ctrl+f   # toggling
 #keymap.home: h, r, home        # home or reset mnemonic
-#keymap.back: left, c, backspace, MouseButton.BACK  # forward / backward keys
-#keymap.forward: right, v, MouseButton.FORWARD      # for quick navigation
+keymap.back: left, H, backspace, MouseButton.BACK  # forward / backward keys
+keymap.forward: right, L, MouseButton.FORWARD      # for quick navigation
 #keymap.pan: p                  # pan mnemonic
 #keymap.zoom: o                 # zoom mnemonic
 #keymap.save: s, ctrl+s         # saving current figure
 #keymap.help: f1                # display help about active tools
 #keymap.quit: ctrl+w, cmd+w, q  # close the current figure
-#keymap.quit_all:               # close all figures
+keymap.quit_all: Q              # close all figures
 #keymap.grid: g                 # switching on/off major grids in current axes
 #keymap.grid_minor: G           # switching on/off minor grids in current axes
-#keymap.yscale: l               # toggle scaling of y-axes ('log'/'linear')
-#keymap.xscale: k, L            # toggle scaling of x-axes ('log'/'linear')
-#keymap.copy: ctrl+c, cmd+c     # Copy figure to clipboard
+keymap.yscale: y                # toggle scaling of y-axes ('log'/'linear')
+keymap.xscale: x                # toggle scaling of x-axes ('log'/'linear')
+keymap.copy: c, ctrl+c, cmd+c   # Copy figure to clipboard
 
 
 ## ***************************************************************************

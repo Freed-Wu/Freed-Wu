@@ -3,8 +3,9 @@
 !/.gitignore
 !/LICENSE
 !/README.md
-!/setup.cfg
+!/pyproject.toml
 !/.pre-commit-config.yaml
+!/.gitlint
 
 # dotfile
 !/.xprofile
@@ -38,7 +39,6 @@
 !/.chktexrc
 !/.sqliterc
 !/.pdbrc
-!/.tmux.conf
 
 # dotfiles
 !/.dosbox/
@@ -63,7 +63,7 @@
 /.ipython/*
 !/.ipython/profile_default/
 /.ipython/profile_default/*
-!/.ipython/profile_default/*_config.py
+!/.ipython/profile_default/*.py
 !/.ipython/profile_default/startup
 /.ipython/profile_default/startup/*
 !/.ipython/profile_default/startup/*.py
@@ -110,7 +110,6 @@
 !/.config/neomutt/
 /.config/neomutt/*
 !/.config/neomutt/neomuttrc*
-!/.config/neomutt/*/
 !/.config/mutt/
 !/.config/git/
 /.config/git/*
@@ -216,6 +215,9 @@
 /.config/powershell/*
 !/.config/powershell/Microsoft.PowerShell_profile.ps1
 !/.config/powershell/profile.ps1
+!/.config/gem/
+/.config/gem/*
+!/.config/gem/gemrc
 !/.config/pacman/
 /.config/pacman/*
 !/.config/pacman/makepkg.conf
@@ -236,6 +238,7 @@
 !/.local/share/themes/
 /.local/share/themes/*
 !/.local/share/themes/luZorin/
+!/.local/share/themes/Emacs/
 !/.local/share/pandoc/
 
 # Windows

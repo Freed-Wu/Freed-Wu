@@ -1,5 +1,6 @@
+# Setting {{{1 #
 set sleep_time = 0
-set realname = $DEBFULLNAME
+set real_name = $DEBFULLNAME
 set attach_save_dir = ~/Downloads
 set digest_collapse = no
 set use_envelope_from
@@ -26,32 +27,14 @@ set sidebar_format = '%B%* %n%o/%S'
 set sidebar_short_path
 set sidebar_folder_indent
 set sidebar_indent_string = '├── '
-auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
-
 set ssl_starttls=yes
 set ssl_force_tls=yes
+auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
 
-# Handler for gzip compressed mailboxes
-open-hook   '\.gz$' "gzip --stdout --decompress '%f' >  '%t'"
-close-hook  '\.gz$' "gzip --stdout              '%t' >  '%f'"
-append-hook '\.gz$' "gzip --stdout              '%t' >> '%f'"
-# Handler for bzip2 compressed mailboxes
-open-hook   '\.bz2$' "bzip2 --stdout --decompress '%f' >  '%t'"
-close-hook  '\.bz2$' "bzip2 --stdout              '%t' >  '%f'"
-append-hook '\.bz2$' "bzip2 --stdout              '%t' >> '%f'"
-# Handler for xz compressed mailboxes
-open-hook   '\.xz$' "xz --stdout --decompress '%f' >  '%t'"
-close-hook  '\.xz$' "xz --stdout              '%t' >  '%f'"
-append-hook '\.xz$' "xz --stdout              '%t' >> '%f'"
-# Handler for pgp encrypted mailboxes
-# PGP does not support appending to an encrypted file
-open-hook   '\.pgp$' "pgp -f < '%f' > '%t'"
-close-hook  '\.pgp$' "pgp -fe YourPgpUserIdOrKeyId < '%t' > '%f'"
-# Handler for gpg encrypted mailboxes
-# gpg does not support appending to an encrypted file
-open-hook   '\.gpg$' "gpg --decrypt < '%f' > '%t'"
-close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId < '%t' > '%f'"
+source `[ -f ~/.config/neomutt/mutt-colors-custom/neomuttrc.custom ] && echo ~/.config/neomutt/mutt-colors-custom/neomuttrc.custom || echo /dev/null`
+# 1}}} Setting #
 
+# Hotkey {{{1 #
 bind pager,index,attach,browser g noop
 bind pager,index,attach,browser z noop
 bind pager,index,attach,browser [ noop
@@ -124,16 +107,49 @@ bind index gm mark-message
 bind index g/ root-message
 bind index ~ toggle-read
 bind pager,index gs compose-to-sender
+# 1}}} Hotkey #
 
-source ~/.config/neomutt/neomuttrc.qq
-folder-hook imaps://imap.qq.com 'source ~/.config/neomutt/neomuttrc.qq'
-folder-hook imaps://imap.gmail.com 'source ~/.config/neomutt/neomuttrc.gmail'
-folder-hook imaps://imap.mail.ustc.edu.cn 'source ~/.config/neomutt/neomuttrc.ustc'
-folder-hook imaps://imap.exmail.qq.com 'source ~/.config/neomutt/neomuttrc.njust'
-# must after set folder
-set spoolfile = +INBOX
+# Handlers {{{1 #
+# https://neomutt.org/feature/compress#4-%C2%A0neomuttrc
+# handler for compressed/encrypted mailboxes
+open-hook   '\.gz$' "gzip --stdout --decompress '%f' >  '%t'"
+close-hook  '\.gz$' "gzip --stdout              '%t' >  '%f'"
+append-hook '\.gz$' "gzip --stdout              '%t' >> '%f'"
+open-hook   '\.bz2$' "bzip2 --stdout --decompress '%f' >  '%t'"
+close-hook  '\.bz2$' "bzip2 --stdout              '%t' >  '%f'"
+append-hook '\.bz2$' "bzip2 --stdout              '%t' >> '%f'"
+open-hook   '\.xz$' "xz --stdout --decompress '%f' >  '%t'"
+close-hook  '\.xz$' "xz --stdout              '%t' >  '%f'"
+append-hook '\.xz$' "xz --stdout              '%t' >> '%f'"
+# pgp/gpg does not support appending to an encrypted file
+open-hook   '\.pgp$' "pgp -f < '%f' > '%t'"
+close-hook  '\.pgp$' "pgp -fe YourPgpUserIdOrKeyId < '%t' > '%f'"
+open-hook   '\.gpg$' "gpg --decrypt < '%f' > '%t'"
+close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId < '%t' > '%f'"
+# 1}}} Handlers #
 
-macro index g1 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.qq<enter><change-folder>!<enter>'
-macro index g2 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.gmail<enter><change-folder>!<enter>'
-macro index g3 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.ustc<enter><change-folder>!<enter>'
-macro index g4 '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc.njust<enter><change-folder>!<enter>'
+# Config {{{1 #
+set my_config = ~/.config/neomutt/neomuttrc
+set my_ustc = qiye.163.com
+set my_njust = exmail.qq.com
+set my_qq = qq.com
+set my_gmail = gmail.com
+set my_imap_ustc = imaps://imaphz.$my_ustc
+set my_imap_njust = imaps://imap.$my_njust
+set my_imap_qq = imaps://imap.$my_qq
+set my_imap_gmail = imaps://imap.$my_gmail
+source $my_config.ustc
+folder-hook $my_imap_ustc source $my_config.ustc
+folder-hook $my_imap_njust source $my_config.njust
+folder-hook $my_imap_qq source $my_config.qq
+folder-hook $my_imap_gmail source $my_config.gmail
+
+set my_pre = <sync-mailbox><enter-command>source
+set my_post = <enter><change-folder>!<enter>
+macro index g1 "$my_pre $my_config.ustc$my_post"
+macro index g2 "$my_pre $my_config.njust$my_post"
+macro index g3 "$my_pre $my_config.qq$my_post"
+macro index g4 "$my_pre $my_config.gmail$my_post"
+# 1}}} Config #
+
+# ex: foldmethod=marker

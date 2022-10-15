@@ -1,3 +1,4 @@
+# shellcheck disable=all
 # PluginManage {{{1 #
 if ((! $+HOMEBREW_BAT)); then
   . ~/.zprofile
@@ -130,7 +131,8 @@ zinit id-as'.pyenv' depth'1' wait lucid \
   for zdharma-continuum/null
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 zinit id-as depth'1' wait lucid \
-  atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $(fzf_sizer_preview_window_settings)"' \
+  atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+$(fzf_sizer_preview_window_settings)"' \
   if'(($+commands[fzf] && $+commands[bc]))' \
   for bigH/auto-sized-fzf
 # 1}}} Hook #
@@ -171,183 +173,17 @@ zstyle ':completion:*' extra-verbose true
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   for Aloxaf/fzf-tab
-
-# general {{{ #
+# in .xprofile, LINES=0
+# in .zprofile, $LINES is not correct
+FZF_TMUX_HEIGHT=$((LINES - 1))
 zstyle ':fzf-tab:*' prefix ''
+zstyle ':fzf-tab:*' single-group prefix color header
 zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'
 zstyle ':fzf-tab:*' switch-group 'alt-,' 'alt-.'
-zstyle ':fzf-tab:user-expand:*' fzf-preview 'less $word'
-zstyle ':fzf-tab:complete:*' fzf-preview 'less $realpath'
-zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand|typeset|declare|local):*' \
-  fzf-preview 'echo ${(P)word}'
-zstyle ':fzf-tab:complete:-tilde-:*' fzf-preview \
-  '(($+commands[finger])) && finger $word || pinky $word'
-zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-  'case "$group" in
-  "external command") less =$word;;
-  "builtin command") run-help $word | bat --color=always -plman;;
-  "parameter") echo ${(P)word}
-  esac'
-zstyle ':fzf-tab:complete:bindkey:option-?-1' fzf-preview 'bindkey -M$word'
-# }}} general #
 
-# alias {{{ #
-zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
-zstyle ':fzf-tab:complete:(\\|)zinit:*' fzf-preview \
-  "less ${ZINIT[PLUGINS_DIR]}/"'$word/README*'
-# }}} alias #
-
-# command {{{ #
-cmds=(
-  {cpp,readlink,'readelf -a',size,strings,nm,'objdump -d'}' $realpath'
-  {gcc,g++,cc,c++,clang{,++}}' -o- -S $realpath | bat --color=always -plasm'
-)
-for cmd in $cmds ; do
-  bin=${cmd%% *}
-  bins=({,{{i686,x86_64}-w64-mingw32,i386-apple-darwin,o{64{,e},32}}-}$bin)
-  for bin in $bins ; do
-    zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
-      '[ -f $realpath ] && '"$cmd"' || less $realpath'
-  done
-done
-
-dir=/opt/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin
-if [[ -d $dir ]]; then
-  for cmd in {,$dir/aarch64-linux-android??-}clang{,++} ; do
-    bin=${cmd##*/}
-    zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
-      '[ -f $realpath ] &&
-      '"$cmd"' -o- -S $realpath | bat --color=always -plasm || less $realpath'
-  done
-fi
-unset dir
-
-cmds=(
-  'has $word'
-  {hexdump,xxd,hexyl,'od -Ax -tx1','pandoc -tmarkdown'}' $realpath'
-  )
-for cmd in $cmds ; do
-  bin=${cmd%% *}
-  zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview \
-    '[ -f $realpath ] && '"$cmd"' || less $realpath'
-done
-
-cmds=(
-  {{pip{,3},apt{,-cache}}' show','pkg info'}' $word | bat --color=always -plyaml'
-  {jupyter,brew,plotext}' $word --help | bat --color=always -plhelp'
-  'jupyter $word --help | bat --color=always -plrst'
-  'pygmentize -L $word | bat --color=always -plrst'
-  {getconf,man,fc-list,'dpkg -L'}' $word'
-  {go,yarn,luarocks,cabal,nix,gh,git,svn,systemctl,docker,gem,pyenv}' \
-    help $word | bat --color=always -plhelp'
-)
-for cmd in $cmds ; do
-  bin=${cmd%% *}
-  zstyle ':fzf-tab:complete:(\\|*/|)'"$bin"':*' fzf-preview "$cmd"
-done
-
-zstyle ':fzf-tab:complete:(\\|*/|)(sudo|proxychains):*' fzf-preview 'less =$word'
-zstyle ':fzf-tab:complete:(\\|*/|)ydcv:*' fzf-preview \
-  'case "$group" in
-  word) ydcv --color=always --history=/dev/null $word;;
-  esac'
-  zstyle ':fzf-tab:complete:(\\|*/|)(,neo)mutt:*' fzf-preview \
-  'case "$group" in
-  "file attachment") less $realpath;;
-  recipient) (($+commands[finger])) && finger $word || pinky $word;;
-  esac'
-zstyle ':fzf-tab:complete:(\\|)read:*' fzf-preview \
-  'case "$group" in
-  varprompt) echo ${(P)word};;
-  esac'
-zstyle ':fzf-tab:complete:(\\|*/|)(scp|rsync):*' fzf-preview \
-  'case "$group" in
-  file) less $realpath;;
-  user) (($+commands[finger])) && finger $word || pinky $word;;
-  *host*) grc --colour=on ping -c1 $word;;
-  esac'
-zstyle ':fzf-tab:complete:(\\|*/|)(g|b|d|p|freebsd-|)make:*' fzf-preview \
-  'case "$group" in
-  "make target") make -n $word | bat --color=always -plsh;;
-  "make variable") make -pq | rg -Ns "^$word = " | bat --color=always -plsh;;
-  file) less $realpath;;
-  esac'
-zstyle ':fzf-tab:complete:(\\|*/|)bat:*' fzf-preview \
-  'case "$group" in
-  subcommand) bat cache --help | bat --color=always -plhelp;;
-  file) less $realpath;;
-  esac'
-zstyle ':fzf-tab:complete:(\\|*/|)journalctl:*' fzf-preview \
-  'case "$group" in
-  boot\ *) journalctl -b $word | bat --color=always -pllog;;
-  "/dev files") journalctl -b /dev/$word | bat --color=always -pllog;;
-  esac'
-zstyle ':fzf-tab:complete:(\\|*/|)(pacman|yay):*' fzf-preview \
-  '[ "$group" != repository/package ] &&
-  pacman -Qi $word | bat --color=always -plyaml'
-zstyle ':fzf-tab:complete:(\\|*/|)pkg-config:argument-rest' fzf-preview \
-  '[ "$group" = package ] && less /usr/(lib|share)/pkgconfig/$word.pc ||
-  less $word'
-zstyle ':fzf-tab:complete:(-equal-|(\\|*/|)sudo):*' fzf-preview 'less =$word'
-zstyle ':fzf-tab:complete:(\\|*/|)(c(make|test|pack)|ccmake|cmake-gui):*' \
-  fzf-preview '[[ $word == --help* ]] && cmake $word'
-zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-preview \
-  '[ "$group" = "process ID" ] && ps -p$word -wocmd --no-headers \
-  | bat --color=always -plsh'
-zstyle ':fzf-tab:complete:(\\|*/|)(kill|ps):argument-rest' fzf-flags \
-  --preview-window=down:3:wrap
-zstyle ':fzf-tab:complete:(\\|*/|)(pkill|killall):*' fzf-preview \
-  'grc --colour=on ps -C$word'
-zstyle ':fzf-tab:complete:(\\|*/|)df:argument-rest' fzf-preview \
-  '[ "$group" != "device label" ] && grc --colour=on df -Th $word'
-zstyle ':fzf-tab:complete:(\\|*/|)du:argument-rest' fzf-preview \
-  'grc --colour=on du -sh $realpath'
-zstyle ':fzf-tab:complete:(\\|*/|)gdu:argument-rest' fzf-preview \
-  '[ -d $realpath ] && gdu -n $realpath || grc --colour=on du -sh $realpath'
-zstyle ':fzf-tab:complete:(\\|*/|)findmnt:argument-1' fzf-preview \
-  '[ "$group" != prefix ] && grc --colour=on findmnt $word'
-# }}} command #
-
-# subcommand {{{ #
-cmds=(
-  'gem '{check,rdoc,contents,pristine,list,which,environment,dependency}' $word'
-  'gem specification $word | bat --color=always -plyaml'
-  'docker '{image,container}' ls $word'
-  'systemctl '{cat,show}' $word | bat --color=always -plini'
-  {'brew '{ls,list},'git log --color=always'}' $word'
-)
-for cmd in $cmds ; do
-  bin=${${cmd/ /-}%% *}
-  zstyle ':fzf-tab:complete:'"$bin"':*' fzf-preview "$cmd"
-done
-
-zstyle ':fzf-tab:complete:brew-(edit|cat|test):*' \
-  fzf-preview 'brew cat $word | bat --color=always -plruby'
-zstyle ':fzf-tab:complete:brew-((|un)install|info|cleanup):*' \
-  fzf-preview 'brew info $word | bat --color=always -plyaml'
-zstyle ':fzf-tab:complete:gem-((|un)install|update|lock|fetch|open|yank|owner|unpack):*' \
-  fzf-preview 'gem info $word | bat --color=always -plyaml'
-zstyle ':fzf-tab:complete:systemctl-*' fzf-preview \
-  'SYSTEMD_COLORS=1 systemctl status $word'
-zstyle ':fzf-tab:complete:git-diff:*' fzf-preview \
-  'case "$group" in
-  "tree file") less $word;;
-  *) git diff $word | delta ;;
-  esac'
-zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
-  'case "$group" in
-  "commit tag") git show --color=always $word ;;
-  *) git show --color=always $word | delta ;;
-  esac'
-zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
-  'case "$group" in
-  "modified file") git diff $word | delta ;;
-  "recent commit object name") git show --color=always $word | delta ;;
-  *) git log --color=always $word ;;
-  esac'
-# }}} subcommand #
-
-unset cmd cmds bin bins
+zinit id-as depth'1' wait lucid \
+  if'(($+commands[fzf]))' \
+  for Freed-Wu/fzf-tab-source
 
 zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
   for petronny/pinyin-completion
@@ -452,6 +288,8 @@ zinit id-as depth'1' wait lucid \
 zinit id-as depth'1' wait lucid for zdharma-continuum/zui
 # https://github.com/zdharma-continuum/zsh-cmd-architect/pull/1
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-cmd-architect
+# https://github.com/joshskidmore/zsh-fzf-history-search/pull/20
+ZSH_FZF_HISTORY_SEARCH_FZF_ARGS='+s +m -x -e --preview-window=hidden'
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   atload'bindkey -Mvicmd / fzf_history_seach' \
@@ -494,11 +332,6 @@ zinit id-as depth'1' wait lucid \
 # Compatible {{{1 #
 # after loading completions
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
-# must after lesspipe export LESSOPEN
-# use $HOME to replace ~ to avoid windows path bug
-if [[ -x ~/.lessfilter ]]; then
-  export LESSOPEN="|$HOME/.lessfilter %s"
-fi
 alias mv='mv -i'
 alias cp='cp -ri'
 alias scp='scp -r'
@@ -513,6 +346,21 @@ if (($+commands[exa])); then
   alias tree='exa --icons -T'
 else
   alias ls='ls --color=auto -h'
+fi
+if (($+commands[bat])); then
+  bat-help() {
+    for opt in $@; do
+      alias -g -- "$opt=\\$opt | bat -plhelp --paging=never"
+    done
+  }
+  bat-help --help
+  # man
+  bat-help '-\?'
+  # x264
+  bat-help --longhelp --fullhelp
+  # gnome
+  bat-help --help-all --help-gapplication --help-gtk
+  unfunction bat-help
 fi
 # 1}}} Compatible #
 
@@ -559,4 +407,4 @@ zinit id-as depth'1' wait lucid as'null' sbin'has' \
   for kdabir/has
 # 2}}} Tool #
 # 1}}} Program #
-# ex: isfname-=/ foldmethod=marker path=.,~/.local/share/zinit/plugins
+# ex: foldmethod=marker

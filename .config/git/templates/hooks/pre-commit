@@ -24,13 +24,13 @@ ARGS.extend(('--hook-dir', os.path.realpath(os.path.dirname(__file__))))
 ARGS.append('--')
 ARGS.extend(sys.argv[1:])
 
-DNE = '`pre-commit` not found.  Did you forget to activate your virtualenv?'
+DONE = '`pre-commit` not found.  Did you forget to activate your virtualenv?'
 if os.access(INSTALL_PYTHON, os.X_OK):
     CMD = [INSTALL_PYTHON, '-mpre_commit']
 elif which('pre-commit'):
     CMD = ['pre-commit']
 else:
-    raise SystemExit(DNE)
+    raise SystemExit(DONE)
 
 CMD.extend(ARGS)
 if sys.platform == 'win32':  # https://bugs.python.org/issue19124

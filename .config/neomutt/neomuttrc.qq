@@ -1,15 +1,20 @@
-set folder = imaps://imap.qq.com
+set my_addr = $my_qq
+
+set folder = $my_imap_qq
 set imap_user = $EMAIL
 set imap_pass = $EMAIL_PASS
-set from = $imap_user
 
+set from = $imap_user
+set smtp_url = smtps://$from@smtp.$my_addr
+set smtp_pass = $imap_pass
+
+set spool_file = +Inbox
 set postponed = +Drafts
 set record = '+Sent Messages'
 set trash = '+Deleted Messages'
-set smtp_url = smtps://wuzy01@smtp.qq.com
-set smtp_pass = $EMAIL_PASS
 unmailboxes *
-mailboxes +INBOX +Drafts '+Sent Messages' '+Deleted Messages' +Junk \
-+其他文件夹 +其他文件夹/github +其他文件夹/bugzilla +其他文件夹/wakatime \
-+其他文件夹/people +其他文件夹/class +其他文件夹/verification \
-+其他文件夹/QQ邮件订阅
+mailboxes $spool_file $postponed $record $trash \
++Junk \
++其他文件夹 \
++其他文件夹/github +其他文件夹/bugzilla +其他文件夹/wakatime \
++其他文件夹/people +其他文件夹/class +其他文件夹/QQ邮件订阅

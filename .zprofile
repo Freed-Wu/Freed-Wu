@@ -1,3 +1,4 @@
+# shellcheck disable=all
 # all shells share share this file, so use bash syntax primarily
 # paths must be loaded here
 if (($+DOCKER_BUILDKIT)); then
@@ -36,8 +37,6 @@ if [[ $OSTYPE == linux-android ]]; then
   else
     export BROWSER=termux-open
   fi
-  # ~/.local/share/zinit/plugins/zsh-bash-completions-fallback/bash-completions-getter.sh:36
-  export ZSH_BASH_COMPLETIONS_FALLBACK_PATH=$PREFIX/share/bash-completion
 elif (($+commands[col] && $+commands[bat])); then
   export MANPAGER="sh -c 'col -bx|bat -plman'"
 fi
@@ -48,53 +47,13 @@ fi
 # less
 export LESS='--mouse -I'
 # fzf
-if [[ $OSTYPE == msys ]]; then
-  export FZF_DEFAULT_OPTS="--history=$(cygpath -w ${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt|sed 's=\\=\\\\=g')
-  --preview='bat --color=always --highlight-line={2} {1} 2> nul || less {1}'"
+if (($+commands[cygpath])); then
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--history=$(cygpath -w ${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt | sed 's=\\=\\\\=g')"
 else
-  export FZF_DEFAULT_OPTS="--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt
-  --preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'"
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt"
 fi
-# rg foo --color=always | fzf -d:
-FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
--m
--d$"\0"
---ansi
---reverse
---prompt="❯ "
---pointer=❯
---marker=✓
---bind=tab:down
---bind=btab:up
---bind=ctrl-j:jump
---bind=ctrl-k:kill-line
---bind=ctrl-n:down
---bind=ctrl-p:up
---bind=alt-j:previous-history
---bind=alt-k:next-history
---bind=ctrl-q:clear-query
---bind=alt-a:first
---bind=alt-e:last
---bind=alt-N:toggle-out
---bind=alt-P:toggle-in
---bind=ctrl-space:toggle
---bind=ctrl-o:toggle-all
---bind=ctrl-g:deselect-all
---bind=alt-g:select-all
---bind=ctrl-s:toggle-search
---bind=ctrl-\\:toggle-sort
---bind=ctrl-^:toggle-preview-wrap
---bind=ctrl-x:toggle-preview
---bind=alt-p:preview-up
---bind=alt-n:preview-down
---bind=ctrl-v:preview-page-down
---bind=alt-v:preview-page-up
---bind=ctrl-r:preview-half-page-down
---bind=alt-r:preview-half-page-up
---bind="alt-<:preview-top"
---bind="alt->:preview-bottom"
---bind="ctrl-]:change-preview-window(bottom|right)"
-'
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

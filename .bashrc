@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # /etc/skel/.bashrc
 #
 # This file is .d by all *interactive* bash shells on startup,
