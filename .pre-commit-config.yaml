@@ -88,7 +88,7 @@ repos:
     hooks:
       - id: doc8
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.270
+    rev: v1.1.277
     hooks:
       - id: pyright
         exclude: ^template/.*$
@@ -104,7 +104,7 @@ repos:
     hooks:
       - id: eradicate
   - repo: https://github.com/vimjas/vint
-    rev: v0.4a4
+    rev: v0.4a3
     hooks:
       - id: vint
         exclude: ^template/.*$
