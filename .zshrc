@@ -30,13 +30,13 @@ zinit id-as'.brew' depth'1' \
 # exec tmux will met bug in android
 # tmux on android and windows is slow because it cannot run in background
 # don't run tmux on them
-if [[ $OSTYPE == linux-gnu && $KITTY_WINDOW_ID == 1 ]] && ((! $+TMUX \
-  && $+commands[tmux] && ! $+SSH_TTY && ! $+HOMEBREW_DEBUG_INSTALL)); then
-  exec tmux new -As0
-fi
-# windows don't support screen
-if [[ $OSTYPE == cygwin || $OSTYPE == msys ]] && (($+TMUX)); then
-  export TERM=xterm-256color
+if [[ $OSTYPE == linux-gnu ]] && (($+commands[tmux])) \
+  && (( ! ($+TMUX || $+SSH_TTY || $+HOMEBREW_DEBUG_INSTALL))); then
+  if [[ $KITTY_WINDOW_ID == 1 || $WEZTERM_PANE == 0 ]]; then
+    exec tmux new -As0
+  elif [[ $TERM == linux ]]; then
+    tmux new -As0
+  fi
 fi
 
 # must load it quickly
@@ -109,10 +109,10 @@ setopt histverify
 setopt noflowcontrol
 setopt interactivecomments
 
-# https://github.com/MenkeTechnologies/zsh-expand/issues/7
 setopt rcquotes
 
 zmodload zsh/pcre
+[ $+aliases[run-help] ] && unalias run-help
 autoload -Uz run-help
 autoload -Uz zcalc
 autoload -Uz zmv
@@ -167,7 +167,6 @@ zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*' option-stacking true
 # work when fzf-tab is not installed
 zstyle ':completion:*' menu select
-# https://github.com/BurntSushi/ripgrep/pull/2196
 zstyle ':completion:*' extra-verbose true
 
 zinit id-as depth'1' wait lucid \
@@ -259,6 +258,8 @@ bindkey '^[' vi-cmd-mode
 bindkey '^[i' expand-or-complete-prefix
 bindkey -Mvicmd cc vi-change-whole-line
 # cursor cannot display correctly after start zsh, quit neovim, switch tmux
+# tmux selectw will result in wrong cursor in insert mode
+# and cannot work when bindkey -e
 # zinit id-as depth'1' wait lucid \
 #   atload'bindkey -sMvisual s S
 #   bindkey -e' \
@@ -268,9 +269,6 @@ zinit id-as depth'1' wait lucid \
   atload'bindkey -Mvisual Q exchange
   bindkey -Mvicmd Q exchange' \
   for okapia/zsh-viexchange
-# tmux selectw will result in wrong cursor in insert mode
-# and cannot work when bindkey -e
-# zinit id-as depth'1' for jeffreytse/zsh-vi-mode
 zinit id-as depth'1' wait lucid for zsh-vi-more/vi-increment
 # conflict with zsh-system-clipboard
 # zinit id-as depth'1' wait lucid \
@@ -350,7 +348,7 @@ fi
 if (($+commands[bat])); then
   bat-help() {
     for opt in $@; do
-      alias -g -- "$opt=\\$opt | bat -plhelp --paging=never"
+      alias -g -- "$opt=\\$opt | bat -plhelp --paging=never --color=always"
     done
   }
   bat-help --help

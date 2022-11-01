@@ -99,3 +99,4 @@ save_append_py = True
 # search) and right arrow will complete the current line with the first match
 # from history. (default: True)
 # right_arrow_completion = True
+# ex: filetype=dosini

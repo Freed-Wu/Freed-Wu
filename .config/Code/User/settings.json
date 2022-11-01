@@ -1,0 +1,7 @@
+{
+  "terminal": {
+    "integrated": {
+      "sendKeybindingsToShell": true
+    }
+  }
+}

@@ -2,13 +2,22 @@
 import atexit
 from contextlib import suppress
 import logging
+import os
 import readline
 import sys
 
 from rich import print
 from rich.logging import RichHandler
 
-from startup.my import my
+try:
+    from startup.my import my
+except ImportError:
+    sys.path.insert(
+        0,
+        os.path.dirname(os.path.dirname(os.getenv("PYTHONSTARTUP", __file__))),
+    )
+
+    from startup.my import my
 
 if sys.argv[0] == "":
     from startup.python import sys

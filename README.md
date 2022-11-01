@@ -28,15 +28,7 @@
 
 Keep all my computers' configurations same.
 
-![android](https://user-images.githubusercontent.com/32936898/151281612-aee1f23a-b456-45bf-8291-8f012569b000.jpg)
-
-![windows](https://user-images.githubusercontent.com/32936898/151283506-f44001ba-bbfa-4929-b0c3-86dd377213b6.png)
-
-![linux](https://user-images.githubusercontent.com/32936898/151281635-7daa1f6a-3517-496b-bc63-f327607caa31.png)
-
-![web](https://user-images.githubusercontent.com/32936898/151282068-0c77691f-3f89-4ba6-b1cb-e51bd40d514d.png)
-
-[More Screenshots](https://www.zhihu.com/question/20873523/answer/2185169992)
+[![screenshot](https://user-images.githubusercontent.com/32936898/199290335-bb4c9b9e-1fc9-4f8d-af30-a1f8d49c6f35.jpg)](https://user-images.githubusercontent.com/32936898/199288079-777dee13-224d-468b-ac32-23042e34f0be.jpg)
 
 <!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=2 -->
 
@@ -47,17 +39,18 @@ Keep all my computers' configurations same.
 
 ## Platforms
 
-- Linux 
-  - GNU/Linux 
-    - [Gentoo](https://github.com/Freed-Wu/my-portage) (broken) 
-    - [Arch](https://github.com/Freed-Wu/my-pacman.conf) (laptop & desktop) 
-    - Deepin (desktop) 
-    - Ubuntu (server & docker) 
-    - CentOS (cluster) 
-    - Openwrt (router) 泌
-  - Android (mobile) 
+- ![Linux](https://img.shields.io/badge/Linux-gray?logo=Linux)
+  - ![GNU/Linux](https://img.shields.io/badge/GNU%2FLinux-gray?logo=gnu)
+    - [![Gentoo](https://img.shields.io/badge/Gentoo-gray?logo=Gentoo)](https://github.com/Freed-Wu/my-portage)
+    - [![Arch](https://img.shields.io/badge/Archlinux-gray?logo=Archlinux)](https://github.com/Freed-Wu/my-pacman.conf)
+      laptop & desktop
+    - ![Deepin](https://img.shields.io/badge/Deepin-gray?logo=Deepin) desktop
+    - ![Ubuntu](https://img.shields.io/badge/Ubuntu-gray?logo=Ubuntu) server & docker
+    - ![CentOS](https://img.shields.io/badge/CentOS-gray?logo=CentOS) cluster
+    - ![OpenWrt](https://img.shields.io/badge/OpenWrt-gray?logo=OpenWrt) router
+  - ![Android](https://img.shields.io/badge/Android-gray?logo=Android) mobile
     - Termux
-- Windows (virtualbox) 
+- ![Windows](https://img.shields.io/badge/Windows-gray?logo=Windows) virtualbox
   - Cygwin
   - [Msys](https://github.com/Freed-Wu/my-msys2-config)
 

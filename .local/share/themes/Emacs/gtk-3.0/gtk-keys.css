@@ -30,6 +30,10 @@
 /*
  * Bindings for GtkTextView and GtkEntry
  */
+
+/* https://wiki.archlinux.org/title/GTK#Emacs_key_bindings */
+/* gsettings set org.gnome.desktop.interface gtk-key-theme Emacs */
+/* xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs */
 @binding-set gtk-emacs-text-entry
 {
   bind "<ctrl>b" { "move-cursor" (logical-positions, -1, 0) };

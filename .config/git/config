@@ -3,6 +3,7 @@
 	email = wuzy01@qq.com
 [feature]
 	manyFiles = true
+	experimental = true
 [pull]
 	rebase = true
 [push]
@@ -27,9 +28,9 @@
 [submodule]
 	recurse = true
 [core]
-	autocrlf = input
 	symlink = true
 [pager]
+	tag = cat
 	diff = delta
 	blame = delta
 	log = perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less

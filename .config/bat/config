@@ -1,9 +1,7 @@
 # https://github.com/sharkdp/bat/issues/2115
 --paging=always
 -m'_*:Bourne Again Shell (bash)'
--m'*.sa:ARM Assembly'
 -m'entry_points.txt:INI'
--m'PKG-INFO:reStructuredText'
 -m'*.BUILD:Python'
 -m'BUILD:Python'
 -m'WORKSPACE:Python'

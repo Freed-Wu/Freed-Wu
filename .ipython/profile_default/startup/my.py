@@ -1,8 +1,9 @@
 """This is my mostly used functions."""
+from typing import Callable, Optional
 
 
 class My:
-    """My most used functions."""
+    """My mostly used functions."""
 
     @staticmethod
     def params_M(net, requires_grad: bool = True):
@@ -24,6 +25,7 @@ class My:
 
         :param net:
         :param args:
+        :type args: int
         """
         from fvcore.nn import FlopCountAnalysis
         import torch
@@ -33,13 +35,17 @@ class My:
         return flops.total() / 1e9, flops
 
     @staticmethod
-    def register_forward_hook(net):
-        """register_forward_hook.
+    def register_forward_hook(net, hook: Optional[Callable] = None):
+        """Register forward hook.
 
         :param net:
+        :param hook:
+        :type hook: Optional[Callable]
         """
-        net.register_forward_hook(My.hook)
-        return net
+        if hook is None:
+            hook = My.hook
+        for module in net.modules():
+            module.register_forward_hook(hook)
 
     @staticmethod
     def hook(module, input, output):
@@ -49,7 +55,7 @@ class My:
         :param input:
         :param output:
         """
-        print(output.shape)
+        print(list(output.shape))
 
     @staticmethod
     def calc_batch_size(

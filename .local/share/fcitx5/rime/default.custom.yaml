@@ -1,0 +1,6 @@
+---
+patch:
+  schema_list:
+    - schema: double_pinyin_mspy
+  menu:
+    page_size: 10

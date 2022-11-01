@@ -1,3 +1,4 @@
+/* https://fcitx-im.org/wiki/Setup_Fcitx_5#pam_env.so */
 MOZ_ENABLE_WAYLAND DEFAULT=1
 GOOGLE_API_KEY DEFAULT=AIzaSyBVEpoNH9fjBh4KUCOC4anuYP1EMoBPHQU
 GOOGLE_DEFAULT_CLIENT_ID DEFAULT=1042517208020-u7cj4slc2l73ulm44v99gkbo28fj1i3s.apps.googleusercontent.com

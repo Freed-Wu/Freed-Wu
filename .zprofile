@@ -22,15 +22,14 @@ elif [[ $OSTYPE == msys ]]; then
   export PATH=$PATH:/proc/cygdrive/c/msys64
 elif [[ $OSTYPE == darwin ]]; then
   export BROWSER=open
-elif [[ -n $DISPLAY ]]; then
-  export BROWSER=xdg-open
-else
+elif [[ -z $DISPLAY ]]; then
   export BROWSER=w3m
 fi
 if [[ $OSTYPE == linux-android ]]; then
   export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin\
 :/vendor/bin:/product/bin:/sbin
   # https://github.com/termux/termux-packages/issues/4781
+  # android/alpine/bsd/darwin use mandoc not man-db
   export MANPAGER=batman
   if [[ -n $DISPLAY ]]; then
     export BROWSER=exo-open

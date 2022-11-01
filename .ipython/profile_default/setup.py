@@ -92,7 +92,7 @@ setup(
     ]
     + [
         f"Programming Language :: Python :: 3.{minor}"
-        for minor in range(6, 11)
+        for minor in range(7, 12)
     ],
     packages=PACKAGES,
     package_dir=PACKAGE_DIR,

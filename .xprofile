@@ -7,6 +7,8 @@
 PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
+# `gtk-launch $(xdg-mime query default text/html) about:blank` cannot work
+export BROWSER=firefox
 # man
 MANPATH="$HOME/.local/man:$MANPATH"
 MANOPT=-Lzh_CN.UTF-8
@@ -25,9 +27,7 @@ export DEBEMAIL
 RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
 export RIPGREP_CONFIG_PATH
 # kitty
-# kitty cannot work in dde:
-# Failed to enable transparency.
-# This happens when your desktop environment does not support compositing.
+# https://sw.kovidgoyal.net/kitty/glossary/#envvar-GLFW_IM_MODULE
 export GLFW_IM_MODULE=ibus
 # minicom
 export MINICOM='-m -w -8 -c on -C /tmp/minicom.log'
@@ -42,6 +42,8 @@ export WINEDEBUG=-all
 # python
 export PYTHONSTARTUP=$HOME/.ipython/profile_default/startup/init.py
 export PYTHONBREAKPOINT=pudb.set_trace
+# lesspipe
+export LESSQUIET=1
 # fzf
 # rg foo | fzf
 # $word = {2} make a wrong --preview-window
@@ -49,8 +51,8 @@ export PYTHONBREAKPOINT=pudb.set_trace
 # -d$"\0"
 export FZF_DEFAULT_COMMAND='rg --files --color=always'
 export FZF_DEFAULT_OPTS
-FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1} \
-  2> $(python -c 'import os; print(os.devnull)') || less {1}'
+FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
+2> $(python -c 'import os; print(os.devnull)') || less {1}'
 -m
 -d:
 --ansi

@@ -1,2 +1,2 @@
 [tool.codespell]
-ignore-words-list = "inout, hist, ist, acn, fot"
+ignore-words-list = "inout, hist, ist, acn, fot, inactivate, doubleclick"

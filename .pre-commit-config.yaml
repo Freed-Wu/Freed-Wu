@@ -15,9 +15,9 @@ repos:
       - id: check-symlinks
         exclude: ^AppData/Local/nvim$
       - id: check-ast
-        exclude: ^\.pdbrc$
+        exclude: &pdbrc ^\.pdbrc$
       - id: debug-statements
-        exclude: ^\.pdbrc$
+        exclude: *pdbrc
       - id: requirements-txt-fixer
       - id: check-xml
       - id: check-yaml
@@ -49,10 +49,11 @@ repos:
       - id: check-mailmap
       - id: shellcheck
       - id: shfmt
-        args:
-          - -i
-          - "2"
         exclude: .*\.zsh$|^\.z(profile|shrc)$
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.28.0
+    hooks:
+      - id: yamllint
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.16
     hooks:
@@ -76,12 +77,8 @@ repos:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath@0.9.1
-  - repo: https://github.com/PyCQA/doc8
-    rev: v1.0.0
-    hooks:
-      - id: doc8
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.270
+    rev: v1.1.277
     hooks:
       - id: pyright
   - repo: https://github.com/pycqa/pydocstyle

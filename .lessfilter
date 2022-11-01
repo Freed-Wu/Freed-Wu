@@ -1,15 +1,11 @@
 #! /usr/bin/env bash
-mime=$(file -Lb --mime-type "$1")
+mime=$(file -Lbs --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
 ext=${1##*.}
-if [ -d "$1" ]; then
-  if [ "$(command -v exa)" ]; then
-    exa --git -hl --color=always --icons "$1"
-  fi
-elif [ "$kind" = octet-stream ]; then
-  if [[ "$1" = *events.out.tfevents.* ]]; then
-    python <<EOF
+if [ "$kind" = octet-stream ]; then
+	if [[ "$1" = *events.out.tfevents.* ]]; then
+		python <<EOF
 from contextlib import suppress
 import sys
 from time import gmtime, strftime
@@ -38,8 +34,8 @@ plt.clc()
 plt.show()
 df.to_csv(sys.stdout, "\t")
 EOF
-  elif [[ $(basename "$1") = data.mdb ]]; then
-    python <<EOF
+	elif [[ $(basename "$1") = data.mdb ]]; then
+		python <<EOF
 from os.path import dirname as dirn
 import lmdb
 
@@ -47,75 +43,9 @@ with lmdb.open(dirn("$1")) as env, env.begin() as txn:
     for key, val in txn.cursor():
         print(key.decode())
 EOF
-  elif [ "$(command -v hexyl)" ]; then
-    hexyl "$1"
-  fi
-elif [ "$kind" = plain ] && [ "$ext" = tsv ]; then
-  if [ "$(command -v xsv)" ]; then
-    xsv table -d'\t' "$1"
-  fi
-elif [ "$kind" = csv ]; then
-  if [ "$(command -v bat)" ]; then
-    bat -p "$1" --color=always | xsv table | bat -p --color=always
-  fi
-elif [ "$kind" = json ]; then
-  if [ "$(command -v jupyter)" ] && [ "$(command -v bat)" ] && [ "$ext" = ipynb ]; then
-    jupyter nbconvert --to python --stdout "$1" | bat --color=always -plpython
-  elif [ "$(command -v jq)" ]; then
-    jq -r . "$1" --color-output
-  fi
-elif [ "$kind" = pdf ]; then
-  if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
-    pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/"
-  fi
-elif [ "$kind" = vnd.openxmlformats-officedocument.wordprocessingml.document ]; then
-  if [ "$(command -v pandoc)" ]; then
-    pandoc "$1" -tmarkdown
-  fi
-elif [ "$kind" = vnd.openxmlformats-officedocument.spreadsheetml.sheet ] ||
-  [ "$kind" = vnd.ms-excel ]; then
-  if [ "$(command -v in2csv)" ] && [ "$(command -v xsv)" ] && [ "$(command -v bat)" ]; then
-    in2csv "$1" | xsv table | bat -ltsv --color=always
-  fi
-elif [ "$kind" = vnd.sqlite3 ]; then
-  if [ "$(command -v yes)" ] && [ "$(command -v sqlite3)" ] && [ "$(command -v bat)" ]; then
-    yes .q | sqlite3 "$1" | bat --color=always -plsql
-  fi
-elif [ "$category" = text ] || [ "$kind" = x-empty ] || [ "$kind" = pgp-keys ]; then
-  if [ "$(command -v bat)" ]; then
-    bat --color=always "$1"
-  elif [ "$(command -v pygmentize)" ]; then
-    pygmentize "$1" | less
-  fi
-elif [ "$kind" = rfc822 ]; then
-  if [ "$(command -v bat)" ]; then
-    bat --color=always -lEmail "$1"
-  fi
-elif [ "$kind" = blockdevice ]; then
-  if [ "$(command -v findmnt)" ]; then
-    findmnt "$1"
-  fi
-elif [ "$category" = image ]; then
-  if [ "$(command -v chafa)" ]; then
-    chafa -f symbols "$1"
-  fi
-  if [ "$(command -v exiftool)" ]; then
-    exiftool "$1" | bat --color=always -plyaml
-  fi
-elif [ "$kind" = x-pie-executable ] || [ "$kind" = x-sharelib ]; then
-  if [ "$(command -v ldd)" ]; then
-    ldd "$1"
-  fi
-elif [ "$kind" = gzip ]; then
-  if [ "$(command -v tar)" ]; then
-    tar vtaf "$1"
-  fi
-elif [ "$kind" = x-executable ] || [ "$kind" = java-archive ] || [ "$kind" = zstd ]; then
-  if [ "$(command -v 7z)" ]; then
-    7z l "$1"
-  fi
+	fi
 elif [ "$kind" = zip ] && [ "$ext" = pth ]; then
-  python <<EOF
+	python <<EOF
 import torch
 
 data = torch.load("$1")
@@ -123,8 +53,47 @@ if isinstance(data, torch.Tensor):
     print(data.shape)
 print(data)
 EOF
-elif [ -e "$1" ]; then
-  if [ "$(command -v bat)" ] && [ "$(command -v lesspipe.sh)" ]; then
-    lesspipe.sh "$1" | bat --color=always
-  fi
+elif [ "$kind" = json ]; then
+	if [ "$(command -v jupyter)" ] && [ "$(command -v bat)" ] && [ "$ext" = ipynb ]; then
+		jupyter nbconvert --to python --stdout "$1" | bat --color=always -plpython
+	elif [ "$(command -v jq)" ]; then
+		jq -r . "$1" --color-output
+	fi
+elif [ "$kind" = vnd.sqlite3 ]; then
+	if [ "$(command -v yes)" ] && [ "$(command -v sqlite3)" ] && [ "$(command -v bat)" ]; then
+		yes .q | sqlite3 "$1" | bat --color=always -plsql
+	fi
+# https://github.com/wofr06/lesspipe/pull/107
+elif [ -d "$1" ]; then
+	if [ "$(command -v exa)" ]; then
+		exa --git -hl --color=always --icons "$1"
+	fi
+# https://github.com/wofr06/lesspipe/pull/110
+elif [ "$kind" = pdf ]; then
+	if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
+		pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/"
+	fi
+# https://github.com/wofr06/lesspipe/pull/111
+elif [ "$kind" = rfc822 ]; then
+	if [ "$(command -v bat)" ]; then
+		bat --color=always -lEmail "$1"
+	fi
+# https://github.com/wofr06/lesspipe/pull/106
+elif [ "$category" = image ]; then
+	if [ "$(command -v chafa)" ]; then
+		chafa -f symbols "$1"
+	fi
+	if [ "$(command -v exiftool)" ]; then
+		exiftool "$1" | bat --color=always -plyaml
+	fi
+# https://github.com/wofr06/lesspipe/pull/105
+# https://github.com/wofr06/lesspipe/pull/109
+elif [ "$category" = text ]; then
+	if [ "$(command -v bat)" ]; then
+		bat --color=always "$1"
+	elif [ "$(command -v pygmentize)" ]; then
+		pygmentize "$1" | less
+	fi
+else
+	exit 1
 fi
