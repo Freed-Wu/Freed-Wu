@@ -6,7 +6,7 @@ return {
         'WenQuanYi Micro Hei Mono', -- ①
         'Noto Sans Symbols', -- ⓪
         'Noto Sans Symbols2', -- 🗂
-        'Asana Math', -- ≣
+        'Noto Sans Math' -- ≣
     },
     window_background_opacity = 0.75,
     hide_tab_bar_if_only_one_tab = true,
@@ -16,6 +16,8 @@ return {
         {key = '-', mods = 'CTRL', action = 'DisableDefaultAssignment'},
         {key = '=', mods = 'CTRL', action = 'DisableDefaultAssignment'},
         {key = '0', mods = 'CTRL', action = 'DisableDefaultAssignment'},
-        {key = 'Backspace', mods = 'SHIFT|CTRL', action = act.ToggleFullScreen}
+        {key = 'Backspace', mods = 'SHIFT|CTRL', action = act.ToggleFullScreen},
+        {key = 'Enter', mods = 'SHIFT', action = act.SendString '\x1b[13;2u'},
+        {key = 'Enter', mods = 'CTRL', action = act.SendString '\x1b[13;5u'}
     }
 }

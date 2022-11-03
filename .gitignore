@@ -231,18 +231,21 @@
 !/.config/fcitx/
 /.config/fcitx/*
 !/.config/fcitx/config
+!/.config/fcitx5/
+/.config/fcitx5/*
+!/.config/fcitx5/config
+!/.config/fcitx5/profile
 !/.config/Code/
 /.config/Code/*
 !/.config/Code/User/
 /.config/Code/User/*
 !/.config/Code/User/settings.json
 !/.config/lxqt/
-!/.config/pcmanfm-qt/
-/.config/pcmanfm-qt/lxqt/settings.conf
-/.config/pcmanfm-qt/lxqt/settings.conf.lock
-!/.config/screengrab/
 !/.config/openbox/
 !/.config/wezterm/
+!/.config/luarocks/
+/.config/luarocks/*
+!/.config/luarocks/config.lua
 
 # $XDG_DATA_HOME
 !/.local/
