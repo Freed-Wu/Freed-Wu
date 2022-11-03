@@ -1,5 +1,17 @@
 local wezterm = require 'wezterm'
+local hostname = wezterm.hostname()
+local font_size
+if hostname == 'desktop' then
+    font_size = 16
+else
+    font_size = 12
+end
 local act = wezterm.action
+local mux = wezterm.mux
+wezterm.on('gui-startup', function(cmd)
+    local tab, pane, window = mux.spawn_window(cmd or {})
+    window:gui_window():toggle_fullscreen()
+end)
 return {
     font = wezterm.font_with_fallback {
         'JetBrainsMono Nerd Font Mono', -- 
@@ -10,7 +22,7 @@ return {
     },
     window_background_opacity = 0.75,
     hide_tab_bar_if_only_one_tab = true,
-    font_size = 16,
+    font_size = font_size,
     keys = {
         {key = 'Enter', mods = 'ALT', action = 'DisableDefaultAssignment'},
         {key = '-', mods = 'CTRL', action = 'DisableDefaultAssignment'},

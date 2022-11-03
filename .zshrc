@@ -386,6 +386,9 @@ zinit id-as depth'1' wait lucid null sbin'release/bash/*' \
 # 2}}} Download #
 
 # Tool {{{2 #
+zinit id-as depth'1' wait lucid as'null' sbin'bin/interactively' \
+  if'((! $+commands[interactively]))' \
+  for bigH/interactively
 zinit id-as depth'1' wait lucid as'null' sbin'spark' \
   if'((! $+commands[spark]))' \
   for holman/spark
