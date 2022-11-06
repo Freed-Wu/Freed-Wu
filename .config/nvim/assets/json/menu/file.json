@@ -1,0 +1,17 @@
+[
+  ["&File", "Fern -drawer ."],
+  ["&.", "call init#init#fern#current_file_dir()"],
+  ["--"],
+  ["&Downloads", "Fern -drawer ~/Downloads"],
+  ["D&ocuments", "Fern -drawer ~/Documents"],
+  ["D&esktop", "Fern -drawer ~/Desktop"],
+  ["P&ictures", "Fern -drawer ~/Pictures"],
+  ["&Trash", "Fern -drawer ~/.local/share/Trash/files"],
+  ["--"],
+  ["Vim &config", "Fern -drawer $XDG_CONFIG_HOME/nvim"],
+  ["&Vim data", "Fern -drawer $XDG_DATA_HOME/nvim"],
+  ["--"],
+  ["&UDISK", "Fern -drawer /run/media/$USER"],
+  ["&Phone", "Fern -drawer /run/user/1000/gvfs"],
+  ["&Mount", "Fern -drawer /mnt"]
+]

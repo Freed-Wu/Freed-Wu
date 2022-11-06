@@ -1,0 +1,5 @@
+#!/usr/bin/env -S python -m runx.runx -i
+CMD: %FILE%
+
+HPARAMS:
+  %HERE%:

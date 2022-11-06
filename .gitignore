@@ -249,6 +249,7 @@
 /.config/luarocks/*
 !/.config/luarocks/config.lua
 !/.config/python_keyring/
+!/.config/nvim/
 
 # $XDG_DATA_HOME
 !/.local/

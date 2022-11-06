@@ -1,0 +1,16 @@
+[
+  ["&Z-fold Last pattern", "Fl"],
+  ["&Word", "Fw"],
+  ["&Find search", "Fs"],
+  ["&Spell", "FS"],
+  ["&Context", "Fc"],
+  ["Ex&pression", "Fp"],
+  ["&Increment", "Fi"],
+  ["&Decrement", "Fd"],
+  ["--"],
+  ["&End", "Fe"],
+  ["--"],
+  ["&Unchanged", "CocCommand git.foldUnchanged"],
+  ["--"],
+  ["&AnyFoldActivate", "AnyFoldActivate"]
+]

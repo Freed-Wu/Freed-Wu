@@ -1,0 +1,3 @@
+[
+ ["&Echo", "call init#init#tmux#show('cword')"]
+]

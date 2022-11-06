@@ -1,0 +1,4 @@
+[
+  ["&Menu", "call quickui#menu#open()"],
+  ["&Search", "CocList -I -A grep"]
+]

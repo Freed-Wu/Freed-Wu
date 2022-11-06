@@ -1,0 +1,7 @@
+---
+name: %DIR%
+author: %USER%
+description: %HERE%
+inputs:
+outputs:
+runs:

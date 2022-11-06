@@ -1,6 +1,6 @@
 # my-dotfiles
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/my-dotfiles/master.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/my-dotfiles/master)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/my-dotfiles/main.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/my-dotfiles/main)
 
 [![github/downloads](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/total)](https://github.com/Freed-Wu/my-dotfiles/releases)
 [![github/downloads/latest](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/latest/total)](https://github.com/Freed-Wu/my-dotfiles/releases/latest)
@@ -18,7 +18,7 @@
 [![github/last-commit](https://shields.io/github/last-commit/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/commits)
 [![github/release-date](https://shields.io/github/release-date/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/releases/latest)
 
-[![github/license](https://shields.io/github/license/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/blob/master/LICENSE)
+[![github/license](https://shields.io/github/license/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/blob/main/LICENSE)
 ![github/languages](https://shields.io/github/languages/count/Freed-Wu/my-dotfiles)
 ![github/languages/top](https://shields.io/github/languages/top/Freed-Wu/my-dotfiles)
 ![github/directory-file-count](https://shields.io/github/directory-file-count/Freed-Wu/my-dotfiles)

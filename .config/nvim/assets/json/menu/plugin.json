@@ -1,0 +1,13 @@
+[
+  ["Ch&eckhealth", "checkhealth"],
+  ["--"],
+  ["&StartupTime", "StartupTime"],
+  ["--"],
+  ["&Update", "SPUpdate"],
+  ["&Install", "SPInstall"],
+  ["--"],
+  ["&Clean", "Dein clean"],
+  ["&Recache", "Dein recache_runtimepath"],
+  ["--"],
+  ["CocU&pdate", "CocUpdate"]
+]

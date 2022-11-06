@@ -1,0 +1,8 @@
+[
+  ["&Snippet", "CocCommand snippets.editSnippets"],
+  ["S&nippets", "CocCommand snippets.openSnippetFiles"],
+  ["--"],
+  ["S&tartify", "Startify"],
+  ["&Undotree", "UndotreeToggle"],
+  ["Filet&ype", "call init#init#filetype#edit()"]
+]

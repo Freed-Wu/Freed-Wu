@@ -1,0 +1,15 @@
+---
+"on":
+  push: &default
+    paths-ignore:
+      - "**.md"
+  pull_request: *default
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: %HERE%
+        run: |

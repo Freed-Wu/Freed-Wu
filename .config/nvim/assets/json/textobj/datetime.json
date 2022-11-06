@@ -1,0 +1,7 @@
+{
+  "auto": { "select": "iT" },
+  "full": { "select": "aT" },
+  "date": { "select": "iY" },
+  "time": { "select": "aY" },
+  "tz": { "select": "iZ" }
+}

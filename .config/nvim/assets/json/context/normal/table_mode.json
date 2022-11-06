@@ -1,0 +1,13 @@
+[
+  ["&Tableize", "&Tableize"],
+  ["Table&AddFormula", "TableAddFormula"],
+  ["Table&EvalFormulaLine", "TableEvalFormulaLine"],
+  ["TableMode&Realign", "TableModeRealign"],
+  ["TableModeEcho&Cell", "call tablemode#spreadsheet#EchoCell()"],
+  ["--"],
+  ["DeleteRo&w", "call tablemode#spreadsheet#DeleteRow()"],
+  ["DeleteCo&lumn", "call tablemode#spreadsheet#DeleteColumn()"],
+  ["--"],
+  ["&InsertColumnBefore", "call tablemode#spreadsheet#InsertColumn(0)"],
+  ["InsertColumn&After", "call tablemode#spreadsheet#InsertColumn(1)"]
+]

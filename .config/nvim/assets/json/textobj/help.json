@@ -1,0 +1,20 @@
+{
+  "link": {
+    "move-p": "<buffer>[m",
+    "move-n": "<buffer>]m",
+    "move-P": "<buffer>[M",
+    "move-N": "<buffer>]M"
+  },
+  "option": {
+    "move-p": "<buffer>['",
+    "move-n": "<buffer>]'",
+    "move-P": "<buffer>[\"",
+    "move-N": "<buffer>]\""
+  },
+  "any": {
+    "move-p": "<buffer>[[",
+    "move-n": "<buffer>]]",
+    "move-P": "<buffer>[]",
+    "move-N": "<buffer>]["
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "%DIR%",
+  "description": "
+.!gh repo view --json description -q.description %GITHUB_USER%/%DIR%%HERE%
+  ",
+  "version": "0.0.1",
+  "author": "%USER%",
+  "repository": {
+    "type": "git",
+    "url": "%GITHUB%/%DIR%"
+  }
+}

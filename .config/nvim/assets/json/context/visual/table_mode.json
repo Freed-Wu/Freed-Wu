@@ -1,0 +1,7 @@
+[
+  ["&Tableize", "*Tableize"],
+  ["Table&AddFormula", "*TableAddFormula"],
+  ["Table&EvalFormulaLine", "*TableEvalFormulaLine"],
+  ["TableMode&Realign", "*TableModeRealign"],
+  ["TableizeBy&Delimiter", "call tablemode#TableizeByDelimiter()"]
+]

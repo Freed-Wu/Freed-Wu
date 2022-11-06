@@ -1,0 +1,13 @@
+priority 100
+extends dot
+extends html
+extends tex
+
+snippet img "myUltiSnips" b
+![$1](${2:path}${1/.+/ "/}${1:opt title}${1/.+/"/})
+endsnippet
+snippet notes "myUltiSnips" b
+::: notes
+$0
+:::
+endsnippet

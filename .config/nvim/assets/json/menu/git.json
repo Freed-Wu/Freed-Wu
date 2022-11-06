@@ -1,0 +1,5 @@
+[
+  ["&Git", "Gina status"],
+  ["&Add All", "Gina add -A"],
+  ["Add &.", "Gina add %"]
+]

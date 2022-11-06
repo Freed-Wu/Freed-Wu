@@ -1,0 +1,9 @@
+[
+  ["&Set", "call init#init#vim#set()"],
+  ["&Echo", "call init#init#vim#echo()"],
+  ["&Has", "call init#init#vim#has()"],
+  ["&Autocmd", "call init#init#vim#autocmd()"],
+  ["H&ighlight", "call init#init#vim#highlight()"],
+  ["&Map", "call init#init#vim#map_()"],
+  ["&Function", "call init#init#vim#function()"]
+]

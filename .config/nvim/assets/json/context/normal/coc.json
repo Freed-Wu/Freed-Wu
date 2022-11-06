@@ -1,0 +1,16 @@
+[
+  ["&Implementation", "call CocAction('jumpImplementation')"],
+  ["&TypeDefinition", "call CocAction('jumpTypeDefinition')"],
+  ["&Called References", "call CocAction('jumpReferences')"],
+  ["Re&name", "call CocAction('rename')"],
+  ["Re&factor", "call CocAction('refactor')"],
+  ["--"],
+  ["Trans&late", "call coc#rpc#notify('doKeymap', ['translator-p'])"],
+  ["Translate &Replace", "call coc#rpc#notify('doKeymap', ['translator-r'])"],
+  ["--"],
+  ["&Browser", "CocCommand git.browserOpen"],
+  ["C&hunk", "CocCommand git.chunkInfo"],
+  ["Stag&e", "CocCommand git.chunkStage"],
+  ["&Undo", "CocCommand git.chunkUndo"],
+  ["C&ommit", "CocCommand git.showCommit"]
+]

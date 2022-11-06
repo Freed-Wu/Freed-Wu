@@ -1,0 +1,4 @@
+[
+  ["&Echo", "call init#init#sh#echo('cWORD')"],
+  ["E&xecute", "call init#init#sh#execute('.')"]
+]

@@ -1,0 +1,4 @@
+[
+  ["Trans&late", "call coc#rpc#notify('doKeymap', ['translator-pv'])"],
+  ["Translate &Replace", "call coc#rpc#notify('doKeymap', ['translator-rv'])"]
+]

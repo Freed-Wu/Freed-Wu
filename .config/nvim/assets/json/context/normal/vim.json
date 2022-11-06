@@ -1,0 +1,12 @@
+[
+  ["&Set", "call init#init#vim#set('cword')"],
+  ["&Echo", "call init#init#vim#echo('cWORD')"],
+  ["&Has", "call init#init#vim#has('cword')"],
+  ["&Autocmd", "call init#init#vim#autocmd('cword')"],
+  ["H&ighlight", "call init#init#vim#highlight('cword')"],
+  ["&Map", "call init#init#vim#map_('cWORD')"],
+  ["&Function", "call init#init#vim#function('cword')"],
+  ["--"],
+  ["E&xecute", "call init#init#vim#execute(getline('.'))"],
+  ["So&urce", "source %"]
+]

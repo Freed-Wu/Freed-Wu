@@ -1,0 +1,7 @@
+[
+  ["&NR", "NR"],
+  ["R&ainbowDelim", "RainbowDelim"],
+  ["--"],
+  ["&Table-mode ▶", "call init#init#quickui#install('normal/table_mode')"],
+  ["&Coc ▶", "call init#init#quickui#install('normal/coc')"]
+]

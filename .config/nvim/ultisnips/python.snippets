@@ -1,0 +1,25 @@
+priority 100
+
+snippet #! "myUltiSnips" b
+#!/usr/bin/env python
+endsnippet
+
+snippet cls "myUltiSnips" b
+class $1:
+	def __init__(self):
+		super().__init__()
+endsnippet
+
+snippet def "myUltiSnips" b
+def $1(self, $2):
+	$0
+endsnippet
+
+snippet wrap "from functools import wraps" b
+def	$1(f):
+	@wraps(f)
+	def wrapper(*args, **kwds):
+		$0
+		return f(*args, **kwds)
+	return wrapper
+endsnippet

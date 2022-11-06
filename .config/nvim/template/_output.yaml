@@ -1,0 +1,5 @@
+---
+pdf_document:
+  latex_engine: xelatex
+  toc: true
+  citation_package: natbib

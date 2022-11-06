@@ -1,0 +1,4 @@
+[
+ ["&Echo", "call init#init#tmux#show('cword')"],
+ ["E&xecute", "call init#init#tmux#execute(line('.'))"]
+]

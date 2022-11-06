@@ -1,0 +1,5 @@
+[
+  ["&Menu", "call quickui#menu#open()"],
+  ["&Up Dir", "call feedkeys('gu')"],
+  ["&Return CWD", "call feedkeys('gU')"]
+]

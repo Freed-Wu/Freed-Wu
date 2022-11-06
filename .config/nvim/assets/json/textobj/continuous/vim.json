@@ -1,0 +1,6 @@
+{
+  "vim": {
+    "select-a": "<buffer>aL",
+    "select-i": "<buffer>iL"
+  }
+}

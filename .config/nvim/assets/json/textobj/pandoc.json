@@ -1,0 +1,26 @@
+{
+  "text": {
+    "select-a": "<buffer>aF",
+    "select-i": "<buffer>iF",
+    "move-p": "<buffer>[F",
+    "move-n": "<buffer>]F"
+  },
+  "Btext": {
+    "select-a": "<buffer>aE",
+    "select-i": "<buffer>iE",
+    "move-p": "<buffer>[E",
+    "move-n": "<buffer>]E"
+  },
+  "chunk": {
+    "select-a": "<buffer>am",
+    "select-i": "<buffer>im",
+    "move-p": "<buffer>[m",
+    "move-n": "<buffer>]m"
+  },
+  "Bchunk": {
+    "select-a": "<buffer>aM",
+    "select-i": "<buffer>iM",
+    "move-p": "<buffer>[M",
+    "move-n": "<buffer>]M"
+  }
+}

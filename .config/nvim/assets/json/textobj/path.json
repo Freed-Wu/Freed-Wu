@@ -1,0 +1,10 @@
+{
+  "prev_path": {
+    "select-a": "aA",
+    "select-i": "iA"
+  },
+  "next_path": {
+    "select-a": "anA",
+    "select-i": "inA"
+  }
+}

@@ -1,4 +1,6 @@
 ---
+exclude: ^\.config/nvim/template/.*$
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
@@ -94,6 +96,12 @@ repos:
     rev: v0.4a4
     hooks:
       - id: vint
+  - repo: https://github.com/google/vimdoc
+    rev: v0.7.1
+    hooks:
+      - id: vimdoc
+        args:
+          - .config/nvim
 
 ci:
   skip:
