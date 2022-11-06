@@ -73,9 +73,6 @@
 !/.julia/config/
 /.julia/config/*
 !/.julia/config/startup.jl
-!/.gnupg/
-/.gnupg/*
-!/.gnupg/*.conf
 !/.wgetpaste.d/
 /.wgetpaste.d/*
 !/.wgetpaste.d/*.conf
