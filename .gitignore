@@ -102,6 +102,7 @@
 !/.ssh/
 /.ssh/*
 !/.ssh/config
+!/.password-store/
 
 # $XDG_CONFIG_HOME
 !/.config/
