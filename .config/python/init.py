@@ -10,17 +10,17 @@ from rich import print
 from rich.logging import RichHandler
 
 try:
-    from startup.my import my
+    from python.my import my
 except ImportError:
     sys.path.insert(
         0,
         os.path.dirname(os.path.dirname(os.getenv("PYTHONSTARTUP", __file__))),
     )
 
-    from startup.my import my
+    from python.my import my
 
 if sys.argv[0] == "":
-    from startup.python import sys
+    from python.python import sys
 
 with suppress(OSError):
     readline.read_history_file()

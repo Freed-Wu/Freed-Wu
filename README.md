@@ -26,7 +26,13 @@
 ![github/repo-size](https://shields.io/github/repo-size/Freed-Wu/my-dotfiles)
 ![github/v](https://shields.io/github/v/release/Freed-Wu/my-dotfiles)
 
-Keep all my computers' configurations same.
+My dotfiles, e.g.,
+
+- [vim](.config/nvim)
+- [mutt](.config/neomutt)
+- [tmux](.config/tmux)
+- [python](.config/python)
+- [ptpython](.config/ptpython)
 
 [![screenshot](https://user-images.githubusercontent.com/32936898/199290335-bb4c9b9e-1fc9-4f8d-af30-a1f8d49c6f35.jpg)](https://user-images.githubusercontent.com/32936898/199288079-777dee13-224d-468b-ac32-23042e34f0be.jpg)
 

@@ -486,9 +486,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#pandoc#after#source()',
         \ })
   call dein#add('Winseven4lyf/vim-bbcode')
-  call dein#add('raimon49/requirements.txt.vim', {
-        \ 'build': 'vimdoc .',
-        \ })
+  call dein#add('raimon49/requirements.txt.vim')
   call dein#add('Freed-Wu/sublime-syntax.vim')
   call dein#add('liuchengxu/graphviz.vim')
   call dein#add('tmux-plugins/vim-tmux')
