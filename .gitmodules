@@ -17,6 +17,6 @@
 	path = .local/share/pandoc/styles
 	url = https://github.com/citation-style-language/styles
 # self
-[submodule "/home/wzy/.config/neomutt/mutt-colors-custom"]
+[submodule ".config/neomutt/mutt-colors-custom"]
 	path = .config/neomutt/mutt-colors-custom
 	url = https://github.com/Freed-Wu/mutt-colors-custom
