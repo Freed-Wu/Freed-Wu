@@ -61,7 +61,7 @@ CompactInputMethodInformation=True
 # Show first input method information
 ShowFirstInputMethodInformation=True
 # Default page size
-DefaultPageSize=5
+DefaultPageSize=10
 # Override Xkb Option
 OverrideXkbOption=False
 # Custom Xkb Option
@@ -72,3 +72,4 @@ EnabledAddons=
 DisabledAddons=
 # Preload input method to be used by default
 PreloadInputMethod=True
+

@@ -7,6 +7,9 @@ fi
 if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
   . ~/.xprofile
 fi
+if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]] && ((! $+CODESTATS_API_KEY)); then
+  . ~/.local/share/zinit/plugins/.pass/pass.sh
+fi
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then
   export LANG=en_US.UTF-8
@@ -32,27 +35,25 @@ if [[ $OSTYPE == linux-android ]]; then
   # android/alpine/bsd/darwin use mandoc not man-db
   export MANPAGER=batman
   if [[ -n $DISPLAY ]]; then
-    export BROWSER=exo-open
+    export BROWSER='gio open'
   else
     export BROWSER=termux-open
   fi
 elif (($+commands[col] && $+commands[bat])); then
   export MANPAGER="sh -c 'col -bx|bat -plman'"
 fi
-# user customize
-if [[ -f ~/.bash_login ]]; then
-  . ~/.bash_login
-fi
 # less
 export LESS='--mouse -I'
-# fzf
+# interactively
+export FZF_HISTORY_DIR
 if (($+commands[cygpath])); then
-  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
---history=$(cygpath -w ${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt | sed 's=\\=\\\\=g')"
+  FZF_HISTORY_DIR="$(cygpath -w ${XDG_DATA_HOME:-$HOME/.cache}/fzf | sed 's=\\=\\\\=g')"
 else
-  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
---history=${XDG_CACHE_HOME:-$HOME/.cache}/fzf.txt"
+  FZF_HISTORY_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fzf"
 fi
+# fzf
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--history=$FZF_HISTORY_DIR/fzf.txt"
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

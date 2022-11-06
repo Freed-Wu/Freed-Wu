@@ -1,8 +1,8 @@
 set my_addr = $my_gmail
 
 set folder = $my_imap_gmail
-set imap_user = wuzy001@gmail.com
-set imap_pass = $GMAIL_PASS
+set imap_user = `pass ls neomutt/user/gmail`
+set imap_pass = `pass ls neomutt/pass/gmail`
 
 set from = $imap_user
 # gnutls_handshake: The TLS connection was non-properly terminated.

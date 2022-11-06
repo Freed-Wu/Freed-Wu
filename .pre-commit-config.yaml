@@ -12,7 +12,7 @@ repos:
         exclude: ^\.config/pudb/pudb\.cfg$
       - id: mixed-line-ending
       - id: end-of-file-fixer
-        exclude: ^\.config/(pudb/pudb\.cfg|fcitx5/profile)$
+        exclude: ^\.config/(pudb/pudb\.cfg|fcitx5/(config|profile))$
       - id: detect-private-key
       - id: check-symlinks
         exclude: ^AppData/Local/nvim$
@@ -56,6 +56,7 @@ repos:
     rev: v1.28.0
     hooks:
       - id: yamllint
+        exclude: ^\.config/gh/config\.yml$
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.16
     hooks:

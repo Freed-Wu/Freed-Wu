@@ -1,4 +1,3 @@
----
 # What protocol to use when performing git operations.
 # Supported values: ssh, https
 git_protocol: https

@@ -1,6 +1,6 @@
 [user]
 	name = Wu Zhenyu
-	email = wuzy01@qq.com
+	email = wuzhenyu@ustc.edu
 [feature]
 	manyFiles = true
 	experimental = true
@@ -33,6 +33,7 @@
 	tag = cat
 	diff = delta
 	blame = delta
+	format-patch = delta
 	log = perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less
 	reflog = perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less
 	config = bat -plini
@@ -93,3 +94,6 @@
 	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
 [safe]
 	directory = *
+[sendemail]
+	suppresscc = author
+	sendmailCmd = git-neomutt

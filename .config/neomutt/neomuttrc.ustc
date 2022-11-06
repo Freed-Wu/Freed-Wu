@@ -2,8 +2,8 @@
 set my_addr = $my_ustc
 
 set folder = $my_imap_ustc
-set imap_user = wuzhenyu@ustc.edu
-set imap_pass = $MAIL_PASS
+set imap_user = `pass ls neomutt/user/ustc`
+set imap_pass = `pass ls neomutt/pass/ustc`
 
 set from = $imap_user
 set smtp_url = smtps://$from@smtphz.$my_addr

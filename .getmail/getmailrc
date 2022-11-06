@@ -1,0 +1,15 @@
+[options]
+verbose = 1
+read_all = false
+message_log = ~/.cache/getmail.log
+message_log_verbose = true
+
+[retriever]
+type = SimpleIMAPRetriever
+server = qiye.163.com
+username = wuzhenyu@ustc.edu
+password_command = ("pass", "ls", "neomutt/pass/ustc")
+
+[destination]
+type = MDA_external
+path = /usr/bin/procmail

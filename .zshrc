@@ -129,6 +129,16 @@ zinit id-as'.pyenv' depth'1' wait lucid \
   zcompile *.sh' \
   if'(($+commands[pyenv]))' \
   for zdharma-continuum/null
+# https://github.com/Kaggle/kaggle-api/issues/446
+zinit id-as'.pass' depth'1' as'null' wait lucid \
+  atclone"echo 'export CODESTATS_API_KEY=$(pass ls codestats/$HOST)' > pass.sh
+echo 'export YDAPPID=$(pass ls ydcv/ydappid)' >> pass.sh
+echo 'export YDAPPSEC=$(pass ls ydcv/ydappsec)' >> pass.sh
+echo 'export KAGGLE_USERNAME=$(pass ls kaggle/username)' >> pass.sh
+echo 'export KAGGLE_KEY=$(pass ls kaggle/key)' >> pass.sh
+" \
+  if'(($+commands[pass]))' \
+  for zdharma-continuum/null
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 zinit id-as depth'1' wait lucid \
   atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS

@@ -42,6 +42,7 @@
 !/.gtkrc-2.0
 !/.xinitrc
 !/.xsession
+!/.pypirc
 
 # dotfiles
 !/.dosbox/
@@ -65,11 +66,6 @@
 !/.ipython/
 /.ipython/*
 !/.ipython/profile_default/
-/.ipython/profile_default/*
-!/.ipython/profile_default/*.py
-!/.ipython/profile_default/startup
-/.ipython/profile_default/startup/*
-!/.ipython/profile_default/startup/*.py
 !/.julia/
 /.julia/*
 !/.julia/config/
@@ -99,6 +95,13 @@
 !/.proxychains/
 /.proxychains/*
 !/.proxychains/proxychains.conf
+!/.docker/
+/.docker/*
+!/.docker/config.json
+!/.getmail/
+!/.ssh/
+/.ssh/*
+!/.ssh/config
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -111,8 +114,6 @@
 !/.config/pylintrc
 !/.config/zathura/zathura*
 !/.config/neomutt/
-/.config/neomutt/*
-!/.config/neomutt/neomuttrc*
 !/.config/mutt/
 !/.config/git/
 /.config/git/*
@@ -246,6 +247,7 @@
 !/.config/luarocks/
 /.config/luarocks/*
 !/.config/luarocks/config.lua
+!/.config/python_keyring/
 
 # $XDG_DATA_HOME
 !/.local/
@@ -269,6 +271,13 @@
 !/.local/share/fcitx5/rime/
 /.local/share/fcitx5/rime/*
 !/.local/share/fcitx5/rime/default.custom.yaml
+
+# BIN
+!/.local/bin/
+/.local/bin/*
+!/.local/bin/adb.py
+!/.local/bin/telnet.py
+!/.local/bin/git-neomutt
 
 # Windows
 !/.minttyrc

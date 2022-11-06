@@ -1,8 +1,8 @@
 set my_addr = $my_njust
 
 set folder = $my_imap_njust
-set imap_user = 916101630117@njust.edu.cn
-set imap_pass = $MAIL_PASS
+set imap_user = `pass ls neomutt/user/njust`
+set imap_pass = `pass ls neomutt/pass/njust`
 
 set from = $imap_user
 set smtp_url = smtps://$from@smtp.$my_addr

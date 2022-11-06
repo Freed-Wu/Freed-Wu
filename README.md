@@ -56,6 +56,5 @@ Keep all my computers' configurations same.
 
 ## Related
 
-- [my-init.vim](https://github.com/Freed-Wu/my-init.vim)
 - [my-keymaps](https://github.com/Freed-Wu/my-keymaps)
 - [my-x11-keymaps](https://github.com/Freed-Wu/my-x11-keymaps)
