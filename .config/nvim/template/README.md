@@ -33,6 +33,11 @@
 ![pypi/implementation](https://shields.io/pypi/implementation/%DIR%)
 ![pypi/pyversions](https://shields.io/pypi/pyversions/%DIR%)
 
+![docker/pulls](https://img.shields.io/docker/pulls/%DOCKERHUB_USER%/%DIR%)
+![docker/image-size](https://img.shields.io/docker/image-size/%DOCKERHUB_USER%/%DIR%)
+![docker/stars](https://img.shields.io/docker/stars/%DOCKERHUB_USER%/%DIR%)
+![docker/v](https://img.shields.io/docker/v/%DOCKERHUB_USER%/%DIR%)
+
 <!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=2 -->
 
 <!-- mdformat-toc end -->

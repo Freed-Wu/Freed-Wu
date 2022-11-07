@@ -1,10 +1,13 @@
 ---
 "on":
-  push: &default
+  push:
     paths-ignore:
       - "**.md"
       - docs/*
-  pull_request: *default
+  pull_request:
+    paths-ignore:
+      - "**.md"
+      - docs/*
   workflow_dispatch:
 
 env:

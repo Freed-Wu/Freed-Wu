@@ -6,11 +6,13 @@ function! init#template#source() abort
   let g:templates_directory = [expand('$XDG_CONFIG_HOME/nvim/template')]
   let g:templates_user_variables = [
         \ ['DIR', 'init#init#template#dir'],
+        \ ['DIR3', 'init#init#template#dir3'],
         \ ['CFILE', 'init#init#template#cfile'],
         \ ['FILE_', 'init#init#template#file_'],
         \ ['TEST_FILE', 'init#init#template#test_file'],
         \ ['EXT', 'init#init#template#ext'],
         \ ['GITHUB', 'init#init#template#github'],
         \ ['GITHUB_USER', 'init#init#template#github_user'],
+        \ ['DOCKERHUB_USER', 'init#init#template#dockerhub_user'],
         \ ]
 endfunction

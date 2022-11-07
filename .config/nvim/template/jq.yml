@@ -1,9 +1,11 @@
 ---
 "on":
-  push: &default
+  push:
     paths:
       - ${{ env.paths }}
-  pull_request: *default
+  pull_request:
+    paths:
+      - ${{ env.paths }}
   workflow_dispatch:
 
 env:

@@ -22,7 +22,7 @@ fi
 zinit id-as'.brew' depth'1' \
   atclone'/home/linuxbrew/.linuxbrew/bin/brew shellenv > brew.sh
   zcompile *.sh' \
-    if'[ -x /home/linuxbrew/.linuxbrew/bin/brew ]' \
+  if'[ -x /home/linuxbrew/.linuxbrew/bin/brew ]' \
   for zdharma-continuum/null
 
 # tmux firstly avoid load ~/.zshrc twice
@@ -49,7 +49,10 @@ SAVEHIST=$HISTSIZE
 setopt autopushd
 setopt chaselinks
 setopt pushdignoredups
-setopt cdsilent
+# ubuntu 18.04
+if (($+options[cdsilent])); then
+  setopt cdsilent
+fi
 setopt pushdsilent
 
 setopt globstarshort
@@ -70,7 +73,9 @@ setopt interactivecomments
 setopt rcquotes
 
 zmodload zsh/pcre
-[ $+aliases[run-help] ] && unalias run-help
+if (($+aliases[run-help])); then
+  unalias run-help
+fi
 autoload -Uz run-help
 autoload -Uz zcalc
 autoload -Uz zmv
@@ -168,11 +173,12 @@ zinit id-as depth'1' for zdharma-continuum/z-a-bin-gem-node
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   . "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-zinit id-as depth'1' \
-  if'[[ ! -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]' \
-  for romkatv/powerlevel10k
 if [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
   . /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+elif [[ -f ~/.nix-profile/share/zsh-powerlevel10k/powerlevel10k.zsh-theme ]]; then
+  . ~/.nix-profile/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+else
+  zinit id-as depth'1' for romkatv/powerlevel10k
 fi
 [[ ! -f ~/.p10k.zsh ]] || . ~/.p10k.zsh
 # 1}}} StatusLine #
@@ -247,6 +253,7 @@ zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   for Freed-Wu/fzf-tab-source
 
+# https://github.com/petronny/pinyin-completion/issues/14
 zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
   for petronny/pinyin-completion
 # 1}}} Complete #

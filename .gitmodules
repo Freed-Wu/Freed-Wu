@@ -20,3 +20,6 @@
 [submodule ".config/neomutt/mutt-colors-custom"]
 	path = .config/neomutt/mutt-colors-custom
 	url = https://github.com/Freed-Wu/mutt-colors-custom
+[submodule ".gnupg"]
+	path = .gnupg
+	url = https://github.com/Freed-Wu/.gnupg

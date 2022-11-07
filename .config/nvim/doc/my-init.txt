@@ -19,6 +19,9 @@ init#init#template#dir()                            *init#init#template#dir()*
   for LaTeX package script foo/build.lua -> foo for pre-commit hook config
   foo/.pre-commit_hooks.yaml -> foo for README.md foo/README.md -> foo
 
+init#init#template#dir3()                          *init#init#template#dir3()*
+  for github actions: foo/.github/workflows/main.yml -> foo
+
 init#init#template#cfile()                        *init#init#template#cfile()*
   for homebrew package script: foo-bar -> FooBar foo-bar.rb -> class FooBar <
   Formula

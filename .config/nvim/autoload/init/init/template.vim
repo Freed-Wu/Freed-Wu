@@ -10,6 +10,13 @@ function! init#init#template#dir() abort
 endfunction
 
 ""
+" for github actions:
+" foo/.github/workflows/main.yml -> foo
+function! init#init#template#dir3() abort
+  return expand('%:p:h:h:h:t')
+endfunction
+
+""
 " for homebrew package script:
 " foo-bar -> FooBar
 " foo-bar.rb -> class FooBar < Formula
@@ -39,9 +46,13 @@ function! init#init#template#ext() abort
 endfunction
 
 function! init#init#template#github() abort
-  return g:snips_github
+  return 'https://github.com/' . init#init#template#github_user()
 endfunction
 
 function! init#init#template#github_user() abort
-  return $GITHUB_USER
+  return 'Freed-Wu'
+endfunction
+
+function! init#init#template#dockerhub_user() abort
+  return 'freedwu'
 endfunction

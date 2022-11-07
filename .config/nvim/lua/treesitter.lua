@@ -1,7 +1,7 @@
--- https://github.com/liuchengxu/vim-which-key/issues/211
--- don't use incremental_selection
+-- ~/.local/share/nvim/repos/github.com/nvim-treesitter/nvim-treesitter/parser/*.so
+-- depends glibc, must reinstalled in docker. In order to save time,
+-- ensure_installed = "all",
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",
     indent = {enable = true},
     highlight = {enable = true, additional_vim_regex_highlighting = true},
     textobjects = {enable = true},

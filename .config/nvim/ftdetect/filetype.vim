@@ -8,6 +8,8 @@ augroup init_filetype
   " 1}}} Text "
 
   " Data_Exchange {{{1 "
+  autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
+  autocmd BufNewFile,BufRead */tex/latex/**.cfg setfiletype tex
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*} setfiletype conf
   autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc setfiletype dosini
   autocmd BufNewFile,BufRead *.mplstyle setfiletype yaml

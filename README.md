@@ -1,6 +1,7 @@
 # my-dotfiles
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/my-dotfiles/main.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/my-dotfiles/main)
+[![github/workflow](https://github.com/Freed-Wu/my-dotfiles/actions/workflows/main.yml/badge.svg)](https://github.com/Freed-Wu/my-dotfiles/actions)
 
 [![github/downloads](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/total)](https://github.com/Freed-Wu/my-dotfiles/releases)
 [![github/downloads/latest](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/latest/total)](https://github.com/Freed-Wu/my-dotfiles/releases/latest)
@@ -25,6 +26,11 @@
 ![github/code-size](https://shields.io/github/languages/code-size/Freed-Wu/my-dotfiles)
 ![github/repo-size](https://shields.io/github/repo-size/Freed-Wu/my-dotfiles)
 ![github/v](https://shields.io/github/v/release/Freed-Wu/my-dotfiles)
+
+![docker/pulls](https://img.shields.io/docker/pulls/freedwu/my-dotfiles)
+![docker/image-size](https://img.shields.io/docker/image-size/freedwu/my-dotfiles)
+![docker/stars](https://img.shields.io/docker/stars/freedwu/my-dotfiles)
+![docker/v](https://img.shields.io/docker/v/freedwu/my-dotfiles)
 
 My dotfiles, e.g.,
 

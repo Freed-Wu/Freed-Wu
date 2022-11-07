@@ -6,6 +6,8 @@
 !/pyproject.toml
 !/.pre-commit-config.yaml
 !/.gitlint
+!/.github/
+!/.dockerignore
 
 # dotfile
 !/.xprofile
@@ -97,11 +99,13 @@
 !/.docker/
 /.docker/*
 !/.docker/config.json
+!/.docker/Dockerfile
 !/.getmail/
 !/.ssh/
 /.ssh/*
 !/.ssh/config
 !/.password-store/
+!/.gnupg/
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -270,6 +274,7 @@
 !/.local/share/fcitx5/rime/
 /.local/share/fcitx5/rime/*
 !/.local/share/fcitx5/rime/default.custom.yaml
+!/.local/share/fzf/
 
 # BIN
 !/.local/bin/
