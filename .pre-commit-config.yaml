@@ -84,7 +84,7 @@ repos:
         additional_dependencies:
           - markdown-it-texmath@0.9.1
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.277
+    rev: v1.1.278
     hooks:
       - id: pyright
   - repo: https://github.com/pycqa/pydocstyle
