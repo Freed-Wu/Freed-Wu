@@ -20,17 +20,17 @@
 [![github/release-date](https://shields.io/github/release-date/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/releases/latest)
 
 [![github/license](https://shields.io/github/license/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles/blob/main/LICENSE)
-![github/languages](https://shields.io/github/languages/count/Freed-Wu/my-dotfiles)
-![github/languages/top](https://shields.io/github/languages/top/Freed-Wu/my-dotfiles)
-![github/directory-file-count](https://shields.io/github/directory-file-count/Freed-Wu/my-dotfiles)
-![github/code-size](https://shields.io/github/languages/code-size/Freed-Wu/my-dotfiles)
-![github/repo-size](https://shields.io/github/repo-size/Freed-Wu/my-dotfiles)
-![github/v](https://shields.io/github/v/release/Freed-Wu/my-dotfiles)
+[![github/languages](https://shields.io/github/languages/count/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles)
+[![github/languages/top](https://shields.io/github/languages/top/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles)
+[![github/directory-file-count](https://shields.io/github/directory-file-count/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles)
+[![github/code-size](https://shields.io/github/languages/code-size/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles)
+[![github/repo-size](https://shields.io/github/repo-size/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles)
+[![github/v](https://shields.io/github/v/release/Freed-Wu/my-dotfiles)](https://github.com/Freed-Wu/my-dotfiles)
 
-![docker/pulls](https://img.shields.io/docker/pulls/freedwu/my-dotfiles)
-![docker/image-size](https://img.shields.io/docker/image-size/freedwu/my-dotfiles)
-![docker/stars](https://img.shields.io/docker/stars/freedwu/my-dotfiles)
-![docker/v](https://img.shields.io/docker/v/freedwu/my-dotfiles)
+[![docker/pulls](https://img.shields.io/docker/pulls/freedwu/my-dotfiles)](https://hub.docker.com/r/freedwu/my-dotfiles)
+[![docker/image-size](https://img.shields.io/docker/image-size/freedwu/my-dotfiles)](https://hub.docker.com/r/freedwu/my-dotfiles)
+[![docker/stars](https://img.shields.io/docker/stars/freedwu/my-dotfiles)](https://hub.docker.com/r/freedwu/my-dotfiles)
+[![docker/v](https://img.shields.io/docker/v/freedwu/my-dotfiles)](https://hub.docker.com/r/freedwu/my-dotfiles/tags)
 
 My dotfiles, e.g.,
 
