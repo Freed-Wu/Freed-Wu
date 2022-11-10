@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 function! init#gina#source() abort
   let g:gina#action#mark_sign_text = '✓'
   let g:gina#command#blame#formatter#current_mark = '✓'
@@ -37,6 +39,10 @@ function! init#gina#map() abort
   xmap <buffer><nowait> <lt> <Plug>(gina-index-stage)
   xmap <buffer><nowait> > <Plug>(gina-index-unstage)
   xmap <buffer><nowait> = <Plug>(gina-index-discard)
+endfunction
+
+function! init#gina#add() abort
+  execute 'Gina add' expand('%:p')
 endfunction
 
 augroup init#gina

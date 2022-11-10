@@ -4,14 +4,15 @@
 if (($+DOCKER_BUILDKIT)); then
   return
 fi
+# Add some programs to $PATH
+if [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
+  . ~/.nix-profile/etc/profile.d/nix.sh
+fi
 if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
   . ~/.xprofile
 fi
 if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]] && ((! $+CODESTATS_API_KEY)); then
   . ~/.local/share/zinit/plugins/.pass/pass.sh
-fi
-if [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
-  . ~/.nix-profile/etc/profile.d/nix.sh
 fi
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then

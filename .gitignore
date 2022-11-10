@@ -8,6 +8,7 @@
 !/.gitlint
 !/.github/
 !/.dockerignore
+!/script/
 
 # dotfile
 !/.xprofile
@@ -106,6 +107,13 @@
 !/.ssh/config
 !/.password-store/
 !/.gnupg/
+!/.vscode-remote/
+/.vscode-remote/*
+!/.vscode-remote/data/
+/.vscode-remote/data/*
+!/.vscode-remote/data/Machine/
+/.vscode-remote/data/Machine/*
+!/.vscode-remote/data/Machine/settings.json
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -234,15 +242,29 @@
 !/.config/fcitx/
 /.config/fcitx/*
 !/.config/fcitx/config
+!/.config/fcitx/profile
+!/.config/fcitx/conf/
 !/.config/fcitx5/
 /.config/fcitx5/*
 !/.config/fcitx5/config
 !/.config/fcitx5/profile
+!/.config/fcitx5/conf/
+/.config/fcitx5/conf/cached_layouts
 !/.config/Code/
 /.config/Code/*
 !/.config/Code/User/
 /.config/Code/User/*
 !/.config/Code/User/settings.json
+!/.config/Code - OSS/
+/.config/Code - OSS/*
+!/.config/Code - OSS/User/
+/.config/Code - OSS/User/*
+!/.config/Code - OSS/User/settings.json
+!/.config/VSCodium/
+/.config/VSCodium/*
+!/.config/VSCodium/User/
+/.config/VSCodium/User/*
+!/.config/VSCodium/User/settings.json
 !/.config/lxqt/
 !/.config/openbox/
 !/.config/wezterm/
@@ -273,7 +295,7 @@
 /.local/share/fcitx5/*
 !/.local/share/fcitx5/rime/
 /.local/share/fcitx5/rime/*
-!/.local/share/fcitx5/rime/default.custom.yaml
+!/.local/share/fcitx5/rime/*.custom.yaml
 !/.local/share/fzf/
 
 # BIN

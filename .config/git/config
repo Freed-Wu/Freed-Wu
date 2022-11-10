@@ -97,3 +97,5 @@
 [sendemail]
 	suppresscc = author
 	sendmailCmd = git-neomutt
+[fetch "fsck"]
+	badTimezone = warn

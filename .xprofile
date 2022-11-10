@@ -40,7 +40,7 @@ export GKS_ENCODING=utf-8
 # wine
 export WINEDEBUG=-all
 # python
-export PYTHONSTARTUP=${XDG_CONFIG_HOME:-$HOME/.config}/python/init.py
+export PYTHONSTARTUP=${XDG_CONFIG_HOME:-$HOME/.config}/python/python/init.py
 export PYTHONBREAKPOINT=pudb.set_trace
 # lesspipe
 export LESSQUIET=1

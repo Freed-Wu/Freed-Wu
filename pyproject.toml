@@ -31,17 +31,16 @@ classifiers = [
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [tool.setuptools.dynamic]
-dependencies = { file = ".config/python/requirements.txt" }
+dependencies = { file = ".config/python/python/requirements.txt" }
 
 [tool.setuptools.dynamic.optional-dependencies]
-dev = { file = ".config/python/requirements/dev.txt" }
+dev = { file = ".config/python/python/requirements/dev.txt" }
 
 [tool.setuptools.packages.find]
-where = [".config"]
-include = ["python"]
+where = [".config/python"]
 
 [tool.setuptools_scm]
-write_to = ".config/python/_version.py"
+write_to = ".config/python/python/_version.py"
 
 [tool.black]
 line-length = 79
@@ -51,4 +50,4 @@ line-length = 79
 add_ignore = "D205, D400"
 
 [tool.codespell]
-ignore-words-list = "inout, hist, ist, acn, fot, inactivate, doubleclick, rime, enew, ommit"
+ignore-words-list = "inout, hist, ist, acn, fot, inactivate, doubleclick, rime, enew, ommit, ue, lene, fo"

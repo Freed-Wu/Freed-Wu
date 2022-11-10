@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+cp -r .git ~
+git -C ~ reset --hard
+chsh -s/bin/zsh
+sudo chsh -s/bin/zsh

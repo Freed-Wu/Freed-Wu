@@ -14,8 +14,7 @@ repos:
         exclude: ^\.config/pudb/pudb\.cfg$
       - id: mixed-line-ending
       - id: end-of-file-fixer
-        exclude: >-
-          ^\.(docker/config\.json|config/(pudb/pudb\.cfg|fcitx5/(config|profile)))$
+        exclude: ^\.(docker/config\.json|config/(pudb/pudb\.cfg|fcitx.*))$
       - id: detect-private-key
       - id: check-symlinks
         exclude: ^AppData/Local/nvim$

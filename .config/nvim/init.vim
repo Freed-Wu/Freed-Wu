@@ -239,7 +239,6 @@ endif
 if executable('aria2c')
   let g:dein#download_command = 'aria2c'
 endif
-let g:dein#install_github_api_token = $GITHUB_TOKEN
 let g:dein#notification_icon =
       \ '/usr/share/icons/hicolor/128x128/apps/nvim.png'
 let g:dein#types#git#clone_depth = 1

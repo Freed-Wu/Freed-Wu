@@ -1,5 +1,5 @@
 [
   ["&Git", "Gina status"],
   ["&Add All", "Gina add -A"],
-  ["Add &.", "Gina add %"]
+  ["Add &.", "call init#gina#add()"]
 ]
