@@ -31,10 +31,10 @@ classifiers = [
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [tool.setuptools.dynamic]
-dependencies = { file = ".config/python/python/requirements.txt" }
+dependencies = { file = ".config/python/requirements.txt" }
 
 [tool.setuptools.dynamic.optional-dependencies]
-dev = { file = ".config/python/python/requirements/dev.txt" }
+dev = { file = ".config/python/requirements/dev.txt" }
 
 [tool.setuptools.packages.find]
 where = [".config/python"]

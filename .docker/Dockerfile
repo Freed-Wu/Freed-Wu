@@ -1,5 +1,5 @@
-#!/usr/bin/env -S docker build -tghcr.io/freed-wu/my-dotfiles . -f
-# docker run --rm -it --name=test --gpus=all -p 8022:22 ghcr.io/freed-wu/my-dotfiles
+#!/usr/bin/env -S docker build -tfreedwu/my-dotfiles:main . -f
+# docker run --rm -it --name=test --gpus=all -p 8022:22 freedwu/my-dotfiles:main
 FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 # bithuab's debug mode uses gtx1080ti
 
@@ -57,8 +57,8 @@ ARG bin=$home/.nix-profile/bin
 # python packages installed by nix-env cannot find systemside packages
 RUN mkdir -p .config/nix \
       && echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > .config/nix/nix.conf \
-      && $bin/nix-env -i git neovim tmux bat ripgrep fd delta fzf jq \
-      nodejs lesspipe powerlevel10k \
+      && $bin/nix-env -i git neovim tmux vivid exa bat ripgrep fd delta fzf jq \
+      nodejs lesspipe less powerlevel10k \
       && sudo ln -s $bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .

@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 cp -r .git ~
 git -C ~ reset --hard
-chsh -s/bin/zsh
-sudo chsh -s/bin/zsh
+echo "$USER:U6aMy0wojraho" | sudo chpasswd -e
+echo root:root | sudo chpasswd -e
+sudo sed -i s/archive.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list
+sudo sed -i s=/bin/bash=/bin/zsh=g /etc/passwd
+
+sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
+~/.nix-profile/bin/nix-env -i neovim tmux vivid exa bat ripgrep fd delta fzf powerlevel10k
+sudo ln -sf ~/.nix-profile/bin/nvim /usr/bin/vi
+
+pip install -e "$HOME"'[dev]'
+TERM=xterm-256color TMUX='' zsh -isc '@zinit-scheduler burst'
+git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+git clone --depth=1 https://github.com/zdharma-continuum/zinit ~/.local/share/zinit/plugins/zinit
+.config/tmux/plugins/tpm/bin/install_plugins
+vi -c'call dein#update() | quit'

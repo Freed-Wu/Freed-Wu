@@ -1,10 +1,14 @@
--- ~/.local/share/nvim/repos/github.com/nvim-treesitter/nvim-treesitter/parser/*.so
--- depends glibc, must reinstalled in docker. In order to save time,
--- ensure_installed = "all",
+if os.getenv('CODESPACE') then
+    SYNC_INSTALL = true
+else
+    SYNC_INSTALL = false
+end
 require'nvim-treesitter.configs'.setup {
+    ensure_installed = "all",
+    sync_install = SYNC_INSTALL,
     indent = {enable = true},
     highlight = {enable = true, additional_vim_regex_highlighting = true},
-    textobjects = {enable = true},
+    textobjects = {enable = true}
 }
 
 local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
