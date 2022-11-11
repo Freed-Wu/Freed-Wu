@@ -25,26 +25,26 @@ ARG mirror=mirrors.ustc.edu.cn
 # codestats need curl
 # `pip install -e '.[dev]'` need a higher version of pip
 # setuptools_scm need git in $PATH
-RUN sed -i s/archive.ubuntu.com/$mirror/g /etc/apt/sources.list \
-      && apt-get -y update \
-      && apt-get -y install openssh-server sudo locales zsh \
-      curl python-is-python3 python3-pip python3-build \
-      && sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
-      && locale-gen \
-      && ln -sf /usr/bin/pip3 /usr/bin/pip \
-      && pip install -U pip \
-      && sed -i 's/^#PermitRootLogin .*/PermitRootLogin yes/' \
-      /etc/ssh/sshd_config \
-      && sed -i 's/^#PermitEmptyPasswords .*/PermitEmptyPasswords yes/' \
-      /etc/ssh/sshd_config \
-      && ssh-keygen -A \
-      && mkdir -p /run/sshd \
-      && useradd -ms/bin/zsh -k/dev/null -d$home -g65534 $user \
-      && echo $user:U6aMy0wojraho | chpasswd -e \
-      && echo root:root | chpasswd \
-      && gpasswd -a$user sudo \
-      && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-      && rm -rf /var/lib/apt/lists/* /var/cache/* /tmp/* /var/tmp/*
+RUN sed -i s/archive.ubuntu.com/$mirror/g /etc/apt/sources.list && \
+      apt-get -y update && \
+      apt-get -y install openssh-server sudo locales zsh \
+      curl python-is-python3 python3-pip python3-build && \
+      sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen && \
+      locale-gen && \
+      ln -sf /usr/bin/pip3 /usr/bin/pip && \
+      pip install -U pip && \
+      sed -i 's/^#PermitRootLogin .*/PermitRootLogin yes/' \
+      /etc/ssh/sshd_config && \
+      sed -i 's/^#PermitEmptyPasswords .*/PermitEmptyPasswords yes/' \
+      /etc/ssh/sshd_config && \
+      ssh-keygen -A && \
+      mkdir -p /run/sshd && \
+      useradd -ms/bin/zsh -k/dev/null -d$home -g65534 $user && \
+      echo $user:U6aMy0wojraho | chpasswd -e && \
+      echo root:root | chpasswd && \
+      gpasswd -a$user sudo && \
+      echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+      rm -rf /var/lib/apt/lists/* /var/cache/* /tmp/* /var/tmp/*
 
 USER $user
 WORKDIR $home
@@ -55,18 +55,19 @@ RUN sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 ARG bin=$home/.nix-profile/bin
 
 # python packages installed by nix-env cannot find systemside packages
-RUN mkdir -p .config/nix \
-      && echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > .config/nix/nix.conf \
-      && $bin/nix-env -i git neovim tmux vivid exa bat ripgrep fd delta fzf jq \
-      nodejs lesspipe less powerlevel10k \
-      && sudo ln -s $bin/nvim /usr/bin/vi
+RUN mkdir -p .config/nix && \
+      echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > .config/nix/nix.conf && \
+      $bin/nix-env -i git neovim tmux vivid exa bat ripgrep fd delta fzf jq \
+      nodejs lesspipe less powerlevel10k && \
+      sudo ln -s $bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .
-RUN export PATH=$bin:$PATH \
-      && git config --global safe.directory '*' \
-      && git reset --hard \
-      && pip install -e '.[dev]' \
-      && TERM=xterm-256color TMUX= zsh -isc '@zinit-scheduler burst' \
-      && .config/tmux/plugins/tpm/bin/install_plugins \
-      && vi -c'call dein#update() | quit' \
-      && rm -rf .cache
+# https://docs.github.com/en/codespaces/developing-in-codespaces/default-environment-variables-for-your-codespace#list-of-default-environment-variables
+RUN export PATH=$bin:$PATH && \
+      git config --global safe.directory '*' && \
+      git reset --hard && \
+      pip install -e '.[dev]' && \
+      TERM=xterm-256color TMUX= zsh -isc '@zinit-scheduler burst' && \
+      .config/tmux/plugins/tpm/bin/install_plugins && \
+      CODESPACE=true vi -c'call dein#update() | quit' && \
+      rm -rf .cache
