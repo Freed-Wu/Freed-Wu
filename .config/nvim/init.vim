@@ -783,6 +783,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
 
   " Tool {{{1 "
   " LSP {{{2 "
+  " neoclide/coc.nvim_release
   call dein#add('neoclide/coc.nvim', {
         \ 'if': executable('node'),
         \ 'merged': 0,

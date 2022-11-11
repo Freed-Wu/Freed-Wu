@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2046
 # gh cs cp -e remote:/workspaces/.codespaces/.persistedshare/creation.log .
 # less creation.log
 cp -r .git ~ && git -C ~ reset --hard
@@ -22,4 +23,12 @@ git clone --depth=1 https://github.com/tmux-plugins/tpm \
 	~/.config/tmux/plugins/tpm/bin/install_plugins
 git clone --depth=1 https://github.com/Shougo/dein.vim \
 	~/.local/share/nvim/repos/github.com/Shougo/dein.vim &&
-	vi -c'call dein#update() | quit'
+	vi -c'call dein#update() | quit' &&
+	mkdir -p ~/.config/coc/extensions &&
+	cd ~/.config/coc/extensions &&
+	echo '{"dependencies": {}}' >package.json &&
+	npm install \
+		$(vi --headless -c'echo g:coc_global_extensions | quit' 2>&1 | tail -n1 |
+			sed "s=\(', '\|\['\|']\)=\n=g") &&
+	mkdir -p coc-gist-data &&
+	echo '{"token": "gho_"}' >coc-gist-data/secret.json

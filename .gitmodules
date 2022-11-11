@@ -23,3 +23,6 @@
 [submodule ".gnupg"]
 	path = .gnupg
 	url = https://github.com/Freed-Wu/.gnupg
+[submodule ".local/share/bash/bash-wakatime"]
+	path = .local/share/bash/bash-wakatime
+	url = https://github.com/irondoge/bash-wakatime

@@ -1,9 +1,9 @@
-# shellcheck shell=bash
+# shellcheck shell=bash source=/dev/null
+# https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 if [ -f ~/.xprofile ]; then
-  # https://github.com/koalaman/shellcheck/issues/1845
-  . "$HOME/.xprofile"
+	. ~/.xprofile
 fi
 if [ -f ~/.bash_login ]; then
-  . "$HOME/.bash_login"
+	. ~/.bash_login
 fi

@@ -58,10 +58,11 @@ ARG bin=$home/.nix-profile/bin
 RUN mkdir -p .config/nix && \
       echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > .config/nix/nix.conf && \
       $bin/nix-env -i git neovim tmux vivid exa bat ripgrep fd delta fzf jq \
-      nodejs lesspipe less powerlevel10k && \
+      nodejs lesspipe file less powerlevel10k && \
       sudo ln -s $bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .
+# https://github.com/neoclide/coc.nvim/issues/118#issuecomment-1311768351
 RUN export PATH=$bin:$PATH && \
       git config --global safe.directory '*' && \
       git reset --hard && \
@@ -69,4 +70,12 @@ RUN export PATH=$bin:$PATH && \
       TERM=xterm-256color TMUX= zsh -isc '@zinit-scheduler burst' && \
       .config/tmux/plugins/tpm/bin/install_plugins && \
       vi -c'call dein#update() | quit' && \
+      mkdir -p .config/coc/extensions && \
+      cd .config/coc/extensions && \
+      echo '{"dependencies": {}}' > package.json && \
+      npm install \
+      $(vi --headless -c'echo g:coc_global_extensions | quit' 2>&1 | tail -n1 | \
+      sed "s=\(', '\|\['\|']\)=\n=g") && \
+      mkdir -p coc-gist-data && \
+      echo '{"token": "gho_"}' > coc-gist-data/secret.json && \
       rm -rf .cache

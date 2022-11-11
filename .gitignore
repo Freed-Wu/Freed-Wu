@@ -298,6 +298,7 @@
 /.local/share/fcitx5/rime/*
 !/.local/share/fcitx5/rime/*.custom.yaml
 !/.local/share/fzf/
+!/.local/share/bash/
 
 # BIN
 !/.local/bin/
