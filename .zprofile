@@ -1,10 +1,5 @@
 # shellcheck disable=all
-# all shells share share this file, so use bash syntax primarily
-# paths must be loaded here
-if (($+DOCKER_BUILDKIT)); then
-  return
-fi
-# Add some programs to $PATH
+# Add some programs to $PATH before other commands
 if [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
   . ~/.nix-profile/etc/profile.d/nix.sh
 fi

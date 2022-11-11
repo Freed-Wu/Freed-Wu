@@ -1,9 +1,5 @@
 {
-  "terminal": {
-    "integrated": {
-      "sendKeybindingsToShell": true
-    }
-  },
+  "terminal.integrated.sendKeybindingsToShell": true,
   "go.toolsManagement.checkForUpdates": "local",
   "go.useLanguageServer": true,
   "go.gopath": "/go",

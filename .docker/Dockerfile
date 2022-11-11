@@ -62,12 +62,11 @@ RUN mkdir -p .config/nix && \
       sudo ln -s $bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .
-# https://docs.github.com/en/codespaces/developing-in-codespaces/default-environment-variables-for-your-codespace#list-of-default-environment-variables
 RUN export PATH=$bin:$PATH && \
       git config --global safe.directory '*' && \
       git reset --hard && \
       pip install -e '.[dev]' && \
       TERM=xterm-256color TMUX= zsh -isc '@zinit-scheduler burst' && \
       .config/tmux/plugins/tpm/bin/install_plugins && \
-      CODESPACE=true vi -c'call dein#update() | quit' && \
+      vi -c'call dein#update() | quit' && \
       rm -rf .cache

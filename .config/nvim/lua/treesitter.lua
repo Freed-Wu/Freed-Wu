@@ -1,11 +1,6 @@
-if os.getenv('CODESPACE') then
-    SYNC_INSTALL = true
-else
-    SYNC_INSTALL = false
-end
+-- https://github.com/Freed-Wu/my-dotfiles/actions/runs/3443911804/jobs/5745944038#step:8:5258
+-- don't install automatically
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",
-    sync_install = SYNC_INSTALL,
     indent = {enable = true},
     highlight = {enable = true, additional_vim_regex_highlighting = true},
     textobjects = {enable = true}

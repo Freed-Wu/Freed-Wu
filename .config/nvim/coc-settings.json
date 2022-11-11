@@ -1,310 +1,223 @@
 {
-  "suggest": {
-    "triggerAfterInsertEnter": true,
-    "echodocSupport": true,
-    "snippetIndicator": "",
-    "invalidInsertCharacters": "(,<,{,[,\r,\n"
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.snippetIndicator": "",
+  "suggest.invalidInsertCharacters": ["(", "<", "{", "[", "\r", "\n"],
+  "diagnostic.errorSign": "✗",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": "",
+  "diagnostic.format": "%source%code: %message",
+  "session.directory": "~/.local/share/nvim/session",
+  "session.saveOnVimLeave": false,
+  "list.source.files.args": ["--hidden", "--files"],
+  "list.insertMappings": {
+    "<A-j>": "prompt:next",
+    "<A-k>": "prompt:previous",
+    "<C-k>": "prompt:removetail",
+    "<C-F>": "prompt:right",
+    "<C-B>": "prompt:left",
+    "<C-D>": "prompt:deletebackward",
+    "<C-Y>": "prompt:paste",
+    "<A-a>": "normal:gg",
+    "<A-e>": "normal:G",
+    "<A-v>": "feedkeys:<PageUp>",
+    "<C-V>": "feedkeys:<PageDown>",
+    "<A-p>": "do:previewup",
+    "<A-n>": "do:previewdown",
+    "<C-X>": "do:previewtoggle",
+    "<A-g>": "do:selectall",
+    "<C-G>": "do:toggle",
+    "<C-P>": "do:previous",
+    "<C-N>": "do:next",
+    "<C-Q>": "do:help"
   },
-  "diagnostic": {
-    "errorSign": "✗",
-    "infoSign": "",
-    "hintSign": "",
-    "format": "%source%code: %message"
+  "list.normalMappings": {
+    "u": "feedkeys:<PageUp>",
+    "d": "feedkeys:<PageDown>",
+    "t": "feedkeys:t",
+    "<Space>": "feedkeys:<Space>",
+    "?": "feedkeys:?",
+    "o": "do:toggle",
+    "x": "action:delete"
   },
-  "session": {
-    "directory": "~/.local/share/nvim/session",
-    "saveOnVimLeave": false
-  },
-  "list": {
-    "source": {
-      "files": {
-        "args": ["--hidden", "--files"]
-      },
-      "bibtex": {
-        "files": ["*.bib", "refs/*.bib"],
-        "citation": {
-          "after": "}",
-          "before": "\\cite{"
+  "coc.preferences.enableMarkdown": true,
+  "coc.source.emoji.shortcut": "😀",
+
+  "highlight.colors.enable": true,
+  "highlight.document.enable": true,
+
+  "pydocstring.enableFileAction": true,
+  "pydocstring.doqPath": "/usr/bin/doq",
+
+  "diagnostic-languageserver.linters": {
+    "lacheck": {
+      "comment": "https://github.com/iamcco/coc-diagnostic/pull/133",
+      "command": "lacheck",
+      "args": ["%file"],
+      "debounce": 100,
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "lacheck",
+      "formatLines": 1,
+      "formatPattern": [
+        "\"[^\"]+\", line (\\d+):\\s*(.*)(\\r|\\n)*$",
+        {
+          "line": 1,
+          "message": 2
         }
+      ],
+      "securities": {
+        "undefined": "warning"
       }
     },
-    "insertMappings": {
-      "<A-j>": "prompt:next",
-      "<A-k>": "prompt:previous",
-      "<C-k>": "prompt:removetail",
-      "<C-F>": "prompt:right",
-      "<C-B>": "prompt:left",
-      "<C-D>": "prompt:deletebackward",
-      "<C-Y>": "prompt:paste",
-      "<A-a>": "normal:gg",
-      "<A-e>": "normal:G",
-      "<A-v>": "feedkeys:<PageUp>",
-      "<C-V>": "feedkeys:<PageDown>",
-      "<A-p>": "do:previewup",
-      "<A-n>": "do:previewdown",
-      "<C-X>": "do:previewtoggle",
-      "<A-g>": "do:selectall",
-      "<C-G>": "do:toggle",
-      "<C-P>": "do:previous",
-      "<C-N>": "do:next",
-      "<C-Q>": "do:help"
-    },
-    "normalMappings": {
-      "u": "feedkeys:<PageUp>",
-      "d": "feedkeys:<PageDown>",
-      "t": "feedkeys:t",
-      "<Space>": "feedkeys:<Space>",
-      "?": "feedkeys:?",
-      "o": "do:toggle",
-      "x": "action:delete"
-    }
-  },
-  "coc": {
-    "preferences": {
-      "snippetStatusText": "",
-      "enableMarkdown": true
-    },
-    "source": {
-      "emoji": {
-        "shortcut": "😀"
-      }
-    }
-  },
-
-  "highlight": {
-    "colors": {
-      "enable": true
-    },
-    "document": {
-      "enable": true
-    }
-  },
-
-  "pydocstring": {
-    "enableFileAction": true,
-    "doqPath": "/usr/bin/doq"
-  },
-
-  "diagnostic-languageserver": {
-    "linters": {
-      "lacheck": {
-        "comment": "https://github.com/iamcco/coc-diagnostic/pull/133",
-        "command": "lacheck",
-        "args": ["%file"],
-        "debounce": 100,
-        "offsetLine": 0,
-        "offsetColumn": 0,
-        "sourceName": "lacheck",
-        "formatLines": 1,
-        "formatPattern": [
-          "\"[^\"]+\", line (\\d+):\\s*(.*)(\\r|\\n)*$",
-          {
-            "line": 1,
-            "message": 2
-          }
-        ],
-        "securities": {
-          "undefined": "warning"
+    "pip-compile": {
+      "comment": "https://github.com/iamcco/coc-diagnostic/pull/135",
+      "command": "sh",
+      "args": ["-c", "pip-compile -n %file 2>&1"],
+      "debounce": 100,
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "pip-compile",
+      "formatLines": 1,
+      "formatPattern": [
+        "(Could not find a version that matches \\S+) \\(from -r ([^(]+) \\(line (\\d+)\\)\\)",
+        {
+          "message": 1,
+          "errorsRoot": 2,
+          "line": 3
         }
-      },
-      "pip-compile": {
-        "comment": "https://github.com/iamcco/coc-diagnostic/pull/135",
-        "command": "sh",
-        "args": ["-c", "pip-compile -n %file 2>&1"],
-        "debounce": 100,
-        "offsetLine": 0,
-        "offsetColumn": 0,
-        "sourceName": "pip-compile",
-        "formatLines": 1,
-        "formatPattern": [
-          "(Could not find a version that matches \\S+) \\(from -r ([^(]+) \\(line (\\d+)\\)\\)",
-          {
-            "message": 1,
-            "errorsRoot": 2,
-            "line": 3
-          }
-        ]
-      },
-      "syntest": {
-        "comment": "https://github.com/iamcco/coc-diagnostic/pull/136",
-        "command": "syntest",
-        "args": ["%file", "."],
-        "debounce": 100,
-        "offsetLine": 0,
-        "offsetColumn": 0,
-        "sourceName": "syntest",
-        "formatLines": 1,
-        "formatPattern": [
-          "Assertion selector \"[^\"]+\" from line (\\d+) failed against line \\d+, column range (\\d+)-(\\d+) \\(with text \"[^\"]+\"\\) has scope \\[([^\\]]+)\\]",
-          {
-            "line": 1,
-            "column": 2,
-            "endColumn": 3,
-            "message": 4
-          }
-        ]
-      },
-      "languagetool": {
-        "comment": "https://github.com/iamcco/coc-diagnostic/pull/137",
-        "command": "languagetool",
-        "debounce": 200,
-        "args": ["%file"],
-        "offsetLine": 0,
-        "offsetColumn": 0,
-        "sourceName": "languagetool",
-        "formatLines": 2,
-        "formatPattern": [
-          "^\\d+?\\.\\)\\s+Line\\s+(\\d+),\\s+column\\s+(\\d+),\\s+([^\\n]+)\nMessage:\\s+(.*)(\\r|\\n)*$",
-          {
-            "line": 1,
-            "column": 2,
-            "message": [4, 3]
-          }
-        ]
-      },
-      "jq": {
-        "comment": "https://github.com/iamcco/coc-diagnostic/pull/138",
-        "command": "sh",
-        "args": ["-c", "jq -f %file /dev/null 2>&1"],
-        "debounce": 100,
-        "offsetLine": 0,
-        "offsetColumn": 0,
-        "sourceName": "jq",
-        "formatLines": 1,
-        "formatPattern": [
-          "^jq: (error): syntax error, (.*) at <.*>, line (\\d+):$",
-          {
-            "security": 1,
-            "message": 2,
-            "line": 3
-          }
-        ]
-      }
+      ]
     },
-    "filetypes": {
-      "jq": "jq",
-      "syntax_test": "syntest",
-      "requirements": "pip-compile",
-      "latex": "lacheck",
-      "text": ["write-good", "alex-text", "languagetool"],
-      "bbcode": ["write-good", "alex-text", "languagetool"],
-      "mail": ["write-good", "alex-text", "languagetool"],
-      "gitcommit": ["write-good", "alex-text", "languagetool"],
-      "html": "alex-html",
-      "vim": "vint",
-      "markdown": ["write-good", "markdownlint", "alex", "languagetool"],
-      "sh": "shellcheck",
-      "elixir": ["mix_credo", "mix_credo_compile"],
-      "php": ["phpstan", "psalm"],
-      "yaml": "yamllint",
-      "cmake": ["cmake-lint", "cmakelint"],
-      "systemd": "systemd-analyze"
+    "syntest": {
+      "comment": "https://github.com/iamcco/coc-diagnostic/pull/136",
+      "command": "syntest",
+      "args": ["%file", "."],
+      "debounce": 100,
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "syntest",
+      "formatLines": 1,
+      "formatPattern": [
+        "Assertion selector \"[^\"]+\" from line (\\d+) failed against line \\d+, column range (\\d+)-(\\d+) \\(with text \"[^\"]+\"\\) has scope \\[([^\\]]+)\\]",
+        {
+          "line": 1,
+          "column": 2,
+          "endColumn": 3,
+          "message": 4
+        }
+      ]
     },
-    "formatFiletypes": {
-      "dart": "dartfmt",
-      "elixir": "mix_format",
-      "lua": "lua-format",
-      "sh": "shfmt",
-      "blade": "blade-formatter",
-      "cmake": "cmake-format"
-    }
-  },
-
-  "cSpell": {
-    "allowCompoundWords": true
-  },
-
-  "prettier": {
-    "ignorePath": ".gitignore"
-  },
-
-  "tasks": {
-    "shortcut": "!"
-  },
-
-  "snippets": {
-    "shortcut": "▶",
-    "userSnippetsDirectory": "~/.config/nvim/ultisnips"
-  },
-
-  "translator": {
-    "enableHover": true
-  },
-
-  "git": {
-    "showCommitInFloating": true,
-    "virtualTextPrefix": "",
-    "gitlab": {
-      "hosts": ["gitlab.com", "gitee.com"]
-    }
-  },
-
-  "dash-complete": {
-    "shortcut": "-"
-  },
-
-  "dot-complete": {
-    "shortcut": "."
-  },
-
-  "just-complete": {
-    "shortcut": "_"
-  },
-
-  "tabnine": {
-    "shortcut": ""
-  },
-
-  "markdown-preview-enhanced": {
-    "enableScriptExecution": true
-  },
-
-  "yaml": {
-    "format": {
-      "singleQuote": true
-    }
-  },
-
-  "html": {
-    "autoClosingTags": true
-  },
-
-  "clang-format-style-options": {
-    "shortcut": "clang"
-  },
-
-  "texlab": {
-    "build": {
-      "isContinuous": true
+    "languagetool": {
+      "comment": "https://github.com/iamcco/coc-diagnostic/pull/137",
+      "command": "languagetool",
+      "debounce": 200,
+      "args": ["%file"],
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "languagetool",
+      "formatLines": 2,
+      "formatPattern": [
+        "^\\d+?\\.\\)\\s+Line\\s+(\\d+),\\s+column\\s+(\\d+),\\s+([^\\n]+)\nMessage:\\s+(.*)(\\r|\\n)*$",
+        {
+          "line": 1,
+          "column": 2,
+          "message": [4, 3]
+        }
+      ]
     },
-    "forwardSearch": {
-      "executable": "zathura"
-    },
-    "chktex": {
-      "onOpenAndSave": true,
-      "onEdit": true
+    "jq": {
+      "comment": "https://github.com/iamcco/coc-diagnostic/pull/138",
+      "command": "sh",
+      "args": ["-c", "jq -f %file /dev/null 2>&1"],
+      "debounce": 100,
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "jq",
+      "formatLines": 1,
+      "formatPattern": [
+        "^jq: (error): syntax error, (.*) at <.*>, line (\\d+):$",
+        {
+          "security": 1,
+          "message": 2,
+          "line": 3
+        }
+      ]
     }
+  },
+  "diagnostic-languageserver.filetypes": {
+    "jq": "jq",
+    "syntax_test": "syntest",
+    "requirements": "pip-compile",
+    "latex": "lacheck",
+    "text": ["write-good", "alex-text", "languagetool"],
+    "bbcode": ["write-good", "alex-text", "languagetool"],
+    "mail": ["write-good", "alex-text", "languagetool"],
+    "gitcommit": ["write-good", "alex-text", "languagetool"],
+    "html": "alex-html",
+    "vim": "vint",
+    "markdown": ["write-good", "markdownlint", "alex", "languagetool"],
+    "sh": "shellcheck",
+    "elixir": ["mix_credo", "mix_credo_compile"],
+    "php": ["phpstan", "psalm"],
+    "yaml": "yamllint",
+    "cmake": ["cmake-lint", "cmakelint"],
+    "systemd": "systemd-analyze"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "dart": "dartfmt",
+    "elixir": "mix_format",
+    "lua": "lua-format",
+    "sh": "shfmt",
+    "blade": "blade-formatter",
+    "cmake": "cmake-format"
   },
 
-  "python": {
-    "formatting": {
-      "provider": "black"
-    },
-    "linting": {
-      "pycodestyleEnabled": true,
-      "pydocstyleEnabled": true,
-      "banditEnabled": true
-    }
+  "cSpell.allowCompoundWords": true,
+
+  "prettier.ignorePath": ".gitignore",
+
+  "tasks.shortcut": "!",
+
+  "snippets.shortcut": "▶",
+  "snippets.userSnippetsDirectory": "~/.config/nvim/ultisnips",
+
+  "translator.enableHover": true,
+
+  "git.showCommitInFloating": true,
+  "git.virtualTextPrefix": "",
+  "git.gitlab.hosts": ["gitlab.com", "gitee.com"],
+
+  "dash-complete.shortcut": "-",
+
+  "dot-complete.shortcut": ".",
+
+  "just-complete.shortcut": "_",
+
+  "tabnine.shortcut": "",
+
+  "list.source.bibtex.files": ["*.bib", "refs/*.bib"],
+  "list.source.bibtex.citation": {
+    "after": "}",
+    "before": "\\cite{"
   },
-  "Lua": {
-    "hint": {
-      "enable": true
-    }
-  },
-  "solargraph": {
-    "diagnostics": true,
-    "autoformat": true,
-    "formatting": true
-  },
-  "markdown-preview-enhanced.previewTheme": "atom-material.css"
+
+  "markdown-preview-enhanced.enableScriptExecution": true,
+
+  "yaml.format.singleQuote": true,
+
+  "html.autoClosingTags": true,
+
+  "clang-format-style-options.shortcut": "clang",
+
+  "texlab.forwardSearch.executable": "zathura",
+  "texlab.chktex.onOpenAndSave": true,
+  "texlab.chktex.onEdit": true,
+
+  "python.formatting.provider": "black",
+  "python.linting.pycodestyleEnabled": true,
+  "python.linting.pydocstyleEnabled": true,
+  "python.linting.banditEnabled": true,
+  "Lua.hint.enable": true,
+  "solargraph.diagnostics": true,
+  "solargraph.autoformat": true,
+  "solargraph.formatting": true
 }

@@ -1,9 +1,5 @@
 # shellcheck shell=bash
-# any X program like gvim will source this file.
-# this file cannot include `if/then/fi`,
-# because X don't support.
 # posix
-# the following line will be ineffective in tty
 PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL

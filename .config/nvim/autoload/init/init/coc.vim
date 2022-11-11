@@ -7,8 +7,14 @@ function! init#init#coc#grep(type) abort
   else
     return
   endif
-  let word = substitute(@@, '\n$', '', 'g')
+  let word = substitute(@@, 'n$', '', 'g')
   let word = escape(word, '| ')
   let @@ = saved_unnamed_register
   execute 'CocList grep' word
+endfunction
+
+function! init#init#coc#keywordprg(word) abort
+  help coc-config.txt
+  call search(a:word)
+  normal! zMzv
 endfunction
