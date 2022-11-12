@@ -1,4 +1,5 @@
 #compdef %FILE_%
+# shellcheck disable=all
 
 _arguments -s -S \
   "(- : *)"{-V,--version}"[Show version]" \

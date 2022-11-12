@@ -255,16 +255,8 @@
 !/.config/Code/User/
 /.config/Code/User/*
 !/.config/Code/User/settings.json
-!/.config/Code - OSS/
-/.config/Code - OSS/*
-!/.config/Code - OSS/User/
-/.config/Code - OSS/User/*
-!/.config/Code - OSS/User/settings.json
-!/.config/VSCodium/
-/.config/VSCodium/*
-!/.config/VSCodium/User/
-/.config/VSCodium/User/*
-!/.config/VSCodium/User/settings.json
+!/.config/Code - OSS
+!/.config/VSCodium
 !/.config/lxqt/
 !/.config/openbox/
 !/.config/wezterm/

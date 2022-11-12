@@ -9,10 +9,12 @@ sudo sed -i s/archive.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list
 sudo sed -i s=/bin/bash=/bin/zsh=g /etc/passwd
 
 # https://github.com/NixOS/nix/issues/6680
+# `git reset --hard` avoid nix installer add some lines to .bashrc and .zshrc
 sudo apt-get -y update &&
 	sudo apt-get -y install acl &&
 	sudo setfacl -k /tmp &&
 	sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)" &&
+	git -C ~ reset --hard &&
 	~/.nix-profile/bin/nix-env -i neovim tmux vivid exa bat ripgrep fd delta fzf powerlevel10k &&
 	sudo ln -sf ~/.nix-profile/bin/nvim /usr/bin/vi
 

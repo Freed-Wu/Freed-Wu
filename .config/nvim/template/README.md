@@ -1,6 +1,8 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/%GITHUB_USER%/%DIR%/main.svg)](https://results.pre-commit.ci/latest/github/%GITHUB_USER%/%DIR%/main)
 [![github/workflow](https://github.com/%GITHUB_USER%/%DIR%/actions/workflows/main.yml/badge.svg)](https://github.com/%GITHUB_USER%/%DIR%/actions)
+[![codecov](https://codecov.io/gh/%GITHUB_USER%/%DIR%/branch/main/graph/badge.svg)](https://codecov.io/gh/%GITHUB_USER%/%DIR%)
 [![readthedocs](https://shields.io/readthedocs/%DIR%)](https://%DIR%.readthedocs.io)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%?ref=badge_shield)
 
 [![github/downloads](https://shields.io/github/downloads/%GITHUB_USER%/%DIR%/total)](https://github.com/%GITHUB_USER%/%DIR%/releases)
 [![github/downloads/latest](https://shields.io/github/downloads/%GITHUB_USER%/%DIR%/latest/total)](https://github.com/%GITHUB_USER%/%DIR%/releases/latest)
@@ -40,4 +42,10 @@
 
 <!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=2 -->
 
+- [License](#license)
+
 <!-- mdformat-toc end -->
+
+## License
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%?ref=badge_large)

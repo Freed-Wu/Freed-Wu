@@ -36,7 +36,8 @@ jobs:
           pip install -e '.[dev]'
       - name: Test
         run: |
-          pytest
+          pytest --cov .
+      - uses: codecov/codecov-action@v3
   build:
     needs: test
     strategy:
