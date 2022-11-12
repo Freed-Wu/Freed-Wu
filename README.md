@@ -2,6 +2,7 @@
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/my-dotfiles/main.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/my-dotfiles/main)
 [![github/workflow](https://github.com/Freed-Wu/my-dotfiles/actions/workflows/main.yml/badge.svg)](https://github.com/Freed-Wu/my-dotfiles/actions)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFreed-Wu%2Fmy-dotfiles.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FFreed-Wu%2Fmy-dotfiles?ref=badge_shield)
 
 [![github/downloads](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/total)](https://github.com/Freed-Wu/my-dotfiles/releases)
 [![github/downloads/latest](https://shields.io/github/downloads/Freed-Wu/my-dotfiles/latest/total)](https://github.com/Freed-Wu/my-dotfiles/releases/latest)
@@ -50,6 +51,7 @@ firstly.
 
 - [Platforms](#platforms)
 - [Related](#related)
+- [License](#license)
 
 <!-- mdformat-toc end -->
 
@@ -74,3 +76,7 @@ firstly.
 
 - [my-keymaps](https://github.com/Freed-Wu/my-keymaps)
 - [my-x11-keymaps](https://github.com/Freed-Wu/my-x11-keymaps)
+
+## License
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFreed-Wu%2Fmy-dotfiles.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FFreed-Wu%2Fmy-dotfiles?ref=badge_large)
