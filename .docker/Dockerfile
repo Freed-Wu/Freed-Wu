@@ -71,11 +71,10 @@ RUN export PATH=$bin:$PATH && \
       .config/tmux/plugins/tpm/bin/install_plugins && \
       vi -c'call dein#update() | quit' && \
       mkdir -p .config/coc/extensions && \
-      cd .config/coc/extensions && \
-      echo '{"dependencies": {}}' > package.json && \
+      echo '{"dependencies": {}}' >~/.config/coc/extensions/package.json && \
       npm install \
       $(vi --headless -c'echo g:coc_global_extensions | quit' 2>&1 | tail -n1 | \
       sed "s=\(', '\|\['\|']\)=\n=g") && \
-      mkdir -p coc-gist-data && \
-      echo '{"token": "gho_"}' > coc-gist-data/secret.json && \
+      mkdir -p ~/.config/coc/extensions/coc-gist-data && \
+      echo '{"token": "gho_"}' >~/.config/coc/extensions/coc-gist-data/secret.json && \
       rm -rf .cache

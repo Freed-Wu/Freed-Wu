@@ -1,6 +1,7 @@
 [user]
 	name = Wu Zhenyu
 	email = wuzhenyu@ustc.edu
+	signingKey = 0E07E1F8C0EC10AD
 [feature]
 	manyFiles = true
 	experimental = true
@@ -99,3 +100,9 @@
 	sendmailCmd = git-neomutt
 [fetch "fsck"]
 	badTimezone = warn
+[commit]
+	gpgsign = true
+	template = ~/.config/git/templates/COMMIT_MSG
+# after git 2.23
+[tag]
+	gpgSign = true

@@ -27,10 +27,9 @@ git clone --depth=1 https://github.com/Shougo/dein.vim \
 	~/.local/share/nvim/repos/github.com/Shougo/dein.vim &&
 	vi -c'call dein#update() | quit' &&
 	mkdir -p ~/.config/coc/extensions &&
-	cd ~/.config/coc/extensions &&
-	echo '{"dependencies": {}}' >package.json &&
-	npm install \
+	echo '{"dependencies": {}}' >~/.config/coc/extensions/package.json &&
+	npm install -C ~/.config/coc/extensions \
 		$(vi --headless -c'echo g:coc_global_extensions | quit' 2>&1 | tail -n1 |
 			sed "s=\(', '\|\['\|']\)=\n=g") &&
-	mkdir -p coc-gist-data &&
-	echo '{"token": "gho_"}' >coc-gist-data/secret.json
+	mkdir -p ~/.config/coc/extensions/coc-gist-data &&
+	echo '{"token": "gho_"}' >~/.config/coc/extensions/coc-gist-data/secret.json
