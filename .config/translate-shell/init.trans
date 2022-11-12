@@ -2,4 +2,7 @@
   :verbose false
   :theme "random"
   :tl "zh"
+  :interactive true
 }
+# https://github.com/soimort/translate-shell/issues/473
+# ex: filetype=awk

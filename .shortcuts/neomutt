@@ -1,6 +1,7 @@
+#!/usr/bin/env sh
+# shellcheck source=/dev/null
 # $DEBFULLNAME
 . ~/.xprofile
 # $EMAIL
 . ~/.bash_login
 neomutt
-# ex: filetype=sh

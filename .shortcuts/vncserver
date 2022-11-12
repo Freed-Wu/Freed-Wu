@@ -1,2 +1,2 @@
+#!/usr/bin/env sh
 vncserver -kill :1 || vncserver &
-# ex: filetype=sh

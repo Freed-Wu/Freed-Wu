@@ -1,2 +1,2 @@
+#!/usr/bin/env sh
 termux-tts-speak
-# ex: filetype=sh
