@@ -51,6 +51,7 @@ firstly.
 
 - [Platforms](#platforms)
 - [Related](#related)
+- [License](#license)
 
 <!-- mdformat-toc end -->
 
@@ -76,6 +77,6 @@ firstly.
 - [my-keymaps](https://github.com/Freed-Wu/my-keymaps)
 - [my-x11-keymaps](https://github.com/Freed-Wu/my-x11-keymaps)
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFreed-Wu%2Fmy-dotfiles.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FFreed-Wu%2Fmy-dotfiles?ref=badge_large)
