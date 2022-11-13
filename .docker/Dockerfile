@@ -65,18 +65,20 @@ COPY --chown=$user . .
 # https://github.com/neoclide/coc.nvim/issues/118#issuecomment-1311768351
 RUN export PATH=$bin:$PATH && \
       git config --global safe.directory '*' && \
-      git reset --hard && \
-      pip install -e '.[dev]' && \
+      git -C ~ reset --hard && \
+      pip install -e $home'[dev]' && \
       TERM=xterm-256color TMUX= zsh -isc '@zinit-scheduler burst' && \
-      .config/tmux/plugins/tpm/bin/install_plugins && \
+      ~/.config/tmux/plugins/tpm/bin/install_plugins && \
       vi -c'call dein#update() | quit' && \
-      mkdir -p .config/coc/extensions && \
+      mkdir -p ~/.config/coc/extensions && \
       echo '{"dependencies": {}}' >~/.config/coc/extensions/package.json && \
-      npm install \
-      $(vi --headless -c'echo g:coc_global_extensions | quit' 2>&1 | tail -n1 | \
-      sed "s=\(', '\|\['\|']\)=\n=g") && \
+      npm install -C ~/.config/coc/extensions \
+      $(vi --headless -c'echo g:coc_global_extensions | quit' 2>&1 | \
+      tail -n1 | sed "s=\(', '\|\['\|']\)=\n=g") && \
       mkdir -p ~/.config/coc/extensions/coc-gist-data && \
-      echo '{"token": "gho_"}' >~/.config/coc/extensions/coc-gist-data/secret.json && \
-      rm -rf .cache
+      echo '{"token": "gho_"}' \
+      >~/.config/coc/extensions/coc-gist-data/secret.json && \
+      rm -rf ~/.cache
 
 USER root
+WORKDIR /
