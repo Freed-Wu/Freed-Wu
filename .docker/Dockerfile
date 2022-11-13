@@ -14,7 +14,7 @@ LABEL org.opencontainers.image.licenses=GPL-3.0
 
 EXPOSE 22
 # cannot use `sudo systemctl enable --now ssh`
-CMD ["sudo", "/usr/sbin/sshd", "-D"]
+CMD ["/usr/sbin/sshd", "-D"]
 
 ARG user=wzy
 ARG home=/home/$user
@@ -78,3 +78,5 @@ RUN export PATH=$bin:$PATH && \
       mkdir -p ~/.config/coc/extensions/coc-gist-data && \
       echo '{"token": "gho_"}' >~/.config/coc/extensions/coc-gist-data/secret.json && \
       rm -rf .cache
+
+USER root
