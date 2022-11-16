@@ -44,7 +44,7 @@ RUN sed -i s/archive.ubuntu.com/$mirror/g /etc/apt/sources.list && \
       mkdir -p /run/sshd && \
       useradd -ms/bin/zsh -k/dev/null -d$home -g65534 $user && \
       echo $user:U6aMy0wojraho | chpasswd -e && \
-      echo root:root | chpasswd && \
+      echo root:U6aMy0wojraho | chpasswd -e && \
       gpasswd -a$user sudo && \
       echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
       rm -rf /var/lib/apt/lists/* /var/cache/* /tmp/* /var/tmp/*
