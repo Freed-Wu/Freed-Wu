@@ -15,7 +15,7 @@ endfunction
 
 function! init#init#python#substitute() abort
   " vint: next-line -ProhibitCommandRelyOnUser -ProhibitCommandWithUnintendedSideEffect
-  %s/\m^\S/# &/g
+  %substitute/\m^\S/# &/g
   " vint: next-line -ProhibitCommandRelyOnUser -ProhibitCommandWithUnintendedSideEffect
-  %s/\m^# \%(>>>\\|\.\.\.\)\%( \\|$\)//g
+  %substitute/\m^# \%(>>>\\|\.\.\.\)\%( \\|$\)//g
 endfunction

@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-if [ "$USER" == root ]; then
-	sudo() {
-		"$@"
-	}
-fi
-for file in requirements*.txt; do
+for file in requirements.txt requirements/*.txt; do
 	"./$file"
 done
 ./main.py --print-completion bash | sudo tee /usr/share/bash-completion/completions/main.py
