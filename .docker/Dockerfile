@@ -27,8 +27,9 @@ ARG mirror=mirrors.ustc.edu.cn
 # setuptools_scm need git in $PATH
 RUN sed -i s/archive.ubuntu.com/$mirror/g /etc/apt/sources.list && \
       apt-get -y update && \
-      apt-get -y install openssh-server sudo locales zsh \
+      apt-get -y install openssh-server sudo tzdata locales zsh \
       curl python-is-python3 python3-pip python3-build && \
+      ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
       sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen && \
       locale-gen && \
       ln -sf /usr/bin/pip3 /usr/bin/pip && \
@@ -69,6 +70,7 @@ RUN export PATH=$bin:$PATH && \
       pip install -e $home'[dev]' && \
       TERM=xterm-256color TMUX= zsh -isc '@zinit-scheduler burst' && \
       ~/.config/tmux/plugins/tpm/bin/install_plugins && \
+      pip install -r ~/.config/tmux/plugins/tmux-bitahub/requirements.txt && \
       vi -c'call dein#update() | quit' && \
       mkdir -p ~/.config/coc/extensions && \
       echo '{"dependencies": {}}' >~/.config/coc/extensions/package.json && \

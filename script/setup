@@ -22,7 +22,8 @@ pip install -e "$HOME"'[dev]'
 TERM=xterm-256color TMUX='' zsh -isc '@zinit-scheduler burst'
 git clone --depth=1 https://github.com/tmux-plugins/tpm \
 	~/.config/tmux/plugins/tpm &&
-	~/.config/tmux/plugins/tpm/bin/install_plugins
+	~/.config/tmux/plugins/tpm/bin/install_plugins &&
+	pip install -r ~/.config/tmux/plugins/tmux-bitahub/requirements.txt
 git clone --depth=1 https://github.com/Shougo/dein.vim \
 	~/.local/share/nvim/repos/github.com/Shougo/dein.vim &&
 	vi -c'call dein#update() | quit' &&
