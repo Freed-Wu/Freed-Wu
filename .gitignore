@@ -37,7 +37,6 @@
 !/.wgetrc
 !/.curlrc
 !/.nix-channels
-!/.visidatarc
 !/.vintrc.yaml
 !/.chktexrc
 !/.sqliterc
@@ -266,6 +265,9 @@
 !/.config/python_keyring/
 !/.config/nvim/
 !/.config/python/
+!/.config/autostart/
+!/.config/picom/
+!/.config/visidata/
 
 # $XDG_DATA_HOME
 !/.local/
@@ -321,9 +323,9 @@
 
 # Android
 # https://github.com/termux/termux-app/issues/2826
-!/.termuxrc
 !/.termux/
 /.termux/*
+!/.termux/termuxrc.sh
 !/.termux/.profile
 !/.termux/termux.properties
 !/.termux/colors.properties

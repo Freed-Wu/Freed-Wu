@@ -1,0 +1,8 @@
+[
+  ["&CreateTypeStub", "call init#init#python#create_type_stub('cWORD')"],
+  ["--"],
+  ["&Echo", "call init#init#python#echo('cWORD')"],
+  ["E&xecute", "call init#init#python#execute('.')"],
+  ["--"],
+  ["&Substitute", "call init#init#python#substitute()"]
+]

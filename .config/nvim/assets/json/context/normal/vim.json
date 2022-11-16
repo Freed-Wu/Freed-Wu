@@ -7,6 +7,6 @@
   ["&Map", "call init#init#vim#map_('cWORD')"],
   ["&Function", "call init#init#vim#function('cword')"],
   ["--"],
-  ["E&xecute", "call init#init#vim#execute(getline('.'))"],
+  ["E&xecute", "call init#init#vim#execute('.')"],
   ["So&urce", "source %"]
 ]

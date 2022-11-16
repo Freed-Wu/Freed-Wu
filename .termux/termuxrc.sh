@@ -1,5 +1,5 @@
 # shellcheck shell=bash disable=SC2034
-JAVA_HOME="$(command ls -d /usr/lib/jvm/java-*-openjdk 2> /dev/null||return 0)"
+JAVA_HOME="$(command ls -d /usr/lib/jvm/java-*-openjdk 2>/dev/null || return 0)"
 
 if [ "${TERMUX_PACKAGES_OFFLINE-false}" = false ]; then
 	if [ -d /opt/android-sdk ]; then
@@ -9,4 +9,3 @@ if [ "${TERMUX_PACKAGES_OFFLINE-false}" = false ]; then
 		NDK=/opt/android-ndk
 	fi
 fi
-# ex: filetype=bash

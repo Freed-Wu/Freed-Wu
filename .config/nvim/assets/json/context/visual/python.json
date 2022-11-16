@@ -1,0 +1,5 @@
+[
+  ["&CreateTypeStub", "call init#init#python#create_type_stub()"],
+  ["--"],
+  ["&Echo", "call init#init#python#echo()"]
+]

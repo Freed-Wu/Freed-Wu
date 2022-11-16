@@ -292,11 +292,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   call dein#add('yianwillis/vimcdoc')
   call dein#add('mhinz/vim-hugefile')
-  " https://github.com/grwlf/xkb-switch/issues/60
-  call dein#add('lyokha/vim-xkbswitch', {
-        \ 'if': executable('g3kb-switch'),
-        \ 'hook_source': 'call init#xkbswitch#source()',
-        \ })
   " need coc.nvim
   call dein#add('Shougo/echodoc.vim', {
         \ 'if': executable('node'),
@@ -316,8 +311,20 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   " 1}}} Setting "
 
+  " IME {{{1 "
+  " https://github.com/grwlf/xkb-switch/issues/60
+  call dein#add('lyokha/vim-xkbswitch', {
+        \ 'if': executable('g3kb-switch') || executable('xkb-switch') ,
+        \ 'hook_source': 'call init#xkbswitch#source()',
+        \ })
+  call dein#add('lilydjwg/fcitx.vim', {
+        \ 'if': executable('fcitx5-remote'),
+        \ 'hook_source': 'call init#fcitx#source()',
+        \ })
+  " 1}}} IME "
+
   " Log {{{1 "
-  " too slow, don't enable it on msys
+  " too slow, don't enable it on msys2
   call dein#add('wakatime/vim-wakatime', {
         \ 'if': has('pythonx') && filereadable(expand('$HOME/.wakatime.cfg')),
         \ })
@@ -473,7 +480,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " Ftplugin {{{2 "
   " https://github.com/lervag/vimtex/issues/237
   call dein#add('lervag/vimtex', {
-        \ 'if': executable('tex'),
         \ 'merged': 0,
         \ 'hook_source': 'call init#vimtex#source()',
         \ })

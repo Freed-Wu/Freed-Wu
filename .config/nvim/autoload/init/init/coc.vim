@@ -18,3 +18,7 @@ function! init#init#coc#keywordprg(word) abort
   call search(a:word)
   normal! zMzv
 endfunction
+
+function! init#init#coc#includeexpr() abort
+  return 'coc-' . v:fname
+endfunction

@@ -14,6 +14,7 @@ function! init#vimtex#source() abort
         \ ['\biggl', '\biggr'],
         \ ['\Biggl', '\Biggr'],
         \]
+  let g:vimtex_doc_confirm_single = v:false
   let g:vimtex_doc_handlers = ['init#init#vimtex#texdoc']
   let g:vimtex_env_change_autofill = 1
   let g:vimtex_fold_bib_enabled = 1

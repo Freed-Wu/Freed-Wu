@@ -48,8 +48,8 @@ function! init#init#vim#function(...) abort
 endfunction
 
 function! init#init#vim#execute(...) abort
-  let l:word = init#parse(a:)
-  let l:line = getline(l:word)
+  let l:line = init#parse(a:)
   let l:line = substitute(l:line, '[|`]\|(.*)', '', 'g')
-  execute substitute(l:line, '[lsa]\ze:', 'g', 'g')
+  let l:line = substitute(l:line, '[lsa]\ze:', 'g', 'g')
+  execute l:line
 endfunction

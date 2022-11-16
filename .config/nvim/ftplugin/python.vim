@@ -1,17 +1,14 @@
 setlocal textwidth=79
-if has('python3')
+if has('pythonx')
   py3 import sys
-  let s:path = [''] + py3eval('sys.path')
-elseif has('python')
-  py import sys
-  let s:path = [''] + pyeval('sys.path')
+  let s:path = [''] + pyxeval('sys.path')
 else
-  execute 'let s:path =' system("python -c 'import sys; print(sys.path)'")
+  let s:path = eval(trim(system("python -c 'import sys; print(sys.path)'")))
 endif
 let &l:path = join(s:path, ',')
 
-nnoremap <silent><buffer> <LocalLeader>t :<C-U>CocCommand pyright.createtypestub <C-R><C-W><CR>
-nnoremap <silent><buffer> <LocalLeader>s :<C-U>%s/^\S/# &/g<CR>:%s/^# \%(>>>\\|\.\.\.\)\%( \\|$\)//g<CR>
+nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('normal/python')<CR>
+xnoremap <silent><nowait><buffer> <LocalLeader> :<C-U>call init#init#quickui#install('visual/python')<CR>
 
 let b:browser_search_default_engine = 'pypi'
 

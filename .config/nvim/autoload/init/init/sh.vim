@@ -25,8 +25,8 @@ function! init#init#sh#echo() abort
 endfunction
 
 function! init#init#sh#execute() abort
-  let l:word = init#parse(a:)
-  let l:line = getline(l:word)
+  let l:line = init#parse(a:)
+  let l:line = getline(l:line)
   echo system(l:line)
 endfunction
 

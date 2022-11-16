@@ -17,12 +17,10 @@ function! init#coc#source() abort
         \ 'sublime_syntax': 'yaml',
         \ 'liquid': 'html',
         \ }
-  " https://github.com/neoclide/coc-sources/issues/56
-  " coc-word cannot be loaded
   let g:coc_global_extensions = [
         \ 'coc-highlight',
         \
-        \ 'coc-ci',
+        \ 'coc-ci', 'coc-rime',
         \
         \ 'coc-pydocstring',
         \
@@ -141,6 +139,7 @@ function! init#coc#imap() abort
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
   inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"
   inoremap <silent><expr> <C-\> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
+  inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR>
 endfunction
 
 augroup init#coc

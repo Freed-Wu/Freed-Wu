@@ -9,6 +9,8 @@ endfunction
 function! init#parse(dict) abort
   if a:dict[0] == 0
     let l:word = getline('.')[col('v') - 1:col("'>") - 1]
+  elseif a:dict[1] ==# '.'
+    let l:word = getline(a:dict[1])
   else
     let l:scope = a:dict[1]
     let l:word = expand('<' . l:scope . '>')
