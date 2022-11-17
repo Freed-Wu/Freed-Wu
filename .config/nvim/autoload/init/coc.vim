@@ -139,7 +139,7 @@ function! init#coc#imap() abort
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
   inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"
   inoremap <silent><expr> <C-\> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
-  inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR>
+  inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR><C-O>:call CocAction('toggleSource', 'word')<CR>
 endfunction
 
 augroup init#coc

@@ -35,8 +35,8 @@
 	diff = delta
 	blame = delta
 	format-patch = delta
-	log = perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less
-	reflog = perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less
+	log = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
+	reflog = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
 	config = bat -plini
 	ls-files = parallel exa --color=always --icons
 	remote = bat -pltsv --paging=never
