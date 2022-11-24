@@ -326,7 +326,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " Log {{{1 "
   " too slow, don't enable it on msys2
   call dein#add('wakatime/vim-wakatime', {
-        \ 'if': has('pythonx') && filereadable(expand('$HOME/.wakatime.cfg')),
+        \ 'if': has('pythonx') && executable('pass'),
         \ })
   call dein#add('https://gitlab.com/code-stats/code-stats-vim', {
         \ 'if': has('pythonx') && !empty($CODESTATS_API_KEY),
@@ -497,7 +497,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('tmux-plugins/vim-tmux')
   call dein#add('neomutt/neomutt.vim')
   call dein#add('tpope/vim-scriptease')
-  call dein#add('mechatroner/rainbow_csv')
+  call dein#add('mechatroner/rainbow_csv', {
+        \ 'hook_source': 'call init#rainbow_csv#source()',
+        \ })
   call dein#add('cmcaine/vim-uci')
   call dein#add('thinca/vim-themis', {
         \ 'build': 'ln -s $PWD/bin/themis ~/.local/bin',
@@ -795,9 +797,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'merged': 0,
         \ 'rev': 'release',
         \ 'hook_source': 'call init#coc#source()',
-        \ })
-  call dein#add('github/copilot.vim', {
-        \ 'if': has('nvim'),
         \ })
   " 2}}} LSP "
 

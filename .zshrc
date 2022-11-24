@@ -95,6 +95,12 @@ bindkey '^]' vi-find-next-char
 bindkey '^[]' vi-find-prev-char
 bindkey '^[W' copy-region-as-kill
 bindkey '^[l' down-case-word
+# vi
+_complete_files () {
+  eval "$_comp_setup"
+  _main_complete _files
+}
+compdef -k _complete_files complete-word '^X^F'
 bindkey '^[' vi-cmd-mode
 bindkey '^[i' expand-or-complete-prefix
 bindkey -Mvicmd cc vi-change-whole-line
@@ -216,6 +222,7 @@ zinit id-as'.lesspipe.sh' depth'1' wait lucid \
 # https://github.com/Kaggle/kaggle-api/issues/446
 zinit id-as'.pass' depth'1' as'null' wait lucid \
   atclone'echo "export CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
+echo "export WAKATIME_API_KEY=$(pass ls wakatime/api_key)" >> pass.sh
 echo "export KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
 echo "export KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh' \
   if'(($+commands[pass]))' \
@@ -271,6 +278,7 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Log #
 
 # Syntax {{{1 #
+# fast-syntax-highlighting.plugin.zsh download ~/.cache/fsh/secondary_theme.zsh
 zinit id-as depth'1' wait lucid for zdharma-continuum/fast-syntax-highlighting
 # 1}}} Syntax #
 
@@ -340,7 +348,7 @@ zinit id-as depth'1' wait lucid \
   for zdharma-continuum/zsh-editing-workbench
 zinit id-as depth'1' wait lucid for zdharma-continuum/zui
 # https://github.com/zdharma-continuum/zsh-cmd-architect/pull/1
-zinit id-as depth'1' wait lucid for Freed-Wu/zsh-cmd-architect
+zinit id-as depth'1' wait lucid for zdharma-continuum/zsh-cmd-architect
 # https://github.com/joshskidmore/zsh-fzf-history-search/pull/20
 ZSH_FZF_HISTORY_SEARCH_FZF_ARGS='+s +m -x -e --preview-window=hidden'
 zinit id-as depth'1' wait lucid \

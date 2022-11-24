@@ -1,10 +1,14 @@
 # https://github.com/sharkdp/bat/issues/2115
 --paging=always
+# https://github.com/wofr06/lesspipe/pull/117
+# https://github.com/wofr06/lesspipe/commit/708fec400c189cfb1b94390078873a44c7f8d401
+--style=full
 -m'_*:Bourne Again Shell (bash)'
 -m'entry_points.txt:INI'
 -m'*.BUILD:Python'
 -m'BUILD:Python'
 -m'WORKSPACE:Python'
+-m'*.drv:Nix'
 
 # https://github.com/sharkdp/bat/issues/2358
 -m'*.aux:LaTeX'

@@ -39,6 +39,8 @@ function! init#coc#source() abort
         \
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji', 'coc-syntax',
         \
+        \ 'coc-copilot',
+        \
         \ '@yaegassy/coc-marksman',
         \ 'coc-webview', 'coc-markdown-preview-enhanced',
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',

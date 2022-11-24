@@ -73,7 +73,7 @@ elif [ "$kind" = pdf ]; then
 	if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
 		pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/"
 	fi
-# https://github.com/wofr06/lesspipe/pull/111
+# https://github.com/wofr06/lesspipe/pull/115
 elif [ "$kind" = rfc822 ]; then
 	if [ "$(command -v bat)" ]; then
 		bat --color=always -lEmail "$1"
@@ -86,8 +86,7 @@ elif [ "$category" = image ]; then
 	if [ "$(command -v exiftool)" ]; then
 		exiftool "$1" | bat --color=always -plyaml
 	fi
-# https://github.com/wofr06/lesspipe/pull/105
-# https://github.com/wofr06/lesspipe/pull/109
+# https://github.com/wofr06/lesspipe/pull/117
 elif [ "$category" = text ]; then
 	if [ "$(command -v bat)" ]; then
 		bat --color=always "$1"

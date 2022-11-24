@@ -445,6 +445,19 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['json', 'jsonc'],
         \ })
 
+  call smartinput#map_to_trigger('i', ';', ';', ';')
+  call smartinput#define_rule({
+        \ 'at': '\%#',
+        \ 'char': ';',
+        \ 'input': '; ',
+        \ 'filetype': ['jq'],
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '\%# ',
+        \ 'char': ';',
+        \ 'input': ';',
+        \ })
+
   call smartinput#map_to_trigger('i', '!', '!', '!')
   call smartinput#define_rule({
         \ 'at': '\%#',

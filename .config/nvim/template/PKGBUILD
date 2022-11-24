@@ -1,4 +1,4 @@
-# shellcheck shell=bash disable=SC2034
+# shellcheck shell=bash disable=SC2034,SC2154
 # Maintainer: %USER% <%MAIL%>
 # https://aur.archlinux.org/packages/updaurpkg-git
 # $ updaurpkg --apply
@@ -9,7 +9,7 @@ _pkgname=$(tr A-Z a-z <<< ${_repo##*/})
 
 # pkgbase=mingw-w64-$_pkgname
 # pkgname=$MINGW_PACKAGE_PREFIX-$_pkgname
-pkgname=$_pkgname
+pkgname=${_pkgname//_/-}
 pkgver=${_upstreamver##v}
 pkgrel=1
 pkgdesc="
@@ -31,23 +31,39 @@ source=("$url/archive/$_upstreamver.tar.gz")
 # [[ $_os == windows ]] && _ext=zip || _ext=tar.gz
 # source=("$url/releases/download/$_upstreamver/${pkgname}_${_os}_${_arch}.$_ext")
 # source=("https://files.pythonhosted.org/packages/source/${_pkgname:0:1}/$_pkgname/${_pkgname//-/_}-$pkgver.tar.gz")
-# _py=py2.py3
+# _py=py3
 # source=("https://files.pythonhosted.org/packages/$_py/${_pkgname:0:1}/$_pkgname/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
 sha256sums=(SKIP)
 
 # pkgver() {
-#   cd "$srcdir/$_pkgname"
+#   cd "$srcdir/$_pkgname" || return 1
 #   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 # }
 
 package() {
-  cd "$srcdir/$_pkgname"
+  cd "$srcdir/$_pkgname" || return 1
   install -D "$_pkgname" -t "$pkgdir/usr/bin"
+  install -Dm644 README.md -t "$pkgdir/usr/share/doc/$_pkgname"
   # make DESTDIR="$pkgdir" install
-  # cd "$srcdir/$_pkgname-$pkgver"
-  # python setup.py install --root="$pkgdir" --optimize=1 || return 1
-  # cd "$srcdir"
-  # cp -L "$_pkgname" "${_pkgname//-/_}-$pkgver-$_py-none-any.whl"
-  # python -m installer --destdir="$pkgdir" *.whl || return 1
-  # install -D -m644 README.md $pkgdir/usr/share/doc/$_pkgname/README.md
+  # cd "$srcdir/$_pkgname-$pkgver" || return 1
+  # python setup.py install --root="$pkgdir" --optimize=1
+  # cd "$srcdir" || return 1
+  # python -m installer --destdir="$pkgdir" ./*.whl
+
+  # local bin
+  # bin=${_repo##*/}
+  # PYTHONPATH="$(ls -d "$pkgdir"/usr/lib/python*/site-packages)"
+  # export PYTHONPATH
+  # "$pkgdir/usr/bin/$bin" --print-completion bash > "$bin.bash"
+  # "$pkgdir/usr/bin/$bin" --print-completion zsh > "_$bin"
+  # "$pkgdir/usr/bin/$bin" --print-completion tcsh > "$bin.csh"
+  # local complete
+  # complete="_$(echo ${bin//-/_} | tr a-z A-Z)_COMPLETE"
+  # eval "$complete=zsh_source" "$bin" > "$bin.bash"
+  # eval "$complete=bash_source" "$bin" > "_$bin"
+  # eval "$complete=fish_source" "$bin" > "$bin.fish"
+  # install -D $bin.bash "$pkgdir/usr/share/bash-completion/completions/$bin"
+  # install -D _$bin -t "$pkgdir/usr/share/zsh/site-functions"
+  # install -D $bin.csh -t "$pkgdir/etc/profile.d"
+  # install -D $bin.fish -t "$pkgdir/usr/share/fish/vendor_completions.d"
 }

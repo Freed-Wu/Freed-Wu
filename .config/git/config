@@ -37,7 +37,7 @@
 	format-patch = delta
 	log = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
 	reflog = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe$(jq -j '.[] as $i | \"s=\" + $i.code + \"=\" + $i.emoji + \"=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
-	config = bat -plini
+	config = bat -plproperties
 	ls-files = parallel exa --color=always --icons
 	remote = bat -pltsv --paging=never
 [interactive]
@@ -102,7 +102,7 @@
 	badTimezone = warn
 [commit]
 	gpgsign = true
-	template = ~/.config/git/templates/COMMIT_MSG
+	template = ~/.config/git/_COMMIT_EDITMSG
 # after git 2.23
 [tag]
 	gpgSign = true

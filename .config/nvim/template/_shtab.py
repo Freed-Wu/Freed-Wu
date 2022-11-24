@@ -1,12 +1,16 @@
 """Fake shtab."""
 from argparse import Action, ArgumentParser
 
+
 FILE = None
 DIRECTORY = DIR = None
 
 
 class PrintCompletionAction(Action):
-    """Print completion action."""
+    """Print completion action.
+
+    See <https://github.com/iterative/shtab/blob/95b0e3092cd4dcf1ac2871d44cebda01a89992df/shtab/__init__.py#L786-L789>
+    """
 
     def __call__(self, parser, namespace, values, option_string=None):
         """Warn when shtab is not installed.

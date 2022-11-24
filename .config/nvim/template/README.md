@@ -20,7 +20,7 @@
 [![github/last-commit](https://shields.io/github/last-commit/%GITHUB_USER%/%DIR%)](https://github.com/%GITHUB_USER%/%DIR%/commits)
 [![github/release-date](https://shields.io/github/release-date/%GITHUB_USER%/%DIR%)](https://github.com/%GITHUB_USER%/%DIR%/releases/latest)
 
-[![github/license](https://shields.io/github/license/%GITHUB_USER%/%DIR%)](https://github.com/%GITHUB_USER%/%DIR%/blob/master/LICENSE)
+[![github/license](https://shields.io/github/license/%GITHUB_USER%/%DIR%)](https://github.com/%GITHUB_USER%/%DIR%/blob/main/LICENSE)
 [![github/languages](https://shields.io/github/languages/count/%GITHUB_USER%/%DIR%)](https://github.com/%GITHUB_USER%/%DIR%)
 [![github/languages/top](https://shields.io/github/languages/top/%GITHUB_USER%/%DIR%)](https://github.com/%GITHUB_USER%/%DIR%)
 [![github/directory-file-count](https://shields.io/github/directory-file-count/%GITHUB_USER%/%DIR%)](https://github.com/%GITHUB_USER%/%DIR%)

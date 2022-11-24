@@ -33,11 +33,13 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
+    my_init_start_time
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
+    my_brew_shell
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
@@ -92,7 +94,6 @@
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     time                    # current time
-    # example               # example user-defined segment (see prompt_example function below)
     # =========================[ Line #2 ]=========================
     newline                 # \n
     os_icon                 # os identifier
@@ -914,7 +915,12 @@
   # Context format when running with privileges: user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n@%m'
   # Context format when in SSH without privileges: user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
+  # https://github.com/romkatv/powerlevel10k/issues/2101
+  if (($+PAI_JOB_NAME)); then
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@'$PAI_JOB_NAME:${SSH_CONNECTION[(w)-1]}
+  else
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
+  fi
   # Default context format (no privileges, no SSH): user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n@%m'
 
@@ -1640,8 +1646,27 @@
   # greeting the user.
   #
   # Type `p10k help segment` for documentation and a more sophisticated example.
-  function prompt_example() {
-    p10k segment -b 1 -f 3 -i '⭐' -t '%n'
+
+  # https://github.com/romkatv/powerlevel10k/issues/1986
+  function prompt_my_brew_shell() {
+    if [[ -n $HOMEBREW_DEBUG_INSTALL ]]; then
+      p10k segment -b yellow -f red -i ⭐
+    fi
+  }
+  # https://github.com/romkatv/powerlevel10k/issues/2096
+  if [[ $(ps -p1 -ocmd=) == '/sbin/docker-init '* ]]; then
+    typeset -g my_init_start_time=${$(ps -p1 -ostart=)## *}
+    if [[ $my_init_start_time != *:*:* ]]; then
+      my_init_start_time=
+    fi
+  else
+    typeset -g my_init_start_time=
+  fi
+
+  function prompt_my_init_start_time() {
+    if [[ -n $my_init_start_time ]]; then
+      p10k segment -b yellow -f red -i  -t ${${(f)$(pdd --sub "$my_init_start_time")[-2]}//\%/%%}
+    fi
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job

@@ -45,6 +45,7 @@
 !/.xinitrc
 !/.xsession
 !/.pypirc
+!/.wakatime.cfg
 
 # dotfiles
 !/.dosbox/
@@ -76,8 +77,6 @@
 /.julia/config/*
 !/.julia/config/startup.jl
 !/.wgetpaste.d/
-/.wgetpaste.d/*
-!/.wgetpaste.d/*.conf
 !/.vnc/
 /.vnc/*
 !/.vnc/xstartup
@@ -94,8 +93,6 @@
 /.texlive/*
 !/.texlive/texmf-config/
 !/.proxychains/
-/.proxychains/*
-!/.proxychains/proxychains.conf
 !/.docker/
 /.docker/*
 !/.docker/config.json
@@ -106,6 +103,9 @@
 !/.ssh/config
 !/.password-store/
 !/.gnupg/
+!/.nixpkgs/
+/.nixpkgs/*
+!/.nixpkgs/darwin-configuration.nix
 !/.vscode-remote/
 /.vscode-remote/*
 !/.vscode-remote/data/
@@ -123,16 +123,13 @@
 !/.config/electron-flags.conf
 !/.config/black
 !/.config/pylintrc
+!/.config/zathura/
+/.config/zathura/*
 !/.config/zathura/zathura*
 !/.config/neomutt/
 !/.config/mutt/
 !/.config/git/
-/.config/git/*
-!/.config/git/config
-!/.config/git/templates/
 !/.config/aria2/
-/.config/aria2/*
-!/.config/aria2/aria2.conf
 !/.config/ppsspp/
 /.config/ppsspp/*
 !/.config/ppsspp/PSP/
@@ -268,6 +265,7 @@
 !/.config/autostart/
 !/.config/picom/
 !/.config/visidata/
+!/.config/nixpkgs/
 
 # $XDG_DATA_HOME
 !/.local/

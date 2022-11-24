@@ -8,6 +8,7 @@ augroup init_filetype
   " 1}}} Text "
 
   " Data_Exchange {{{1 "
+  autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
   autocmd BufNewFile,BufRead */tex/latex/**.cfg setfiletype tex
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*} setfiletype conf
@@ -24,6 +25,7 @@ augroup init_filetype
   " 1}}} Mark_Up "
 
   " Script {{{1 "
+  autocmd BufNewFile,BufRead *.drv setfiletype nix
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead SConstruct setfiletype python
   autocmd BufNewFile,BufRead *.bats,.bash_history setfiletype bash

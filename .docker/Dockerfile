@@ -59,7 +59,7 @@ ARG bin=$home/.nix-profile/bin
 RUN mkdir -p .config/nix && \
       echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > .config/nix/nix.conf && \
       $bin/nix-env -i git neovim tmux vivid exa bat ripgrep fd delta fzf jq \
-      nodejs lesspipe file less powerlevel10k && \
+      nodejs lesspipe less powerlevel10k && \
       sudo ln -s $bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .
@@ -77,8 +77,7 @@ RUN export PATH=$bin:$PATH && \
       tail -n1 | sed "s=\(', '\|\['\|']\)=\n=g") && \
       mkdir -p ~/.config/coc/extensions/coc-gist-data && \
       echo '{"token": "gho_"}' \
-      >~/.config/coc/extensions/coc-gist-data/secret.json && \
-      rm -rf ~/.cache
+      >~/.config/coc/extensions/coc-gist-data/secret.json
 
 USER root
 WORKDIR /
