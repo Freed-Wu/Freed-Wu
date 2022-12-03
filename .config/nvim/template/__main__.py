@@ -1,87 +1,46 @@
 #!/usr/bin/env python
-"""{binname}.
-
-Usage: {binname} [options]
-
-Options:
-    -q, --quiet                         Don't show normal information.
-    -d, --debug                         Show debug information.
-
-Report bugs to <%MAIL%>.
+"""Make this module can be call by
+`python -m <https://docs.python.org/3/library/__main__.html>`_.
 """
-from contextlib import suppress
-import logging
-import os
-import sys
-from typing import Final
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
+from datetime import datetime
 
-with suppress(ImportError):
-    # for debug
-    import pudb
-
-    os.environ["PYTHONBREAKPOINT"] = "pudb.set_trace"
-    del pudb
-    from pathlib import Path
-
-    # avoid warning
-    os.makedirs(os.path.expanduser("~/.config/ptpython"), exist_ok=True)
-    Path(os.path.expanduser("~/.config/ptpython/config.py")).touch()
+from . import __version__
 
 try:
-    # when this file is __main__.py
-    from . import __version__  # type: ignore
+    import shtab
 except ImportError:
-    __version__: Final = "0.0.1"
+    from . import _shtab as shtab
 
-__all__ = ["get_parser", "VERSION"]
-logger: Final = logging.getLogger(__name__)
-VERSION: Final = """{version}
-Copyright (C) %YEAR%
+VERSION = f"""%DIR% {__version__}
+Copyright (C) {datetime.now().year}
 Written by %USER%
-""".format(
-    version=__version__
-)
+"""
+EPILOG = """
+Report bugs to <%MAIL%>.
+"""
 
 
-def get_parser(prog=None):
-    """Get parser for test."""
-    from argopt import argopt
-
-    if prog is None:
-        prog = os.path.basename(sys.argv[0])
-    BINNAME: Final = prog
-    DOC: Final = __doc__.format(binname=BINNAME)  # type: ignore
-    parser = argopt(DOC, version=VERSION)
-    with suppress(ImportError):
-        import shtab
-
-        shtab.add_argument_to(parser)
+def get_parser():
+    """Get a parser for unit test."""
+    parser = ArgumentParser(
+        "%DIR%", epilog=EPILOG, formatter_class=RawDescriptionHelpFormatter
+    )
+    parser.add_argument("--version", version=VERSION, action="version")
+    shtab.add_argument_to(parser)
     return parser
 
 
 def main():
-    """Parse options, environments, configs."""
+    """Parse arguments and provide shell completions."""
     parser = get_parser()
     args = parser.parse_args()
-    if args.debug:
-        args.level = "DEBUG"
-    elif args.quiet:
-        args.level = "WARNING"
-    else:
-        args.level = "INFO"
-    try:
-        from rich.logging import RichHandler
 
-        logging.basicConfig(
-            level=args.level,
-            format="%(message)s",
-            handlers=[RichHandler(rich_tracebacks=True, markup=True)],
-        )
-    except ImportError:
-        logging.basicConfig(level=args.level)
-    del args.debug, args.quiet  # type: ignore
-    logger.debug(args)
-    # %HERE%
+    if args.text:
+        from .ui.cli import run
+    else:
+        from .ui.repl import run
+    run(args)
 
 
 if __name__ == "__main__":

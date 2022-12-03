@@ -1,4 +1,4 @@
-"""%FILE%."""
+"""%FILE%"""
 from contextlib import suppress
 
 from %TEST_FILE%.__main__ import get_parser, VERSION
@@ -9,7 +9,7 @@ class Test:
     """Test."""
 
     def test_help(self, capsys):
-        """test_help.
+        """Test help.
 
         :param capsys:
         """
@@ -33,7 +33,7 @@ Report bugs to <%MAIL%>.
 """
 
     def test_version(self, capsys):
-        """test_version.
+        """Test version.
 
         :param capsys:
         """

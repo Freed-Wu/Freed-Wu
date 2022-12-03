@@ -17,6 +17,8 @@ shopt -s histverify
 shopt -s globstar
 shopt -s checkhash
 shopt -s mailwarn
+stty -ixon
+HISTIGNORE='&: *'
 
 if [[ -f ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]]; then
 	. ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash
@@ -36,10 +38,48 @@ if command -v tmux &>/dev/null &&
 	fi
 fi
 
-# Put your fun stuff here.
-HISTIGNORE='&: *'
-PS1='\[\e[37;44m\d\t\e[34;41m\e[30m\s\e[31;42m\e[30m\u\e[32;43m\e[30m\h\e[33;45m\e[30m\w\e[35;40m\e[37m\]\n '
-PS2='--> '
-PS3='? '
-
-stty -ixon
+declare -A platforms=(
+	[android]=
+	[arch]=
+	[centos]=
+	[debian]=
+	[docker]=
+	[gentoo]=
+	[linux]=
+	[macos]=
+	[ubuntu]=
+	[windows]=
+)
+if [[ $(ps -p1 -ocmd=) == /sbin/docker-init ]]; then
+	platform=docker
+elif [[ $PREFIX == /data/data/com.termux/files/usr ]]; then
+	platform=android
+elif [[ $OSTYPE == darwin ]]; then
+	platform=macos
+elif [[ $OSTYPE == msys2 || $OSTYPE == cygwin ]]; then
+	platform=windows
+elif [[ $OSTYPE == linux-gnu ]]; then
+	platform=linux
+fi
+if command -v lsb_release &>/dev/null; then
+	lsb=$(lsb_release -i | cut -f2)
+	if [[ $lsb == Arch ]]; then
+		platform=arch
+	elif [[ $lsb == Centos ]]; then
+		platform=centos
+	elif [[ $lsb == Debian ]]; then
+		platform=debian
+	elif [[ $lsb == Ubunut ]]; then
+		platform=ubunut
+	elif [[ $lsb == Gentoo ]]; then
+		platform=gentoo
+	fi
+fi
+declare icon=${platforms[$platform]}
+if [ -f /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh ]; then
+	. /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh
+fi
+if [[ -n $SSH_TTY || $USER == root ]]; then
+	declare host_info=" \u@\h"
+fi
+PS1='\[\e[30;47m'" $icon $host_info"'\e[37;43m\e[30m  \s \v \e[33;47m\e[30m  \t \e[37;44m\e[37m  \e[1m\w \e[0;34;40m \e[32m ${GITSTATUS_PROMPT}\e[40m \e[0;30m\e[0m\]\n$ '

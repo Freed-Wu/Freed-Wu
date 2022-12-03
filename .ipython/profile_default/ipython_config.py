@@ -1,8 +1,8 @@
 """Configuration file for ipython."""
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # InteractiveShellApp(Configurable) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## A Mixin for applications that start InteractiveShell instances.
 #
 #  Provides configurables for loading extensions and executing files as part of
@@ -36,7 +36,7 @@
 
 ## A list of dotted module names of IPython extensions to load.
 #  Default: []
-c.InteractiveShellApp.extensions = ['autoreload']
+c.InteractiveShellApp.extensions = ["autoreload"]
 
 ## DEPRECATED. Dotted module name of a single extra IPython extension to load.
 #
@@ -103,9 +103,9 @@ c.InteractiveShellApp.extensions = ['autoreload']
 #  Default: False
 # c.InteractiveShellApp.reraise_ipython_extension_failures = False
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## This is an application.
 
 ## The date format used by logging formatters for %(asctime)s
@@ -129,9 +129,9 @@ c.InteractiveShellApp.extensions = ['autoreload']
 #  Default: False
 # c.Application.show_config_json = False
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # BaseIPythonApplication(Application) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## IPython: an enhanced interactive Python shell.
 
 ## Whether to create profile dir if it doesn't exist
@@ -191,9 +191,9 @@ c.InteractiveShellApp.extensions = ['autoreload']
 #  Default: False
 # c.BaseIPythonApplication.verbose_crash = False
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # TerminalIPythonApp(BaseIPythonApplication, InteractiveShellApp) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Execute the given command string.
 #  See also: InteractiveShellApp.code_to_run
 # c.TerminalIPythonApp.code_to_run = ''
@@ -322,9 +322,9 @@ c.TerminalIPythonApp.display_banner = False
 #  See also: BaseIPythonApplication.verbose_crash
 # c.TerminalIPythonApp.verbose_crash = False
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # InteractiveShell(SingletonConfigurable) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## An enhanced, interactive shell for Python.
 
 ## 'all', 'last', 'last_expr' or 'none', 'last_expr_or_assign' specifying which
@@ -423,7 +423,7 @@ c.InteractiveShell.enable_html_pager = True
 
 ## The name of the logfile to use.
 #  Default: ''
-c.InteractiveShell.logfile = '~/.cache/ipython.py'
+c.InteractiveShell.logfile = "~/.cache/ipython.py"
 
 ## Start logging to the default log file in overwrite mode. Use `logappend` to
 #  specify a log file to **append** logs to.
@@ -492,9 +492,9 @@ c.InteractiveShell.wildcards_case_sensitive = False
 #  Default: 'Context'
 # c.InteractiveShell.xmode = 'Context'
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # TerminalInteractiveShell(InteractiveShell) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 #  See also: InteractiveShell.ast_node_interactivity
 # c.TerminalInteractiveShell.ast_node_interactivity = 'last_expr'
@@ -513,7 +513,7 @@ c.InteractiveShell.wildcards_case_sensitive = False
 
 ## Autoformatter to reformat Terminal code. Can be `'black'` or `None`
 #  Default: None
-c.TerminalInteractiveShell.autoformatter = 'black'
+c.TerminalInteractiveShell.autoformatter = "black"
 
 ##
 #  See also: InteractiveShell.autoindent
@@ -673,6 +673,7 @@ c.TerminalInteractiveShell.mouse_support = True
 #  Default: 'IPython.terminal.prompts.Prompts'
 try:
     from powerline.bindings.ipython.since_7 import PowerlinePrompts
+
     c.TerminalInteractiveShell.prompts_class = PowerlinePrompts
 except ImportError:
     pass
@@ -742,9 +743,9 @@ c.TerminalInteractiveShell.true_color = True
 #  See also: InteractiveShell.xmode
 # c.TerminalInteractiveShell.xmode = 'Context'
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # HistoryAccessor(HistoryAccessorBase) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Access the history database without adding to it.
 #
 #  This is intended for use by standalone history tools. IPython shells use
@@ -782,9 +783,9 @@ c.TerminalInteractiveShell.true_color = True
 #  Default: ''
 # c.HistoryAccessor.hist_file = ''
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # HistoryManager(HistoryAccessor) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## A class to organize all history-related functionality in one place.
 
 ## Options for configuring the SQLite connection
@@ -808,9 +809,9 @@ c.TerminalInteractiveShell.true_color = True
 #  See also: HistoryAccessor.hist_file
 # c.HistoryManager.hist_file = ''
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # ProfileDir(LoggingConfigurable) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## An object to manage the profile directory and its resources.
 #
 #  The profile directory is used by all IPython applications, to manage
@@ -824,9 +825,9 @@ c.TerminalInteractiveShell.true_color = True
 #  Default: ''
 # c.ProfileDir.location = ''
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # BaseFormatter(Configurable) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## A base formatter class that is configurable.
 #
 #  This formatter should usually be used as the base class of all formatters. It
@@ -861,9 +862,9 @@ c.TerminalInteractiveShell.true_color = True
 #  Default: {}
 # c.BaseFormatter.type_printers = {}
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # PlainTextFormatter(BaseFormatter) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## The default pretty-printer.
 #
 #  This uses :mod:`IPython.lib.pretty` to compute the format data of the object.
@@ -916,9 +917,9 @@ c.TerminalInteractiveShell.true_color = True
 #  Default: False
 # c.PlainTextFormatter.verbose = False
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Completer(Configurable) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Enable unicode completions, e.g. \alpha<tab> . Includes completion of latex
 #  commands, unicode names, and expanding unicode characters back to latex
 #  commands.
@@ -949,9 +950,9 @@ c.Completer.greedy = True
 #  Default: True
 # c.Completer.use_jedi = True
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # IPCompleter(Completer) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Extension of the completer class with IPython-specific features
 
 ## Enable unicode completions, e.g. \alpha<tab> . Includes completion of latex
@@ -1011,9 +1012,9 @@ c.Completer.greedy = True
 #  See also: Completer.use_jedi
 # c.IPCompleter.use_jedi = True
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # ScriptMagics(Magics) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Magics for talking to scripts
 #
 #  This defines a base `%%script` cell magic for running a cell with a program in
@@ -1036,18 +1037,18 @@ c.Completer.greedy = True
 #  Default: {}
 # c.ScriptMagics.script_paths = {}
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # LoggingMagics(Magics) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Magics related to all logging machinery.
 
 ## Suppress output of log state when logging is enabled
 #  Default: False
 c.LoggingMagics.quiet = True
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # StoreMagics(Magics) configuration
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ## Lightweight persistence for python variables.
 #
 #  Provides the %store magic.

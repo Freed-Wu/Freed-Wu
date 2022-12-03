@@ -1,9 +1,9 @@
-"""``%DIR%/__init__.py``."""
+"""Provide ``__version__`` for
+`importlib.metadata.version() <https://docs.python.org/3/library/importlib.metadata.html#distribution-versions>`_.
+"""
 from contextlib import suppress
-import logging
 
 __all__ = ["__version__", "version_tuple"]
-logger = logging.getLogger(__name__)
 
 from ._version import version as __version__, version_tuple
 

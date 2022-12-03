@@ -8,7 +8,7 @@ name = "%DIR%"
 description = "%HERE%"
 authors = [{ name = "%USER%", email = "%MAIL%" }]
 readme = "README.md"
-requires-python = ">= 3.6"
+requires-python = ">= 3.9"
 keywords = [""]
 license = { text = "GPL v3" }
 classifiers = [
@@ -22,10 +22,9 @@ classifiers = [
   "Operating System :: MacOS",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.6",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
 ]
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
@@ -49,6 +48,10 @@ dev = { file = "requirements/dev.txt" }
 
 [tool.black]
 line-length = 79
+
+[tool.isort]
+line_length = 79
+profile = "black"
 
 # https://github.com/PyCQA/pydocstyle/issues/418
 [tool.pydocstyle]

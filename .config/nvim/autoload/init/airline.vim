@@ -8,41 +8,11 @@ function! init#airline#source() abort
   let g:airline_left_alt_sep = ''
   let g:airline_right_sep = ''
   let g:airline_right_alt_sep = ''
-  let g:airline_symbols = {
-        \ 'linenr': '',
-        \ 'maxlinenr': '',
-        \ 'colnr': '',
-        \ 'paste': '',
-        \ 'notexists': '?',
-        \ 'dirty': '!',
-        \ 'spell': '',
-        \ 'keymap': '',
-        \ 'whitespace': '',
-        \ }
-  let g:airline_mode_map = {
-        \ '__':     '-',
-        \ 'c':      ':',
-        \ 'i':      '▏',
-        \ 'ic':     '≣',
-        \ 'ix':     '=',
-        \ 'n':      '█',
-        \ 'ni':     '▌',
-        \ 'no':     '▄',
-        \ 'multi':  '…',
-        \ 'R':      '▁',
-        \ 'Rv':     '∿',
-        \ 's':      '→',
-        \ 'S':      '↓',
-        \ "\<C-S>": '↘',
-        \ 't':      '!',
-        \ 'v':      '▶',
-        \ 'V':      '▼',
-        \ "\<C-V>": '◆',
-        \ }
+  let g:airline_symbols = init#get_json('airline/symbols')
+  let g:airline_mode_map = init#get_json('airline/mode')
   if !has('unix') || has('unix') && !has('win32unix') && exists('*trim')
-    let g:airline_filetype_overrides = {
-            \ 'startify': ['startify', '%{wifi#component()}'],
-            \ }
+    let g:airline_filetype_overrides =
+          \ init#get_json('airline/filetype_overrides')
   endif
 
   let g:airline#extensions#coc#error_symbol = '✗'
@@ -70,18 +40,8 @@ function! init#airline#source() abort
   let g:airline#extensions#tabline#overflow_marker = '…'
   let g:airline#extensions#tabline#buffer_idx_mode = 1
   " install wqy-zenhei
-  let g:airline#extensions#tabline#buffer_idx_format = {
-        \ '0': '⓪ ',
-        \ '1': '① ',
-        \ '2': '② ',
-        \ '3': '③ ',
-        \ '4': '④ ',
-        \ '5': '⑤ ',
-        \ '6': '⑥ ',
-        \ '7': '⑦ ',
-        \ '8': '⑧ ',
-        \ '9': '⑨ ',
-        \ }
+  let g:airline#extensions#tabline#buffer_idx_format =
+        \ init#get_json('airline/number')
   nmap <C-W>1 <Plug>AirlineSelectTab1
   nmap <C-W>2 <Plug>AirlineSelectTab2
   nmap <C-W>3 <Plug>AirlineSelectTab3

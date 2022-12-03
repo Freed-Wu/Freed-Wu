@@ -109,7 +109,9 @@ import webbrowser
 webbrowser.register(
     "termux-open",
     None,
-    webbrowser.GenericBrowser(r"/data/data/com.termux/files/usr/bin/termux-open"),
+    webbrowser.GenericBrowser(
+        r"/data/data/com.termux/files/usr/bin/termux-open"
+    ),
 )
 # c.NotebookApp.browser = 'xdg-open'
 

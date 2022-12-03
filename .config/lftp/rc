@@ -3,5 +3,5 @@ set bmk:save-passwords true
 set mirror:parallel-transfer-count 4
 set cmd:cls-default ''
 set cmd:cls-completion-default -Fi
-set prompt '\[\e[30;45m\s\e[35;44m\e[37m\S\?\l\e[34;43m\
-\e[30m\u\?\h\?\w\e[33;40m\e[37m\]\n❯ '
+set prompt '\[\e[30;43m  \s \v \e[33;40m\e[37m\S\?  \u\?   \h\? \
+\e[30;44m\e[37m  \l \e[34;47m\e[30m  \w \e[0;37m\e[0m\]\n❯ '

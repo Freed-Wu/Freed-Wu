@@ -1,2 +1,34 @@
-PS1('\[\e[37;44m\d\t\e[34;41m\e[30m\s\e[31;42m\e[30m\u\e[32;43m\e[30m\h\e[33;45m\e[30m\w\e[35;40m\e[37;40m\]\n\$ ')
-PS2('--> ')
+if strcmp(getenv('PREFIX'), '/data/data/com.termux/files/usr')
+  icon = '';
+else
+  if ispc()
+    icon = '';
+  elseif ismac()
+    icon = '';
+  elseif isunix()
+    icon = '';
+    [status, output] = system('lsb_release -i | cut -f2');
+    output = output(1:length(output) - 1);
+    if strcmp(output, 'Arch')
+      icon = '';
+    elseif strcmp(output, 'Centos')
+      icon = '';
+    elseif strcmp(output, 'Debian')
+      icon = '';
+    elseif strcmp(output, 'Gentoo')
+      icon = '';
+    elseif strcmp(output, 'Ubuntu')
+      icon = '';
+    end
+    clear status output
+  else
+    icon = '?';
+  end
+end
+if getenv('SSH_TTY') | strcmp(getenv('USER'), 'root')
+  host_info = ' \u@\h ';
+else
+  host_info = '';
+end
+PS1(['\[\e[30;47m ', icon, ' ', host_info, '\e[37;43m\e[30m ﬧ \s \e[33;47m\e[30m  \t \e[37;44m\e[37m  \e[1m\w \e[0;34m\e[0m\]\n$ '])
+clear icon host_info

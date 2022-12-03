@@ -45,9 +45,16 @@ write_to = ".config/python/python/_version.py"
 [tool.black]
 line-length = 79
 
+[tool.isort]
+line_length = 79
+profile = "black"
+
 # https://github.com/PyCQA/pydocstyle/issues/418
 [tool.pydocstyle]
 add_ignore = "D205, D400"
+
+[tool.bandit]
+skips = ["B404", "B603", "B606"]
 
 [tool.codespell]
 ignore-words-list = "inout, hist, ist, acn, fot, inactivate, doubleclick, rime, enew, ommit, ue, lene, fo"

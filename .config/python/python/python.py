@@ -1,16 +1,17 @@
 """Run when ``python`` not ``ptpython``."""
-from datetime import datetime
-from getpass import getuser
 import os
 import platform
 import sys
+from contextlib import suppress
+from datetime import datetime
+from pathlib import Path
 
 import colorama
 from colorama import Back, Fore, Style
 from jedi.utils import setup_readline
-from rich import pretty
-from rich import traceback
+from rich import pretty, traceback
 
+colorama.init()
 pretty.install()
 traceback.install()
 setup_readline()
@@ -21,10 +22,6 @@ class _Ps1:
 
     def __init__(self):
         """__init__."""
-        self.n = 0
-        if sys.platform == "windows":
-            colorama.init()
-
         try:
             # python 3.10 support platform.freedesktop_os_release()
             os_name = platform.freedesktop_os_release().get("ID", "")
@@ -59,41 +56,65 @@ class _Ps1:
 
     def __str__(self):
         """__str__."""
-        self.n += 1
-        path = os.getcwd()
-        if os.access(path, 7):
-            path = " " + path
+        cwd = os.getcwd()
+        if os.access(cwd, 7):
+            logo = "  "
         else:
-            path = " " + path
-
+            logo = "  "
+        with suppress(ValueError):
+            cwd = str(Path(cwd).relative_to(Path.home()))
+            if cwd == ".":
+                cwd = "~"
+            else:
+                cwd = "~/" + cwd
+        head, mid, tail = cwd.rpartition("/")
         return (
-            Fore.WHITE
-            + Back.BLUE
-            + datetime.now().strftime("%F%T%a")
-            + Fore.BLUE
-            + Back.RED
-            + ""
-            + Fore.BLACK
-            + Back.RED
-            + getuser()
-            + Fore.RED
-            + Back.MAGENTA
-            + ""
-            + Fore.BLACK
-            + self.os_icon
-            + Fore.MAGENTA
+            Fore.BLACK
             + Back.YELLOW
-            + ""
-            + Fore.BLACK
-            + path
+            + " "
+            + self.os_icon
+            + " "
             + Fore.YELLOW
             + Back.BLACK
             + ""
+            + Fore.GREEN
+            + "  "
+            + ".".join(
+                map(
+                    str,
+                    [
+                        sys.version_info.major,
+                        sys.version_info.minor,
+                        sys.version_info.micro,
+                    ],
+                )
+            )
+            + " "
+            + Fore.BLACK
+            + Back.BLUE
+            + ""
+            + Fore.WHITE
+            + logo
+            + head
+            + mid
+            + Style.BRIGHT
+            + tail
+            + " "
+            + Style.RESET_ALL
+            + Fore.BLUE
+            + Back.WHITE
+            + ""
+            + Fore.BLACK
+            + " "
+            + datetime.now().strftime("%T")
+            + " "
+            + Fore.WHITE
+            + Back.RESET
+            + ""
             + Style.RESET_ALL
             + "\n"
-            + f"{self.n:2} "
+            + ">>> "
         )
 
 
 sys.ps1 = _Ps1()
-sys.ps2 = "--> "

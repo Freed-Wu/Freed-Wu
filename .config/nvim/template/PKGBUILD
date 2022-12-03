@@ -62,8 +62,8 @@ package() {
   # eval "$complete=zsh_source" "$bin" > "$bin.bash"
   # eval "$complete=bash_source" "$bin" > "_$bin"
   # eval "$complete=fish_source" "$bin" > "$bin.fish"
-  # install -D $bin.bash "$pkgdir/usr/share/bash-completion/completions/$bin"
-  # install -D _$bin -t "$pkgdir/usr/share/zsh/site-functions"
-  # install -D $bin.csh -t "$pkgdir/etc/profile.d"
-  # install -D $bin.fish -t "$pkgdir/usr/share/fish/vendor_completions.d"
+  # install -D "$bin.bash" "$pkgdir/usr/share/bash-completion/completions/$bin"
+  # install -D "_$bin" -t "$pkgdir/usr/share/zsh/site-functions"
+  # install -D "$bin.csh" -t "$pkgdir/etc/profile.d"
+  # install -D "$bin.fish" -t "$pkgdir/usr/share/fish/vendor_completions.d"
 }

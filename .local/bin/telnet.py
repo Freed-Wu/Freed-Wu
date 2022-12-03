@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Expect telnet."""
-from keyring import get_keyring
 import pexpect
+from keyring import get_keyring
 
 keyring = get_keyring()
 password = keyring.get_password("telnet", "admin")

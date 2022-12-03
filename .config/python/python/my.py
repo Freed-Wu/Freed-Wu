@@ -27,8 +27,8 @@ class My:
         :param args:
         :type args: int
         """
-        from fvcore.nn import FlopCountAnalysis
         import torch
+        from fvcore.nn import FlopCountAnalysis
 
         input = torch.zeros(1, *args)
         flops = FlopCountAnalysis(net, (input,))

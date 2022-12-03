@@ -29,3 +29,4 @@ nnoremap <silent><buffer> <LocalLeader>vd :<C-U>Pandoc docx<CR>
 nnoremap <silent><buffer> <LocalLeader>vD :<C-U>Pandoc! docx<CR>
 
 call init#textobj#map('pandoc')
+call init#init#sphinx#set()

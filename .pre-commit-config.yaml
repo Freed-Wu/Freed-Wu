@@ -1,5 +1,5 @@
 ---
-exclude: ^\.config/nvim/template/.*$
+exclude: ^\.config/nvim/template/.*
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -82,14 +82,31 @@ repos:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath@0.9.1
-  - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.278
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
     hooks:
-      - id: pyright
+      - id: black
+        exclude: *pdbrc
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.1.1
     hooks:
       - id: pydocstyle
+        additional_dependencies:
+          - toml
+  - repo: https://github.com/kumaraditya303/mirrors-pyright
+    rev: v1.1.278
+    hooks:
+      - id: pyright
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    hooks:
+      - id: bandit
+        args:
+          - -cpyproject.toml
         additional_dependencies:
           - toml
   - repo: https://github.com/vimjas/vint
