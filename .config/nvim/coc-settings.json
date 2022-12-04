@@ -105,6 +105,7 @@
   "texlab.chktex.onEdit": true,
   "texlab.chktex.onOpenAndSave": true,
   "texlab.forwardSearch.executable": "zathura",
+  "translator.engines": ["google"],
   "translator.enableHover": true,
   "yaml.format.singleQuote": true
 }

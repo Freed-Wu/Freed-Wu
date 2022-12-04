@@ -2,6 +2,7 @@
   :verbose false
   :theme "random"
   :tl "zh"
+  :engine "bing"
   :interactive true
 }
 # https://github.com/soimort/translate-shell/issues/473

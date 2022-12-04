@@ -105,7 +105,7 @@ class _Ps1:
             + Back.WHITE
             + ""
             + Fore.BLACK
-            + " "
+            + "  "
             + datetime.now().strftime("%T")
             + " "
             + Fore.WHITE

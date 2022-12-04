@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Make this module can be call by
+"""This module can be called by
 `python -m <https://docs.python.org/3/library/__main__.html>`_.
 """
 from argparse import ArgumentParser, RawDescriptionHelpFormatter

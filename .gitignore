@@ -159,6 +159,8 @@
 /.config/matplotlib/*
 !/.config/matplotlib/matplotlibrc
 !/.config/translate-shell/
+/.config/translate-shell/*.trans
+!/.config/translate-shell/init.trans
 !/.config/mypy/
 /.config/mypy/*
 !/.config/mypy/config

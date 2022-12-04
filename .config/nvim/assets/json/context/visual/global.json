@@ -1,6 +1,6 @@
 [
   ["&NRV", "NRV"],
   ["--"],
-  ["&Table-mode ▶", "call init#init#quickui#install('normal/table_mode')"],
-  ["&Coc ▶", "call init#init#quickui#install('normal/coc')"]
+  ["&Table-mode ▶", "call init#init#quickui#install('visual/table_mode')"],
+  ["&Coc ▶", "call init#init#quickui#install('visual/coc')"]
 ]

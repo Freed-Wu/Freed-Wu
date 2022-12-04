@@ -1,15 +1,19 @@
 <!-- markdownlint-disable MD041-->
 
 ```{toctree}
-:hidden:
-:caption: API
-
-%HERE%
+---
+hidden:
+glob:
+caption: API
+---
+api/*
 ```
 
 ```{toctree}
-:hidden:
-:caption: Index
+---
+hidden:
+caption: Index
+---
 
 genindex
 modindex
