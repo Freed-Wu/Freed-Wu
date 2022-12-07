@@ -53,7 +53,7 @@ package() {
 	# local bin
 	# bin=${_repo##*/}
 	# help2man "$pkgdir/usr/bin/$bin" | gzip >"$bin.1.gz"
-	# install -D "$bin.1.gz" -t "$pkgdir/usr/share/man/man1"
+	# install -Dm644 "$bin.1.gz" -t "$pkgdir/usr/share/man/man1"
 	# PYTHONPATH="$(ls -d "$pkgdir"/usr/lib/python*/site-packages)"
 	# export PYTHONPATH
 	# "$pkgdir/usr/bin/$bin" --print-completion bash > "$bin.bash"
@@ -64,8 +64,8 @@ package() {
 	# eval "$complete=zsh_source" "$bin" > "$bin.bash"
 	# eval "$complete=bash_source" "$bin" > "_$bin"
 	# eval "$complete=fish_source" "$bin" > "$bin.fish"
-	# install -D "$bin.bash" "$pkgdir/usr/share/bash-completion/completions/$bin"
-	# install -D "_$bin" -t "$pkgdir/usr/share/zsh/site-functions"
-	# install -D "$bin.csh" -t "$pkgdir/etc/profile.d"
-	# install -D "$bin.fish" -t "$pkgdir/usr/share/fish/vendor_completions.d"
+	# install -Dm644 "$bin.bash" "$pkgdir/usr/share/bash-completion/completions/$bin"
+	# install -Dm644 "_$bin" -t "$pkgdir/usr/share/zsh/site-functions"
+	# install -Dm644 "$bin.csh" -t "$pkgdir/etc/profile.d"
+	# install -Dm644 "$bin.fish" -t "$pkgdir/usr/share/fish/vendor_completions.d"
 }

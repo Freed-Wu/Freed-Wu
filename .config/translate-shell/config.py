@@ -9,5 +9,5 @@ def configure() -> Configuration:
     """
     config = Configuration()
     config.target_lang = "zh_CN"
-    config.translators = "google,stardict"
+    config.translators = "google,speaker"
     return config

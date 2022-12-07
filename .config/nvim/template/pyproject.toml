@@ -29,7 +29,7 @@ classifiers = [
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [project.urls]
-Homepage = "https://pypi.org/project/%DIR%"
+Homepage = "https://%DIR%.readthedocs.io"
 Download = "%GITHUB%/%DIR%/releases"
 "Bug Report" = "%GITHUB%/%DIR%/issues"
 Source = "%GITHUB%/%DIR%"
