@@ -2,7 +2,6 @@
 [![github/workflow](https://github.com/%GITHUB_USER%/%DIR%/actions/workflows/main.yml/badge.svg)](https://github.com/%GITHUB_USER%/%DIR%/actions)
 [![codecov](https://codecov.io/gh/%GITHUB_USER%/%DIR%/branch/main/graph/badge.svg)](https://codecov.io/gh/%GITHUB_USER%/%DIR%)
 [![readthedocs](https://shields.io/readthedocs/%DIR%)](https://%DIR%.readthedocs.io)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%?ref=badge_shield)
 
 [![github/downloads](https://shields.io/github/downloads/%GITHUB_USER%/%DIR%/total)](https://github.com/%GITHUB_USER%/%DIR%/releases)
 [![github/downloads/latest](https://shields.io/github/downloads/%GITHUB_USER%/%DIR%/latest/total)](https://github.com/%GITHUB_USER%/%DIR%/releases/latest)
@@ -34,18 +33,3 @@
 [![pypi/format](https://shields.io/pypi/format/%DIR%)](https://pypi.org/project/%DIR%/#files)
 [![pypi/implementation](https://shields.io/pypi/implementation/%DIR%)](https://pypi.org/project/%DIR%/#files)
 [![pypi/pyversions](https://shields.io/pypi/pyversions/%DIR%)](https://pypi.org/project/%DIR%/#files)
-
-[![docker/pulls](https://img.shields.io/docker/pulls/%DOCKERHUB_USER%/%DIR%)](https://hub.docker.com/r/%DOCKERHUB_USER%/%DIR%)
-[![docker/image-size](https://img.shields.io/docker/image-size/%DOCKERHUB_USER%/%DIR%)](https://hub.docker.com/r/%DOCKERHUB_USER%/%DIR%)
-[![docker/stars](https://img.shields.io/docker/stars/%DOCKERHUB_USER%/%DIR%)](https://hub.docker.com/r/%DOCKERHUB_USER%/%DIR%)
-[![docker/v](https://img.shields.io/docker/v/%DOCKERHUB_USER%/%DIR%)](https://hub.docker.com/r/%DOCKERHUB_USER%/%DIR%/tags)
-
-<!-- mdformat-toc start --slug=github --no-anchors --maxlevel=6 --minlevel=2 -->
-
-- [License](#license)
-
-<!-- mdformat-toc end -->
-
-## License
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2F%GITHUB_USER%%2F%DIR%?ref=badge_large)

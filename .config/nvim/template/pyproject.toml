@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >= 45", "setuptools_scm[toml] >= 6.2", "wheel"]
+requires = ["setuptools >= 45", "setuptools_scm[toml] >= 6.2", "setuptools-generate"]
 build-backend = "setuptools.build_meta"
 
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
@@ -34,8 +34,11 @@ Download = "%GITHUB%/%DIR%/releases"
 "Bug Report" = "%GITHUB%/%DIR%/issues"
 Source = "%GITHUB%/%DIR%"
 
-[tool.setuptools_scm]
-write_to = "src/%DIR%/_version.py"
+[project.scripts]
+%DIR% = "%DIR%.__main__:main"
+
+[tool.setuptools.package-data]
+%DIR% = ["py.typed", "assets/*"]
 
 [tool.setuptools.dynamic]
 dependencies = { file = "requirements.txt" }
@@ -43,8 +46,11 @@ dependencies = { file = "requirements.txt" }
 [tool.setuptools.dynamic.optional-dependencies]
 dev = { file = "requirements/dev.txt" }
 
-[project.scripts]
-%DIR% = "%DIR%.__main__:main"
+[tool.setuptools_scm]
+write_to = "src/%DIR%/_version.py"
+
+[tool.setuptools-generate]
+write-to = "src/%DIR%/_metainfo.py"
 
 [tool.black]
 line-length = 79
@@ -56,3 +62,19 @@ profile = "black"
 # https://github.com/PyCQA/pydocstyle/issues/418
 [tool.pydocstyle]
 add_ignore = "D205, D400"
+
+[tool.doq]
+template_path = "templates"
+
+[tool.coverage.report]
+exclude_lines = [
+  "if TYPE_CHECKING:",
+  "if __name__ == .__main__.:",
+  "\\s*import tomli as tomllib",
+]
+
+[tool.bandit.assert_used]
+skips = [
+  "*_test.py",
+  "test_*.py",
+]

@@ -11,7 +11,6 @@
   workflow_dispatch:
 
 env:
-  path: dist/*
   python-version: 3.x
   cache: pip
 
@@ -31,12 +30,28 @@ jobs:
         with:
           python-version: ${{ env.python-version }}
           cache: ${{ env.cache }}
+      - name: Install dependencies for Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt update
+          sudo apt install shfmt
+      - name: Install dependencies for macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install shellcheck shfmt
       - name: Install dependencies
         run: |
           pip install -e '.[dev]'
-      - name: Test
+      - name: Test for Linux and macOS
+        if: runner.os != 'Windows'
         run: |
           pytest --cov .
+          pre-commit run -a
+      - name: Test for Windows
+        if: runner.os == 'Windows'
+        run: |
+          pytest --cov
       - uses: codecov/codecov-action@v3
   build:
     needs: test
@@ -64,12 +79,14 @@ jobs:
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
         with:
           path: |
-            ${{ env.path }}
+            dist/*
+            build/resources/*
       - uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ${{ env.path }}
+            dist/*
+            build/resources/*
       - uses: pypa/gh-action-pypi-publish@release/v1
         if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
         with:
