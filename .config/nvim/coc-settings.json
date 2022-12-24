@@ -5,6 +5,50 @@
   "coc.preferences.enableMarkdown": true,
   "coc.source.emoji.shortcut": "😀",
   "dash-complete.shortcut": "-",
+  "diagnostic-languageserver.linters": {
+    "perl": {
+      "args": ["-wc", "%file"],
+      "command": "perl",
+      "isStderr": true,
+      "isStdout": false,
+      "debounce": 100,
+      "formatLines": 1,
+      "formatPattern": [
+        "^(.*) at .* line (\\d+)(.)(.*)$",
+        {
+          "message": [1, 4],
+          "line": 2,
+          "security": "3"
+        }
+      ],
+      "securities": {
+        ",": "error",
+        ".": "warning"
+      },
+      "offsetColumn": 0,
+      "offsetLine": 0,
+      "sourceName": "perl"
+    },
+    "zsh": {
+      "args": ["-n", "%file"],
+      "command": "zsh",
+      "comment": "https://github.com/iamcco/coc-diagnostic/pull/146",
+      "isStderr": true,
+      "isStdout": false,
+      "debounce": 100,
+      "formatLines": 1,
+      "formatPattern": [
+        "^.*:(\\d+): (parse error near .*)$",
+        {
+          "line": 1,
+          "message": 2
+        }
+      ],
+      "offsetColumn": 0,
+      "offsetLine": 0,
+      "sourceName": "zsh"
+    }
+  },
   "diagnostic-languageserver.filetypes": {
     "bbcode": ["write-good", "alex-text", "languagetool"],
     "cmake": ["cmake-lint", "cmakelint"],
@@ -15,9 +59,10 @@
     "latex": "lacheck",
     "mail": ["write-good", "alex-text", "languagetool"],
     "markdown": ["write-good", "markdownlint", "alex", "languagetool"],
+    "perl": "perl",
     "php": ["phpstan", "psalm"],
     "requirements": "pip-compile",
-    "sh": "shellcheck",
+    "sh": ["shellcheck", "zsh"],
     "syntax_test": "syntest",
     "systemd": "systemd-analyze",
     "text": ["write-good", "alex-text", "languagetool"],

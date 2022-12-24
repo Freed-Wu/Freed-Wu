@@ -1,9 +1,5 @@
 # shellcheck disable=all
 # Default {{{1 #
-if ((! $+HOMEBREW_BAT)); then
-  . ~/.zprofile
-fi
-
 ZPFX="$HOME/.local"
 typeset -A ZINIT
 ZINIT[MAN_DIR]="$ZPFX/share/man"
@@ -222,7 +218,6 @@ zinit id-as'.lesspipe.sh' depth'1' wait lucid \
 # https://github.com/Kaggle/kaggle-api/issues/446
 zinit id-as'.pass' depth'1' as'null' wait lucid \
   atclone'echo "export CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
-echo "export WAKATIME_API_KEY=$(pass ls wakatime/api_key)" >> pass.sh
 echo "export KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
 echo "export KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh' \
   if'(($+commands[pass]))' \
@@ -384,9 +379,4 @@ zinit id-as depth'1' wait lucid \
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
 zinit id-as depth'1' null for zdharma-continuum/zinit
 # 1}}} Compatible #
-
-# https://github.com/msys2/MSYS2-packages/issues/2998
-if [[ $OSTYPE == cygwin || $OSTYPE == msys ]]; then
-  . ~/.config/zsh/program.zsh
-fi
 # ex: foldmethod=marker

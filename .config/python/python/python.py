@@ -8,13 +8,18 @@ from pathlib import Path
 
 import colorama
 from colorama import Back, Fore, Style
-from jedi.utils import setup_readline
 from rich import pretty, traceback
 
 colorama.init()
 pretty.install()
 traceback.install()
-setup_readline()
+
+with suppress(ImportError):
+    import readline
+
+    from jedi.utils import setup_readline
+
+    setup_readline()
 
 
 class _Ps1:
@@ -22,16 +27,16 @@ class _Ps1:
 
     def __init__(self):
         """__init__."""
-        try:
-            # python 3.10 support platform.freedesktop_os_release()
-            os_name = platform.freedesktop_os_release().get("ID", "")
-        except AttributeError:
-            os_name = ""
-        except OSError:
-            if os.getenv("PREFIX") == "/data/data/com.termux/files/usr":
-                os_name = "android"
-            else:
-                os_name = sys.platform
+        os_name = sys.platform
+        if os_name.startswith("linux"):
+            try:
+                # python 3.10 support platform.freedesktop_os_release()
+                os_name = platform.freedesktop_os_release().get("ID", "")
+            except AttributeError:
+                pass
+            except OSError:
+                if os.getenv("PREFIX") == "/data/data/com.termux/files/usr":
+                    os_name = "android"
 
         icons = {
             "linux": "",
@@ -106,7 +111,7 @@ class _Ps1:
             + ""
             + Fore.BLACK
             + "  "
-            + datetime.now().strftime("%T")
+            + datetime.now().strftime("%H:%M:%S")
             + " "
             + Fore.WHITE
             + Back.RESET

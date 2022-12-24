@@ -5,18 +5,9 @@ import os
 import sys
 from contextlib import suppress
 
+from python.my import my
 from rich import print
 from rich.logging import RichHandler
-
-try:
-    from python.my import my
-except ImportError:
-    sys.path.insert(
-        0,
-        os.path.dirname(os.path.dirname(os.getenv("PYTHONSTARTUP", __file__))),
-    )
-
-    from python.my import my
 
 if sys.argv[0] == "":
     from python.python import sys

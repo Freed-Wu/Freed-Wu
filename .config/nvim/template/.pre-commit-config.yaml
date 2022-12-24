@@ -57,12 +57,8 @@ repos:
         args:
           - --number
         additional_dependencies:
-          - mdformat-gfm
           - mdformat-myst
-          - mdformat-tables
           - mdformat-toc
-          - mdformat-footnote
-          - mdformat-frontmatter
           - mdformat-deflist
           - mdformat-beautysh
           - mdformat-black

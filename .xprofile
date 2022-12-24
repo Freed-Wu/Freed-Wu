@@ -37,7 +37,7 @@ export GKS_ENCODING=utf-8
 export WINEDEBUG=-all
 # python
 export PYTHONSTARTUP=${XDG_CONFIG_HOME:-$HOME/.config}/python/python/init.py
-export PYTHONBREAKPOINT=pudb.set_trace
+export PYTHONBREAKPOINT=pudb.forked.set_trace
 # lesspipe
 export LESSQUIET=1
 # fzf
