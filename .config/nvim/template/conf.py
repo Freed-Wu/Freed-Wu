@@ -2,18 +2,8 @@
 
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
-import os
-from datetime import datetime
-
-from %DIR2% import __version__ as version
-
-try:
-    import tomllib  # type: ignore
-except ImportError:
-    import tomli as tomllib
-
-scriptdir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "scripts")
-os.environ["PATH"] = scriptdir + os.path.pathsep + os.getenv("PATH", "")
+from %DIR% import __version__ as version
+from %DIR%._metainfo import author, copyright, project
 
 # -- Path setup --------------------------------------------------------------
 
@@ -23,16 +13,6 @@ os.environ["PATH"] = scriptdir + os.path.pathsep + os.getenv("PATH", "")
 
 # -- Project information -----------------------------------------------------
 language = "en"
-copyright = "%YEAR%-" + str(datetime.now().year)
-
-PROJECT_FILE = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)), "pyproject.toml"
-)
-
-with open(PROJECT_FILE, "rb") as f:
-    data = tomllib.load(f)["project"]
-    author = data["authors"][0]["name"]
-    project = data["name"]
 
 # -- General configuration ---------------------------------------------------
 
@@ -46,6 +26,7 @@ extensions = [
 ]
 
 myst_heading_anchors = 3
+myst_title_to_header = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]

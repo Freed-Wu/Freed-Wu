@@ -53,6 +53,9 @@ profile = "black"
 [tool.pydocstyle]
 add_ignore = "D205, D400"
 
+[tool.doq]
+template_path = ".config/python/templates"
+
 [tool.bandit]
 skips = ["B404", "B603", "B606"]
 

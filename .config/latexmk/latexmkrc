@@ -1,29 +1,34 @@
-$show_time = 1;
-$dependents_phony = 1;
-$do_cd = 1;
-$preview_continuous_mode = 1;
-$bibtex_use = 1.5;
+my $show_time = 1;
+my $dependents_phony = 1;
+my $do_cd = 1;
+my $preview_continuous_mode = 1;
+my $bibtex_use = 1.5;
 # *.ins cannot generate pdf
 push @default_files, '*.dtx';
 push @default_files, '*.tikz';
 
-$pdf_mode = 5;
-$pdflatex = 'pdflatex -shell-escape -file-line-error -synctex=1 %O %S';
-$xelatex = 'xelatex -shell-escape -8bit -file-line-error -no-pdf -synctex=1 %O %S';
-$lualatex = 'lualatex -shell-escape -file-line-error -synctex=1 %O %S';
+my $pdf_mode = 5;
+my $pdflatex = 'pdflatex -shell-escape -file-line-error -synctex=1 %O %S';
+my $xelatex = 'xelatex -shell-escape -8bit -file-line-error -no-pdf -synctex=1 %O %S';
+my $lualatex = 'lualatex -shell-escape -file-line-error -synctex=1 %O %S';
 
 # http://www.alma.ch/perl/perloses.htm
-if ($^O eq "linux") {
+my $pdf_previewer;
+my $compiling_cmd;
+my $success_cmd;
+my $failure_cmd;
+my $warning_cmd;
+if ($^O eq 'linux') {
 	$pdf_previewer = 'xdg-open %S';
 	$compiling_cmd = 'xdotool search --name "%D" set_window --name "%D "';
 	$success_cmd   = 'xdotool search --name "%D" set_window --name "%D ✔"';
 	$failure_cmd   = 'xdotool search --name "%D" set_window --name "%D ✗"';
 	$warning_cmd   = 'xdotool search --name "%D" set_window --name "%D ⚠"';
 }
-elsif ($^O eq "MSWin32") {
+elsif ($^O eq 'MSWin32') {
 	$pdf_previewer = 'start %S';
 }
-elsif ($^O eq "MacOS") {
+elsif ($^O eq 'MacOS') {
 	$pdf_previewer = 'open %S';
 }
 
@@ -41,7 +46,7 @@ sub pythontex{
 }
 
 # docstrip
-$clean_full_ext = 'sty cls';
+my $clean_full_ext = 'sty cls';
 # tex4ht
 $clean_full_ext .= ' css html';
 # TeX.gitignore:

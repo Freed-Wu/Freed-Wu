@@ -45,7 +45,7 @@ function! init#coc#source() abort
         \ 'coc-webview', 'coc-markdown-preview-enhanced',
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',
         \ 'coc-clang-format-style-options', 'coc-docker',
-        \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-texlab',
+        \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-texlab', 'coc-perl',
         \ 'coc-jedi', 'coc-pyright', 'coc-lua', 'coc-solargraph', 'coc-clangd',
         \ ]
   " tabnine don't support android

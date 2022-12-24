@@ -46,6 +46,7 @@
 !/.xsession
 !/.pypirc
 !/.wakatime.cfg
+!/.replyrc
 
 # dotfiles
 !/.dosbox/
@@ -106,6 +107,11 @@
 !/.nixpkgs/
 /.nixpkgs/*
 !/.nixpkgs/darwin-configuration.nix
+!/.cpan/
+/.cpan/*
+!/.cpan/CPAN/
+/.cpan/CPAN/*
+!/.cpan/CPAN/MyConfig.pm
 !/.vscode-remote/
 /.vscode-remote/*
 !/.vscode-remote/data/
@@ -298,6 +304,17 @@
 !/.local/bin/adb.py
 !/.local/bin/telnet.py
 !/.local/bin/git-neomutt
+
+# LIB
+!/.local/lib/
+/.local/lib/*
+!/.local/lib/perl5/
+/.local/lib/perl5/*
+!/.local/lib/perl5/Reply/
+/.local/lib/perl5/Reply/*
+!/.local/lib/perl5/Reply/Plugin/
+/.local/lib/perl5/Reply/Plugin/*
+!/.local/lib/perl5/Reply/Plugin/Prompt.pm
 
 # Windows
 !/.minttyrc

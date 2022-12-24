@@ -11,6 +11,9 @@ MANOPT=-Lzh_CN.UTF-8
 export MANOPT
 MANSECT='1:1p:8:3:3p:0:0p:2:5:4:9:6:7:n:l'
 export MANSECT
+# perl
+export PERL5LIB
+PERL5LIB="$HOME/.local/lib/perl5"
 # neomutt
 EMAIL="$(git config user.email)"
 export EMAIL

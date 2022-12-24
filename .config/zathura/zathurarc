@@ -1,4 +1,5 @@
 include zathura-gruvbox/zathura-gruvbox-light
-set font 'JetBrainsMono Nerd Font regular 12'
+include desktop/zathurarc
 set recolor false
 set window-title-page true
+# ex: filetype=vim

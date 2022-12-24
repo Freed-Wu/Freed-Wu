@@ -1,3 +1,2 @@
 #!/usr/bin/env sh
-# https://github.com/platformdirs/platformdirs/pull/115
-SHELL='' trans
+trans
