@@ -33,7 +33,6 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    my_init_start_time
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
@@ -72,6 +71,7 @@
     gcloud                  # google cloud cli account and project (https://cloud.google.com/)
     google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
     context                 # user@hostname
+    my_init_start_time
     nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
     ranger                  # ranger shell (https://github.com/ranger/ranger)
     nnn                     # nnn shell (https://github.com/jarun/nnn)
@@ -917,7 +917,7 @@
   # Context format when in SSH without privileges: user@hostname.
   # https://github.com/romkatv/powerlevel10k/issues/2101
   if (($+PAI_JOB_NAME)); then
-    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@'$PAI_JOB_NAME:${SSH_CONNECTION[(w)-1]}
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@'$PAI_JOB_NAME
   else
     typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
   fi
@@ -1664,8 +1664,16 @@
   fi
 
   function prompt_my_init_start_time() {
+    local time fg
     if [[ -n $my_init_start_time ]]; then
-      p10k segment -b yellow -f red -i  -t ${${(f)$(pdd --sub "$my_init_start_time")[-2]}//\%/%%}
+      if (($+commands[pdd])); then
+        time=${(f)$(pdd --sub $my_init_start_time)[-2]}
+        fg=red
+      else
+        time=$my_init_start_time
+        fg=green
+      fi
+      p10k segment -b blue -f $fg -i  -t ${time//\%/%%}
     fi
   }
 
