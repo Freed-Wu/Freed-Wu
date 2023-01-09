@@ -1,5 +1,11 @@
-"""Configuration file for ipython."""
+"""Config
+=========
 
+Configure ``ipython``.
+"""
+from traitlets.config.loader import Config
+
+c = Config()
 # ------------------------------------------------------------------------------
 # InteractiveShellApp(Configurable) configuration
 # ------------------------------------------------------------------------------
