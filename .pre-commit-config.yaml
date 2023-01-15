@@ -1,3 +1,4 @@
+#!/usr/bin/env -S pre-commit run -ac
 ---
 exclude: ^\.config/nvim/template/.*
 
@@ -14,10 +15,11 @@ repos:
         exclude: ^\.config/pudb/pudb\.cfg$
       - id: mixed-line-ending
       - id: end-of-file-fixer
-        exclude: ^\.(docker/config\.json|config/(pudb/pudb\.cfg|fcitx.*))$
+        exclude: >-
+          ^\.(docker/config\.json|config/(pudb/pudb\.cfg|fcitx.*|python/templates/class\.txt))|$
       - id: detect-private-key
       - id: check-symlinks
-        exclude: ^AppData/Local/nvim$
+        exclude: ^(AppData/Local/nvim|\.termux/shell)$
       - id: check-ast
         exclude: &pdbrc ^\.pdbrc$
       - id: debug-statements
@@ -66,6 +68,7 @@ repos:
         args:
           - --number
         additional_dependencies:
+          - mdformat-gfm
           - mdformat-myst
           - mdformat-toc
           - mdformat-deflist

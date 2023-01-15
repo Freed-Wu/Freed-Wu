@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# https://github.com/termux/termux-packages/issues/4781
+# some distributions' man is man-doc not man-db
+col -bx <"$1" | bat -plman

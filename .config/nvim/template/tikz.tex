@@ -1,6 +1,6 @@
 %! TeX program = lualatex
 \documentclass[tikz]{standalone}
-\usetikzlibrary{arrows.meta, quotes, graphs, graphdrawing}
+\usetikzlibrary{arrows.meta, quotes, graphs, graphdrawing, shapes.geometric}
 \usegdlibrary{layered}
 \usepackage{hyperref}
 \title{%FILE%}
@@ -12,8 +12,9 @@
 \newcommand{\Authorname}[0]{\href{mailto:\Email}{\Name}}
 \author{\Authorname\thanks{\href{https://ustc.edu.cn/}{USTC}}}
 \begin{document}
+\tikzset{io/.style={trapezium, trapezium left angle=60, trapezium right angle=120, rounded corners=false}}
 \begin{tikzpicture}[rounded corners, >=Stealth, auto]
-  \graph[layered layout, nodes={draw}]{%
+  \graph[layered layout, nodes={draw, align=center}]{%
     %HERE%;
   };
 \end{tikzpicture}

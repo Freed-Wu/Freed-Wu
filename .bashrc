@@ -17,6 +17,9 @@ shopt -s histverify
 shopt -s globstar
 shopt -s checkhash
 shopt -s mailwarn
+if [[ $OSTYPE == msys2 || $OSTYPE == cygwin ]]; then
+	shopt -s completion_strip_exe
+fi
 stty -ixon
 HISTIGNORE='&: *'
 

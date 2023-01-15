@@ -1,4 +1,4 @@
-%YAML 1.2
+#!/usr/bin/env -S yamllint -c
 ---
 extends: default
 

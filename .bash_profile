@@ -26,9 +26,7 @@ if [[ $OSTYPE != msys2 && -d /mingw64/bin ]]; then
 	export PATH=$PATH:/mingw64/bin
 fi
 if [[ $OSTYPE == linux-android ]]; then
-	export PATH=$PATH:$HOME/bin:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
-	# https://github.com/termux/termux-packages/issues/4781
-	# android/alpine/bsd/darwin use mandoc not man-db
+	export PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
 	export MANPAGER=batman
 	if [[ -n $DISPLAY ]]; then
 		export BROWSER='gio open'

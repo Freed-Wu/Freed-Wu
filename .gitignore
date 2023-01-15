@@ -298,14 +298,15 @@
 !/.local/share/fzf/
 !/.local/share/bash/
 
-# BIN
+# bin
 !/.local/bin/
 /.local/bin/*
 !/.local/bin/adb.py
 !/.local/bin/telnet.py
 !/.local/bin/git-neomutt
+!/.local/bin/batman
 
-# LIB
+# lib
 !/.local/lib/
 /.local/lib/*
 !/.local/lib/perl5/
@@ -334,16 +335,11 @@
 !/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json
 !/Documents/
 /Documents/*
-!/Documents/WindowsPowerShell
+!/Documents/PowerShell
 
 # Android
-# https://github.com/termux/termux-app/issues/2826
 !/.termux/
-/.termux/*
-!/.termux/termuxrc.sh
-!/.termux/.profile
-!/.termux/termux.properties
-!/.termux/colors.properties
-!/.termux/boot
-!/.shortcuts/
-!/bin/
+/.termux/*.ttf
+# https://github.com/termux/termux-app/issues/2826
+!/bin
+!/.shortcuts

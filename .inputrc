@@ -21,3 +21,4 @@ set vi-ins-mode-string \1\e[3 q\2
 set vi-cmd-mode-string \1\e[2 q\2
 set visible-stats on
 set show-mode-in-prompt on
+set enable-bracketed-paste on

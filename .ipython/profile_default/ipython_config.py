@@ -3,9 +3,10 @@
 
 Configure ``ipython``.
 """
-from traitlets.config.loader import Config
+from contextlib import suppress
 
-c = Config()
+from repl_python_wakatime.ipython import install_hook
+
 # ------------------------------------------------------------------------------
 # InteractiveShellApp(Configurable) configuration
 # ------------------------------------------------------------------------------
@@ -677,12 +678,11 @@ c.TerminalInteractiveShell.mouse_support = True
 
 ## Class used to generate Prompt token for prompt_toolkit
 #  Default: 'IPython.terminal.prompts.Prompts'
-try:
+with suppress(ImportError):
     from powerline.bindings.ipython.since_7 import PowerlinePrompts
 
     c.TerminalInteractiveShell.prompts_class = PowerlinePrompts
-except ImportError:
-    pass
+install_hook(c)
 
 ## Deprecated since IPython 4.0 and ignored since 5.0, set
 #  TerminalInteractiveShell.prompts object directly.

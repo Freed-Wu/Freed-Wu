@@ -85,6 +85,7 @@
   "prettier.ignorePath": ".gitignore",
   "pydocstring.doqPath": "/usr/bin/doq",
   "pydocstring.enableFileAction": true,
+  "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",
   "python.linting.banditEnabled": true,
   "python.linting.pycodestyleEnabled": true,

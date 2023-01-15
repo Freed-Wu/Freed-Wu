@@ -10,6 +10,13 @@ function! init#init#template#dir() abort
 endfunction
 
 ""
+" for sphinx config file:
+" foo/docs/conf.py -> foo
+function! init#init#template#dir2() abort
+  return expand('%:p:h:h:t')
+endfunction
+
+""
 " for github actions:
 " foo/.github/workflows/main.yml -> foo
 function! init#init#template#dir3() abort

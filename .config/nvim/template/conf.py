@@ -2,8 +2,8 @@
 
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
-from %DIR% import __version__ as version
-from %DIR%._metainfo import author, copyright, project
+from %DIR2% import __version__ as version  # type: ignore
+from %DIR2%._metainfo import author, copyright, project  # type: ignore
 
 # -- Path setup --------------------------------------------------------------
 

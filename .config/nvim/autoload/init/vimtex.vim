@@ -102,9 +102,6 @@ function! init#vimtex#source() abort
           \ . ':\%l^<CR^>:normal\! zzzv^<CR^>'
           \ . ':call remote_foreground('''.v:servername.''')^<CR^>^<CR^>\""'
   endif
-  let g:vimtex_compiler_latexmk_engines = {
-        \ '_': '-xelatex',
-        \ }
 endfunction
 
 augroup init#vimtex

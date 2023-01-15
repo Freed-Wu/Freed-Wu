@@ -2,7 +2,7 @@
 	"common": {
 		"default_top_theme": "powerline",
 		"cursor_columns": 160,
-		"term_truecolor": false
+		"term_truecolor": true
 	},
 	"ext": {
 		"ipython": {

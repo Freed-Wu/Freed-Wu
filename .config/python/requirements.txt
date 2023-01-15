@@ -4,5 +4,6 @@ colorama
 fvcore
 jedi
 numpy
+python-wakatime
 rich
 torch

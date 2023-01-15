@@ -6,13 +6,10 @@ from contextlib import suppress
 from datetime import datetime
 from pathlib import Path
 
-import colorama
-from colorama import Back, Fore, Style
-from rich import pretty, traceback
+from colorama import Back, Fore, Style, init
+from repl_python_wakatime.python import install_hook
 
-colorama.init()
-pretty.install()
-traceback.install()
+init()
 
 with suppress(ImportError):
     import readline
@@ -22,10 +19,10 @@ with suppress(ImportError):
     setup_readline()
 
 
-class _Ps1:
-    """_Ps1."""
+class Ps1:
+    """Ps1."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """__init__."""
         os_name = sys.platform
         if os_name.startswith("linux"):
@@ -59,7 +56,7 @@ class _Ps1:
         }
         self.os_icon = icons.get(os_name, "?")
 
-    def __str__(self):
+    def __str__(self) -> str:
         """__str__."""
         cwd = os.getcwd()
         if os.access(cwd, 7):
@@ -122,4 +119,5 @@ class _Ps1:
         )
 
 
-sys.ps1 = _Ps1()
+sys.ps1 = Ps1()
+install_hook()

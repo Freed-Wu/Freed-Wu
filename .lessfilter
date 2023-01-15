@@ -57,7 +57,7 @@ elif [ "$kind" = json ]; then
 	if [ "$(command -v jupyter)" ] && [ "$(command -v bat)" ] && [ "$ext" = ipynb ]; then
 		jupyter nbconvert --to python --stdout "$1" | bat --color=always -plpython
 	elif [ "$(command -v jq)" ]; then
-		jq -r . "$1" --color-output
+		jq -Cr . "$1"
 	fi
 elif [ "$kind" = vnd.sqlite3 ]; then
 	if [ "$(command -v yes)" ] && [ "$(command -v sqlite3)" ] && [ "$(command -v bat)" ]; then

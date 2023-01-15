@@ -1,1 +1,0 @@
-col -bx < $1|bat -plman

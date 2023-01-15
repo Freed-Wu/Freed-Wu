@@ -1,4 +1,13 @@
 <!-- markdownlint-disable MD041-->
+```{toctree}
+---
+hidden:
+glob:
+caption: resources
+---
+resources/*
+```
+
 
 ```{toctree}
 ---
@@ -14,7 +23,6 @@ api/*
 hidden:
 caption: Index
 ---
-
 genindex
 modindex
 search
