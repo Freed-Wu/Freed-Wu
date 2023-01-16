@@ -8,7 +8,6 @@ caption: resources
 resources/*
 ```
 
-
 ```{toctree}
 ---
 hidden:
@@ -29,4 +28,7 @@ search
 ```
 
 ```{include} ../README.md
+---
+relative-docs: docs
+---
 ```

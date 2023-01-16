@@ -1,28 +1,6 @@
-# zathura
-[submodule ".config/zathura/zathura-gruvbox"]
-	path = .config/zathura/zathura-gruvbox
-	url = https://github.com/rwrr/zathura-gruvbox
-[submodule ".config/zathura/zathura-solarized"]
-	path = .config/zathura/zathura-solarized
-	url = https://github.com/lennonwoo/zathura-solarized
-# XDG
-[submodule ".local/share/icons/Windows-10"]
-	path = .local/share/icons/Windows-10
-	url = https://github.com/B00merang-Artwork/Windows-10
-[submodule ".local/share/themes/Windows-10"]
-	path = .local/share/themes/Windows-10
-	url = https://github.com/B00merang-Project/Windows-10
-# pandoc
-[submodule ".local/share/pandoc/styles"]
-	path = .local/share/pandoc/styles
-	url = https://github.com/citation-style-language/styles
-# self
 [submodule ".config/neomutt/mutt-colors-custom"]
 	path = .config/neomutt/mutt-colors-custom
 	url = https://github.com/Freed-Wu/mutt-colors-custom
 [submodule ".gnupg"]
 	path = .gnupg
 	url = https://github.com/Freed-Wu/.gnupg
-[submodule ".local/share/bash/bash-wakatime"]
-	path = .local/share/bash/bash-wakatime
-	url = https://github.com/irondoge/bash-wakatime

@@ -1,4 +1,4 @@
-include zathura-gruvbox/zathura-gruvbox-light
+include /usr/share/zathura/themes/zathura-gruvbox-light
 include desktop/zathurarc
 set recolor false
 set window-title-page true

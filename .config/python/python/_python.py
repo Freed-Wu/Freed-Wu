@@ -7,6 +7,7 @@ from datetime import datetime
 from pathlib import Path
 
 from colorama import Back, Fore, Style, init
+from repl_python_codestats.python import install_hook as install_codestats_hook
 from repl_python_wakatime.python import install_hook
 
 init()
@@ -121,3 +122,4 @@ class Ps1:
 
 sys.ps1 = Ps1()
 install_hook()
+install_codestats_hook()

@@ -260,6 +260,7 @@
 !/.config/Code - OSS
 !/.config/VSCodium
 !/.config/lxqt/
+/.config/lxqt/lxqt-config*.conf
 !/.config/openbox/
 !/.config/wezterm/
 !/.config/luarocks/

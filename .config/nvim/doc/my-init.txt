@@ -19,6 +19,9 @@ init#init#template#dir()                            *init#init#template#dir()*
   for LaTeX package script foo/build.lua -> foo for pre-commit hook config
   foo/.pre-commit_hooks.yaml -> foo for README.md foo/README.md -> foo
 
+init#init#template#dir_()                          *init#init#template#dir_()*
+  for pyproject.toml foo-bar/pyproject.toml -> foo_bar
+
 init#init#template#dir2()                          *init#init#template#dir2()*
   for sphinx config file: foo/docs/conf.py -> foo
 

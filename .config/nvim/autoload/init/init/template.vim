@@ -10,6 +10,13 @@ function! init#init#template#dir() abort
 endfunction
 
 ""
+" for pyproject.toml
+" foo-bar/pyproject.toml -> foo_bar
+function! init#init#template#dir_() abort
+  return substitute(expand('%:p:h:t'), '-', '_', 'g')
+endfunction
+
+""
 " for sphinx config file:
 " foo/docs/conf.py -> foo
 function! init#init#template#dir2() abort

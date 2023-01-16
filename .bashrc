@@ -28,8 +28,8 @@ if [[ -f ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]
 fi
 
 if command -v wakatime &>/dev/null &&
-	[[ -f ~/.local/share/bash/bash-wakatime/bash-wakatime.sh ]]; then
-	. ~/.local/share/bash/bash-wakatime/bash-wakatime.sh
+	[[ -f /usr/share/bash-wakatime/bash-wakatime.sh ]]; then
+	. /usr/share/bash-wakatime/bash-wakatime.sh
 fi
 
 if command -v tmux &>/dev/null &&
