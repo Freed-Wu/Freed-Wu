@@ -284,12 +284,6 @@
 !/.local/share/flatpak/repo/
 /.local/share/flatpak/repo/*
 !/.local/share/flatpak/repo/config
-!/.local/share/icons/
-/.local/share/icons/hicolor/
-!/.local/share/themes/
-/.local/share/themes/*
-!/.local/share/themes/luZorin/
-!/.local/share/themes/Emacs/
 !/.local/share/pandoc/
 !/.local/share/fcitx5/
 /.local/share/fcitx5/*
@@ -297,7 +291,6 @@
 /.local/share/fcitx5/rime/*
 !/.local/share/fcitx5/rime/*.custom.yaml
 !/.local/share/fzf/
-!/.local/share/bash/
 
 # bin
 !/.local/bin/
