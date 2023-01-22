@@ -16,6 +16,8 @@
 !/.bashrc
 !/.zprofile
 !/.zshrc
+!/.zlogin
+!/.zlogout
 !/.p10k.zsh
 !/.Rprofile
 !/.inputrc

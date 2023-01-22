@@ -250,7 +250,7 @@ function! init#smartinput#post_source() abort
 
   call smartinput#map_to_trigger('i', '(', '(', '(')
   call smartinput#define_rule({
-        \ 'at': '\%#',
+        \ 'at': '\S\%#',
         \ 'char': '(',
         \ 'input': ' ()' . left,
         \ 'filetype': ['text'],

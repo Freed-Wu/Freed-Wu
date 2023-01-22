@@ -54,7 +54,7 @@ repos:
       - id: check-mailmap
       - id: shellcheck
       - id: shfmt
-        exclude: .*\.zsh$|^\.z(profile|shrc)$
+        exclude: .*\.zsh$|^\.z(profile|shrc|log(in|out))$
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.29.0
     hooks:
