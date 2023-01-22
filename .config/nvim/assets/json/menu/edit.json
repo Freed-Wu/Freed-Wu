@@ -8,5 +8,6 @@
   ["--"],
   ["&Delete", "Delete"],
   ["Delete&!", "Delete!"],
-  ["Chmod +&x", "Chmod +x"]
+  ["Chmod +&x", "Chmod +x"],
+  ["Chmod &-x", "Chmod -x"]
 ]

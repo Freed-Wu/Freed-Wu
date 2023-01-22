@@ -1,8 +1,7 @@
 #!/usr/bin/env -S pip install -r
 
+fvcore
 gpustat
-pdd
-pre-commit
+numpy
 ptpython
 pudb
-visidata

@@ -33,3 +33,4 @@
 -m'*.tikz:LaTeX'
 -m'*.cu:C'
 -m'*.cuh:C'
+-m'*.tlu:Lua'

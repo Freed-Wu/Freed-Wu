@@ -24,6 +24,13 @@ function! init#init#template#dir2() abort
 endfunction
 
 ""
+" for pytest file:
+" foo-bar/tests/baz_test.py -> foo_bar
+function! init#init#template#dir2_() abort
+  return substitute(expand('%:p:h:h:t'), '-', '_', 'g')
+endfunction
+
+""
 " for github actions:
 " foo/.github/workflows/main.yml -> foo
 function! init#init#template#dir3() abort

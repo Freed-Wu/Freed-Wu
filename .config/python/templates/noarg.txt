@@ -1,1 +1,1 @@
-"""{{ name.replace("_", " ").strip().capitalize() }}."""
+r"""{{ name.replace("_", " ").strip().capitalize() }}."""

@@ -27,9 +27,18 @@ if [[ -f ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]
 	. ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash
 fi
 
+if [ -f /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh ]; then
+	. /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh
+fi
+
 if command -v wakatime &>/dev/null &&
 	[[ -f /usr/share/bash-wakatime/bash-wakatime.sh ]]; then
 	. /usr/share/bash-wakatime/bash-wakatime.sh
+fi
+
+if command -v curl &>/dev/null &&
+	[[ -f /usr/share/code-stats-bash/codestats.sh ]]; then
+	. /usr/share/code-stats-bash/codestats.sh
 fi
 
 if command -v tmux &>/dev/null &&
@@ -79,9 +88,6 @@ if command -v lsb_release &>/dev/null; then
 	fi
 fi
 declare icon=${platforms[$platform]}
-if [ -f /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh ]; then
-	. /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh
-fi
 if [[ -n $SSH_TTY || $USER == root ]]; then
 	declare host_info=" \u@\h"
 fi

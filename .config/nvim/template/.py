@@ -1,4 +1,4 @@
-"""%FILE%
+r"""%FILE%
 """
 import logging
 

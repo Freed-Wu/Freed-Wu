@@ -1,4 +1,6 @@
-"""Run when ``python`` not ``ptpython``."""
+"""Python REPL Specific Code
+============================
+"""
 import os
 import platform
 import sys

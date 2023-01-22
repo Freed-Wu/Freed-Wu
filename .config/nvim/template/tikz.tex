@@ -4,13 +4,6 @@
 \usegdlibrary{layered}
 \usepackage{hyperref}
 \title{%FILE%}
-\ExplSyntaxOn%
-\NewDocumentCommand{\Shell}{om}{\sys_get_shell:nnN{#2}{}#1}
-\ExplSyntaxOff%
-\Shell[\Name]{git config user.name}
-\Shell[\Email]{git config user.email}
-\newcommand{\Authorname}[0]{\href{mailto:\Email}{\Name}}
-\author{\Authorname\thanks{\href{https://ustc.edu.cn/}{USTC}}}
 \begin{document}
 \tikzset{io/.style={trapezium, trapezium left angle=60, trapezium right angle=120, rounded corners=false}}
 \begin{tikzpicture}[rounded corners, >=Stealth, auto]

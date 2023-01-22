@@ -167,6 +167,9 @@ snoremap <C-Y> <C-G>pgv<C-G>
 nnoremap <silent> y<C-F>
       \ :<C-U>let @+ = join([expand('%'), line('.'), getline('.')], ':')<CR>
 nnoremap <silent> y<C-L> :<C-U>let @+ = join([expand('%'), line('.')], ':')<CR>
+nnoremap <silent> y<M-f>
+      \ :<C-U>let @+ = join([expand('%:p'), line('.'), getline('.')], ':')<CR>
+nnoremap <silent> y<M-l> :<C-U>let @+ = join([expand('%:p'), line('.')], ':')<CR>
 nnoremap <silent> <2-LeftMouse> :call init#init#map#2leftmouse()<CR>
 nnoremap <silent> <RightMouse> :call init#init#quickui#install('normal/rightmenu/default')<CR>
 

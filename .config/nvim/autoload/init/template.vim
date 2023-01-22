@@ -8,6 +8,7 @@ function! init#template#source() abort
         \ ['DIR', 'init#init#template#dir'],
         \ ['DIR_', 'init#init#template#dir_'],
         \ ['DIR2', 'init#init#template#dir2'],
+        \ ['DIR2_', 'init#init#template#dir2_'],
         \ ['DIR3', 'init#init#template#dir3'],
         \ ['CFILE', 'init#init#template#cfile'],
         \ ['FILE_', 'init#init#template#file_'],

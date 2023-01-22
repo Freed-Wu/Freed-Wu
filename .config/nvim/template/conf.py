@@ -1,4 +1,4 @@
-"""Configure the Sphinx documentation builder.
+r"""Configure the Sphinx documentation builder.
 
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """

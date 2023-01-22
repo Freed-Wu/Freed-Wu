@@ -1,16 +1,25 @@
-"""This is my mostly used functions."""
+"""My mostly used functions
+===========================
+"""
+from __future__ import annotations
+
 import random
-from typing import Callable, Optional
+from typing import TYPE_CHECKING, Callable, Optional
+
+if TYPE_CHECKING:
+    from fvcore.nn import FlopCountAnalysis
+    from torch import Tensor, nn
 
 
 class My:
     """My mostly used functions."""
 
     @staticmethod
-    def params_M(net, requires_grad: bool = True) -> float:
+    def params_M(net: "nn.Module", requires_grad: bool = True) -> float:
         """Get the parameters of network.
 
         :param net:
+        :type net: "nn.Module"
         :param requires_grad:
         :type requires_grad: bool
         :rtype: float
@@ -22,12 +31,16 @@ class My:
         return s / 1e6
 
     @staticmethod
-    def flops_G(net, *args: int):
+    def flops_G(
+        net: "nn.Module", *args: int
+    ) -> tuple[float, "FlopCountAnalysis"]:
         """Get the FLOPs of network.
 
         :param net:
+        :type net: "nn.Module"
         :param args:
         :type args: int
+        :rtype: tuple[float, "FlopCountAnalysis"]
         """
         import torch
         from fvcore.nn import FlopCountAnalysis
@@ -38,10 +51,13 @@ class My:
         return flops.total() / 1e9, flops
 
     @staticmethod
-    def register_forward_hook(net, hook: Optional[Callable] = None) -> None:
+    def register_forward_hook(
+        net: "nn.Module", hook: Optional[Callable] = None
+    ) -> None:
         """Register forward hook.
 
         :param net:
+        :type net: "nn.Module"
         :param hook:
         :type hook: Optional[Callable]
         :rtype: None
@@ -52,12 +68,15 @@ class My:
             module.register_forward_hook(hook)
 
     @staticmethod
-    def hook(module, input, output) -> None:
+    def hook(module: "nn.Module", input: "Tensor", output: "Tensor") -> None:
         """Provide a hook function.
 
         :param module:
+        :type module: "nn.Module"
         :param input:
+        :type input: "Tensor"
         :param output:
+        :type output: "Tensor"
         :rtype: None
         """
         print(list(output.shape))
@@ -104,10 +123,11 @@ class My:
         return b, m_rest
 
     @staticmethod
-    def plot(tensors) -> None:
+    def plot(tensors: "Tensor") -> None:
         """Plot.
 
         :param tensors:
+        :type tensors: "Tensor"
         :rtype: None
         """
         from matplotlib import pyplot as plt

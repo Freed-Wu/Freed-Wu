@@ -1,4 +1,4 @@
-"""Provide ``__version__`` for
+r"""Provide ``__version__`` for
 `importlib.metadata.version() <https://docs.python.org/3/library/importlib.metadata.html#distribution-versions>`_.
 """
 from ._version import __version__, __version_tuple__  # type: ignore

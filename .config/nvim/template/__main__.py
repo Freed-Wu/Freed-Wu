@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""This module can be called by
+r"""This module can be called by
 `python -m <https://docs.python.org/3/library/__main__.html>`_.
 """
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
@@ -12,7 +12,7 @@ try:
 except ImportError:
     from . import _shtab as shtab
 
-VERSION = f"""%DIR% {__version__}
+VERSION = rf"""%DIR% {__version__}
 Copyright (C) {datetime.now().year}
 Written by %USER%
 """
@@ -22,7 +22,7 @@ Report bugs to <%MAIL%>.
 
 
 def get_parser():
-    """Get a parser for unit test."""
+    r"""Get a parser for unit test."""
     parser = ArgumentParser(
         "%DIR%", epilog=EPILOG, formatter_class=RawDescriptionHelpFormatter
     )
@@ -32,7 +32,7 @@ def get_parser():
 
 
 def main():
-    """Parse arguments and provide shell completions."""
+    r"""Parse arguments and provide shell completions."""
     parser = get_parser()
     args = parser.parse_args()
 

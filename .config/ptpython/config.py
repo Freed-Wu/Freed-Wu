@@ -39,42 +39,25 @@ from ptpython.entry_points.run_ptpython import (
 from ptpython.layout import CompletionVisualisation
 from ptpython.repl import PythonRepl
 from ptpython.style import default_ui_style
-from repl_python_codestats.python import install_hook as install_codestats_hook
+from repl_python_codestats.ptpython import (
+    install_hook as install_codestats_hook,
+)
 from repl_python_wakatime.ptpython import install_hook
 
 CONFIG_FILE, _ = get_config_and_history_file(create_parser().parse_args([]))
 sys.path.insert(0, os.path.dirname(CONFIG_FILE))
-from _ptpython.cursor import InputMode  # noqa: E402
-from _ptpython.prompt_style import PythonPrompt  # noqa: E402
+from _ptpython.cursor import InputMode  # noqa: E402  # type: ignore
+from _ptpython.prompt_style import PythonPrompt  # noqa: E402  # type: ignore
+from _ptpython.utils.insert import insert  # noqa: E402  # type: ignore
 
 sys.path.pop(0)
 
+# https://github.com/inducer/pudb/pull/586
+if "my" not in globals():
+    from python.my import my
+
 if TYPE_CHECKING:
     from prompt_toolkit.key_binding.key_processor import KeyPressEvent
-
-
-# insert {{{1 #
-def insert(event, pre, post):
-    """Insert.
-
-    :param event:
-    :param pre:
-    :param post:
-    """
-    event.current_buffer.cursor_position += (
-        event.current_buffer.document.get_start_of_line_position(
-            after_whitespace=True
-        )
-    )
-    event.cli.current_buffer.insert_text(pre)
-    event.current_buffer.cursor_position += (
-        event.current_buffer.document.get_end_of_line_position()
-    )
-    event.cli.current_buffer.insert_text(post)
-    event.current_buffer.validate_and_handle()
-
-
-# 1}}} insert #
 
 
 def configure(repl: PythonRepl) -> None:
@@ -212,6 +195,7 @@ def configure(repl: PythonRepl) -> None:
     )
     repl.use_ui_colorscheme("my-colorscheme")
 
+    # https://github.com/Textualize/rich/pull/2759
     repl.show_result = sys.displayhook  # type: ignore
     # 1}}} repl #
 

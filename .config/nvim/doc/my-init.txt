@@ -25,6 +25,9 @@ init#init#template#dir_()                          *init#init#template#dir_()*
 init#init#template#dir2()                          *init#init#template#dir2()*
   for sphinx config file: foo/docs/conf.py -> foo
 
+init#init#template#dir2_()                        *init#init#template#dir2_()*
+  for pytest file: foo-bar/tests/baz_test.py -> foo_bar
+
 init#init#template#dir3()                          *init#init#template#dir3()*
   for github actions: foo/.github/workflows/main.yml -> foo
 

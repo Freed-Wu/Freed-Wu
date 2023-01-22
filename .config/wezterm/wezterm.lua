@@ -23,12 +23,7 @@ return {
     window_background_opacity = 0.75,
     hide_tab_bar_if_only_one_tab = true,
     font_size = font_size,
-    window_padding = {
-        left = 0,
-        right = 0,
-        top = 0,
-        bottom = 0,
-    },
+    window_padding = {left = 0, right = 0, top = 0, bottom = 0},
     keys = {
         {key = 'Enter', mods = 'ALT', action = 'DisableDefaultAssignment'},
         {key = '-', mods = 'CTRL', action = 'DisableDefaultAssignment'},

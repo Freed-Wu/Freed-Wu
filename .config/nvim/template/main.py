@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""{binname}.
+r"""{binname}.
 
 Usage: {binname} [options]
 
@@ -35,7 +35,7 @@ except ImportError:
 
 __all__ = ["get_parser", "VERSION"]
 logger: Final = logging.getLogger(__name__)
-VERSION: Final = """{version}
+VERSION: Final = r"""{version}
 Copyright (C) %YEAR%
 Written by %USER%
 """.format(
@@ -44,7 +44,7 @@ Written by %USER%
 
 
 def get_parser(prog=None):
-    """Get parser for test."""
+    r"""Get parser for test."""
     from argopt import argopt
 
     if prog is None:
@@ -60,7 +60,7 @@ def get_parser(prog=None):
 
 
 def main():
-    """Parse options, environments, configs."""
+    r"""Parse options, environments, configs."""
     parser = get_parser()
     args = parser.parse_args()
     if args.debug:

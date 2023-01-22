@@ -374,6 +374,10 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Function #
 
 # Compatible {{{1 #
+# https://github.com/3v1n0/zsh-bash-completions-fallback/issues/6
+compdef _python python
+compdef _pydoc pydoc
+compdef _pip pip
 # after compinit
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
 zinit id-as depth'1' null for zdharma-continuum/zinit

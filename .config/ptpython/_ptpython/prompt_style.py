@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 from prompt_toolkit.formatted_text import AnyFormattedText
 from ptpython.prompt_style import IPythonPrompt
 
-# from .utils import ansi2prompt_toolkit
+# from .utils.ansi import ansi2prompt_toolkit
 
 if TYPE_CHECKING:
     from ptpython.python_input import PythonInput

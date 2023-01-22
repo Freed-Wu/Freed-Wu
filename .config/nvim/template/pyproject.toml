@@ -7,11 +7,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "%DIR%"
 description = "%HERE%"
-authors = [{ name = "%USER%", email = "%MAIL%" }]
 readme = "README.md"
-requires-python = ">= 3.9"
+requires-python = ">= 3.7"
 keywords = [""]
-license = { text = "GPL v3" }
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -23,6 +21,8 @@ classifiers = [
   "Operating System :: MacOS",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
@@ -30,6 +30,13 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dynamic = ["version", "dependencies", "optional-dependencies"]
+
+[[project.authors]]
+name = "%USER%"
+email = "%MAIL%"
+
+[project.license]
+text = "GPL v3"
 
 [project.urls]
 Homepage = "https://%DIR%.readthedocs.io"
@@ -43,12 +50,12 @@ Source = "%GITHUB%/%DIR%"
 [tool.setuptools.package-data]
 %DIR_% = ["py.typed", "assets/*"]
 
-[tool.setuptools.dynamic]
-dependencies = { file = "requirements.txt" }
+[tool.setuptools.dynamic.dependencies]
+file = "requirements.txt"
 
 # begin: scripts/generate-pyproject.toml.pl
-[tool.setuptools.dynamic.optional-dependencies]
-dev = { file = "requirements/dev.txt" }
+[tool.setuptools.dynamic.optional-dependencies.dev]
+file = "requirements/dev.txt"
 # end: scripts/generate-pyproject.toml.pl
 
 [tool.setuptools_scm]

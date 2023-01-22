@@ -1,4 +1,6 @@
-"""$PYTHONSTARTUP."""
+"""$PYTHONSTARTUP
+=================
+"""
 import atexit
 import logging
 import sys
@@ -17,10 +19,6 @@ traceback.install()
 with suppress(ImportError):
     import readline
 
-    if sys.argv == [""]:
-        with suppress(OSError):
-            readline.read_history_file()
-        atexit.register(readline.write_history_file)
 logging.basicConfig(
     format="%(message)s",
     handlers=[RichHandler(rich_tracebacks=True, markup=True)],

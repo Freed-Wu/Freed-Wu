@@ -1,5 +1,5 @@
-"""Utils
-========
+"""Ansi
+=======
 
 `<https://github.com/prompt-toolkit/ptpython/issues/525>`_
 """

@@ -1664,16 +1664,8 @@
   fi
 
   function prompt_my_init_start_time() {
-    local time fg
     if [[ -n $my_init_start_time ]]; then
-      if (($+commands[pdd])); then
-        time=${(f)$(pdd --sub $my_init_start_time)[-2]}
-        fg=red
-      else
-        time=$my_init_start_time
-        fg=green
-      fi
-      p10k segment -b blue -f $fg -i  -t ${time//\%/%%}
+      p10k segment -b blue -f red -i  -t $(date -d"0 $(date +%s) sec - $(date -d $my_init_start_time +%s) sec" +%T)
     fi
   }
 
