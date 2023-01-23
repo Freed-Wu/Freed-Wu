@@ -5,6 +5,8 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 from %DIR2% import __version__ as version  # type: ignore
 from %DIR2%._metainfo import author, copyright, project  # type: ignore
 
+__all__ = ["version", "author", "copyright", "project"]
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,

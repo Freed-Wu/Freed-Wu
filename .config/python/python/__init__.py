@@ -6,7 +6,7 @@ import logging
 import sys
 from contextlib import suppress
 
-from python.my import my
+from python import my
 from rich import pretty, print, traceback
 from rich.logging import RichHandler
 

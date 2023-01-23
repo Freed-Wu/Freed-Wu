@@ -16,10 +16,17 @@ def $1(self, $2):
 endsnippet
 
 snippet wrap "from functools import wraps" b
-def	$1(f):
+def $1(f):
 	@wraps(f)
 	def wrapper(*args, **kwds):
 		$0
 		return f(*args, **kwds)
 	return wrapper
+endsnippet
+
+snippet distbreak "from torch import distributed as dist" b
+if dist.get_rank() == 0:
+	breakpoint()
+else:
+	dist.barrier()
 endsnippet

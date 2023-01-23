@@ -8,7 +8,8 @@ parser = get_parser("%TEST_FILE%")
 class Test:
     r"""Test."""
 
-    def test_help(self, capsys) -> None:
+    @staticmethod
+    def test_help(capsys) -> None:
         r"""Test help.
 
         :param capsys:
@@ -32,7 +33,8 @@ options:
 Report bugs to <%MAIL%>.
 """
 
-    def test_version(self, capsys) -> None:
+    @staticmethod
+    def test_version(capsys) -> None:
         r"""Test version.
 
         :param capsys:

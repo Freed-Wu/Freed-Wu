@@ -51,10 +51,12 @@ from _ptpython.prompt_style import PythonPrompt  # noqa: E402  # type: ignore
 from _ptpython.utils.insert import insert  # noqa: E402  # type: ignore
 
 sys.path.pop(0)
+# https://github.com/TylerYep/torchinfo/issues/216
+sys.ps1 = ">>> "
 
 # https://github.com/inducer/pudb/pull/586
 if "my" not in globals():
-    from python.my import my
+    from python import my
 
 if TYPE_CHECKING:
     from prompt_toolkit.key_binding.key_processor import KeyPressEvent
