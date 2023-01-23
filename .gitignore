@@ -8,6 +8,7 @@
 !/.gitlint
 !/.github/
 !/.dockerignore
+!/.deepsource.toml
 !/script/
 
 # dotfile
@@ -45,7 +46,7 @@
 !/.pdbrc
 !/.gtkrc-2.0
 !/.xinitrc
-!/.xsession
+!/.Xsession
 !/.pypirc
 !/.wakatime.cfg
 !/.replyrc
@@ -89,6 +90,7 @@
 !/.parallel/
 /.parallel/*
 !/.parallel/config
+!/.parallel/will-cite
 !/.cgdb/
 /.cgdb/*
 !/.cgdb/cgdbrc
@@ -219,6 +221,7 @@
 !/.config/pudb/
 /.config/pudb/*
 !/.config/pudb/pudb.cfg
+!/.config/pudb/*.py
 !/.config/gdb/
 /.config/gdb/*
 !/.config/gdb/gdbinit
@@ -243,11 +246,6 @@
 !/.config/gtk-3.0/
 /.config/gtk-3.0/*
 !/.config/gtk-3.0/settings.ini
-!/.config/fcitx/
-/.config/fcitx/*
-!/.config/fcitx/config
-!/.config/fcitx/profile
-!/.config/fcitx/conf/
 !/.config/fcitx5/
 /.config/fcitx5/*
 !/.config/fcitx5/config
@@ -263,7 +261,12 @@
 !/.config/VSCodium
 !/.config/lxqt/
 /.config/lxqt/lxqt-config*.conf
+/.config/lxqt/session.conf
+# .config/lxqt/panel.conf.in
+/.config/lxqt/panel.conf
 !/.config/openbox/
+/.config/openbox/*
+!/.config/openbox/rc.xml.in
 !/.config/wezterm/
 !/.config/luarocks/
 /.config/luarocks/*
@@ -287,6 +290,9 @@
 /.local/share/flatpak/repo/*
 !/.local/share/flatpak/repo/config
 !/.local/share/pandoc/
+!/.local/share/themes/
+/.local/share/themes/*
+!/.local/share/themes/Emacs/
 !/.local/share/fcitx5/
 /.local/share/fcitx5/*
 !/.local/share/fcitx5/rime/

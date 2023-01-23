@@ -5,11 +5,6 @@ Configure ``ipython``.
 """
 from contextlib import suppress
 
-from repl_python_codestats.ipython import (
-    install_hook as install_codestats_hook,
-)
-from repl_python_wakatime.ipython import install_hook
-
 # ------------------------------------------------------------------------------
 # InteractiveShellApp(Configurable) configuration
 # ------------------------------------------------------------------------------
@@ -685,8 +680,18 @@ with suppress(ImportError):
     from powerline.bindings.ipython.since_7 import PowerlinePrompts
 
     c.TerminalInteractiveShell.prompts_class = PowerlinePrompts
-install_hook(c)
-install_codestats_hook(c)
+
+with suppress(ImportError):
+    from repl_python_wakatime.ipython import install_hook
+
+    install_hook(c)
+
+with suppress(ImportError):
+    from repl_python_codestats.ipython import (
+        install_hook as install_codestats_hook,
+    )
+
+    install_codestats_hook(c)
 
 ## Deprecated since IPython 4.0 and ignored since 5.0, set
 #  TerminalInteractiveShell.prompts object directly.

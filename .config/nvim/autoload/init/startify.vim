@@ -46,7 +46,7 @@ function! init#startify#source() abort
     let g:startify_custom_header = map(readfile(expand('$PREFIX/etc/issue')), {_, v -> substitute(v, "\x1b\[[0-9;\?]\\{-}\\a", '', 'g')})
   endif
   let g:startify_bookmarks = [
-        \ {g:maplocalleader . 'v': fnamemodify($MYVIMRC, ':~')},
+        \ {g:maplocalleader . 'v': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/init.vim'), ':~')},
         \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/autoload/init/coc.vim'), ':~')},
         \ {g:maplocalleader . 'j': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/coc-settings.json'), ':~')},
         \ {g:maplocalleader . 't': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/lua/treesitter.lua'), ':~')},

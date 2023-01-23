@@ -29,6 +29,8 @@ fi
 
 if [ -f /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh ]; then
 	. /usr/share/zsh-theme-powerlevel10k/gitstatus/gitstatus.prompt.sh
+elif [ -f /run/current-system/sw/share/zsh-powerlevel10k/gitstatus/gitstatus.prompt.sh ]; then
+	. /run/current-system/sw/share/zsh-powerlevel10k/gitstatus/gitstatus.prompt.sh
 fi
 
 if command -v wakatime &>/dev/null &&

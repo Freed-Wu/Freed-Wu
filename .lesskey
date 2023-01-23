@@ -1,3 +1,9 @@
+#command
+l right-scroll
+L end-scroll
+h left-scroll
+H no-scroll
+^H help
 #line-edit
 ^B left
 ^F right

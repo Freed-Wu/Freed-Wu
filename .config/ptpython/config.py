@@ -8,6 +8,7 @@ from __future__ import annotations
 import os
 import re
 import sys
+from contextlib import suppress
 from typing import TYPE_CHECKING
 
 from prompt_toolkit.application.current import get_app
@@ -39,10 +40,6 @@ from ptpython.entry_points.run_ptpython import (
 from ptpython.layout import CompletionVisualisation
 from ptpython.repl import PythonRepl
 from ptpython.style import default_ui_style
-from repl_python_codestats.ptpython import (
-    install_hook as install_codestats_hook,
-)
-from repl_python_wakatime.ptpython import install_hook
 
 CONFIG_FILE, _ = get_config_and_history_file(create_parser().parse_args([]))
 sys.path.insert(0, os.path.dirname(CONFIG_FILE))
@@ -51,10 +48,8 @@ from _ptpython.prompt_style import PythonPrompt  # noqa: E402  # type: ignore
 from _ptpython.utils.insert import insert  # noqa: E402  # type: ignore
 
 sys.path.pop(0)
-
-# https://github.com/inducer/pudb/pull/586
-if "my" not in globals():
-    from python.my import my
+# https://github.com/TylerYep/torchinfo/issues/216
+sys.ps1 = ">>> "
 
 if TYPE_CHECKING:
     from prompt_toolkit.key_binding.key_processor import KeyPressEvent
@@ -128,8 +123,18 @@ def configure(repl: PythonRepl) -> None:
     repl.all_prompt_styles |= {"python": PythonPrompt(repl)}
     # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
     repl.prompt_style = "python"  # 'classic' or 'ipython'
-    install_hook(repl)
-    install_codestats_hook(repl)
+
+    with suppress(ImportError):
+        from repl_python_codestats.ptpython import (
+            install_hook as install_codestats_hook,
+        )
+
+        install_codestats_hook(repl)
+
+    with suppress(ImportError):
+        from repl_python_wakatime.ptpython import install_hook
+
+        install_hook(repl)
 
     # Don't insert a blank line after the output.
     repl.insert_blank_line_after_output = False

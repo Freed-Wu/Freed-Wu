@@ -1,8 +1,10 @@
 local wezterm = require 'wezterm'
 local hostname = wezterm.hostname()
 local font_size
-if hostname == 'desktop' then
+if hostname == 'desktop' then -- 2560x2880
     font_size = 16
+elseif hostname == 'laptop' then -- 3120x2080
+    font_size = 24
 else
     font_size = 12
 end
@@ -15,10 +17,8 @@ end)
 return {
     font = wezterm.font_with_fallback {
         'JetBrainsMono Nerd Font Mono', -- 
-        'WenQuanYi Micro Hei Mono', -- ①
-        'Noto Sans Symbols', -- ⓪
-        'Noto Sans Symbols2', -- 🗂
-        'Noto Sans Math' -- ≣
+        'WenQuanYi Zen Hei Mono', -- ①
+        'WenQuanYi Micro Hei Mono' -- ⇡
     },
     window_background_opacity = 0.75,
     hide_tab_bar_if_only_one_tab = true,

@@ -177,8 +177,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 if [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
   . /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-elif [[ -f ~/.nix-profile/share/zsh-powerlevel10k/powerlevel10k.zsh-theme ]]; then
-  . ~/.nix-profile/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+elif [[ -f /run/current-system/sw/share/zsh-powerlevel10k/powerlevel10k.zsh-theme ]]; then
+  . /run/current-system/sw/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
 else
   zinit id-as depth'1' for romkatv/powerlevel10k
 fi
@@ -217,9 +217,11 @@ zinit id-as'.lesspipe.sh' depth'1' wait lucid \
   for zdharma-continuum/null
 # https://github.com/Kaggle/kaggle-api/issues/446
 zinit id-as'.pass' depth'1' as'null' wait lucid \
-  atclone'echo "export CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
-echo "export KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
-echo "export KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh' \
+  atclone'echo "CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
+echo "KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
+echo "KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
+pass ls wakatime/api_key > wakatime.txt
+pass ls codestats/$HOST > codestats.txt' \
   if'(($+commands[pass]))' \
   for zdharma-continuum/null
 zinit id-as depth'1' for mdumitru/last-working-dir

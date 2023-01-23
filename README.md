@@ -52,10 +52,12 @@ firstly.
 - ![Linux](https://img.shields.io/badge/Linux-gray?logo=Linux)
   - ![GNU/Linux](https://img.shields.io/badge/GNU%2FLinux-gray?logo=gnu)
     - [![Gentoo](https://img.shields.io/badge/Gentoo-gray?logo=Gentoo)](https://github.com/Freed-Wu/my-portage)
+    - [![NixOS](https://img.shields.io/badge/NixOS-gray?logo=NixOS)](https://github.com/Freed-Wu/my-configuration.nix)
+      laptop
     - [![Arch](https://img.shields.io/badge/Archlinux-gray?logo=Archlinux)](https://github.com/Freed-Wu/my-pacman.conf)
-      laptop & desktop
-    - ![Deepin](https://img.shields.io/badge/Deepin-gray?logo=Deepin) desktop
-    - ![Ubuntu](https://img.shields.io/badge/Ubuntu-gray?logo=Ubuntu) server & docker
+      desktop
+    - ![Deepin](https://img.shields.io/badge/Deepin-gray?logo=Deepin)
+    - ![Ubuntu](https://img.shields.io/badge/Ubuntu-gray?logo=Ubuntu) workstation
     - ![CentOS](https://img.shields.io/badge/CentOS-gray?logo=CentOS) cluster
     - ![OpenWrt](https://img.shields.io/badge/OpenWrt-gray?logo=OpenWrt) router
   - ![Android](https://img.shields.io/badge/Android-gray?logo=Android) mobile
