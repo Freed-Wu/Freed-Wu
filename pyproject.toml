@@ -1,15 +1,13 @@
 [build-system]
-requires = ["setuptools >= 45", "setuptools_scm[toml] >= 6.2", "wheel"]
+requires = ["setuptools >= 45", "setuptools_scm[toml] >= 6.2"]
 build-backend = "setuptools.build_meta"
 
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 [project]
 name = "python"
-authors = [{ name = "Wu Zhenyu", email = "wuzhenyu@ustc.edu" }]
 readme = "README.md"
-requires-python = ">= 3.6"
+requires-python = ">= 3.7"
 keywords = [""]
-license = { text = "GPL v3" }
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -21,23 +19,30 @@ classifiers = [
   "Operating System :: MacOS",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.6",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
-[tool.setuptools.dynamic]
-dependencies = { file = ".config/python/requirements.txt" }
+[[project.authors]]
+name = "Wu Zhenyu"
+email = "wuzhenyu@ustc.edu"
 
-[tool.setuptools.dynamic.optional-dependencies]
-dev = { file = ".config/python/requirements/dev.txt" }
+[project.license]
+text = "GPL v3"
 
 [tool.setuptools.packages.find]
 where = [".config/python"]
+
+# begin: scripts/generate-pyproject.toml.pl
+[tool.setuptools.dynamic.optional-dependencies.dev]
+file = ".config/python/requirements/dev.txt"
+# end: scripts/generate-pyproject.toml.pl
 
 [tool.setuptools_scm]
 write_to = ".config/python/python/_version.py"

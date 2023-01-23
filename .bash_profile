@@ -37,7 +37,7 @@ else
 	export MANPAGER="sh -c 'col -bx|bat -plman'"
 fi
 # less
-export LESS='--mouse -I'
+export LESS='--mouse --chop-long-lines -I -R -M'
 # interactively
 export FZF_HISTORY_DIR
 if [[ $OSTYPE == msys2 ]] || [[ $OSTYPE == cygwin ]]; then
@@ -46,8 +46,57 @@ else
 	FZF_HISTORY_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fzf"
 fi
 # fzf
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+if [[ $OSTYPE == msys2 ]]; then
+	devnull=nul
+else
+	devnull=/dev/null
+fi
+# rg foo | fzf
+# $word = {2} make a wrong --preview-window
+# https://github.com/Aloxaf/fzf-tab/issues/282
+# -d$"\0"
+export FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
+2> $devnull || less {1}'
+-m
+-d:
+--ansi
+--reverse
+--prompt='❯ '
+--pointer=❯
+--marker=✓
+--bind=tab:down
+--bind=btab:up
+--bind=ctrl-j:jump
+--bind=ctrl-k:kill-line
+--bind=ctrl-n:down
+--bind=ctrl-p:up
+--bind=alt-j:previous-history
+--bind=alt-k:next-history
+--bind=ctrl-q:clear-query
+--bind=alt-a:first
+--bind=alt-e:last
+--bind=alt-N:toggle-out
+--bind=alt-P:toggle-in
+--bind=ctrl-space:toggle
+--bind=ctrl-o:toggle-all
+--bind=ctrl-g:deselect-all
+--bind=alt-g:select-all
+--bind=ctrl-s:toggle-search
+--bind='ctrl-\\:toggle-sort'
+--bind=ctrl-^:toggle-preview-wrap
+--bind=ctrl-x:toggle-preview
+--bind=alt-p:preview-up
+--bind=alt-n:preview-down
+--bind=ctrl-v:preview-page-down
+--bind=alt-v:preview-page-up
+--bind=ctrl-r:preview-half-page-down
+--bind=alt-r:preview-half-page-up
+--bind='alt-<:preview-top'
+--bind='alt->:preview-bottom'
+--bind='ctrl-]:change-preview-window(bottom|right)'
+--bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'
 --history=$FZF_HISTORY_DIR/fzf.txt"
+unset devnull
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

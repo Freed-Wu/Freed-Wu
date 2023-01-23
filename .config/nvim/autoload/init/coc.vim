@@ -17,6 +17,7 @@ function! init#coc#source() abort
         \ 'sublime_syntax': 'yaml',
         \ 'liquid': 'html',
         \ }
+  " https://github.com/NixOS/nixpkgs/issues/214147
   let g:coc_global_extensions = [
         \ 'coc-highlight',
         \

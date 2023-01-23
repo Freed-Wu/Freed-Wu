@@ -52,7 +52,7 @@
   bind "<shift><ctrl>e" { "move-cursor" (paragraph-ends, 1, 1) };
 
   bind "<ctrl>w" { "cut-clipboard" () };
-  bind "<ctrl>y" { "paste-clipboard" () };
+  /* bind "<ctrl>y" { "paste-clipboard" () }; */
 
   bind "<ctrl>d" { "delete-from-cursor" (chars, 1) };
   bind "<alt>d" { "delete-from-cursor" (word-ends, 1) };

@@ -22,7 +22,6 @@ if !has('nvim')
   if !isdirectory(&directory)
     call mkdir(&directory, 'p')
   endif
-  let $MYVIMRC = expand('$XDG_CONFIG_HOME/nvim/init.vim')
 endif
 if has('gui_running')
   set guioptions=gtaAPd
@@ -32,7 +31,11 @@ if has('gui_running')
 endif
 set spellfile=$XDG_DATA_HOME/nvim/spell/en.utf-8.add
 " firenvim use guifont although has('gui_running') == 0
-set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h10
+if hostname() == "laptop"
+  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h24
+else
+  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h10
+endif
 set runtimepath=$VIMRUNTIME
 set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
 set belloff=
@@ -329,10 +332,14 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " Log {{{1 "
   " too slow, don't enable it on msys2
   call dein#add('wakatime/vim-wakatime', {
-        \ 'if': has('pythonx') && executable('pass'),
+        \ 'if': has('pythonx') && executable('wakatime-cli') && filereadable(
+        \ expand('$HOME/.local/share/zinit/plugins/.pass/wakatime.txt')
+        \ ),
         \ })
   call dein#add('https://gitlab.com/code-stats/code-stats-vim', {
-        \ 'if': has('pythonx') && !empty($CODESTATS_API_KEY),
+        \ 'if': has('pythonx') && filereadable(
+        \ expand('$HOME/.local/share/zinit/plugins/.pass/codestats.txt')
+        \ ),
         \ 'hook_source': 'call init#code_stats#source()',
         \ })
   " 1}}} Log "
