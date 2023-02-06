@@ -14,9 +14,11 @@ The example in this file
 """
 import logging
 import os
+
 from pudb.shell import run_ptpython_shell
 
 logger = logging.getLogger(__name__)
+
 
 # Define this a function with this name and signature at the module level.
 def pudb_shell(_globals: dict, _locals: dict) -> None:
