@@ -123,7 +123,9 @@ class Ps1:
 sys.ps1 = Ps1()
 
 with suppress(ImportError):
-    from repl_python_codestats.python import install_hook as install_codestats_hook
+    from repl_python_codestats.python import (
+        install_hook as install_codestats_hook,
+    )
 
     install_codestats_hook()
 

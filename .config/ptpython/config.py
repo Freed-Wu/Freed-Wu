@@ -132,9 +132,9 @@ def configure(repl: PythonRepl) -> None:
         install_codestats_hook(repl)
 
     with suppress(ImportError):
-       from repl_python_wakatime.ptpython import install_hook
+        from repl_python_wakatime.ptpython import install_hook
 
-       install_hook(repl)
+        install_hook(repl)
 
     # Don't insert a blank line after the output.
     repl.insert_blank_line_after_output = False
