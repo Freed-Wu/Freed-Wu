@@ -34,7 +34,7 @@ if [[ $OSTYPE == linux-android ]]; then
 		export BROWSER=termux-open
 	fi
 else
-	export MANPAGER="sh -c 'col -bx|bat -plman'"
+	export MANPAGER="sh -c 'col -bx | bat --color=always -plman | less --pattern=^[A-Z][A-Z\ ]+'"
 fi
 # less
 export LESS='--mouse --chop-long-lines -I -R -M'

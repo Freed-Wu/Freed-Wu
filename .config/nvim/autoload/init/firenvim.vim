@@ -29,7 +29,7 @@ augroup init#firenvim
   autocmd!
   autocmd BufEnter www.bitahub.com_project-run_*.txt set filetype=sh
   autocmd BufEnter forums.gentoo.org_*.txt set filetype=bbcode
-  autocmd BufEnter {*.stackexchange.com,aur.archlinux.org,github.com,gitlab.com,www.cnblogs.com,www.jianshu.com}_*.txt set filetype=pandoc
+  autocmd BufEnter {{devforum,talk,discuss,discourse,gitlab}.*,*.stackexchange.com,aur.archlinux.org,github.com,www.{cnblogs,jianshu}.com}_*.txt set filetype=pandoc
   autocmd BufEnter {bbs.archlinux.org,forums.gentoo.org}_*.txt set filetype=bbcode
   autocmd BufEnter jqplay.org_jq_*.txt set filetype=jq
   autocmd BufEnter colab.research.google.com_*.txt set filetype=python

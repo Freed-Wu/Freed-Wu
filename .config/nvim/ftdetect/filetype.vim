@@ -13,7 +13,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*} setfiletype conf
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype json
-  autocmd BufNewFile,BufRead *.mplstyle setfiletype yaml
+  autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle setfiletype yaml
   " 1}}} Data_Describe "
 
   " Template {{{1 "
@@ -35,6 +35,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead .octave_hist,*.matlab setfiletype octave
   autocmd BufNewFile,BufRead *.{gnuplot,plt},.gnuplot_history setfiletype gnuplot
   autocmd BufNewFile,BufRead SConstruct setfiletype python
+  autocmd BufNewFile,BufRead *.tlu setfiletype lua
   autocmd BufNewFile,BufRead .netrwhist setfiletype vim
   " 1}}} Script "
 

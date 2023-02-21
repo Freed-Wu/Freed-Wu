@@ -1,6 +1,5 @@
--- https://github.com/Freed-Wu/my-dotfiles/actions/runs/3443911804/jobs/5745944038#step:8:5258
--- don't install automatically
-require'nvim-treesitter.configs'.setup {
+-- don't install automatically to avoid network failure
+require"nvim-treesitter.configs".setup {
     indent = {enable = true},
     highlight = {enable = true, additional_vim_regex_highlighting = true},
     textobjects = {enable = true}
@@ -18,5 +17,11 @@ ft_to_parser.pandoc = "markdown"
 ft_to_parser.mysql = "sql"
 ft_to_parser.eelixir = "elixir"
 ft_to_parser.sublime_syntax = "yaml"
--- https://github.com/nvim-treesitter/nvim-treesitter/issues/3692
-ft_to_parser.liquid = "html"
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "liquid",
+    callback = function(args)
+        vim.treesitter.start(args.buf, vim.b.liquid_subtype)
+        -- only if additional legacy syntax is needed
+        vim.bo[args.buf].syntax = "on"
+    end
+})

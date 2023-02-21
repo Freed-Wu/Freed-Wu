@@ -31,7 +31,7 @@ if has('gui_running')
 endif
 set spellfile=$XDG_DATA_HOME/nvim/spell/en.utf-8.add
 " firenvim use guifont although has('gui_running') == 0
-if hostname() == "laptop"
+if hostname() ==# 'laptop'
   set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h24
 else
   set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h10
@@ -354,12 +354,11 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#quickui#source()',
         \ 'hook_post_source': 'call init#quickui#post_source()',
         \ })
-  call dein#add('ryanoasis/vim-devicons', {
-        \ 'hook_source': 'call init#devicons#source()',
-        \ })
+  call dein#add('lambdalisue/nerdfont.vim')
   call dein#add('mhinz/vim-startify', {
         \ 'hook_source': 'call init#startify#source()',
         \ })
+  call dein#add('csch0/vim-startify-renderer-nerdfont')
   call dein#add('junegunn/vim-peekaboo')
   " 1}}} UX "
 
@@ -394,6 +393,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('vim-airline/vim-airline', {
         \ 'hook_source': 'call init#airline#source()',
         \ })
+  call dein#add('Freed-Wu/airline-renderer-nerdfont.vim')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('enricobacis/vim-airline-clock', {
         \ 'hook_source': 'call init#airline#clock#source()',
@@ -820,6 +820,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " 2}}} FileCMD "
 
   " Debug {{{2 "
+  call dein#add('Freed-Wu/cppinsights.vim', {
+        \ 'if': executable('insights'),
+        \ })
   call dein#add('preservim/vimux', {
         \ 'on_cmd': ['VimuxRunCommand', 'VimuxRunLastCommand', 'VimuxOpenRunner',
         \ 'VimuxZoomRunner', 'VimuxInspectRunner', 'VimuxScrollUpInspect',
@@ -873,7 +876,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('lambdalisue/fern-mapping-git.vim', {
         \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
         \ })
-  call dein#add('lambdalisue/nerdfont.vim')
   call dein#add('lambdalisue/fern-renderer-nerdfont.vim', {
         \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
         \ })

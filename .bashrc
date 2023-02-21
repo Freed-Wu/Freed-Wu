@@ -40,6 +40,7 @@ fi
 
 if command -v curl &>/dev/null &&
 	[[ -f /usr/share/code-stats-bash/codestats.sh ]]; then
+	. ~/.local/share/zinit/plugins/.pass/pass.sh
 	. /usr/share/code-stats-bash/codestats.sh
 fi
 

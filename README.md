@@ -47,29 +47,13 @@ firstly.
 
 [![screenshot](https://user-images.githubusercontent.com/32936898/199290335-bb4c9b9e-1fc9-4f8d-af30-a1f8d49c6f35.jpg)](https://user-images.githubusercontent.com/32936898/199288079-777dee13-224d-468b-ac32-23042e34f0be.jpg)
 
-## Platforms
+## Usage
 
-- ![Linux](https://img.shields.io/badge/Linux-gray?logo=Linux)
-  - ![GNU/Linux](https://img.shields.io/badge/GNU%2FLinux-gray?logo=gnu)
-    - [![Gentoo](https://img.shields.io/badge/Gentoo-gray?logo=Gentoo)](https://github.com/Freed-Wu/my-portage)
-    - [![NixOS](https://img.shields.io/badge/NixOS-gray?logo=NixOS)](https://github.com/Freed-Wu/my-configuration.nix)
-      laptop
-    - [![Arch](https://img.shields.io/badge/Archlinux-gray?logo=Archlinux)](https://github.com/Freed-Wu/my-pacman.conf)
-      desktop
-    - ![Deepin](https://img.shields.io/badge/Deepin-gray?logo=Deepin)
-    - ![Ubuntu](https://img.shields.io/badge/Ubuntu-gray?logo=Ubuntu) workstation
-    - ![CentOS](https://img.shields.io/badge/CentOS-gray?logo=CentOS) cluster
-    - ![OpenWrt](https://img.shields.io/badge/OpenWrt-gray?logo=OpenWrt) router
-  - ![Android](https://img.shields.io/badge/Android-gray?logo=Android) mobile
-    - Termux
-- ![Windows](https://img.shields.io/badge/Windows-gray?logo=Windows) virtualbox
-  - Cygwin
-  - [Msys](https://github.com/Freed-Wu/my-msys2-config)
+See [wiki](https://github.com/Freed-Wu/my-dotfiles/wiki).
 
 ## Related
 
-- [my-keymaps](https://github.com/Freed-Wu/my-keymaps)
-- [my-x11-keymaps](https://github.com/Freed-Wu/my-x11-keymaps)
+- [All dotfiles](https://github.com/Freed-Wu?tab=repositories&q=dotfiles)
 
 ## License
 

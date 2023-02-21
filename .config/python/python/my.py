@@ -1,10 +1,21 @@
 """My mostly used functions
 ===========================
 """
+import sys
+from contextlib import suppress
 from typing import TYPE_CHECKING, Callable
 
+from .describe import describe
+
 if TYPE_CHECKING:
+    import numpy as np
     from torch import Tensor, nn
+
+if "torch" in sys.modules:
+    with suppress(ImportError):
+        from torchinfo import summary
+
+del sys, suppress
 
 
 def hook(module: "nn.Module", input: "Tensor", output: "Tensor") -> None:
@@ -75,77 +86,31 @@ def calc_batch_size(
     return b, m_rest
 
 
-def plot(tensors: "Tensor") -> None:
-    """Plot.
+def plot(inputs: "Tensor | np.ndarray") -> None:
+    r"""Plot tensors or array. Clip to $[0, 1]$ by default.
 
-    :param tensors:
-    :type tensors: "Tensor"
+    :param inputs:
+    :type inputs: Tensor | np.ndarray
     :rtype: None
     """
+    import numpy as np
     from matplotlib import pyplot as plt
-    from torchvision.utils import make_grid
 
-    img = make_grid(tensors).permute(1, 2, 0).detach().cpu().float().numpy()
+    if isinstance(inputs, np.ndarray):
+        img = inputs
+    else:
+        from torchvision.utils import make_grid
+
+        img = (
+            make_grid(inputs.clip(0, 1))
+            .permute(1, 2, 0)
+            .detach()
+            .cpu()
+            .float()
+            .numpy()
+        )
     plt.imshow(img)
     plt.show()
-
-
-def describe(
-    obj: object,
-    min: bool = True,
-    max: bool = True,
-    mean: bool = True,
-    var: bool = True,
-    device: bool = True,
-    dtype: bool = True,
-) -> str:
-    """Describe.
-
-    :param obj:
-    :type obj: object
-    :param min:
-    :type min: bool
-    :param max:
-    :type max: bool
-    :param mean:
-    :type mean: bool
-    :param var:
-    :type var: bool
-    :param device:
-    :type device: bool
-    :param dtype:
-    :type dtype: bool
-    :rtype: str
-    """
-    import torch
-
-    if isinstance(obj, torch.Tensor):
-        attrs: list[str] = []
-        if min:
-            attrs += [f"min={obj.min():.2}"]
-        if max:
-            attrs += [f"max={obj.max():.2}"]
-        if var:
-            _mean, _var = torch.var_mean(obj)
-            if mean:
-                attrs += [f"mean={_mean:.2}"]
-            attrs += [f"var={_var:.2}"]
-        elif mean:
-            attrs += [f"mean={obj.mean():.2}"]
-        if device:
-            attrs += [f"device={obj.device}"]
-        if dtype:
-            attrs += ["dtype=" + f"{obj.dtype}".split(".")[-1]]
-        return f"tensor({', '.join(attrs)})"
-    elif isinstance(obj, dict):
-        dic = {}
-        for k, v in obj.items():
-            pass
-        return ""
-    elif isinstance(obj, list):
-        return ""
-    else:
-        return ""
 
 
 def seed_everything(seed: int = 0) -> None:

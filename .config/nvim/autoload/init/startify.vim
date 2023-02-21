@@ -53,6 +53,8 @@ function! init#startify#source() abort
         \ {g:maplocalleader . 's': '~/.zshrc'},
         \ {g:maplocalleader . 'z': '~/.zprofile'},
         \ {g:maplocalleader . 'x': '~/.xprofile'},
+        \ {g:maplocalleader . 'y': fnamemodify(expand('$XDG_CONFIG_HOME/ptpython/config.py'), ':~')},
+        \ {g:maplocalleader . 'p': fnamemodify(expand('$PYTHONSTARTUP'), ':~')},
         \ ]
   let g:startify_custom_indices =
         \ map(range(0x61, 0x7a) + range(0x41, 0x5a), {_, v -> '.' . nr2char(v)})

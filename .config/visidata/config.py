@@ -14,3 +14,5 @@ DirSheet.addCommand(  # type: ignore
 )
 options.cmdlog_histfile = "~/.cache/visidata/visidata.tsv"  # type: ignore
 options.color_default = "white"  # type: ignore
+options.clipboard_copy_cmd = "xsel -ib"  # type: ignore
+options.clipboard_paste_cmd = "xsel -ob"  # type: ignore

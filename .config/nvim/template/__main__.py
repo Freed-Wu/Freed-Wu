@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 r"""This module can be called by
 `python -m <https://docs.python.org/3/library/__main__.html>`_.
 """

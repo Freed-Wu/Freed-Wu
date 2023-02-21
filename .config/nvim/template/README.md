@@ -2,6 +2,7 @@
 [![github/workflow](https://github.com/%GITHUB_USER%/%DIR%/actions/workflows/main.yml/badge.svg)](https://github.com/%GITHUB_USER%/%DIR%/actions)
 [![codecov](https://codecov.io/gh/%GITHUB_USER%/%DIR%/branch/main/graph/badge.svg)](https://codecov.io/gh/%GITHUB_USER%/%DIR%)
 [![readthedocs](https://shields.io/readthedocs/%DIR%)](https://%DIR%.readthedocs.io)
+[![DeepSource](https://deepsource.io/gh/%GITHUB_USER%/%DIR%.svg/?show_trend=true)](https://deepsource.io/gh/%GITHUB_USER%/%DIR%)
 
 [![github/downloads](https://shields.io/github/downloads/%GITHUB_USER%/%DIR%/total)](https://github.com/%GITHUB_USER%/%DIR%/releases)
 [![github/downloads/latest](https://shields.io/github/downloads/%GITHUB_USER%/%DIR%/latest/total)](https://github.com/%GITHUB_USER%/%DIR%/releases/latest)

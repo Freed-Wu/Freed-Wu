@@ -6,7 +6,7 @@ endsnippet
 
 snippet cls "myUltiSnips" b
 class $1:
-	def __init__(self):
+	def __init__(self) -> None:
 		super().__init__()
 endsnippet
 
@@ -15,12 +15,12 @@ def $1(self, $2):
 	$0
 endsnippet
 
-snippet wrap "from functools import wraps" b
-def $1(f):
+snippet wrap "from functools import wraps; from typing import Callable" b
+def $1(f) -> Callable:
 	@wraps(f)
-	def wrapper(*args, **kwds):
+	def wrapper(*args, **kwargs):
 		$0
-		return f(*args, **kwds)
+		return f(*args, **kwargs)
 	return wrapper
 endsnippet
 

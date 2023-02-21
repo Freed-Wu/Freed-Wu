@@ -171,6 +171,12 @@ function! init#smartinput#post_source() abort
         \ 'char': '<Enter>',
         \ 'input': '<Enter><Enter><Up><TAB>',
         \ })
+  call smartinput#map_to_trigger('i', '%', '%', '%')
+  call smartinput#define_rule({
+        \ 'at': '{\%#}',
+        \ 'char': '%',
+        \ 'input': '%%' . left,
+        \ })
 
   call smartinput#map_to_trigger('i', '-*-', '-*-', '-*-')
   call smartinput#define_rule({
@@ -179,6 +185,7 @@ function! init#smartinput#post_source() abort
         \ 'input': '-*-  -*-' . left . left . left . left,
         \ })
 
+  " https://github.com/kana/vim-smartinput/issues/70
   call smartinput#map_to_trigger('i', '<Space>', '<Space>', '<Space>')
   call smartinput#define_rule({
         \ 'at': '(\%#)',
@@ -196,6 +203,16 @@ function! init#smartinput#post_source() abort
         \ 'input': '<Space><Space>' . left,
         \ })
   call smartinput#define_rule({
+        \ 'at': '%\%#%',
+        \ 'char': '<Space>',
+        \ 'input': '<Space><Space>' . left,
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '%\%#%',
+        \ 'char': '-',
+        \ 'input': '--' . left,
+        \ })
+  call smartinput#define_rule({
         \ 'at': '( \%# )',
         \ 'char': '<BS>',
         \ 'input': '<BS><Del>',
@@ -207,6 +224,16 @@ function! init#smartinput#post_source() abort
         \ })
   call smartinput#define_rule({
         \ 'at': '{ \%# }',
+        \ 'char': '<BS>',
+        \ 'input': '<BS><Del>',
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '% \%# %',
+        \ 'char': '<BS>',
+        \ 'input': '<BS><Del>',
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '%-\%#-%',
         \ 'char': '<BS>',
         \ 'input': '<BS><Del>',
         \ })
@@ -227,7 +254,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '\%#',
         \ 'char': '`',
         \ 'input': "`'" . left,
-        \ 'filetype': ['tex'],
+        \ 'filetype': ['tex', 'm4'],
         \ })
   call smartinput#define_rule({
         \ 'at': '`\%#''',
@@ -640,7 +667,7 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['python'],
         \ })
   call smartinput#define_rule({
-        \ 'at': ',\s*\%#',
+        \ 'at': '[,(]\s*\%#',
         \ 'char': '*',
         \ 'input': '*',
         \ 'filetype': ['python'],

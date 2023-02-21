@@ -1,8 +1,14 @@
+function! init#quickui#process(menu) abort
+  let l:menu = map(a:menu, {_, v -> [v[0]] + [get(v, 1, substitute(v[0], '&', '', 'g'))]})
+  let l:menu = map(l:menu, {_, v -> v + [get(v, 1)]})
+  return l:menu
+endfunction
+
 ""
 " assets/json/menu
 function! init#quickui#install(menu_name, json_name) abort
   let l:menu = init#get_json('menu/' . a:json_name)
-  let l:menu = map(l:menu, {_, v -> v + [get(v, 1)]})
+  let l:menu = init#quickui#process(l:menu)
   call quickui#menu#install(a:menu_name, l:menu)
 endfunction
 

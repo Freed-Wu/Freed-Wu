@@ -45,4 +45,6 @@ export PYTHONBREAKPOINT=pudb.set_trace
 export LESSQUIET=1
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --color=always'
+# mdcat
+export MDCAT_PAGER='less --pattern=^┄(┄|)'
 # ex: filetype=sh

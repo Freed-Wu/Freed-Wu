@@ -6,6 +6,7 @@
 !/pyproject.toml
 !/.pre-commit-config.yaml
 !/.gitlint
+!/.yamlint.yaml
 !/.github/
 !/.dockerignore
 !/.deepsource.toml
@@ -111,6 +112,9 @@
 !/.nixpkgs/
 /.nixpkgs/*
 !/.nixpkgs/darwin-configuration.nix
+!/.bundle/
+/.bundle/*
+!/.bundle/config
 !/.cpan/
 /.cpan/*
 !/.cpan/CPAN/
@@ -195,6 +199,7 @@
 !/.config/neofetch/
 /.config/neofetch/*
 !/.config/neofetch/config.conf
+!/.config/hyfetch.json
 !/.config/lftp/
 /.config/lftp/*
 !/.config/lftp/rc
