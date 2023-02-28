@@ -86,6 +86,7 @@
   "list.source.bibtex.files": ["*.bib", "refs/*.bib"],
   "list.source.files.args": ["--hidden", "--files"],
   "markdown-preview-enhanced.enableScriptExecution": true,
+  "perl.disableCache": true,
   "prettier.ignorePath": ".gitignore",
   "pydocstring.doqPath": "/usr/bin/doq",
   "pydocstring.enableFileAction": true,

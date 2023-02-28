@@ -1,0 +1,43 @@
+---
+"on":
+  push:
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: shogo82148/actions-setup-perl@v1
+      - name: Build
+        run: |
+          ./Makefile.PL
+          cp MANIFEST.SKIP.bak MANIFEST.SKIP
+          make manifest
+          make dist
+      - uses: actions/upload-artifact@v3
+        if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+        with:
+          path: |
+            *.tar.gz
+      - name: Install Requirements
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cpan CPAN::Uploader
+      - name: Upload
+        if: startsWith(github.ref, 'refs/tags/')
+        run: >
+          cpan-upload -u ${{ secrets.CPAN_USERNAME }}
+          -p ${{ secrets.CPAN_PASSWORD }} *.tar.gz
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            *.tar.gz

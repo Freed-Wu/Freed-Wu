@@ -34,3 +34,5 @@
 [![pypi/format](https://shields.io/pypi/format/%DIR%)](https://pypi.org/project/%DIR%/#files)
 [![pypi/implementation](https://shields.io/pypi/implementation/%DIR%)](https://pypi.org/project/%DIR%/#files)
 [![pypi/pyversions](https://shields.io/pypi/pyversions/%DIR%)](https://pypi.org/project/%DIR%/#files)
+
+[![cpan/v](https://img.shields.io/cpan/v/%DIR%)](https://metacpan.org/pod/%PERLDIR%)

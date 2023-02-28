@@ -10,7 +10,7 @@ augroup init_filetype
   " Data_Describe {{{1 "
   autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
   autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc setfiletype dosini
-  autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*} setfiletype conf
+  autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype json
   autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle setfiletype yaml

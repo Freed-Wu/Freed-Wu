@@ -17,6 +17,7 @@ function! init#init#vim#echo(...) abort
   let l:word = init#parse(a:)
   let l:word = substitute(l:word, '[|`]', '', 'g')
   let l:word = substitute(l:word, '[lsa]\ze:', 'g', 'g')
+  let l:word = substitute(l:word, ',$', '', 'g')
   echo eval(l:word)
 endfunction
 

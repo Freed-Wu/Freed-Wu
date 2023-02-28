@@ -38,6 +38,30 @@ function! init#init#template#dir3() abort
 endfunction
 
 ""
+" for perl:
+" Foo-Bar -> Foo::Bar
+function! init#init#template#perldir() abort
+  let l:dir = substitute(expand('%:p:h:t'), '\%(-\|^\)\(.\)', '::\u\1', 'g')
+  return substitute(l:dir, '^::', '', 'g')
+endfunction
+
+""
+" for perl:
+" Foo-Bar -> Foo/Bar
+function! init#init#template#perlfile() abort
+  let l:dir = substitute(expand('%:p:h:t'), '\%(-\|^\)\(.\)', '/\u\1', 'g')
+  return substitute(l:dir, '^/', '', 'g')
+endfunction
+
+""
+" for perl lib:
+" lib/Foo/Bar.pm -> FooBar
+function! init#init#template#perllib() abort
+  let l:lib = substitute(expand('%:r'), '\%(/\|^\)\(.\)', '::\u\1', 'g')
+  return substitute(l:lib, '^::Lib::', '', 'g')
+endfunction
+
+""
 " for homebrew package script:
 " foo-bar -> FooBar
 " foo-bar.rb -> class FooBar < Formula

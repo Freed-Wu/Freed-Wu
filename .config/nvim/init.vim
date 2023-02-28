@@ -88,10 +88,8 @@ endif
 if exists('+makeencoding')
   set makeencoding=char
 endif
-if has('nvim-0.5.0') || has('patch-8.1.1564')
-  set diffopt+=vertical,algorithm:patience
-  set signcolumn=number
-endif
+set diffopt+=vertical,algorithm:patience
+set signcolumn=number
 if $PREFIX !=# '/data/data/com.termux/files/usr'
   set wildignorecase
 endif
@@ -432,15 +430,11 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#treesitter#source()',
         \ 'hook_post_update': 'TSUpdate',
         \ })
-  " too slow
   call dein#add('sheerun/vim-polyglot', {
-        \ 'if': !has('win32unix'),
         \ 'merged': 0,
         \ 'hook_source': 'call init#polyglot#source()',
         \ })
-  " need ++once
   call dein#add('lambdalisue/glyph-palette.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
         \ 'hook_post_source': 'call init#glyph_palette#post_source()',
         \ })
   call dein#add('luochen1990/rainbow', {
@@ -507,14 +501,21 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('tmux-plugins/vim-tmux')
   call dein#add('neomutt/neomutt.vim')
   call dein#add('tpope/vim-scriptease')
+  " https://github.com/vim-jp/vital.vim/issues/574
+  call dein#add('vim-jp/vital.vim', {
+        \ 'merged': 0,
+        \ })
+  call dein#add('junegunn/vader.vim')
+  call dein#add('thinca/vim-themis', {
+        \ 'build': 'ln -s $PWD/bin/themis ~/.local/bin',
+        \ })
   call dein#add('mechatroner/rainbow_csv', {
         \ 'hook_source': 'call init#rainbow_csv#source()',
         \ })
   call dein#add('cmcaine/vim-uci')
-  call dein#add('thinca/vim-themis', {
-        \ 'build': 'ln -s $PWD/bin/themis ~/.local/bin',
+  call dein#add('Freed-Wu/cppinsights.vim', {
+        \ 'if': executable('insights'),
         \ })
-  call dein#add('junegunn/vader.vim')
   " 2}}} Ftplugin "
   " 1}}} Filetype "
 
@@ -678,6 +679,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('aperezdc/vim-template', {
         \ 'hook_source': 'call init#template#source()',
         \ })
+  " call dein#add('Freed-Wu/template.vim')
   call dein#add('mattn/emmet-vim', {
         \ 'on_map': {'n': '<C-y>', 'v': '<C-y>', 'i': '<C-y>'},
         \ })
@@ -820,9 +822,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " 2}}} FileCMD "
 
   " Debug {{{2 "
-  call dein#add('Freed-Wu/cppinsights.vim', {
-        \ 'if': executable('insights'),
-        \ })
   call dein#add('preservim/vimux', {
         \ 'on_cmd': ['VimuxRunCommand', 'VimuxRunLastCommand', 'VimuxOpenRunner',
         \ 'VimuxZoomRunner', 'VimuxInspectRunner', 'VimuxScrollUpInspect',
@@ -860,37 +859,17 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " File {{{2 "
   call dein#add('antoinemadec/FixCursorHold.nvim')
   call dein#add('lambdalisue/fern.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
         \ 'hook_source': 'call init#fern#source()',
         \ })
-  " need ++nested, ++once
-  call dein#add('lambdalisue/fern-ssh', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('lambdalisue/fern-hijack.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('lambdalisue/fern-git-status.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('lambdalisue/fern-mapping-git.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('lambdalisue/fern-renderer-nerdfont.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('lambdalisue/fern-mapping-project-top.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('lambdalisue/fern-mapping-quickfix.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('lambdalisue/fern-mapping-mark-children.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
-  call dein#add('yuki-yano/fern-preview.vim', {
-        \ 'if': has('nvim-0.5.0') || has('patch-8.1.1564'),
-        \ })
+  call dein#add('lambdalisue/fern-ssh')
+  call dein#add('lambdalisue/fern-hijack.vim')
+  call dein#add('lambdalisue/fern-git-status.vim')
+  call dein#add('lambdalisue/fern-mapping-git.vim')
+  call dein#add('lambdalisue/fern-renderer-nerdfont.vim')
+  call dein#add('lambdalisue/fern-mapping-project-top.vim')
+  call dein#add('lambdalisue/fern-mapping-quickfix.vim')
+  call dein#add('lambdalisue/fern-mapping-mark-children.vim')
+  call dein#add('yuki-yano/fern-preview.vim')
   " 2}}} File "
   " 1}}} Tool "
 

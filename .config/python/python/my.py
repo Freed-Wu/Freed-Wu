@@ -93,24 +93,58 @@ def plot(inputs: "Tensor | np.ndarray") -> None:
     :type inputs: Tensor | np.ndarray
     :rtype: None
     """
-    import numpy as np
     from matplotlib import pyplot as plt
 
-    if isinstance(inputs, np.ndarray):
-        img = inputs
-    else:
-        from torchvision.utils import make_grid
+    from .image import convert_images
 
-        img = (
-            make_grid(inputs.clip(0, 1))
-            .permute(1, 2, 0)
-            .detach()
-            .cpu()
-            .float()
-            .numpy()
-        )
+    img = convert_images(inputs)
     plt.imshow(img)
     plt.show()
+
+
+def save(inputs: "Tensor | np.ndarray", fname: str = "a.png") -> None:
+    r"""Save tensors or array. Clip to $[0, 1]$ by default.
+
+    :param inputs:
+    :type inputs: "Tensor | np.ndarray"
+    :param fname:
+    :type fname: str
+    :rtype: None
+    """
+    from matplotlib import pyplot as plt
+
+    from .image import convert_images
+
+    img = convert_images(inputs)
+    plt.imsave(fname, img)
+
+
+def patch_images(
+    samples: "Tensor", ratio: int = 1, S: int = 64
+) -> tuple["Tensor", list[int]]:
+    """Patch images.
+
+    :param samples:
+    :type samples: "Tensor"
+    :param ratio:
+    :type ratio: int
+    :param S:
+    :type S: int
+    :rtype: tuple["Tensor", list[int]]
+    """
+    import math
+
+    from torchvision.transforms.functional import pad
+
+    h, w = samples.shape[-2:]
+    h_pad = S * math.ceil(h / S) - h
+    w_pad = S * math.ceil(w / S) - w
+    l_pad, u_pad = w_pad // 2, h_pad // 2
+    r_pad, d_pad = w_pad - l_pad, h_pad - u_pad
+    pad_param = [l_pad, u_pad, r_pad, d_pad]
+    samples = pad(samples, pad_param)
+    crop_param = [ratio * u_pad, ratio * l_pad, ratio * h, ratio * w]
+    return samples, crop_param
 
 
 def seed_everything(seed: int = 0) -> None:

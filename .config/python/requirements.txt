@@ -3,3 +3,4 @@
 jedi
 repl-python-codestats
 rich
+translate-shell

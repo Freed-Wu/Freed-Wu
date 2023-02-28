@@ -31,6 +31,15 @@ init#init#template#dir2_()                        *init#init#template#dir2_()*
 init#init#template#dir3()                          *init#init#template#dir3()*
   for github actions: foo/.github/workflows/main.yml -> foo
 
+init#init#template#perldir()                    *init#init#template#perldir()*
+  for perl: Foo-Bar -> Foo::Bar
+
+init#init#template#perlfile()                  *init#init#template#perlfile()*
+  for perl: Foo-Bar -> Foo/Bar
+
+init#init#template#perllib()                    *init#init#template#perllib()*
+  for perl lib: lib/Foo/Bar.pm -> FooBar
+
 init#init#template#cfile()                        *init#init#template#cfile()*
   for homebrew package script: foo-bar -> FooBar foo-bar.rb -> class FooBar <
   Formula

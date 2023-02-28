@@ -6,6 +6,9 @@ function! init#rainbow#source() abort
         \ 'separately': {
           \ 'bbcode': 0,
           \ 'html': 0,
+          \ 'htmldjango': 0,
+          \ 'jinja2': 0,
+          \ 'liquid': 0,
           \ },
           \ }
 endfunction

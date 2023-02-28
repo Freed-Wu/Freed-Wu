@@ -176,6 +176,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '{\%#}',
         \ 'char': '%',
         \ 'input': '%%' . left,
+        \ 'filetype': ['liquid', 'htmldjango', 'jinja2'],
         \ })
 
   call smartinput#map_to_trigger('i', '-*-', '-*-', '-*-')

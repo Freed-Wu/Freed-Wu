@@ -51,6 +51,8 @@
 !/.pypirc
 !/.wakatime.cfg
 !/.replyrc
+# https://bugs.chromium.org/p/gerrit/issues/detail?id=16717
+!/.gitconfig
 
 # dotfiles
 !/.dosbox/
@@ -312,17 +314,6 @@
 !/.local/bin/telnet.py
 !/.local/bin/git-neomutt
 !/.local/bin/batman
-
-# lib
-!/.local/lib/
-/.local/lib/*
-!/.local/lib/perl5/
-/.local/lib/perl5/*
-!/.local/lib/perl5/Reply/
-/.local/lib/perl5/Reply/*
-!/.local/lib/perl5/Reply/Plugin/
-/.local/lib/perl5/Reply/Plugin/*
-!/.local/lib/perl5/Reply/Plugin/Prompt.pm
 
 # Windows
 !/.minttyrc

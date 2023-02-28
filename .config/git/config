@@ -24,6 +24,8 @@
 	submodule = log
 	colorMoved = default
 	tool = vimdiff
+[color]
+	ui = auto
 [status]
 	submodulesummary = true
 [submodule]
@@ -103,6 +105,11 @@
 [commit]
 	gpgsign = true
 	template = ~/.config/git/_COMMIT_EDITMSG
-# after git 2.23
 [tag]
+	# after git 2.23
 	gpgSign = true
+[url "https://mirrors.bfsu.edu.cn/git/AOSP/"]
+	insteadof = https://android.googlesource.com
+# ManifestInvalidRevisionError
+# [url "https://mirrors.bfsu.edu.cn/git/LineageOS/LineageOS"]
+	# insteadof = https://github.com/LineageOS
