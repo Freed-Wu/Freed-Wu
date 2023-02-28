@@ -9,5 +9,6 @@ image/jpeg=lximage-qt.desktop;
 image/png=lximage-qt.desktop;
 image/gif=lximage-qt.desktop;
 image/x-xpixmap=lximage-qt.desktop;
+image/svg+xml=lximage-qt.desktop;
 application/rtf=libreoffice-writer.desktop;
 application/pdf=org.pwmt.zathura.desktop;

@@ -1,0 +1,17 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/syntax.html
+scope: source.{{ expand('%:t:r') }}
+file_extensions:
+  - {{ expand('%:t:r') }}
+first_line_match: |-
+  (?xi:
+    ^ \#! .* \b{{ expand('%:t:r') }}\b                         # shebang
+  | ^ \s* \# .*? -\*- .*? \b{{ expand('%:t:r') }}\b .*? -\*-   # editorconfig
+  | ^ \s* \# (vim?|ex): .*? \b{{ expand('%:t:r') }}\b          # modeline
+  )
+
+context:
+  main:
+  - match:
+    scope: .source.{{ expand('%:t:r') }}

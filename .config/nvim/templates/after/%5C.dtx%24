@@ -1,0 +1,39 @@
+% \iffalse
+%<*driver>
+\ProvidesFile{{{ expand('%:t') }}}[{{ strftime('%F') }} v0.0.1]
+\documentclass{ltxdoc}
+\usepackage{hypdoc}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% \title{{{ expand('%:t:r') }}\\{{ strftime('%Y/%m/%d') }} v0.0.1}
+% \author{\href{mailto:{{ g:snips_email }}}{{{ g:snips_author }}}}
+% \maketitle
+% \begin{abstract}
+%   {% here %}
+% \end{abstract}
+% \tableofcontents
+% \section{Introduction}%
+% \label{sec:Introduction}
+% \IndexPrologue{\section{\indexname}}
+% \StopEventually{\PrintIndex}
+% \appendix
+% \section{Implement}%
+% \label{sec:Implement}
+%    \begin{macrocode}
+%<*cls|sty>
+%<cls>  \ProvidesClass{{{ expand('%:t:r') }}}[{{ strftime('%Y/%m/%d') }} v0.0.1]
+%<sty>  \ProvidesPackage{{{ expand('%:t:r') }}}[{{ strftime('%Y/%m/%d') }} v0.0.1]
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{kvoptions}
+\RequirePackage{kvsetkeys}
+\SetupKeyvalOptions{%
+  setkeys=\kvsetkeys,
+}
+%<cls> \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{}}
+\ProcessKeyvalOptions*
+%</cls|sty>
+%    \end{macrocode}
+% \Finale

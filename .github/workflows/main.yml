@@ -9,10 +9,12 @@
   workflow_dispatch:
 
 env:
-  path: dist/*
+  files: dist/*
   python-version: 3.x
   cache: pip
 
+# disable windows
+# invalid path '.password-store/https:/test.pypi.org/legacy/__token__.gpg'
 jobs:
   build:
     strategy:
@@ -21,8 +23,6 @@ jobs:
         runs-on:
           - ubuntu-latest
           - macos-latest
-          # https://github.com/Freed-Wu/my-dotfiles/actions/runs/3420653073/jobs/5695749611
-          # - windows-latest
     runs-on: ${{ matrix.runs-on }}
     steps:
       - uses: actions/checkout@v3
@@ -40,12 +40,12 @@ jobs:
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
         with:
           path: |
-            ${{ env.path }}
+            ${{ env.files }}
       - uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ${{ env.path }}
+            ${{ env.files }}
 
   publish:
     runs-on: ubuntu-latest

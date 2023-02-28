@@ -1,0 +1,15 @@
+""
+" https://github.com/neoclide/coc.nvim/wiki/Create-custom-source
+function! coc#source#{{ expand('%:t:r') }}#init() abort
+  return {
+        \ 'shortcut': '{{ expand('%:t:r') }}',
+        \ 'priority': 9,
+        \ 'filetypes': ['{{ expand('%:t:r') }}'],
+        \ }
+endfunction
+
+""
+" https://github.com/neoclide/coc.nvim/wiki/Create-custom-source
+function! coc#source#{{ expand('%:t:r') }}#complete(opt, cb) abort
+  call a:cb(s:items)
+endfunction

@@ -6,9 +6,11 @@ from contextlib import suppress
 with suppress(ImportError):
     import readline
 
+    from jedi import settings
     from jedi.utils import setup_readline
 
     setup_readline()
+    settings.add_bracket_after_function = True
 
 with suppress(ImportError):
     import sys

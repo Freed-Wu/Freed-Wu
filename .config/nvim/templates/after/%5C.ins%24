@@ -1,0 +1,11 @@
+\input docstrip
+\usedir{tex/latex/\jobname}
+\preamble%
+Copyright (C) {{ strftime('%Y') }}-\the\year\ by {{ g:snips_author }} <{{ g:snips_email }}>
+
+This work may be distributed and/or modified under the conditions of GPLv3+.
+\endpreamble%
+\generate{%
+  \file{\jobname.cls}{\from{\jobname.dtx}{cls}}
+}
+\endbatchfile%

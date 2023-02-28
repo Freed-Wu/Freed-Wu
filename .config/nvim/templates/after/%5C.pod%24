@@ -1,0 +1,34 @@
+=head1 NAME
+
+{{ expand('%:t:r') }} - {% here %}
+
+=head1 SYNOPSIS
+
+B<{{ expand('%:t:r') }}>
+[B<-?>]
+[B<--help>]
+[B<--version>]
+[B<--print-completion=>I<shell>]
+[F<files>]...
+
+=head1 DESCRIPTION
+
+{% here %}
+
+=head1 OPTIONS
+
+=over
+
+=item B<-?>, B<--help>
+
+display this help and exit.
+
+=item B<--version>
+
+output version information and exit.
+
+=item B<--print-completion=>I<shell>
+
+print shell completion and exit.
+
+=back

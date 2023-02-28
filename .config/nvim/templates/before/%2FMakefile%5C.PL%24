@@ -1,0 +1,20 @@
+#!/usr/bin/env perl
+use Env qw(GITHUB_REF_NAME);
+use ExtUtils::MakeMaker;
+
+if ( defined $GITHUB_REF_NAME ) {
+    $version = $GITHUB_REF_NAME;
+}
+else {
+    $version = `git describe --abbrev=0`;
+    chomp $version;
+}
+
+WriteMakefile(
+    NAME          => '{{ substitute(substitute(expand('%:p:h:t'), '\%(-\|^\)\(.\)', '::\u\1', 'g'), '^::', '', 'g') }}',
+    LICENSE       => 'gpl_3',
+    AUTHOR        => '{{ g:snips_author }} <{{ g:snips_email }}>',
+    VERSION_FROM  => '{{ expand('%:p:h:t') }}.PL',
+    ABSTRACT_FROM => '{{ expand('%:p:h:t') }}.PL',
+    EXE_FILES     => ['{{ expand('%:p:h:t') }}'],
+);

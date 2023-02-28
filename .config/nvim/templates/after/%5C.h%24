@@ -1,0 +1,3 @@
+#ifndef __{{ expand('%:t:r') }}__
+#define __{{ expand('%:t:r') }}__
+#endif

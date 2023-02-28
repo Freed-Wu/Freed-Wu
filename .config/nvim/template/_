@@ -1,7 +1,0 @@
-#compdef %FILE_%
-# shellcheck disable=all
-
-_arguments -s -S \
-  "(- : *)"{-V,--version}"[Show version]" \
-  "(- : *)"{-h,--help}"[Show list of command-line options]" \
-  '*: :_files'

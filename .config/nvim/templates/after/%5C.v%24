@@ -1,0 +1,8 @@
+module {{ expand('%:t:r') }} (
+  {% here %}
+);
+
+{% here %}
+
+endmodule
+

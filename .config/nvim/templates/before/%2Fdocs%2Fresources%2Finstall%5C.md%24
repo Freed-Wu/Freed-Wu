@@ -1,0 +1,21 @@
+# Install
+
+## [AUR](https://aur.archlinux.org/packages/{{ expand('%:p:h:h:h:t') }})
+
+```sh
+yay -S {{ expand('%:p:h:h:h:t') }}
+```
+
+```sh
+sudo pacman -R {{ expand('%:p:h:h:h:t') }}
+```
+
+## [PYPI](https://pypi.org/project/{{ expand('%:p:h:h:h:t') }})
+
+```sh
+pip install {{ expand('%:p:h:h:h:t') }}
+```
+
+```sh
+pip uninstall {{ expand('%:p:h:h:h:t') }}
+```

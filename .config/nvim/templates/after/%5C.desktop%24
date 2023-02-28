@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding = UTF-8
+Name = {{ expand('%:t:r') }}
+GenericName = {{ expand('%:t:r') }}
+GenericName[zh_CN] = {{ expand('%:t:r') }}
+Type = Application
+Exec = {% here %}
+Terminal = false
+Categories = Application;

@@ -178,6 +178,12 @@ function! init#smartinput#post_source() abort
         \ 'input': '%%' . left,
         \ 'filetype': ['liquid', 'htmldjango', 'jinja2'],
         \ })
+  call smartinput#define_rule({
+        \ 'at': '{\%#}',
+        \ 'char': '#',
+        \ 'input': '##' . left,
+        \ 'filetype': ['liquid', 'htmldjango', 'jinja2'],
+        \ })
 
   call smartinput#map_to_trigger('i', '-*-', '-*-', '-*-')
   call smartinput#define_rule({
@@ -205,6 +211,11 @@ function! init#smartinput#post_source() abort
         \ })
   call smartinput#define_rule({
         \ 'at': '%\%#%',
+        \ 'char': '<Space>',
+        \ 'input': '<Space><Space>' . left,
+        \ })
+  call smartinput#define_rule({
+        \ 'at': '#\%##',
         \ 'char': '<Space>',
         \ 'input': '<Space><Space>' . left,
         \ })

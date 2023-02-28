@@ -2,7 +2,7 @@ function! init#treesitter#source() abort
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
   " lua/treesitter.lua
-  lua require("treesitter")
+  lua require"treesitter"
 endfunction
 
 function! s:init() abort

@@ -1,8 +1,0 @@
-#!/usr/bin/env -S make -f
-PREFIX = /usr/local
-
-.PHONY: default
-default: all
-
-.PHONY: all
-all: %HERE%

@@ -1,0 +1,14 @@
+---
+documentclass: beamer
+title: {{ expand('%:t:r') }}
+author: {{ g:snips_author }}
+institute: USTC
+logo: images/logo.pdf
+aspectratio: 169
+theme: Berkeley
+colortheme: spruce
+navigation: horizontal
+bibliography: refs/main.bib
+---
+
+{% here %}

@@ -1,3 +1,4 @@
+---treesitter config.
 -- don't install automatically to avoid network failure
 require"nvim-treesitter.configs".setup {
     indent = {enable = true},
@@ -17,11 +18,15 @@ ft_to_parser.pandoc = "markdown"
 ft_to_parser.mysql = "sql"
 ft_to_parser.eelixir = "elixir"
 ft_to_parser.sublime_syntax = "yaml"
+-- luacheck: globals vim
+---@diagnostic disable-next-line: undefined-global
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "liquid",
     callback = function(args)
+        ---@diagnostic disable-next-line: undefined-global
         vim.treesitter.start(args.buf, vim.b.liquid_subtype)
         -- only if additional legacy syntax is needed
+        ---@diagnostic disable-next-line: undefined-global
         vim.bo[args.buf].syntax = "on"
     end
 })

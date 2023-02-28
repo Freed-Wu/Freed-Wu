@@ -6,14 +6,20 @@ export EDITOR=$VISUAL
 # `gtk-launch $(xdg-mime query default text/html) about:blank` cannot work
 export BROWSER=firefox
 # man
-MANPATH="$HOME/.local/man:$MANPATH"
+MANPATH="$HOME/.local/share/man:$MANPATH"
 MANOPT=-Lzh_CN.UTF-8
 export MANOPT
 MANSECT='1:1p:8:3:3p:0:0p:2:5:4:9:6:7:n:l'
 export MANSECT
 # perl
+export PERL_LOCAL_LIB_ROOT
+PERL_LOCAL_LIB_ROOT="$HOME/.local"
 export PERL5LIB
 PERL5LIB="$HOME/.local/lib/perl5"
+export PERL_MB_OPT
+PERL_MB_OPT="--install_base $PERL_LOCAL_LIB_ROOT"
+export PERL_MM_OPT
+PERL_MM_OPT="INSTALL_BASE=$PERL_LOCAL_LIB_ROOT"
 # neomutt
 EMAIL="$(git config user.email)"
 export EMAIL

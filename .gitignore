@@ -51,6 +51,7 @@
 !/.pypirc
 !/.wakatime.cfg
 !/.replyrc
+!/.indentconfig.yaml
 # https://bugs.chromium.org/p/gerrit/issues/detail?id=16717
 !/.gitconfig
 
@@ -285,10 +286,14 @@
 !/.config/picom/
 !/.config/visidata/
 !/.config/nixpkgs/
+!/.config/luacheck/
+!/.config/latexindent.yaml
 
 # $XDG_DATA_HOME
 !/.local/
 /.local/*
+# perl install manpage here, which is a symlink to share/man
+!/.local/man/
 !/.local/share/
 /.local/share/*
 !/.local/share/flatpak/

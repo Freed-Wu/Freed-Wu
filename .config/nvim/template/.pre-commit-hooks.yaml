@@ -1,5 +1,0 @@
----
-- id: %DIR%
-  name: %DIR%
-  description: "%HERE%"
-  entry: %DIR%

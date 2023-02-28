@@ -15,7 +15,8 @@ sudo apt-get -y update &&
 	sudo setfacl -k /tmp &&
 	sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)" &&
 	git -C ~ reset --hard &&
-	~/.nix-profile/bin/nix-env -i neovim tmux vivid exa bat ripgrep fd delta fzf powerlevel10k &&
+	~/.nix-profile/bin/nix-env -i neovim tmux vivid exa bat ripgrep fd delta fzf \
+		powerlevel10k chafa parallel perl5.36.0-Image-ExifTool &&
 	sudo ln -sf ~/.nix-profile/bin/nvim /usr/bin/vi
 
 pip install -e "$HOME"'[dev]'

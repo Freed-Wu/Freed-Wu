@@ -1,0 +1,8 @@
+\documentclass{article}
+\usepackage{hyperref}
+\title{{{ expand('%:t:r') }}}
+\begin{document}
+
+{% here %}
+
+\end{document}

@@ -1,0 +1,10 @@
+{
+  "name": "{{ expand('%:p:h:t') }}",
+  "description": "",
+  "version": "0.0.1",
+  "author": "{{ g:snips_author }}",
+  "repository": {
+    "type": "git",
+    "url": "{{ g:snips_github }}/{{ expand('%:p:h:t') }}"
+  }
+}

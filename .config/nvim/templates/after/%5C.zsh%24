@@ -1,0 +1,2 @@
+# :fzf-tab:complete:(\\|*/|){{ expand('%:t:r') }}:
+{{ expand('%:t:r') }} $word

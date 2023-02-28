@@ -1,0 +1,6 @@
+Describe {{ expand('%:t:r') }}
+  Before all
+  End
+  It check {{ here }}
+  End
+End

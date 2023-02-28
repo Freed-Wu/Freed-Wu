@@ -675,11 +675,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('honza/vim-snippets', {
         \ 'hook_source': 'call init#snippets#source()',
         \ })
-  " if BufNewFile, augroup Templates will be loaded in next BufNewFile
-  call dein#add('aperezdc/vim-template', {
-        \ 'hook_source': 'call init#template#source()',
-        \ })
-  " call dein#add('Freed-Wu/template.vim')
+  call dein#add('Freed-Wu/template.vim')
   call dein#add('mattn/emmet-vim', {
         \ 'on_map': {'n': '<C-y>', 'v': '<C-y>', 'i': '<C-y>'},
         \ })

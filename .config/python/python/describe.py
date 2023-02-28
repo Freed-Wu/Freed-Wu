@@ -1,6 +1,7 @@
 r"""Describe
 ============
 """
+from contextlib import suppress
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -14,7 +15,7 @@ class Describe:
         self,
         device: "torch.device",
         dtype: "torch.dtype",
-        requires_grad: bool,
+        requires_grad: bool = False,
         min: float | None = None,
         max: float | None = None,
         var: float | None = None,
@@ -81,6 +82,24 @@ class Describe:
             texts += [text]
         self.repr = f"Describe({', '.join(texts)})"
 
+    def __eq__(self, that) -> bool:
+        """Eq.
+
+        :param that:
+        :rtype: bool
+        """
+        if (
+            self.device == that.device
+            and self.dtype == that.dtype
+            and self.requires_grad == that.requires_grad
+            and self.min == that.min
+            and self.max == that.max
+            and self.var == that.var
+            and self.mean == that.mean
+        ):
+            return True
+        return False
+
     def __repr__(self) -> str:
         """Repr.
 
@@ -98,7 +117,7 @@ def describe(
     device: bool = True,
     dtype: bool = True,
     requires_grad: bool = True,
-) -> Describe:
+) -> Describe | dict | list:
     """Describe.
 
     :param obj:
@@ -117,7 +136,7 @@ def describe(
     :type dtype: bool
     :param requires_grad:
     :type requires_grad: bool
-    :rtype: Describe
+    :rtype: Describe | dict | list
     """
     import torch
 
@@ -129,14 +148,15 @@ def describe(
             kwargs["min"] = obj.min().item()
         if max:
             kwargs["max"] = obj.max().item()
-        if var:
-            _mean, _var = torch.var_mean(obj)
-            if mean:
-                kwargs["mean"] = _mean.item()
-            kwargs["var"] = _var.item()
-        elif mean:
-            kwargs["mean"] = obj.mean().item()
-            kwargs["var"] = None
+        with suppress(RuntimeError):
+            if var:
+                _mean, _var = torch.var_mean(obj)
+                if mean:
+                    kwargs["mean"] = _mean.item()
+                kwargs["var"] = _var.item()
+            elif mean:
+                kwargs["mean"] = obj.mean().item()
+                kwargs["var"] = None
         if device:
             kwargs["device"] = obj.device
         if dtype:
@@ -145,11 +165,14 @@ def describe(
             kwargs["requires_grad"] = obj.requires_grad
         return Describe(**kwargs)  # type: ignore
     elif isinstance(obj, dict):
-        dic = {}
+        d = {}
         for k, v in obj.items():
-            pass
-        raise NotImplementedError
+            d[k] = describe(v)
+        return d
     elif isinstance(obj, list):
-        raise NotImplementedError
+        l = []
+        for v in obj:
+            l += [describe(v)]
+        return l
     else:
         raise NotImplementedError

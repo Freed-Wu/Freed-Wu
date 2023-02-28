@@ -1,0 +1,17 @@
+set my_addr = $my_{{ expand('%:e') }}
+
+set folder = $my_imap_{{ expand('%:e') }}
+set imap_user = $EMAIL
+set imap_pass = $MAIL_PASS
+
+set from = $imap_user
+set smtp_url = smtps://$from@smtp.$my_addr
+set smtp_pass = $imap_pass
+
+set spool_file = +Inbox
+set postponed = +Drafts
+set record = +Sent
+set trash = +Trash
+unmailboxes *
+mailboxes $spool_file $postponed $record $trash \
+Spam{% here %}

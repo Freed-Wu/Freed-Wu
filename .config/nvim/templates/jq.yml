@@ -1,0 +1,23 @@
+---
+"on":
+  push:
+    paths:
+      - $\{\{ env.paths \}\}
+  pull_request:
+    paths:
+      - $\{\{ env.paths \}\}
+  workflow_dispatch:
+
+env:
+  paths: assets/json/**/*.json
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check if a json is sorted
+        run: |
+          for json in $\{\{ env.paths \}\} ; do
+            diff <(jq -S . $json) $json || exit 1
+          done

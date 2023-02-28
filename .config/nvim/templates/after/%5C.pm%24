@@ -1,0 +1,11 @@
+package {{ substitute(substitute(expand('%:r'), '\%(/\|^\)\(.\)', '::\u\1', 'g'), '^::Lib::', '', 'g') }}
+use strict;
+use warnings;
+
+__END__
+
+=head1 NAME
+
+{{ substitute(substitute(expand('%:r'), '\%(/\|^\)\(.\)', '::\u\1', 'g'), '^::Lib::', '', 'g') }} - {% here %}
+
+=head1 DESCRIPTION

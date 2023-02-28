@@ -1,0 +1,4 @@
+# https://github.com/Perl-Toolchain-Gang/ExtUtils-Manifest/pull/17
+#!include_default
+^\.vscode/
+^{{ expand('%:p:h:t') }}-

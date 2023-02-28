@@ -1,0 +1,7 @@
+---
+name: {{ expand('%:p:h:t') }}
+author: {{ g:snips_author }}
+description: {% here %}
+inputs:
+outputs:
+runs:

@@ -3,11 +3,14 @@
 """
 import sys
 from contextlib import suppress
-from typing import TYPE_CHECKING, Callable
+from typing import TYPE_CHECKING
 
 from .describe import describe
+from .image import inputs2tensors
 
 if TYPE_CHECKING:
+    from typing import Callable
+
     import numpy as np
     from torch import Tensor, nn
 
@@ -15,7 +18,7 @@ if "torch" in sys.modules:
     with suppress(ImportError):
         from torchinfo import summary
 
-del sys, suppress
+del TYPE_CHECKING, sys, suppress
 
 
 def hook(module: "nn.Module", input: "Tensor", output: "Tensor") -> None:
@@ -32,7 +35,7 @@ def hook(module: "nn.Module", input: "Tensor", output: "Tensor") -> None:
     print(list(output.shape))
 
 
-def register_forward_hook(net: "nn.Module", hook: Callable = hook) -> None:
+def register_forward_hook(net: "nn.Module", hook: "Callable" = hook) -> None:
     """Register forward hook.
 
     :param net:
@@ -86,36 +89,68 @@ def calc_batch_size(
     return b, m_rest
 
 
-def plot(inputs: "Tensor | np.ndarray") -> None:
+def plot(
+    inputs: "Tensor | np.ndarray | list[str] | str", show: bool = True
+) -> None:
     r"""Plot tensors or array. Clip to $[0, 1]$ by default.
 
     :param inputs:
-    :type inputs: Tensor | np.ndarray
+    :type inputs: "Tensor | np.ndarray | list[str] | str"
+    :param show:
+    :type show: bool
     :rtype: None
     """
     from matplotlib import pyplot as plt
 
-    from .image import convert_images
+    from .image import inputs2ndarray
 
-    img = convert_images(inputs)
+    img = inputs2ndarray(inputs)
     plt.imshow(img)
-    plt.show()
+    if show:
+        plt.show()
 
 
-def save(inputs: "Tensor | np.ndarray", fname: str = "a.png") -> None:
+def hist(
+    inputs: "Tensor | list[str] | str", channel: int = 0, show: bool = True
+) -> None:
+    """Hist.
+
+    :param inputs:
+    :type inputs: "Tensor | list[str] | str"
+    :param channel:
+    :type channel: int
+    :param show:
+    :type show: bool
+    :rtype: None
+    """
+    from matplotlib import pyplot as plt
+
+    channels = ["R", "G", "B"]
+    tensors = inputs2tensors(inputs)
+    plt.hist(tensors[:, channel].flatten().detach().cpu().float().numpy(), 256)
+    plt.xlabel("pixel")
+    plt.ylabel("frequency")
+    plt.title(channels[channel])
+    if show:
+        plt.show()
+
+
+def save(
+    inputs: "Tensor | np.ndarray | list[str] | str", fname: str = "a.png"
+) -> None:
     r"""Save tensors or array. Clip to $[0, 1]$ by default.
 
     :param inputs:
-    :type inputs: "Tensor | np.ndarray"
+    :type inputs: Tensor | np.ndarray | list[str] | str
     :param fname:
     :type fname: str
     :rtype: None
     """
     from matplotlib import pyplot as plt
 
-    from .image import convert_images
+    from .image import inputs2ndarray
 
-    img = convert_images(inputs)
+    img = inputs2ndarray(inputs)
     plt.imsave(fname, img)
 
 
@@ -164,6 +199,3 @@ def seed_everything(seed: int = 0) -> None:
     torch.cuda.manual_seed_all(seed)
 
     np.random.seed(seed)
-
-
-del TYPE_CHECKING, Callable

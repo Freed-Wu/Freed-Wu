@@ -59,7 +59,7 @@ ARG bin=$home/.nix-profile/bin
 RUN mkdir -p .config/nix && \
       echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > .config/nix/nix.conf && \
       $bin/nix-env -i git neovim tmux vivid exa bat ripgrep fd delta fzf jq \
-      nodejs lesspipe file less powerlevel10k && \
+      nodejs lesspipe file less powerlevel10k chafa parallel perl5.36.0-Image-ExifTool && \
       sudo ln -s $bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .

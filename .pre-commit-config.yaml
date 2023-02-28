@@ -1,5 +1,5 @@
 ---
-exclude: ^\.config/nvim/template/.*
+exclude: ^\.config/nvim/templates/.*
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -96,7 +96,7 @@ repos:
         additional_dependencies:
           - tomli
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.294
+    rev: v1.1.296
     hooks:
       - id: pyright
   - repo: https://github.com/PyCQA/bandit

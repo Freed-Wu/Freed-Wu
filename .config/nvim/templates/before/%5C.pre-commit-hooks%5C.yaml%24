@@ -1,0 +1,6 @@
+---
+- id: {{ expand('%:p:h:t') }}
+  name: {{ substitute(expand('%:p:h:t'), '-', ' ', 'g') }}
+  description: >
+    {% here %}
+  entry: {{ expand('%:p:h:t') }}

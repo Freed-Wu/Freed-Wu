@@ -1,5 +1,8 @@
 {
+  "Lua.codeLens.enable": true,
+  "Lua.completion.callSnippet": "Both",
   "Lua.hint.enable": true,
+  "Lua.hint.setType": true,
   "cSpell.allowCompoundWords": true,
   "clang-format-style-options.shortcut": "clang",
   "coc.preferences.enableMarkdown": true,
@@ -12,7 +15,7 @@
     "gitcommit": ["languagetool", "write-good", "alex-text"],
     "html": "alex-html",
     "jq": "jq",
-    "latex": "lacheck",
+    "lua": "luacheck",
     "mail": ["languagetool", "write-good", "alex-text"],
     "markdown": ["languagetool", "write-good", "alex"],
     "nix": "nix-linter",
@@ -28,7 +31,6 @@
   },
   "diagnostic-languageserver.formatFiletypes": {
     "blade": "blade-formatter",
-    "cmake": "cmake-format",
     "dart": "dartfmt",
     "elixir": "mix_format",
     "fish": "fish_indent",
@@ -49,6 +51,16 @@
   "highlight.document.enable": true,
   "html.autoClosingTags": true,
   "just-complete.shortcut": "_",
+  "languageserver": {
+    "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": ["cmake"],
+      "rootPatterns": ["build/"],
+      "initializationOptions": {
+        "buildDirectory": "build"
+      }
+    }
+  },
   "list.insertMappings": {
     "<A-a>": "normal:gg",
     "<A-e>": "normal:G",
@@ -86,7 +98,6 @@
   "list.source.bibtex.files": ["*.bib", "refs/*.bib"],
   "list.source.files.args": ["--hidden", "--files"],
   "markdown-preview-enhanced.enableScriptExecution": true,
-  "perl.disableCache": true,
   "prettier.ignorePath": ".gitignore",
   "pydocstring.doqPath": "/usr/bin/doq",
   "pydocstring.enableFileAction": true,

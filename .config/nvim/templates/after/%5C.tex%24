@@ -1,0 +1,7 @@
+\documentclass[../main]{subfiles}
+\begin{document}
+
+\chapter{{% here %}}%
+\label{cha:{{ expand('%:t:r') }}}
+
+\end{document}
