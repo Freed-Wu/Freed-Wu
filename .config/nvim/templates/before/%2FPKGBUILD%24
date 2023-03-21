@@ -28,9 +28,10 @@ source=("$url/archive/$_upstreamver.tar.gz")
 # _os="${OSTYPE%%-*}"
 # [[ $_os == windows ]] && _ext=zip || _ext=tar.gz
 # source=("$url/releases/download/$_upstreamver/${pkgname}_${_os}_${_arch}.$_ext")
-# source=("https://files.pythonhosted.org/packages/source/${_pkgname:0:1}/$_pkgname/${_pkgname//-/_}-$pkgver.tar.gz")
+# source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/${_pkgname//-/_}-$pkgver.tar.gz")
 # _py=py3
-# source=("https://files.pythonhosted.org/packages/$_py/${_pkgname:0:1}/$_pkgname/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
+# source=("https://files.pythonhosted.org/packages/$_py/${_pkgname::1}/$_pkgname/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
+# source=("https://cpan.metacpan.org/authors/id/F/FR/FREED/$_pkgname-$pkgver.tar.gz")
 sha256sums=(SKIP)
 
 # pkgver() {
@@ -38,25 +39,50 @@ sha256sums=(SKIP)
 #   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 # }
 
+# build() {
+#   cd $_pkgname-$pkgver || return 1
+#   unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+#   export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
+#   perl Makefile.PL
+#   make
+# }
+
+# check() {
+#   cd $_pkgname-$pkgver || return 1
+#   unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+#   export PERL_MM_USE_DEFAULT=1
+#   make test
+# }
+
 package() {
 	cd "$srcdir/$_pkgname" || return 1
+
 	install -D "$_pkgname" -t "$pkgdir/usr/bin"
 	install -Dm644 README.md -t "$pkgdir/usr/share/doc/$_pkgname"
+
 	# make DESTDIR="$pkgdir" install
+
 	# cd "$srcdir/$_pkgname-$pkgver" || return 1
 	# python setup.py install --root="$pkgdir" --optimize=1
+
 	# cd "$srcdir" || return 1
 	# python -m installer --destdir="$pkgdir" ./*.whl
+
+  # cd $_pkgname-$pkgver || return 1
+  # unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+  # make install INSTALLDIRS=vendor DESTDIR="$pkgdir"
 
 	# local bin
 	# bin=${_repo##*/}
 	# help2man "$pkgdir/usr/bin/$bin" | gzip >"$bin.1.gz"
 	# install -Dm644 "$bin.1.gz" -t "$pkgdir/usr/share/man/man1"
+
 	# PYTHONPATH="$(ls -d "$pkgdir"/usr/lib/python*/site-packages)"
 	# export PYTHONPATH
 	# "$pkgdir/usr/bin/$bin" --print-completion bash > "$bin.bash"
 	# "$pkgdir/usr/bin/$bin" --print-completion zsh > "_$bin"
 	# "$pkgdir/usr/bin/$bin" --print-completion tcsh > "$bin.csh"
+
 	# local complete
 	# complete="_$(echo ${bin//-/_} | tr a-z A-Z)_COMPLETE"
 	# eval "$complete=zsh_source" "$bin" > "$bin.bash"

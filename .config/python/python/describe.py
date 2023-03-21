@@ -2,7 +2,7 @@ r"""Describe
 ============
 """
 from contextlib import suppress
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     import torch
@@ -76,11 +76,15 @@ class Describe:
                     suffix = ""
                 else:
                     suffix = f":{v.index}"
-                text = f"{k}={v.type}" + suffix
+                text = f"{v.type}" + suffix
+                if text == "cpu":
+                    continue
+            elif isinstance(v, torch.dtype):
+                text = f"{v}".split(".")[-1]
             else:
                 text = f"{k}={v}"
             texts += [text]
-        self.repr = f"Describe({', '.join(texts)})"
+        self.repr = f"tensor({', '.join(texts)})"
 
     def __eq__(self, that) -> bool:
         """Eq.
@@ -117,7 +121,7 @@ def describe(
     device: bool = True,
     dtype: bool = True,
     requires_grad: bool = True,
-) -> Describe | dict | list:
+) -> Any:
     """Describe.
 
     :param obj:
@@ -136,7 +140,7 @@ def describe(
     :type dtype: bool
     :param requires_grad:
     :type requires_grad: bool
-    :rtype: Describe | dict | list
+    :rtype: Any
     """
     import torch
 
@@ -144,10 +148,13 @@ def describe(
         kwargs: dict[
             str, str | bool | float | torch.device | torch.dtype | None
         ] = {}
-        if min:
-            kwargs["min"] = obj.min().item()
-        if max:
-            kwargs["max"] = obj.max().item()
+        try:
+            obj.imag
+        except RuntimeError:
+            if min:
+                kwargs["min"] = obj.min().item()
+            if max:
+                kwargs["max"] = obj.max().item()
         with suppress(RuntimeError):
             if var:
                 _mean, _var = torch.var_mean(obj)
@@ -175,4 +182,4 @@ def describe(
             l += [describe(v)]
         return l
     else:
-        raise NotImplementedError
+        return obj

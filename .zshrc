@@ -383,6 +383,9 @@ compdef _pip pip
 # after compinit
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
 zinit id-as depth'1' null for zdharma-continuum/zinit
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-completions-for-cross-compilers
+# FIXME
+. ~/.local/share/zinit/plugins/zsh-completions-for-cross-compilers/*.plugin.zsh
 compdef _gnu_generic ffmpeg ffplay ffprobe file
 # 1}}} Compatible #
 # ex: foldmethod=marker

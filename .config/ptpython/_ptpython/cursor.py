@@ -3,9 +3,19 @@
 
 Refer `<https://github.com/prompt-toolkit/python-prompt-toolkit/issues/192>`_
 """
-import sys
-
 from prompt_toolkit.key_binding.vi_state import InputMode, ViState
+
+
+def change_input_mode(mode: InputMode = InputMode.INSERT) -> None:
+    """Change input mode.
+
+    :param mode:
+    :type mode: InputMode
+    :rtype: None
+    """
+    shape = {InputMode.NAVIGATION: 2, InputMode.REPLACE: 4}.get(mode, 6)
+    cursor = f"\x1b[{shape} q"
+    print(cursor, end="")
 
 
 def get_input_mode(self) -> InputMode:
@@ -25,10 +35,13 @@ def set_input_mode(self, mode: InputMode) -> None:
     :type mode: InputMode
     :rtype: None
     """
-    shape = {InputMode.NAVIGATION: 2, InputMode.REPLACE: 4}.get(mode, 6)
-    cursor = f"\x1b[{shape} q"
-    sys.stdout.write(cursor)
-    sys.stdout.flush()
+    change_input_mode(mode)
+
+    if mode == InputMode.NAVIGATION:
+        self.waiting_for_digraph = False
+        self.operator_func = None
+        self.operator_arg = None
+
     self._input_mode = mode
 
 

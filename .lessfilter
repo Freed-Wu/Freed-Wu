@@ -4,7 +4,7 @@ category=${mime%%/*}
 kind=${mime##*/}
 ext=${1##*.}
 if [ "$kind" = octet-stream ]; then
-	if [[ "$1" = *events.out.tfevents.* ]]; then
+	if [[ $1 == *events.out.tfevents.* ]]; then
 		python <<EOF
 from contextlib import suppress
 import sys
@@ -34,7 +34,7 @@ plt.clc()
 plt.show()
 df.to_csv(sys.stdout, "\t")
 EOF
-	elif [[ $(basename "$1") = data.mdb ]]; then
+	elif [[ $(basename "$1") == data.mdb ]]; then
 		python <<EOF
 from os.path import dirname as dirn
 import lmdb
@@ -71,7 +71,7 @@ elif [ -d "$1" ]; then
 # https://github.com/wofr06/lesspipe/pull/110
 elif [ "$kind" = pdf ]; then
 	if [ "$(command -v pdftotext)" ] && [ "$(command -v sed)" ]; then
-		pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/"
+		pdftotext -q "$1" - | sed "s/\f/$(hr ─)\n/g"
 	fi
 # https://github.com/wofr06/lesspipe/pull/115
 elif [ "$kind" = rfc822 ]; then

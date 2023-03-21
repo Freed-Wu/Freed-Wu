@@ -7,6 +7,7 @@ function! init#coc#source() abort
   let g:coc_status_warning_sign = ''
   " https://github.com/neoclide/coc.nvim/issues/4282#issuecomment-1279692192
   let g:coc_filetype_map = {
+        \ 'brewfile': 'ruby',
         \ 'bash': 'sh',
         \ 'zsh': 'sh',
         \ 'vimspec': 'vim',

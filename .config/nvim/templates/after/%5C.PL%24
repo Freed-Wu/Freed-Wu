@@ -1,7 +1,12 @@
 #!/usr/bin/env perl
-# https://github.com/actions/checkout/issues/1190
-$VERSION = `git describe --abbrev=0`;
-chomp $VERSION;
+if ( defined $GITHUB_REF_NAME ) {
+    $VERSION = $GITHUB_REF_NAME;
+}
+else {
+    $VERSION = `git describe --abbrev=0`;
+    chomp $VERSION;
+}
+$VERSION = '0.0.0' if $VERSION eq '';
 my $filename = shift;
 exit unless $filename;
 open my $out, ">$filename" or die "Can't create `$filename'!";

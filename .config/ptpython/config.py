@@ -29,6 +29,7 @@ from prompt_toolkit.key_binding.bindings.named_commands import (
     forward_char,
     unix_word_rubout,
 )
+from prompt_toolkit.key_binding.vi_state import InputMode
 from prompt_toolkit.keys import Keys
 from prompt_toolkit.selection import SelectionType
 from prompt_toolkit.styles import Style
@@ -41,16 +42,19 @@ from ptpython.layout import CompletionVisualisation
 from ptpython.repl import PythonRepl
 from ptpython.style import default_ui_style
 
-CONFIG_FILE, _ = get_config_and_history_file(create_parser().parse_args([]))
-sys.path.insert(0, os.path.dirname(CONFIG_FILE))
-from _ptpython.cursor import InputMode  # noqa: E402  # type: ignore
+sys.path.insert(
+    0,
+    os.path.dirname(
+        get_config_and_history_file(create_parser().parse_args([]))[0]
+    ),
+)
+from _ptpython.cursor import change_input_mode  # noqa: E402  # type: ignore
 from _ptpython.prompt_style import PythonPrompt  # noqa: E402  # type: ignore
 from _ptpython.utils.insert import insert  # noqa: E402  # type: ignore
 
 sys.path.pop(0)
 # https://github.com/TylerYep/torchinfo/issues/216
 sys.ps1 = ">>> "
-
 if TYPE_CHECKING:
     from prompt_toolkit.key_binding.key_processor import KeyPressEvent
 
@@ -116,6 +120,7 @@ def configure(repl: PythonRepl) -> None:
 
     # Vi mode.
     repl.vi_mode = False
+    repl.cursor_shape_config = "Beam"
 
     # Paste mode. (When True, don't insert whitespace after new line.)
     repl.paste_mode = False

@@ -22,8 +22,8 @@ elif [[ $OSTYPE == darwin ]]; then
 elif [[ -z $DISPLAY ]]; then
 	export BROWSER=w3m
 fi
-if [[ $OSTYPE != msys2 && -d /mingw64/bin ]]; then
-	export PATH=$PATH:/mingw64/bin
+if [[ $OSTYPE != msys2 ]]; then
+	export PATH=$PATH:/${MINGW_ARCH:-mingw64}/bin
 fi
 if [[ $OSTYPE == linux-android ]]; then
 	export PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
@@ -36,6 +36,15 @@ if [[ $OSTYPE == linux-android ]]; then
 else
 	export MANPAGER="sh -c 'col -bx | bat --color=always -plman | less --pattern=^[A-Z][A-Z\ ]+'"
 fi
+# https://aur.archlinux.org/packages/ccstudio#comment-906326
+export PATH=$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin
+# ccstudio
+_C6X_C_DIR=$(find /opt/ccstudio/ccs/tools/compiler -name 'ti-cgt-c6000_*')
+export C6X_C_DIR
+C6X_C_DIR="$_C6X_C_DIR/include;$_C6X_C_DIR/lib"
+unset _C6X_C_DIR
+export C6X_C_OPTION
+C6X_C_OPTION=--issue_remarks
 # less
 export LESS='--mouse --chop-long-lines -I -R -M'
 # interactively

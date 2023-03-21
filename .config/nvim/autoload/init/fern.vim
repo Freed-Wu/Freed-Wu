@@ -1,3 +1,4 @@
+scriptencoding utf-8
 function! init#fern#source() abort
   let g:fern#renderer = 'nerdfont'
   let g:fern#mark_symbol = '✓'

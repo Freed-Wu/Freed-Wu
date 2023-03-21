@@ -9,6 +9,7 @@ require"nvim-treesitter.configs".setup {
 local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
 ft_to_parser.mail = "text"
 ft_to_parser.gitcommit = "text"
+ft_to_parser.brewfile = "ruby"
 ft_to_parser.bbcode = "text"
 ft_to_parser.bash = "sh"
 ft_to_parser.zsh = "sh"

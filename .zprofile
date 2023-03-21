@@ -9,4 +9,8 @@ if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
 fi
 if [[ -f ~/.bash_profile ]] && ((! $+DOCKER_BUILDKIT)); then
 	. ~/.bash_profile
+	for bin in /opt/ccstudio/ccs/tools/compiler/*/bin(N) /opt/android-ndk/toolchains/llvm/prebuilt/*/bin(N); do
+		export PATH=$PATH:$bin
+	done
+	unset bin
 fi

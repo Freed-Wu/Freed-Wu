@@ -12,3 +12,5 @@ image/x-xpixmap=lximage-qt.desktop;
 image/svg+xml=lximage-qt.desktop;
 application/rtf=libreoffice-writer.desktop;
 application/pdf=org.pwmt.zathura.desktop;
+x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_opt_ccstudio_ccs_eclipse_.desktop
+x-scheme-handler/baiduyunguanjia=baidunetdisk.desktop

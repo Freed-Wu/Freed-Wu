@@ -6,7 +6,7 @@
 !/pyproject.toml
 !/.pre-commit-config.yaml
 !/.gitlint
-!/.yamlint.yaml
+!/.yamllint.yaml
 !/.github/
 !/.dockerignore
 !/.deepsource.toml
@@ -260,6 +260,7 @@
 !/.config/fcitx5/profile
 !/.config/fcitx5/conf/
 /.config/fcitx5/conf/cached_layouts
+/.config/fcitx5/conf/notifications.conf
 !/.config/Code/
 /.config/Code/*
 !/.config/Code/User/

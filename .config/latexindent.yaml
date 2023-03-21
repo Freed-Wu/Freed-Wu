@@ -2,6 +2,7 @@
 ---
 defaultIndent: "  "
 indentPreamble: 1
+onlyOneBackUp: 1
 fileExtensionPreference:
   .dtx: 1
   .ins: 2

@@ -42,6 +42,7 @@ firstly.
 - [tmux](.config/tmux)
 - [python](.config/python)
 - [ptpython](.config/ptpython)
+- [visidata](.config/visidata)
 - [docker](.docker)
 - [...](.gitignore)
 

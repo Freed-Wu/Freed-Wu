@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >= 45", "setuptools_scm[toml] >= 6.2", "setuptools-generate"]
+requires = ["setuptools_scm[toml] >= 6.2", "setuptools-generate"]
 build-backend = "setuptools.build_meta"
 
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
@@ -49,10 +49,10 @@ Source = "{{ g:snips_github }}/{{ expand('%:p:h:t') }}"
 [tool.setuptools.dynamic.dependencies]
 file = "requirements.txt"
 
-# begin: scripts/generate-pyproject.toml.pl
+# begin: scripts/update-pyproject.toml.pl
 [tool.setuptools.dynamic.optional-dependencies.dev]
 file = "requirements/dev.txt"
-# end: scripts/generate-pyproject.toml.pl
+# end: scripts/update-pyproject.toml.pl
 
 [tool.setuptools_scm]
 write_to = "src/{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }}/_version.py"

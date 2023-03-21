@@ -13,7 +13,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype json
-  autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle setfiletype yaml
+  autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd setfiletype yaml
   " 1}}} Data_Describe "
 
   " Template {{{1 "
@@ -26,6 +26,7 @@ augroup init_filetype
   " 1}}} Mark_Up "
 
   " Script {{{1 "
+  autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
   autocmd BufNewFile,BufRead *.bats,.bash_history setfiletype bash
   autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history setfiletype zsh
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
@@ -40,7 +41,9 @@ augroup init_filetype
   " 1}}} Script "
 
   " Compile {{{1 "
+  autocmd BufNewFile,BufRead *.{s,S,sa} setfiletype asm
   autocmd BufNewFile,BufRead *.cl setfiletype opencl
+  autocmd BufNewFile,BufRead *.gel setfiletype c
   " 1}}} Compile "
 augroup END
 " ex: foldmethod=marker

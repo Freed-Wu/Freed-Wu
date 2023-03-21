@@ -9,6 +9,7 @@
 -m'WORKSPACE:Python'
 -m'*.drv:Nix'
 -m'*.cff:YAML'
+-m'*.gel:C'
 
 # https://github.com/sharkdp/bat/issues/2358
 -m'*.aux:LaTeX'
