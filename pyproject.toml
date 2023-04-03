@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >= 45", "setuptools_scm[toml] >= 6.2"]
+requires = ["setuptools_scm[toml] >= 6.2"]
 build-backend = "setuptools.build_meta"
 
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
@@ -39,13 +39,16 @@ text = "GPL v3"
 [tool.setuptools.packages.find]
 where = [".config/python"]
 
-# begin: scripts/generate-pyproject.toml.pl
+# begin: scripts/update-pyproject.toml.pl
 [tool.setuptools.dynamic.optional-dependencies.dev]
 file = ".config/python/requirements/dev.txt"
-# end: scripts/generate-pyproject.toml.pl
+# end: scripts/update-pyproject.toml.pl
 
 [tool.setuptools_scm]
 write_to = ".config/python/python/_version.py"
+
+[tool.mdformat]
+number = true
 
 [tool.black]
 line-length = 79

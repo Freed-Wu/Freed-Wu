@@ -147,9 +147,9 @@ folder-hook $my_imap_gmail source $my_config.gmail
 set my_pre = <sync-mailbox><enter-command>source
 set my_post = <enter><change-folder>!<enter>
 macro index g1 "$my_pre $my_config.ustc$my_post"
-macro index g2 "$my_pre $my_config.njust$my_post"
-macro index g3 "$my_pre $my_config.qq$my_post"
-macro index g4 "$my_pre $my_config.gmail$my_post"
+macro index g2 "$my_pre $my_config.qq$my_post"
+macro index g3 "$my_pre $my_config.gmail$my_post"
+macro index g4 "$my_pre $my_config.njust$my_post"
 # 1}}} Config #
 
 # ex: foldmethod=marker

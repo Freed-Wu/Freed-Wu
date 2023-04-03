@@ -24,11 +24,6 @@ conflicts=("$_pkgname")
 # install=$_pkgname.install
 source=("$url/archive/$_upstreamver.tar.gz")
 # source=("git+https://github.com/$_repo")
-# _arch="$(uname -m|sed s/x86_64/amd64/)"
-# _os="${OSTYPE%%-*}"
-# [[ $_os == windows ]] && _ext=zip || _ext=tar.gz
-# source=("$url/releases/download/$_upstreamver/${pkgname}_${_os}_${_arch}.$_ext")
-# source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/${_pkgname//-/_}-$pkgver.tar.gz")
 # _py=py3
 # source=("https://files.pythonhosted.org/packages/$_py/${_pkgname::1}/$_pkgname/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
 # source=("https://cpan.metacpan.org/authors/id/F/FR/FREED/$_pkgname-$pkgver.tar.gz")
@@ -62,11 +57,8 @@ package() {
 
 	# make DESTDIR="$pkgdir" install
 
-	# cd "$srcdir/$_pkgname-$pkgver" || return 1
-	# python setup.py install --root="$pkgdir" --optimize=1
-
 	# cd "$srcdir" || return 1
-	# python -m installer --destdir="$pkgdir" ./*.whl
+	# python -m installer -d "$pkgdir" ./*.whl
 
   # cd $_pkgname-$pkgver || return 1
   # unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
@@ -74,8 +66,8 @@ package() {
 
 	# local bin
 	# bin=${_repo##*/}
-	# help2man "$pkgdir/usr/bin/$bin" | gzip >"$bin.1.gz"
-	# install -Dm644 "$bin.1.gz" -t "$pkgdir/usr/share/man/man1"
+	# help2man "$pkgdir/usr/bin/$bin" >"$bin.1"
+	# install -Dm644 "$bin.1" -t "$pkgdir/usr/share/man/man1"
 
 	# PYTHONPATH="$(ls -d "$pkgdir"/usr/lib/python*/site-packages)"
 	# export PYTHONPATH
@@ -90,6 +82,5 @@ package() {
 	# eval "$complete=fish_source" "$bin" > "$bin.fish"
 	# install -Dm644 "$bin.bash" "$pkgdir/usr/share/bash-completion/completions/$bin"
 	# install -Dm644 "_$bin" -t "$pkgdir/usr/share/zsh/site-functions"
-	# install -Dm644 "$bin.csh" -t "$pkgdir/etc/profile.d"
 	# install -Dm644 "$bin.fish" -t "$pkgdir/usr/share/fish/vendor_completions.d"
 }

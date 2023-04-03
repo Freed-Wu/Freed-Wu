@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools_scm[toml] >= 6.2", "setuptools-generate"]
+requires = ["setuptools_scm[toml] >= 6.2", "setuptools-generate >= 0.0.6"]
 build-backend = "setuptools.build_meta"
 
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
@@ -46,6 +46,16 @@ Source = "{{ g:snips_github }}/{{ expand('%:p:h:t') }}"
 [project.scripts]
 {{ substitute(expand('%:p:h:t'), '-', '_', 'g') }} = "{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }}.__main__:main"
 
+[tool.setuptools.package-data]
+{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }} = ["py.typed", "assets/**"]
+
+[tool.setuptools.data-files]
+"share/applications" = ["assets/desktop/{{ expand('%:p:h:t') }}.desktop"]
+"share/icons/hicolor/256x256/apps" = ["src/{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }}/assets/images/{{ expand('%:p:h:t') }}.png"]
+"share/man/man1" = ["sdist/{{ expand('%:p:h:t') }}.1"]
+"share/bash-completion/completions" = ["sdist/{{ expand('%:p:h:t') }}"]
+"share/zsh/site-functions" = ["sdist/_{{ expand('%:p:h:t') }}"]
+
 [tool.setuptools.dynamic.dependencies]
 file = "requirements.txt"
 
@@ -59,6 +69,9 @@ write_to = "src/{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }}/_version.py"
 
 [tool.setuptools-generate]
 write-to = "src/{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }}/_metainfo.py"
+
+[tool.mdformat]
+number = true
 
 [tool.black]
 line-length = 79

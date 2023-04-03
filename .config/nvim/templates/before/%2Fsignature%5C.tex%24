@@ -1,3 +1,4 @@
+% gs -sDEVICE=pngalpha -sOutputFile=signature.png -r1440 signature.pdf
 \documentclass{standalone}
 \usepackage{ctex}
 \usepackage{hyperref}

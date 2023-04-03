@@ -142,6 +142,10 @@ if (($+commands[exa])); then
 else
   alias ls='ls --color=auto -h'
 fi
+if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
+  alias node='node -r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
+fi
+# it will change the behavior of `--help <TAB>`
 if (($+commands[bat])); then
   bat-help() {
     for opt in $@; do
@@ -151,6 +155,8 @@ if (($+commands[bat])); then
   bat-help --help
   # man
   bat-help '-\?'
+  # ccstudio
+  bat-help -ccs.help
   # x264
   bat-help --longhelp --fullhelp
   # gnome
@@ -376,6 +382,10 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Function #
 
 # Compatible {{{1 #
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-completions-for-cross-compilers
+# FIXME
+. ~/.local/share/zinit/plugins/zsh-completions-for-cross-compilers/*.plugin.zsh
+compdef _gnu_generic ffmpeg ffplay ffprobe file
 # https://github.com/3v1n0/zsh-bash-completions-fallback/issues/6
 compdef _python python
 compdef _pydoc pydoc
@@ -383,9 +393,5 @@ compdef _pip pip
 # after compinit
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
 zinit id-as depth'1' null for zdharma-continuum/zinit
-zinit id-as depth'1' wait lucid for Freed-Wu/zsh-completions-for-cross-compilers
-# FIXME
-. ~/.local/share/zinit/plugins/zsh-completions-for-cross-compilers/*.plugin.zsh
-compdef _gnu_generic ffmpeg ffplay ffprobe file
 # 1}}} Compatible #
 # ex: foldmethod=marker

@@ -1,10 +1,6 @@
 try
-  let s:comments = &l:comments
-  let s:commentstring = &l:commentstring
   call vimtex#init()
   call init#init#tex#main()
-  let &l:comments = s:comments
-  let &l:commentstring = s:commentstring
 catch /^Vim\%((\a\+)\)\=:E117:/
 endtry
 

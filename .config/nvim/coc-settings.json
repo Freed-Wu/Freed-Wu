@@ -59,6 +59,14 @@
       "initializationOptions": {
         "buildDirectory": "build"
       }
+    },
+    "jq": {
+      "command": "jq-lsp",
+      "filetypes": ["jq"]
+    },
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": ["nix"]
     }
   },
   "list.insertMappings": {

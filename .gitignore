@@ -25,7 +25,6 @@
 !/.inputrc
 !/.fbtermrc
 !/.astylerc
-!/.octaverc
 !/.procmailrc
 !/.clang-format
 !/.ccls
@@ -117,7 +116,7 @@
 !/.nixpkgs/darwin-configuration.nix
 !/.bundle/
 /.bundle/*
-!/.bundle/config
+!/.bundle/config.bak
 !/.cpan/
 /.cpan/*
 !/.cpan/CPAN/
@@ -215,7 +214,7 @@
 !/.config/gh/config.yml
 !/.config/nix/
 /.config/nix/*
-!/.config/nix/nix.conf
+!/.config/nix/nix.conf.bak
 !/.config/ctags/
 /.config/ctags/*
 !/.config/ctags/*.ctags
@@ -289,12 +288,15 @@
 !/.config/nixpkgs/
 !/.config/luacheck/
 !/.config/latexindent.yaml
+!/.config/pry/
+!/.config/clangd/
+!/.config/octave/
+/.config/octave/*
+!/.config/octave/octaverc
 
 # $XDG_DATA_HOME
 !/.local/
 /.local/*
-# perl install manpage here, which is a symlink to share/man
-!/.local/man/
 !/.local/share/
 /.local/share/*
 !/.local/share/flatpak/
@@ -316,6 +318,7 @@
 # bin
 !/.local/bin/
 /.local/bin/*
+!/.local/bin/luap
 !/.local/bin/adb.py
 !/.local/bin/telnet.py
 !/.local/bin/git-neomutt

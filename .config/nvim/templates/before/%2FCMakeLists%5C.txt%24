@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.10)
+project(
+  {{ expand('%:p:h:t') }}
+  VERSION 0.0.0.0
+  DESCRIPTION {{ expand('%:p:h:t') }}
+  HOMEPAGE_URL {{ g:snips_github }}/{{ expand('%:p:h:t') }})
+add_executable(main main.c)
+configure_file(config.h.in config.h)
+install(TARGETS main RUNTIME)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(CPACK_ARCHIVE_THREADS 0)
+set(CPACK_THREADS 0)

@@ -1,5 +1,5 @@
 # shellcheck disable=all
-# Add some programs to $PATH before other commands
+# Add ~/.nix-profile/bin to $PATH
 if [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh
 fi
@@ -9,8 +9,4 @@ if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
 fi
 if [[ -f ~/.bash_profile ]] && ((! $+DOCKER_BUILDKIT)); then
 	. ~/.bash_profile
-	for bin in /opt/ccstudio/ccs/tools/compiler/*/bin(N) /opt/android-ndk/toolchains/llvm/prebuilt/*/bin(N); do
-		export PATH=$PATH:$bin
-	done
-	unset bin
 fi

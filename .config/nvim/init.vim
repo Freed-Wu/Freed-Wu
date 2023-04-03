@@ -97,7 +97,7 @@ endif
 if exists('&inccommand')
   set inccommand=nosplit
 endif
-if executable('ps2pdf')
+if executable('ps2pdf') && !has('nvim')
   set printexpr=system(join(['ps2pdf']+[v:fname_in])).delete(v:fname_in)+v:shell_error
 endif
 if executable('rg')
@@ -434,6 +434,8 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'merged': 0,
         \ 'hook_source': 'call init#polyglot#source()',
         \ })
+  call dein#add('vito-c/jq.vim')
+  call dein#add('kaarmu/typst.vim')
   call dein#add('lambdalisue/glyph-palette.vim', {
         \ 'hook_post_source': 'call init#glyph_palette#post_source()',
         \ })

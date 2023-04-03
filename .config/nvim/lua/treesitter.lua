@@ -1,33 +1,32 @@
 ---treesitter config.
 -- don't install automatically to avoid network failure
-require"nvim-treesitter.configs".setup {
-    indent = {enable = true},
-    highlight = {enable = true, additional_vim_regex_highlighting = true},
-    textobjects = {enable = true}
+require "nvim-treesitter.configs".setup {
+    indent = { enable = true },
+    highlight = { enable = true, additional_vim_regex_highlighting = true },
+    textobjects = { enable = true }
 }
 
-local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
-ft_to_parser.mail = "text"
-ft_to_parser.gitcommit = "text"
-ft_to_parser.brewfile = "ruby"
-ft_to_parser.bbcode = "text"
-ft_to_parser.bash = "sh"
-ft_to_parser.zsh = "sh"
-ft_to_parser.vimspec = "vim"
-ft_to_parser.tutor = "markdown"
-ft_to_parser.pandoc = "markdown"
-ft_to_parser.mysql = "sql"
-ft_to_parser.eelixir = "elixir"
-ft_to_parser.sublime_syntax = "yaml"
 -- luacheck: globals vim
----@diagnostic disable-next-line: undefined-global
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "liquid",
-    callback = function(args)
-        ---@diagnostic disable-next-line: undefined-global
-        vim.treesitter.start(args.buf, vim.b.liquid_subtype)
-        -- only if additional legacy syntax is needed
-        ---@diagnostic disable-next-line: undefined-global
-        vim.bo[args.buf].syntax = "on"
-    end
-})
+---@diagnostic disable: undefined-global
+if vim.treesitter.language.register then
+    vim.treesitter.language.register("mail", "text")
+    vim.treesitter.language.register("gitcommit", "text")
+    vim.treesitter.language.register("brewfile", "ruby")
+    vim.treesitter.language.register("bbcode", "text")
+    vim.treesitter.language.register("bash", "sh")
+    vim.treesitter.language.register("zsh", "sh")
+    vim.treesitter.language.register("vimspec", "vim")
+    vim.treesitter.language.register("tutor", "markdown")
+    vim.treesitter.language.register("pandoc", "markdown")
+    vim.treesitter.language.register("mysql", "sql")
+    vim.treesitter.language.register("eelixir", "elixir")
+    vim.treesitter.language.register("sublime_syntax", "yaml")
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "liquid",
+        callback = function(args)
+            vim.treesitter.start(args.buf, vim.b.liquid_subtype)
+            -- only if additional legacy syntax is needed
+            vim.bo[args.buf].syntax = "on"
+        end
+    })
+end

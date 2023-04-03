@@ -1,5 +1,4 @@
 #compdef {{ substitute(expand('%:t'), '^_', '', 'g') }}
-# shellcheck disable=all
 
 _arguments -s -S \
   "(- : *)"{-V,--version}"[Show version]" \

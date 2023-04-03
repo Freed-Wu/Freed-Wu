@@ -1,0 +1,20 @@
+priority 100
+
+snippet arr "myUltiSnips" b
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
+endsnippet
+
+snippet max "myUltiSnips" b
+#define max(a,b)             \
+({                           \
+	__typeof__ (a) _a = (a); \
+	__typeof__ (b) _b = (b); \
+	_a > _b ? _a : _b;       \
+})
+#define min(a,b)             \
+({                           \
+	__typeof__ (a) _a = (a); \
+	__typeof__ (b) _b = (b); \
+	_a < _b ? _a : _b;       \
+})
+endsnippet

@@ -1,0 +1,69 @@
+#!/usr/bin/env lua
+
+local prompt = require "prompt"
+local ansicolors = require "ansicolors"
+
+---get distro
+---@return string
+local function get_distro()
+    local f = io.popen("lsb_release -i", 'r')
+    if f == nil then return "linux" end
+    local line = f:read()
+    return string.lower(string.gsub(line, ".*:%s*", ""))
+end
+
+---get os
+---@return string
+local function get_os()
+    if os.getenv("PREFIX") == "/data/data/com.termux/files/usr" then
+        return "android"
+    end
+    local binary_format = package.cpath:match("%p[\\|/]?%p(%a+)")
+    if binary_format == "so" then
+        return get_distro()
+    elseif binary_format == "dll" then
+        return "windows"
+    elseif binary_format == "dylib" then
+        return "macos"
+    end
+    return "unknown"
+end
+
+---get icon
+---@return string
+local function get_icon()
+    local icons = {
+        unknown = "?",
+        android = "",
+        arch = "",
+        centos = "",
+        debian = "",
+        docker = "",
+        gentoo = "",
+        linux = "",
+        macos = "",
+        ubuntu = "",
+        windows = ""
+    }
+    return icons[get_os()]
+end
+
+---get version
+---@return string
+local function get_version()
+    local version = string.gsub(_VERSION, ".*%s+", "")
+    return " " .. version
+end
+
+---get ps1
+---@return string
+local function get_ps1()
+    local ps1 = ansicolors("%{yellowbg black} " .. get_icon() ..
+                               " %{blackbg yellow}")
+    ps1 = ps1 .. ansicolors("%{blue} " .. get_version() .. " %{reset black}")
+    return ps1 .. "\n❯ "
+end
+
+prompt.history = os.getenv("HOME") .. "/.lua_history"
+prompt.prompts = {get_ps1(), "    "}
+prompt.enter()

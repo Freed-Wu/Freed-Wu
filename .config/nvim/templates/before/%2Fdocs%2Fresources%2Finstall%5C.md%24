@@ -6,8 +6,36 @@
 yay -S {{ expand('%:p:h:h:h:t') }}
 ```
 
+## [NixOS](https://nixos.org)
+
+Add the following code to `/etc/nixos/configuration.nix`:
+
+```nix
+{ config, pkgs, ... }:
+{
+  nix.settings.experimental-features = [ "flakes" ];
+  environment.systemPackages =
+    let
+      {{ expand('%:p:h:h:h:t') }} = (
+        builtins.getFlake "github:{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:h:h:t') }}"
+      ).packages.${builtins.currentSystem}.default;
+    in
+    [
+      {{ expand('%:p:h:h:h:t') }}
+    ];
+}
+```
+
+## [nix](https://github.com/NixOS/nix)
+
 ```sh
-sudo pacman -R {{ expand('%:p:h:h:h:t') }}
+nix shell github:{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:h:h:t') }}
+```
+
+Or just take a try without installation:
+
+```sh
+nix run github:{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:h:h:t') }} -- --help
 ```
 
 ## [PYPI](https://pypi.org/project/{{ expand('%:p:h:h:h:t') }})
@@ -16,6 +44,4 @@ sudo pacman -R {{ expand('%:p:h:h:h:t') }}
 pip install {{ expand('%:p:h:h:h:t') }}
 ```
 
-```sh
-pip uninstall {{ expand('%:p:h:h:h:t') }}
-```
+See [requirements](requirements) to know `extra_requires`.

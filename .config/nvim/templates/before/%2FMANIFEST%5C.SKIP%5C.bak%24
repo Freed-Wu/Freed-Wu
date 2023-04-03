@@ -1,7 +1,0 @@
-# https://github.com/Perl-Toolchain-Gang/ExtUtils-Manifest/pull/17
-#!include_default
-^MANIFEST\.SKIP$
-^\..*
-^package\.json$
-^scripts/
-^{{ expand('%:p:h:t') }}-

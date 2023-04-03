@@ -9,7 +9,7 @@ export BROWSER=firefox
 MANPATH="$HOME/.local/share/man:$MANPATH"
 MANOPT=-Lzh_CN.UTF-8
 export MANOPT
-MANSECT='1:1p:8:3:3p:0:0p:2:5:4:9:6:7:n:l'
+MANSECT='1:1p:8:3:3p:3perl:3tcl:0:0p:2:5:4:9:6:7:n:l'
 export MANSECT
 # cpanm
 export PERL_CPANM_OPT
@@ -47,4 +47,7 @@ export LESSQUIET=1
 export FZF_DEFAULT_COMMAND='rg --files --color=always'
 # mdcat
 export MDCAT_PAGER='less --pattern=^┄(┄|)'
+# cmake
+export CMAKE_GENERATOR=Ninja
+export CMAKE_EXPORT_COMPILE_COMMANDS=1
 # ex: filetype=sh

@@ -24,19 +24,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: shogo82148/actions-setup-perl@v1
-      - name: Install
-        run: |
-          ./Makefile.PL
-          make manifest
-          make install
-      - name: Install Requirements
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          cpanm -qn Devel::Cover Devel::Cover::Report::Codecovbash
+      - name: Install Dependencies
+        run: >
+          cpanm -qn Dist::Zilla::App::Command::cover
+          Devel::Cover::Report::Codecovbash
       - name: Test
         run: |
-          make test
-          cover -test -report codecovbash
+          git config github.user $GITHUB_REPOSITORY_OWNER
+          dzil authordeps --missing | cpanm -qn
+          dzil cover -test -report codecovbash
       - uses: codecov/codecov-action@v3
 
   deploy:
@@ -45,34 +41,36 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: shogo82148/actions-setup-perl@v1
+      - name: Install Dependencies
+        run: |
+          cpanm -qn Dist::Zilla CPAN::Uploader
       - name: Build
         run: |
-          ./Makefile.PL
-          make manifest
-          make dist
+          git config github.user $GITHUB_REPOSITORY_OWNER
+          dzil authordeps --missing | cpanm -qn
+          dzil build
+          perl -0777 -ni -e'/## .*?\n\n(.*?)\n\n\n/s; print $1' CHANGELOG.md
       - uses: actions/upload-artifact@v3
         if: $\{\{ ! startsWith(github.ref, 'refs/tags/') \}\}
         with:
           path: |
             *.tar.gz
-      - name: Get changelog
-        if: startsWith(github.ref, 'refs/tags/')
-        run: >
-          mkdir -p build;
-          perl -0777 -ne'/## .*?\n\n(.*?)\n\n\n/s; print $1' CHANGELOG.md >
-          build/CHANGELOG.md
       - uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          body_path: build/CHANGELOG.md
+          body_path: CHANGELOG.md
           files: |
             *.tar.gz
-      - name: Install Requirements
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          cpanm -qn CPAN::Uploader
       - name: Upload
         if: startsWith(github.ref, 'refs/tags/')
         run: >
           cpan-upload -u $\{\{ secrets.CPAN_USERNAME \}\}
           -p $\{\{ secrets.CPAN_PASSWORD \}\} *.tar.gz
+      - uses: Freed-Wu/update-aur-package@v1.0.8
+        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
+        with:
+          tag_version_prefix: ""
+          package_name: perl-{{ tolower(expand('%:p:h:h:h:t')) }}
+          commit_username: github-action[bot]
+          commit_email: 41898282+github-actions[bot]@users.noreply.github.com
+          ssh_private_key: $\{\{ secrets.AUR_SSH_PRIVATE_KEY \}\}

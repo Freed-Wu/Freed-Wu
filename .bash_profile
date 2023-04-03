@@ -4,6 +4,9 @@
 if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
 	. ~/.local/share/zinit/plugins/.pass/pass.sh
 fi
+if [[ -z $C6X_C_DIR && -f ~/.bash_login ]]; then
+	. ~/.bash_login
+fi
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then
 	export LANG=en_US.UTF-8
@@ -26,7 +29,8 @@ if [[ $OSTYPE != msys2 ]]; then
 	export PATH=$PATH:/${MINGW_ARCH:-mingw64}/bin
 fi
 if [[ $OSTYPE == linux-android ]]; then
-	export PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
+	PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
+	# ~/.local/bin/batman
 	export MANPAGER=batman
 	if [[ -n $DISPLAY ]]; then
 		export BROWSER='gio open'
@@ -34,19 +38,16 @@ if [[ $OSTYPE == linux-android ]]; then
 		export BROWSER=termux-open
 	fi
 else
-	export MANPAGER="sh -c 'col -bx | bat --color=always -plman | less --pattern=^[A-Z][A-Z\ ]+'"
+	PATH="$PATH:/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
+	export MANPAGER="sh -c 'col -bx | bat --color=always -plman | less --pattern=^\\\\S+'"
 fi
 # https://aur.archlinux.org/packages/ccstudio#comment-906326
 export PATH=$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin
 # ccstudio
-_C6X_C_DIR=$(find /opt/ccstudio/ccs/tools/compiler -name 'ti-cgt-c6000_*')
-export C6X_C_DIR
-C6X_C_DIR="$_C6X_C_DIR/include;$_C6X_C_DIR/lib"
-unset _C6X_C_DIR
 export C6X_C_OPTION
 C6X_C_OPTION=--issue_remarks
 # less
-export LESS='--mouse --chop-long-lines -I -R -M'
+export LESS='--mouse -S -I'
 # interactively
 export FZF_HISTORY_DIR
 if [[ $OSTYPE == msys2 ]] || [[ $OSTYPE == cygwin ]]; then

@@ -18,7 +18,7 @@ function! init#coc#source() abort
         \ 'sublime_syntax': 'yaml',
         \ 'liquid': 'html',
         \ }
-  " https://github.com/NixOS/nixpkgs/issues/214147
+  " https://github.com/SeniorMars/coc-typst/issues/1
   let g:coc_global_extensions = [
         \ 'coc-highlight',
         \
@@ -37,17 +37,17 @@ function! init#coc#source() abort
         \ 'coc-gitignore',
         \
         \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
-        \ 'coc-bibtex',
         \
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji', 'coc-syntax',
         \
         \ 'coc-copilot',
         \
-        \ '@yaegassy/coc-marksman',
-        \ 'coc-webview', 'coc-markdown-preview-enhanced',
+        \ '@yaegassy/coc-marksman', 'coc-webview',
+        \ 'coc-markdown-preview-enhanced',
+        \ 'coc-texlab', 'coc-bibtex', 'coc-cmake',
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',
         \ 'coc-clang-format-style-options', 'coc-docker',
-        \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-texlab', 'coc-perl',
+        \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-perl',
         \ 'coc-jedi', 'coc-pyright', 'coc-lua', 'coc-solargraph', 'coc-clangd',
         \ ]
   " tabnine don't support android
