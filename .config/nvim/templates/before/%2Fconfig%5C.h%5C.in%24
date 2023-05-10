@@ -1,3 +1,5 @@
+/* config.h.  Generated from config.h.in by cmake.  */
+
 #ifndef CONFIG_H
 #define CONFIG_H 1
 

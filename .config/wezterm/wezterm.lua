@@ -4,7 +4,7 @@ local font_size
 if hostname == 'desktop' then -- 2560x2880
     font_size = 16
 elseif hostname == 'laptop' then -- 3120x2080
-    font_size = 24
+    font_size = 12
 else
     font_size = 12
 end

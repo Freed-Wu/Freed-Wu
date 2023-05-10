@@ -1,0 +1,81 @@
+---
+"on":
+  push:
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+# https://github.com/softprops/action-gh-release/issues/236
+permissions:
+  contents: write
+
+env:
+  CMAKE_GENERATOR: Ninja
+  PYTHONUTF8: "1"
+  python-version: 3.x
+  cache: pip
+
+jobs:
+  build-wheels-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runs-on: ubuntu-latest
+            CIBW_SKIP: "*-manylinux_*"
+          - runs-on: ubuntu-latest
+            CIBW_SKIP: "*-musllinux_*"
+          - runs-on: macos-latest
+            CIBW_SKIP: ""
+          - runs-on: windows-latest
+            CIBW_SKIP: ""
+    runs-on: $\{\{ matrix.runs-on \}\}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2.1.0
+        if: runner.os == 'Linux'
+      - uses: pypa/cibuildwheel@v2.12.3
+        env:
+          CIBW_SKIP: $\{\{ matrix.CIBW_SKIP \}\}
+      - uses: actions/upload-artifact@v3
+        with:
+          path: |
+            wheelhouse/*.whl
+
+  build-sdist:
+    needs:
+      - build-wheels-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: $\{\{ env.python-version \}\}
+          cache: $\{\{ env.cache \}\}
+      - name: Install dependencies
+        run: |
+          pip install build
+      - name: Build sdist
+        run: python -m build -s
+      - uses: actions/upload-artifact@v3
+        if: $\{\{ ! startsWith(github.ref, 'refs/tags/') \}\}
+        with:
+          path: |
+            dist/*
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: dist
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          # body_path: build/CHANGELOG.md
+          files: |
+            dist/*
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          password: $\{\{ secrets.PYPI_API_TOKEN \}\}

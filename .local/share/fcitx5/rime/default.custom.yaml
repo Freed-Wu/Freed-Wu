@@ -7,15 +7,18 @@ patch:
     accept: Alt+f
     send: Shift+Right
     when: composing
-  "key_binder/bindings/@before 1":
+  key_binder/bindings/@before 1:
     accept: Alt+b
     send: Shift+Left
     when: composing
-  "key_binder/bindings/@before 2":
+  key_binder/bindings/@before 2:
     accept: Control+w
     send: Shift+BackSpace
     when: composing
-  "key_binder/bindings/@before 3":
+  key_binder/bindings/@before 3:
     accept: Alt+w
     send: Shift+BackSpace
     when: composing
+  ascii_composer/switch_key/Shift_L: noop
+  ascii_composer/switch_key/Caps_Lock: noop
+  switcher/save_options/@before 0: ascii_mode

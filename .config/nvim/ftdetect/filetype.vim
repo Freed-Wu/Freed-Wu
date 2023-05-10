@@ -14,6 +14,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead flake.lock,*.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype json
   autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd setfiletype yaml
+  autocmd BufNewFile,BufRead *.{x,l}pr setfiletype xml
   " 1}}} Data_Describe "
 
   " Template {{{1 "

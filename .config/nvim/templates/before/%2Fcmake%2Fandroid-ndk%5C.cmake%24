@@ -1,0 +1,7 @@
+set(CMAKE_SYSTEM_NAME Android)
+if(NOT DEFINED CMAKE_ANDROID_ARCH_ABI)
+  set(CMAKE_ANDROID_ARCH_ABI arm64-v8a)
+endif()
+if(NOT DEFINED CMAKE_ANDROID_NDK)
+  set(CMAKE_ANDROID_NDK /opt/android-ndk)
+endif()

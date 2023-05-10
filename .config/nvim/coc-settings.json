@@ -13,21 +13,21 @@
     "cmake": ["cmake-lint", "cmakelint"],
     "elixir": ["mix_credo", "mix_credo_compile"],
     "gitcommit": ["languagetool", "write-good", "alex-text"],
-    "html": "alex-html",
-    "jq": "jq",
-    "lua": "luacheck",
+    "html": ["alex-html"],
+    "jq": ["jq"],
+    "lua": ["luacheck"],
     "mail": ["languagetool", "write-good", "alex-text"],
     "markdown": ["languagetool", "write-good", "alex"],
-    "nix": "nix-linter",
-    "perl": "perl",
+    "nix": ["nix-linter"],
+    "perl": ["perl"],
     "php": ["phpstan", "psalm"],
-    "requirements": "pip-compile",
+    "requirements": ["pip-compile"],
     "sh": ["shellcheck", "bash", "zsh"],
-    "syntax_test": "syntest",
-    "systemd": "systemd-analyze",
+    "syntax_test": ["syntest"],
+    "systemd": ["systemd-analyze"],
     "text": ["languagetool", "write-good", "alex-text"],
-    "vim": "vint",
-    "yaml": "yamllint"
+    "vim": ["vint"],
+    "yaml": ["yamllint", "actionlint"]
   },
   "diagnostic-languageserver.formatFiletypes": {
     "blade": "blade-formatter",
@@ -60,6 +60,11 @@
         "buildDirectory": "build"
       }
     },
+    "hdlChecker": {
+      "command": "hdl_checker",
+      "args": ["--lsp"],
+      "filetypes": ["vhdl", "verilog", "systemverilog"]
+    },
     "jq": {
       "command": "jq-lsp",
       "filetypes": ["jq"]
@@ -67,6 +72,10 @@
     "nix": {
       "command": "rnix-lsp",
       "filetypes": ["nix"]
+    },
+    "svls": {
+      "command": "svls",
+      "filetypes": ["systemverilog"]
     }
   },
   "list.insertMappings": {

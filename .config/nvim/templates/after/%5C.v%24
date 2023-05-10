@@ -1,8 +1,3 @@
-module {{ expand('%:t:r') }} (
+module {{ expand('%:t:r') }};
   {% here %}
-);
-
-{% here %}
-
 endmodule
-

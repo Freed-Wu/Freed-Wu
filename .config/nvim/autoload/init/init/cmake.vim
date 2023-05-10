@@ -1,4 +1,10 @@
 function! init#init#cmake#includeexpr() abort
-  let l:fname = substitute(v:fname, '(\|)', '', 'g')
-  return l:fname . '.cmake'
+  if !empty(findfile(v:fname))
+    return v:fname
+  elseif !empty(findfile(v:fname . '.cmake'))
+    return v:fname . '.cmake'
+  elseif !empty(findfile(v:fname . '-config.cmake'))
+    return v:fname . '-config.cmake'
+  endif
+  return 'Find' . v:fname . '.cmake'
 endfunction

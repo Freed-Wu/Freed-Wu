@@ -22,7 +22,7 @@ elif [[ $OSTYPE == msys ]]; then
 	export PATH=$PATH:/proc/cygdrive/c/msys64
 elif [[ $OSTYPE == darwin ]]; then
 	export BROWSER=open
-elif [[ -z $DISPLAY ]]; then
+elif [[ -z $DISPLAY && -z $WAYLAND_DISPLAY ]]; then
 	export BROWSER=w3m
 fi
 if [[ $OSTYPE != msys2 ]]; then
@@ -47,7 +47,7 @@ export PATH=$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/us
 export C6X_C_OPTION
 C6X_C_OPTION=--issue_remarks
 # less
-export LESS='--mouse -S -I'
+export LESS='-r -M --mouse -S -I'
 # interactively
 export FZF_HISTORY_DIR
 if [[ $OSTYPE == msys2 ]] || [[ $OSTYPE == cygwin ]]; then

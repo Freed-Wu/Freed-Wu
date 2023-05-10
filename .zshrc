@@ -383,8 +383,7 @@ zinit id-as depth'1' wait lucid \
 
 # Compatible {{{1 #
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-completions-for-cross-compilers
-# FIXME
-. ~/.local/share/zinit/plugins/zsh-completions-for-cross-compilers/*.plugin.zsh
+
 compdef _gnu_generic ffmpeg ffplay ffprobe file
 # https://github.com/3v1n0/zsh-bash-completions-fallback/issues/6
 compdef _python python

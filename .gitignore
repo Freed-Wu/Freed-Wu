@@ -53,6 +53,8 @@
 !/.indentconfig.yaml
 # https://bugs.chromium.org/p/gerrit/issues/detail?id=16717
 !/.gitconfig
+!/.tclshrc
+!/.wishrc
 
 # dotfiles
 !/.dosbox/
@@ -133,7 +135,6 @@
 # $XDG_CONFIG_HOME
 !/.config/
 /.config/*
-!/.config/mimeapps.list
 !/.config/user-dirs.dirs
 !/.config/user-dirs.locale
 !/.config/electron-flags.conf

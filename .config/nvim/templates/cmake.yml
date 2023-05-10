@@ -9,21 +9,20 @@
   workflow_dispatch:
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: mig4/setup-bats@v1
-      - uses: brokenpip3/setup-bats-libs@0.1.0
       - name: Install dependencies
         run: |
           sudo apt update
           sudo apt install check
       - name: Test
-        # disable bashcov due to bug
+        # https://bugs.launchpad.net/ubuntu/+source/check/+bug/2019478
         run: |
-          bats -r .
-          make check
+          cmake -Bbuild
+          cmake --build build --target check_{{ expand('%:p:h:h:h') }}
+          ctest --test-dir build
       - uses: codecov/codecov-action@v3
         with:
           gcov: true

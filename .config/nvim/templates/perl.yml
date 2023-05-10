@@ -44,14 +44,22 @@ jobs:
       - name: Install Dependencies
         run: |
           cpanm -qn Dist::Zilla CPAN::Uploader
+          sudo apt update
+          sudo apt install po4a
       - name: Build
         run: |
+          po4a po4a/po4a.cfg
           git config github.user $GITHUB_REPOSITORY_OWNER
           dzil authordeps --missing | cpanm -qn
           dzil build
           perl -0777 -ni -e'/## .*?\n\n(.*?)\n\n\n/s; print $1' CHANGELOG.md
+      - name: Upload
+        if: startsWith(github.ref, 'refs/tags/')
+        run: >
+          cpan-upload -u $\{\{ secrets.CPAN_USERNAME \}\}
+          -p $\{\{ secrets.CPAN_PASSWORD \}\} *.tar.gz
       - uses: actions/upload-artifact@v3
-        if: $\{\{ ! startsWith(github.ref, 'refs/tags/') \}\}
+        if: "! startsWith(github.ref, 'refs/tags/')"
         with:
           path: |
             *.tar.gz
@@ -61,16 +69,13 @@ jobs:
           body_path: CHANGELOG.md
           files: |
             *.tar.gz
-      - name: Upload
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Freed-Wu/update-aur-package@v1.0.9
         if: startsWith(github.ref, 'refs/tags/')
-        run: >
-          cpan-upload -u $\{\{ secrets.CPAN_USERNAME \}\}
-          -p $\{\{ secrets.CPAN_PASSWORD \}\} *.tar.gz
-      - uses: Freed-Wu/update-aur-package@v1.0.8
-        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
         with:
           tag_version_prefix: ""
           package_name: perl-{{ tolower(expand('%:p:h:h:h:t')) }}
-          commit_username: github-action[bot]
-          commit_email: 41898282+github-actions[bot]@users.noreply.github.com
           ssh_private_key: $\{\{ secrets.AUR_SSH_PRIVATE_KEY \}\}

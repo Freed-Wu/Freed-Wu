@@ -19,7 +19,7 @@ set abort_nosubject = no
 set auto_tag
 set x_comment_to
 set header_cache = ~/.cache/neomutt
-set message_cachedir = ~/.cache/neomutt
+set message_cache_dir = ~/.cache/neomutt
 set mbox =
 set mail_check_stats
 set sidebar_visible
