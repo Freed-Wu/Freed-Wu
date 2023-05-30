@@ -11,7 +11,7 @@ first_line_match: |-
   | ^ \s* \# (vim?|ex): .*? \b{{ expand('%:t:r') }}\b          # modeline
   )
 
-context:
+contexts:
   main:
-  - match:
-    scope: .source.{{ expand('%:t:r') }}
+    - match:
+      scope: .source.{{ expand('%:t:r') }}

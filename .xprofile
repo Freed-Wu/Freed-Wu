@@ -3,7 +3,6 @@
 PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
-# `gtk-launch $(xdg-mime query default text/html) about:blank` cannot work
 export BROWSER=firefox
 # firefox
 export MOZ_USE_XINPUT2=1
@@ -30,8 +29,6 @@ export RIPGREP_CONFIG_PATH
 # kitty
 # https://sw.kovidgoyal.net/kitty/glossary/#envvar-GLFW_IM_MODULE
 export GLFW_IM_MODULE=ibus
-# minicom
-export MINICOM='-mw8con -aon -C/tmp/minicom.log -D/dev/ttyUSB0'
 # has
 export HAS_ALLOW_UNSAFE=y
 # ccache
@@ -48,7 +45,7 @@ export LESSQUIET=1
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --color=always'
 # mdcat
-export MDCAT_PAGER='less --pattern=^┄(┄|)'
+export MDCAT_PAGER='less --pattern=┄+'
 # cmake
 export CMAKE_GENERATOR=Ninja
 export CMAKE_EXPORT_COMPILE_COMMANDS=1

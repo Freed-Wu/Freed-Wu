@@ -226,6 +226,7 @@ zinit id-as'.pass' depth'1' as'null' wait lucid \
   atclone'echo "CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
 echo "KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
 echo "KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
+echo "OPENAI_API_KEY=$(pass ls openai/api_key)" >> pass.sh
 pass ls wakatime/api_key > wakatime.txt
 pass ls codestats/$HOST > codestats.txt' \
   if'(($+commands[pass]))' \

@@ -20,7 +20,6 @@ if vim.treesitter.language.register then
     vim.treesitter.language.register("pandoc", "markdown")
     vim.treesitter.language.register("mysql", "sql")
     vim.treesitter.language.register("eelixir", "elixir")
-    vim.treesitter.language.register("sublime_syntax", "yaml")
     vim.api.nvim_create_autocmd("FileType", {
         pattern = "liquid",
         callback = function(args)

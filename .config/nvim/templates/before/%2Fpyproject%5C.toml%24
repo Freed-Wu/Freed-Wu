@@ -44,7 +44,7 @@ Download = "{{ g:snips_github }}/{{ expand('%:p:h:t') }}/releases"
 Source = "{{ g:snips_github }}/{{ expand('%:p:h:t') }}"
 
 [project.scripts]
-{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }} = "{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }}.__main__:main"
+{{ expand('%:p:h:t') }} = "{{ substitute(expand('%:p:h:t'), '-', '_', 'g') }}.__main__:main"
 
 [tool.setuptools.package-data]
 {{ substitute(expand('%:p:h:t'), '-', '_', 'g') }} = ["py.typed", "assets/**"]

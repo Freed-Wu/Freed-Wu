@@ -60,13 +60,13 @@ function! init#startify#source() abort
   let g:startify_custom_indices =
         \ map(range(0x61, 0x7a) + range(0x41, 0x5a), {_, v -> '.' . nr2char(v)})
   let g:startify_lists = [
-        \ {'type': 'sessions', 'header': [' Sessions']},
+        \ {'type': 'sessions', 'header': ['󰍒 Sessions']},
         \ {'type': 'files',
-        \ 'header': [' Global Histories'],
+        \ 'header': ['󰍐 Global Histories'],
         \ 'indices': map(range(1, 9) + [0], {_, v -> g:maplocalleader . v}),
         \ },
         \ {'type': 'dir',
-        \ 'header': [' Local Histories'],
+        \ 'header': ['󰍎 Local Histories'],
         \ 'indices': map(range(1, 9) + [0], {_, v -> '.' . v}),
         \ },
         \ {'type': function('s:gitModified'),  'header': ['! Git Modified']},

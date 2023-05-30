@@ -55,17 +55,12 @@
 !/.gitconfig
 !/.tclshrc
 !/.wishrc
+!/.minirc.dfl
 
 # dotfiles
 !/.dosbox/
 /.dosbox/*
 !/.dosbox/dosbox-*.conf
-!/.jupyter/
-/.jupyter/*
-!/.jupyter/jupyter_notebook_config.py
-!/.jupyter/lab/
-/.jupyter/lab/*
-!/.jupyter/lab/user-settings/
 !/.vim/
 /.vim/*
 !/.vim/vimrc
@@ -294,6 +289,15 @@
 !/.config/octave/
 /.config/octave/*
 !/.config/octave/octaverc
+!/.config/fcitx/
+/.config/fcitx/*
+!/.config/fcitx/rime
+!/.config/ibus/
+/.config/ibus/*
+!/.config/ibus/rime
+!/.config/fontconfig/
+/.config/fontconfig/*
+!/.config/fontconfig/fonts.conf
 
 # $XDG_DATA_HOME
 !/.local/
@@ -315,6 +319,12 @@
 /.local/share/fcitx5/rime/*
 !/.local/share/fcitx5/rime/*.custom.yaml
 !/.local/share/fzf/
+!/.local/share/jupyter/
+/.local/share/jupyter/*
+!/.local/share/jupyter/jupyter_notebook_config.py
+!/.local/share/jupyter/lab/
+/.local/share/jupyter/lab/*
+!/.local/share/jupyter/lab/user-settings/
 
 # bin
 !/.local/bin/
@@ -322,6 +332,8 @@
 !/.local/bin/luap
 !/.local/bin/adb.py
 !/.local/bin/telnet.py
+!/.local/bin/xsct.py
+!/.local/bin/vivado.py
 !/.local/bin/git-neomutt
 !/.local/bin/batman
 

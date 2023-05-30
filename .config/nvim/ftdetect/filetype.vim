@@ -10,11 +10,12 @@ augroup init_filetype
   " Data_Describe {{{1 "
   autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
   autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc setfiletype dosini
+  autocmd BufNewFile,BufRead *.service setfiletype systemd
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
-  autocmd BufNewFile,BufRead flake.lock,*.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map} setfiletype json
+  autocmd BufNewFile,BufRead flake.lock,*.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map,xci} setfiletype json
   autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd setfiletype yaml
-  autocmd BufNewFile,BufRead *.{x,l}pr setfiletype xml
+  autocmd BufNewFile,BufRead *.{{x,l}pr,{x,s}pfm},fonts.conf,*/conf.d/*.conf setfiletype xml
   " 1}}} Data_Describe "
 
   " Template {{{1 "
@@ -31,7 +32,7 @@ augroup init_filetype
 
   " Script {{{1 "
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
-  autocmd BufNewFile,BufRead *.bats,.bash_history setfiletype bash
+  autocmd BufNewFile,BufRead *.bats,.bash_history,boot.cmd.* setfiletype sh
   autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history setfiletype zsh
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead *.lg4 setfiletype lingo

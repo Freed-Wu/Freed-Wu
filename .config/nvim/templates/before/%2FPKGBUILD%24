@@ -5,11 +5,11 @@
 _repo={% here %}/{{ expand('%:p:h:t') }}
 _source_type=github-releases
 _upstreamver=$(date +%Y%m%d)
-_pkgname=$(tr A-Z a-z <<<${_repo##*/})
+_pkgname=${_repo##*/}
 
 # pkgbase=mingw-w64-$_pkgname
 # pkgname=$MINGW_PACKAGE_PREFIX-$_pkgname
-pkgname=${_pkgname//_/-}
+pkgname=$(tr A-Z a-z <<<${_pkgname//_/-})
 pkgver=${_upstreamver##v}
 pkgrel=1
 pkgdesc=""
@@ -19,23 +19,21 @@ arch=(any)
 url=https://github.com/$_repo
 # makedepends=(python-installer)
 license=(GPL3)
-provides=("$_pkgname")
-conflicts=("$_pkgname")
 # install=$_pkgname.install
 source=("$url/archive/$_upstreamver.tar.gz")
 # source=("git+$url")
 # _py=py3
-# source=("https://files.pythonhosted.org/packages/$_py/${_pkgname::1}/$_pkgname/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
+# source=("https://files.pythonhosted.org/packages/$_py/${_pkgname::1}/${_pkgname//-/_}/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
 # source=("https://cpan.metacpan.org/authors/id/F/FR/FREED/$_pkgname-$pkgver.tar.gz")
 sha256sums=(SKIP)
 
 # pkgver() {
-#   cd "$srcdir/$_pkgname" || return 1
+#   cd "$_pkgname" || return 1
 #   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 # }
 
 # build() {
-#   cd $_pkgname-$pkgver || return 1
+#   cd "$_pkgname-$pkgver" || return 1
 #   unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
 #   export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
 #   perl Makefile.PL
@@ -43,24 +41,23 @@ sha256sums=(SKIP)
 # }
 
 # check() {
-#   cd $_pkgname-$pkgver || return 1
+#   cd "$_pkgname-$pkgver" || return 1
 #   unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
 #   export PERL_MM_USE_DEFAULT=1
 #   make test
 # }
 
 package() {
-	cd "$srcdir/$_pkgname" || return 1
+	cd "$_pkgname" || return 1
 
 	install -D "$_pkgname" -t "$pkgdir/usr/bin"
 	install -Dm644 README.md -t "$pkgdir/usr/share/doc/$_pkgname"
 
 	# make DESTDIR="$pkgdir" install
 
-	# cd "$srcdir" || return 1
 	# python -m installer -d "$pkgdir" ./*.whl
 
-  # cd $_pkgname-$pkgver || return 1
+  # cd "$_pkgname-$pkgver" || return 1
   # unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
   # make install INSTALLDIRS=vendor DESTDIR="$pkgdir"
 
@@ -83,4 +80,5 @@ package() {
 	# install -Dm644 "$bin.bash" "$pkgdir/usr/share/bash-completion/completions/$bin"
 	# install -Dm644 "_$bin" -t "$pkgdir/usr/share/zsh/site-functions"
 	# install -Dm644 "$bin.fish" -t "$pkgdir/usr/share/fish/vendor_completions.d"
+
 }

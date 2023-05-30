@@ -1,5 +1,10 @@
 if {[catch {package require tclreadline} tmp]} {
-  return
+  lappend auto_path /usr/lib
+  if {[catch {package require tclreadline} tmp]} {
+    return
+  }
+  # https://github.com/flightaware/tclreadline/issues/50
+  proc 1 {} {return 1}
 }
 set tclreadline::historyLength 100000
 

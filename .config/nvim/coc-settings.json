@@ -21,9 +21,7 @@
     "nix": ["nix-linter"],
     "perl": ["perl"],
     "php": ["phpstan", "psalm"],
-    "requirements": ["pip-compile"],
-    "sh": ["shellcheck", "bash", "zsh"],
-    "syntax_test": ["syntest"],
+    "sh": ["bash", "zsh"],
     "systemd": ["systemd-analyze"],
     "text": ["languagetool", "write-good", "alex-text"],
     "vim": ["vint"],
@@ -34,10 +32,9 @@
     "dart": "dartfmt",
     "elixir": "mix_format",
     "fish": "fish_indent",
-    "lua": "lua-format",
-    "nix": "nixpkgs-fmt",
     "perl": "perltidy",
-    "sh": "shfmt"
+    "sh": "shfmt",
+    "verilog": "iStyle"
   },
   "diagnostic.errorSign": "✗",
   "diagnostic.format": "%source%code: %message",
@@ -52,13 +49,17 @@
   "html.autoClosingTags": true,
   "just-complete.shortcut": "_",
   "languageserver": {
-    "cmake": {
-      "command": "cmake-language-server",
-      "filetypes": ["cmake"],
-      "rootPatterns": ["build/"],
-      "initializationOptions": {
-        "buildDirectory": "build"
-      }
+    "arduino": {
+      "command": "arduino-language-server",
+      "filetypes": ["arduino"]
+    },
+    "autoconf": {
+      "command": "autoconf-language-server",
+      "filetypes": ["config"]
+    },
+    "bitbake": {
+      "command": "bitbake-language-server",
+      "filetypes": ["bitbake"]
     },
     "hdlChecker": {
       "command": "hdl_checker",
@@ -73,10 +74,34 @@
       "command": "rnix-lsp",
       "filetypes": ["nix"]
     },
+    "nil": {
+      "command": "nil",
+      "filetypes": ["nix"]
+    },
+    "PKGBUILD": {
+      "command": "pkgbuild-language-server",
+      "filetypes": ["sh"]
+    },
+    "portage": {
+      "command": "portage-language-server",
+      "filetypes": ["sh"]
+    },
+    "requirements": {
+      "command": "requirements-language-server",
+      "filetypes": ["requirements"]
+    },
+    "sublime-syntax": {
+      "command": "sublime-syntax-language-server",
+      "filetypes": ["syntax_test", "yaml"]
+    },
     "svls": {
       "command": "svls",
       "filetypes": ["systemverilog"]
-    }
+    },
+    "termux": {
+      "command": "termux-language-server",
+      "filetypes": ["sh"]
+    },
   },
   "list.insertMappings": {
     "<A-a>": "normal:gg",

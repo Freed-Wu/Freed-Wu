@@ -121,6 +121,7 @@ let g:vimsyn_folding = 'af'
 let g:xml_syntax_folding = 1
 let g:python_highlight_all = 1
 let g:readline_has_bash = 1
+let g:yaml_schema = 'pyyaml'
 
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
@@ -436,6 +437,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   call dein#add('vito-c/jq.vim')
   call dein#add('kaarmu/typst.vim')
+  call dein#add('kergoth/vim-bitbake')
   call dein#add('lambdalisue/glyph-palette.vim', {
         \ 'hook_post_source': 'call init#glyph_palette#post_source()',
         \ })

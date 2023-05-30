@@ -22,7 +22,7 @@ jobs:
         neovim:
           - true
           - false
-    runs-on: $\{\{ matrix.runs-on \}\}
+    runs-on: ${{matrix.runs-on}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
@@ -32,9 +32,9 @@ jobs:
       - uses: rhysd/action-setup-vim@v1
         id: vim
         with:
-          neovim: $\{\{ matrix.neovim \}\}
+          neovim: ${{matrix.neovim}}
       - name: Run unit tests with themis.vim
         env:
-          THEMIS_VIM: $\{\{ steps.vim.outputs.executable \}\}
+          THEMIS_VIM: ${{steps.vim.outputs.executable}}
         run: |
           vim-themis/bin/themis

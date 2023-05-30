@@ -1,12 +1,6 @@
 # shellcheck shell=bash source=/dev/null
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
-if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
-	. ~/.local/share/zinit/plugins/.pass/pass.sh
-fi
-if [[ -z $C6X_C_DIR && -f ~/.bash_login ]]; then
-	. ~/.bash_login
-fi
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then
 	export LANG=en_US.UTF-8
@@ -22,8 +16,6 @@ elif [[ $OSTYPE == msys ]]; then
 	export PATH=$PATH:/proc/cygdrive/c/msys64
 elif [[ $OSTYPE == darwin ]]; then
 	export BROWSER=open
-elif [[ -z $DISPLAY && -z $WAYLAND_DISPLAY ]]; then
-	export BROWSER=w3m
 fi
 if [[ $OSTYPE != msys2 ]]; then
 	export PATH=$PATH:/${MINGW_ARCH:-mingw64}/bin

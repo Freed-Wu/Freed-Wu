@@ -2,8 +2,8 @@ r"""Configure the Sphinx documentation builder.
 
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
-from {{ expand('%:p:h:h:t') }} import __version__ as version  # type: ignore
-from {{ expand('%:p:h:h:t') }}._metainfo import author, copyright, project  # type: ignore
+from {{ substitute(expand('%:p:h:h:t'), '-', '_', 'g') }} import __version__ as version  # type: ignore
+from {{ substitute(expand('%:p:h:h:t'), '-', '_', 'g') }}._metainfo import author, copyright, project  # type: ignore
 
 __all__ = ["version", "author", "copyright", "project"]
 

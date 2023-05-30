@@ -18,8 +18,8 @@ function! init#airline#source() abort
   let g:airline#extensions#coc#error_symbol = '✗'
   let g:airline#extensions#coc#warning_symbol = '⚠'
 
-  let g:airline#extensions#quickfix#quickfix_text = ''
-  let g:airline#extensions#quickfix#location_text = ''
+  let g:airline#extensions#quickfix#quickfix_text = '󰍐'
+  let g:airline#extensions#quickfix#location_text = '󰍎'
 
   let g:airline#extensions#hunks#coc_git = 1
 
@@ -76,5 +76,5 @@ function! init#airline#source() abort
   let g:airline#extensions#windowswap#indicator_text = '✂'
 
   let g:airline#extensions#zoomwintab#enabled = 1
-  let g:airline#extensions#zoomwintab#status_zoomed_in = ''
+  let g:airline#extensions#zoomwintab#status_zoomed_in = '󰍉'
 endfunction

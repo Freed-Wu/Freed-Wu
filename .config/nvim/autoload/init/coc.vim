@@ -15,7 +15,6 @@ function! init#coc#source() abort
         \ 'pandoc': 'markdown',
         \ 'mysql': 'sql',
         \ 'eelixir': 'elixir',
-        \ 'sublime_syntax': 'yaml',
         \ 'liquid': 'html',
         \ }
   " https://github.com/SeniorMars/coc-typst/issues/1
@@ -43,7 +42,7 @@ function! init#coc#source() abort
         \ 'coc-copilot',
         \
         \ '@yaegassy/coc-marksman', 'coc-webview',
-        \ 'coc-markdown-preview-enhanced',
+        \ 'coc-markdown-preview-enhanced', 'coc-esbonio',
         \ 'coc-texlab', 'coc-bibtex', 'coc-cmake',
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',
         \ 'coc-clang-format-style-options', 'coc-docker',

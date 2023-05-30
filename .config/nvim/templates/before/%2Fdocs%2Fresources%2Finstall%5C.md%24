@@ -3,36 +3,42 @@
 ## [AUR](https://aur.archlinux.org/packages/{{ expand('%:p:h:h:h:t') }})
 
 ```sh
-yay -S {{ expand('%:p:h:h:h:t') }}
+yay -S python-{{ expand('%:p:h:h:h:t') }}
 ```
 
-## [NixOS](https://nixos.org)
-
-Add the following code to `/etc/nixos/configuration.nix`:
+## [NUR](https://nur.nix-community.org/repos/{{ split(g:snips_github, '/')[-1] }})
 
 ```nix
 { config, pkgs, ... }:
 {
-  nix.settings.experimental-features = [ "flakes" ];
-  environment.systemPackages =
-    let
-      {{ expand('%:p:h:h:h:t') }} = (
-        builtins.getFlake "github:{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:h:h:t') }}"
-      ).packages.${builtins.currentSystem}.default;
-    in
-    [
-      {{ expand('%:p:h:h:h:t') }}
-    ];
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import
+      (
+        builtins.fetchTarball
+          "https://github.com/nix-community/NUR/archive/master.tar.gz"
+      )
+      {
+        inherit pkgs;
+      };
+  };
+  environment.systemPackages = with pkgs;
+      (
+        python3.withPackages (
+          p: with p; [
+            nur.repos.{{ split(g:snips_github, '/')[-1] }}.{{ expand('%:p:h:h:h:t') }}
+          ]
+        )
+      )
 }
 ```
 
-## [nix](https://github.com/NixOS/nix)
+## [Nix](https://nixos.org)
 
 ```sh
 nix shell github:{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:h:h:t') }}
 ```
 
-Or just take a try without installation:
+Run without installation:
 
 ```sh
 nix run github:{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:h:h:t') }} -- --help

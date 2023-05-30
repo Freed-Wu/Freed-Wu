@@ -606,7 +606,8 @@ function! init#smartinput#post_source() abort
         \ 'char': '=',
         \ 'input': ' = ',
         \ 'filetype': ['pandoc', 'c', 'cpp', 'vim', 'perl', 'make', 'ninja',
-        \ 'lua', 'dosini', 'muttrc', 'neomuttrc', 'nix', 'automake', 'toml'],
+        \ 'lua', 'dosini', 'muttrc', 'neomuttrc', 'nix', 'automake', 'toml',
+        \ 'verilog', 'dts', 'bitbake'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',

@@ -11,8 +11,5 @@ branding:
   color: yellow
 runs:
   using: docker
-image: docker://ghcr.io/{{ split(g: snips_github, '/')[-1] }}:v0.0.1
+  image: docker://ghcr.io/{{ split(g: snips_github, '/')[-1] }}:v0.0.1
   entrypoint: sh
-  args:
-    - -c
-    - {% here %} $\{\{ inputs.args \}\}

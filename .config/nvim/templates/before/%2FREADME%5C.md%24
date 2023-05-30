@@ -1,9 +1,9 @@
 # {{ expand('%:p:h:t') }}
 
+[![readthedocs](https://shields.io/readthedocs/{{ expand('%:p:h:t') }})](https://{{ expand('%:p:h:t') }}.readthedocs.io)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/main.svg)](https://results.pre-commit.ci/latest/github/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/main)
 [![github/workflow](https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/actions/workflows/main.yml/badge.svg)](https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/actions)
 [![codecov](https://codecov.io/gh/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }})
-[![readthedocs](https://shields.io/readthedocs/{{ expand('%:p:h:t') }})](https://{{ expand('%:p:h:t') }}.readthedocs.io)
 [![DeepSource](https://deepsource.io/gh/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}.svg/?show_trend=true)](https://deepsource.io/gh/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }})
 
 [![github/downloads](https://shields.io/github/downloads/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/total)](https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/releases)

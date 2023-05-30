@@ -4,6 +4,7 @@ r"""This module can be called by
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from datetime import datetime
 
+from . import __name__ as NAME
 from . import __version__
 
 try:
@@ -11,7 +12,8 @@ try:
 except ImportError:
     from . import _shtab as shtab
 
-VERSION = rf"""{{ expand('%:p:h:t') }} {__version__}
+NAME = NAME.replace("_", "-")
+VERSION = rf"""{NAME} {__version__}
 Copyright (C) {datetime.now().year}
 Written by {{ g:snips_author }}
 """
@@ -20,17 +22,17 @@ Report bugs to <{{ g:snips_email }}>.
 """
 
 
-def get_parser():
+def get_parser() -> ArgumentParser:
     r"""Get a parser for unit test."""
     parser = ArgumentParser(
-        "{{ expand('%:p:h:t') }}", epilog=EPILOG, formatter_class=RawDescriptionHelpFormatter
+        epilog=EPILOG, formatter_class=RawDescriptionHelpFormatter
     )
     parser.add_argument("--version", version=VERSION, action="version")
     shtab.add_argument_to(parser)
     return parser
 
 
-def main():
+def main() -> None:
     r"""Parse arguments and provide shell completions."""
     parser = get_parser()
     args = parser.parse_args()

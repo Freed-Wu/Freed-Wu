@@ -1,1 +1,1 @@
-filter=-whitespace/indent
+filter=-whitespace/indent,-linelength,-readability/wonkycase
