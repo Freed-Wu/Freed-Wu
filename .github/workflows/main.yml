@@ -79,7 +79,7 @@ jobs:
           images: |
             ${{ secrets.DOCKER_USERNAME }}/my-dotfiles
             ghcr.io/${{ github.repository }}
-      - uses: docker/build-push-action@v4.0.0
+      - uses: docker/build-push-action@v4.1.1
         with:
           context: .
           file: .docker/Dockerfile
