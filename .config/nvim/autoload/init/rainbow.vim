@@ -9,6 +9,7 @@ function! init#rainbow#source() abort
           \ 'htmldjango': 0,
           \ 'jinja2': 0,
           \ 'liquid': 0,
+          \ 'systemd': 0,
           \ },
           \ }
 endfunction

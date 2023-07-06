@@ -14,6 +14,7 @@ function! init#firenvim#source() abort
           \ },
           \ }
           \ }
+  inoremap <silent> <S-lt> <
   nnoremap <silent> <C-z> :<C-U>call firenvim#hide_frame()<CR>
   inoremap <silent> <C-z> <C-O>:call firenvim#hide_frame()<CR>
   nnoremap <silent> <C-.> :<C-U>call firenvim#focus_page()<CR>

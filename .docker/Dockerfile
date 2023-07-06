@@ -56,10 +56,10 @@ RUN sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 ARG bin=$home/.nix-profile/bin
 
 # python packages installed by nix-env cannot find systemside packages
-RUN mkdir -p .config/nix && \
-      echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > .config/nix/nix.conf && \
-      $bin/nix-env -i git neovim tmux vivid exa bat ripgrep fd delta fzf jq \
-      nodejs lesspipe file less powerlevel10k chafa parallel perl5.36.0-Image-ExifTool && \
+RUN export PATH=$bin:$PATH && \
+      echo 'https://mirrors.bfsu.edu.cn/nix-channels/nixos-unstable nixos' > .nix-channels && \
+      nix-channel --update && \
+      nix-env -iA nixos.neovim nixos.tmux nixos.vivid nixos.exa nixos.bat nixos.ripgrep nixos.fd nixos.delta nixos.fzf nixos.zsh-powerlevel10k nixos.chafa nixos.parallel nixos.exiftool nixos.git nixos.jq nixos.nodejs nixos.lesspipe nixos.file nixos.less && \
       sudo ln -s $bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .

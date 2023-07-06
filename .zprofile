@@ -13,9 +13,6 @@ fi
 if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
 	. ~/.local/share/zinit/plugins/.pass/pass.sh
 fi
-if [[ -z $DISPLAY && -z $WAYLAND_DISPLAY ]]; then
-	export BROWSER=w3m
-fi
 # NixOS
 if [[ -d /run/current-system/sw/share ]] &&
 	[[ ${XDG_DATA_DIRS#/run/current-system/sw/share:} == $XDG_DATA_DIRS ]]; then

@@ -20,5 +20,8 @@ function! init#init#coc#keywordprg(word) abort
 endfunction
 
 function! init#init#coc#includeexpr() abort
-  return 'coc-' . v:fname
+  if findfile(v:fname)
+    return v:fname
+  endif
+  return 'coc-' . split(v:fname, '\.')[0]
 endfunction

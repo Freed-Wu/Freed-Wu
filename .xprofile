@@ -7,11 +7,8 @@ export BROWSER=firefox
 # firefox
 export MOZ_USE_XINPUT2=1
 # man
-MANPATH="$HOME/.local/share/man:$MANPATH"
 MANOPT=-Lzh_CN:zh_CHS:zh
 export MANOPT
-MANSECT='1:1p:8:3:3p:3perl:3tcl:0:0p:2:5:4:9:6:7:n:l'
-export MANSECT
 # cpanm
 export PERL_CPANM_OPT
 PERL_CPANM_OPT="-l $HOME/.local"

@@ -1,4 +1,0 @@
----
-BUNDLE_MIRROR__HTTPS://RUBYGEMS__ORG/: "https://mirrors.bfsu.edu.cn/rubygems"
-BUNDLE_PATH: ".bundle"
-BUNDLE_FORCE_RUBY_PLATFORM: "true"

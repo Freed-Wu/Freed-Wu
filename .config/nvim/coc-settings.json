@@ -71,6 +71,10 @@
       "filetypes": ["jq"]
     },
     "nix": {
+      "command": "nixd",
+      "filetypes": ["nix"]
+    },
+    "rnix": {
       "command": "rnix-lsp",
       "filetypes": ["nix"]
     },
@@ -101,7 +105,7 @@
     "termux": {
       "command": "termux-language-server",
       "filetypes": ["sh"]
-    },
+    }
   },
   "list.insertMappings": {
     "<A-a>": "normal:gg",
@@ -140,8 +144,8 @@
   "list.source.bibtex.files": ["*.bib", "refs/*.bib"],
   "list.source.files.args": ["--hidden", "--files"],
   "markdown-preview-enhanced.enableScriptExecution": true,
+  "perl.disableCache": true,
   "prettier.ignorePath": ".gitignore",
-  "pydocstring.doqPath": "/usr/bin/doq",
   "pydocstring.enableFileAction": true,
   "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",
@@ -168,5 +172,6 @@
   "translator.enableHover": true,
   "translator.engines": ["google"],
   "translator.proxy": "socks://127.0.0.1:1080",
-  "yaml.format.singleQuote": true
+  "yaml.format.singleQuote": true,
+  "zi.hover": false
 }

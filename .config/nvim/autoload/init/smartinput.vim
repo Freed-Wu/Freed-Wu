@@ -365,7 +365,7 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['help'],
         \ })
   call smartinput#define_rule({
-        \ 'at': '^\%#',
+        \ 'at': '^\%#\(\S\|$\)',
         \ 'char': '>',
         \ 'input': '> ',
         \ 'filetype': ['pandoc', 'markdown', 'gfimarkdown'],
@@ -468,14 +468,9 @@ function! init#smartinput#post_source() abort
 
   call smartinput#map_to_trigger('i', ',', ',', ',')
   call smartinput#define_rule({
-        \ 'at': '\%#',
+        \ 'at': '\%#\(\S\|$\)',
         \ 'char': ',',
         \ 'input': ', ',
-        \ })
-  call smartinput#define_rule({
-        \ 'at': '\%# ',
-        \ 'char': ',',
-        \ 'input': ',',
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',
