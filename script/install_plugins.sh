@@ -8,8 +8,8 @@ TERM=xterm-256color TMUX='' zsh -isc '@zinit-scheduler burst'
 echo -e "\n\r::endgroup::"
 echo -e "\n\r::group::Install tmux plugins"
 [ -f ~/.config/tmux/plugins/tpm/bin/install_plugins ] ||
-  git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm &&
-  ~/.config/tmux/plugins/tpm/bin/install_plugins
+	git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm &&
+	~/.config/tmux/plugins/tpm/bin/install_plugins
 echo -e "\n\r::endgroup::"
 echo -e "\n\r::group::Install vim plugins"
 script/install_plugins.vim
