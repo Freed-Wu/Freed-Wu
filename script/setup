@@ -3,6 +3,7 @@
 # Debug:
 # 	gh cs cp -e remote:/workspaces/.codespaces/.persistedshare/creation.log .
 # 	less creation.log
+[ -d ~/.git ] && exit
 cd "$(dirname "$(readlink -f "$0")")/.." || exit 1
 
 sudo sed -i s=/bin/bash=/bin/zsh=g /etc/passwd

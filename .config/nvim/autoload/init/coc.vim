@@ -17,7 +17,7 @@ function! init#coc#source() abort
         \ 'eelixir': 'elixir',
         \ 'liquid': 'html',
         \ }
-  let g:coc_global_extensions = g:init#init#install#coc()
+  let g:coc_global_extensions = g:init#init#install#coc
   nnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   xnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   nnoremap gK K

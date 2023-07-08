@@ -11,6 +11,7 @@
 !/.dockerignore
 !/.deepsource.toml
 !/script/
+!/.devcontainer/
 
 # dotfile
 !/.xprofile
