@@ -53,36 +53,14 @@ WORKDIR $home
 # cost long time
 RUN sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 
-ARG bin=$home/.nix-profile/bin
-
 # python packages installed by nix-env cannot find systemside packages
-RUN export PATH=$bin:$PATH && \
-      echo 'https://mirrors.bfsu.edu.cn/nix-channels/nixos-unstable nixos' > .nix-channels && \
-      nix-channel --update && \
-      nix-env -iA nixos.neovim nixos.tmux nixos.vivid nixos.exa nixos.bat nixos.ripgrep nixos.fd nixos.delta nixos.fzf nixos.zsh-powerlevel10k nixos.chafa nixos.parallel nixos.exiftool nixos.git nixos.jq nixos.nodejs nixos.lesspipe nixos.file nixos.less && \
-      sudo ln -s $bin/nvim /usr/bin/vi
+# `. "$HOME/.nix-profile/etc/profile.d/nix.sh"` cannot work
+RUN export PATH=~/.nix-profile/bin:$PATH && \
+      install -d ~/.config/nix && \
+      echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > ~/.config/nix/nix.conf && \
+      nix-env -iA nixpkgs.neovim nixpkgs.tmux nixpkgs.vivid nixpkgs.exa nixpkgs.bat nixpkgs.ripgrep nixpkgs.fd nixpkgs.delta nixpkgs.fzf nixpkgs.zsh-powerlevel10k nixpkgs.chafa nixpkgs.parallel nixpkgs.exiftool \
+      nixpkgs.git nixpkgs.jq nixpkgs.nodejs nixpkgs.lesspipe nixpkgs.file nixpkgs.less && \
+      sudo ln -s ~/.nix-profile/bin/nvim /usr/bin/vi
 
 COPY --chown=$user . .
-# https://github.com/neoclide/coc.nvim/issues/118#issuecomment-1311768351
-RUN export PATH=$bin:$PATH && \
-      git config --global safe.directory '*' && \
-      git -C ~ reset --hard && \
-      TERM=xterm-256color TMUX='' zsh -isc '@zinit-scheduler burst' && \
-      ~/.config/tmux/plugins/tpm/bin/install_plugins && \
-      vi -c'call dein#update() | quit' && \
-      mkdir -p ~/.config/coc/extensions && \
-      echo '{"dependencies": {}}' >~/.config/coc/extensions/package.json && \
-      npm install -C ~/.config/coc/extensions \
-      $(vi --headless -c'echo g:coc_global_extensions | quit' 2>&1 | \
-      tail -n1 | sed "s=\(', '\|\['\|']\)=\n=g") && \
-      mkdir -p ~/.config/coc/extensions/coc-gist-data && \
-      echo '{"token": "gho_"}' \
-      >~/.config/coc/extensions/coc-gist-data/secret.json
-
-USER root
-WORKDIR /
-
-RUN export PATH=$bin:$PATH && \
-      install -D $home/.config/pip/pip.conf -t /root/.config/pip && \
-      pip install -e $home'[dev]' && \
-      $home/.config/tmux/plugins/tmux-bitahub/requirements.txt
+RUN script/install_plugins.sh

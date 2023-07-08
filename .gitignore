@@ -102,7 +102,6 @@
 !/.docker/
 /.docker/*
 !/.docker/config.json
-!/.docker/Dockerfile
 !/.getmail/
 !/.ssh/
 /.ssh/*

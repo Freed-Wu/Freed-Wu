@@ -17,42 +17,7 @@ function! init#coc#source() abort
         \ 'eelixir': 'elixir',
         \ 'liquid': 'html',
         \ }
-  " https://github.com/SeniorMars/coc-typst/issues/1
-  let g:coc_global_extensions = [
-        \ 'coc-highlight',
-        \
-        \ 'coc-ci', 'coc-rime',
-        \
-        \ 'coc-pydocstring',
-        \
-        \ 'coc-diagnostic', 'coc-spell-checker', 'coc-markdownlint',
-        \
-        \ 'coc-prettier',
-        \
-        \ 'coc-tasks', 'coc-vimtex', 'coc-emmet',
-        \ 'coc-snippets', 'coc-translator', 'coc-zi',
-        \
-        \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
-        \ 'coc-gitignore',
-        \
-        \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
-        \
-        \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji', 'coc-syntax',
-        \
-        \ 'coc-copilot',
-        \
-        \ '@yaegassy/coc-marksman', 'coc-webview',
-        \ 'coc-markdown-preview-enhanced', 'coc-esbonio',
-        \ 'coc-texlab', 'coc-bibtex', 'coc-cmake',
-        \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',
-        \ 'coc-clang-format-style-options', 'coc-docker',
-        \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-perl',
-        \ 'coc-jedi', 'coc-pyright', 'coc-lua', 'coc-solargraph', 'coc-clangd',
-        \ ]
-  " tabnine don't support android
-  if $PREFIX !=# '/data/data/com.termux/files/usr'
-    let g:coc_global_extensions += ['coc-tabnine']
-  endif
+  let g:coc_global_extensions = g:init#init#install#coc()
   nnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   xnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   nnoremap gK K
@@ -150,9 +115,12 @@ augroup init#coc
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   " https://github.com/neoclide/coc-highlight/issues/36
   " autocmd CursorHold * call CocActionAsync('highlight')
-  autocmd VimLeavePre * CocCommand mru.validate
+  autocmd VimLeavePre * if exists(':CocCommand')
+        \ | CocCommand mru.validate
+        \ | endif
   autocmd VimLeavePre * if get(g:, 'coc_process_pid', 0)
-        \ | call system('kill -9 '.g:coc_process_pid) | endif
+        \ | call system('kill -9 '.g:coc_process_pid)
+        \ | endif
   autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
 " ex: path=.,$XDG_CONFIG_HOME/coc/extensions/node_modules

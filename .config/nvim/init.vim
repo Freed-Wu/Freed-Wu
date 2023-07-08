@@ -247,11 +247,12 @@ endif
 let g:dein#notification_icon =
       \ '/usr/share/icons/hicolor/128x128/apps/nvim.png'
 let g:dein#types#git#clone_depth = 1
-if !isdirectory(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
+if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
   if executable('git')
-    call system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim '
+    echo system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim '
           \ . '$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
-  else
+  endif
+  if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
     finish
   endif
 endif

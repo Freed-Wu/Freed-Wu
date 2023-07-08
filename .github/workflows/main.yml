@@ -54,14 +54,6 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
-        with:
-          repository: tmux-plugins/tpm
-          path: .config/tmux/plugins/tpm
-      - uses: actions/checkout@v3
-        with:
-          repository: Shougo/dein.vim
-          path: .local/share/nvim/repos/github.com/Shougo/dein.vim
       - uses: docker/login-action@v2.2.0
         if: github.event_name != 'pull_request'
         with:
@@ -82,7 +74,7 @@ jobs:
       - uses: docker/build-push-action@v4.1.1
         with:
           context: .
-          file: .docker/Dockerfile
+          file: script/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
