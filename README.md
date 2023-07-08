@@ -43,7 +43,6 @@ firstly.
 - [python](.config/python)
 - [ptpython](.config/ptpython)
 - [visidata](.config/visidata)
-- [docker](.docker)
 - [...](.gitignore)
 
 [![screenshot](https://user-images.githubusercontent.com/32936898/199290335-bb4c9b9e-1fc9-4f8d-af30-a1f8d49c6f35.jpg)](https://user-images.githubusercontent.com/32936898/199288079-777dee13-224d-468b-ac32-23042e34f0be.jpg)

@@ -3,3 +3,22 @@
 # Debug:
 # 	gh cs cp -e remote:/workspaces/.codespaces/.persistedshare/creation.log .
 # 	less creation.log
+cd "$(dirname "$(readlink -f "$0")")/.." || exit 1
+
+sudo sed -i s=/bin/bash=/bin/zsh=g /etc/passwd
+sudo sed -i s/archive.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list
+echo "$USER:U6aMy0wojraho" | sudo chpasswd -e
+echo root:U6aMy0wojraho | sudo chpasswd -e
+
+# https://github.com/NixOS/nix/issues/6680
+# `git reset --hard` avoid nix installer add some lines to .bashrc and .zshrc
+sudo apt-get -y update
+sudo apt-get -y install acl
+sudo setfacl -k /tmp
+sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
+git -C ~ reset --hard
+export PATH="$HOME/.nix-profile/bin:$PATH"
+nix-env -iA nixpkgs.{neovim,tmux,vivid,exa,bat,ripgrep,fd,delta,fzf,powerlevel10k,chafa,parallel,exiftool}
+sudo ln -sf ~/.nix-profile/bin/nvim /usr/bin/vi
+
+source script/install_plugins.sh

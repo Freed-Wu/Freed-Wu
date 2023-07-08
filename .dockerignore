@@ -1,5 +1,6 @@
 *
 !/.git/
-# action/checkout
+!/script/install_plugins.sh
+# see .github/workflows/main.yml
 !/.config/tmux/plugins/tpm/
 !/.local/share/nvim/repos/github.com/Shougo/dein.vim/
