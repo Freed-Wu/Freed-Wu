@@ -4,6 +4,8 @@
 !/LICENSE
 !/README.md
 !/pyproject.toml
+!/_config.yml
+!/Gemfile
 !/.pre-commit-config.yaml
 !/.gitlint
 !/.yamllint.yaml

@@ -18,7 +18,7 @@ augroup init_filetype
   " 1}}} Data_Describe "
 
   " Template {{{1 "
-  autocmd BufNewFile,BufRead */_layouts/*.html setfiletype liquid
+  autocmd BufNewFile,BufRead */_layouts/*.html setfiletype liquid.html
   " 1}}} Template "
 
   " Mark_Up {{{1 "
@@ -30,6 +30,7 @@ augroup init_filetype
   " 1}}} Mark_Up "
 
   " Script {{{1 "
+  autocmd BufNewFile,BufRead *.qsf setfiletype tcl
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
   autocmd BufNewFile,BufRead *.bats,.bash_history,boot.cmd.* setfiletype sh
   autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history setfiletype zsh

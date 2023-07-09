@@ -1,0 +1,22 @@
+---
+"on":
+  push:
+  workflow_dispatch:
+
+env:
+  PAGES_REPO_NWO: ${{github.repository}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: ruby/setup-ruby@v1.150.0
+        with:
+          ruby-version: head
+          bundler-cache: true
+      - uses: jeffreytse/jekyll-deploy-action@v0.4.0
+        with:
+          token: ${{secrets.GH_TOKEN}}

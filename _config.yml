@@ -1,0 +1,14 @@
+---
+plugins:
+  - jekyll-default-layout
+  - jekyll-github-metadata
+  - jekyll-readme-index
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-spaceship
+
+readme_index:
+  remove_originals: true
+  with_frontmatter: true
+
+remote_theme: Freed-Wu/jekyll-theme-freed

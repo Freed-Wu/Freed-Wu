@@ -69,7 +69,7 @@ jobs:
         uses: docker/metadata-action@v4.6.0
         with:
           images: |
-            ${{ secrets.DOCKER_USERNAME }}/my-dotfiles
+            ${{ secrets.DOCKER_USERNAME }}/freed-wu
             ghcr.io/${{ github.repository }}
       - uses: docker/build-push-action@v4.1.1
         with:

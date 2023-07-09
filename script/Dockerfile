@@ -1,14 +1,14 @@
-#!/usr/bin/env -S docker build -tfreedwu/my-dotfiles:main . -f
-# docker run --rm -it --name=test --gpus=all -p 8022:22 freedwu/my-dotfiles:main
+#!/usr/bin/env -S docker build -tfreedwu/freed-wu:main . -f
+# docker run --rm -it --name=test --gpus=all -p 8022:22 freedwu/Freed-Wu:main
 FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 # bithuab's debug mode uses gtx1080ti
 
-LABEL org.opencontainers.image.title=my-dotfiles
+LABEL org.opencontainers.image.title=Freed-Wu
 LABEL org.opencontainers.image.authors="Wu Zhenyu"
 LABEL org.opencontainers.image.vendor="Wu Zhenyu"
-LABEL org.opencontainers.image.url=https://ghcr.io/freed-wu/my-dotfiles
+LABEL org.opencontainers.image.url=https://ghcr.io/freed-wu/Freed-Wu
 # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#labelling-container-images
-LABEL org.opencontainers.image.source=https://github.com/Freed-Wu/my-dotfiles
+LABEL org.opencontainers.image.source=https://github.com/Freed-Wu/Freed-Wu
 LABEL org.opencontainers.image.description=":gear: My dotfiles. "
 LABEL org.opencontainers.image.licenses=GPL-3.0
 
