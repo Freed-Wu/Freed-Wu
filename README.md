@@ -61,7 +61,9 @@ Sometimes I do some lightweight development :wrench: on it when I am on a :bus:
 like this:
 
 <details>
-<summary>Fix a typo fast</summary>
+<summary>
+Fix a typo fast
+</summary>
 
 ```sh
 git clone --depth=1 https://github.com/one-of/my-favourite-open-source-projects
@@ -88,7 +90,9 @@ and
 on coding and will spend the rest of my life on it.
 
 <details>
-<summary>Screenshot</summary>
+<summary>
+Screenshot
+</summary>
 
 [![screenshot](https://user-images.githubusercontent.com/32936898/199290335-bb4c9b9e-1fc9-4f8d-af30-a1f8d49c6f35.jpg)](https://user-images.githubusercontent.com/32936898/199288079-777dee13-224d-468b-ac32-23042e34f0be.jpg)
 
@@ -117,7 +121,9 @@ and
 ## Hobbies
 
 <details open>
-<summary>my recent status</summary>
+<summary>
+my recent status
+</summary>
 
 [![trophy](https://github-profile-trophy.vercel.app/?username=Freed-Wu&theme=dracula&column=-1&no-bg=true&no-frame=true)](https://github.com/Freed-Wu)
 
@@ -201,7 +207,7 @@ It contains:
   [![rime](https://img.shields.io/badge/rime:%20microsoft%20double%20pinyin-gray?logo=data:image/png%3Bbase64,iVBORw0KGgoAAAANSUhEUgAAAMEAAADACAYAAAC9Hgc5AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAACcVJREFUeNrsnf112jwYRyEn/yedIHSCsEHoBKEThE4QOkHoBKUTlExQMkHIBmQDskEyAa9+vFaPDwUDlm1J1r3nqPS0+QBZV48+Hsvd9XrdaYput9szL/2sDEy5NOW6AynzZsrKlGX2ujBtctnkG+jWLYFp+GrwI1OGplxxzeEIPkyZSwi9mjb6Hp0EWY8/ygoNH6oQYlpXhKhUgqzxT0y549pBDbyofZk2uwhOAtP4L7PGf891goZkGFcVGZwlMAJoyDM15YJrAw3zK4sM714kyHr/mSm3XAvwiFaXhi5RoZQE2YrPgt4fAuK7acvTRiTIhj+/qXMIkEfTnke1SoAAEMmkeXjKPOFoCYwAGv+z9Akx8GrK4FgRjpKACAAximDadr8SCRAA2j5HKJSAVSBoAT9MG5+UkiDbB9DaK7k/EDtfilItiiRQ0hIbYdAGlITX2zdR3imBEUBpz3+oO0hhfvCPBAyDILVh0dmOLxwjALSU6cFIkEWBVYfVIGgv30ybnxVJMDEvD9QTtJg30+Z7OyUgCkBCfDXtfr5rTjBEAEiE0b5IoBUhjj+BVPhs2v7qbyTIbpBHAEiJ4fZwaEidQKoSbIZDJhIszN9vqBdIjE9KpbASrKkPSJDNKtGZEWBAXUCi9O2coE9dQKIMrAQ96gISpUckaIDJZNLRvKtMWSwWVGC9bBJFz6kHSBntkREJIPkhkSQgXwiS5owqACQAQAIAJABAAoCUaXyfQJtHDw+7b2N+eXnZ+32r1aozm83YQAqcXq/XGY1GncFgsPdr+v1+5+LiYuf1L/q+1khQxM3NTeH/SQQkCF+CfZ0cwyEAJAA4HEWQAJLm6uoqDQl8THygOd7f36N7z0QCqJTlcokEVDAgAaEWkAAACQBK42OZFAkACVL4kABBSeBrQwSaoygREgkAkMANZZECIAEAwyEAJABAAgAkAEACACQAQAIAJABIUQId2gSQtASXl5dcMYhfgtfXV2q95RSdJIgEHe4ThvDaBxNjCAofJ4owMQbmBDGFOybG4RPjCYONS8ABWrCPt7e3NCRIrZdJDZeDFHzdNNW4BNwdhgTJD4dcJIht/RkJTsPXU4ii2ydgckwkSH5izDJp2LhEa1+LJl4mxi6rAEyO2xsFkpkYu35YIkG4uHZQSUUClwkQEoSLy7XxmVgZXSTQWaYc6tu+SOBz6dyLBK5hbzgc0uICnA9cX19HNxTyKsHHxweT4xbh2jH52iPwJoHrh769vWW/IDBGoxESNP2hXSsdwhkK+X6eQbQSjMdjWh9RIG4JNC9w2TTTKhFzA/9oWOraIc3n8zQlqOLDTyYTWqFnJMDFxUXp71dH6PseE68SzGYzp+9XngrLpUSBqCVwHRKJ6XTKSpEnFIldokAVHWH0ElRRCZobMCxqHs3H7u/vnX6GUiVCuN02egmELgaT5GaHQVVcN0XxEPAugXJGHh8fK5lkk1zXDKpr1+dRK2MghKFQEBLYsaUrGpuqUpkf1B+5q7jNNZQoEIwEVUUD7Vpq4wUR6hPg7u7O+ecoCiBBTdHAiiCpGBpVOwfQEKgKAWwUCO1M2nUoxVTOuipMJa9Ho5H3z2TkLv0ZTFTz/v5NZ7JeLpeVXRfTQa1DanNa6ApKAtPjbBpvlZgebPNzkeD0Mh6PK78ew+EQCQ4VVVLV+IwKMUowGAwq7f3zHVJo7S1ICVRUWXWgUNy0DDFJ0Ov1aqt7dUQ+I3J0Eqiy1GDrwsrQxEWJQQL1/PpddaLfEWJbC1YCOyGrejy6q3eazWa1jlNDlUC9vt5bnZ2NRXOLUNtZ0BKoqLduirwQVUaIkCRQb6wVuDrG+/tQnYbcxoKXoGkR8qihqMFICvWasUkgkdXo9fs1zq87qoa6xHuMBOcx7FLqHtaHh4dGf6823VRspqR2OZXxqKLNOL1qw8d3FqTqJl+USKhX19weV5QhGsu9Ht3MhuDRzRs/f/4M9v3Zm8W3xVCjLJtro3st8klm2rm1O+EhNPQiAfS5I3lS6Zfgh0MhDI2gVXOA+OYEuyZ3Psa3cBjNP2JrT1FKYJf3mlzhgMMrawGmQ7RbgjoS7qD8CpDL6hkSBJznAod7/8A3wdKRIL8ez1yhuclvoHlAaUtgN4hcNqfg8NBH6SxtajOtk2A7L4bIUA3acQ44AQ4JDkUGjVubSBJr45hfCw+RT3qRYHsCrbEs0eFwr99UmnkoEkSTNlElymmxxfUYwTbw9PS0uZFeJZJUh0rTJpKUII9ycSSDS45PbCi3R0fTqIRwIC4SBCiFhNCrissTWELAHn2uokZvs18BCU4WQ1mb9tX+PaShlM1iVUNXqnc+3RuQoFasFFaW/Ol3NpqUTXnO38OQb8z28UYh3M/QBgmSWR3qeNzJbvmdWdGvDp3REUDqIAEgAVUASACABABIAIAEAEgAgAQASACABABIAIAEAEgAgAQASACABABIAIAEAEgAgAQASACQFMmeO5Q/LyhP/jGpx36PpckDuexhW7uw5xJts+8wrn1fnwhhH761fZhVUSPd10BDOykuFnR8o06xO0aYY/8NCQrQ2Z/Pz8+0vJaTj156SHn+QeU+JTgP4V1wXmYa5E/9DilSBDEx5jxNSF4CACSA5Agp+iMBJD8PRAJgOEQVABIAIEEYFKUBABAJoHXsSsnwKcEHlwRSl4DtWkjax/MQ35V9dOmxlHmUqcvjT0N8PvChNO9tilLGXb42nx8UA+v1eqUs0qkp93QIkCBvRoKehkMr6gJSHQoxJ4DUWeiPrgkHnW63u6Y+IEG+mvY/txLIiBvqBBLjk2n/73azbE59QGK8SAA7J0ACSJG/bX4zHNr8pdvVBPmauoFE+Kw9gnwkEFPqBRLhyQqwHQl0wI/+g0N6oO1sVoX+kSATYWJeHqgjaDGbXeL8P2xLQDSAtvPNtPnZXgmIBtByXk17/ycTcJcEigZaKbqizqBlfDHtfXFQgkyEoXn5Q51Bi3g0bX206z92SpCJoNnzLXUHLUB3T/bsDvEpEjAsglYPgw5KkImgSYS+mdUiiJUfpo1Pir6gUIJMBI2jflOX0KZ5wEkSIAJEys7l0NISZCJwLzJEI4Apg30T4dISEBEgEnSU4fBYAU6WABGgDXMAZwkyEVg1gtD4btpyqdsBSkmQiaB9hFmHDTXwy1s2/Cl9akppCbaGR1OiAnjglymTU8b/tUiQiwqTDqtH0Nzkd+zS+1cuQU6GXibDHdcJamr8k6IUCO8SbMkwygq5R+CCkt+UzDmtqudvRIItIfqZDEOEgBMbvnr8ueuY37sEOyJEPysDUzSX4JiXtNHqzqrzf8byptTV4+/jPwEGAKfS7Os5PMVcAAAAAElFTkSuQmCC)](https://rime.im).
 - [a list](.gitignore) to display all my used programs.
 
-The system side configurations can be found:
+The OS configurations can be found:
 
 - [the configurations](https://github.com/Freed-Wu/nixos) for
   [![NixOS](https://img.shields.io/badge/NixOS-unstable-blue?logo=NixOS)](https://nixos.org).
@@ -217,7 +223,9 @@ I collect some [nerd font](https://www.nerdfonts.com) style configurations for
 many programs:
 
 <details>
-<summary>Nerd Font Styles</summary>
+<summary>
+Nerd Font Styles
+</summary>
 
 #### [bash](https://github.com/Freed-Wu/Freed-Wu/blob/main/.bashrc)
 
@@ -296,7 +304,9 @@ This is my [homepage](https://freed-wu.github.io). If you are :satisfied: with
 me, you can find:
 
 <details>
-<summary>more information about me</summary>
+<summary>
+more information about me
+</summary>
 
 - [![github](https://img.shields.io/github/followers/Freed-Wu?logo=github)](https://github.com/Freed-Wu?tab=followers)
 - [![sponsors](https://shields.io/github/sponsors/Freed-Wu?logo=github)](https://github.com/sponsors/Freed-Wu/)

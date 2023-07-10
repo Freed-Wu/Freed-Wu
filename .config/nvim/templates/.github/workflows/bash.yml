@@ -17,15 +17,17 @@ jobs:
       - uses: brokenpip3/setup-bats-libs@0.1.0
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
+          ruby-version: head
           bundler-cache: true
       - name: Install Ruby dependencies
         run: |
-          bundle update --bundler && bundle install
+          bundle install
       - name: Test
-        # TMPDIR=/tmp is needed
         run: |
-          TMPDIR=/tmp bundle exec bashcov -- bats -r .
+          bundle exec bashcov -- bats -r .
+        env:
+          # due to setup-bats
+          TMPDIR: /tmp
       - uses: codecov/codecov-action@v3
         with:
           files: coverage/codecov-result.json

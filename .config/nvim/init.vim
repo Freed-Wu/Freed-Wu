@@ -436,6 +436,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'merged': 0,
         \ 'hook_source': 'call init#polyglot#source()',
         \ })
+  call dein#add('vim-scripts/bats.vim')
   call dein#add('vito-c/jq.vim')
   call dein#add('kaarmu/typst.vim')
   call dein#add('kergoth/vim-bitbake')

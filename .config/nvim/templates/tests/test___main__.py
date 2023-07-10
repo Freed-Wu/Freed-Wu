@@ -1,11 +1,8 @@
-r"""Test {{ substitute(expand('%:t'), '_test.py"""
-, '', 'g') }}"""
+r"""Test __main__."""
 from contextlib import suppress
 
-from {{ substitute(expand('%:p:h:h:t'), '-', '_', 'g') }}.{{ substitute(expand('%:t'), '_test.py.__main__ import get_parser, VERSION
-, '', 'g') }}.__main__ import get_parser, VERSION
-parser = get_parser("{{ substitute(expand('%:t'), '_test.py")
-, '', 'g') }}")
+from {{ substitute(expand('%:p:h:h:t'), '-', '_', 'g') }}.__main__ import get_parser, VERSION
+parser = get_parser("{{ substitute(expand('%:p:h:h:t'), '-', '_', 'g') }}")
 
 
 class Test:

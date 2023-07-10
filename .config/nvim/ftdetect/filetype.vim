@@ -32,7 +32,7 @@ augroup init_filetype
   " Script {{{1 "
   autocmd BufNewFile,BufRead *.qsf setfiletype tcl
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
-  autocmd BufNewFile,BufRead *.bats,.bash_history,boot.cmd.* setfiletype sh
+  autocmd BufNewFile,BufRead .bash_history setfiletype sh
   autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history setfiletype zsh
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead *.lg4 setfiletype lingo

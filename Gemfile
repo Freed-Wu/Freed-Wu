@@ -2,10 +2,8 @@
 
 source 'https://rubygems.org'
 
-gem 'jekyll-default-layout'
-gem 'jekyll-github-metadata'
-gem 'jekyll-readme-index'
-gem 'jekyll-remote-theme'
-gem 'jekyll-seo-tag'
-gem 'jekyll-spaceship'
-gem 'kramdown-parser-gfm'
+require 'yaml'
+config = YAML.load_file('_config.yml')
+config['plugins'].each do |plugin|
+  gem plugin
+end

@@ -1,6 +1,7 @@
 setlocal noexpandtab
 setlocal shiftwidth=8
 setlocal tabstop=8
+call init#init#c#main()
 
 nnoremap <silent><buffer> <LocalLeader>e :<C-U>CocCommand clangd.switchSourceHeader<CR>
 nnoremap <silent><buffer> <LocalLeader>s :<C-U>CocCommand clangd.switchSourceHeader split<CR>

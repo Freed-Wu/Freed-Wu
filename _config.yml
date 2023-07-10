@@ -1,4 +1,25 @@
 ---
+# https://jekyllrb.com/docs/configuration/options
+# by default, open_url will open 127.0.0.1, which is disabled by fontawesome
+host: localhost
+# make same as `python -m http.server -d_site`
+port: 8000
+# will not rebuild
+# incremental: true
+livereload: true
+open_url: true
+sass:
+  style: compressed
+# .github/FUNDING.yml
+data_dir: .github
+page_excerpts: true
+future: true
+# https://kramdown.gettalong.org/options.html
+kramdown:
+  # https://github.com/gettalong/kramdown/issues/715
+  parse_block_html: true
+  remove_line_breaks_for_cjk: true
+
 plugins:
   - jekyll-default-layout
   - jekyll-github-metadata

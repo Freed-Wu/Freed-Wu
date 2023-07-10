@@ -160,17 +160,7 @@ function! init#smartinput#post_source() abort
         \ 'char': '<CR>',
         \ 'input': '<CR><CR><Up><TAB>',
         \ })
-  " <Enter> has more priority than <CR> to override the default
-  call smartinput#define_rule({
-        \ 'at': '(\%#)',
-        \ 'char': '<Enter>',
-        \ 'input': '<Enter><Enter><Up><TAB>',
-        \ })
-  call smartinput#define_rule({
-        \ 'at': '{\%#}',
-        \ 'char': '<Enter>',
-        \ 'input': '<Enter><Enter><Up><TAB>',
-        \ })
+  " don't map {<CR>} or [<CR>] to avoid wrong indent
   call smartinput#map_to_trigger('i', '%', '%', '%')
   call smartinput#define_rule({
         \ 'at': '{\%#}',

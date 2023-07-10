@@ -4,7 +4,6 @@
   "Lua.hint.enable": true,
   "Lua.hint.setType": true,
   "cSpell.allowCompoundWords": true,
-  "clang-format-style-options.shortcut": "clang",
   "coc.preferences.enableMarkdown": true,
   "coc.source.emoji.shortcut": "😀",
   "dash-complete.shortcut": "-",
@@ -72,14 +71,6 @@
     },
     "nix": {
       "command": "nixd",
-      "filetypes": ["nix"]
-    },
-    "rnix": {
-      "command": "rnix-lsp",
-      "filetypes": ["nix"]
-    },
-    "nil": {
-      "command": "nil",
       "filetypes": ["nix"]
     },
     "PKGBUILD": {
@@ -172,6 +163,9 @@
   "translator.enableHover": true,
   "translator.engines": ["google"],
   "translator.proxy": "socks://127.0.0.1:1080",
+  "yaml.schemas": {
+    "https://json.schemastore.org/clang-format.json": ".clang-format"
+  },
   "yaml.format.singleQuote": true,
   "zi.hover": false
 }

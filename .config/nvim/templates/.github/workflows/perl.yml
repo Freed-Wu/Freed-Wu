@@ -44,8 +44,8 @@ jobs:
       - name: Install Dependencies
         run: |
           cpanm -qn Dist::Zilla CPAN::Uploader
-          sudo apt update
-          sudo apt install po4a
+          sudo apt-get -y update
+          sudo apt-get -y install po4a
       - name: Build
         run: |
           po4a po4a/po4a.cfg

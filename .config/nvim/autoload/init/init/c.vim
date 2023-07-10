@@ -1,5 +1,5 @@
 function! init#init#c#main() abort
-  setlocal path+=~/.local/include
+  setlocal path+=/usr/local/include,~/.local/include,~/.nix-profile/include
 
   nnoremap <silent><buffer> <LocalLeader>o :set paste<CR>i<C-R>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<CR><Esc>='[:set nopaste<CR>
   nnoremap <silent><buffer> <LocalLeader>O :set paste<CR>i<C-R>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({'includeNS': 0})<CR><Esc>='[:set nopaste<CR>

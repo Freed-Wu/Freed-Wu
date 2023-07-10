@@ -29,8 +29,6 @@
 !/.fbtermrc
 !/.astylerc
 !/.procmailrc
-!/.clang-format
-!/.ccls
 !/.mailcap
 !/.signature
 !/.bastetrc
@@ -286,6 +284,7 @@
 !/.config/latexindent.yaml
 !/.config/pry/
 !/.config/clangd/
+!/.config/cling/
 !/.config/octave/
 /.config/octave/*
 !/.config/octave/octaverc
@@ -335,7 +334,6 @@
 !/.local/bin/xsct.py
 !/.local/bin/vivado.py
 !/.local/bin/git-neomutt
-!/.local/bin/batman
 
 # Windows
 !/.minttyrc

@@ -1,8 +1,9 @@
 " https://github.com/SeniorMars/coc-typst/issues/1
+" https://github.com/neoclide/coc-yaml/issues/76
 let g:init#init#install#coc = [
       \ 'coc-highlight',
       \
-      \ 'coc-ci', 'coc-rime',
+      \ 'coc-ci',
       \
       \ 'coc-pydocstring',
       \
@@ -25,12 +26,18 @@ let g:init#init#install#coc = [
       \ '@yaegassy/coc-marksman', 'coc-webview',
       \ 'coc-markdown-preview-enhanced', 'coc-esbonio',
       \ 'coc-texlab', 'coc-bibtex', 'coc-cmake',
-      \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-xml', 'coc-svg', 'coc-html',
-      \ 'coc-clang-format-style-options', 'coc-docker',
+      \ 'coc-json', 'coc-yaml', 'coc-toml',
+      \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css',
+      \ 'coc-docker',
       \ 'coc-sql', 'coc-sh', 'coc-vimlsp', 'coc-perl',
       \ 'coc-jedi', 'coc-pyright', 'coc-lua', 'coc-solargraph', 'coc-clangd',
       \ ]
-" tabnine don't support android
+" don't support android
 if $PREFIX !=# '/data/data/com.termux/files/usr'
   let g:init#init#install#coc += ['coc-tabnine']
+endif
+" don't support android
+" https://github.com/tonyfettes/coc-rime/issues/6
+if $PREFIX !=# '/data/data/com.termux/files/usr' && ! filereadable('/run/current-system/nixos-version')
+  let g:init#init#install#coc += ['coc-rime']
 endif

@@ -145,24 +145,6 @@ fi
 if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
   alias node='node -r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
 fi
-# it will change the behavior of `--help <TAB>`
-if (($+commands[bat])); then
-  bat-help() {
-    for opt in $@; do
-      alias -g -- "$opt=\\$opt | bat -plhelp --paging=never --color=always"
-    done
-  }
-  bat-help --help
-  # man
-  bat-help '-\?'
-  # ccstudio
-  bat-help -ccs.help
-  # x264
-  bat-help --longhelp --fullhelp
-  # gnome
-  bat-help --help-all --help-gapplication --help-gtk
-  unfunction bat-help
-fi
 
 if (( $+HOMEBREW_PREFIX )); then
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
@@ -224,9 +206,9 @@ zinit id-as'.lesspipe.sh' depth'1' wait lucid \
 # https://github.com/Kaggle/kaggle-api/issues/446
 zinit id-as'.pass' depth'1' as'null' wait lucid \
   atclone'echo "CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
-echo "KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
-echo "KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
-echo "OPENAI_API_KEY=$(pass ls openai/api_key)" >> pass.sh
+echo "export KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
+echo "export KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
+echo "export OPENAI_API_KEY=$(pass ls openai/api_key)" >> pass.sh
 pass ls wakatime/api_key > wakatime.txt
 pass ls codestats/$HOST > codestats.txt' \
   if'(($+commands[pass]))' \
@@ -370,6 +352,7 @@ zinit id-as depth'1' wait lucid for hlissner/zsh-autopair
 # 1}}} Insert #
 
 # Colorize {{{1 #
+zinit id-as depth'1' wait lucid sbin'bin/manpager' for Freed-Wu/zsh-help
 zinit id-as depth'1' wait lucid for zpm-zsh/colorize
 zinit id-as depth'1' wait lucid \
   if'(($+commands[mysql]))' \

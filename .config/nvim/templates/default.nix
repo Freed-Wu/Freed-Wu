@@ -17,10 +17,10 @@ stdenv.mkDerivation rec {
   installFlags = [ "PREFIX=$(out)" ];
 
   meta = with lib; {
-    homepage = "https://github.com/{{ split(g: snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}";
+    homepage = "https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}";
     description = "";
     license = licenses.mit;
-    maintainers = with maintainers; [ {{ split(g: snips_github, '/')[-1] }} ];
+    maintainers = with maintainers; [ {{ split(g:snips_github, '/')[-1] }} ];
     platforms = platforms.unix;
   };
 }

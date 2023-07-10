@@ -22,8 +22,6 @@ if [[ $OSTYPE != msys2 ]]; then
 fi
 if [[ $OSTYPE == linux-android ]]; then
 	PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
-	# ~/.local/bin/batman
-	export MANPAGER=batman
 	if [[ -n $DISPLAY ]]; then
 		export BROWSER='gio open'
 	else
@@ -31,8 +29,8 @@ if [[ $OSTYPE == linux-android ]]; then
 	fi
 else
 	PATH="$PATH:/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
-	export MANPAGER="sh -c 'col -bx | bat --color=always -plman | less --pattern=^\\\\S+'"
 fi
+export MANPAGER='manpager | less --pattern=^\\S+'
 # https://aur.archlinux.org/packages/ccstudio#comment-906326
 export PATH=$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin
 # ccstudio

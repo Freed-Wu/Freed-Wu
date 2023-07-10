@@ -1,6 +1,7 @@
 scriptencoding utf-8
 function! init#coc#source() abort
   set formatexpr=CocAction('formatSelected')
+  let g:coc_global_extensions = g:init#init#install#coc
   let g:coc_snippet_next = '<Tab>'
   let g:coc_snippet_prev = '<S-Tab>'
   let g:coc_status_error_sign = '✗'
@@ -17,7 +18,6 @@ function! init#coc#source() abort
         \ 'eelixir': 'elixir',
         \ 'liquid': 'html',
         \ }
-  let g:coc_global_extensions = g:init#init#install#coc
   nnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   xnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   nnoremap gK K
@@ -123,4 +123,4 @@ augroup init#coc
         \ | endif
   autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
-" ex: path=.,$XDG_CONFIG_HOME/coc/extensions/node_modules
+" ex: path=,.,$XDG_CONFIG_HOME/coc/extensions/node_modules
