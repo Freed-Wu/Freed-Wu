@@ -1,0 +1,27 @@
+# shellcheck shell=bash disable=SC2034,SC2154
+_realname={{ substitute(expand('%:h:t'), '^mingw-w64-', '', '') }}
+pkgbase=mingw-w64-$_realname
+pkgname=$MINGW_PACKAGE_PREFIX-$_realname
+pkgver=0.0.1
+pkgrel=1
+pkgdesc=""
+arch=(any)
+mingw_arch=(mingw32 mingw64 ucrt64 clang64 clang32 clangarm64)
+url=https://github.com/foo/{{ substitute(expand('%:h:t'), '^mingw-w64-', '', '') }}
+makedepends=(cmake)
+license=(GPL3)
+source=("$url/archive/$_upstreamver.tar.gz")
+sha256sums=(SKIP)
+
+build() {
+	cd "$_realname" || return 1
+
+	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$MINGW_PACKAGE_PREFIX
+	cmake --build build
+}
+
+package() {
+	cd "$_realname" || return 1
+
+	DESTDIR="$pkgdir" cmake --install build
+}

@@ -1,4 +1,4 @@
-class {{ substitute(expand('%:t:r'), '%(-|^)(.)', '', 'g') }} < Formula
+class {{ substitute(expand('%:t:r'), '%(-|^)(.)', '\u', 'g') }} < Formula
   desc ""
   homepage "https://github.com/foo/{{ expand('%:t:r') }}"
   url "https://github.com/foo/{{ expand('%:t:r') }}/archive/v.tar.gz"

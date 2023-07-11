@@ -153,6 +153,7 @@
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "suggest.invalidInsertCharacters": ["(", "<", "{", "[", "\r", "\n"],
+  "suggest.removeDuplicateItems": true,
   "suggest.snippetIndicator": "",
   "suggest.triggerAfterInsertEnter": true,
   "tabnine.shortcut": "",

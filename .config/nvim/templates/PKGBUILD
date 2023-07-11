@@ -7,78 +7,19 @@ _source_type=github-releases
 _upstreamver=$(date +%Y%m%d)
 _pkgname=${_repo##*/}
 
-# pkgbase=mingw-w64-$_pkgname
-# pkgname=$MINGW_PACKAGE_PREFIX-$_pkgname
 pkgname=$(tr A-Z a-z <<<${_pkgname//_/-})
 pkgver=${_upstreamver##v}
 pkgrel=1
 pkgdesc=""
-arch=(any)
-# arch=(x86 x86_64 arm aarch64)
-# mingw_arch=(mingw32 mingw64 ucrt64 clang64 clang32 clangarm64)
+arch=(x86 x86_64 arm aarch64)
 url=https://github.com/$_repo
-# makedepends=(python-installer)
 license=(GPL3)
-# install=$_pkgname.install
+install=$_pkgname.install
 source=("$url/archive/$_upstreamver.tar.gz")
-# source=("git+$url")
-# _py=py3
-# source=("https://files.pythonhosted.org/packages/$_py/${_pkgname::1}/${_pkgname//-/_}/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
-# source=("https://cpan.metacpan.org/authors/id/F/FR/FREED/$_pkgname-$pkgver.tar.gz")
 sha256sums=(SKIP)
-
-# pkgver() {
-#   cd "$_pkgname" || return 1
-#   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-# }
-
-# build() {
-#   cd "$_pkgname-$pkgver" || return 1
-#   unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
-#   export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
-#   perl Makefile.PL
-#   make
-# }
-
-# check() {
-#   cd "$_pkgname-$pkgver" || return 1
-#   unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
-#   export PERL_MM_USE_DEFAULT=1
-#   make test
-# }
 
 package() {
 	cd "$_pkgname" || return 1
 
-	install -D "$_pkgname" -t "$pkgdir/usr/bin"
-	install -Dm644 README.md -t "$pkgdir/usr/share/doc/$_pkgname"
-
-	# make DESTDIR="$pkgdir" install
-
-	# python -m installer -d "$pkgdir" ./*.whl
-
-  # cd "$_pkgname-$pkgver" || return 1
-  # unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
-  # make install INSTALLDIRS=vendor DESTDIR="$pkgdir"
-
-	# local bin
-	# bin=${_repo##*/}
-	# help2man "$pkgdir/usr/bin/$bin" >"$bin.1"
-	# install -Dm644 "$bin.1" -t "$pkgdir/usr/share/man/man1"
-
-	# PYTHONPATH="$(ls -d "$pkgdir"/usr/lib/python*/site-packages)"
-	# export PYTHONPATH
-	# "$pkgdir/usr/bin/$bin" --print-completion bash > "$bin.bash"
-	# "$pkgdir/usr/bin/$bin" --print-completion zsh > "_$bin"
-	# "$pkgdir/usr/bin/$bin" --print-completion tcsh > "$bin.csh"
-
-	# local complete
-	# complete="_$(echo ${bin//-/_} | tr a-z A-Z)_COMPLETE"
-	# eval "$complete=zsh_source" "$bin" > "$bin.bash"
-	# eval "$complete=bash_source" "$bin" > "_$bin"
-	# eval "$complete=fish_source" "$bin" > "$bin.fish"
-	# install -Dm644 "$bin.bash" "$pkgdir/usr/share/bash-completion/completions/$bin"
-	# install -Dm644 "_$bin" -t "$pkgdir/usr/share/zsh/site-functions"
-	# install -Dm644 "$bin.fish" -t "$pkgdir/usr/share/fish/vendor_completions.d"
-
+	make DESTDIR="$pkgdir" install
 }

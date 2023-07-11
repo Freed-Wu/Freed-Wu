@@ -40,7 +40,6 @@
 !/.lessfilter
 !/.wgetrc
 !/.curlrc
-!/.nix-channels
 !/.vintrc.yaml
 !/.chktexrc
 !/.sqliterc
@@ -109,6 +108,7 @@
 !/.ssh/config
 !/.password-store/
 !/.gnupg/
+# https://github.com/LnL7/nix-darwin/issues/573
 !/.nixpkgs/
 /.nixpkgs/*
 !/.nixpkgs/darwin-configuration.nix
@@ -324,6 +324,13 @@
 !/.local/share/jupyter/lab/
 /.local/share/jupyter/lab/*
 !/.local/share/jupyter/lab/user-settings/
+
+# $XDG_STATE_HOME
+!/.local/state/
+/.local/state/*
+!/.local/state/nix/
+/.local/state/nix/*
+!/.local/state/nix/channels
 
 # bin
 !/.local/bin/

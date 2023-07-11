@@ -33,11 +33,8 @@ let g:init#init#install#coc = [
       \ 'coc-jedi', 'coc-pyright', 'coc-lua', 'coc-solargraph', 'coc-clangd',
       \ ]
 " don't support android
-if $PREFIX !=# '/data/data/com.termux/files/usr'
-  let g:init#init#install#coc += ['coc-tabnine']
-endif
-" don't support android
 " https://github.com/tonyfettes/coc-rime/issues/6
-if $PREFIX !=# '/data/data/com.termux/files/usr' && ! filereadable('/run/current-system/nixos-version')
-  let g:init#init#install#coc += ['coc-rime']
+if $PREFIX !=# '/data/data/com.termux/files/usr'
+  let g:init#init#install#coc += ['coc-tabnine', 'coc-rime']
 endif
+" ex: path=,.,$XDG_CONFIG_HOME/coc/extensions/node_modules

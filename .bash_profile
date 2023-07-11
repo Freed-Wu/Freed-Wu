@@ -27,15 +27,20 @@ if [[ $OSTYPE == linux-android ]]; then
 	else
 		export BROWSER=termux-open
 	fi
-else
+elif [[ ! -f /run/current-system/nixos-version ]]; then
 	PATH="$PATH:/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
+	# https://aur.archlinux.org/packages/ccstudio#comment-906326
+	PATH="$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin"
+else
+	# python
+	PYTHONPATH="$HOME/.local/lib/python$(python --version | cut -d' ' -f2 | cut -d. -f1-2)/site-packages"
+	export PYTHONPATH
 fi
-export MANPAGER='manpager | less --pattern=^\\S+'
-# https://aur.archlinux.org/packages/ccstudio#comment-906326
-export PATH=$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin
+MANPAGER='manpager | less --pattern=^\\S+'
+export MANPAGER
 # ccstudio
-export C6X_C_OPTION
 C6X_C_OPTION=--issue_remarks
+export C6X_C_OPTION
 # less
 export LESS='-r -M --mouse -S -I'
 # interactively

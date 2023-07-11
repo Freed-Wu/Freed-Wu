@@ -1,5 +1,1 @@
-for s:dir in g:template#directories
-  if expand('%:p:h') ==# s:dir
-    call init#init#vim#map()
-  endif
-endfor
+let b:match_words = '\<if\>:\<elif\>:\<else\>:\<endif\>,\<for\>:\<in\>:\<else\>:\<endfor\>,\<block\>:\<endblock\>,\<macro\>:\<endmacro\>,\<call\>:\<endcall\>,\<filter\>:\<endfilter\>'

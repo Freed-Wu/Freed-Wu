@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}";
-    description = "";
+    description = "{% here %}";
     license = licenses.mit;
     maintainers = with maintainers; [ {{ split(g:snips_github, '/')[-1] }} ];
     platforms = platforms.unix;

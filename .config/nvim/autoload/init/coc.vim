@@ -123,4 +123,3 @@ augroup init#coc
         \ | endif
   autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
-" ex: path=,.,$XDG_CONFIG_HOME/coc/extensions/node_modules

@@ -1,0 +1,40 @@
+# shellcheck shell=bash disable=SC2034,SC2154
+_pkgname={{ substitute(expand('%:h:t'), '^python-', '', '') }}
+pkgname=python-$_pkgname
+pkgver=0.0.1
+pkgrel=1
+pkgdesc=""
+arch=(any)
+url=https://github.com/Freed-Wu/$_pkgname
+depends=(python)
+makedepends=(python-installer)
+license=(GPL3)
+_py=py3
+source=("https://files.pythonhosted.org/packages/$_py/${_pkgname::1}/${_pkgname//-/_}/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
+sha256sums=(SKIP)
+
+package() {
+	cd "$_pkgname" || return 1
+
+	python -m installer -d "$pkgdir" ./*.whl
+
+	local bin
+	bin=$_pkgname
+	PYTHONPATH="$(ls -d "$pkgdir"/usr/lib/python*/site-packages)"
+	export PYTHONPATH
+	"$pkgdir/usr/bin/$bin" --print-completion bash > "$bin.bash"
+	"$pkgdir/usr/bin/$bin" --print-completion zsh > "_$bin"
+	"$pkgdir/usr/bin/$bin" --print-completion tcsh > "$bin.csh"
+
+	local bin
+	bin=$_pkgname
+	local complete
+	complete="_$(echo ${bin//-/_} | tr a-z A-Z)_COMPLETE"
+	eval "$complete=zsh_source" "$bin" > "$bin.bash"
+	eval "$complete=bash_source" "$bin" > "_$bin"
+	eval "$complete=fish_source" "$bin" > "$bin.fish"
+	install -Dm644 "$bin.bash" "$pkgdir/usr/share/bash-completion/completions/$bin"
+	install -Dm644 "_$bin" -t "$pkgdir/usr/share/zsh/site-functions"
+	install -Dm644 "$bin.fish" -t "$pkgdir/usr/share/fish/vendor_completions.d"
+
+}

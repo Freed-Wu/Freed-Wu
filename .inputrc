@@ -1,8 +1,8 @@
 $include /etc/inputrc
 $include function rl_custom_complete /usr/lib/librl_custom_complete.so
-C-I rl_custom_complete
 $include function rl_custom_isearch /usr/lib/librl_custom_isearch.so
-C-R rl_custom_isearch
+# C-I rl_custom_complete
+# C-R rl_custom_isearch
 # https://github.com/Dushistov/sdcv/issues/48
 $if sdcv
   "\x07": "\x15-1\n"

@@ -1,0 +1,34 @@
+# shellcheck shell=bash disable=SC2034,SC2154
+_pkgname={{ substitute(substitute(expand('%:h:t'), '^perl-', '', ''), '-\|^', '\u', 'g') }}
+pkgname={{ expand('%:h:t') }}
+pkgver=0.0.1
+pkgrel=1
+pkgdesc=""
+arch=(any)
+url=https://github.com/Freed-Wu/$_pkgname
+depends=(perl)
+license=(GPL3)
+# https://github.com/rwstauner/Git-DescribeVersion/issues/1
+source=("https://cpan.metacpan.org/authors/id/F/FR/FREED/$_pkgname-$pkgver.0.tar.gz")
+sha256sums=(SKIP)
+
+build() {
+  cd "$_pkgname-$pkgver.0" || return 1
+  unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+  export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
+  perl Makefile.PL
+  make
+}
+
+check() {
+  cd "$_pkgname-$pkgver.0" || return 1
+  unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+  export PERL_MM_USE_DEFAULT=1
+  make test
+}
+
+package() {
+  cd "$_pkgname-$pkgver.0" || return 1
+  unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+  make install INSTALLDIRS=vendor DESTDIR="$pkgdir"
+}
