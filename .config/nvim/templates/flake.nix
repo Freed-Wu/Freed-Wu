@@ -9,8 +9,7 @@
         {
           formatter = nixpkgs-fmt;
           packages.default = buildPythonApplication rec {
-            pname = "{{ expand('%:p:h:t') }}";
-            version = "";
+            name = "{{ expand('%:p:h:t') }}";
             src = self;
             format = "pyproject";
             disabled = pythonOlder "3.6";

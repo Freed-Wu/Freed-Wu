@@ -335,7 +335,7 @@ more information about me
 
 </details>
 
-Welcome to [:e-mail:](mailto:wuzy01@qq.com) me or join
+Welcome to [:e-mail:](mailto:wuzhenyu@ustc.edu) me or join
 [![github/discussions](https://shields.io/github/discussions/Freed-Wu/Freed-Wu)](https://github.com/Freed-Wu/Freed-Wu/discussions).
 
 Let us work :construction_worker: hard for a bright future :cherry_blossom: !

@@ -217,11 +217,6 @@ zinit id-as depth'1' for mdumitru/last-working-dir
 zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
 zinit id-as depth'1' wait lucid for RobSis/zsh-reentry-hook
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
-zinit id-as depth'1' wait lucid \
-  atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
-$(fzf_sizer_preview_window_settings)"' \
-  if'(($+commands[fzf] && $+commands[bc]))' \
-  for bigH/auto-sized-fzf
 # 1}}} Hook #
 
 # Complete {{{1 #
@@ -352,7 +347,7 @@ zinit id-as depth'1' wait lucid for hlissner/zsh-autopair
 # 1}}} Insert #
 
 # Colorize {{{1 #
-zinit id-as depth'1' wait lucid sbin'bin/manpager' for Freed-Wu/zsh-help
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-help
 zinit id-as depth'1' wait lucid for zpm-zsh/colorize
 zinit id-as depth'1' wait lucid \
   if'(($+commands[mysql]))' \

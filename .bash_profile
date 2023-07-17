@@ -102,6 +102,10 @@ export FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
 --bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'
 --history=$FZF_HISTORY_DIR/fzf.txt"
 unset devnull
+if command -v auto-sized-fzf.sh &>/dev/null; then
+	FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--preview-window=$(auto-sized-fzf.sh)"
+fi
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

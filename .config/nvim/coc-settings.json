@@ -168,5 +168,6 @@
     "https://json.schemastore.org/clang-format.json": ".clang-format"
   },
   "yaml.format.singleQuote": true,
-  "zi.hover": false
+  "zi.hover": false,
+  "markdown-preview-enhanced.previewTheme": "atom-dark.css"
 }

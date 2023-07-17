@@ -103,8 +103,14 @@ endif
 if executable('rg')
   set grepprg=rg\ -ni
 endif
-let g:maplocalleader = ';'
+" https://github.com/vim/vim/issues/12683
+highlight default link shebang Special
+augroup Shebang
+  autocmd!
+  autocmd BufEnter * syntax match shebang /\%^#!.*$/ display
+augroup END
 
+let g:maplocalleader = ';'
 let g:tex_flavor = 'latex'
 let g:filetype_m = 'octave'
 let g:asmsyntax = 'masm'
@@ -507,7 +513,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('liuchengxu/graphviz.vim')
   call dein#add('tmux-plugins/vim-tmux')
   call dein#add('neomutt/neomutt.vim')
-  call dein#add('tpope/vim-scriptease')
+  call dein#add('tpope/vim-scriptease', {
+        \ 'hook_source': 'call init#scriptease#source()',
+        \ })
   " https://github.com/vim-jp/vital.vim/issues/574
   call dein#add('vim-jp/vital.vim', {
         \ 'merged': 0,

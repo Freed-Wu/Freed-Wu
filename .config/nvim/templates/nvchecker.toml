@@ -1,0 +1,4 @@
+[{{ expand('%:p:h:t') }}]
+source = "github"
+github = "{{ g:snips_author }}/{{ expand('%:p:h:t') }}"
+use_latest_release = true

@@ -1,25 +1,19 @@
+#!/usr/bin/env -S sh -c 'nvchecker -cnvchecker.toml --logger=json | jq -r '\''.version | sub("^v"; "") | split("-") | .[-1]'\'' | xargs -i{} sed -i "s/^\\(pkgver=\\).*/\\1{}/" $0'
 # shellcheck shell=bash disable=SC2034,SC2154
+# ex: nowrap
 # Maintainer: {{ g:snips_author }} <{{ g:snips_email }}>
-# https://aur.archlinux.org/packages/updaurpkg-git
-# $ updaurpkg --apply
-_repo={% here %}/{{ expand('%:p:h:t') }}
-_source_type=github-releases
-_upstreamver=$(date +%Y%m%d)
-_pkgname=${_repo##*/}
-
-pkgname=$(tr A-Z a-z <<<${_pkgname//_/-})
-pkgver=${_upstreamver##v}
+pkgname={{ expand('%:p:h:t') }}
+pkgver=0.0.1
 pkgrel=1
 pkgdesc=""
 arch=(x86 x86_64 arm aarch64)
-url=https://github.com/$_repo
+url=https://github.com/Freed-Wu/$pkgname
 license=(GPL3)
-install=$_pkgname.install
-source=("$url/archive/$_upstreamver.tar.gz")
+source=("$url/archive/$pkgver.tar.gz")
 sha256sums=(SKIP)
 
 package() {
-	cd "$_pkgname" || return 1
+	cd "$pkgname-$pkgver" || return 1
 
 	make DESTDIR="$pkgdir" install
 }

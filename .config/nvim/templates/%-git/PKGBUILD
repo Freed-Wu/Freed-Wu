@@ -1,5 +1,8 @@
+#!/usr/bin/env -S sh -c 'nvchecker -cnvchecker.toml --logger=json | jq -r '\''.version | sub("^v"; "") | split("-") | .[-1]'\'' | xargs -i{} sed -i "s/^\\(pkgver=\\).*/\\1{}/" $0'
 # shellcheck shell=bash disable=SC2034,SC2154
-_pkgname={{ substitute(expand('%:h:t'), '-git$', '', '') }}
+# ex: nowrap
+# Maintainer: {{ g:snips_author }} <{{ g:snips_email }}>
+_pkgname={{ substitute(expand('%:p:h:t'), '-git$', '', '') }}
 pkgname=$_pkgname-git
 pkgver=0.0.1
 pkgrel=1
@@ -11,11 +14,19 @@ source=("git+$url")
 sha256sums=(SKIP)
 
 pkgver() {
-  cd "$_pkgname" || return 1
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+	cd "$_pkgname" || return 1
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+	cd "$_pkgname" || return 1
+
+	cargo build
 }
 
 package() {
+	cd "$_pkgname" || return 1
+
 	install -D "$_pkgname" -t "$pkgdir/usr/bin"
 	install -Dm644 README.md -t "$pkgdir/usr/share/doc/$_pkgname"
 }

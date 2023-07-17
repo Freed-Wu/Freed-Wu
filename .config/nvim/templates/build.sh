@@ -1,17 +1,17 @@
 # shellcheck shell=bash disable=SC2034
-TERMUX_PKG_HOMEPAGE=https://github.com/
-TERMUX_PKG_DESCRIPTION=''
+TERMUX_PKG_HOMEPAGE=https://github.com/{{ g:snips_author }}/{{ expand('%:p:h:t') }}
+TERMUX_PKG_DESCRIPTION="{% here %}"
 TERMUX_PKG_LICENSE=GPL-3.0
-# _COMMIT=
 TERMUX_PKG_MAINTAINER=@termux
 TERMUX_PKG_VERSION=0.0.1
 TERMUX_PKG_SRCURL=$TERMUX_PKG_HOMEPAGE/archive/v$TERMUX_PKG_VERSION.tar.gz
+# _COMMIT=
 # TERMUX_PKG_SRCURL=$TERMUX_PKG_HOMEPAGE.git
 # TERMUX_PKG_GIT_BRANCH=master
 TERMUX_PKG_SHA256=0
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_BUILD_IN_SRC=true
-TERMUX_PKG_DEPENDS=bash
+TERMUX_PKG_DEPENDS="bash"
 TERMUX_PKG_PLATFORM_INDEPENDENT=true
 
 termux_step_post_get_source() {
@@ -34,5 +34,5 @@ termux_step_make_install() {
 	local bin
 	bin="$(basename $TERMUX_PKG_HOMEPAGE)"
 	install -D "$bin" -t "$TERMUX_PREFIX/bin"
-	install -D "$bin.1" -t "$TERMUX_PREFIX/share/man/man1"
+	install -Dm644 "$bin.1" -t "$TERMUX_PREFIX/share/man/man1"
 }

@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+llama -i -ins --color -t $(nproc) --prompt-cache $PREFIX/tmp/prompt-cache -c 2048 --numa -m ~/Desktop/ggml-model-q4_0.bin

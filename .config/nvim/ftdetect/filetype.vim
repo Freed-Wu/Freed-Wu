@@ -13,7 +13,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map,xci} setfiletype json
-  autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd setfiletype yaml
+  autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd,.git setfiletype yaml
   autocmd BufNewFile,BufRead *.{{x,l}pr,{x,s}pfm},fonts.conf,*/{dbus-1,conf.d}/*.conf setfiletype xml
   " 1}}} Data_Describe "
 

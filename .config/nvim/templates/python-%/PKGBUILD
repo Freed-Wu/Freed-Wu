@@ -1,5 +1,8 @@
+#!/usr/bin/env -S sh -c 'nvchecker -cnvchecker.toml --logger=json | jq -r '\''.version | sub("^v"; "") | split("-") | .[-1]'\'' | xargs -i{} sed -i "s/^\\(pkgver=\\).*/\\1{}/" $0'
 # shellcheck shell=bash disable=SC2034,SC2154
-_pkgname={{ substitute(expand('%:h:t'), '^python-', '', '') }}
+# ex: nowrap
+# Maintainer: {{ g:snips_author }} <{{ g:snips_email }}>
+_pkgname={{ substitute(expand('%:p:h:t'), '^python-', '', '') }}
 pkgname=python-$_pkgname
 pkgver=0.0.1
 pkgrel=1
@@ -11,12 +14,15 @@ makedepends=(python-installer)
 license=(GPL3)
 _py=py3
 source=("https://files.pythonhosted.org/packages/$_py/${_pkgname::1}/${_pkgname//-/_}/${_pkgname//-/_}-$pkgver-$_py-none-any.whl")
+# source=("https://files.pythonhosted.org/packages/source/${_pkgname:0:1}/$_pkgname/${_pkgname//-/_}-$pkgver.tar.gz")
 sha256sums=(SKIP)
 
 package() {
 	cd "$_pkgname" || return 1
+	python -minstaller -d"$pkgdir" ./*.whl
 
-	python -m installer -d "$pkgdir" ./*.whl
+	cd "${_pkgname//-/_}-$pkgver" || return 1
+	python setup.py install --root="$pkgdir" --optimize=1
 
 	local bin
 	bin=$_pkgname
