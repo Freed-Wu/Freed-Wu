@@ -3,7 +3,7 @@
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 interpolation=(
-	"\#{{{ expand('%:t:r') }}_status}"
+	"#{{{ expand('%:t:r') }}_status}"
 )
 commands=(
 	"#($CURRENT_DIR/scripts/{{ expand('%:t:r') }}.py)"

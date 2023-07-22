@@ -16,7 +16,7 @@ fi
 # NixOS
 if [[ -d /run/current-system/sw/share ]] &&
 	[[ ${XDG_DATA_DIRS#/run/current-system/sw/share:} == $XDG_DATA_DIRS ]]; then
-	XDG_DATA_DIRS="/run/current-system/sw/share:$XDG_DATA_DIRS"
+	XDG_DATA_DIRS="/run/current-system/sw/share${XDG_DATA_DIRS+:}$XDG_DATA_DIRS"
 fi
 if [[ -z $C6X_C_DIR && -f ~/.bash_login ]]; then
 	. ~/.bash_login

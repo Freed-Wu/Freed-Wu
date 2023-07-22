@@ -16,6 +16,7 @@ permissions:
 
 env:
   PYTHONUTF8: "1"
+  python-version: 3.x
   cache: pip
 
 jobs:
@@ -32,6 +33,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
+          python-version: ${{env.python-version}}
           cache: ${{env.cache}}
           cache-dependency-path: |-
             requirements.txt
@@ -58,6 +60,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
+          python-version: ${{env.python-version}}
           cache: ${{env.cache}}
           cache-dependency-path: |-
             requirements.txt
@@ -104,5 +107,5 @@ jobs:
         run: >
           curl -X POST -d '{"ref":"main"}'
           -H "Accept: application/vnd.github.v3+json"
-          -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}"
+          -H "Authorization: Bearer ${{secrets.GH_TOKEN}}"
           https://api.github.com/repos/Freed-Wu/nur-packages/actions/workflows/version.yml/dispatches

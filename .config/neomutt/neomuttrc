@@ -27,11 +27,11 @@ set sidebar_format = '%B%* %n%o/%S'
 set sidebar_short_path
 set sidebar_folder_indent
 set sidebar_indent_string = '├── '
-set ssl_starttls=yes
-set ssl_force_tls=yes
+set ssl_starttls = yes
+set ssl_force_tls = yes
 auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
 
-source `[ -f ~/.config/neomutt/mutt-colors-custom/neomuttrc.custom ] && echo ~/.config/neomutt/mutt-colors-custom/neomuttrc.custom || echo /dev/null`
+source ~/.config/neomutt/mutt-colors-custom/neomuttrc.custom
 # 1}}} Setting #
 
 # Hotkey {{{1 #

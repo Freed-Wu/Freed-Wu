@@ -7,7 +7,7 @@ let g:init#init#install#coc = [
       \
       \ 'coc-pydocstring',
       \
-      \ 'coc-diagnostic', 'coc-spell-checker', 'coc-markdownlint',
+      \ 'coc-diagnostic', 'coc-spell-checker', 'coc-markdownlint', 'coc-ltex',
       \
       \ 'coc-prettier',
       \

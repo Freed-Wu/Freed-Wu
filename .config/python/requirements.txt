@@ -1,6 +1,3 @@
 #!/usr/bin/env -S pip install -r
 
-jedi
-repl-python-codestats
-rich
-translate-shell
+translate-shell[repl]

@@ -22,7 +22,7 @@ sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 cp -r .git ~
 cd || exit
 git reset --hard
-nix-env -iA nixpkgs.{neovim,tmux,vivid,exa,bat,ripgrep,fd,delta,fzf,zsh-powerlevel10k,chafa,parallel,exiftool}
+nix-env -iA nixpkgs.{neovim,tmux,vivid,eza,bat,ripgrep,fd,delta,fzf,zsh-powerlevel10k,chafa,parallel,exiftool}
 sudo ln -sf ~/.nix-profile/bin/nvim /usr/bin/vi
 
 source script/install_plugins.sh

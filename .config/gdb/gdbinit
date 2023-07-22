@@ -6,16 +6,16 @@ set output-radix 16
 set logging overwrite on
 set disable-randomization on
 set confirm off
-set extended-prompt \[\e[37;44m  \w \e[34;40m\e[37m  \f \e[30;43m\e[30m  \t \e[0;33m\e[0m\]\n❯ 
+source ~/.config/gdb/gdbinit.py
 
 define arg
   print *argv @ argc
 end
 
 define pp
-  set $i = 0
-  while $i < $argc
-    eval "print $arg%d", $i
-    set $i += 1
+  set $pp_i = 0
+  while $pp_i < $argc
+    eval "print $arg%d", $pp_i
+    set $pp_i += 1
   end
 end

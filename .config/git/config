@@ -99,7 +99,7 @@
 	directory = *
 [sendemail]
 	suppresscc = author
-	sendmailCmd = git-neomutt
+	sendmailCmd = neomutt
 [fetch "fsck"]
 	badTimezone = warn
 [commit]

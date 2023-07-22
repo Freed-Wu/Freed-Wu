@@ -1,5 +1,5 @@
 # shellcheck shell=bash disable=SC2034
-TERMUX_PKG_HOMEPAGE=https://github.com/{{ g:snips_author }}/{{ expand('%:p:h:t') }}
+TERMUX_PKG_HOMEPAGE=https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}
 TERMUX_PKG_DESCRIPTION="{% here %}"
 TERMUX_PKG_LICENSE=GPL-3.0
 TERMUX_PKG_MAINTAINER=@termux

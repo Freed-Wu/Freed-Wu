@@ -9,32 +9,39 @@ fi
 if [[ $OSTYPE == cygwin ]]; then
 	export BROWSER=start
 	export CYGWIN=winsymlinks:nativestrict
-	export PATH=$PATH:/proc/cygdrive/c/cygwin
+	export PATH="$PATH${PATH+:}/proc/cygdrive/c/cygwin"
 elif [[ $OSTYPE == msys ]]; then
 	export BROWSER=start
 	export MSYS=winsymlinks:nativestrict
-	export PATH=$PATH:/proc/cygdrive/c/msys64
+	export PATH="$PATH${PATH+:}/proc/cygdrive/c/msys64"
 elif [[ $OSTYPE == darwin ]]; then
 	export BROWSER=open
 fi
 if [[ $OSTYPE != msys2 ]]; then
-	export PATH=$PATH:/${MINGW_ARCH:-mingw64}/bin
+	export PATH="$PATH${PATH+:}/${MINGW_ARCH:-mingw64}/bin"
 fi
 if [[ $OSTYPE == linux-android ]]; then
-	PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
+	PATH="$PATH${PATH+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin"
 	if [[ -n $DISPLAY ]]; then
 		export BROWSER='gio open'
 	else
 		export BROWSER=termux-open
 	fi
-elif [[ ! -f /run/current-system/nixos-version ]]; then
-	PATH="$PATH:/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
-	# https://aur.archlinux.org/packages/ccstudio#comment-906326
-	PATH="$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin"
-else
+elif [[ -f /run/current-system/nixos-version ]]; then
 	# python
-	PYTHONPATH="$HOME/.local/lib/python$(python --version | cut -d' ' -f2 | cut -d. -f1-2)/site-packages"
+	python_version=$(python --version)
+	python_version=${python_version#* }
+	python_version=${python_version%.*}
+	PYTHONPATH="$HOME/.local/lib/python${python_version}/site-packages"
+	unset python_version
 	export PYTHONPATH
+	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
+	export PKG_CONFIG_PATH
+else
+	PATH="$PATH${PATH+:}$HOME/.local/state/nix/profile/bin"
+	PATH="$PATH${PATH+:}/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
+	# https://aur.archlinux.org/packages/ccstudio#comment-906326
+	PATH="$PATH${PATH+:}/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin"
 fi
 MANPAGER='manpager | less --pattern=^\\S+'
 export MANPAGER
@@ -121,3 +128,26 @@ export DOCKER_BUILDKIT=1
 export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 # direnv
 export DIRENV_LOG_FORMAT=
+# lua
+version="$(lua -v)"
+version=${version#* }
+version=${version%% *}
+version=${version%.*}
+case $OSTYPE in
+linux-*)
+	ext=so
+	;;
+darwin)
+	ext=dynlib
+	;;
+*)
+	ext=dll
+	;;
+esac
+export LUA_PATH="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;$HOME/.local/share/lua/$version/?.lua;$HOME/.local/share/lua/$version/?/init.lua;$HOME/.local/state/nix/profile/share/lua/$version/?.lua;$HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
+export LUA_CPATH="./lib/lua/$version/?.$ext;./?.$ext;./lib/lua/$version/loadall.$ext;;$HOME/.local/lib/lua/$version/?.$ext;$HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
+if [[ -f /run/current-system/nixos-version ]]; then
+	LUA_PATH="$LUA_PATH;/run/current-system/sw/share/lua/$version/?.lua;/run/current-system/sw/share/lua/$version/?/init.lua"
+	LUA_CPATH="$LUA_CPATH;/run/current-system/sw/lib/lua/$version/?.$ext"
+fi
+unset version ext

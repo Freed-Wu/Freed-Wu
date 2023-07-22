@@ -7,7 +7,8 @@ build-backend = "setuptools.build_meta"
 name = "{{ expand('%:p:h:t') }}"
 description = "{% here %}"
 readme = "README.md"
-requires-python = ">= 3.7"
+# type_a | type_b
+requires-python = ">= 3.10"
 keywords = [""]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -99,5 +100,6 @@ skips = ["*_test.py", "test_*.py"]
 
 [tool.cibuildwheel]
 archs = ["all"]
-before-test = "pip install pytest"
+skip = "*37-* *38-* *39-*"
+before-test = "pip install -rrequirements.txt -rrequirements/dev.txt"
 test-command = "pytest {project}"

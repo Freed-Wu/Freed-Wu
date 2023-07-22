@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# https://github.com/neomutt/neomutt/issues/3554
+PATH=$(echo $PATH | tr ':' '\n' | grep -v "$(dirname "$(realpath "$0")")" | tr '\n' ':')
+neomutt ${@//-i/}

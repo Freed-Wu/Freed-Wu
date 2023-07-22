@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "python"
 readme = "README.md"
-requires-python = ">= 3.7"
+requires-python = ">= 3.10"
 keywords = [""]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -62,7 +62,7 @@ profile = "black"
 add_ignore = "D205, D400"
 
 [tool.doq]
-template_path = ".config/python/templates"
+template_path = ".config/nvim/templates/templates"
 
 [tool.bandit]
 skips = ["B404", "B603", "B606"]

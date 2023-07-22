@@ -1,0 +1,32 @@
+---
+layout: "package"
+premalink: "{{ expand('%:t:r') }}"
+description: >-
+  {% here %}
+links:
+- icon: "far fa-copyright"
+  label: "GPL-3.0-or-later"
+  url: "https://github.com/gnu-octave/{{ expand('%:t:r') }}/blob/main/COPYING"
+- icon: "fas fa-rss"
+  label: "news"
+  url: "https://github.com/gnu-octave/{{ expand('%:t:r') }}/releases"
+- icon: "fas fa-code-branch"
+  label: "repository"
+  url: "https://github.com/gnu-octave/{{ expand('%:t:r') }}"
+- icon: "fas fa-book"
+  label: "package documentation"
+  url: "https://github.com/gnu-octave/{{ expand('%:t:r') }}/blob/main/README.md"
+- icon: "fas fa-bug"
+  label: "report a problem"
+  url: "https://github.com/gnu-octave/{{ expand('%:t:r') }}/issues"
+maintainers:
+- name: "{{ g:snips_author }}"
+  contact: "{{ g:snips_email }}"
+versions:
+- id: "0.0.1"
+  date: "{{ strftime('%F') }}"
+  sha256: ""
+  url: "https://github.com/gnu-octave/{{ expand('%:t:r') }}/archive/0.0.1.tar.gz"
+  depends:
+  - "pkg"
+---

@@ -23,7 +23,7 @@ buildPythonPackage rec {
     homepage = "https://{{ expand('%:p:h:t') }}.readthedocs.io";
     description = "{% here %}";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ Freed-Wu ];
+    maintainers = with maintainers; [ {{ split(g:snips_github, /)[-1] }} ];
     platforms = platforms.unix;
   };
 }

@@ -592,7 +592,7 @@ function! init#smartinput#post_source() abort
         \ 'input': ' = ',
         \ 'filetype': ['pandoc', 'c', 'cpp', 'vim', 'perl', 'make', 'ninja',
         \ 'lua', 'dosini', 'muttrc', 'neomuttrc', 'nix', 'automake', 'toml',
-        \ 'verilog', 'dts', 'bitbake'],
+        \ 'verilog', 'dts', 'bitbake', 'octave', 'matlab', 'gdb'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',
@@ -625,7 +625,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '${\w\%#}',
         \ 'char': '+',
         \ 'input': '+',
-        \ 'filetype': ['sh', 'bash', 'zsh'],
+        \ 'filetype': ['sh', 'bash', 'zsh', 'make', 'automake'],
         \ })
   call smartinput#define_rule({
         \ 'at': '$\%#',
@@ -967,7 +967,7 @@ function! init#smartinput#post_source() abort
         \ 'at': 'set .*\%#',
         \ 'char': '+=',
         \ 'input': '+=',
-        \ 'filetype': ['vim'],
+        \ 'filetype': ['vim', 'bash', 'zsh'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\%#',

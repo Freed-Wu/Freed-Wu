@@ -21,14 +21,13 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get -y install rpm
-          # sudo apt-get -y install rpm check
       - name: Build
         # https://bugs.launchpad.net/ubuntu/+source/check/+bug/2019478
         run: |
           cmake -Bbuild
           cmake --build build
-          # cmake --build build --target check_{{ expand('%:p:h:h:h') }}
-          # ctest --test-dir build
+          cmake --build build
+          ctest --test-dir build
           cd build
           cpack -G DEB
           cpack -G RPM
@@ -68,5 +67,5 @@ jobs:
         run: >
           curl -X POST -d '{"ref":"main"}'
           -H "Accept: application/vnd.github.v3+json"
-          -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}"
+          -H "Authorization: Bearer ${{secrets.GH_TOKEN}}"
           https://api.github.com/repos/Freed-Wu/nur-packages/actions/workflows/version.yml/dispatches

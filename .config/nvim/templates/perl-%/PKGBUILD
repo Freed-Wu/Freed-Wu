@@ -8,7 +8,7 @@ pkgver=0.0.1
 pkgrel=1
 pkgdesc=""
 arch=(any)
-url=https://github.com/Freed-Wu/$_pkgname
+url={{ g:snips_github }}/$_pkgname
 depends=(perl)
 license=(GPL3)
 # https://github.com/rwstauner/Git-DescribeVersion/issues/1

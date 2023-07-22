@@ -6,8 +6,7 @@ require "nvim-treesitter.configs".setup {
     textobjects = { enable = true }
 }
 
--- luacheck: globals vim
----@diagnostic disable: undefined-global
+vim = vim or {}
 if vim.treesitter.language.register then
     vim.treesitter.language.register("mail", "text")
     vim.treesitter.language.register("gitcommit", "text")

@@ -1,61 +1,14 @@
-if {[catch {package require tclreadline} tmp]} {
-  lappend auto_path /usr/lib
-  if {[catch {package require tclreadline} tmp]} {
-    return
+if {[info exists argv0]} {
+  set exe [file tail $argv0]
+  if {[string first tclsh $exe] == -1 && [string first wish $exe] == -1} {
+    lappend auto_path /usr/lib
+    # https://github.com/flightaware/tclreadline/issues/50
+    proc 1 {} {return 1}
   }
-  # https://github.com/flightaware/tclreadline/issues/50
-  proc 1 {} {return 1}
+  unset exe
 }
+
+package require prompt
+
 set tclreadline::historyLength 100000
-
-array set platforms {
-  unknown ?
-  android 
-  arch 
-  centos 
-  debian 
-  docker 
-  gentoo 
-  linux 
-  macos 
-  ubuntu 
-  windows 
-}
-if {[exec ps -p1 -ocmd=] == {/sbin/docker-init}} {
-  set platform docker
-} elseif {[array get env(PREFIX)] == {/data/data/com.termux/files/usr}} {
-  set platform android
-} elseif {[string match *.exe $argv0]} {
-  set platform windows
-} elseif {[exec uname -s] == {Linux}} {
-  set platform linux
-  catch {set platform [string tolower [exec lsb_release -i | cut -f2]]}
-} elseif {[exec uname -s] == {Darwin}} {
-  set platform darwin
-} else {
-  set platform unknown
-}
-set icon $platforms($platform)
-
-proc ::tclreadline::prompt1 {} {
-  global tcl_version
-  global env
-  global icon
-  global argv0
-  if {[catch {set pwd [pwd]} tmp]} {
-    set pwd "unable to get pwd"
-  }
-
-  if {[info exists env(HOME)]} {
-    variable normalized_home
-    if {![info exists normalized_home]} {
-      set normalized_home [file normalize $env(HOME)]
-    }
-    if {[string equal -length [string length $normalized_home] $pwd $normalized_home]} {
-      set pwd "~[string range $pwd [string length $normalized_home] end]"
-    }
-  }
-  return "\x1b\[30;47m $icon \x1b\[37;43m\x1b\[30m  $argv0 $tcl_version \x1b\[33;47m\x1b\[30m  [exec date +%T] \x1b\[37;44m\x1b\[37m  \x1b\[1m$pwd \x1b\[0;34m\x1b\[0m\n% "
-}
-
 ::tclreadline::Loop

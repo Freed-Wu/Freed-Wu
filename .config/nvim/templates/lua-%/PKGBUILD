@@ -1,0 +1,38 @@
+#!/usr/bin/env -S sh -c 'nvchecker -cnvchecker.toml --logger=json | jq -r '\''.version | sub("^v"; "") | split("-") | .[-1]'\'' | xargs -i{} sed -i "s/^\\(pkgver=\\).*/\\1{}/" $0'
+# shellcheck shell=bash disable=SC2034,SC2154
+# ex: nowrap
+# Maintainer: {{ g:snips_author }} <{{ g:snips_email }}>
+_pkgname={{ substitute(expand('%:p:h:t'), '\.lua$', '', '') }}
+pkgname=(lua{,51,52,53}-"$_pkgname")
+pkgver=0.0.1
+pkgrel=1
+pkgdesc=""
+arch=(any)
+url={{ g:snips_github }}/$_pkgname.lua
+license=(GPL3)
+makedepends=(luarocks)
+source=("$url/releases/download/$pkgver/$_pkgname-$pkgver-0.all.rock")
+sha256sums=('SKIP')
+_lua_version=5.4
+
+_package() {
+	install -Dm644 ./*.rock -t $1
+	luarocks install --lua-version=$1 --tree="$pkgdir/usr/" --deps-mode=none $1/*.rock
+	rm $pkgdir/usr/lib/luarocks/rocks-*/manifest
+}
+
+package_lua51-{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }}() {
+	_package 5.1
+}
+
+package_lua52-{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }}() {
+	_package 5.2
+}
+
+package_lua53-{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }}() {
+	_package 5.3
+}
+
+package_lua-{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }}() {
+	_package $_lua_version
+}

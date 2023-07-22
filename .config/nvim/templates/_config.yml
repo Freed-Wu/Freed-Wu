@@ -32,4 +32,4 @@ readme_index:
   remove_originals: true
   with_frontmatter: true
 
-remote_theme: Freed-Wu/jekyll-theme-freed
+remote_theme: {{ split(g:snips_github, /)[-1] }}/jekyll-theme-freed

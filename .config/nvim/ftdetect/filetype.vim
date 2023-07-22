@@ -13,7 +13,8 @@ augroup init_filetype
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map,xci} setfiletype json
-  autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd,.git setfiletype yaml
+  " https://github.com/McSinyx/vim-octave/issues/4
+  autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd,.git,DESCRIPTION setfiletype yaml
   autocmd BufNewFile,BufRead *.{{x,l}pr,{x,s}pfm},fonts.conf,*/{dbus-1,conf.d}/*.conf setfiletype xml
   " 1}}} Data_Describe "
 
@@ -37,10 +38,10 @@ augroup init_filetype
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead *.lg4 setfiletype lingo
   autocmd BufNewFile,BufRead */R/* setfiletype r
-  autocmd BufNewFile,BufRead .octave_hist,*.matlab setfiletype octave
+  autocmd BufNewFile,BufRead */octave/history,*.matlab setfiletype octave
   autocmd BufNewFile,BufRead *.{gnuplot,plt},.gnuplot_history setfiletype gnuplot
   autocmd BufNewFile,BufRead SConstruct setfiletype python
-  autocmd BufNewFile,BufRead *.tlu setfiletype lua
+  autocmd BufNewFile,BufRead rock_manifest,config.ld,*.tlu setfiletype lua
   autocmd BufNewFile,BufRead .netrwhist setfiletype vim
   " 1}}} Script "
 

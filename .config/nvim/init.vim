@@ -128,7 +128,7 @@ let g:xml_syntax_folding = 1
 let g:python_highlight_all = 1
 let g:readline_has_bash = 1
 let g:yaml_schema = 'pyyaml'
-
+let g:octave_use_matlab_end = 1
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
 let g:netrw_home = expand('$XDG_CACHE_HOME/nvim/netrw')
@@ -438,15 +438,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#treesitter#source()',
         \ 'hook_post_update': 'TSUpdate',
         \ })
-  call dein#add('sheerun/vim-polyglot', {
-        \ 'merged': 0,
-        \ 'hook_source': 'call init#polyglot#source()',
-        \ })
-  call dein#add('pboettch/vim-cmake-syntax')
-  call dein#add('vim-scripts/bats.vim')
-  call dein#add('vito-c/jq.vim')
-  call dein#add('kaarmu/typst.vim')
-  call dein#add('kergoth/vim-bitbake')
   call dein#add('lambdalisue/glyph-palette.vim', {
         \ 'hook_post_source': 'call init#glyph_palette#post_source()',
         \ })
@@ -495,6 +486,27 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " 2}}} Conceal "
 
   " Ftplugin {{{2 "
+  call dein#add('sheerun/vim-polyglot', {
+        \ 'merged': 0,
+        \ 'hook_source': 'call init#polyglot#source()',
+        \ })
+  call dein#add('Freed-Wu/sublime-syntax-language-server', {
+        \ 'rev': 'release',
+        \ })
+  call dein#add('Freed-Wu/xilinx-language-server', {
+        \ 'rev': 'release',
+        \ })
+  call dein#add('Freed-Wu/zathura-language-server', {
+        \ 'rev': 'release',
+        \ })
+  call dein#add('gnu-octave/vim-octave')
+  call dein#add('rubberduck203/aosp-vim')
+  call dein#add('LnL7/vim-nix')
+  call dein#add('pboettch/vim-cmake-syntax')
+  call dein#add('vim-scripts/bats.vim')
+  call dein#add('vito-c/jq.vim')
+  call dein#add('kaarmu/typst.vim')
+  call dein#add('kergoth/vim-bitbake')
   " https://github.com/lervag/vimtex/issues/237
   call dein#add('lervag/vimtex', {
         \ 'merged': 0,
@@ -509,7 +521,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   call dein#add('Winseven4lyf/vim-bbcode')
   call dein#add('raimon49/requirements.txt.vim')
-  call dein#add('Freed-Wu/sublime-syntax.vim')
   call dein#add('liuchengxu/graphviz.vim')
   call dein#add('tmux-plugins/vim-tmux')
   call dein#add('neomutt/neomutt.vim')
