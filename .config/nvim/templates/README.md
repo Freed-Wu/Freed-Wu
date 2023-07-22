@@ -37,4 +37,6 @@
 [![pypi/implementation](https://shields.io/pypi/implementation/{{ expand('%:p:h:t') }})](https://pypi.org/project/{{ expand('%:p:h:t') }}/#files)
 [![pypi/pyversions](https://shields.io/pypi/pyversions/{{ expand('%:p:h:t') }})](https://pypi.org/project/{{ expand('%:p:h:t') }}/#files)
 
-[![cpan/v](https://img.shields.io/cpan/v/{{ expand('%:p:h:t') }})](https://metacpan.org/pod/{{ substitute(substitute(expand('%:r'), '\%(/\|^\)\(.\)', '::\u\1', 'g'), '^::Lib::', '', 'g') }})
+[![cpan/v](https://img.shields.io/cpan/v/{{ expand('%:p:h:t') }})](https://metacpan.org/pod/{{ substitute(expand('%:p:h:t'), '-', '::', 'g') }})
+
+[![luarocks](https://img.shields.io/luarocks/v/{{ split(g:snips_github, '/')[-1] }}/{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }})](https://luarocks.org/modules/{{ split(g:snips_github, '/')[-1] }}/{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }})

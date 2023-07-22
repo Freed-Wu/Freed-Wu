@@ -73,7 +73,7 @@ function! init#startify#source() abort
         \ {'type': function('s:gitModified'),  'header': ['! Git Modified']},
         \ {'type': function('s:gitUntracked'), 'header': ['? Git Untracked']},
         \ {'type': 'commands', 'header': [' Commands']},
-        \ {'type': 'bookmarks', 'header': [' Bookmarks']},
+        \ {'type': 'bookmarks', 'header': ['󰍑 Bookmarks']},
         \ ]
 endfunction
 

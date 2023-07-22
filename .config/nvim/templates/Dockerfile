@@ -1,5 +1,5 @@
 #!/usr/bin/env -S docker build -t{{ g:snips_dockerhub_user }}/{{ expand('%:p:h:t') }}:main . -f
-FROM freedwu/Freed-Wu:main
+FROM freedwu/{{ split(g:snips_github, /)[-1] }}:main
 
 LABEL org.opencontainers.image.title={{ expand('%:p:h:t') }}
 LABEL org.opencontainers.image.authors="{{ g:snips_author }}"

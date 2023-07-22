@@ -1,0 +1,24 @@
+---
+"on":
+  push:
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install octave
+          tar vacCf .. ../pkg.tar.gz {{ expand('%:p:h:h:h:t') }}
+          octave --eval 'pkg install ../pkg.tar.gz'
+      - name: Test
+        run: |
+          test/test.m

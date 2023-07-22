@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 # posix
-PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/.local/bin${PATH+:}$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
 export BROWSER=firefox
@@ -10,7 +10,7 @@ export MOZ_USE_XINPUT2=1
 MANOPT=-Lzh_CN:zh_CHS:zh
 export MANOPT
 # pkg-config
-PKG_CONFIG_PATH="$HOME/.local/state/nix/profile/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
+PKG_CONFIG_PATH="$HOME/.local/state/nix/profile/lib/pkgconfig:$HOME/.local/state/nix/profile/share/pkgconfig${PKG_CONFIG_PATH+:}$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH
 # cpanm
 export PERL_CPANM_OPT

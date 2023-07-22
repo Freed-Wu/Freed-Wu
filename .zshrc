@@ -132,13 +132,15 @@ alias cp='cp -ri'
 alias scp='scp -r'
 alias rsync='rsync -avzP'
 alias rm='rm -i'
-alias rename='rename -i'
-alias perl-rename='perl-rename -i'
 alias mkdir='mkdir -p'
 alias rmdir='rmdir -p'
-if (($+commands[exa])); then
-  alias ls='exa --icons --git -h'
-  alias tree='exa --icons -T'
+alias rename='rename -i'
+if (($+commands[perl-rename])); then
+  alias perl-rename='perl-rename -i'
+fi
+if (($+commands[eza])); then
+  alias ls='eza --icons --git -h'
+  alias tree='eza --icons -T'
 else
   alias ls='ls --color=auto -h'
 fi
@@ -348,6 +350,7 @@ zinit id-as depth'1' wait lucid for hlissner/zsh-autopair
 
 # Colorize {{{1 #
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-help
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-colorize-functions
 zinit id-as depth'1' wait lucid for zpm-zsh/colorize
 zinit id-as depth'1' wait lucid \
   if'(($+commands[mysql]))' \

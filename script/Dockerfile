@@ -58,7 +58,7 @@ RUN sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 RUN export PATH=~/.nix-profile/bin:$PATH && \
       install -d ~/.config/nix && \
       echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > ~/.config/nix/nix.conf && \
-      nix-env -iA nixpkgs.neovim nixpkgs.tmux nixpkgs.vivid nixpkgs.exa nixpkgs.bat nixpkgs.ripgrep nixpkgs.fd nixpkgs.delta nixpkgs.fzf nixpkgs.zsh-powerlevel10k nixpkgs.chafa nixpkgs.parallel nixpkgs.exiftool \
+      nix-env -iA nixpkgs.neovim nixpkgs.tmux nixpkgs.vivid nixpkgs.eza nixpkgs.bat nixpkgs.ripgrep nixpkgs.fd nixpkgs.delta nixpkgs.fzf nixpkgs.zsh-powerlevel10k nixpkgs.chafa nixpkgs.parallel nixpkgs.exiftool \
       nixpkgs.git nixpkgs.jq nixpkgs.nodejs nixpkgs.lesspipe nixpkgs.file nixpkgs.less && \
       sudo ln -s ~/.nix-profile/bin/nvim /usr/bin/vi
 

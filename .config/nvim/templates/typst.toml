@@ -1,0 +1,8 @@
+[package]
+name = "{{ expand('%:p:h:h:t') }}"
+version = "{{ expand('%:p:h:t') }}"
+entrypoint = "main.typ"
+repository = "https://github.com/typst/packages"
+authors = ["{{ g:snips_author }}"]
+license = "GPL3"
+description = "{% here %}"

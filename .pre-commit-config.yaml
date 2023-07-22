@@ -1,5 +1,5 @@
 ---
-exclude: ^\.config/(nvim|python)/templates/.*
+exclude: ^\.config/nvim/templates/.*
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -28,7 +28,7 @@ repos:
       - id: check-toml
       - id: check-json
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.1
+    rev: v1.5.4
     hooks:
       - id: remove-crlf
   - repo: https://github.com/codespell-project/codespell
@@ -64,7 +64,7 @@ repos:
       - id: yamllint
         exclude: ^\.config/gh/config\.yml$
   - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
+    rev: 0.7.17
     hooks:
       - id: mdformat
         additional_dependencies:
@@ -77,13 +77,13 @@ repos:
           - mdformat-black
           - mdformat-config
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.8.1
+    rev: v0.9.2
     hooks:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath@0.9.1
   - repo: https://github.com/perltidy/perltidy
-    rev: "20230309.04"
+    rev: "20230701.02"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -91,7 +91,7 @@ repos:
     hooks:
       - id: shfmt
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 23.7.0
     hooks:
       - id: black
         exclude: *pdbrc
@@ -106,7 +106,7 @@ repos:
         additional_dependencies:
           - tomli
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.316
+    rev: v1.1.325
     hooks:
       - id: pyright
   - repo: https://github.com/PyCQA/bandit
@@ -118,7 +118,7 @@ repos:
         additional_dependencies:
           - tomli
   - repo: https://github.com/vimjas/vint
-    rev: v0.4a4
+    rev: v0.4a3
     hooks:
       - id: vint
   - repo: https://github.com/google/vimdoc
@@ -127,8 +127,16 @@ repos:
       - id: vimdoc
         args:
           - .config/nvim
+  - repo: https://github.com/Koihik/LuaFormatter
+    rev: 29afe1046ad015de96ffdb6d361a21882356e801
+    hooks:
+      - id: luaformatter
+  - repo: https://github.com/lunarmodules/luacheck
+    rev: v1.1.1
+    hooks:
+      - id: luacheck
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.54.2
+    rev: v1.56.2
     hooks:
       - id: rubocop
   - repo: https://github.com/nix-community/nixpkgs-fmt

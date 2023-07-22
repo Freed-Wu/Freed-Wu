@@ -161,6 +161,7 @@ project only if I :heart: it. E.g.:
   - [![pypi](https://img.shields.io/badge/dynamic/xml?url=https://pypi.org/user/Freed-Wu&query=//html/body/main/div/div/div/h2&label=pypi&logo=pypi)](https://pypi.org/user/Freed-Wu)
   - [![cpan](https://img.shields.io/badge/cpan-1%20package-888888?logo=perl)](https://metacpan.org/author/FREED)
   - [![ctan](https://img.shields.io/badge/ctan-1%20package-888888?logo=data:image/png%3Bbase64,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)](https://ctan.org/author/zhenyu)
+  - [![luarocks](https://img.shields.io/badge/luarocks-1%20package-888888?logo=lua)](https://luarocks.org/modules/Freed-Wu)
   - [![vim.org](https://img.shields.io/badge/vim.org-1%20package-888888?logo=vim)](https://www.vim.org/account/profile.php?user_id=76258)
 
 BTW:
@@ -217,80 +218,6 @@ The OS configurations can be found:
   [![Gentoo](https://img.shields.io/badge/Gentoo-rolling-blue?logo=Gentoo)](https://www.gentoo.org).
 - [All my configurations](https://github.com/Freed-Wu?tab=repositories&q=dotfiles).
 
-### Nerd Font Styles
-
-I collect some [nerd font](https://www.nerdfonts.com) style configurations for
-many programs:
-
-<details>
-<summary>
-Nerd Font Styles
-</summary>
-
-#### [bash](https://github.com/Freed-Wu/Freed-Wu/blob/main/.bashrc)
-
-![bash](https://user-images.githubusercontent.com/32936898/205438946-3ecbd16a-3832-4609-a4b4-84be21fe1165.png)
-
-#### [zsh](https://github.com/romkatv/powerlevel10k)
-
-![zsh](https://user-images.githubusercontent.com/32936898/205438934-4add45ea-62bc-477e-93bb-4d615bd7aa3f.png)
-
-#### [tclsh](https://github.com/Freed-Wu/Freed-Wu/blob/main/.tclshrc)
-
-![tclsh](https://github.com/Freed-Wu/Freed-Wu/assets/32936898/d410608b-6ddf-4c1b-a72e-9d6f6b1f48a4)
-
-#### [wish](https://github.com/Freed-Wu/Freed-Wu/blob/main/.wishrc)
-
-![wish](https://github.com/Freed-Wu/Freed-Wu/assets/32936898/a8a2304b-cc63-4597-befe-9e04fc453179)
-
-#### [vivado](https://aur.archlinux.org/packages/vitis)
-
-![vivado](https://github.com/Freed-Wu/Freed-Wu/assets/32936898/37a9488b-8ea5-407d-9d3a-0f15de24abad)
-
-#### xsct
-
-![xsct](https://github.com/Freed-Wu/Freed-Wu/assets/32936898/bcec3659-ebdf-4c3b-aefa-193020db4146)
-
-#### [python](https://github.com/Freed-Wu/Freed-Wu/tree/main/.config/python/python)
-
-![python](https://user-images.githubusercontent.com/32936898/205494856-6f11d1a1-b2e3-469d-91c7-8a24c400fa78.jpg)
-
-#### [octave](https://github.com/Freed-Wu/Freed-Wu/blob/main/.octaverc)
-
-![octave](https://user-images.githubusercontent.com/32936898/205438943-431b16bf-e858-4fd4-80dd-59841f859416.png)
-
-#### [reply](https://github.com/Freed-Wu/Reply-Plugin-Prompt/)
-
-![reply](https://user-images.githubusercontent.com/32936898/210608476-34f5cf64-e565-4292-9f3d-d8472db7035b.jpg)
-
-#### [luap](https://github.com/dpapavas/luaprompt)
-
-![luap](https://user-images.githubusercontent.com/32936898/229018452-f9cba971-8ae6-4249-a715-bb910259053f.jpg)
-
-#### [lftp](https://github.com/Freed-Wu/Freed-Wu/blob/main/.config/lftp/rc)
-
-![lftp](https://user-images.githubusercontent.com/32936898/205438945-7ac66e83-bcd4-4574-a520-614023fa1205.png)
-
-#### [gdb](https://github.com/Freed-Wu/Freed-Wu/blob/main/.config/gdb/gdbinit)
-
-![gdb](https://user-images.githubusercontent.com/32936898/228215268-4d480ca9-797e-4d70-9e3e-d9c43dfab80b.jpg)
-
-#### [trans](https://github.com/Freed-Wu/translate-shell/)
-
-![trans](https://user-images.githubusercontent.com/32936898/205499028-c2304621-b51b-40b6-a386-54fc94916544.jpg)
-
-#### [vim](https://github.com/vim-airline/vim-airline)
-
-![vim](https://user-images.githubusercontent.com/32936898/205438937-349daa37-ba3d-4ebf-a485-7481a5066265.png)
-
-#### [tmux](https://github.com/Freed-Wu/Freed-Wu/blob/main/.config/tmux/tmux.conf)
-
-![tmux](https://user-images.githubusercontent.com/32936898/205438941-d0dafaef-798e-448e-8804-2ccf902427d3.png)
-
-</details>
-
-See [wiki](https://github.com/Freed-Wu/Freed-Wu/wiki) to know more.
-
 ### Homework
 
 If you are my junior :boy:, you can find all of
@@ -325,6 +252,9 @@ more information about me
 - [![cmake discourse](https://img.shields.io/badge/cmake%20discourse-gray?logo=cmake)](https://discourse.cmake.org/u/freed-wu)
 - [![jupyter discourse](https://img.shields.io/badge/jupyter%20discourse-gray?logo=jupyter)](https://discourse.jupyter.org/u/freed-wu)
 - [![root forum](https://img.shields.io/badge/root%20forum-gray?logo=C%2B%2B)](https://root-forum.cern.ch/u/freed-wu)
+- [![libreoffice forum](https://img.shields.io/badge/libreoffice%20forum-gray?logo=libreoffice)](https://ask.libreoffice.org/u/wzy)
+- [![gnome discourse](https://img.shields.io/badge/gnome%20discourse-gray?logo=gnome)](https://discourse.gnome.org/u/freed-wu)
+- [![f-droid forum](https://img.shields.io/badge/f-droid%20forum-gray?logo=f-droid)](https://forum.f-droid.org/u/freed-wu)
 - [![poe](https://img.shields.io/badge/poe-gray?logo=poe)](https://poe.com/zhenyuwu)
 - [![reddit](https://img.shields.io/badge/reddit-gray?logo=reddit)](https://www.reddit.com/user/Worried-Current9852)
 - [![zhihu](https://img.shields.io/badge/zhihu-gray?logo=zhihu)](https://www.zhihu.com/people/wu-zhen-yu-49-44)

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# https://github.com/neomutt/neomutt/issues/3554
-neomutt "${@//-i/}"

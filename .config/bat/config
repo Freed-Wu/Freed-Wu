@@ -35,3 +35,5 @@
 -m'*.cu:C'
 -m'*.cuh:C'
 -m'*.tlu:Lua'
+-m'*.rockspec:Lua'
+-m'rock_manifest:Lua'

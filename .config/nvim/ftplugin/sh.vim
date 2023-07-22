@@ -1,6 +1,7 @@
 setlocal isfname-==
 setlocal includeexpr=init#init#sh#includeexpr()
 setlocal makeprg=./%
+setlocal foldmethod=syntax
 
 if expand('%:t') ==# '.envrc'
   compiler direnv
