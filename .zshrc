@@ -172,7 +172,7 @@ elif [[ -f /run/current-system/sw/share/zsh-powerlevel10k/powerlevel10k.zsh-them
 else
   zinit id-as depth'1' for romkatv/powerlevel10k
 fi
-[[ ! -f ~/.p10k.zsh ]] || . ~/.p10k.zsh
+[[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/p10k.zsh ]] || . ${XDG_CONFIG_HOME:-$HOME/.config}/p10k.zsh
 # 1}}} StatusLine #
 
 # Cursor {{{1 #

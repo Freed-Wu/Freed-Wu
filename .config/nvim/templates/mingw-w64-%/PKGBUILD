@@ -8,7 +8,7 @@ pkgdesc=""
 arch=(any)
 mingw_arch=(mingw32 mingw64 ucrt64 clang64 clang32 clangarm64)
 url={{ g:snips_github }}/$_realname
-makedepends=(cmake)
+makedepends=(cmake ninja)
 license=(GPL3)
 source=("$url/archive/$pkgver.tar.gz")
 sha256sums=(SKIP)
@@ -16,7 +16,7 @@ sha256sums=(SKIP)
 build() {
 	cd "$_realname-$pkgver" || return 1
 
-	cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$MINGW_PACKAGE_PREFIX
+	cmake -Bbuild -GNinja -DCMAKE_INSTALL_PREFIX=$MINGW_PACKAGE_PREFIX
 	cmake --build build
 }
 

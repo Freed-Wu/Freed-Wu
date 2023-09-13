@@ -9,6 +9,8 @@
   "dash-complete.shortcut": "-",
   "diagnostic-languageserver.filetypes": {
     "bbcode": ["write-good", "alex-text"],
+    "c": ["cppcheck"],
+    "cpp": ["cppcheck"],
     "cmake": ["cmake-lint", "cmakelint"],
     "elixir": ["mix_credo", "mix_credo_compile"],
     "expect": ["nagelfar"],

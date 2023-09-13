@@ -38,6 +38,7 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
 	export PKG_CONFIG_PATH
 else
+	PATH="$PATH${PATH+:}/usr/src/linux/scripts/clang-tools:/usr/src/linux/scripts"
 	PATH="$PATH${PATH+:}$HOME/.local/state/nix/profile/bin"
 	PATH="$PATH${PATH+:}/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
 	# https://aur.archlinux.org/packages/ccstudio#comment-906326
@@ -129,25 +130,37 @@ export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 # direnv
 export DIRENV_LOG_FORMAT=
 # lua
-version="$(lua -v)"
-version=${version#* }
-version=${version%% *}
-version=${version%.*}
-case $OSTYPE in
-linux-*)
-	ext=so
-	;;
-darwin)
-	ext=dynlib
-	;;
-*)
-	ext=dll
-	;;
-esac
-export LUA_PATH="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;$HOME/.local/share/lua/$version/?.lua;$HOME/.local/share/lua/$version/?/init.lua;$HOME/.local/state/nix/profile/share/lua/$version/?.lua;$HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
-export LUA_CPATH="./lib/lua/$version/?.$ext;./?.$ext;./lib/lua/$version/loadall.$ext;;$HOME/.local/lib/lua/$version/?.$ext;$HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
-if [[ -f /run/current-system/nixos-version ]]; then
-	LUA_PATH="$LUA_PATH;/run/current-system/sw/share/lua/$version/?.lua;/run/current-system/sw/share/lua/$version/?/init.lua"
-	LUA_CPATH="$LUA_CPATH;/run/current-system/sw/lib/lua/$version/?.$ext"
+has_cmd() {
+	for opt in "$@"; do
+		command -v "$opt" >/dev/null
+	done
+}
+if has_cmd lua; then
+	version="$(command lua -v)"
+	version=${version#* }
+	version=${version%% *}
+	version=${version%.*}
+	case $OSTYPE in
+	linux-*)
+		ext=so
+		;;
+	darwin)
+		ext=dynlib
+		;;
+	*)
+		ext=dll
+		;;
+	esac
+	export LUA_PATH="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;$HOME/.local/share/lua/$version/?.lua;$HOME/.local/share/lua/$version/?/init.lua;$HOME/.local/state/nix/profile/share/lua/$version/?.lua;$HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
+	export LUA_CPATH="./lib/lua/$version/?.$ext;./?.$ext;./lib/lua/$version/loadall.$ext;;$HOME/.local/lib/lua/$version/?.$ext;$HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
+	if [[ -f /run/current-system/nixos-version ]]; then
+		LUA_PATH="$LUA_PATH;/run/current-system/sw/share/lua/$version/?.lua;/run/current-system/sw/share/lua/$version/?/init.lua"
+		LUA_CPATH="$LUA_CPATH;/run/current-system/sw/lib/lua/$version/?.$ext"
+	fi
+	unset version ext
 fi
-unset version ext
+if [ -n "$ZSH_VERSION" ]; then
+	unfunction has_cmd
+else
+	unset has_cmd
+fi

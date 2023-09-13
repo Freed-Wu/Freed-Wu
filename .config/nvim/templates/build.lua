@@ -1,17 +1,15 @@
 ---l3build config.
--- luacheck: ignore 111
--- LuaFormatter off
 
--- LuaFormatter on
+-- luacheck: ignore 111
 ---@diagnostic disable: lowercase-global
 module = "{{ expand('%:p:h:t') }}" -- luacheck: ignore 121
-cleanfiles = {"*.curlopt"}
-demofiles = {"latexmkrc", "Makefile"}
-docfiles = {"*.md", "*.cfg"}
-tagfiles = {"*.dtx", "build.lua"}
+cleanfiles = { "*.curlopt" }
+demofiles = { "latexmkrc", "Makefile" }
+docfiles = { "*.md", "*.cfg" }
+tagfiles = { "*.dtx", "build.lua" }
 typesetexe = "xelatex"
 typesetopts =
-    "-shell-escape -file-line-error -8bit -halt-on-error -interaction=nonstopmode"
+"-shell-escape -file-line-error -8bit -halt-on-error -interaction=nonstopmode"
 
 local repository = "{{ g:snips_github }}/" .. module
 uploadconfig = {
@@ -24,7 +22,6 @@ uploadconfig = {
     summary = [[]],
     uploader = "{{ g:snips_author }}",
     version = "{{ strftime('%Y/%m/%d') }} v0.0.1",
-
     bugtracker = repository .. "/issues",
     description = [[]],
     development = repository,
@@ -46,7 +43,7 @@ function update_tag(file, content, tagname, tagdate) -- luacheck: ignore 212
     if tagname then
         tagdate = string.gsub(tagdate, "-", "/")
         content = string.gsub(content, "%d%d%d%d/%d%d/%d%d v[0-9.]+",
-                              tagdate .. " v" .. tagname)
+            tagdate .. " v" .. tagname)
     end
     return content
 end

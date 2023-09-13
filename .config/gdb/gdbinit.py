@@ -12,7 +12,7 @@ paths = [
     "/usr/local",
     "/run/current-system/sw",
     "/data/data/com.termux/files/usr",
-    "~/.local/state/nix/profile"
+    "~/.local/state/nix/profile",
 ]
 
 for path in paths:

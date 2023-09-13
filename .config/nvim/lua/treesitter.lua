@@ -6,6 +6,8 @@ require "nvim-treesitter.configs".setup {
     textobjects = { enable = true }
 }
 
+-- luacheck: ignore 111 112 113
+---@diagnostic disable: lowercase-global
 vim = vim or {}
 if vim.treesitter.language.register then
     vim.treesitter.language.register("mail", "text")

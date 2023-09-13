@@ -139,7 +139,24 @@ I am interested in contributing to any
 [![open source](https://img.shields.io/badge/open%20source-gray?logo=open-source-initiative)](https://github.com/Freed-Wu)
 project only if I :heart: it. E.g.:
 
-- Package :package: my needed programs for:
+- Program :hammer: with some languages:
+  - [![pypi](https://img.shields.io/badge/dynamic/xml?url=https://pypi.org/user/Freed-Wu&query=//html/body/main/div/div/div/h2&label=pypi&logo=pypi)](https://pypi.org/user/Freed-Wu):
+    [python](https://www.python.org/)
+  - [![cpan](https://img.shields.io/badge/cpan-2%20packages-888888?logo=perl)](https://metacpan.org/author/FREED):
+    [perl](https://www.perl.org/)
+  - [![ctan](https://img.shields.io/badge/ctan-1%20package-888888?logo=data:image/png%3Bbase64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAAB3RJTUUH3wkSFggO73aB8gAABuhJREFUWMOdl2usFVcVx///tWfOzLkcQEAaauECt1xAQGoplEJBKsGoaUOiiRofiVqbaEoRYmJrE7TxAzEp9aZUuA01is+kVVJJ1MRWUx8Vy+MWaSFQYsGmDZRSKNx77jlnzszstfxwpvI6pzxWMh8ms/f+/ddee+21hrhGi+MeiJRISmjmU++H0Wweu+p1eG3wqejq6oX3tXlk8BXVbCPpjpilFTL4qJnfAfCdoaEXLruWuxZ4udwL1eGbyKifDFaS0mOW/JUMFohEPyPdGNXGP+O4O7vcrlyVgBZ8GlRrc8nocdLdAiAnpZd0k1STbWQ4knR3k4HzvvZCFHX7NO0s4ooFxPGUwvPahwr4fAC++GykzCKDive1h8ngOjK4W6SUeD+4J44na5oev3YBLfg0qNbnFPAF58HfNZIylwzE+9oGMuwh3ZdFojNpemJvHPdYmr559QLieHLheX12Ab+1DRwADIAjeTPp6qr1PjKcSwZfdK5yvFrdub9S+TDS9MSVC4iibnR1TYf39dkiHeEErK6aPUZyLCDXkzKfdCdVkx+RwSKR4HNRNPHIjBlbXhkc/Bey7OTlBcRxd5FqjVkFfGEbuLTWYAjoXrN0K+luA2Q8KQtJvqqaPkEGy0Xcp0+f/sPBrq4ZRwGPLHu7s4CW571QbXywgN/WznMzPQDkPweQkrICwHGz/GnSLQY4hpRFgP0byH5JBp8k3Z1Z9s6+UmnCGySRZacvFRBFkwrPk5kFfFH7bQeB7CdZdmor6d4E9E8Ax6sm+wE5QLo7AI4i3WIze74lLPgU4Fao1naH4fgTgEEuhE88H97fAQ7AzgLwZPi1IBhzKxnOIktrSAnJoAQgBKCth+NFwj6AoWq6msQ4MtrsfW1mHE85dxVH0USUy9Ohmswo4Le3gQdmOqDaeEAknEMG3zBDZNb8FhneRbqvAhgCUAIYF5lRhFqPqDa/DsgEkdJGMz2gmqx2LfgNBbw5vYAv6XDaTwF22PvaM4DErUMnKSmfUE23kcEsUiYDdOfBixTl+wG87f3Qb0TiO0i3jGRPcB68VyTa3AEuZv5Zs+wvZGm1c+UpZPglM/+y98O/IEs7REr3k5xabL21mf877+tbg+B961qH2o6b6W+DYtunicSbSbe0A3y7av0xka5HSJkKhCtUG31kuMS50U8DqJGcCbDcBu7M/DPe19Y513UPGdwD2FnV9MHBweefFNXmLJF4E+k+chGcrcn5NtXkqVZs9W9Fyn0cYIMMl7dqgNzyHvB/qNbvd678BTJYBdiwavbdJPnvU5XKzebK5Z6tZLD8UrglZvl21Wy/c+Vvk+EC1foG0pVIWUZyqLj1JrfPFDgzv1u18U2R6E4y/A6A3Cz7fpa99eMwHKvDw3vhoqg7I2UhwFHnPLBUNdsI6EGR0j2ku5GUKWRwXavahd1k8HlSJqG9OTN9STW5T6S0hAwfaoUy/0GWndnkXFderb7YGthsvn4wiiaeLC6Ocmug/hnwu0Sih0mZUBwskjKTDMYCrJAyHe07Kmemr6gmq8hgjkhpPYDILO/L88EfisRptbrn3OBKZR6y7MTBIBhZJ2VpK3/97wEMkcHKAi5m+S6SEekWktLTJt7v5vtRs+Yq0k0SKW0AOMos7/d+eL1IqVGt7r5wQpq+iXK517wffkkkcqQsBqBmyRNk0E2yF7DDZs3HyWARwNEd4ALoMdX0PoAjRaJHAY4zy3/qfe0hMhweGtrVTjGQpsdRLk/1qo0BsjSadCtJl6vW+wDsNMv+TkafKVqwDnA7qZquASwXiTYB8gGz/Nfe1x8kw8FODeoFMRw1ahHM8jHOjegj3WfNbDegR0mZD8j0Ihzt4GdU07WAnhCJtgByYyt9G2vJ4OTg4A50Ml78Onr07TDLrhfp6ifdXfh/UekIH1LNHjDLD4nEW0iZZeb/qNq4jwyPVasDUG10FHBJOfZ+CFF0w7BqOkC6m4pUawcnYA2z7Htm2Ysi5X5S5pr551ST1SKlN2q1A/C+iveySwSoJjBTRNGEM2bJPsDdRnLCRbEnYKlZvl41fU6kvIl0C8z8DtXmvSLRkXr9MLLsFC5nbTsi74dABoiiG95SrR1q1QiOLUQQsNwsf0Q12S7S9SjplprpgFnzXufKh5LkyBX/pnXsCfP8HYiEqFTmv56mJ14jZVlxW3qzvF81+ZVI1wbSfcxM97fgI/clyVEkyWtXBH9PAQCKxjFDtbrnP1E08RQpS8z8k3l+dp1IeblIuAawI2bNVUEwbmej8SoajVevGF7E8vJWqcwDiVAkXmqmLwM8BfiRIvFaM90Vx1OfrVYHUK8fuir4FQtoZyNGzIaZDwDzAKxeP3xN6/wP1odyHpqKjVAAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMDktMThUMjI6MDg6MTQrMDI6MDAbD7zKAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTA5LTE4VDIyOjA4OjE0KzAyOjAwalIEdgAAAABJRU5ErkJggg==)](https://ctan.org/author/zhenyu):
+    [LaTeX](https://latex.org/)
+  - [![luarocks](https://img.shields.io/badge/luarocks-1%20package-888888?logo=lua)](https://luarocks.org/modules/Freed-Wu):
+    [lua](https://www.lua.org/)
+  - [![vim.org](https://img.shields.io/badge/vim.org-1%20package-888888?logo=vim)](https://www.vim.org/account/profile.php?user_id=76258):
+    [vim script](https://www.vim.org/)
+- Create :wrench: plugins:
+  - [![vim](https://img.shields.io/badge/vim-gray?logo=vim)](https://github.com/Freed-Wu?tab=repositories&q=vim&type=source)
+  - [![zsh](https://img.shields.io/badge/zsh-gray?logo=windows-terminal)](https://github.com/Freed-Wu?tab=repositories&q=zsh&type=source)
+  - [![tmux](https://img.shields.io/badge/tmux-gray?logo=tmux)](https://github.com/Freed-Wu?tab=repositories&q=tmux&type=source)
+  - [![openuserjs](https://img.shields.io/badge/openuserjs-gray?logo=javascript)](https://openuserjs.org/users/Freed-Wu/scripts)
+  - [![greasyfork](https://img.shields.io/badge/greasyfork-gray?logo=javascript)](https://greasyfork.org/users/Freed-Wu/scripts)
+- Package :package: programs for some software distributions:
   - [![termux](https://img.shields.io/badge/termux-gray?logo=Android)](https://github.com/termux/termux-packages/commits?author=Freed-Wu)
   - [![msys2](https://img.shields.io/badge/msys2-gray?logo=Windows)](https://github.com/msys2/MINGW-packages/commits?author=Freed-Wu)
   - [![homebrew](https://img.shields.io/badge/homebrew-gray?logo=Homebrew)](https://github.com/Homebrew/homebrew-core/commits?author=Freed-Wu)
@@ -147,22 +164,6 @@ project only if I :heart: it. E.g.:
   - [![NUR](https://img.shields.io/badge/NUR-gray?logo=NixOS)](https://nur.nix-community.org/repos/freed-wu)
   - [![nix](https://img.shields.io/badge/nix-gray?logo=NixOS)](https://github.com/NixOS/nixpkgs/commits?author=Freed-Wu)
   - [![anaconda](https://img.shields.io/badge/anaconda-gray?logo=Anaconda)](https://anaconda.org/freed-wu)
-- Create :wrench: my needed plugins for:
-  - [![vim](https://img.shields.io/badge/vim-gray?logo=vim)](https://github.com/Freed-Wu?tab=repositories&q=vim&type=source)
-  - [![zsh](https://img.shields.io/badge/zsh-gray?logo=windows-terminal)](https://github.com/Freed-Wu?tab=repositories&q=zsh&type=source)
-  - [![tmux](https://img.shields.io/badge/tmux-gray?logo=tmux)](https://github.com/Freed-Wu?tab=repositories&q=tmux&type=source)
-    On the top of the above screenshot, there exists
-    [a tmux plugin](https://github.com/Freed-Wu/tmux-bitahub)
-    developed by me to display the GPU numbers of our laboratory server. Do you
-    \:heart: it?
-  - [![openuserjs](https://img.shields.io/badge/openuserjs-gray?logo=javascript)](https://openuserjs.org/users/Freed-Wu/scripts)
-  - [![greasyfork](https://img.shields.io/badge/greasyfork-gray?logo=javascript)](https://greasyfork.org/users/Freed-Wu/scripts)
-- Build :hammer: my needed libraries for:
-  - [![pypi](https://img.shields.io/badge/dynamic/xml?url=https://pypi.org/user/Freed-Wu&query=//html/body/main/div/div/div/h2&label=pypi&logo=pypi)](https://pypi.org/user/Freed-Wu)
-  - [![cpan](https://img.shields.io/badge/cpan-1%20package-888888?logo=perl)](https://metacpan.org/author/FREED)
-  - [![ctan](https://img.shields.io/badge/ctan-1%20package-888888?logo=data:image/png%3Bbase64,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)](https://ctan.org/author/zhenyu)
-  - [![luarocks](https://img.shields.io/badge/luarocks-1%20package-888888?logo=lua)](https://luarocks.org/modules/Freed-Wu)
-  - [![vim.org](https://img.shields.io/badge/vim.org-1%20package-888888?logo=vim)](https://www.vim.org/account/profile.php?user_id=76258)
 
 BTW:
 
@@ -172,21 +173,11 @@ BTW:
 - I use CI/CD like [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/Freed-Wu/main.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/Freed-Wu/main).
 - and [![github/workflow](https://github.com/Freed-Wu/Freed-Wu/actions/workflows/main.yml/badge.svg)](https://github.com/Freed-Wu/Freed-Wu/actions)
 
-### My Dotfiles
+### Dotfiles
 
-This project contains my [dotfiles](https://dotfiles.github.io).
-You can take a try by installing [github-cli](https://cli.github.com) then use
-the following code to `ssh` a codespace with this dotfiles:
+This project contains my [dotfiles](https://dotfiles.github.io):
 
-```bash
-gh cs create -RFreed-Wu/Freed-Wu -mbasicLinux32gb -dwzy
-# wait about 3 minutes
-gh cs ssh
-```
-
-It contains:
-
-- [all scripts](script) to create this codespace. Refer
+- [all scripts](script) to create a codespace. Refer
   [personalizing-github-codespaces-for-your-account](https://docs.github.com/en/codespaces/customizing-your-codespace/personalizing-github-codespaces-for-your-account#dotfiles).
 - [the configuration](.zshrc) for my shell
   [![zsh](https://img.shields.io/badge/zsh-gray?logo=data:image/png%3Bbase64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADg0lEQVR4Ae2YA7A0ORCA+2zbdzPJ49m27QvOtm3bVzjbtm1bv21sJs/cv7sqtZNFPVbN7quar6oXSfZ196S703mQkpKSkpKSUkD2kFUXMprtmj1xo/kgaYwINraS3Rjp8NlI8scjFZ7ecES4PPQRMtoq9kmkWDZS/HJIilmaLY6KXybFJaQh0uw06ANW8Qfcb7qtZPsks+VHr7kgKvyOFPckVvILoAdwzTm59ZpdAwlBiq8qYfB4lNkFYx1WVtWU/Bsy3B3nO2kd7WQWYK6EEg7mQaXTPSNnWxlsDTS3/fbz0pMscOI+KKBBszocN27+l8knrrwwJINT7oeJDs+DAsgob81v4IE7siyOjXRzkzCXVoUkQYO3yn/CwZ5FDmj2lLdmXLx79fMbxT6ncXxvjnSwCSSNOaJ6Ld8BI9nt4JHdgy0QqXCMt+Y7QCjG8fOTbqwbf3colAs0YJifqBRGjXKtFRoO47X4/c2CHLgKECPDy3JOK3YRlBM0+CjfyB4kQzGfUfxA/Nzlxp6ASsAo9mgvxrdRfmQE2wA/N7qxrynEoOy4mKbQicthLFbxP6xkWzQdXruSOx+ylBeuxagsph6x7iL2cLYvnapGsVMiVbUpOUcNGo794JyyjTpYB4YIruLw55zxnVbzvWEoEWl+fS6kZHgGOWQkP8go9po7xMahvG81O9a10JUD1Xeq865cPpw5es0l8fOHPST7b7OPDFaHSsCKcEs0qMUZ/znlQdzr9yCa/Tvj2OrFoJxk1FproDFTXcX536jVlypxXrS5MHoexebPhddCuaCnR6XTGTML6z93Z8Xn3unbTLe3nMOiZs1Isylx6WUTXEudLNmrYe5IsjecIe1Ghjt6LUfkPeHHwMdvL5wkfk44I++MGzt+UsFcq2fgnUW/lexU34HEk9lKfkyJrtR34B9vB8bEieouRpp94znQmGhJtYdXbUNJ6ZS/SwYVOxBel39HZr/j2JFUaq1in/pzdPAl2MhVBah0hlP+z+xDgiWgBNEh9UvHlalHabKHV1dDElB5pDLpFE+l8tljjgi+Ga6bWdJwV52sDPfv/XRn79H6QcgI+lcQWM1ucgMt1HFCH6DkxPVPk7H+RSjS4dt9bfJw/dhBOtDaJKpXBiP5LlTzqbcZSOeaObxqPaPCjajFgH5AFyOjg50wfHceiNBVGAZHSkpKSkpKSsoczV+akNhbXS4AAAAASUVORK5CYII=)](https://zsh.sourceforge.io).
@@ -220,10 +211,14 @@ The OS configurations can be found:
 
 ### Homework
 
-If you are my junior :boy:, you can find all of
-[my homework :chart_with_upwards_trend:](https://github.com/Freed-Wu?tab=repositories&q=homework)
-and [competition code :memo:](https://github.com/Freed-Wu?tab=repositories&q=competition)
-as a reference :eye:.
+If you are my junior :boy:, you can find all my homework as a reference :eye:.
+
+- homework :chart_with_upwards_trend:
+  - [postgradute](https://github.com/Freed-Wu?tab=repositories&q=homework+ustc)
+  - undergradute
+    - [major](https://github.com/Freed-Wu?tab=repositories&q=homework+njust+electronics)
+    - [minor](https://github.com/Freed-Wu?tab=repositories&q=homework+njust+accountancy)
+- [competition code :memo:](https://github.com/Freed-Wu?tab=repositories&q=competition)
 
 ## Contact Me
 
@@ -256,6 +251,8 @@ more information about me
 - [![gnome discourse](https://img.shields.io/badge/gnome%20discourse-gray?logo=gnome)](https://discourse.gnome.org/u/freed-wu)
 - [![f-droid forum](https://img.shields.io/badge/f-droid%20forum-gray?logo=f-droid)](https://forum.f-droid.org/u/freed-wu)
 - [![poe](https://img.shields.io/badge/poe-gray?logo=poe)](https://poe.com/zhenyuwu)
+- [![v2ex](https://img.shields.io/badge/v2ex-gray?logo=v2ex)](https://www.v2ex.com/member/freedwu)
+- [![disqus](https://img.shields.io/badge/disqus-gray?logo=disqus)](https://disqus.com/by/disqus_eRnTnl0KT4)
 - [![reddit](https://img.shields.io/badge/reddit-gray?logo=reddit)](https://www.reddit.com/user/Worried-Current9852)
 - [![zhihu](https://img.shields.io/badge/zhihu-gray?logo=zhihu)](https://www.zhihu.com/people/wu-zhen-yu-49-44)
 - [![weibo](https://img.shields.io/badge/weibo-gray?logo=sina-weibo)](https://weibo.com/u/5198670731)

@@ -11,6 +11,8 @@ end
 local act = wezterm.action
 local mux = wezterm.mux
 wezterm.on('gui-startup', function(cmd)
+    -- luacheck: ignore 211
+    ---@diagnostic disable: unused-local
     local tab, pane, window = mux.spawn_window(cmd or {})
     window:gui_window():toggle_fullscreen()
 end)
@@ -23,14 +25,14 @@ return {
     window_background_opacity = 0.75,
     hide_tab_bar_if_only_one_tab = true,
     font_size = font_size,
-    window_padding = {left = 0, right = 0, top = 0, bottom = 0},
+    window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
     keys = {
-        {key = 'Enter', mods = 'ALT', action = 'DisableDefaultAssignment'},
-        {key = '-', mods = 'CTRL', action = 'DisableDefaultAssignment'},
-        {key = '=', mods = 'CTRL', action = 'DisableDefaultAssignment'},
-        {key = '0', mods = 'CTRL', action = 'DisableDefaultAssignment'},
-        {key = 'Backspace', mods = 'SHIFT|CTRL', action = act.ToggleFullScreen},
-        {key = 'Enter', mods = 'SHIFT', action = act.SendString '\x1b[13;2u'},
-        {key = 'Enter', mods = 'CTRL', action = act.SendString '\x1b[13;5u'}
+        { key = 'Enter',     mods = 'ALT',        action = 'DisableDefaultAssignment' },
+        { key = '-',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
+        { key = '=',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
+        { key = '0',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
+        { key = 'Backspace', mods = 'SHIFT|CTRL', action = act.ToggleFullScreen },
+        { key = 'Enter',     mods = 'SHIFT',      action = act.SendString '\x1b[13;2u' },
+        { key = 'Enter',     mods = 'CTRL',       action = act.SendString '\x1b[13;5u' }
     }
 }
