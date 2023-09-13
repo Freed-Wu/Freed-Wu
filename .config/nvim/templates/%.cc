@@ -1,8 +1,8 @@
 #if 0
-gcc "$0" -oa && exec ./a "$@"
+g++ "$0" -oa && exec ./a "$@"
 #endif
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <cstdlib>
 int main(int argc, char *argv[]) {
   {% here %}
   return EXIT_SUCCESS;

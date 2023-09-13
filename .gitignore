@@ -23,7 +23,6 @@
 !/.zshrc
 !/.zlogin
 !/.zlogout
-!/.p10k.zsh
 !/.Rprofile
 !/.inputrc
 !/.fbtermrc
@@ -293,6 +292,7 @@
 /.config/fontconfig/*
 !/.config/fontconfig/fonts.conf
 !/.config/luaprc.lua
+!/.config/p10k.zsh
 
 # $XDG_DATA_HOME
 !/.local/
@@ -320,6 +320,8 @@
 !/.local/share/jupyter/lab/
 /.local/share/jupyter/lab/*
 !/.local/share/jupyter/lab/user-settings/
+!/.local/share/supertux2/
+/.local/share/supertux2/addons/
 
 # $XDG_STATE_HOME
 !/.local/state/

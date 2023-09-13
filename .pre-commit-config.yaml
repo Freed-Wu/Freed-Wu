@@ -127,10 +127,6 @@ repos:
       - id: vimdoc
         args:
           - .config/nvim
-  - repo: https://github.com/Koihik/LuaFormatter
-    rev: 29afe1046ad015de96ffdb6d361a21882356e801
-    hooks:
-      - id: luaformatter
   - repo: https://github.com/lunarmodules/luacheck
     rev: v1.1.1
     hooks:

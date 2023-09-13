@@ -9,13 +9,13 @@ augroup init_filetype
 
   " Data_Describe {{{1 "
   autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
-  autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc setfiletype dosini
+  autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc,bootstraprc,psprint.conf,sofficerc setfiletype dosini
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
   autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map,xci} setfiletype json
   " https://github.com/McSinyx/vim-octave/issues/4
   autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd,.git,DESCRIPTION setfiletype yaml
-  autocmd BufNewFile,BufRead *.{{x,l}pr,{x,s}pfm},fonts.conf,*/{dbus-1,conf.d}/*.conf setfiletype xml
+  autocmd BufNewFile,BufRead *.{{x,l}pr,{x,s}pfm},fonts.conf,*/{dbus-1,conf.d}/*.conf,*.xcu setfiletype xml
   " 1}}} Data_Describe "
 
   " Template {{{1 "
@@ -31,6 +31,7 @@ augroup init_filetype
   " 1}}} Mark_Up "
 
   " Script {{{1 "
+  autocmd BufNewFile,BufRead *{.stsg,/.local/share/supertux2/config} setfiletype lisp
   autocmd BufNewFile,BufRead *.qsf setfiletype tcl
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
   autocmd BufNewFile,BufRead .bash_history setfiletype sh
