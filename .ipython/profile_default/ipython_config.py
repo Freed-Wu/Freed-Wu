@@ -946,7 +946,7 @@ c.TerminalInteractiveShell.true_color = True
 #  Default: False
 # c.Completer.debug = False
 
-## Activate greedy completion PENDING DEPRECTION. this is now mostly taken care
+## Activate greedy completion PENDING DEPRECATION. this is now mostly taken care
 #  of with Jedi.
 #
 #  This will enable completion on elements of lists, results of function calls,

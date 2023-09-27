@@ -22,7 +22,7 @@ jobs:
           - macos-latest
     runs-on: ${{matrix.runs-on}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: shogo82148/actions-setup-perl@v1
       - name: Install Dependencies
         run: >
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: shogo82148/actions-setup-perl@v1
       - name: Install Dependencies
         run: |

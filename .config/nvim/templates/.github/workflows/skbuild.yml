@@ -34,7 +34,7 @@ jobs:
             CIBW_SKIP: ""
     runs-on: ${{matrix.runs-on}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v2.1.0
         if: runner.os == 'Linux'
       - uses: pypa/cibuildwheel@v2.12.3
@@ -50,7 +50,7 @@ jobs:
       - build-wheels-and-test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
           python-version: ${{env.python-version}}

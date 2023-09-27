@@ -1,20 +1,33 @@
 priority 100
 
 snippet arr "myUltiSnips" b
+/* Are two types/vars the same type (ignoring qualifiers)? */
+#define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+
+#ifdef __CHECKER__
+#define BUILD_BUG_ON_ZERO(e) (0)
+#else /* __CHECKER__ */
+/*
+ * Force a compilation error if condition is true, but also produce a
+ * result (of value 0 and type int), so the expression can be used
+ * e.g. in a structure initializer (or where-ever else comma expressions
+ * aren't permitted).
+ */
+#define BUILD_BUG_ON_ZERO(e) ((int)(sizeof(struct { int:(-!!(e)); })))
+#endif /* __CHECKER__ */
+
+/* &a[0] degrades to a pointer: a different type from an array */
+#define __must_be_array(a)	BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
+
+/**
+ * ARRAY_SIZE - get the number of elements in array @arr
+ * @arr: array to be sized
+ */
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
 endsnippet
 
-snippet max "myUltiSnips" b
-#define max(a,b)             \
-({                           \
-	__typeof__ (a) _a = (a); \
-	__typeof__ (b) _b = (b); \
-	_a > _b ? _a : _b;       \
-})
-#define min(a,b)             \
-({                           \
-	__typeof__ (a) _a = (a); \
-	__typeof__ (b) _b = (b); \
-	_a < _b ? _a : _b;       \
-})
+snippet param "myUltiSnips" b
+static ${2:int} $1;
+module_param($1, $2, 0);
+MODULE_PARM_DESC($1, "$0");
 endsnippet

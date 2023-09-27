@@ -38,7 +38,6 @@
 !/.lesskey
 !/.lessfilter
 !/.wgetrc
-!/.curlrc
 !/.vintrc.yaml
 !/.chktexrc
 !/.sqliterc
@@ -293,6 +292,7 @@
 !/.config/fontconfig/fonts.conf
 !/.config/luaprc.lua
 !/.config/p10k.zsh
+!/.config/curlrc
 
 # $XDG_DATA_HOME
 !/.local/
