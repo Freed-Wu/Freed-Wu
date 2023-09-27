@@ -31,10 +31,14 @@ if has('gui_running')
 endif
 set spellfile=$XDG_DATA_HOME/nvim/spell/en.utf-8.add
 " firenvim use guifont although has('gui_running') == 0
-if hostname() ==# 'laptop'
-  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h24
+set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h
+" set fontsize is smaller than terminal by 6
+if hostname() ==# 'desktop'
+  let &guifont .= '10'
+elseif hostname() ==# 'laptop'
+  let &guifont .= '6'
 else
-  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h10
+  let &guifont .= '6'
 endif
 set runtimepath=$VIMRUNTIME
 set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
@@ -310,10 +314,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#echodoc#source()',
         \ })
   call dein#add('pbrisbin/vim-mkdir')
-  call dein#add('lambdalisue/suda.vim', {
-        \ 'if': executable('sudo'),
-        \ 'hook_source': 'call init#suda#source()',
-        \ })
   call dein#add('roxma/vim-tmux-clipboard', {
         \ 'if': !empty('$TMUX'),
         \ })
@@ -599,7 +599,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('kana/vim-grex', {
         \ 'hook_source': 'call init#grex#source()',
         \ })
-  call dein#add('tyru/caw.vim', {
+  " https://github.com/tyru/caw.vim/pull/185
+  call dein#add('KentoOgata/caw.vim', {
+        \ 'rev': 'fix/treesitter-hl_map-removed',
         \ 'on_map': {'n': ['gc', 'gs'], 'x': ['gc', 'gs']},
         \ 'hook_source': 'call init#caw#source()',
         \ })
@@ -643,6 +645,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'on_cmd': ['EasyAlign', 'LiveEasyAlign'],
         \ 'hook_source': 'call init#easy_align#source()',
         \ })
+  call dein#add('dominikduda/vim_yank_with_context')
   " 2}}} Operator "
 
   " Search {{{2 "

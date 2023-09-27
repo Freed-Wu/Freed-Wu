@@ -2,7 +2,7 @@
 -- don't install automatically to avoid network failure
 require "nvim-treesitter.configs".setup {
     indent = { enable = true },
-    highlight = { enable = true, additional_vim_regex_highlighting = true },
+    highlight = { enable = true },
     textobjects = { enable = true }
 }
 

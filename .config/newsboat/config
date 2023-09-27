@@ -21,7 +21,7 @@ include `[[ -f ~/.config/newsboat/colorschemes/solarized-dark ]] && echo ~/.conf
 save-path ~/Downloads
 
 urls-source oldreader
-oldreader-login `echo $EMAIL`
-oldreader-password `echo $GITHUB_PASSWORD`
+oldreader-login `pass ls neomutt/user/qq`
+oldreader-password `pass ls neomutt/pass/ustc`
 oldreader-flag-share @
 oldreader-flag-star *

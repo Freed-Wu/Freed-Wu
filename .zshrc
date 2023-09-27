@@ -27,7 +27,7 @@ zinit id-as'.brew' depth'1' \
 # don't run tmux on them
 if [[ $OSTYPE == linux-gnu ]] && (($+commands[tmux])) \
   && (( ! ($+TMUX || $+SSH_TTY || $+HOMEBREW_DEBUG_INSTALL))); then
-  if [[ $KITTY_WINDOW_ID == 1 || $WEZTERM_PANE == 0 ]]; then
+  if [[ $KITTY_WINDOW_ID == 1 || $WEZTERM_PANE == 0 ]] || (($+ALACRITTY_WINDOW_ID)); then
     exec tmux new -As0
   elif [[ $TERM == linux ]]; then
     tmux new -As0
@@ -137,6 +137,9 @@ alias rmdir='rmdir -p'
 alias rename='rename -i'
 if (($+commands[perl-rename])); then
   alias perl-rename='perl-rename -i'
+fi
+if (($+commands[bear])); then
+  alias make='bear -- make'
 fi
 if (($+commands[eza])); then
   alias ls='eza --icons --git -h'

@@ -9,7 +9,7 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     family: JetBrainsMono Nerd Font Mono
-  size: 10.0
+  size: 12.0
 colors:
   vi_mode_cursor:
     #  text: CellBackground
@@ -19,7 +19,9 @@ colors:
     #
     # Window opacity as a floating point number from `0.0` to `1.0`.
     # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.75
+window:
+  opacity: 0.75
+  startup_mode: Fullscreen
 
 selection:
   # This string contains all characters that are used as separators for
@@ -66,6 +68,25 @@ cursor:
     # If the same trigger is assigned to multiple actions, all of them are
     # executed in the order they were defined in.
 key_bindings:
+  # keep same as wezterm
+  - key: Plus
+    mods: Shift|Control
+    action: IncreaseFontSize
+  - key: Underline
+    mods: Shift|Control
+    action: DecreaseFontSize
+  - key: 11
+    mods: Shift|Control
+    action: ResetFontSize
+  - key: Equals
+    mods: Control
+    chars: ""
+  - key: Minus
+    mods: Control
+    chars: "\x1f"
+  - key: Key0
+    mods: Control
+    chars: ""
   - key: H
     mods: Shift|Control
     action: Hide

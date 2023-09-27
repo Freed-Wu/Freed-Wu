@@ -11,7 +11,7 @@ function! init#init#c#main() abort
     setlocal path-=/usr/include
     let &l:path .= ',' . init#init#c#nix()
   else
-    setlocal path+=/usr/local/include,/usr/src/linux/include
+    setlocal path+=/usr/local/include,/usr/src/linux/include,/usr/src/linux/arch/*/include
   endif
 
   nnoremap <silent><buffer> <LocalLeader>o :set paste<CR>i<C-R>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<CR><Esc>='[:set nopaste<CR>

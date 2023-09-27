@@ -3,7 +3,10 @@ function! init#init#fern#current_file_dir() abort
   if empty(l:dir)
     let l:dir = '.'
   endif
+  " https://github.com/lambdalisue/suda.vim
   let l:dir = substitute(l:dir, '^suda://', '', 'g')
+  " https://github.com/vim-scripts/sudo.vim
+  let l:dir = substitute(l:dir, '^sudo://', '', 'g')
   execute 'Fern -drawer' l:dir
 endfunction
 
