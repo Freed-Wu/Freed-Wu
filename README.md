@@ -2,10 +2,6 @@
 
 # About Me
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/Freed-Wu/main.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/Freed-Wu/main)
-[![github/workflow](https://github.com/Freed-Wu/Freed-Wu/actions/workflows/main.yml/badge.svg)](https://github.com/Freed-Wu/Freed-Wu/actions)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFreed-Wu%2FFreed-Wu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FFreed-Wu%2FFreed-Wu?ref=badge_shield)
-
 [![github/downloads](https://shields.io/github/downloads/Freed-Wu/Freed-Wu/total)](https://github.com/Freed-Wu/Freed-Wu/releases)
 [![github/downloads/latest](https://shields.io/github/downloads/Freed-Wu/Freed-Wu/latest/total)](https://github.com/Freed-Wu/Freed-Wu/releases/latest)
 [![github/issues](https://shields.io/github/issues/Freed-Wu/Freed-Wu)](https://github.com/Freed-Wu/Freed-Wu/issues)
@@ -40,7 +36,9 @@ Hello, everyone!
 I am a [:cn:](https://en.wikipedia.org/wiki/China) student :mortar_board:.
 My constellation is :leo: and I have driving license :page_with_curl: to drive :car:.
 
-I :heart: open source :recycle: and
+I :heart:
+[![open source](https://img.shields.io/badge/open%20source-gray?logo=open-source-initiative)](https://github.com/Freed-Wu)
+and
 hacker culture :sunglasses:. My English name comes from
 ["free software"](https://www.gnu.org), which named by myself after reading
 [_The Cathedral and the Bazaar_](https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar),
@@ -103,7 +101,7 @@ Screenshot
 When I return to my :house:, I use my
 [![NixOS](https://img.shields.io/badge/NixOS-unstable-blue?logo=NixOS)](https://discourse.nixos.org/u/Freed-Wu)
 laptop :computer: to connect my
-[![OpenWrt](https://img.shields.io/badge/OpenWrt-gray?logo=OpenWrt)](https://space.bilibili.com/49330423/dynamic)
+![OpenWrt](https://img.shields.io/badge/OpenWrt-gray?logo=OpenWrt)
 router and use
 [![firefox](https://img.shields.io/badge/firefox-gray?logo=firefox-browser)](https://github.com/mozilla)
 to surf the network. I watch
@@ -120,6 +118,8 @@ and
 
 ## Hobbies
 
+### Developments
+
 <details open>
 <summary>
 my recent status
@@ -133,62 +133,37 @@ my recent status
 
 </details>
 
-### Contributions
-
-I am interested in contributing to any
-[![open source](https://img.shields.io/badge/open%20source-gray?logo=open-source-initiative)](https://github.com/Freed-Wu)
-project only if I :heart: it. E.g.:
-
-- Program :hammer: with some languages:
-  - [![pypi](https://img.shields.io/badge/dynamic/xml?url=https://pypi.org/user/Freed-Wu&query=//html/body/main/div/div/div/h2&label=pypi&logo=pypi)](https://pypi.org/user/Freed-Wu):
-    [python](https://www.python.org/)
-  - [![cpan](https://img.shields.io/badge/cpan-2%20packages-888888?logo=perl)](https://metacpan.org/author/FREED):
-    [perl](https://www.perl.org/)
-  - [![ctan](https://img.shields.io/badge/ctan-1%20package-888888?logo=data:image/png%3Bbase64,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)](https://ctan.org/author/zhenyu):
-    [LaTeX](https://latex.org/)
-  - [![luarocks](https://img.shields.io/badge/luarocks-1%20package-888888?logo=lua)](https://luarocks.org/modules/Freed-Wu):
-    [lua](https://www.lua.org/)
-  - [![vim.org](https://img.shields.io/badge/vim.org-1%20package-888888?logo=vim)](https://www.vim.org/account/profile.php?user_id=76258):
-    [vim script](https://www.vim.org/)
-- Create :wrench: plugins:
-  - [![vim](https://img.shields.io/badge/vim-gray?logo=vim)](https://github.com/Freed-Wu?tab=repositories&q=vim&type=source)
-  - [![zsh](https://img.shields.io/badge/zsh-gray?logo=windows-terminal)](https://github.com/Freed-Wu?tab=repositories&q=zsh&type=source)
-  - [![tmux](https://img.shields.io/badge/tmux-gray?logo=tmux)](https://github.com/Freed-Wu?tab=repositories&q=tmux&type=source)
-  - [![openuserjs](https://img.shields.io/badge/openuserjs-gray?logo=javascript)](https://openuserjs.org/users/Freed-Wu/scripts)
-  - [![greasyfork](https://img.shields.io/badge/greasyfork-gray?logo=javascript)](https://greasyfork.org/users/Freed-Wu/scripts)
-- Package :package: programs for some software distributions:
-  - [![termux](https://img.shields.io/badge/termux-gray?logo=Android)](https://github.com/termux/termux-packages/commits?author=Freed-Wu)
-  - [![msys2](https://img.shields.io/badge/msys2-gray?logo=Windows)](https://github.com/msys2/MINGW-packages/commits?author=Freed-Wu)
-  - [![homebrew](https://img.shields.io/badge/homebrew-gray?logo=Homebrew)](https://github.com/Homebrew/homebrew-core/commits?author=Freed-Wu)
-  - [![AUR](https://img.shields.io/badge/AUR-gray?logo=Archlinux)](https://aur.Archlinux.org/packages?K=Freed&SeB=m)
-  - [![NUR](https://img.shields.io/badge/NUR-gray?logo=NixOS)](https://nur.nix-community.org/repos/freed-wu)
-  - [![nix](https://img.shields.io/badge/nix-gray?logo=NixOS)](https://github.com/NixOS/nixpkgs/commits?author=Freed-Wu)
-  - [![anaconda](https://img.shields.io/badge/anaconda-gray?logo=Anaconda)](https://anaconda.org/freed-wu)
-
-BTW:
-
 - I always write documents [![readthedocs](https://shields.io/readthedocs/computer-graphics-demo)](https://computer-graphics-demo.readthedocs.io).
 - I care about licenses [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFreed-Wu%2FFreed-Wu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FFreed-Wu%2FFreed-Wu).
-- I make sure code coverage rate [![codecov](https://codecov.io/gh/Freed-Wu/hhighlighter-rg/branch/main/graph/badge.svg)](https://codecov.io/gh/Freed-Wu/hhighlighter-rg).
-- I use CI/CD like [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/Freed-Wu/main.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/Freed-Wu/main).
-- and [![github/workflow](https://github.com/Freed-Wu/Freed-Wu/actions/workflows/main.yml/badge.svg)](https://github.com/Freed-Wu/Freed-Wu/actions)
+- I make sure unit test coverage rate [![codecov](https://codecov.io/gh/Freed-Wu/hhighlighter-rg/branch/main/graph/badge.svg)](https://codecov.io/gh/Freed-Wu/hhighlighter-rg).
+- I use CI/CD:
+  - [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Freed-Wu/Freed-Wu/main.svg)](https://results.pre-commit.ci/latest/github/Freed-Wu/Freed-Wu/main)
+  - [![github/workflow](https://github.com/Freed-Wu/Freed-Wu/actions/workflows/main.yml/badge.svg)](https://github.com/Freed-Wu/Freed-Wu/actions)
 
 ### Dotfiles
 
-This project contains my [dotfiles](https://dotfiles.github.io):
+This repository contains my [dotfiles](https://dotfiles.github.io):
 
-- [all scripts](script) to create a codespace. Refer
-  [personalizing-github-codespaces-for-your-account](https://docs.github.com/en/codespaces/customizing-your-codespace/personalizing-github-codespaces-for-your-account#dotfiles).
+- [all scripts](script) to
+  [personalize my github codespace](https://docs.github.com/en/codespaces/customizing-your-codespace/personalizing-github-codespaces-for-your-account#dotfiles).
 - [the configuration](.zshrc) for my shell
   [![zsh](https://img.shields.io/badge/zsh-gray?logo=data:image/png%3Bbase64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADg0lEQVR4Ae2YA7A0ORCA+2zbdzPJ49m27QvOtm3bVzjbtm1bv21sJs/cv7sqtZNFPVbN7quar6oXSfZ196S703mQkpKSkpKSUkD2kFUXMprtmj1xo/kgaYwINraS3Rjp8NlI8scjFZ7ecES4PPQRMtoq9kmkWDZS/HJIilmaLY6KXybFJaQh0uw06ANW8Qfcb7qtZPsks+VHr7kgKvyOFPckVvILoAdwzTm59ZpdAwlBiq8qYfB4lNkFYx1WVtWU/Bsy3B3nO2kd7WQWYK6EEg7mQaXTPSNnWxlsDTS3/fbz0pMscOI+KKBBszocN27+l8knrrwwJINT7oeJDs+DAsgob81v4IE7siyOjXRzkzCXVoUkQYO3yn/CwZ5FDmj2lLdmXLx79fMbxT6ncXxvjnSwCSSNOaJ6Ld8BI9nt4JHdgy0QqXCMt+Y7QCjG8fOTbqwbf3colAs0YJifqBRGjXKtFRoO47X4/c2CHLgKECPDy3JOK3YRlBM0+CjfyB4kQzGfUfxA/Nzlxp6ASsAo9mgvxrdRfmQE2wA/N7qxrynEoOy4mKbQicthLFbxP6xkWzQdXruSOx+ylBeuxagsph6x7iL2cLYvnapGsVMiVbUpOUcNGo794JyyjTpYB4YIruLw55zxnVbzvWEoEWl+fS6kZHgGOWQkP8go9po7xMahvG81O9a10JUD1Xeq865cPpw5es0l8fOHPST7b7OPDFaHSsCKcEs0qMUZ/znlQdzr9yCa/Tvj2OrFoJxk1FproDFTXcX536jVlypxXrS5MHoexebPhddCuaCnR6XTGTML6z93Z8Xn3unbTLe3nMOiZs1Isylx6WUTXEudLNmrYe5IsjecIe1Ghjt6LUfkPeHHwMdvL5wkfk44I++MGzt+UsFcq2fgnUW/lexU34HEk9lKfkyJrtR34B9vB8bEieouRpp94znQmGhJtYdXbUNJ6ZS/SwYVOxBel39HZr/j2JFUaq1in/pzdPAl2MhVBah0hlP+z+xDgiWgBNEh9UvHlalHabKHV1dDElB5pDLpFE+l8tljjgi+Ga6bWdJwV52sDPfv/XRn79H6QcgI+lcQWM1ucgMt1HFCH6DkxPVPk7H+RSjS4dt9bfJw/dhBOtDaJKpXBiP5LlTzqbcZSOeaObxqPaPCjajFgH5AFyOjg50wfHceiNBVGAZHSkpKSkpKSsoczV+akNhbXS4AAAAASUVORK5CYII=)](https://zsh.sourceforge.io).
+  - [zsh plugins](https://github.com/Freed-Wu?tab=repositories&q=zsh&type=source)
+    created by me.
 - [the configuration](.config/tmux) for my terminal multiplexer
   [![tmux](https://img.shields.io/badge/tmux-gray?logo=tmux)](https://github.com/tmux/tmux/wiki).
+  - [tmux plugins](https://github.com/Freed-Wu?tab=repositories&q=tmux&type=source)
+    created by me.
 - [the configuration](.config/wezterm) for my PC terminal emulator
   [![wezterm](https://img.shields.io/badge/wezterm-gray?logo=data:image/jpg%3Bbase64,/9j/4AAQSkZJRgABAQIBLAEsAAD/2wBDACAWGBwYFCAcGhwkIiAmMFA0MCwsMGJGSjpQdGZ6eHJmcG6AkLicgIiuim5woNqirr7EztDOfJri8uDI8LjKzsb/2wBDASIkJDAqMF40NF7GhHCExsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsb/wAARCACAAIADASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAEDBAIF/8QAKBAAAwACAAUDBAMBAAAAAAAAAAECAxEhMVFhcQQSQSIjMjMTQoGR/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAEEAgP/xAAeEQEBAQADAQEAAwAAAAAAAAAAAQIDERIxISIyQf/aAAwDAQACEQMRAD8A8CZdPSNMYpnu+rGOPZPf5OyoAAIAAAAAAAAAAAAAK7xTXLg+pnqXL0zYcZI989/gK6AAQAAAAtnEnKbb4nWc3XwVA6ySprSZySzq9UAAQAAAAAAAAAQAqQTE++tI0zClcEeuOO7RnWO3/VmlLSSIdynptEtpLbejRjGcd9UUXFu29FbTT0+ZqVJ8mjNke7ryePLiT9g6xSrppndYpUt8TjB+f+F9fi/B3x5zcd2DKCAZVdSt0l1Lv4Z7lOP9k+TUaeHMsvcRkrhTQFfk/JBnv1UAAgu9O/qfgv8AgxptPa5mnHkV9mauHc681FKhrKk+pZ6h6hLqy0qzzVaa4pFuPGL0KCADIqzB+xGl8jLh/YjUa+D+qMfN6LKwuZb3vRGJbyrsaWtpo8+PjmpbRlxfsk1GbEtZUuhpr8X4PTg/M0Y3zIAMigAAAADThp1G29liafJnGL6cS8bKMdUsi18vibPfmZl/1F2TEq4rgzMbTLm4ZXo45sSfygjG/uT5NZjl6peTYXg+UqnCvrp/4WRfuql0ZEr2TTfVspwV9zj8ll8eYO9a9R54lt8IrwQ5+5NEZXrFR3J5lGUAGFUAADR6dcKZa4l85X/DJOSpWpei3Dku703w0aePeepnpF+lrXwQpmeSSIyV7cba5mV5LfOmem+SYvwabyzC6voZW3TbfNkAzb5LtUm1cjCaJzypSezvh1J32ldZ3rG+5ml6pPoWZsivWt6RUc8uu9dwbuZXnf235OYzyoSe9o5zZZuUlvme+uTNx9FIAMagIAElmLIse9pvZUC5tze4LsuZXGkmiogF1q6vdEggHIkEACQQAJBAAkEADmK9y7nRQm09otm0/IHQAAAAAAAAAAAAAAABzde1dxVpd30Km23tgf/Z)](https://wezfurlong.org/wezterm).
 - [the configuration](.termux) for my Android terminal emulator
   [![termux](https://img.shields.io/badge/termux-gray?logo=data:image/jpg%3Bbase64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAGRFS1hLP2RYUVhxamR3lvqjloqKlv/b57X6////////////////////////////////////////////////////2wBDAWpxcZaDlv+jo///////////////////////////////////////////////////////////////////////////wAARCADIAMgDASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAIDBAUB/8QALhABAAIBAQcDAQgDAAAAAAAAAAECAxEEEyExMlKREhRBYSIjM0NigaHRUXGx/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AMoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/Hs28pFovHH6KFuz5pxW49M8wWeznvjwqzYbYtNZ1ifl0I4xrDy9IvWa25SDmCWSk47zWUQAAAAAAAAAAAAAAAAAAAAAAatlzfl2/b+mpy2/Z8u8ppPVHMHufFGWn6o5OfMaTpPN1GbasOv3lefyDIAAAAAAAAAAAAAAAAAAAAAAlS80vFq84RAdLHeMlItHykwYM26tx6Z5t8cY1gGHaMO7trHTP8ACl071i9ZrblLnZMc47zWQRAAAAAAAAAAAAAAAAAAAAAAbtk9W6+1y+GbBh3tuPTHNvjhGkAM+2ej0Rr1fC+9opWbW5Q52TJOS82kEQAAAAAAAAAAAAAAAAAAAEqUm94rXnKLfs+Ld01nqnmCeOkY6RWPhIZtqzafd15/IKtozby2kdMfypAAAAAAAAAAAAAAAAAAAAFuz4Zy249McwW7Lh/Mt+39tRHCNIeXvFKza3KAQz5YxU/VPJz5nWdZ5pZLzkvNpRAAASil7RrFLTH0hFv2b8Cv7/8AZBi3WTst4k3WTst4l0gHN3WTst4k3WTst4l0gHN3WTst4knHeI1mlvDpI3/Dt/qQc0AAAAAAAAABfj2nd0isUjh9VADT7yeyPKrNmtl01jSI+FYAAAAAvx7TOOkV9MTp9VADT7yeyPJ7yeyPLMA0+8nsjye8nsjyzANPvJ7I8vLbXM1mPRHGP8s4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//Z)](https://termux.dev).
+  - [termux packages](https://github.com/termux/termux-packages/commits?author=Freed-Wu)
+    packaged by me.
 - [the configuration](.config/nvim) for my editor
   [![neovim](https://img.shields.io/badge/neovim-gray?logo=neovim)](https://neovim.io).
+  - [vim plugins](https://github.com/Freed-Wu?tab=repositories&q=vim&type=source)
+    created by me.
 - [the configuration](.config/neomutt) for my mail reader
   [![neomutt](https://img.shields.io/badge/neomutt-gray?logo=data:image/jpg%3Bbase64,/9j/4AAQSkZJRgABAQIAIwAjAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAwADADASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAABQcEBgABCAP/xAAvEAABAwMEAAUBCAMAAAAAAAABAgMEAAURBhIhMQcTMlFhQRQiIyQzcZGxodHh/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAME/8QAIBEAAgIBAwUAAAAAAAAAAAAAAAECAxESQaEhMWGi0f/aAAwDAQACEQMRAD8A5/rKn2W2qu93jwUnb5quT7AcmoslCW5TzaQQlKykA/BoDyo5pjTrmoZzjfm+THZTvddxnA6AHyaBgEkADJNPzw70ci32H86CZMopccGfSB6U0Aj7oxHj3WRHib1MtuFCCvknHGah9U0NY2y26Q+2TbW83IlypKm8qAJj/Ugf7pYElSiSck8k0AU03cBa9RQpavQhwBf7Hg/3RXXmn3LNf3Hm0ExJZ81pYHHPYobpW3oump4ERz9NboKvkDnH+K6XYYjutpQ8y24gdJWkED+aA5503Ynylu8SoLxhsvJIWU4Ss+1Pa03Fp+Mh5lYUhQyDRic1GkQlxVtILCk7SjHGKVspyToq4K3FTtsdVwc9f9/upNuMsvs+DbXCu+rTHpNey+rleSz3mFZWpsOdLtbD0duQp57DefvEeo+4zjNKbxFuVnud3betTDDR2kOeSkBJ9uvrR29+JcRyA6zb0PKeWkpC1pwE5+tK8kkkns1qjYlW4aVl7kY3KNUq9Ky990GNLRLhM1FDRbDtkpXvCz0gDsn4p23nWMTTcmDGlvIKnD+MQCShOO8D3NK7w3vNus15kuXB5LKXGdqHFDgHPVXGfd9DBifKDkSTKdQpR3grUpWOAM9VIgH4OvrTerq3bretx5xaVKKyjalIA+aUmsdQ3S9XR+JJwGYrqkpbbTxwcZNSNJ3m223VkaW84GY6I5Qte08qxV6c1Zo6PFmGM8x5ryVqVtaOVqIPZxQCUrK2o5UT1k1qgP/Z)](https://neomutt.org).
 - [the configuration](.config/ptpython) for my python REPL
@@ -203,11 +178,24 @@ The OS configurations can be found:
 
 - [the configurations](https://github.com/Freed-Wu/nixos) for
   [![NixOS](https://img.shields.io/badge/NixOS-unstable-blue?logo=NixOS)](https://nixos.org).
+  - [nix packages](https://github.com/NixOS/nixpkgs/commits?author=Freed-Wu)
+    packaged by me.
 - [the configurations](https://github.com/Freed-Wu/pacman.d) for
   [![Archlinux](https://img.shields.io/badge/Archlinux-rolling-blue?logo=Archlinux)](https://archlinux.org).
 - [the configurations](https://github.com/Freed-Wu/portage) for
   [![Gentoo](https://img.shields.io/badge/Gentoo-rolling-blue?logo=Gentoo)](https://www.gentoo.org).
-- [All my configurations](https://github.com/Freed-Wu?tab=repositories&q=dotfiles).
+- [the configurations](https://github.com/Freed-Wu/etc) for
+  [![Windows msys2](https://img.shields.io/badge/Windows-msys2-blue?logo=Windows)](https://msys2.org).
+  - [mingw packages](https://github.com/msys2/MINGW-packages/commits?author=Freed-Wu)
+    packaged by me.
+- I have used
+  [![nix](https://img.shields.io/badge/nix-gray?logo=NixOS)](https://nixos.org)
+  to replace
+  [![homebrew](https://img.shields.io/badge/homebrew-gray?logo=Homebrew)](https://brew.sh)
+  as my third-party package manager.
+  - [homebrew packages](https://github.com/Homebrew/homebrew-core/commits?author=Freed-Wu)
+    packaged by me.
+- [More](https://github.com/Freed-Wu?tab=repositories&q=dotfiles).
 
 ### Homework
 
@@ -230,36 +218,59 @@ me, you can find:
 more information about me
 </summary>
 
-- [![github](https://img.shields.io/github/followers/Freed-Wu?logo=github)](https://github.com/Freed-Wu?tab=followers)
-- [![sponsors](https://shields.io/github/sponsors/Freed-Wu?logo=github)](https://github.com/sponsors/Freed-Wu/)
-- [![twitter](https://img.shields.io/twitter/follow/FreedWu?logo=twitter)](https://twitter.com/FreedWu)
-- [![dockerhub](https://img.shields.io/badge/dockerhub-gray?logo=Docker)](https://hub.docker.com/u/freedwu)
-- [![wandb](https://img.shields.io/badge/wandb-888888?logo=data:image/png%3Bbase64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAUVBMVEUAAAD/zzD/zzD/zzD/zjH/yzD/zDP/zDP/zTL/zDP/zTL/yzL/yzL/zDL/zDL/zDP/zDP/zDP/zDP/yzL/yzP/zDL/zDL/zDL/zDL/zDP/zDNs+ITNAAAAGnRSTlMAECAwP0BQX2BvcICPkJ+gr7C/wM/Q3+Dv8ORN9PUAAAEOSURBVBgZfcEJkpswAADBEVphB0EwzmJg/v/QcKbKC3E3FI/xN5fa8VEAjRq5ENUGaNXIhai2QBrsOJTf3yWHziHxw6AvPpl04pOsmXehfvksOYTAoXz6qgONi8hJdNEwuMicZBcvXGVOsit6FxWboq4LNpWLntLZFNj0+s0mTM5KSLmpAjtn7ELV5MQPnXZ8VJacxFvgUrhFZnc1cCGod6BTE7t7Xd/YJbUDKjWw6Zw92AS1AsK9SWyiq4JNau6BN8lV4n+Sq8Sb8PXri93gbOBNGtUnm6Kbpq7gUDDrXFRc6B0TuMqcJbWFyUXmLKoNtC4SmzyOmUMztAUUf9TMbtKRk8g/gw58UvZ9yZu/MeoYEFwSwuAAAAAASUVORK5CYII=)](https://wandb.ai/freed)
-- [![kaggle](https://img.shields.io/badge/kaggle-gray?logo=kaggle)](https://www.kaggle.com/FreedWu)
-- [![huggingface](https://img.shields.io/badge/huggingface-gray?logo=data:image/png%3Bbase64,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)](https://huggingface.co/Freed-Wu)
-- [![XDA forum](https://img.shields.io/badge/XDA%20forum-gray?logo=Android)](https://forum.xda-developers.com/m/freed-wu.11344913)
-- [![Archlinux BBS](https://img.shields.io/badge/Archlinux%20BBS-gray?logo=Archlinux)](https://bbs.Archlinux.org/profile.php?id=126120)
-- [![Gentoo forum](https://img.shields.io/badge/Gentoo%20forum-gray?logo=Gentoo)](https://forums.Gentoo.org/profile.php?mode=viewprofile&u=399232)
-- [![Debian Salsa](https://img.shields.io/badge/Debian%20Salsa-gray?logo=Debian)](https://salsa.debian.org/wzy)
-- [![python discuss](https://img.shields.io/badge/python%20discuss-gray?logo=python)](https://discuss.python.org/u/Freed-Wu)
-- [![pytorch discuss](https://img.shields.io/badge/pytorch%20discuss-gray?logo=pytorch)](https://discuss.pytorch.org/u/Freed-Wu)
-- [![octave discourse](https://img.shields.io/badge/octave%20discourse-gray?logo=octave)](https://octave.discourse.group/u/freed-wu)
-- [![cmake discourse](https://img.shields.io/badge/cmake%20discourse-gray?logo=cmake)](https://discourse.cmake.org/u/freed-wu)
-- [![jupyter discourse](https://img.shields.io/badge/jupyter%20discourse-gray?logo=jupyter)](https://discourse.jupyter.org/u/freed-wu)
-- [![root forum](https://img.shields.io/badge/root%20forum-gray?logo=C%2B%2B)](https://root-forum.cern.ch/u/freed-wu)
-- [![libreoffice forum](https://img.shields.io/badge/libreoffice%20forum-gray?logo=libreoffice)](https://ask.libreoffice.org/u/wzy)
-- [![gnome discourse](https://img.shields.io/badge/gnome%20discourse-gray?logo=gnome)](https://discourse.gnome.org/u/freed-wu)
-- [![f-droid forum](https://img.shields.io/badge/f--droid%20forum-gray?logo=f-droid)](https://forum.f-droid.org/u/freed-wu)
-- [![poe](https://img.shields.io/badge/poe-gray?logo=poe)](https://poe.com/zhenyuwu)
-- [![v2ex](https://img.shields.io/badge/v2ex-gray?logo=v2ex)](https://www.v2ex.com/member/freedwu)
-- [![disqus](https://img.shields.io/badge/disqus-gray?logo=disqus)](https://disqus.com/by/disqus_eRnTnl0KT4)
-- [![reddit](https://img.shields.io/badge/reddit-gray?logo=reddit)](https://www.reddit.com/user/Worried-Current9852)
-- [![gravatar](https://img.shields.io/badge/gravatar-gray?logo=gravatar)](https://gravatar.com/freedwu)
-- [![zhihu](https://img.shields.io/badge/zhihu-gray?logo=zhihu)](https://www.zhihu.com/people/wu-zhen-yu-49-44)
-- [![weibo](https://img.shields.io/badge/weibo-gray?logo=sina-weibo)](https://weibo.com/u/5198670731)
-- [![linkedin](https://img.shields.io/badge/linkedin-gray?logo=linkedin)](https://www.linkedin.com/in/zhenyu-wu-5625971a7)
-- [![bilibili](https://img.shields.io/badge/bilibili-gray?logo=bilibili)](https://space.bilibili.com/49330423)
-- [![qq](https://img.shields.io/badge/qq-gray?logo=tencent-qq)](https://user.qzone.qq.com/1295652958)
+- host packages of some specific languages:
+  - [![pypi](https://img.shields.io/badge/dynamic/xml?url=https://pypi.org/user/Freed-Wu&query=//html/body/main/div/div/div/h2&label=pypi&logo=pypi)](https://pypi.org/user/Freed-Wu)
+  - [![cpan](https://img.shields.io/badge/cpan-gray?logo=perl)](https://metacpan.org/author/FREED)
+  - [![ctan](https://img.shields.io/badge/ctan-gray?logo=data:image/png%3Bbase64,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)](https://ctan.org/author/zhenyu)
+  - [![luarocks](https://img.shields.io/badge/luarocks-gray?logo=lua)](https://luarocks.org/modules/Freed-Wu)
+  - [![vim.org](https://img.shields.io/badge/vim.org-gray?logo=vim)](https://www.vim.org/account/profile.php?user_id=76258)
+  - [![openuserjs](https://img.shields.io/badge/openuserjs-gray?logo=javascript)](https://openuserjs.org/users/Freed-Wu/scripts)
+  - [![greasyfork](https://img.shields.io/badge/greasyfork-gray?logo=javascript)](https://greasyfork.org/users/Freed-Wu/scripts)
+- host packages of some software distributions:
+  - [![AUR](https://img.shields.io/badge/AUR-gray?logo=Archlinux)](https://aur.Archlinux.org/packages?K=Freed&SeB=m)
+  - [![NUR](https://img.shields.io/badge/NUR-gray?logo=NixOS)](https://nur.nix-community.org/repos/freed-wu)
+  - [![dockerhub](https://img.shields.io/badge/dockerhub-gray?logo=Docker)](https://hub.docker.com/u/freedwu)
+  - [![anaconda](https://img.shields.io/badge/anaconda-gray?logo=Anaconda)](https://anaconda.org/freed-wu)
+- host source code:
+  - [![github](https://img.shields.io/github/followers/Freed-Wu?logo=github)](https://github.com/Freed-Wu?tab=followers)
+  - [![sponsors](https://shields.io/github/sponsors/Freed-Wu?logo=github)](https://github.com/sponsors/Freed-Wu/)
+  - [![sourceforge](https://img.shields.io/badge/sourceforge-gray?logo=sourceforge)](https://sourceforge.net/u/freed-wu/profile)
+  - [![Debian Salsa](https://img.shields.io/badge/Debian%20Salsa-gray?logo=Debian)](https://salsa.debian.org/wzy)
+  - [![gitlab](https://img.shields.io/badge/gitlab-gray?logo=gitlab)](https://gitlab.com/Freed-Wu)
+  - [![gitee](https://img.shields.io/badge/gitee-gray?logo=gitee)](https://gitee.com/Freed-Wu)
+  - [![huggingface](https://img.shields.io/badge/huggingface-gray?logo=data:image/png%3Bbase64,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)](https://huggingface.co/Freed-Wu)
+  - [![ustc gitlab](https://img.shields.io/badge/ustc%20gitlab-gray?logo=git)](https://git.ustc.edu.cn/freedwu)
+- forums of some programs:
+  - [![XDA](https://img.shields.io/badge/XDA-gray?logo=Android)](https://forum.xda-developers.com/m/freed-wu.11344913)
+  - [![Archlinux](https://img.shields.io/badge/Archlinux-gray?logo=Archlinux)](https://bbs.Archlinux.org/profile.php?id=126120)
+  - [![Gentoo](https://img.shields.io/badge/Gentoo-gray?logo=Gentoo)](https://forums.Gentoo.org/profile.php?mode=viewprofile&u=399232)
+  - [![python](https://img.shields.io/badge/python-gray?logo=python)](https://discuss.python.org/u/Freed-Wu)
+  - [![pytorch](https://img.shields.io/badge/pytorch-gray?logo=pytorch)](https://discuss.pytorch.org/u/Freed-Wu)
+  - [![octave](https://img.shields.io/badge/octave-gray?logo=octave)](https://octave.discourse.group/u/freed-wu)
+  - [![cmake](https://img.shields.io/badge/cmake-gray?logo=cmake)](https://discourse.cmake.org/u/freed-wu)
+  - [![jupyter](https://img.shields.io/badge/jupyter-gray?logo=jupyter)](https://discourse.jupyter.org/u/freed-wu)
+  - [![root](https://img.shields.io/badge/root-gray?logo=C%2B%2B)](https://root-forum.cern.ch/u/freed-wu)
+  - [![libreoffice](https://img.shields.io/badge/libreoffice-gray?logo=libreoffice)](https://ask.libreoffice.org/u/wzy)
+  - [![gnome](https://img.shields.io/badge/gnome-gray?logo=gnome)](https://discourse.gnome.org/u/freed-wu)
+  - [![f-droid](https://img.shields.io/badge/f--droid-gray?logo=f-droid)](https://forum.f-droid.org/u/freed-wu)
+- development:
+  - [![wandb](https://img.shields.io/badge/wandb-gray?logo=data:image/png%3Bbase64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAUVBMVEUAAAD/zzD/zzD/zzD/zjH/yzD/zDP/zDP/zTL/zDP/zTL/yzL/yzL/zDL/zDL/zDP/zDP/zDP/zDP/yzL/yzP/zDL/zDL/zDL/zDL/zDP/zDNs+ITNAAAAGnRSTlMAECAwP0BQX2BvcICPkJ+gr7C/wM/Q3+Dv8ORN9PUAAAEOSURBVBgZfcEJkpswAADBEVphB0EwzmJg/v/QcKbKC3E3FI/xN5fa8VEAjRq5ENUGaNXIhai2QBrsOJTf3yWHziHxw6AvPpl04pOsmXehfvksOYTAoXz6qgONi8hJdNEwuMicZBcvXGVOsit6FxWboq4LNpWLntLZFNj0+s0mTM5KSLmpAjtn7ELV5MQPnXZ8VJacxFvgUrhFZnc1cCGod6BTE7t7Xd/YJbUDKjWw6Zw92AS1AsK9SWyiq4JNau6BN8lV4n+Sq8Sb8PXri93gbOBNGtUnm6Kbpq7gUDDrXFRc6B0TuMqcJbWFyUXmLKoNtC4SmzyOmUMztAUUf9TMbtKRk8g/gw58UvZ9yZu/MeoYEFwSwuAAAAAASUVORK5CYII=)](https://wandb.ai/freed)
+  - [![kaggle](https://img.shields.io/badge/kaggle-gray?logo=kaggle)](https://www.kaggle.com/FreedWu)
+  - [![poe](https://img.shields.io/badge/poe-gray?logo=poe)](https://poe.com/zhenyuwu)
+- forums for discusstion:
+  - [![stackoverflow](https://img.shields.io/badge/stackoverflow-gray?logo=stackoverflow)](https://stackoverflow.com/users/16027269/wzy)
+  - [![reddit](https://img.shields.io/badge/reddit-gray?logo=reddit)](https://www.reddit.com/user/Worried-Current9852)
+  - [![v2ex](https://img.shields.io/badge/v2ex-gray?logo=v2ex)](https://www.v2ex.com/member/freedwu)
+  - [![disqus](https://img.shields.io/badge/disqus-gray?logo=disqus)](https://disqus.com/by/disqus_eRnTnl0KT4)
+  - [![zhihu](https://img.shields.io/badge/zhihu-gray?logo=zhihu)](https://www.zhihu.com/people/wu-zhen-yu-49-44)
+- personal accounts:
+  - [![gravatar](https://img.shields.io/badge/gravatar-gray?logo=gravatar)](https://gravatar.com/freedwu)
+  - [![twitter](https://img.shields.io/twitter/follow/FreedWu?logo=twitter)](https://twitter.com/FreedWu)
+  - [![linkedin](https://img.shields.io/badge/linkedin-gray?logo=linkedin)](https://www.linkedin.com/in/zhenyu-wu-5625971a7)
+  - [![facebook](https://img.shields.io/badge/facebook-gray?logo=facebook)](https://www.facebook.com/profile.php?id=100057378480375)
+  - [![weibo](https://img.shields.io/badge/weibo-gray?logo=sina-weibo)](https://weibo.com/u/5198670731)
+  - [![bilibili](https://img.shields.io/badge/bilibili-gray?logo=bilibili)](https://space.bilibili.com/49330423)
+  - [![qq](https://img.shields.io/badge/qq-gray?logo=tencent-qq)](https://user.qzone.qq.com/1295652958)
 
 </details>
 

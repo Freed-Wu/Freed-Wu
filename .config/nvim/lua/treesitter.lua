@@ -3,7 +3,31 @@
 require "nvim-treesitter.configs".setup {
     indent = { enable = true },
     highlight = { enable = true },
-    textobjects = { enable = true }
+    -- https://github.com/nvim-treesitter/nvim-treesitter-context/issues/340
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ["ie"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+            },
+            selection_modes = {
+                ['@parameter.outer'] = 'v',
+                ['@function.outer'] = 'V',
+                ['@class.outer'] = '<c-v>',
+            },
+            include_surrounding_whitespace = true,
+        },
+        swap = {
+            enable = true,
+            swap_next = {
+                ["=;"] = "@parameter.inner",
+            },
+            swap_previous = {
+                ["=,"] = "@parameter.inner",
+            },
+        },
+    },
 }
 
 -- luacheck: ignore 111 112 113
