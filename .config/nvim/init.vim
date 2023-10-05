@@ -4,18 +4,20 @@ scriptencoding utf-8
 if exists('*stdpath')
   let $XDG_CONFIG_HOME = fnamemodify(stdpath('config'), ':h')
   let $XDG_DATA_HOME = fnamemodify(stdpath('data'), ':h')
+  let $XDG_STATE_HOME = fnamemodify(stdpath('state'), ':h')
   let $XDG_CACHE_HOME = fnamemodify(stdpath('cache'), ':h')
 else
   let s:expand = {var, default -> var == expand(var) ? expand(default) : var}
   let $XDG_CONFIG_HOME = s:expand('$XDG_CONFIG_HOME', '$HOME/.config')
   let $XDG_DATA_HOME = s:expand('$XDG_DATA_HOME', '$HOME/.local/share')
+  let $XDG_STATE_HOME = s:expand('$XDG_STATE_HOME', '$HOME/.local/state')
   let $XDG_CACHE_HOME = s:expand('$XDG_CACHE_HOME', '$HOME/.cache')
 endif
 if !has('nvim')
   " vint: next-line -ProhibitSetNoCompatible
   set nocompatible
-  set undodir=$XDG_DATA_HOME/nvim/undo
-  set directory=$XDG_DATA_HOME/nvim/swap
+  set undodir=$XDG_STATE_HOME/nvim/undo
+  set directory=$XDG_STATE_HOME/nvim/swap
   if !isdirectory(&undodir)
     call mkdir(&undodir, 'p')
   endif
@@ -29,14 +31,15 @@ if has('gui_running')
     simalt ~x
   endif
 endif
-set spellfile=$XDG_DATA_HOME/nvim/spell/en.utf-8.add
+set spellfile=$XDG_STATE_HOME/nvim/spell/en.utf-8.add
 " firenvim use guifont although has('gui_running') == 0
 set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h
 " set fontsize is smaller than terminal by 6
 if hostname() ==# 'desktop'
   let &guifont .= '10'
+" https://github.com/glacambre/firenvim/issues/1565
 elseif hostname() ==# 'laptop'
-  let &guifont .= '6'
+  let &guifont .= '24'
 else
   let &guifont .= '6'
 endif
@@ -592,18 +595,15 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'on_map': {'n': 'Q', 'x': 'Q'},
         \ 'hook_source': 'call init#exchange#source()',
         \ })
-  call dein#add('Shougo/context_filetype.vim')
   call dein#add('kana/vim-operator-user', {
         \ 'hook_post_source': 'call init#operator_user#post_source()',
         \ })
   call dein#add('kana/vim-grex', {
         \ 'hook_source': 'call init#grex#source()',
         \ })
-  " https://github.com/tyru/caw.vim/pull/185
-  call dein#add('KentoOgata/caw.vim', {
-        \ 'rev': 'fix/treesitter-hl_map-removed',
-        \ 'on_map': {'n': ['gc', 'gs'], 'x': ['gc', 'gs']},
-        \ 'hook_source': 'call init#caw#source()',
+  call dein#add('numToStr/Comment.nvim', {
+        \ 'if': has('nvim-0.5.0'),
+        \ 'hook_source': 'lua require"comment"',
         \ })
   call dein#add('voldikss/vim-browser-search', {
         \ 'hook_source': 'call init#browser_search#source()',
@@ -721,6 +721,13 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   call dein#add('wellle/targets.vim', {
         \ 'hook_source': 'call init#targets#source()',
+        \ })
+  call dein#add('nvim-treesitter/nvim-treesitter-textobjects', {
+        \ 'if': has('nvim-0.5.0'),
+        \ })
+  call dein#add('nvim-treesitter/nvim-treesitter-context', {
+        \ 'if': has('nvim-0.5.0'),
+        \ 'hook_source': 'lua require"treesitter_context"',
         \ })
   call dein#add('kana/vim-textobj-user')
   call dein#add('thinca/vim-textobj-between', {

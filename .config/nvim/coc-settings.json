@@ -162,7 +162,9 @@
   "list.source.files.args": ["--hidden", "--files"],
   "ltex.completionEnabled": true,
   "markdown-preview-enhanced.enableScriptExecution": true,
-  "perl.disableCache": true,
+  "markdown-preview-enhanced.previewTheme": "github-dark.css",
+  "perl.p::ls.enable": true,
+  "perl.p::ls.disableCache": true,
   "prettier.ignorePath": ".gitignore",
   "pydocstring.enableFileAction": true,
   "pyright.organizeimports.provider": "isort",
@@ -195,6 +197,5 @@
     "https://json.schemastore.org/clang-format.json": ".clang-format"
   },
   "yaml.format.singleQuote": true,
-  "zi.hover": false,
-  "markdown-preview-enhanced.previewTheme": "atom-dark.css"
+  "zi.hover": false
 }

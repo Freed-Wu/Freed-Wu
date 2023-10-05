@@ -2,7 +2,7 @@ DRIVER_NAME := $(shell basename $(PWD))
 ifneq ($(KERNELRELEASE),)
 	ccflags-y += -g -DDEBUG
 	obj-m := $(DRIVER_NAME).o
-	$(DRIVER_NAME)-objs = {{ join(map(split(glob(expand('%:h') . '/*.c')), {_, v -> fnamemodify(v, ':t:r') . '.o'}), ' ') }}
+	$(DRIVER_NAME)-objs = {{ join(uniq(map(split(glob(expand('%:h') . '/*.c')), {_, v -> fnamemodify(v, ':t:r:r') . '.o'}), ' ')) }}
 else
 ifeq ($(shell test -d /usr/src/linux || echo 0),)
 	KDIR = /usr/src/linux
