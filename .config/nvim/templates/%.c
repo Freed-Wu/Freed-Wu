@@ -1,6 +1,8 @@
 #if 0
-gcc "$0" -oa && exec ./a "$@"
+bin="$(basename "$0")" && bin="${bin%%.*}" && gcc "$0" -o"$bin" && exec ./"$bin" "$@"
 #endif
+#include <err.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 int main(int argc, char *argv[]) {

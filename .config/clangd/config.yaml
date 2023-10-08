@@ -1,10 +1,13 @@
 ---
-UnusedIncludes: Strict
+Diagnostics:
+  UnusedIncludes: Strict
 Hover:
   ShowAKA: true
 CompileFlags:
   Compiler: gcc
   Add:
+    - -Wunused-variable
+    - -Wunused-label
     - -I/home/.local/include # android termux
     - -I/proc/cygdrive/c/Users/wzy/.local/include # windows msys2
     - -I/home/wzy/.local/include # gnu/linux
@@ -12,5 +15,3 @@ CompileFlags:
     - -I/usr/local/include # BSD or homebrew (macOS x86)
     - -I/opt/include # homebrew (macOS arm)
     - -I/home/linuxbrew/.linuxbrew/include # homebrew (linux)
-    - -I/usr/src/linux/include
-    - -I/usr/src/linux/arch/x86/include

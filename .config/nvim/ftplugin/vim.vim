@@ -17,5 +17,4 @@ endif
 call init#init#vim#map()
 call init#textobj#map('continuous', 'continuous/vim')
 
-nnoremap <silent><buffer> K :<C-U>call CocAction('doHover')<CR>
 nmap <buffer> gK <Plug>ScripteaseHelp

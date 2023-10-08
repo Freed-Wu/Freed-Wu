@@ -15,9 +15,12 @@ endfunction
 
 function! init#init#vim#echo(...) abort
   let l:word = init#parse(a:)
+  if stridx(l:word, '(') == -1
+    let l:word = substitute(l:word, ')$', '', '')
+  endif
   let l:word = substitute(l:word, '[|`]', '', 'g')
   let l:word = substitute(l:word, '[lsa]\ze:', 'g', 'g')
-  let l:word = substitute(l:word, ',$', '', 'g')
+  let l:word = substitute(l:word, ',$', '', '')
   echo eval(l:word)
 endfunction
 

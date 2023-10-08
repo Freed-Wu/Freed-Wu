@@ -11,5 +11,6 @@
   ["--"],
   ["CocU&pdate"],
   ["--"],
-  ["&TSUpdate"]
+  ["&TSUpdate"],
+  ["TSInstall &all"]
 ]

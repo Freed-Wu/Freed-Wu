@@ -1,7 +1,8 @@
 #if 0
-g++ "$0" -oa && exec ./a "$@"
+bin="$(basename "$0")" && bin="${bin%%.*}" && g++ "$0" -o"$bin" && exec ./"$bin" "$@"
 #endif
-#include <iostream>
+#include <cerrno>
+#include <cstdio>
 #include <cstdlib>
 int main(int argc, char *argv[]) {
   {% here %}

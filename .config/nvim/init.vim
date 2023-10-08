@@ -4,7 +4,11 @@ scriptencoding utf-8
 if exists('*stdpath')
   let $XDG_CONFIG_HOME = fnamemodify(stdpath('config'), ':h')
   let $XDG_DATA_HOME = fnamemodify(stdpath('data'), ':h')
-  let $XDG_STATE_HOME = fnamemodify(stdpath('state'), ':h')
+  if has('nvim-0.8.0')
+    let $XDG_STATE_HOME = fnamemodify(stdpath('state'), ':h')
+  else
+    let $XDG_STATE_HOME = $XDG_DATA_HOME
+  endif
   let $XDG_CACHE_HOME = fnamemodify(stdpath('cache'), ':h')
 else
   let s:expand = {var, default -> var == expand(var) ? expand(default) : var}
@@ -44,7 +48,8 @@ else
   let &guifont .= '6'
 endif
 set runtimepath=$VIMRUNTIME
-set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
+" keep compatibility with vim
+set runtimepath+=/usr/share/vim/vimfiles
 set belloff=
 set modelines=2
 set fileencoding=utf-8
@@ -250,6 +255,11 @@ onoremap zK zkzMzv
 " 1}}} Prefix "
 
 " PluginPrefix {{{1 "
+" dein.nvim need
+if !has('patch-8.2.000') && !has('nvim-0.8.0')
+  finish
+endif
+set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
 if has('nvim') && executable('nvim-notify') || executable('notify-send')
       \ || executable('osascript') || executable('terminal-notifier')
   let g:dein#enable_notification = 1
@@ -451,9 +461,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('Soares/trailguide.vim')
   call dein#add('Soares/longline.vim')
   " https://github.com/neoclide/coc-highlight/issues/36
-  call dein#add('dominikduda/vim_current_word', {
-        \ 'hook_source': 'call init#vim_current_word#source()',
-        \ })
+  call dein#add('RRethy/vim-illuminate')
   call dein#add('dbmrq/vim-redacted', {
         \ 'hook_source': 'call init#redacted#source()',
         \ })
@@ -529,14 +537,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('neomutt/neomutt.vim')
   call dein#add('tpope/vim-scriptease', {
         \ 'hook_source': 'call init#scriptease#source()',
-        \ })
-  " https://github.com/vim-jp/vital.vim/issues/574
-  call dein#add('vim-jp/vital.vim', {
-        \ 'merged': 0,
-        \ })
-  call dein#add('junegunn/vader.vim')
-  call dein#add('thinca/vim-themis', {
-        \ 'build': 'ln -s $PWD/bin/themis ~/.local/bin',
         \ })
   call dein#add('mechatroner/rainbow_csv', {
         \ 'hook_source': 'call init#rainbow_csv#source()',

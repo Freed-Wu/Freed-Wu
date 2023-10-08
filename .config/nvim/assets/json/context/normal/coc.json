@@ -1,10 +1,4 @@
 [
-  ["&Implementation", "call CocAction('jumpImplementation')"],
-  ["&TypeDefinition", "call CocAction('jumpTypeDefinition')"],
-  ["&Called References", "call CocAction('jumpReferences')"],
-  ["Re&name", "call CocAction('rename')"],
-  ["Re&factor", "call CocAction('refactor')"],
-  ["--"],
   ["Trans&late", "call coc#rpc#notify('doKeymap', ['translator-p'])"],
   ["Translate &Replace", "call coc#rpc#notify('doKeymap', ['translator-r'])"],
   ["--"],

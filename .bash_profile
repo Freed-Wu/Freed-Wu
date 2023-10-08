@@ -1,6 +1,11 @@
 # shellcheck shell=bash source=/dev/null
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
+has_cmd() {
+	for opt in "$@"; do
+		command -v "$opt" >/dev/null
+	done
+}
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then
 	export LANG=en_US.UTF-8
@@ -9,19 +14,16 @@ fi
 if [[ $OSTYPE == cygwin ]]; then
 	export BROWSER=start
 	export CYGWIN=winsymlinks:nativestrict
-	export PATH="$PATH${PATH+:}/proc/cygdrive/c/cygwin"
+	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/cygwin"
 elif [[ $OSTYPE == msys ]]; then
 	export BROWSER=start
 	export MSYS=winsymlinks:nativestrict
-	export PATH="$PATH${PATH+:}/proc/cygdrive/c/msys64"
+	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/msys64"
 elif [[ $OSTYPE == darwin ]]; then
 	export BROWSER=open
 fi
-if [[ $OSTYPE != msys2 ]]; then
-	export PATH="$PATH${PATH+:}/${MINGW_ARCH:-mingw64}/bin"
-fi
 if [[ $OSTYPE == linux-android ]]; then
-	PATH="$PATH${PATH+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin"
+	PATH="$PATH${PATH:+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin"
 	if [[ -n $DISPLAY ]]; then
 		export BROWSER='gio open'
 	else
@@ -35,17 +37,36 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 	PYTHONPATH="$HOME/.local/lib/python${python_version}/site-packages"
 	unset python_version
 	export PYTHONPATH
-	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
+	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH:+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
 	export PKG_CONFIG_PATH
 else
-	PATH="$PATH${PATH+:}/usr/src/linux/scripts/clang-tools:/usr/src/linux/scripts"
-	PATH="$PATH${PATH+:}$HOME/.local/state/nix/profile/bin"
-	PATH="$PATH${PATH+:}/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
+	dir="/${MINGW_ARCH:-mingw64}/bin"
+	if [[ $OSTYPE != msys2 && -d $dir ]]; then
+		export PATH="$PATH${PATH:+:}$dir"
+	fi
+	dir=/usr/src/linux/scripts
+	if [[ -d $dir ]]; then
+		PATH="$PATH${PATH:+:}$dir/clang-tools:$dir"
+	fi
+	dir=$HOME/.local/state/nix/profile/bin
+	if [[ -d $dir ]]; then
+		PATH="$PATH${PATH:+:}$dir"
+	fi
+	dir="/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
+	if [[ -d $dir ]]; then
+		PATH="$PATH${PATH:+:}$dir"
+	fi
+	dir=/opt/ccstudio/ccs
 	# https://aur.archlinux.org/packages/ccstudio#comment-906326
-	PATH="$PATH${PATH+:}/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin"
+	if [[ -d $dir ]]; then
+		PATH="$PATH${PATH:+:}$dir/eclipse:$dir/ccs_base/common/uscif:$dir/ccs_base/scripting/bin"
+	fi
+	unset dir
 fi
-MANPAGER='manpager | less --pattern=^\\S+'
-export MANPAGER
+if has_cmd manpager; then
+	MANPAGER='manpager | less --pattern=^\\S+'
+	export MANPAGER
+fi
 # ccstudio
 C6X_C_OPTION=--issue_remarks
 export C6X_C_OPTION
@@ -61,15 +82,17 @@ fi
 # fzf
 if [[ $OSTYPE == msys2 ]]; then
 	devnull=nul
-else
-	devnull=/dev/null
 fi
+if has_cmd auto-sized-fzf.sh; then
+	fzf_opt="$(auto-sized-fzf.sh)"
+fi
+# https://github.com/junegunn/fzf/blob/master/ADVANCED.md#ripgrep-integration
 # rg foo | fzf
 # $word = {2} make a wrong --preview-window
 # https://github.com/Aloxaf/fzf-tab/issues/282
 # -d$"\0"
 export FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
-2> $devnull || less {1}'
+2> ${devnull:-/dev/null} || less {1}'
 -m
 -d:
 --ansi
@@ -108,12 +131,9 @@ export FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
 --bind='alt->:preview-bottom'
 --bind='ctrl-]:change-preview-window(bottom|right)'
 --bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'
---history=$FZF_HISTORY_DIR/fzf.txt"
-unset devnull
-if command -v auto-sized-fzf.sh &>/dev/null; then
-	FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
---preview-window=$(auto-sized-fzf.sh)"
-fi
+--history=$FZF_HISTORY_DIR/fzf.txt
+--preview-window=${fzf_opt:-right:50%},border-bottom,+{2}+4/4,~4"
+unset devnull fzf_opt
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true
@@ -130,11 +150,6 @@ export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 # direnv
 export DIRENV_LOG_FORMAT=
 # lua
-has_cmd() {
-	for opt in "$@"; do
-		command -v "$opt" >/dev/null
-	done
-}
 if has_cmd lua; then
 	version="$(command lua -v)"
 	version=${version#* }

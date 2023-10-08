@@ -28,13 +28,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: thinca/vim-themis
-          path: ../vim-themis
+          path: vim-themis
       - uses: rhysd/action-setup-vim@v1
         id: vim
         with:
           neovim: ${{matrix.neovim}}
       - name: Run unit tests with themis.vim
         run: |
-          ../vim-themis/bin/themis
+          vim-themis/bin/themis
         env:
           THEMIS_VIM: ${{steps.vim.outputs.executable}}

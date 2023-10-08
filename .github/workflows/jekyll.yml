@@ -11,12 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          script/git-commit.sh
-      - uses: ruby/setup-ruby@v1.150.0
+      - run: script/git-commit.sh
+      # don't use setup-ruby due to different versions of bundler of container
+      - uses: actions/cache@v3
         with:
-          ruby-version: head
-          bundler-cache: true
-      - uses: jeffreytse/jekyll-deploy-action@v0.4.0
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - uses: jeffreytse/jekyll-deploy-action@v0.5.0
         with:
           token: ${{secrets.GH_TOKEN}}

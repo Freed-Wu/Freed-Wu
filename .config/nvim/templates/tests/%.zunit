@@ -1,0 +1,5 @@
+#!/usr/bin/env zunit
+@test '{{ expand('%:t:r') }}' {
+  run {% here %}
+  assert $#reply equals 2
+}

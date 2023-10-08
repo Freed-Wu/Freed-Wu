@@ -848,6 +848,21 @@ def configure(repl: PythonRepl) -> None:
         else:
             b.insert_text(" > ")
 
+    @repl.add_key_binding(":", "=", filter=ViInsertMode())
+    @repl.add_key_binding(":", "=", filter=EmacsInsertMode())
+    def _(event: "KeyPressEvent") -> None:
+        """.
+
+        :param event:
+        :type event: "KeyPressEvent"
+        :rtype: None
+        """
+        b = event.cli.current_buffer
+        if b.document.char_before_cursor == " ":
+            b.insert_text(":=")
+        else:
+            b.insert_text(" := ")
+
     @repl.add_key_binding("=", "=", filter=ViInsertMode())
     @repl.add_key_binding("=", "=", filter=EmacsInsertMode())
     def _(event: "KeyPressEvent") -> None:

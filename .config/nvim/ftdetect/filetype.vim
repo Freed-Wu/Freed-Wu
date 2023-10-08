@@ -11,7 +11,6 @@ augroup init_filetype
   autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
   autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc,bootstraprc,psprint.conf,sofficerc setfiletype dosini
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
-  autocmd BufNewFile,BufRead .SRCINFO setfiletype jproperties
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map,xci} setfiletype json
   " https://github.com/McSinyx/vim-octave/issues/4
   autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd,.git,DESCRIPTION setfiletype yaml
@@ -35,7 +34,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead *.qsf setfiletype tcl
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
   autocmd BufNewFile,BufRead .bash_history setfiletype sh
-  autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history setfiletype zsh
+  autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history,*.zunit setfiletype zsh
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead *.lg4 setfiletype lingo
   autocmd BufNewFile,BufRead */R/* setfiletype r

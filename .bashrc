@@ -13,6 +13,10 @@ if [[ $- != *i* ]]; then
 	# Shell is non-interactive.  Be done now!
 	return
 fi
+
+# https://unix.stackexchange.com/questions/32409/set-and-shopt-why-two
+set +o histexpand
+
 shopt -s histverify
 shopt -s globstar
 shopt -s checkhash
@@ -23,8 +27,8 @@ fi
 stty -ixon
 HISTIGNORE='&: *'
 
-if [[ -f ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash ]]; then
-	. ~/.local/share/zinit/plugins/pinyin-completion/shell/pinyin-comp.bash
+if [[ -f /usr/share/pinyin-completion/shell/pinyin-comp.bash ]]; then
+	. /usr/share/pinyin-completion/shell/pinyin-comp.bash
 fi
 
 if [[ -f ~/.local/share/zinit/plugins/zsh-colorize-functions/colorize-functions.plugin.zsh ]]; then
