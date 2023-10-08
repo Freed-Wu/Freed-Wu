@@ -6,22 +6,7 @@ function! init#coc#source() abort
   let g:coc_snippet_prev = '<S-Tab>'
   let g:coc_status_error_sign = '✗'
   let g:coc_status_warning_sign = ''
-  " https://github.com/neoclide/coc.nvim/issues/4282#issuecomment-1279692192
-  let g:coc_filetype_map = {
-        \ 'brewfile': 'ruby',
-        \ 'bash': 'sh',
-        \ 'zsh': 'sh',
-        \ 'vimspec': 'vim',
-        \ 'tutor': 'markdown',
-        \ 'pandoc': 'markdown',
-        \ 'mysql': 'sql',
-        \ 'eelixir': 'elixir',
-        \ 'liquid': 'html',
-        \ }
-  nnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
-  xnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
-  nnoremap gK K
-  xnoremap gK K
+  " g:coc_filetype_map is defined in lua/treesitter.lua
   xmap if <Plug>(coc-funcobj-i)
   xmap af <Plug>(coc-funcobj-a)
   xmap ic <Plug>(coc-classobj-i)
@@ -47,6 +32,17 @@ function! init#coc#source() abort
   nmap ]K <Plug>(coc-diagnostic-next-error)
   nmap gd <Plug>(coc-definition)
   nmap gD <Plug>(coc-declaration)
+  nmap 1gd <Plug>(coc-type-definition)
+  nmap 1gD <Plug>(coc-implementation)
+  nmap [d <Plug>(coc-references-used)
+  nmap ]d <Plug>(coc-references)
+  nmap gr <Plug>(coc-refactor)
+  nmap gR <Plug>(coc-rename)
+  nnoremap gK K
+  xnoremap gK K
+  nnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
+  xnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
+  nmap gx <Plug>(coc-openlink)
   nmap <C-W>d <C-W>s<Plug>(coc-definition)
   nmap <C-W>D <C-W>s<Plug>(coc-declaration)
 

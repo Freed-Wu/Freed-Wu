@@ -247,8 +247,6 @@ function! init#which_key#source() abort
   nnoremap ]I ]I
   nnoremap [<C-I> [<C-I>
   nnoremap ]<C-I> ]<C-I>
-  nnoremap [d [d
-  nnoremap ]d ]d
   nnoremap [D [D
   nnoremap ]D ]D
   nnoremap [<C-D> [<C-D>
@@ -391,15 +389,11 @@ function! init#which_key#source() abort
   xnoremap gF gF
   xnoremap g] g]
   " 1}}} fileSwitch "
-  " virtual {{{1 "
-  nnoremap gr gr
-  nnoremap gR gR
-  " 1}}} virtual "
   " last {{{1 "
-  nnoremap gv gv
   nnoremap g& g&
-  xnoremap gv gv
   xnoremap g& g&
+  nnoremap gv gv
+  xnoremap gv gv
   nnoremap gi gi
   xnoremap gi gi
   " 1}}} last "

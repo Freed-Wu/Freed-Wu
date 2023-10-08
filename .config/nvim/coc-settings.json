@@ -5,7 +5,16 @@
   "Lua.hint.setType": true,
   "cSpell.allowCompoundWords": true,
   "coc.preferences.enableMarkdown": true,
+  "coc.source.around.shortcut": "",
+  "coc.source.bibtex.shortcut": "",
+  "coc.source.buffer.shortcut": "",
+  "coc.source.dictionary.shortcut": "",
   "coc.source.emoji.shortcut": "😀",
+  "coc.source.file.shortcut": "",
+  "coc.source.issues.shortcut": "",
+  "coc.source.syntax.shortcut": "󱔁",
+  "coc.source.tag.shortcut": "󰓹",
+  "coc.source.word.shortcut": "",
   "dash-complete.shortcut": "-",
   "diagnostic-languageserver.filetypes": {
     "bbcode": ["write-good", "alex-text"],
@@ -41,10 +50,10 @@
     "sh": "shfmt",
     "verilog": "iStyle"
   },
-  "diagnostic.errorSign": "✗",
+  "diagnostic.errorSign": "",
   "diagnostic.format": "%source%code: %message",
   "diagnostic.hintSign": "",
-  "diagnostic.infoSign": "",
+  "diagnostic.infoSign": "",
   "dot-complete.shortcut": ".",
   "git.gitlab.hosts": ["gitlab.com", "gitee.com"],
   "git.showCommitInFloating": true,
@@ -65,6 +74,11 @@
     "bitbake": {
       "command": "bitbake-language-server",
       "filetypes": ["bitbake"]
+    },
+    "dot": {
+      "command": "dot-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["dot"]
     },
     "expect": {
       "command": "expect-language-server",
@@ -87,14 +101,6 @@
       "command": "nixd",
       "filetypes": ["nix"]
     },
-    "PKGBUILD": {
-      "command": "pkgbuild-language-server",
-      "filetypes": ["sh"]
-    },
-    "portage": {
-      "command": "portage-language-server",
-      "filetypes": ["sh"]
-    },
     "requirements": {
       "command": "requirements-language-server",
       "filetypes": ["requirements"]
@@ -107,7 +113,7 @@
       "command": "svls",
       "filetypes": ["systemverilog"]
     },
-    "termux": {
+    "bash": {
       "command": "termux-language-server",
       "filetypes": ["sh"]
     },
@@ -124,6 +130,9 @@
       "filetypes": ["zathurarc"]
     }
   },
+  "leetcode.language": "cpp",
+  "links.highlight": true,
+  "links.tooltip": true,
   "list.insertMappings": {
     "<A-a>": "normal:gg",
     "<A-e>": "normal:G",
@@ -167,6 +176,7 @@
   "perl.p::ls.disableCache": true,
   "prettier.ignorePath": ".gitignore",
   "pydocstring.enableFileAction": true,
+  "pyright.disableDocumentation": true,
   "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",
   "python.linting.banditEnabled": true,
@@ -174,28 +184,53 @@
   "python.linting.pydocstyleEnabled": true,
   "rime.enabled": false,
   "rime.priority": 99,
+  "semanticTokens.enable": true,
   "session.directory": "~/.local/share/nvim/session",
   "session.saveOnVimLeave": false,
-  "snippets.shortcut": "▶",
+  "snippets.shortcut": "",
   "snippets.userSnippetsDirectory": "~/.config/nvim/ultisnips",
   "solargraph.autoformat": true,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
+  "suggest.completionItemKindLabels": {
+    "text": "",
+    "method": "",
+    "function": "󰊕",
+    "constructor": "󰒓",
+    "field": "",
+    "variable": "",
+    "class": "",
+    "interface": "",
+    "module": "󰕳",
+    "property": "",
+    "unit": "󰑭",
+    "value": "",
+    "enum": "",
+    "keyword": "",
+    "snippet": "",
+    "color": "",
+    "file": "",
+    "reference": "",
+    "folder": "",
+    "enumMember": "",
+    "constant": "",
+    "struct": "",
+    "event": "",
+    "operator": "",
+    "typeParameter": "",
+    "default": ""
+  },
   "suggest.invalidInsertCharacters": ["(", "<", "{", "[", "\r", "\n"],
-  "suggest.removeDuplicateItems": true,
   "suggest.snippetIndicator": "",
   "suggest.triggerAfterInsertEnter": true,
-  "tabnine.shortcut": "",
-  "tasks.shortcut": "!",
+  "tabnine.shortcut": "",
+  "tasks.shortcut": "",
   "texlab.chktex.onEdit": true,
   "texlab.chktex.onOpenAndSave": true,
   "texlab.forwardSearch.executable": "zathura",
   "translator.enableHover": true,
   "translator.engines": ["google"],
   "translator.proxy": "socks://127.0.0.1:1080",
-  "yaml.schemas": {
-    "https://json.schemastore.org/clang-format.json": ".clang-format"
-  },
   "yaml.format.singleQuote": true,
   "zi.hover": false
 }

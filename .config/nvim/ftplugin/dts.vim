@@ -1,5 +1,2 @@
-setlocal include=^/include/\s*
-
-" https://github.com/tyru/caw.vim/pull/186
-let b:caw_oneline_comment = '//'
-let b:caw_wrap_oneline_comment = ['/*', '*/']
+setlocal path=.,components/plnx_workspace/device-tree/device-tree,project-spec/meta-user/recipes-bsp/device-tree/files
+setlocal include=^\(#include\|/include/\)\s*

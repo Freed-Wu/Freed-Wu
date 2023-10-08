@@ -1,8 +1,13 @@
 [
   ["T&emplate", "1,1Template"],
   ["&TemplateHere", "Template"],
+  ["&Open Template", "execute 'edit' template#find(expand('%:p'))"],
   ["--"],
   ["Trail &Fix", "TrailGuide fix"],
+  [
+    "&Sort",
+    "call CocActionAsync('runCommand', 'editor.action.organizeImport')"
+  ],
   ["--"],
   ["Filet&ype Detect", "filetype detect"],
   ["--"],

@@ -595,7 +595,7 @@ function! init#smartinput#post_source() abort
         \ 'at': '\%#',
         \ 'char': '=',
         \ 'input': '=',
-        \ 'filetype': ['sh', 'bash', 'zsh', 'fstab', 'bib', 'python'],
+        \ 'filetype': ['sh', 'bash', 'zsh', 'PKGBUILD', 'ebuild', 'fstab', 'bib', 'python', 'dot'],
         \ })
   call smartinput#define_rule({
         \ 'at': 'set\(local\)\? .*\%#',

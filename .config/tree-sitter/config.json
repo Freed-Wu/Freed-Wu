@@ -1,0 +1,54 @@
+{
+  "parser-directories": [
+    "/home/wzy/.local/share/nvim/repos/github.com/nvim-treesitter/nvim-treesitter/parser"
+  ],
+  "theme": {
+    "module": 136,
+    "constructor": 136,
+    "tag": 18,
+    "variable.parameter": {
+      "underline": true
+    },
+    "function.builtin": {
+      "bold": true,
+      "color": 26
+    },
+    "property": 124,
+    "punctuation.bracket": 239,
+    "attribute": {
+      "italic": true,
+      "color": 124
+    },
+    "number": {
+      "color": 94,
+      "bold": true
+    },
+    "punctuation.delimiter": 239,
+    "string": 28,
+    "constant.builtin": {
+      "color": 94,
+      "bold": true
+    },
+    "variable.builtin": {
+      "bold": true
+    },
+    "comment": {
+      "italic": true,
+      "color": 245
+    },
+    "constant": 94,
+    "string.special": 30,
+    "embedded": null,
+    "operator": {
+      "color": 239,
+      "bold": true
+    },
+    "type.builtin": {
+      "color": 23,
+      "bold": true
+    },
+    "keyword": 56,
+    "function": 26,
+    "type": 23
+  }
+}

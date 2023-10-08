@@ -1,4 +1,7 @@
-include /usr/share/zathura/themes/zathura-gruvbox-light
 include desktop/zathurarc
 set recolor false
+set synctex true
+set statusbar-home-tilde true
+set window-icon-document true
+set window-title-home-tilde true
 set window-title-page true

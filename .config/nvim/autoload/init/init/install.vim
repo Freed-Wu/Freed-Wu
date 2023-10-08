@@ -21,7 +21,7 @@ let g:init#init#install#coc = [
       \
       \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji', 'coc-syntax',
       \
-      \ 'coc-copilot',
+      \ 'coc-copilot', 'coc-leetcode',
       \
       \ '@yaegassy/coc-marksman', 'coc-webview',
       \ 'coc-markdown-preview-enhanced', 'coc-esbonio',

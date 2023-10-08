@@ -1,0 +1,11 @@
+# -auth guess: failed for display='unset'
+# display :0
+shared
+forever
+auth guess
+usepw
+# HOME unset in -usepw mode.
+rfbauth /home/wzy/.vnc/passwd
+# cannot work for `sudo`
+# passwdfile custom:pass ls neomutt/pass/ustc
+# ex: filetype=conf

@@ -1,1 +1,2 @@
-source ~/.tclshrc
+# `x11vnc -gui` will source `~/.wishrc`
+# source ~/.tclshrc

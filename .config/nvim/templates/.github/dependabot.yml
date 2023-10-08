@@ -1,11 +1,1 @@
----
-version: 2
-updates:
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: monthly
-  - package-ecosystem: gitsubmodule
-    directory: /
-    schedule:
-      interval: monthly
+{{ join(readfile(expand('~/.github/dependabot.yml')), "\n") }}

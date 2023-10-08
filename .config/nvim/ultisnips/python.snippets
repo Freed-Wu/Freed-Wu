@@ -4,10 +4,10 @@ snippet #! "myUltiSnips" b
 #!/usr/bin/env python
 endsnippet
 
-snippet cls "myUltiSnips" b
+snippet cls "from dataclasses import dataclass" b
+@dataclass
 class $1:
-	def __init__(self) -> None:
-		super().__init__()
+	$0
 endsnippet
 
 snippet def "myUltiSnips" b

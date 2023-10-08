@@ -1,6 +1,11 @@
 {
+  # nur.repos.xddxdd.wechat-uos
+  permittedInsecurePackages = [
+    "openssl-1.1.1w"
+    "electron-19.1.9"
+  ];
   allowUnfree = true;
-  nixpkgs.config.packageOverrides = pkgs: {
+  packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
       inherit pkgs;
     };

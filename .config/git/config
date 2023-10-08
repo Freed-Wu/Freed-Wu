@@ -32,6 +32,7 @@
 	recurse = true
 [core]
 	symlink = true
+	quotepath = off
 [pager]
 	tag = cat
 	format-patch = cat
@@ -39,9 +40,9 @@
 	blame = delta
 	log = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe' '$(jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
 	reflog = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe' '$(jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
-	config = bat -plproperties
-	ls-files = parallel exa --color=always --icons
-	remote = bat -pltsv --paging=never
+	config = bat -pplproperties
+	ls-files = parallel eza --color=always --icons
+	remote = bat -ppltsv
 [interactive]
 	diffFilter = delta --color-only
 [delta]

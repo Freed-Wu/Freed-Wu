@@ -1,0 +1,35 @@
+---
+"on":
+  push:
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: molovo/revolver
+          path: revolver
+      - uses: actions/checkout@v4
+        with:
+          repository: zdharma-continuum/zunit
+          path: zunit
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install zsh
+          cd zunit
+          zsh -c -l ./build.zsh && install -D zunit -t ~/.local/bin
+          cd ../revolver
+          install -D revolver -t ~/.local/bin
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Test
+        run: |
+          zunit

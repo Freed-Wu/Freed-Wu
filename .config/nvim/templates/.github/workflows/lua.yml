@@ -59,7 +59,7 @@ jobs:
     steps:
       - name: Trigger Workflow
         run: >
-          curl -X POST -d '{"ref":"main"}'
+          curl -X POST -d '{"ref": "main"}'
           -H "Accept: application/vnd.github.v3+json"
           -H "Authorization: Bearer ${{secrets.GH_TOKEN}}"
           https://api.github.com/repos/Freed-Wu/nur-packages/actions/workflows/version.yml/dispatches

@@ -42,6 +42,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 
+setopt nobanghist
+
 setopt autopushd
 setopt chaselinks
 setopt pushdignoredups
@@ -144,6 +146,9 @@ fi
 if (($+commands[eza])); then
   alias ls='eza --icons --git -h'
   alias tree='eza --icons -T'
+elif (($+commands[exa])); then
+  alias ls='exa --icons -h'
+  alias tree='exa --icons -T'
 else
   alias ls='ls --color=auto -h'
 fi
@@ -168,6 +173,7 @@ zinit id-as depth'1' for zdharma-continuum/z-a-bin-gem-node
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   . "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+# https://bugs.archlinux.org/task/80028
 if [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
   . /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 elif [[ -f /run/current-system/sw/share/zsh-powerlevel10k/powerlevel10k.zsh-theme ]]; then
@@ -203,10 +209,6 @@ zinit id-as'.pyenv' depth'1' wait lucid \
   atclone'pyenv init - > pyenv.sh
   zcompile *.sh' \
   if'(($+commands[pyenv]))' \
-  for zdharma-continuum/null
-zinit id-as'.lesspipe.sh' depth'1' wait lucid \
-  atclone'lesspipe.sh > lesspipe.sh' \
-  if'(($+commands[lesspipe.sh] && ! $+LESSOPEN))' \
   for zdharma-continuum/null
 # https://github.com/Kaggle/kaggle-api/issues/446
 zinit id-as'.pass' depth'1' as'null' wait lucid \
@@ -247,9 +249,7 @@ zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   for Freed-Wu/fzf-tab-source
 
-# https://github.com/petronny/pinyin-completion/issues/14
-zinit id-as depth'1' wait lucid pick'shell/pinyin-comp.zsh' sbin'pinyin-comp' \
-  for petronny/pinyin-completion
+zinit id-as depth'1' wait lucid for petronny/pinyin-completion
 # 1}}} Complete #
 
 # Log {{{1 #
