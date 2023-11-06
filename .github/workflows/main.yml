@@ -71,7 +71,7 @@ jobs:
           images: |
             ${{ secrets.DOCKER_USERNAME }}/freed-wu
             ghcr.io/${{ github.repository }}
-      - uses: docker/build-push-action@v4.1.1
+      - uses: docker/build-push-action@v5.0.0
         with:
           context: .
           file: script/Dockerfile
