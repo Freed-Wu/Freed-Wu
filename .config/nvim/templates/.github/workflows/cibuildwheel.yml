@@ -45,7 +45,7 @@ jobs:
           path: |
             wheelhouse/*.whl
 
-  build-sdist:
+  build:
     needs:
       - build-wheels-and-test
     runs-on: ubuntu-latest

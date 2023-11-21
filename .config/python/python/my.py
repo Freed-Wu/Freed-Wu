@@ -3,6 +3,7 @@
 """
 import sys
 from contextlib import suppress
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from .describe import describe
@@ -18,7 +19,31 @@ if "torch" in sys.modules:
     with suppress(ImportError):
         from torchinfo import summary
 
-del TYPE_CHECKING, sys, suppress
+
+@dataclass
+class T:
+    r"""T."""
+
+    hours: int = 0
+    minutes: int = 0
+
+    def __post_init__(self):
+        r"""Post init."""
+        self.hours += self.minutes // 60
+        self.minutes %= 60
+
+    def __add__(self, that: "T") -> "T":
+        r"""Add.
+
+        :param that:
+        :type that: T
+        :rtype: "T"
+        """
+        minutes = self.minutes + that.minutes
+        return T(self.hours + that.hours + minutes // 60, minutes % 60)
+
+
+del TYPE_CHECKING, sys, suppress, dataclass
 
 
 def hook(module: "nn.Module", input: "Tensor", output: "Tensor") -> None:

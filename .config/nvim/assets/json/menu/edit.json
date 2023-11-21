@@ -3,7 +3,6 @@
   ["&TemplateHere", "Template"],
   ["&Open Template", "execute 'edit' template#find(expand('%:p'))"],
   ["--"],
-  ["Trail &Fix", "TrailGuide fix"],
   [
     "&Sort",
     "call CocActionAsync('runCommand', 'editor.action.organizeImport')"

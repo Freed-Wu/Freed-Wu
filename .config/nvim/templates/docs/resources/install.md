@@ -3,7 +3,7 @@
 ## [AUR](https://aur.archlinux.org/packages/{{ expand('%:p:h:h:h:t') }})
 
 ```sh
-yay -S python-{{ expand('%:p:h:h:h:t') }}
+paru -S python-{{ expand('%:p:h:h:h:t') }}
 ```
 
 ## [NUR](https://nur.nix-community.org/repos/{{ split(g:snips_github, '/')[-1] }})

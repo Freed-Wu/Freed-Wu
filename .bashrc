@@ -37,19 +37,16 @@ fi
 
 if [[ -f /usr/share/bash-prompt/prompt.sh ]]; then
 	. /usr/share/bash-prompt/prompt.sh
+	PS1=$(prompt_get_ps1)
 elif [[ -f /run/current-system/sw/share/bash-prompt/prompt.sh ]]; then
 	. /run/current-system/sw/share/bash-prompt/prompt.sh
-fi
-
-has_cmd() {
-	for opt in "$@"; do
-		command -v "$opt" >/dev/null
-	done
-}
-
-if has_cmd wakatime &&
-	[[ -f /usr/share/bash-wakatime/bash-wakatime.sh ]]; then
-	. /usr/share/bash-wakatime/bash-wakatime.sh
+	PS1=$(prompt_get_ps1)
+else
+	has_cmd() {
+		for opt in "$@"; do
+			command -v "$opt" >/dev/null
+		done
+	}
 fi
 
 if has_cmd curl &&
@@ -66,5 +63,3 @@ if has_cmd tmux &&
 		tmux new -As0
 	fi
 fi
-
-unset has_cmd

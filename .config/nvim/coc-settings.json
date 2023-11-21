@@ -67,9 +67,17 @@
       "command": "arduino-language-server",
       "filetypes": ["arduino"]
     },
+    "asm": {
+      "command": "asm-lsp",
+      "filetypes": ["asm", "nasm"]
+    },
     "autotools": {
       "command": "autotools-language-server",
       "filetypes": ["config", "make", "automake"]
+    },
+    "bash": {
+      "command": "termux-language-server",
+      "filetypes": ["sh"]
     },
     "bitbake": {
       "command": "bitbake-language-server",
@@ -95,7 +103,11 @@
     },
     "mutt": {
       "command": "mutt-language-server",
-      "filetypes": ["muttrc", "neomuttrc"]
+      "filetypes": ["muttrc"]
+    },
+    "mlir": {
+      "command": "mlir-lsp-server",
+      "filetypes": ["mlir"]
     },
     "nix": {
       "command": "nixd",
@@ -113,9 +125,9 @@
       "command": "svls",
       "filetypes": ["systemverilog"]
     },
-    "bash": {
-      "command": "termux-language-server",
-      "filetypes": ["sh"]
+    "tablegen": {
+      "command": "tblgen-lsp-server",
+      "filetypes": ["tablegen"]
     },
     "tmux": {
       "command": "tmux-language-server",

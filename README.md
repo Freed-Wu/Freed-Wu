@@ -237,6 +237,8 @@ more information about me
   - [![ctan](https://img.shields.io/badge/ctan-gray?logo=data:image/png%3Bbase64,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)](https://ctan.org/author/zhenyu)
   - [![luarocks](https://img.shields.io/badge/luarocks-gray?logo=lua)](https://luarocks.org/modules/Freed-Wu)
   - [![vim.org](https://img.shields.io/badge/vim.org-gray?logo=vim)](https://www.vim.org/account/profile.php?user_id=76258)
+  - [![npm](https://img.shields.io/badge/npm-gray?logo=npm)](https://www.npmjs.com/~freedwu)
+  - [![Crates.io](https://img.shields.io/badge/crates.io-gray?logo=rust)](https://crates.io/users/Freed-Wu)
   - [![openuserjs](https://img.shields.io/badge/openuserjs-gray?logo=javascript)](https://openuserjs.org/users/Freed-Wu/scripts)
   - [![greasyfork](https://img.shields.io/badge/greasyfork-gray?logo=javascript)](https://greasyfork.org/users/Freed-Wu/scripts)
 - host packages of some software distributions:
@@ -266,12 +268,15 @@ more information about me
     - [![xfce](https://img.shields.io/badge/xfce-gray?logo=xfce)](https://forum.xfce.org/profile.php?id=26979)
   - Program languages:
     - [![python](https://img.shields.io/badge/python-gray?logo=python)](https://discuss.python.org/u/Freed-Wu)
+    - [![julia](https://img.shields.io/badge/julia-gray?logo=julia)](https://discourse.julialang.org/u/freed-wu/)
     - [![octave](https://img.shields.io/badge/octave-gray?logo=octave)](https://octave.discourse.group/u/freed-wu)
     - [![cmake](https://img.shields.io/badge/cmake-gray?logo=cmake)](https://discourse.cmake.org/u/freed-wu)
     - [![llvm](https://img.shields.io/badge/llvm-gray?logo=llvm)](https://discourse.llvm.org/u/freed-wu)
   - Applications:
     - [![libreoffice](https://img.shields.io/badge/libreoffice-gray?logo=libreoffice)](https://ask.libreoffice.org/u/wzy)
+    - [![onlyoffice](https://img.shields.io/badge/onlyoffice-gray?logo=onlyoffice)](https://forum.onlyoffice.com/u/freedwu)
     - [![pytorch](https://img.shields.io/badge/pytorch-gray?logo=pytorch)](https://discuss.pytorch.org/u/Freed-Wu)
+    - [![tvm](https://img.shields.io/badge/tvm-gray?logo=apache)](https://discuss.tvm.apache.org/u/freed-wu)
     - [![jupyter](https://img.shields.io/badge/jupyter-gray?logo=jupyter)](https://discourse.jupyter.org/u/freed-wu)
     - [![root](https://img.shields.io/badge/root-gray?logo=C%2B%2B)](https://root-forum.cern.ch/u/freed-wu)
     - [![f-droid](https://img.shields.io/badge/f--droid-gray?logo=f-droid)](https://forum.f-droid.org/u/freed-wu)
@@ -296,6 +301,7 @@ more information about me
   - [![weibo](https://img.shields.io/badge/weibo-gray?logo=sina-weibo)](https://weibo.com/u/5198670731)
   - [![bilibili](https://img.shields.io/badge/bilibili-gray?logo=bilibili)](https://space.bilibili.com/49330423)
   - [![qq](https://img.shields.io/badge/qq-gray?logo=tencent-qq)](https://user.qzone.qq.com/1295652958)
+  - [cnblog](https://home.cnblogs.com/u/2101500/)
 
 </details>
 

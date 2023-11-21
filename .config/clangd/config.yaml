@@ -6,8 +6,7 @@ Hover:
 CompileFlags:
   Compiler: gcc
   Add:
-    - -Wunused-variable
-    - -Wunused-label
+    - -Wall
     - -I/home/.local/include # android termux
     - -I/proc/cygdrive/c/Users/wzy/.local/include # windows msys2
     - -I/home/wzy/.local/include # gnu/linux

@@ -29,9 +29,7 @@
 !/.astylerc
 !/.procmailrc
 !/.mailcap
-!/.signature
 !/.bastetrc
-!/.npmrc
 !/.spacemacs
 !/.screenrc
 !/.lesskey
@@ -224,6 +222,7 @@
 !/.config/pudb/pudb.cfg
 !/.config/pudb/*.py
 !/.config/gdb/
+!/.config/gdb-dashboard/
 !/.config/lsd/
 /.config/lsd/*
 !/.config/lsd/config.yaml
@@ -294,7 +293,8 @@
 !/.config/p10k.zsh
 !/.config/curlrc
 !/.config/condarc
-!/.config/tree-sitter
+!/.config/tree-sitter/
+!/.config/asm-lsp/
 
 # $XDG_DATA_HOME
 !/.local/

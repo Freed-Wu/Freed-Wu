@@ -1,5 +1,5 @@
 #if 0
-bin="$(basename "$0")" && bin="${bin%%.*}" && c++ "$0" -o"$bin" && exec ./"$bin" "$@"
+bin="$(basename "$0")" && bin="${bin%%.*}" && nvcc "$0" -o "$bin" && exec ./"$bin" "$@"
 #endif
 #include <err.h>
 #include <cerrno>

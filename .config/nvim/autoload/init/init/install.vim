@@ -15,7 +15,7 @@ let g:init#init#install#coc = [
       \ 'coc-snippets', 'coc-translator', 'coc-zi',
       \
       \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
-      \ 'coc-gitignore',
+      \ 'coc-gitignore', 'coc-license',
       \
       \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
       \

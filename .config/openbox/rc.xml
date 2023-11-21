@@ -338,9 +338,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>xdg-open</name>
+          <name>firefox</name>
         </startupnotify>
-        <command>xdg-open about:blank</command>
+        <command>firefox about:blank</command>
       </action>
     </keybind>
   </keyboard>

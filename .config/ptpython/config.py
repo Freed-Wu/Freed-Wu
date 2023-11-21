@@ -130,16 +130,13 @@ def configure(repl: PythonRepl) -> None:
     repl.prompt_style = "python"  # 'classic' or 'ipython'
 
     with suppress(ImportError):
-        from repl_python_codestats.ptpython import (
-            install_hook as install_codestats_hook,
-        )
-
-        install_codestats_hook(repl)
-
-    with suppress(ImportError):
         from repl_python_wakatime.ptpython import install_hook
 
         install_hook(repl)
+        with suppress(ImportError):
+            from repl_python_wakatime.hooks.codestats import codestats_hook
+
+            install_hook(repl, codestats_hook)
 
     # Don't insert a blank line after the output.
     repl.insert_blank_line_after_output = False
