@@ -685,13 +685,10 @@ with suppress(ImportError):
     from repl_python_wakatime.ipython import install_hook
 
     install_hook(c)
+    with suppress(ImportError):
+        from repl_python_wakatime.hooks.codestats import codestats_hook
 
-with suppress(ImportError):
-    from repl_python_codestats.ipython import (
-        install_hook as install_codestats_hook,
-    )
-
-    install_codestats_hook(c)
+        install_hook(c, codestats_hook)
 
 ## Deprecated since IPython 4.0 and ignored since 5.0, set
 #  TerminalInteractiveShell.prompts object directly.

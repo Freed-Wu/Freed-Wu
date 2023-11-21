@@ -42,13 +42,16 @@ function! init#coc#source() abort
   xnoremap gK K
   nnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   xnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
-  nmap gx <Plug>(coc-openlink)
+  " https://github.com/neoclide/coc.nvim/issues/4831
+  nnoremap <silent> gx :<C-U>call init#coc#openLink()<CR>
+  xnoremap <silent> gx :<C-U>call pandoc#hypertext#OpenSystem(getline('.')[col('v') - 1:col('''>') - 1])<CR>
+
   nmap <C-W>d <C-W>s<Plug>(coc-definition)
   nmap <C-W>D <C-W>s<Plug>(coc-declaration)
 
   nmap gq <plug>(coc-format-selected)
-  xmap gq <plug>(coc-format-selected)
-  nmap gqq <plug>(coc-format)
+  xnoremap <silent> gq :<C-U>call init#coc#format(v:true)<CR>
+  nnoremap <silent> gqq :<C-U>call init#coc#format(v:false)<CR>
 
   nmap w <Plug>(coc-ci-w)
   nmap b <Plug>(coc-ci-b)
@@ -119,3 +122,27 @@ augroup init#coc
         \ | endif
   autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
+
+function! init#coc#openLink() abort
+  try
+    call CocActionAsync('openLink')
+  catch
+    call pandoc#hypertext#OpenSystem()
+  endtry
+endfunction
+
+function! init#coc#format(isvisual) abort
+  if a:isvisual
+    if CocHasProvider('format')
+      call CocActionAsync('formatSelected', visualmode())
+    else
+      *TrailGuide fix
+    endif
+  else
+    if CocHasProvider('format')
+      call CocActionAsync('format')
+    else
+      TrailGuide fix
+    endif
+  endif
+endfunction

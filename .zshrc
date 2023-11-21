@@ -152,9 +152,6 @@ elif (($+commands[exa])); then
 else
   alias ls='ls --color=auto -h'
 fi
-if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
-  alias node='node -r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
-fi
 
 if (( $+HOMEBREW_PREFIX )); then
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions

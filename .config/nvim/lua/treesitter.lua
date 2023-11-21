@@ -33,14 +33,6 @@ require "nvim-treesitter.configs".setup {
 -- luacheck: ignore 111 112 113
 ---@diagnostic disable: lowercase-global
 vim = vim or {}
-local coc_filetype_map = {
-    brewfile = "ruby",
-    vimspec = "vim",
-    tutor = "markdown",
-    pandoc = "markdown",
-    mysql = "sql",
-    eelixir = "elixir",
-}
 -- https://github.com/neoclide/coc.nvim/issues/4282#issuecomment-1279692192
 vim.g.coc_filetype_map = {
     bash = "sh",
@@ -48,13 +40,21 @@ vim.g.coc_filetype_map = {
     PKGBUILD = "sh",
     ebuild = "sh",
     liquid = "html",
+    brewfile = "ruby",
+    vimspec = "vim",
+    tutor = "markdown",
+    pandoc = "markdown",
+    mysql = "sql",
+    eelixir = "elixir",
+    neomuttrc = "muttrc",
 }
 ---@diagnostic disable-next-line: undefined-global
-for i, v in pairs(coc_filetype_map) do
-    if vim.treesitter.language.register then
-        vim.treesitter.language.register(i, v)
+for i, v in pairs(vim.g.coc_filetype_map) do
+    if i ~= "zsh" then
+        if vim.treesitter.language.register then
+            vim.treesitter.language.register(i, v)
+        end
     end
-    vim.g.coc_filetype_map[i] = v
 end
 if vim.treesitter.language.register then
     -- :help coc-document-filetype

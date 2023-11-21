@@ -18,7 +18,7 @@ wezterm.on('gui-startup', function(cmd)
 end)
 return {
     font = wezterm.font_with_fallback {
-        'JetBrainsMono Nerd Font Mono', -- 
+        'JetBrainsMono NFM', -- 
         'WenQuanYi Zen Hei Mono', -- ①
         'WenQuanYi Micro Hei Mono' -- ⇡
     },

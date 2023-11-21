@@ -10,15 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: script/git-commit.sh
       # don't use setup-ruby due to different versions of bundler of container
       - uses: actions/cache@v3
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{runner.os}}-gems-${{hashFiles('**/Gemfile.lock')}}
           restore-keys: |
-            ${{ runner.os }}-gems-
+            ${{runner.os}}-gems-
       - uses: jeffreytse/jekyll-deploy-action@v0.5.0
         with:
           token: ${{secrets.GH_TOKEN}}

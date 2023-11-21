@@ -1,4 +1,3 @@
 ---
-exclude: ^CHANGELOG\.md$
-
-repos:
+exclude: ^templates/.*
+{{ join(filter(readfile(expand('~/.pre-commit-config.yaml')), {_, v -> stridx(v, 'exclude: ') == -1})[1:], "\n") }}

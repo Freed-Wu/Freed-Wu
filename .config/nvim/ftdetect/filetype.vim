@@ -47,6 +47,8 @@ augroup init_filetype
 
   " Compile {{{1 "
   autocmd BufNewFile,BufRead *.{s,S,sa} setfiletype asm
+  autocmd BufNewFile,BufRead *.mlir setfiletype mlir
+  autocmd BufNewFile,BufRead *.llvm setfiletype llvm
   autocmd BufNewFile,BufRead *.cl setfiletype opencl
   autocmd BufNewFile,BufRead *.gel setfiletype c
   " 1}}} Compile "

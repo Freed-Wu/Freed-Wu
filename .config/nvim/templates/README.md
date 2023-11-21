@@ -37,6 +37,10 @@
 [![pypi/implementation](https://shields.io/pypi/implementation/{{ expand('%:p:h:t') }})](https://pypi.org/project/{{ expand('%:p:h:t') }}/#files)
 [![pypi/pyversions](https://shields.io/pypi/pyversions/{{ expand('%:p:h:t') }})](https://pypi.org/project/{{ expand('%:p:h:t') }}/#files)
 
+[![npm](https://img.shields.io/npm/dw/{{ expand('%:p:h:t') }})](https://www.npmjs.com/package/{{ expand('%:p:h:t') }})
+
+[![Crates.io (recent)](https://img.shields.io/crates/dr/{{ expand('%:p:h:t') }})](https://crates.io/crates/{{ expand('%:p:h:t') }})
+
 [![cpan/v](https://img.shields.io/cpan/v/{{ expand('%:p:h:t') }})](https://metacpan.org/pod/{{ substitute(expand('%:p:h:t'), '-', '::', 'g') }})
 
 [![luarocks](https://img.shields.io/luarocks/v/{{ split(g:snips_github, '/')[-1] }}/{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }})](https://luarocks.org/modules/{{ split(g:snips_github, '/')[-1] }}/{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }})

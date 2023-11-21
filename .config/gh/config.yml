@@ -12,3 +12,4 @@ prompt: enabled
 pager: !!null delta
 # Aliases allow you to create nicknames for gh commands
 aliases: {}
+version: "1"

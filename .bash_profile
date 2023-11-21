@@ -174,8 +174,7 @@ if has_cmd lua; then
 	fi
 	unset version ext
 fi
-if [ -n "$ZSH_VERSION" ]; then
-	unfunction has_cmd
-else
-	unset has_cmd
+# node
+if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
+  export NODE_OPTIONS='-r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
 fi

@@ -174,6 +174,9 @@ augroup init
   endif
 augroup END
 
+if !has('nvim')
+  nnoremap <silent> zS :<C-U>Inspect<CR>
+endif
 cnoremap <C-G> <C-U><C-H>
 
 snoremap <C-B> <Left>
@@ -451,6 +454,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#treesitter#source()',
         \ 'hook_post_update': 'TSUpdate',
         \ })
+  call dein#add('nvim-treesitter/playground', {
+        \ 'if': has('nvim-0.5.0'),
+        \ })
   call dein#add('lambdalisue/glyph-palette.vim', {
         \ 'hook_post_source': 'call init#glyph_palette#post_source()',
         \ })
@@ -507,13 +513,12 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('Freed-Wu/xilinx-language-server', {
         \ 'rev': 'release',
         \ })
-  call dein#add('Freed-Wu/zathura-language-server', {
-        \ 'rev': 'release',
-        \ })
+  call dein#add('Freed-Wu/zathurarc.vim')
   call dein#add('gnu-octave/vim-octave')
   call dein#add('rubberduck203/aosp-vim')
   call dein#add('LnL7/vim-nix')
   call dein#add('pboettch/vim-cmake-syntax')
+  call dein#add('philj56/vim-asm-indent')
   call dein#add('vim-scripts/bats.vim')
   call dein#add('vito-c/jq.vim')
   call dein#add('kaarmu/typst.vim')
@@ -542,6 +547,13 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#rainbow_csv#source()',
         \ })
   call dein#add('cmcaine/vim-uci')
+  " https://github.com/weirongxu/coc-markdown-preview-enhanced/issues/25
+  call dein#add('iamcco/markdown-preview.nvim', {
+        \ 'if': executable('npx'),
+        \ 'hook_source': 'call init#markdown_preview#source()',
+        \ 'on_ft': ['markdown', 'pandoc', 'rmd'],
+        \ 'build': 'sh -c "cd app && npx --yes yarn install"'
+        \ })
   call dein#add('Freed-Wu/cppinsights.vim', {
         \ 'if': executable('insights'),
         \ })

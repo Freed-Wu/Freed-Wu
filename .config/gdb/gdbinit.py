@@ -7,7 +7,7 @@ import os
 
 import gdb  # type: ignore
 
-paths = [
+prefixs = [
     "/usr",
     "/usr/local",
     "/run/current-system/sw",
@@ -15,8 +15,18 @@ paths = [
     "~/.local/state/nix/profile",
 ]
 
-for path in paths:
-    file = os.path.expanduser(os.path.join(path, "bin/gdb-prompt"))
-    if os.path.exists(file):
-        gdb.execute("source " + file)
+for prefix in prefixs:
+    path = os.path.expanduser(os.path.join(prefix, "bin/gdb-prompt"))
+    if os.path.isfile(path):
+        gdb.execute("source " + path)
+        break
+
+for prefix in prefixs:
+    path = os.path.expanduser(os.path.join(prefix, "share/gdb/gdb-hook.py"))
+    if os.path.isfile(path):
+        gdb.execute(
+            f"""define hook-stop
+  source {path}
+end"""
+        )
         break
