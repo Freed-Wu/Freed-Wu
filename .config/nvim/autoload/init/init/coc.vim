@@ -25,3 +25,35 @@ function! init#init#coc#includeexpr() abort
   endif
   return 'coc-' . split(v:fname, '\.')[0]
 endfunction
+
+function! init#init#coc#format(isvisual) abort
+  if a:isvisual
+    if CocHasProvider('formatRange')
+      call CocActionAsync('formatSelected', visualmode())
+    else
+      *TrailGuide fix
+    endif
+  else
+    if CocHasProvider('format')
+      call CocActionAsync('format')
+    else
+      TrailGuide fix
+    endif
+  endif
+endfunction
+
+function! init#init#coc#openLink() abort
+  if &buftype ==# ''
+    call CocActionAsync('openLink')
+  else
+    call pandoc#hypertext#OpenSystem()
+  endif
+endfunction
+
+function! init#init#coc#action(feature, action, hotkey) abort
+  if CocHasProvider(a:feature)
+    call CocActionAsync(a:action)
+  else
+    execute 'normal!' a:hotkey
+  endif
+endfunction

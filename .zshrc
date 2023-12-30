@@ -78,6 +78,7 @@ autoload -Uz run-help
 autoload -Uz zcalc
 autoload -Uz zmv
 autoload -Uz compinit && compinit
+autoload -Uz zmathfunc && zmathfunc
 
 bindkey -e
 bindkey "\x1b[13;2u" accept-line
@@ -122,8 +123,8 @@ zstyle ':completion:*' word true
 zstyle ':completion::complete:*' use-cache true
 zstyle ':completion::complete:*' call-command true
 zstyle ':completion:*:processes' command "ps -wu$USER -opid,user,comm"
-zstyle ':completion:*:descriptions' format %d
 zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:coredumpctl:*' sort false
 zstyle ':completion:*' option-stacking true
 # work when fzf-tab is not installed
 zstyle ':completion:*' menu select
@@ -231,9 +232,7 @@ zinit id-as'.vivid' depth'1' wait lucid \
   if'(($+commands[vivid]))' \
   for zdharma-continuum/null
 
-# in .xprofile, LINES=0
-# in .zprofile, $LINES is not correct
-FZF_TMUX_HEIGHT=$((LINES - 1))
+FZF_TMUX_HEIGHT=100%
 zstyle ':fzf-tab:*' prefix ''
 zstyle ':fzf-tab:*' single-group prefix color header
 zstyle ':fzf-tab:*' continuous-trigger 'ctrl-_'

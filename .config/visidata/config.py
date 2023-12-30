@@ -3,10 +3,11 @@
 
 Configure ``visidata``.
 """
+
 import os
 import sys
 
-from visidata import IndexSheet, vd
+from visidata import IndexSheet, TableSheet, vd
 from visidata.canvas import Canvas
 from visidata.canvas_text import TextCanvas
 from visidata.main import options
@@ -14,7 +15,7 @@ from visidata.settings import _get_config_file
 from visidata.shell import BaseSheet, Sheet
 
 sys.path.insert(0, os.path.dirname(_get_config_file()))
-from _visidata import sort  # type: ignore
+from _visidata import sort  # type: ignore  # noqa: F401
 
 sys.path.pop(0)
 
@@ -24,10 +25,13 @@ options.clipboard_copy_cmd = "xsel -ib"  # type: ignore
 options.clipboard_paste_cmd = "xsel -ob"  # type: ignore
 options.incr_base = 0  # type: ignore
 options.visidata_dir = "~/.config/visidata"  # type: ignore
-options.disp_status_fmt = "{sheet.shortcut} {sheet.name}{sheet.modifiedStatus} "  # type: ignore
-# https://github.com/saulpw/visidata/issues/1803
-# options.disp_rstatus_fmt = " {sheet.longname}  {sheet.nSelectedRows}{sheet.cursorRowIndex}/{sheet.nRows}{sheet.cursorColIndex}/{sheet.nCols}"  # type: ignore
-options.disp_rstatus_fmt = " {sheet.longname}  {sheet.nSelectedRows}{sheet.cursorRowIndex}/{sheet.nRows}{sheet.nCols}"  # type: ignore
+options.disp_status_fmt = (  # type: ignore
+    "{sheet.shortcut} {sheet.name}{sheet.modifiedStatus} "
+)
+options.disp_rstatus_fmt = (  # type: ignore
+    " {sheet.longname}  {sheet.nSelectedRows}{sheet.cursorRowIndex}"
+    "/{sheet.nRows}{sheet.cursorColIndex}/{sheet.nCols}"
+)
 options.disp_menu_fmt = ""  # type: ignore
 options.disp_more_left = "←"  # type: ignore
 options.disp_more_right = "→"  # type: ignore
@@ -36,7 +40,8 @@ vd.allPrefixes += ["^W"]  # type: ignore
 Sheet.addCommand(  # type: ignore
     "g;",
     "split-col",
-    'addRegexColumns(makeRegexSplitter, cursorCol, input("split regex: ", type="regex-split"))',
+    'addRegexColumns(makeRegexSplitter, cursorCol, input("split regex: ", '
+    'type="regex-split"))',
     "Add new columns from regex split",
 )
 Sheet.addCommand(  # type: ignore
@@ -80,12 +85,14 @@ BaseSheet.addCommand(  # type: ignore
     "vd.redo(sheet)",
     "Redo the most recent undo (options.undo must be enabled)",
 )
-BaseSheet.addCommand(  # type: ignore
-    "R",
-    "reload-sheet",
-    'preloadHook(); reload(); recalc(); status("reloaded")',
-    "Reload current sheet",
-),
+(
+    BaseSheet.addCommand(  # type: ignore
+        "R",
+        "reload-sheet",
+        'preloadHook(); reload(); recalc(); status("reloaded")',
+        "Reload current sheet",
+    ),
+)
 IndexSheet.addCommand(  # type: ignore
     "gR",
     "reload-selected",
@@ -128,14 +135,17 @@ Sheet.addCommand(  # type: ignore
 Sheet.addCommand(  # type: ignore
     "zd",
     "cut-cell",
-    "copyCells(cursorCol, [cursorRow]); cursorCol.setValues([cursorRow], None)",
+    "copyCells(cursorCol, [cursorRow]); "
+    "cursorCol.setValues([cursorRow], None)",
     "delete (cut) current cell and move it to clipboard",
 )
 Sheet.addCommand(  # type: ignore
     "gzd",
     "cut-cells",
-    "copyCells(cursorCol, onlySelectedRows); cursorCol.setValues(onlySelectedRows, None)",
-    "delete (cut) contents of current column for selected rows and move them to clipboard",
+    "copyCells(cursorCol, onlySelectedRows); "
+    "cursorCol.setValues(onlySelectedRows, None)",
+    "delete (cut) contents of current column for selected rows and "
+    "move them to clipboard",
 )
 Sheet.addCommand(  # type: ignore
     "^O",
@@ -152,7 +162,8 @@ BaseSheet.addCommand(  # type: ignore
 BaseSheet.addCommand(  # type: ignore
     "^WN",
     "splitwin-input",
-    'vd.options.disp_splitwin_pct = input("% height for split window: ", value=vd.options.disp_splitwin_pct)',
+    "vd.options.disp_splitwin_pct = "
+    'input("% height for split window: ", value=vd.options.disp_splitwin_pct)',
     "set split pane to specific size",
 )
 BaseSheet.addCommand(  # type: ignore
@@ -176,7 +187,8 @@ BaseSheet.addCommand(  # type: ignore
 TableSheet.addCommand(  # type: ignore
     "gf",
     "open-cell-file",
-    'vd.push(openSource(cursorDisplay) or fail(f"file {cursorDisplay} does not exist"))',
+    "vd.push(openSource(cursorDisplay) or "
+    'fail(f"file {cursorDisplay} does not exist"))',
     "Open file or URL from path in current cell",
 )
 BaseSheet.addCommand(  # type: ignore

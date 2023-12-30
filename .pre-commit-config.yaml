@@ -19,9 +19,7 @@ repos:
       - id: check-symlinks
         exclude: ^(AppData/Local/nvim|\.termux/shell)$
       - id: check-ast
-        exclude: &pdbrc ^\.pdbrc$
       - id: debug-statements
-        exclude: *pdbrc
       - id: requirements-txt-fixer
       - id: check-xml
       - id: check-yaml
@@ -51,6 +49,7 @@ repos:
     rev: 3.0.0
     hooks:
       - id: check-mailmap
+      # https://github.com/koalaman/shellcheck/issues/2909
       - id: shellcheck
         exclude_types:
           - zsh
@@ -59,7 +58,7 @@ repos:
     hooks:
       - id: actionlint
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.33.0
+    rev: v1.35.1
     hooks:
       - id: yamllint
         exclude: ^\.config/gh/config\.yml$
@@ -74,49 +73,32 @@ repos:
           - mdformat-toc
           - mdformat-deflist
           - mdformat-beautysh
-          - mdformat-black
+          - mdformat-ruff
           - mdformat-config
+          - mdformat-web
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.11.0
+    rev: v0.12.1
     hooks:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20230912.05"
+    rev: "20230912.13"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.7.0-4
+    rev: v3.8.0-1
     hooks:
       - id: shfmt
-  - repo: https://github.com/psf/black
-    rev: 23.11.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.2.1
     hooks:
-      - id: black
-        exclude: *pdbrc
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-  - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.3.0
-    hooks:
-      - id: pydocstyle
-        additional_dependencies:
-          - tomli
+      - id: ruff
+      - id: ruff-format
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.338
+    rev: v1.1.350
     hooks:
       - id: pyright
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.5
-    hooks:
-      - id: bandit
-        args:
-          - -cpyproject.toml
-        additional_dependencies:
-          - tomli
   - repo: https://github.com/vimjas/vint
     rev: v0.4a3
     hooks:
@@ -128,11 +110,11 @@ repos:
         args:
           - .config/nvim
   - repo: https://github.com/lunarmodules/luacheck
-    rev: v1.1.1
+    rev: v1.1.2
     hooks:
       - id: luacheck
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.58.0
+    rev: v1.60.1
     hooks:
       - id: rubocop
   - repo: https://github.com/nix-community/nixpkgs-fmt
@@ -144,3 +126,4 @@ ci:
   skip:
     - shellcheck
     - pyright
+  autoupdate_branch: dev

@@ -8,7 +8,7 @@ import sys
 # - macos doesn't ship with python3
 # - windows executables are almost always `python.exe`
 # therefore we continue to support python2 for this small script
-if sys.version_info < (3, 3):
+if sys.version_info < (3, 3):  # noqa: UP036
     from distutils.spawn import find_executable as which
 else:
     from shutil import which
@@ -41,7 +41,8 @@ CMD.extend(ARGS)
 if sys.platform == "win32":  # https://bugs.python.org/issue19124
     import subprocess
 
-    if sys.version_info < (3, 7):  # https://bugs.python.org/issue25942
+    # https://bugs.python.org/issue25942
+    if sys.version_info < (3, 7):  # noqa: UP036
         raise SystemExit(subprocess.Popen(CMD).wait())
     else:
         raise SystemExit(subprocess.call(CMD))

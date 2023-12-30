@@ -1,5 +1,5 @@
 #if 0
-bin="$(basename "$0")" && bin="${bin%%.*}" && cc "$0" -o"$bin" && exec ./"$bin" "$@"
+bin="$(basename "$0")" && bin="${bin%%.*}" && cc -g -Wall -o"$bin" "$0" && exec ./"$bin" "$@"
 #endif
 #include <err.h>
 #include <errno.h>

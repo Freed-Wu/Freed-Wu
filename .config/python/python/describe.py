@@ -1,6 +1,7 @@
 r"""Describe
 ============
 """
+
 from contextlib import suppress
 from typing import TYPE_CHECKING, Any
 
@@ -59,7 +60,7 @@ class Describe:
             "requires_grad",
         ]:
             if (
-                k == "requires_grad" and self.requires_grad == True
+                k == "requires_grad" and self.requires_grad
             ) or k != "requires_grad":
                 attrs += [k]
         texts = []
@@ -72,10 +73,7 @@ class Describe:
             elif isinstance(v, float):
                 text = f"{k}={v:.2}"
             elif isinstance(v, torch.device):
-                if v.index is None:
-                    suffix = ""
-                else:
-                    suffix = f":{v.index}"
+                suffix = "" if v.index is None else f":{v.index}"
                 text = f"{v.type}" + suffix
                 if text == "cpu":
                     continue
@@ -148,9 +146,7 @@ def describe(
         kwargs: dict[
             str, str | bool | float | torch.device | torch.dtype | None
         ] = {}
-        try:
-            obj.imag
-        except RuntimeError:
+        if not torch.is_complex(obj):
             if min:
                 kwargs["min"] = obj.min().item()
             if max:
@@ -177,9 +173,6 @@ def describe(
             d[k] = describe(v)
         return d
     elif isinstance(obj, list):
-        l = []
-        for v in obj:
-            l += [describe(v)]
-        return l
+        return [describe(v) for v in obj]
     else:
         return obj

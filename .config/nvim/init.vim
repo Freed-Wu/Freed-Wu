@@ -307,8 +307,11 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
 
   " Setting {{{1 "
   call dein#add('tpope/vim-sensible')
+  call dein#add('tpope/vim-sleuth')
   call dein#add('farmergreg/vim-lastplace')
-  call dein#add('editorconfig/editorconfig-vim')
+  call dein#add('editorconfig/editorconfig-vim', {
+        \ 'if': !has('nvim'),
+        \ })
   call dein#add('mox-mox/vim-localsearch', {
         \ 'hook_post_source': 'call init#localsearch#post_source()',
         \ })
@@ -503,10 +506,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " 2}}} Conceal "
 
   " Ftplugin {{{2 "
-  call dein#add('sheerun/vim-polyglot', {
-        \ 'merged': 0,
-        \ 'hook_source': 'call init#polyglot#source()',
-        \ })
   call dein#add('Freed-Wu/sublime-syntax-language-server', {
         \ 'rev': 'release',
         \ })
@@ -516,13 +515,14 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('Freed-Wu/zathurarc.vim')
   call dein#add('gnu-octave/vim-octave')
   call dein#add('rubberduck203/aosp-vim')
-  call dein#add('LnL7/vim-nix')
+  " pboettch/vim-cmake-syntax/syntax/cmakecache.vim
   call dein#add('pboettch/vim-cmake-syntax')
-  call dein#add('philj56/vim-asm-indent')
   call dein#add('vim-scripts/bats.vim')
   call dein#add('vito-c/jq.vim')
   call dein#add('kaarmu/typst.vim')
-  call dein#add('kergoth/vim-bitbake')
+  call dein#add('philj56/vim-asm-indent')
+  call dein#add('tpope/vim-dadbod')
+  call dein#add('kristijanhusak/vim-dadbod-ui')
   " https://github.com/lervag/vimtex/issues/237
   call dein#add('lervag/vimtex', {
         \ 'merged': 0,
@@ -537,9 +537,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   call dein#add('Winseven4lyf/vim-bbcode')
   call dein#add('raimon49/requirements.txt.vim')
-  call dein#add('liuchengxu/graphviz.vim')
-  call dein#add('tmux-plugins/vim-tmux')
-  call dein#add('neomutt/neomutt.vim')
   call dein#add('tpope/vim-scriptease', {
         \ 'hook_source': 'call init#scriptease#source()',
         \ })

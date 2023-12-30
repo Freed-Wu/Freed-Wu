@@ -3,6 +3,7 @@
 
 ``gdb -ex 'python print(gdb.PYTHONDIR)' -ex 'quit'`` show gdb python path.
 """
+
 import os
 
 import gdb  # type: ignore
@@ -22,11 +23,17 @@ for prefix in prefixs:
         break
 
 for prefix in prefixs:
+    path = os.path.expanduser(
+        os.path.join(prefix, "share/gdb-dashboard/.gdbinit")
+    )
+    if os.path.isfile(path):
+        gdb.execute("source " + path)
+        break
+
+for prefix in prefixs:
     path = os.path.expanduser(os.path.join(prefix, "share/gdb/gdb-hook.py"))
     if os.path.isfile(path):
-        gdb.execute(
-            f"""define hook-stop
+        gdb.execute(f"""define hook-stop
   source {path}
-end"""
-        )
+end""")
         break

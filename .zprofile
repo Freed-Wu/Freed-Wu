@@ -13,7 +13,7 @@ fi
 if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
 	. ~/.local/share/zinit/plugins/.pass/pass.sh
 fi
-# NixOS
+# https://github.com/NixOS/nixpkgs/issues/282076
 if [[ -d /run/current-system/sw/share ]] &&
 	[[ ${XDG_DATA_DIRS#/run/current-system/sw/share:} == $XDG_DATA_DIRS ]]; then
 	XDG_DATA_DIRS="/run/current-system/sw/share${XDG_DATA_DIRS+:}$XDG_DATA_DIRS"

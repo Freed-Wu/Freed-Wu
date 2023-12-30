@@ -3,6 +3,7 @@
 
 `<https://github.com/prompt-toolkit/ptpython/issues/525>`_
 """
+
 import re
 from functools import reduce
 

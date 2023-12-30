@@ -10,6 +10,7 @@ that the file will be executed.
 Then, go to the PuDB preferences window (type Ctrl-p inside of PuDB) and add
 the path to the file in the "Custom" field under the "Shell" heading.
 """
+
 import logging
 import os
 
@@ -27,7 +28,7 @@ def pudb_shell(_globals: dict, _locals: dict) -> None:
     """
     pythonstartup = os.getenv("PYTHONSTARTUP", os.devnull)
     try:
-        with open(pythonstartup, "r") as f:
+        with open(pythonstartup) as f:
             code = f.read()
         exec(code, _globals, _locals)  # nosec: B102
     except Exception as e:

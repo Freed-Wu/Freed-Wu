@@ -1,23 +1,24 @@
 """My mostly used functions
 ===========================
 """
+
 import sys
 from contextlib import suppress
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from .describe import describe
+from .describe import describe  # noqa: F401
 from .image import inputs2tensors
 
 if TYPE_CHECKING:
-    from typing import Callable
+    from collections.abc import Callable
 
     import numpy as np
     from torch import Tensor, nn
 
 if "torch" in sys.modules:
     with suppress(ImportError):
-        from torchinfo import summary
+        from torchinfo import summary  # noqa: F401
 
 
 @dataclass
@@ -103,10 +104,7 @@ def calc_batch_size(
     k = abs(b2 - b1) / abs(m2 - m1)
     m_rest_max = m_G * 1000 - max(m1, m2)
     b_max = max(b1, b2) + m_rest_max * k
-    if b_wanted == 0:
-        b = int(b_max // 8 * 8)
-    else:
-        b = b_wanted
+    b = int(b_max // 8 * 8) if b_wanted == 0 else b_wanted
     m_rest = (b_max - b) / k
     while m_rest < mem_safe:
         b -= 8

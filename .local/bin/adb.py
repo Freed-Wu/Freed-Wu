@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Expect adb shell."""
+
 import sys
 from shlex import join, split
 

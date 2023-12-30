@@ -27,10 +27,6 @@ fi
 stty -ixon
 HISTIGNORE='&: *'
 
-if [[ -f /usr/share/pinyin-completion/shell/pinyin-comp.bash ]]; then
-	. /usr/share/pinyin-completion/shell/pinyin-comp.bash
-fi
-
 if [[ -f ~/.local/share/zinit/plugins/zsh-colorize-functions/colorize-functions.plugin.zsh ]]; then
 	. ~/.local/share/zinit/plugins/zsh-colorize-functions/colorize-functions.plugin.zsh
 fi

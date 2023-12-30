@@ -1,104 +1,51 @@
 ---
-font:
-  # Normal (roman) font face
-  normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
-    family: JetBrainsMono Nerd Font Mono
-  size: 12.0
 colors:
   vi_mode_cursor:
-    #  text: CellBackground
-    cursor: "#ff00ff"
-
-    # Background opacity
-    #
-    # Window opacity as a floating point number from `0.0` to `1.0`.
-    # The value `0.0` is completely transparent and `1.0` is opaque.
+    cursor: '#ff00ff'
+cursor:
+  style:
+    blinking: 'On'
+font:
+  normal:
+    family: JetBrainsMono Nerd Font Mono
+  size: 12.0
+keyboard:
+  bindings:
+    - action: IncreaseFontSize
+      key: Plus
+      mods: Shift|Control
+    - action: DecreaseFontSize
+      key: _
+      mods: Shift|Control
+    - action: ResetFontSize
+      key: 11
+      mods: Shift|Control
+    - chars: ''
+      key: Equals
+      mods: Control
+    - chars: "\x1F"
+      key: Minus
+      mods: Control
+    - chars: ''
+      key: Key0
+      mods: Control
+    - action: Hide
+      key: H
+      mods: Shift|Control
+    - action: CopySelection
+      key: X
+      mods: Shift|Control
+    - action: PasteSelection
+      key: P
+      mods: Shift|Control
+    - chars: "\e[13;2u"
+      key: Return
+      mods: Shift
+    - chars: "\e[13;5u"
+      key: Return
+      mods: Control
+selection:
+  save_to_clipboard: true
 window:
   opacity: 0.75
   startup_mode: Fullscreen
-
-selection:
-  # This string contains all characters that are used as separators for
-  # "semantic words" in Alacritty.
-  # semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
-
-  # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: true
-
-cursor:
-  # Cursor style
-  style:
-    # Cursor shape
-    #
-    # Values for `shape`:
-    #   - ▇ Block
-    #   - _ Underline
-    #   - | Beam
-    # shape: Block
-
-    # Cursor blinking state
-    #
-    # Values for `blinking`:
-    #   - Never: Prevent the cursor from ever blinking
-    #   - Off: Disable blinking by default
-    #   - On: Enable blinking by default
-    #   - Always: Force the cursor to always blink
-    blinking: "On"
-
-    # Vi mode cursor style
-    #
-    # If the vi mode cursor style is `None` or not specified, it will fall back
-    # to the style of the active value of the normal cursor.
-    #
-    # See `cursor.style` for available options.
-    vi_mode_style: block
-
-    # Bindings are always filled by default, but will be replaced when a new
-    # binding with the same triggers is defined. To unset a default binding, it
-    # can be mapped to the `ReceiveChar` action. Alternatively, you can use
-    # `None` for a no-op if you do not wish to receive input characters for that
-    # binding.
-    #
-    # If the same trigger is assigned to multiple actions, all of them are
-    # executed in the order they were defined in.
-key_bindings:
-  # keep same as wezterm
-  - key: Plus
-    mods: Shift|Control
-    action: IncreaseFontSize
-  - key: Underline
-    mods: Shift|Control
-    action: DecreaseFontSize
-  - key: 11
-    mods: Shift|Control
-    action: ResetFontSize
-  - key: Equals
-    mods: Control
-    chars: ""
-  - key: Minus
-    mods: Control
-    chars: "\x1f"
-  - key: Key0
-    mods: Control
-    chars: ""
-  - key: H
-    mods: Shift|Control
-    action: Hide
-  - key: X
-    mods: Shift|Control
-    action: CopySelection
-  - key: P
-    mods: Shift|Control
-    action: PasteSelection
-  - key: Return
-    mods: Shift
-    chars: "\x1b[13;2u"
-  - key: Return
-    mods: Control
-    chars: "\x1b[13;5u"

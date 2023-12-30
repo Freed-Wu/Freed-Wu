@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #shellcheck disable=SC2046
-cd "$(dirname "$(readlink -f "$0")")/.." || exit 1
+set -e
+cd "$(dirname "$(readlink -f "$0")")/.."
 # `. "$HOME/.nix-profile/etc/profile.d/nix.sh"` cannot work
 export PATH=~/.nix-profile/bin:$PATH
 git config --global safe.directory '*'

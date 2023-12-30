@@ -1,4 +1,5 @@
 r"""Test patch_images"""
+
 import math
 
 import torch

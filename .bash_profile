@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null
+# shellcheck shell=bash source=/dev/null disable=SC2016
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 has_cmd() {
@@ -149,6 +149,8 @@ export DOCKER_BUILDKIT=1
 export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 # direnv
 export DIRENV_LOG_FORMAT=
+# minicom
+export MINICOM=-w
 # lua
 if has_cmd lua; then
 	version="$(command lua -v)"
@@ -166,15 +168,37 @@ if has_cmd lua; then
 		ext=dll
 		;;
 	esac
-	export LUA_PATH="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;$HOME/.local/share/lua/$version/?.lua;$HOME/.local/share/lua/$version/?/init.lua;$HOME/.local/state/nix/profile/share/lua/$version/?.lua;$HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
-	export LUA_CPATH="./lib/lua/$version/?.$ext;./?.$ext;./lib/lua/$version/loadall.$ext;;$HOME/.local/lib/lua/$version/?.$ext;$HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
+	export LUA_PATH="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;\
+$HOME/.local/share/lua/$version/?.lua;\
+$HOME/.local/share/lua/$version/?/init.lua;\
+$HOME/.local/state/nix/profile/share/lua/$version/?.lua;\
+$HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
+	export LUA_CPATH="./lib/lua/$version/?.$ext;./?.$ext;\
+./lib/lua/$version/loadall.$ext;;\
+$HOME/.local/lib/lua/$version/?.$ext;\
+$HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
 	if [[ -f /run/current-system/nixos-version ]]; then
-		LUA_PATH="$LUA_PATH;/run/current-system/sw/share/lua/$version/?.lua;/run/current-system/sw/share/lua/$version/?/init.lua"
+		LUA_PATH="$LUA_PATH;/run/current-system/sw/share/lua/$version/?.lua;\
+/run/current-system/sw/share/lua/$version/?/init.lua"
 		LUA_CPATH="$LUA_CPATH;/run/current-system/sw/lib/lua/$version/?.$ext"
 	fi
 	unset version ext
 fi
 # node
 if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
-  export NODE_OPTIONS='-r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
+	export NODE_OPTIONS='-r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
+fi
+# old bash doesn't support tmux-256color
+if [[ ${BASH_VERSION//.*/} -le 5 ]]; then
+	export TERM=xterm-256color
+fi
+# nix-ld
+# https://blog.thalheim.io/2022/12/31/nix-ld-a-clean-solution-for-issues-with-pre-compiled-executables-on-nixos/
+if has_cmd nix; then
+	export NIX_LD
+	eval NIX_LD="$(nix eval --impure --expr 'let arr = builtins.split "-" "${(import <nixpkgs> {}).system}";
+	in "${(import <nixpkgs> {}).glibc}/lib/ld-${builtins.elemAt arr 2}-${
+	builtins.replaceStrings ["_"] ["-"] (builtins.elemAt arr 0)}.so.2"')"
+	export NIX_LD_LIBRARY_PATH
+	eval NIX_LD_LIBRARY_PATH="$(nix eval --impure --expr '"${(import <nixpkgs> {}).stdenv.cc.cc.lib}/lib"')"
 fi

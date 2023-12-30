@@ -33,41 +33,18 @@ require "nvim-treesitter.configs".setup {
 -- luacheck: ignore 111 112 113
 ---@diagnostic disable: lowercase-global
 vim = vim or {}
--- https://github.com/neoclide/coc.nvim/issues/4282#issuecomment-1279692192
-vim.g.coc_filetype_map = {
-    bash = "sh",
-    zsh = "sh",
-    PKGBUILD = "sh",
-    ebuild = "sh",
-    liquid = "html",
-    brewfile = "ruby",
-    vimspec = "vim",
-    tutor = "markdown",
-    pandoc = "markdown",
-    mysql = "sql",
-    eelixir = "elixir",
-    neomuttrc = "muttrc",
-}
----@diagnostic disable-next-line: undefined-global
-for i, v in pairs(vim.g.coc_filetype_map) do
-    if i ~= "zsh" then
-        if vim.treesitter.language.register then
-            vim.treesitter.language.register(i, v)
-        end
-    end
-end
 if vim.treesitter.language.register then
-    -- :help coc-document-filetype
-    vim.treesitter.language.register("javascript.jsx", "javascriptreact")
-    vim.treesitter.language.register("typescript.jsx", "typescriptreact")
-    vim.treesitter.language.register("typescript.tsx", "typescriptreact")
-    vim.treesitter.language.register("tex", "latex")
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = "liquid",
-        callback = function(args)
-            vim.treesitter.start(args.buf, vim.b.liquid_subtype)
-            -- only if additional legacy syntax is needed
-            vim.bo[args.buf].syntax = "on"
-        end
-    })
+    -- https://github.com/nvim-treesitter/nvim-treesitter/pull/6096/
+    vim.treesitter.language.register("comment", "text")
+    vim.treesitter.language.register("sh", "apkbuild")
+    vim.treesitter.language.register("sh", "PKGBUILD")
+    vim.treesitter.language.register("sh", "ebuild")
 end
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "liquid",
+    callback = function(args)
+        vim.treesitter.start(args.buf, vim.b.liquid_subtype)
+        -- only if additional legacy syntax is needed
+        -- vim.bo[args.buf].syntax = "on"
+    end
+})

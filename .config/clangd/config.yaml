@@ -10,7 +10,7 @@ CompileFlags:
     - -I/home/.local/include # android termux
     - -I/proc/cygdrive/c/Users/wzy/.local/include # windows msys2
     - -I/home/wzy/.local/include # gnu/linux
-    - -I/home/wzy/.local/stat/nix/profile/include # nix
+    - -I/home/wzy/.local/state/nix/profile/include # nix
     - -I/usr/local/include # BSD or homebrew (macOS x86)
     - -I/opt/include # homebrew (macOS arm)
     - -I/home/linuxbrew/.linuxbrew/include # homebrew (linux)

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Expect telnet."""
+
 import sys
 from shlex import join, split
 
