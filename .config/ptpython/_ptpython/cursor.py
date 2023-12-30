@@ -3,6 +3,7 @@
 
 Refer `<https://github.com/prompt-toolkit/python-prompt-toolkit/issues/192>`_
 """
+
 from prompt_toolkit.key_binding.vi_state import InputMode, ViState
 
 

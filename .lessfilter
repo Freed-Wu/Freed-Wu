@@ -86,6 +86,10 @@ elif [ "$kind" = rfc822 ]; then
 	if has_cmd bat; then
 		bat --color=always -lEmail "$1"
 	fi
+elif [ "$kind" = javascript ]; then
+	if has_cmd bat; then
+		bat --color=always -ljs "$1"
+	fi
 # https://github.com/wofr06/lesspipe/pull/106
 elif [ "$category" = image ]; then
 	if has_cmd chafa; then

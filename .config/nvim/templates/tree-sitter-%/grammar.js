@@ -1,5 +1,5 @@
 module.exports = grammar({
-  name: "{{ substitute(expand('%:p:h'), '^tree-sitter-', '', '') }}",
+  name: "{{ substitute(expand('%:p:h:t'), '^tree-sitter-', '', '') }}",
 
   rules: {
     file: ($) => "",

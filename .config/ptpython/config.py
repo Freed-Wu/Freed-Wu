@@ -3,13 +3,11 @@
 
 Configure ``ptpython``.
 """
-from __future__ import annotations
 
 import os
 import re
 import sys
 from contextlib import suppress
-from typing import TYPE_CHECKING
 
 from prompt_toolkit.application.current import get_app
 from prompt_toolkit.clipboard import ClipboardData
@@ -29,6 +27,7 @@ from prompt_toolkit.key_binding.bindings.named_commands import (
     forward_char,
     unix_word_rubout,
 )
+from prompt_toolkit.key_binding.key_processor import KeyPressEvent
 from prompt_toolkit.key_binding.vi_state import InputMode
 from prompt_toolkit.keys import Keys
 from prompt_toolkit.selection import SelectionType
@@ -48,15 +47,15 @@ sys.path.insert(
         get_config_and_history_file(create_parser().parse_args([]))[0]
     ),
 )
-from _ptpython.cursor import change_input_mode  # noqa: E402  # type: ignore
+from _ptpython.cursor import (  # type: ignore
+    change_input_mode,  # noqa: E402, F401
+)
 from _ptpython.prompt_style import PythonPrompt  # noqa: E402  # type: ignore
 from _ptpython.utils.insert import insert  # noqa: E402  # type: ignore
 
 sys.path.pop(0)
 # https://github.com/TylerYep/torchinfo/issues/216
 sys.ps1 = ">>> "
-if TYPE_CHECKING:
-    from prompt_toolkit.key_binding.key_processor import KeyPressEvent
 
 
 def configure(repl: PythonRepl) -> None:
@@ -196,7 +195,6 @@ def configure(repl: PythonRepl) -> None:
         "in.number": "fg:ansiwhite",
         "out.number": "fg:ansiwhite",
     }
-    # _custom_ui_colorscheme |= repl.all_prompt_styles[repl.prompt_style].styles
     repl.install_ui_colorscheme(
         "my-colorscheme", Style.from_dict(_custom_ui_colorscheme)
     )

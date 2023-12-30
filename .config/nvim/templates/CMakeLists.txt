@@ -10,6 +10,7 @@ project(
   DESCRIPTION {{ expand ('%:p:h:t') }}
   HOMEPAGE_URL ${HOMEPAGE_URL})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+include(cmake/sanitize.cmake)
 add_subdirectory(src)
 
 include(CTest)

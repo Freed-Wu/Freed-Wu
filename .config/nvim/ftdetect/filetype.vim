@@ -1,3 +1,4 @@
+" $VIMRUNTIME/lua/vim/filetype.lua
 augroup init_filetype
   autocmd!
   " Text {{{1 "
@@ -10,9 +11,8 @@ augroup init_filetype
   " Data_Describe {{{1 "
   autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
   autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc,bootstraprc,psprint.conf,sofficerc setfiletype dosini
-  autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP setfiletype conf
+  autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP,*.dfl setfiletype conf
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map,xci} setfiletype json
-  " https://github.com/McSinyx/vim-octave/issues/4
   autocmd BufNewFile,BufRead */.bundle/config,*.mplstyle,.clangd,.git,DESCRIPTION setfiletype yaml
   autocmd BufNewFile,BufRead *.{{x,l}pr,{x,s}pfm},fonts.conf,*/{dbus-1,conf.d}/*.conf,*.xcu setfiletype xml
   " 1}}} Data_Describe "
@@ -23,17 +23,13 @@ augroup init_filetype
 
   " Mark_Up {{{1 "
   autocmd BufNewFile,BufRead *.{2type,3{type,head,const}} setfiletype nroff
-  autocmd BufNewFile,BufRead */doc/*.txt setfiletype help
   autocmd BufNewFile,BufRead */tex/latex/**.cfg,*.{def,pgf,nlo,nls,inp,out,thm,eps_tex,pygtex,pygstyle,clo,aux,brf,ind,toc,lot,lof,loe,nav,vrb,ins,tikz,bbx,cbx,beamer} setfiletype tex
-  " polyglot overrides typst
-  autocmd BufNewFile,BufRead *.typ setfiletype typst
   " 1}}} Mark_Up "
 
   " Script {{{1 "
   autocmd BufNewFile,BufRead *{.stsg,/.local/share/supertux2/config} setfiletype lisp
-  autocmd BufNewFile,BufRead *.qsf setfiletype tcl
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
-  autocmd BufNewFile,BufRead .bash_history setfiletype sh
+  autocmd BufNewFile,BufRead */{.,}shortcuts/*,.bash_history,*.la setfiletype sh
   autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history,*.zunit setfiletype zsh
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead *.lg4 setfiletype lingo
@@ -42,7 +38,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead *.{gnuplot,plt},.gnuplot_history setfiletype gnuplot
   autocmd BufNewFile,BufRead SConstruct setfiletype python
   autocmd BufNewFile,BufRead rock_manifest,config.ld,*.tlu setfiletype lua
-  autocmd BufNewFile,BufRead .netrwhist setfiletype vim
+  autocmd BufNewFile,BufRead .netrwhist,cgdbrc setfiletype vim
   " 1}}} Script "
 
   " Compile {{{1 "

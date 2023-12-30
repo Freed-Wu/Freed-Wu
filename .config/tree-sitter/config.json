@@ -1,7 +1,5 @@
 {
-  "parser-directories": [
-    "/home/wzy/.local/share/nvim/repos/github.com/nvim-treesitter/nvim-treesitter/parser"
-  ],
+  "parser-directories": [".."],
   "theme": {
     "module": 136,
     "constructor": 136,

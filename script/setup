@@ -3,8 +3,9 @@
 # Debug:
 # 	gh cs cp -e remote:/workspaces/.codespaces/.persistedshare/creation.log .
 # 	less creation.log
-[ -d ~/.git ] && exit
-cd "$(dirname "$(readlink -f "$0")")/.." || exit 1
+set -e
+[ ! -d ~/.git ]
+cd "$(dirname "$(readlink -f "$0")")/.."
 
 sudo sed -i s=/bin/bash=/bin/zsh=g /etc/passwd
 sudo sed -i s/archive.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list
@@ -20,7 +21,7 @@ sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 # CWD: /workspaces/.codespaces/.persistedshare/dotfiles
 cp -r .git ~
-cd || exit
+cd
 git reset --hard
 nix-env -iA nixpkgs.{neovim,tmux,vivid,eza,bat,ripgrep,fd,delta,fzf,zsh-powerlevel10k,chafa,parallel,exiftool}
 sudo ln -sf ~/.nix-profile/bin/nvim /usr/bin/vi

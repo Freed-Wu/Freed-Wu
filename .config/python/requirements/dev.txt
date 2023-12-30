@@ -3,4 +3,5 @@
 gpustat
 ptpython
 pudb
+ruff-lsp
 torchinfo

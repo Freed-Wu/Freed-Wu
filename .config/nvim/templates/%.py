@@ -1,6 +1,7 @@
 r"""{{ substitute(trim(substitute(expand('%:t:r'), '_\(.\)', ' \u\1', 'g')), '^\(.\)', '\u\1', '') }}
 ===={{ repeat('=', len(substitute(trim(substitute(expand('%:t:r'), '_\(.\)', ' \u\1', 'g')), '^\(.\)', '\u\1', ''))) }}
 """
+
 import logging
 import os
 import sys

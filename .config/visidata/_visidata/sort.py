@@ -1,4 +1,5 @@
 r"""`<https://github.com/saulpw/visidata/issues/1762>`_"""
+
 from typing import Any
 
 from visidata import vd

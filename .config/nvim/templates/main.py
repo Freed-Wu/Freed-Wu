@@ -9,6 +9,7 @@ Options:
 
 Report bugs to <{{ g:snips_email }}>.
 """
+
 import logging
 import os
 import sys

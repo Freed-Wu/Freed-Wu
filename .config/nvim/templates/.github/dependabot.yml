@@ -1,1 +1,1 @@
-{{ join(readfile(expand('~/.github/dependabot.yml')), "\n") }}
+{{ join(filter(readfile(expand('~/.github/dependabot.yml')), {_, v -> stridx(v, 'target-branch: ') == -1}), "\n") }}

@@ -38,11 +38,13 @@
 	format-patch = cat
 	diff = delta
 	blame = delta
-	log = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe' '$(jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
-	reflog = [ -f ~/.gitmoji/gitmojis.json ] && perl -pe' '$(jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json) | less || less
+# https://github.com/mrowa44/emojify/pull/57
+	log = emojify | perl -pe' '$([ -f ~/.gitmoji/gitmojis.json ] && jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json || :) | less
+	reflog = emojify | perl -pe' '$([ -f ~/.gitmoji/gitmojis.json ] && jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json || :) | less
 	config = bat -pplproperties
-	ls-files = parallel eza --color=always --icons
 	remote = bat -ppltsv
+	ls-files = parallel eza --color=always --icons
+	check-ignore = parallel eza --color=always --icons
 [interactive]
 	diffFilter = delta --color-only
 [delta]

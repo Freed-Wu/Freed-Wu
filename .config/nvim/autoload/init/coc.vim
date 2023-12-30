@@ -6,7 +6,31 @@ function! init#coc#source() abort
   let g:coc_snippet_prev = '<S-Tab>'
   let g:coc_status_error_sign = '✗'
   let g:coc_status_warning_sign = ''
-  " g:coc_filetype_map is defined in lua/treesitter.lua
+  " https://github.com/neoclide/coc.nvim/issues/4282
+  " https://github.com/neoclide/coc.nvim/discussions/4892
+  " ~/.local/share/nvim/repos/github.com/nvim-treesitter/nvim-treesitter/lua/nvim-treesitter/parsers.lua
+  " https://code.visualstudio.com/docs/languages/identifiers#_known-language-identifiers
+  let g:coc_filetype_map = {
+        \ 'bash': 'sh',
+        \ 'PKGBUILD': 'sh',
+        \ 'ebuild': 'sh',
+        \ 'apkbuild': 'sh',
+        \ 'zsh': 'sh',
+        \ 'systemverilog': 'verilog',
+        \ 'pandoc': 'markdown',
+        \ 'rmd': 'markdown',
+        \ 'quarto': 'markdown',
+        \ 'tutor': 'markdown',
+        \ 'dosini': 'ini',
+        \ 'confini': 'ini',
+        \ 'svg': 'xml',
+        \ 'xsd': 'xml',
+        \ 'xslt': 'xml',
+        \ 'mysql': 'sql',
+        \ 'sbt': 'scala',
+        \ 'eelixir': 'elixir',
+        \ 'neomuttrc': 'muttrc',
+        \ }
   xmap if <Plug>(coc-funcobj-i)
   xmap af <Plug>(coc-funcobj-a)
   xmap ic <Plug>(coc-classobj-i)
@@ -30,28 +54,27 @@ function! init#coc#source() abort
   nmap ]k <Plug>(coc-diagnostic-next)
   nmap [K <Plug>(coc-diagnostic-prev-error)
   nmap ]K <Plug>(coc-diagnostic-next-error)
-  nmap gd <Plug>(coc-definition)
-  nmap gD <Plug>(coc-declaration)
-  nmap 1gd <Plug>(coc-type-definition)
-  nmap 1gD <Plug>(coc-implementation)
-  nmap [d <Plug>(coc-references-used)
-  nmap ]d <Plug>(coc-references)
-  nmap gr <Plug>(coc-refactor)
-  nmap gR <Plug>(coc-rename)
+  nnoremap <silent> gd :<C-U>call init#init#coc#action('definition', 'jumpDefinition', 'gd')<CR>
+  nnoremap <silent> gD :<C-U>call init#init#coc#action('declaration', 'jumpDeclaration', 'gD')<CR>
+  nnoremap <silent> 1gd :<C-U>call init#init#coc#action('typeDefinition', 'jumpTypeDefinition', '1gd')<CR>
+  nnoremap <silent> 1gD :<C-U>call init#init#coc#action('implementation', 'jumpImplementation', '1gD')<CR>
+  nnoremap <silent> [d :<C-U>call init#init#coc#action('reference', 'jumpUsed', '1gD')<CR>
+  nnoremap <silent> ]d :<C-U>call init#init#coc#action('reference', 'jumpReference', '1gD')<CR>
+  nnoremap <silent> gr :<C-U>call init#init#coc#action('rename', 'refactor', 'gr')<CR>
+  nnoremap <silent> gR :<C-U>call init#init#coc#action('rename', 'rename', 'gR')<CR>
+  nnoremap <silent> K :<C-U>call init#init#coc#action('hover', 'doHover', 'K')<CR>
   nnoremap gK K
   xnoremap gK K
-  nnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
-  xnoremap <silent> K :<C-U>call CocAction('doHover')<CR>
   " https://github.com/neoclide/coc.nvim/issues/4831
-  nnoremap <silent> gx :<C-U>call init#coc#openLink()<CR>
+  nnoremap <silent> gx :<C-U>call init#init#coc#openLink()<CR>
   xnoremap <silent> gx :<C-U>call pandoc#hypertext#OpenSystem(getline('.')[col('v') - 1:col('''>') - 1])<CR>
 
   nmap <C-W>d <C-W>s<Plug>(coc-definition)
   nmap <C-W>D <C-W>s<Plug>(coc-declaration)
 
   nmap gq <plug>(coc-format-selected)
-  xnoremap <silent> gq :<C-U>call init#coc#format(v:true)<CR>
-  nnoremap <silent> gqq :<C-U>call init#coc#format(v:false)<CR>
+  xnoremap <silent> gq :<C-U>call init#init#coc#format(v:true)<CR>
+  nnoremap <silent> gqq :<C-U>call init#init#coc#format(v:false)<CR>
 
   nmap w <Plug>(coc-ci-w)
   nmap b <Plug>(coc-ci-b)
@@ -122,27 +145,3 @@ augroup init#coc
         \ | endif
   autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
-
-function! init#coc#openLink() abort
-  try
-    call CocActionAsync('openLink')
-  catch
-    call pandoc#hypertext#OpenSystem()
-  endtry
-endfunction
-
-function! init#coc#format(isvisual) abort
-  if a:isvisual
-    if CocHasProvider('format')
-      call CocActionAsync('formatSelected', visualmode())
-    else
-      *TrailGuide fix
-    endif
-  else
-    if CocHasProvider('format')
-      call CocActionAsync('format')
-    else
-      TrailGuide fix
-    endif
-  endif
-endfunction

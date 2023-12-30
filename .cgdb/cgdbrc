@@ -1,4 +1,3 @@
-# ex: filetype=vim
 set noignorecase
 set winsplitorientation=vertical
 map ZZ :quit<CR>

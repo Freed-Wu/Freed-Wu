@@ -38,7 +38,6 @@
 !/.vintrc.yaml
 !/.chktexrc
 !/.sqliterc
-!/.pdbrc
 !/.gtkrc-2.0
 !/.xinitrc
 !/.Xsession
@@ -175,8 +174,6 @@
 /.config/mypy/*
 !/.config/mypy/config
 !/.config/alacritty/
-/.config/alacritty/*
-!/.config/alacritty/alacritty.yml
 !/.config/kitty/
 /.config/kitty/*
 !/.config/kitty/*.conf
@@ -292,9 +289,13 @@
 !/.config/luaprc.lua
 !/.config/p10k.zsh
 !/.config/curlrc
-!/.config/condarc
 !/.config/tree-sitter/
 !/.config/asm-lsp/
+!/.config/ruff/
+!/.config/pypoetry/
+!/.config/pdm/
+!/.config/conda/
+!/.config/nvimpager/
 
 # $XDG_DATA_HOME
 !/.local/

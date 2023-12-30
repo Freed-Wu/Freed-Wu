@@ -28,9 +28,10 @@ let g:init#init#install#coc = [
       \ 'coc-texlab', 'coc-bibtex', 'coc-cmake',
       \ 'coc-json', 'coc-yaml', 'coc-toml',
       \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css',
-      \ 'coc-docker', 'coc-sql',
+      \ 'coc-docker', 'coc-sql', 'coc-db',
       \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-eslint',
-      \ 'coc-jedi', 'coc-pyright', 'coc-lua', 'coc-solargraph', 'coc-clangd',
+      \ '@yaegassy/coc-ruff', 'coc-pyright', 'coc-lua', 'coc-solargraph',
+      \ 'coc-clangd',
       \ ]
 " don't support android
 " https://github.com/tonyfettes/coc-rime/issues/6

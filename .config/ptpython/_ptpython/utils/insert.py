@@ -1,6 +1,7 @@
 """Insert
 =========
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -9,7 +10,7 @@ if TYPE_CHECKING:
     from prompt_toolkit.key_binding.key_processor import KeyPressEvent
 
 
-def insert(event: "KeyPressEvent", pre: str, post: str) -> None:
+def insert(event: KeyPressEvent, pre: str, post: str) -> None:
     """Insert.
 
     :param event:
