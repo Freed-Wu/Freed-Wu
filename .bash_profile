@@ -176,5 +176,5 @@ if has_cmd lua; then
 fi
 # node
 if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
-  export NODE_OPTIONS='-r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
+	export NODE_OPTIONS='-r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
 fi
