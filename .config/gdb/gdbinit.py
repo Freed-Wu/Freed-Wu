@@ -3,6 +3,7 @@
 
 ``gdb -ex 'python print(gdb.PYTHONDIR)' -ex 'quit'`` show gdb python path.
 """
+
 import os
 
 import gdb  # type: ignore

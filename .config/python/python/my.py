@@ -1,6 +1,7 @@
 """My mostly used functions
 ===========================
 """
+
 import sys
 from contextlib import suppress
 from dataclasses import dataclass

@@ -1,6 +1,7 @@
 """Prompt style
 ===============
 """
+
 # import sys
 from typing import TYPE_CHECKING
 

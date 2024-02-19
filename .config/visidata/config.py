@@ -3,6 +3,7 @@
 
 Configure ``visidata``.
 """
+
 import os
 import sys
 

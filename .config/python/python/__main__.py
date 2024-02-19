@@ -3,6 +3,7 @@ r"""Init
 
 For all REPLs.
 """
+
 from rich import print
 from translate_shell.tools.repl.main import interact
 

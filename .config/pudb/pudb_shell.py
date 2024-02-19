@@ -10,6 +10,7 @@ that the file will be executed.
 Then, go to the PuDB preferences window (type Ctrl-p inside of PuDB) and add
 the path to the file in the "Custom" field under the "Shell" heading.
 """
+
 import logging
 import os
 

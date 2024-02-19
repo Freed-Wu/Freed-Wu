@@ -3,6 +3,7 @@
 
 Configure ``ipython``.
 """
+
 from contextlib import suppress
 
 # ------------------------------------------------------------------------------

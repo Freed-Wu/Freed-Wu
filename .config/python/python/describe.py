@@ -1,6 +1,7 @@
 r"""Describe
 ============
 """
+
 from contextlib import suppress
 from typing import TYPE_CHECKING, Any
 

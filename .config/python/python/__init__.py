@@ -3,6 +3,7 @@
 
 Only import ``my``.
 """
+
 try:
     from python.__main__ import my
 except ImportError:

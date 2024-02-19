@@ -1,6 +1,7 @@
 r"""Pudb Stringifier
 ====================
 """
+
 from typing import Any
 
 from pudb.var_view import default_stringifier
