@@ -135,7 +135,8 @@ Sheet.addCommand(  # type: ignore
 Sheet.addCommand(  # type: ignore
     "zd",
     "cut-cell",
-    "copyCells(cursorCol, [cursorRow]); " "cursorCol.setValues([cursorRow], None)",
+    "copyCells(cursorCol, [cursorRow]); "
+    "cursorCol.setValues([cursorRow], None)",
     "delete (cut) current cell and move it to clipboard",
 )
 Sheet.addCommand(  # type: ignore

@@ -26,7 +26,9 @@ CODES = reduce(
                     " fg:white bg:black",
                 )
                 .replace("reset_all", "")
-                .replace("reset", "black" if x[0].startswith("bg") else "white")
+                .replace(
+                    "reset", "black" if x[0].startswith("bg") else "white"
+                )
                 .replace("light", "bright")
                 .replace("_ex", ""),
             )
