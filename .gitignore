@@ -325,6 +325,13 @@
 !/.local/share/jupyter/lab/user-settings/
 !/.local/share/supertux2/
 /.local/share/supertux2/addons/
+!/.local/share/portage/
+/.local/share/portage/*
+!/.local/share/portage/config/
+/.local/share/portage/config/*
+!/.local/share/portage/config/make.conf
+!/.local/share/portage/config/repos.conf
+!/.local/share/portage/config/package.use/
 
 # $XDG_STATE_HOME
 !/.local/state/

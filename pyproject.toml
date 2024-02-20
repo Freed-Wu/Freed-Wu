@@ -49,7 +49,7 @@ write_to = ".config/python/python/_version.py"
 number = true
 
 [tool.codespell]
-ignore-words-list = "inout, hist, ist, acn, fot, inactivate, doubleclick, rime, enew, ommit, ue, lene, fo"
+ignore-words-list = "inout, hist, ist, acn, fot, inactivate, doubleclick, rime, enew, ommit, ue, lene, fo, appar, tre, zink, gost"
 
 [tool.doq]
 template_path = ".config/nvim/templates/templates"

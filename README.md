@@ -196,7 +196,7 @@ The OS configurations can be found:
     packaged by me.
 - [the configurations](https://github.com/Freed-Wu/pacman.d) for
   [![Archlinux](https://img.shields.io/badge/Archlinux-rolling-blue?logo=Archlinux)](https://archlinux.org).
-- [the configurations](https://github.com/Freed-Wu/portage) for
+- [the configurations](.local/share/portage/config) for
   [![Gentoo](https://img.shields.io/badge/Gentoo-rolling-blue?logo=Gentoo)](https://www.gentoo.org).
 - [the configurations](https://github.com/Freed-Wu/etc) for
   [![Windows msys2](https://img.shields.io/badge/Windows-msys2-blue?logo=Windows)](https://msys2.org).
