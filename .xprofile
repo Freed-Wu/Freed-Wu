@@ -15,14 +15,6 @@ export PKG_CONFIG_PATH
 # cpanm
 export PERL_CPANM_OPT
 PERL_CPANM_OPT="-l $HOME/.local"
-# neomutt
-EMAIL="$(git config user.email)"
-export EMAIL
-# debmake
-DEBFULLNAME="$(git config user.name)"
-export DEBFULLNAME
-DEBEMAIL="$EMAIL"
-export DEBEMAIL
 # rg
 RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
 export RIPGREP_CONFIG_PATH

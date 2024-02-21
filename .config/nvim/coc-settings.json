@@ -119,7 +119,7 @@
     },
     "sublime-syntax": {
       "command": "sublime-syntax-language-server",
-      "filetypes": ["syntax_test", "yaml"]
+      "filetypes": ["syntax_test"]
     },
     "svls": {
       "command": "svls",

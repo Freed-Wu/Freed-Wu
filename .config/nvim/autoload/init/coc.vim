@@ -1,7 +1,48 @@
 scriptencoding utf-8
 function! init#coc#source() abort
   set formatexpr=CocAction('formatSelected')
-  let g:coc_global_extensions = g:init#init#install#coc
+
+  " https://github.com/SeniorMars/coc-typst/issues/1
+  " https://github.com/neoclide/coc-yaml/issues/76
+  let g:coc_global_extensions = [
+        \ 'coc-highlight',
+        \
+        \ 'coc-ci',
+        \
+        \ 'coc-pydocstring',
+        \
+        \ 'coc-diagnostic', 'coc-spell-checker', 'coc-markdownlint', 'coc-ltex',
+        \
+        \ 'coc-prettier',
+        \
+        \ 'coc-tasks', 'coc-vimtex', 'coc-emmet',
+        \ 'coc-snippets', 'coc-translator', 'coc-zi',
+        \
+        \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
+        \ 'coc-gitignore', 'coc-license',
+        \
+        \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
+        \
+        \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji', 'coc-syntax',
+        \
+        \ 'coc-copilot', 'coc-leetcode',
+        \
+        \ '@yaegassy/coc-marksman', 'coc-webview',
+        \ 'coc-markdown-preview-enhanced', 'coc-esbonio',
+        \ 'coc-texlab', 'coc-bibtex', 'coc-cmake',
+        \ 'coc-json', 'coc-yaml', 'coc-toml',
+        \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css',
+        \ 'coc-docker', 'coc-sql', 'coc-db',
+        \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-eslint',
+        \ '@yaegassy/coc-ruff', 'coc-pyright', 'coc-lua', 'coc-solargraph',
+        \ 'coc-clangd',
+        \ ]
+  " https://github.com/tonyfettes/coc-rime/issues/6
+  " don't support android
+  if $PREFIX !=# '/data/data/com.termux/files/usr'
+    let g:coc_global_extensions += ['coc-tabnine', 'coc-rime']
+  endif
+
   let g:coc_snippet_next = '<Tab>'
   let g:coc_snippet_prev = '<S-Tab>'
   let g:coc_status_error_sign = '✗'
@@ -145,3 +186,4 @@ augroup init#coc
         \ | endif
   autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
+" ex: path=,.,$XDG_CONFIG_HOME/coc/extensions/node_modules

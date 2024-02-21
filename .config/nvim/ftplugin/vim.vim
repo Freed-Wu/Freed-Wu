@@ -1,4 +1,4 @@
-setlocal isfname-==
+setlocal isfname=@,#,48-57,_,-,.
 
 compiler vimdoc
 

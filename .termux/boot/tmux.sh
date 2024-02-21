@@ -1,2 +1,2 @@
 #shellcheck shell=bash
-sshd
+tmux start-server

@@ -3,6 +3,9 @@ function! init#fern#source() abort
   let g:fern#renderer = 'nerdfont'
   let g:fern#mark_symbol = '✓'
   let g:fern#disable_default_mappings = 1
+  if g:fern#drawer_width > &columns / 4
+    let g:fern#drawer_width = &columns / 4
+  endif
   nnoremap <silent> <C-W>N <C-W>n:Fern .<CR>
   nnoremap <silent> <C-W>M :vnew<CR>:Fern .<CR>
   xnoremap <silent> <C-W>N <C-W>n:Fern .<CR>

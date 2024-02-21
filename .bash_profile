@@ -23,20 +23,22 @@ elif [[ $OSTYPE == darwin ]]; then
 	export BROWSER=open
 fi
 if [[ $OSTYPE == linux-android ]]; then
-	PATH="$PATH${PATH:+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin"
+	PATH="$PATH${PATH:+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin:$HOME/.shortcuts"
 	if [[ -n $DISPLAY ]]; then
 		export BROWSER='gio open'
 	else
 		export BROWSER=termux-open
 	fi
 elif [[ -f /run/current-system/nixos-version ]]; then
-	# python
-	python_version=$(python --version)
-	python_version=${python_version#* }
-	python_version=${python_version%.*}
-	PYTHONPATH="$HOME/.local/lib/python${python_version}/site-packages"
-	unset python_version
-	export PYTHONPATH
+	# https://blog.thalheim.io/2022/12/31/nix-ld-a-clean-solution-for-issues-with-pre-compiled-executables-on-nixos/
+	export NIX_LD
+	eval NIX_LD="$(~/script/get-NIX_LD.nix)"
+	export NIX_LD_LIBRARY_PATH
+	eval NIX_LD_LIBRARY_PATH="$(~/script/get-NIX_LD_LIBRARY_PATH.nix)"
+	if has_cmd python; then
+		PYTHONPATH="$HOME/.local/lib/python$(~/script/get-version.py)/site-packages"
+		export PYTHONPATH
+	fi
 	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH:+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
 	export PKG_CONFIG_PATH
 else
@@ -151,12 +153,19 @@ export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 export DIRENV_LOG_FORMAT=
 # minicom
 export MINICOM=-w
+if has_cmd git; then
+	# neomutt
+	EMAIL="$(git config user.email)"
+	export EMAIL
+	# debmake
+	DEBFULLNAME="$(git config user.name)"
+	export DEBFULLNAME
+	DEBEMAIL="$EMAIL"
+	export DEBEMAIL
+fi
 # lua
 if has_cmd lua; then
-	version="$(command lua -v)"
-	version=${version#* }
-	version=${version%% *}
-	version=${version%.*}
+	version="$(~/script/get-version.lua)"
 	case $OSTYPE in
 	linux-*)
 		ext=so
@@ -185,20 +194,15 @@ $HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
 	unset version ext
 fi
 # node
+export NODE_ENV=development
 if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
 	export NODE_OPTIONS='-r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
+fi
+if has_cmd node-prototype-repl; then
+	NODE_REPL_EXTERNAL_MODULE="$(command -v node-prototype-repl)"
+	export NODE_REPL_EXTERNAL_MODULE
 fi
 # old bash doesn't support tmux-256color
 if [[ ${BASH_VERSION//.*/} -le 5 ]]; then
 	export TERM=xterm-256color
-fi
-# nix-ld
-# https://blog.thalheim.io/2022/12/31/nix-ld-a-clean-solution-for-issues-with-pre-compiled-executables-on-nixos/
-if has_cmd nix; then
-	export NIX_LD
-	eval NIX_LD="$(nix eval --impure --expr 'let arr = builtins.split "-" "${(import <nixpkgs> {}).system}";
-	in "${(import <nixpkgs> {}).glibc}/lib/ld-${builtins.elemAt arr 2}-${
-	builtins.replaceStrings ["_"] ["-"] (builtins.elemAt arr 0)}.so.2"')"
-	export NIX_LD_LIBRARY_PATH
-	eval NIX_LD_LIBRARY_PATH="$(nix eval --impure --expr '"${(import <nixpkgs> {}).stdenv.cc.cc.lib}/lib"')"
 fi

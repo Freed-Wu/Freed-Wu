@@ -87,6 +87,8 @@ set iminsert=0
 set noshowmode
 set hidden
 set expandtab
+set tabstop=2
+set shiftwidth=2
 set nowritebackup
 set updatetime=400
 set textwidth=80

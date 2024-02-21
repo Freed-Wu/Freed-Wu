@@ -21,6 +21,8 @@ jobs:
         run: |
           yarn
           yarn build
+        env:
+          NODE_ENV: production
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}

@@ -266,6 +266,9 @@
 !/.config/nvim/
 !/.config/python/
 !/.config/autostart/
+/.config/autostart/*
+!/.config/autostart/lxqt-config-monitor-autostart.desktop
+!/.config/autostart/picom.desktop
 !/.config/picom/
 !/.config/visidata/
 !/.config/nixpkgs/

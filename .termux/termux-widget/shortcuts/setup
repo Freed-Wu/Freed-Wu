@@ -1,0 +1,18 @@
+set -e
+cd "$(dirname "$(readlink -f "$0")")/.."
+
+[ -d ~/storage ] || termux-setup-storage
+mkdir -p ~/Desktop
+mkdir -p /sdcard/Download
+ln -sf storage/downloads -T ~/Downloads
+mkdir -p /sdcard/Pictures
+ln -sf storage/pictures -T ~/Pictures
+mkdir -p /sdcard/Music
+ln -sf storage/music -T ~/Music
+mkdir -p /sdcard/Movies
+ln -sf storage/movies -T ~/Videos
+ln -sf storage/shared -T ~/Public
+mkdir -p /sdcard/Documents
+ln -sf storage/shared/Documents -T ~/Documents
+mkdir -p /sdcard/Notifications
+ln -sf storage/shared/Notifications -T ~/Templates

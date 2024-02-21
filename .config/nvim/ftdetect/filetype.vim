@@ -30,7 +30,7 @@ augroup init_filetype
   autocmd BufNewFile,BufRead *{.stsg,/.local/share/supertux2/config} setfiletype lisp
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
   autocmd BufNewFile,BufRead */{.,}shortcuts/*,.bash_history,*.la setfiletype sh
-  autocmd BufNewFile,BufRead *.zsh-theme,.zsh_history,*.zunit setfiletype zsh
+  autocmd BufNewFile,BufRead *.zsh-theme,*.zunit setfiletype zsh
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead *.lg4 setfiletype lingo
   autocmd BufNewFile,BufRead */R/* setfiletype r

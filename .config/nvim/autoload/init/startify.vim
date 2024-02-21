@@ -54,10 +54,14 @@ function! init#startify#source() abort
         \ {g:maplocalleader . 'z': '~/.zprofile'},
         \ {g:maplocalleader . 'x': '~/.xprofile'},
         \ {g:maplocalleader . 'b': '~/.bash_profile'},
-        \ {g:maplocalleader . 'n': '/etc/nixos/configuration.nix'},
         \ {g:maplocalleader . 'y': fnamemodify(expand('$XDG_CONFIG_HOME/ptpython/config.py'), ':~')},
         \ {g:maplocalleader . 'p': fnamemodify(expand('$PYTHONSTARTUP'), ':~')},
         \ ]
+  if filereadable('/etc/nixos/configuration.nix')
+    let g:startify_bookmarks += [
+          \ {g:maplocalleader . 'n': '/etc/nixos/configuration.nix'},
+          \ ]
+  endif
   let g:startify_custom_indices =
         \ map(range(0x61, 0x7a) + range(0x41, 0x5a), {_, v -> '.' . nr2char(v)})
   let g:startify_lists = [
