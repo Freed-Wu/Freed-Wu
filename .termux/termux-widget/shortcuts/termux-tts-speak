@@ -1,1 +1,1 @@
-termux-tts-speak
+termux-tts-speak "$@" "$(termux-dialog | jq -r .text)"

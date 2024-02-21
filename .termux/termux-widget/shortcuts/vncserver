@@ -1,1 +1,1 @@
-vncserver -kill :1 || vncserver &
+vncserver -kill :1 || vncserver "$@" &

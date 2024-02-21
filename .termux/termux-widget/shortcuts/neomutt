@@ -3,4 +3,4 @@
 . ~/.xprofile
 # $EMAIL
 . ~/.bash_login
-neomutt
+neomutt "$@"

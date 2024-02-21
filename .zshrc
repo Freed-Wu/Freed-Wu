@@ -14,6 +14,12 @@ else
   return
 fi
 
+# some terminal emulators don't start $SHELL with -l,
+# which will not source .zprofile
+if ((! $+DOCKER_BUILDKIT)); then
+  . ~/.zprofile
+fi
+
 # brew add some paths which may contain tmux
 zinit id-as'.brew' depth'1' \
   atclone'/home/linuxbrew/.linuxbrew/bin/brew shellenv > brew.sh
@@ -214,7 +220,8 @@ zinit id-as'.pass' depth'1' as'null' wait lucid \
 echo "export KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
 echo "export KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
 echo "export OPENAI_API_KEY=$(pass ls openai/api_key)" >> pass.sh
-pass ls wakatime/api_key > wakatime.txt
+echo echo "$(pass ls wakatime/api_key)" > wakatime.sh
+chmod +x wakatime.sh
 pass ls codestats/$HOST > codestats.txt' \
   if'(($+commands[pass]))' \
   for zdharma-continuum/null
