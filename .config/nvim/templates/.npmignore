@@ -1,0 +1,7 @@
+/*
+!/{{ filereadable('tsconfig.json') ? trim(get(get(json_decode(substitute(join(readfile('tsconfig.json'), "\n"), '\s*//.\{-\}\n', '', 'g')), 'compilerOptions', {}), 'outDir', 'out'), '/') : 'out' }}/
+*.map
+!/prebuilds/
+!/binding.gyp
+!/binding.c
+!/flake.nix

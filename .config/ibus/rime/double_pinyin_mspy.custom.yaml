@@ -1,0 +1,33 @@
+---
+patch:
+  __include: my/moji:/
+  switches:
+    - name: keyboard
+      reset: 0
+      # https://github.com/osfans/trime/issues/1269
+      options:
+        - _keyboard_.default
+        - _keyboard_letter
+      states:
+        - "⌨️\uFE0E"
+        - "🔡\uFE0E"
+    - name: ascii_mode
+      reset: 0
+      states:
+        - 🇨🇳
+        - 🇺🇸
+    - name: full_shape
+      reset: 0
+      states:
+        - 半角
+        - 全角
+    - name: simplification
+      reset: 1
+      states:
+        - 漢
+        - 汉
+    - name: ascii_punct
+      reset: 0
+      states:
+        - 。
+        - ．

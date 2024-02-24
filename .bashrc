@@ -39,8 +39,13 @@ elif [[ -f /run/current-system/sw/share/bash-prompt/prompt.sh ]]; then
 	PS1=$(prompt_get_ps1)
 else
 	has_cmd() {
-		for opt in "$@"; do
-			command -v "$opt" >/dev/null
+		local opt
+		for opt; do
+			if command -v "$opt" >/dev/null; then
+				continue
+			else
+				return $?
+			fi
 		done
 	}
 fi

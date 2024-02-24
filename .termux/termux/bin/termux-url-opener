@@ -1,1 +1,2 @@
-aria2c $1
+#!/data/data/com.termux/files/usr/bin/env sh
+exec aria2c "$@"

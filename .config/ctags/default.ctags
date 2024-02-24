@@ -23,4 +23,3 @@
 --regex-bib=/^@string\{([^ "#%')(,=}{]+)/\1/s,string/i
 --regex-bib=/^@techreport\{([^,]*)/\1/r,techreport/i
 --regex-bib=/^@unpublished\{([^,]*)/\1/u,unpublished/i
-# ex: filetype=conf

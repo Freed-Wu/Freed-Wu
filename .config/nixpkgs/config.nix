@@ -3,6 +3,8 @@
   permittedInsecurePackages = [
     "openssl-1.1.1w"
     "electron-19.1.9"
+    # https://github.com/xddxdd/nur-packages
+    "nix-2.16.2"
   ];
   allowUnfree = true;
   # https://github.com/NixOS/nixpkgs/issues/224921#issuecomment-1821202793

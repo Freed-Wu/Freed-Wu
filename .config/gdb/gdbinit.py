@@ -8,13 +8,13 @@ import os
 
 import gdb  # type: ignore
 
-prefixs = [
+prefixs = {
     "/usr",
     "/usr/local",
     "/run/current-system/sw",
     "/data/data/com.termux/files/usr",
     "~/.local/state/nix/profile",
-]
+}
 
 for prefix in prefixs:
     path = os.path.expanduser(os.path.join(prefix, "bin/gdb-prompt"))
@@ -23,12 +23,13 @@ for prefix in prefixs:
         break
 
 for prefix in prefixs:
-    path = os.path.expanduser(
-        os.path.join(prefix, "share/gdb-dashboard/.gdbinit")
-    )
-    if os.path.isfile(path):
-        gdb.execute("source " + path)
-        break
+    for name in {".gdbinit", "gdbinit"}:
+        path = os.path.expanduser(
+            os.path.join(prefix, "share/gdb-dashboard/" + name)
+        )
+        if os.path.isfile(path):
+            gdb.execute("source " + path)
+            break
 
 for prefix in prefixs:
     path = os.path.expanduser(os.path.join(prefix, "share/gdb/gdb-hook.py"))

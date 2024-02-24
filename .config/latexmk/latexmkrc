@@ -149,5 +149,3 @@ $clean_ext .= ' sed';
 $clean_ext .= ' headfootlength';
 # docstrip
 $clean_ext .= ' hd';
-
-# ex: filetype=perl

@@ -54,6 +54,8 @@
 # for lua 5.2
 !/.luarocks
 !/.x11vncrc
+# https://github.com/priv-kweihmann/oelint-adv/issues/527
+!/.oelint.cfg
 
 # dotfiles
 !/.dosbox/
@@ -65,9 +67,6 @@
 !/.w3m/
 /.w3m/*
 !/.w3m/keymap
-!/.cabal/
-/.cabal/*
-!/.cabal/config
 !/.ipython/
 /.ipython/*
 !/.ipython/profile_default/
@@ -285,7 +284,12 @@
 !/.config/fcitx/rime
 !/.config/ibus/
 /.config/ibus/*
-!/.config/ibus/rime
+!/.config/ibus/rime/
+/.config/ibus/rime/*
+!/.config/ibus/rime/*.custom.yaml
+!/.config/ibus/rime/my/
+# copied from handset.yaml or tablet.yaml
+/.config/ibus/rime/my/chasis-type.yaml
 !/.config/fontconfig/
 /.config/fontconfig/*
 !/.config/fontconfig/fonts.conf
@@ -299,6 +303,10 @@
 !/.config/pdm/
 !/.config/conda/
 !/.config/nvimpager/
+!/.config/paru/
+!/.config/cabal/
+/.config/cabal/*
+!/.config/cabal/config
 
 # $XDG_DATA_HOME
 !/.local/
@@ -316,9 +324,7 @@
 !/.local/share/themes/Emacs/
 !/.local/share/fcitx5/
 /.local/share/fcitx5/*
-!/.local/share/fcitx5/rime/
-/.local/share/fcitx5/rime/*
-!/.local/share/fcitx5/rime/*.custom.yaml
+!/.local/share/fcitx5/rime
 !/.local/share/fzf/
 !/.local/share/jupyter/
 /.local/share/jupyter/*

@@ -1,10 +1,10 @@
 ---
 colors:
   vi_mode_cursor:
-    cursor: '#ff00ff'
+    cursor: "#ff00ff"
 cursor:
   style:
-    blinking: 'On'
+    blinking: "On"
 font:
   normal:
     family: JetBrainsMono Nerd Font Mono
@@ -20,13 +20,13 @@ keyboard:
     - action: ResetFontSize
       key: 11
       mods: Shift|Control
-    - chars: ''
+    - chars: ""
       key: Equals
       mods: Control
     - chars: "\x1F"
       key: Minus
       mods: Control
-    - chars: ''
+    - chars: ""
       key: Key0
       mods: Control
     - action: Hide

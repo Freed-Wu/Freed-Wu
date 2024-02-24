@@ -1,0 +1,6 @@
+---
+style/window:
+  - label: "%s "
+    candidate: "%s"
+    comment: "%s"
+    sep: "\n"

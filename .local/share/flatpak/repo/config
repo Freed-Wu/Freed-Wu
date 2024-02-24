@@ -16,5 +16,3 @@ xa.description=Central repository of Flatpak applications
 xa.icon=https://dl.flathub.org/repo/logo.svg
 xa.homepage=https://flathub.org/
 url-is-set=true
-
-# ex: filetype=dosini

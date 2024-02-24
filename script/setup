@@ -14,7 +14,7 @@ echo root:U6aMy0wojraho | sudo chpasswd -e
 
 # https://github.com/NixOS/nix/issues/6680
 sudo apt-get -y update
-sudo apt-get -y install acl
+sudo apt-get -y install acl librime1
 sudo setfacl -k /tmp
 # `git reset --hard` avoid nix installer add some lines to .bashrc and .zshrc
 sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"

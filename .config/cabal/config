@@ -189,4 +189,3 @@ program-default-options
   -- strip-options:
   -- tar-options:
   -- uhc-options:
-  -- ex: filetype=haskell
