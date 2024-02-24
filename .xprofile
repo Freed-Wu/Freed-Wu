@@ -41,4 +41,6 @@ export MDCAT_PAGER='less --pattern=┄+'
 # cmake
 export CMAKE_GENERATOR=Ninja
 export CMAKE_EXPORT_COMPILE_COMMANDS=1
-# ex: filetype=sh
+# proxychains-ng
+# https://github.com/rofl0r/proxychains-ng/issues/549
+export PROXYCHAINS_QUIET_MODE=1

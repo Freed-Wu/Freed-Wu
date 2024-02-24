@@ -11,6 +11,7 @@ project(
   HOMEPAGE_URL ${HOMEPAGE_URL})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include(cmake/sanitize.cmake)
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 add_subdirectory(src)
 
 include(CTest)

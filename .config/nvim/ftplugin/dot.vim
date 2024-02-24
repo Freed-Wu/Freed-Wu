@@ -1,4 +1,3 @@
-compiler dot
 setlocal cindent
 
 nnoremap <silent><buffer> <LocalLeader>lV :<C-U>Graphviz!!<CR>

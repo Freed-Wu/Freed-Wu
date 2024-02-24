@@ -1,5 +1,5 @@
 *my-init.txt*	The configuration of my (neo)vim
-Wu Zhenyu                                                            *my-init*
+Wu, Zhenyu                                                           *my-init*
 
 ==============================================================================
 CONTENTS                                                    *my-init-contents*

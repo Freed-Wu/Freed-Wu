@@ -2,4 +2,3 @@ viewer_txt = less
 viewer_md = less
 lang = zh-cn
 alias impatient = impatient-cn/cnbook
-# ex: filetype=dosini

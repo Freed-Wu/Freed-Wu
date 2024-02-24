@@ -90,7 +90,7 @@ class Describe:
         :param that:
         :rtype: bool
         """
-        if (
+        return (
             self.device == that.device
             and self.dtype == that.dtype
             and self.requires_grad == that.requires_grad
@@ -98,9 +98,7 @@ class Describe:
             and self.max == that.max
             and self.var == that.var
             and self.mean == that.mean
-        ):
-            return True
-        return False
+        )
 
     def __repr__(self) -> str:
         """Repr.

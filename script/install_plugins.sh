@@ -23,8 +23,10 @@ echo -e "\n\r::group::Install vim plugins"
 [ -f ~/.local/share/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim ] ||
 	git clone --depth=1 https://github.com/Shougo/dein.vim ~/.local/share/nvim/repos/github.com/Shougo/dein.vim
 vi --headless -c'call dein#update() | quit'
+# https://github.com/neoclide/coc.nvim/discussions/4960#discussioncomment-8925992
 # 2>&1 is needed
-npm install -C ~/.config/coc/extensions $(script/install_plugins.vim 2>&1)
+npm install --ignore-scripts --no-lockfile --omit=dev --legacy-peer-deps --no-global \
+	-C ~/.config/coc/extensions $(script/install_plugins.vim 2>&1)
 echo -e "\n\r::endgroup::"
 echo -e "\n\r::group::Install python packages"
 sudo install -D ~/.config/pip/pip.conf -t /root/.config/pip

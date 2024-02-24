@@ -126,8 +126,9 @@ augroup END
 
 let g:maplocalleader = ';'
 let g:tex_flavor = 'latex'
+let g:pandoc#filetypes#pandoc_markdown = 1
 let g:filetype_m = 'octave'
-let g:asmsyntax = 'masm'
+let g:octave_use_matlab_end = 1
 let g:load_doxygen_syntax = 1
 let g:c_syntax_for_h = 1
 let g:javaScript_fold = 1
@@ -142,7 +143,6 @@ let g:xml_syntax_folding = 1
 let g:python_highlight_all = 1
 let g:readline_has_bash = 1
 let g:yaml_schema = 'pyyaml'
-let g:octave_use_matlab_end = 1
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
 let g:netrw_home = expand('$XDG_CACHE_HOME/nvim/netrw')
@@ -284,8 +284,6 @@ if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/au
     finish
   endif
 endif
-" avoid vimOperError
-let s:exclamation = '!'
 if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#begin(expand('$XDG_DATA_HOME/nvim'))
   " 1}}} PluginPrefix "
@@ -360,7 +358,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " too slow, don't enable it on msys2
   call dein#add('wakatime/vim-wakatime', {
         \ 'if': has('pythonx') && executable('wakatime-cli') && filereadable(
-        \ expand('$HOME/.local/share/zinit/plugins/.pass/wakatime.txt')
+        \ expand('$HOME/.local/share/zinit/plugins/.pass/wakatime.sh')
         \ ),
         \ })
   call dein#add('https://gitlab.com/code-stats/code-stats-vim', {
@@ -514,15 +512,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('Freed-Wu/xilinx-language-server', {
         \ 'rev': 'release',
         \ })
-  call dein#add('Freed-Wu/zathurarc.vim')
-  call dein#add('gnu-octave/vim-octave')
-  call dein#add('rubberduck203/aosp-vim')
-  " pboettch/vim-cmake-syntax/syntax/cmakecache.vim
-  call dein#add('pboettch/vim-cmake-syntax')
-  call dein#add('vim-scripts/bats.vim')
-  call dein#add('vito-c/jq.vim')
-  call dein#add('kaarmu/typst.vim')
-  call dein#add('philj56/vim-asm-indent')
   call dein#add('tpope/vim-dadbod')
   call dein#add('kristijanhusak/vim-dadbod-ui')
   " https://github.com/lervag/vimtex/issues/237
@@ -530,22 +519,12 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'merged': 0,
         \ 'hook_source': 'call init#vimtex#source()',
         \ })
-  call dein#add('vim-pandoc/vim-pandoc', {
-        \ 'hook_source': 'call init#pandoc#source()',
-        \ })
-  call dein#add('vim-pandoc/vim-pandoc-syntax')
-  call dein#add('vim-pandoc/vim-pandoc-after', {
-        \ 'hook_source': 'call init#pandoc#after#source()',
-        \ })
-  call dein#add('Winseven4lyf/vim-bbcode')
-  call dein#add('raimon49/requirements.txt.vim')
   call dein#add('tpope/vim-scriptease', {
         \ 'hook_source': 'call init#scriptease#source()',
         \ })
   call dein#add('mechatroner/rainbow_csv', {
         \ 'hook_source': 'call init#rainbow_csv#source()',
         \ })
-  call dein#add('cmcaine/vim-uci')
   " https://github.com/weirongxu/coc-markdown-preview-enhanced/issues/25
   call dein#add('iamcco/markdown-preview.nvim', {
         \ 'if': executable('npx'),
@@ -631,7 +610,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_post_source': 'call init#unimpaired#post_source()',
         \ })
   call dein#add('tommcdo/vim-express', {
-        \ 'on_map': ['g:', 'g' . s:exclamation],
+        \ 'on_map': ['g:', 'g!'],
         \ 'hook_source': 'call init#express#source()',
         \ })
   call dein#add('tpope/vim-abolish', {

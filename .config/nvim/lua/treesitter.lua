@@ -36,9 +36,9 @@ vim = vim or {}
 if vim.treesitter.language.register then
     -- https://github.com/nvim-treesitter/nvim-treesitter/pull/6096/
     vim.treesitter.language.register("comment", "text")
-    vim.treesitter.language.register("sh", "apkbuild")
-    vim.treesitter.language.register("sh", "PKGBUILD")
-    vim.treesitter.language.register("sh", "ebuild")
+    vim.treesitter.language.register("bash", "apkbuild")
+    vim.treesitter.language.register("bash", "PKGBUILD")
+    vim.treesitter.language.register("bash", "ebuild")
 end
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "liquid",

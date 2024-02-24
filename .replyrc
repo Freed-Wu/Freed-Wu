@@ -17,4 +17,3 @@
 [Autocomplete::Globals]
 [Autocomplete::Methods]
 [Autocomplete::Commands]
-; ex: filetype=dosini

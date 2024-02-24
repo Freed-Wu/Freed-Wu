@@ -20,5 +20,3 @@ push @generated_exts, 'pytxcode';
 sub pythontex{
 	return system("pythontex '$_[0]'");
 }
-
-# ex: filetype=perl

@@ -1,6 +1,5 @@
-setlocal isfname=@,#,48-57,_,-,.
-
-compiler vimdoc
+" exclude = due to set option=path
+setlocal isfname=@,48-57,/,.,-,_,+,,,#,$,%,~
 
 let b:chalk_space_before = 1
 

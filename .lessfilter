@@ -1,7 +1,11 @@
 #! /usr/bin/env bash
 has_cmd() {
 	for opt in "$@"; do
-		command -v "$opt" >/dev/null
+		if command -v "$opt" >/dev/null; then
+			continue
+		else
+			return $?
+		fi
 	done
 }
 

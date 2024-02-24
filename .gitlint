@@ -2,4 +2,3 @@
 [ignore-by-title]
 regex=.*
 ignore=body-is-missing
-# ex: filetype=dosini

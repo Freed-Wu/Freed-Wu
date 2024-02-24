@@ -427,7 +427,8 @@ function! init#smartinput#post_source() abort
         \ 'at': '[^?]\%#',
         \ 'char': ':',
         \ 'input': ': ',
-        \ 'filetype': ['text', 'json', 'jsonc', 'yaml', 'sublime_syntax', 'python', 'c', 'javascript'],
+        \ 'filetype': ['text', 'json', 'jsonc', 'yaml', 'sublime_syntax',
+        \ 'python', 'c', 'javascript', 'typescript'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\(with\|if\|else\|elseif\|for\|while\) .*\%#',
@@ -711,6 +712,13 @@ function! init#smartinput#post_source() abort
         \ 'at': '\S\%#',
         \ 'char': '&&',
         \ 'input': ' && ',
+        \ })
+
+  call smartinput#map_to_trigger('i', '??', '??', '??')
+  call smartinput#define_rule({
+        \ 'at': '\S\%#',
+        \ 'char': '??',
+        \ 'input': ' ?? ',
         \ })
 
   call smartinput#map_to_trigger('i', '^', '^', '^')

@@ -4,8 +4,8 @@ FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 # bithuab's debug mode uses gtx1080ti
 
 LABEL org.opencontainers.image.title=Freed-Wu
-LABEL org.opencontainers.image.authors="Wu Zhenyu"
-LABEL org.opencontainers.image.vendor="Wu Zhenyu"
+LABEL org.opencontainers.image.authors="Wu, Zhenyu"
+LABEL org.opencontainers.image.vendor="Wu, Zhenyu"
 LABEL org.opencontainers.image.url=https://ghcr.io/freed-wu/Freed-Wu
 # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#labelling-container-images
 LABEL org.opencontainers.image.source=https://github.com/Freed-Wu/Freed-Wu
@@ -29,7 +29,7 @@ RUN sed -i s/archive.ubuntu.com/$mirror/g /etc/apt/sources.list && \
       apt-get -y update && \
       ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
       apt-get -y install openssh-server sudo tzdata locales zsh rsync \
-      curl python-is-python3 python3-pip python3-build && \
+      curl python-is-python3 python3-pip python3-build librime1 && \
       sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen && \
       locale-gen && \
       ln -sf /usr/bin/pip3 /usr/bin/pip && \
