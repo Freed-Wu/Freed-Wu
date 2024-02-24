@@ -1,1 +1,2 @@
-trans "$@"
+#!/data/data/com.termux/files/usr/bin/env sh
+exec trans "$@"

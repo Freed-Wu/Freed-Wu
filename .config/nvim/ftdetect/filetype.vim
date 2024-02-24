@@ -9,7 +9,7 @@ augroup init_filetype
   " 1}}} Text "
 
   " Data_Describe {{{1 "
-  autocmd BufNewFile,BufRead .{docker,rg,fd,}ignore setfiletype gitignore
+  autocmd BufNewFile,BufRead .*ignore setfiletype gitignore
   autocmd BufNewFile,BufRead */.config/{lxqt,screengrab,pcmanfm-qt}/*.conf,mimeapps.list,setup.cfg,.coveragerc,bootstraprc,psprint.conf,sofficerc setfiletype dosini
   autocmd BufNewFile,BufRead */pacman.d/mirrorlist{,.*},MANIFEST.SKIP,*.dfl setfiletype conf
   autocmd BufNewFile,BufRead *.{jupyterlab-settings,sublime-{project,settings},vsconfig,jscsrc,jshintrc,plan,ccls,sublime-workspace,css.map,xci} setfiletype json
@@ -29,7 +29,7 @@ augroup init_filetype
   " Script {{{1 "
   autocmd BufNewFile,BufRead *{.stsg,/.local/share/supertux2/config} setfiletype lisp
   autocmd BufNewFile,BufRead */ldscripts/*,*.{map,cmd} setfiletype ld
-  autocmd BufNewFile,BufRead */{.,}shortcuts/*,.bash_history,*.la setfiletype sh
+  autocmd BufNewFile,BufRead .bash_history,*.la setfiletype sh
   autocmd BufNewFile,BufRead *.zsh-theme,*.zunit setfiletype zsh
   autocmd BufNewFile,BufRead .mysql_history setfiletype mysql
   autocmd BufNewFile,BufRead *.lg4 setfiletype lingo

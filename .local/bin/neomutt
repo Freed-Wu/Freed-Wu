@@ -2,4 +2,4 @@
 # shellcheck disable=SC2068
 # https://github.com/neomutt/neomutt/issues/3554
 PATH=$(echo "$PATH" | tr ':' '\n' | grep -v "$(dirname "$(realpath "$0")")" | tr '\n' ':')
-neomutt ${@//-i/}
+exec neomutt ${@//-i/}

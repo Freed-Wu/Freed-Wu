@@ -1,1 +1,2 @@
-termux-tts-speak "$@" "$(termux-dialog | jq -r .text)"
+#!/data/data/com.termux/files/usr/bin/env sh
+exec termux-tts-speak "$@" "$(termux-dialog | jq -r .text)"

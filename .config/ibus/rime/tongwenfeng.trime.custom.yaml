@@ -1,0 +1,11 @@
+---
+patch:
+  __include: my/trime:/
+  style/keyboards/@after 0: mini
+  preset_keyboards/mini:
+    __include: trime:/preset_keyboards/mini
+  preset_keys/delimiter:
+    label: ;
+    text: ;
+  preset_keyboards/mini/height: 5
+  preset_keyboards/mini/keyboard_height: 3

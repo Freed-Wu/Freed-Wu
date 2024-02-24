@@ -4,8 +4,8 @@ FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 # bithuab's debug mode uses gtx1080ti
 
 LABEL org.opencontainers.image.title=Freed-Wu
-LABEL org.opencontainers.image.authors="Wu Zhenyu"
-LABEL org.opencontainers.image.vendor="Wu Zhenyu"
+LABEL org.opencontainers.image.authors="Wu, Zhenyu"
+LABEL org.opencontainers.image.vendor="Wu, Zhenyu"
 LABEL org.opencontainers.image.url=https://ghcr.io/freed-wu/Freed-Wu
 # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#labelling-container-images
 LABEL org.opencontainers.image.source=https://github.com/Freed-Wu/Freed-Wu
