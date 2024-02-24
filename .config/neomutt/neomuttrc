@@ -11,7 +11,7 @@ set ispell = aspell
 set charset = utf-8
 set edit_headers
 set rfc2047_parameters
-set signature = 'echo -e "Best Regards\n$DEBFULLNAME"|'
+set signature = "echo Best Regards'\n'$DEBFULLNAME|"
 set sort = reverse-date
 set query_command = 'mutt_ldap_query.pl %s'
 set abort_unmodified = no
@@ -20,7 +20,6 @@ set auto_tag
 set x_comment_to
 set header_cache = ~/.cache/neomutt
 set message_cache_dir = ~/.cache/neomutt
-set mbox =
 set mail_check_stats
 set sidebar_visible
 set sidebar_format = '%B%* %n%o/%S'

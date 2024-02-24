@@ -1,4 +1,5 @@
-setlocal isfname=@,#,48-57,_,-,.
+" exclude = due to set option=path
+setlocal isfname=@,48-57,/,.,-,_,+,,,#,$,%,~
 
 compiler vimdoc
 

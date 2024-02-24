@@ -360,7 +360,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " too slow, don't enable it on msys2
   call dein#add('wakatime/vim-wakatime', {
         \ 'if': has('pythonx') && executable('wakatime-cli') && filereadable(
-        \ expand('$HOME/.local/share/zinit/plugins/.pass/wakatime.txt')
+        \ expand('$HOME/.local/share/zinit/plugins/.pass/wakatime.sh')
         \ ),
         \ })
   call dein#add('https://gitlab.com/code-stats/code-stats-vim', {

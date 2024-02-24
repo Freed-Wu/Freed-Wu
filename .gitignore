@@ -54,6 +54,8 @@
 # for lua 5.2
 !/.luarocks
 !/.x11vncrc
+# https://github.com/priv-kweihmann/oelint-adv/issues/527
+!/.oelint.cfg
 
 # dotfiles
 !/.dosbox/
@@ -285,7 +287,12 @@
 !/.config/fcitx/rime
 !/.config/ibus/
 /.config/ibus/*
-!/.config/ibus/rime
+!/.config/ibus/rime/
+/.config/ibus/rime/*
+!/.config/ibus/rime/*.custom.yaml
+!/.config/ibus/rime/my/
+# copied from handset.yaml or tablet.yaml
+/.config/ibus/rime/my/chasis-type.yaml
 !/.config/fontconfig/
 /.config/fontconfig/*
 !/.config/fontconfig/fonts.conf
@@ -299,6 +306,7 @@
 !/.config/pdm/
 !/.config/conda/
 !/.config/nvimpager/
+!/.config/paru/
 
 # $XDG_DATA_HOME
 !/.local/
@@ -316,9 +324,7 @@
 !/.local/share/themes/Emacs/
 !/.local/share/fcitx5/
 /.local/share/fcitx5/*
-!/.local/share/fcitx5/rime/
-/.local/share/fcitx5/rime/*
-!/.local/share/fcitx5/rime/*.custom.yaml
+!/.local/share/fcitx5/rime
 !/.local/share/fzf/
 !/.local/share/jupyter/
 /.local/share/jupyter/*

@@ -1,3 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/env sh
 set -e
 cd "$(dirname "$(readlink -f "$0")")/.."
 
@@ -16,3 +17,6 @@ mkdir -p /sdcard/Documents
 ln -sf storage/shared/Documents -T ~/Documents
 mkdir -p /sdcard/Notifications
 ln -sf storage/shared/Notifications -T ~/Templates
+
+ln -sf /system/fonts -T $PREFIX/share/fonts/system
+ln -sf /sdcard/rime-data -T $PREFIX/share/rime-data

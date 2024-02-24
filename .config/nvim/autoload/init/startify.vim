@@ -42,9 +42,15 @@ function! init#startify#source() abort
   let g:startify_change_to_vcs_root = 1
   let g:startify_enable_special = 0
   let g:startify_relative_path = 1
-  if filereadable(expand('$PREFIX/etc/issue'))
-    let g:startify_custom_header = map(readfile(expand('$PREFIX/etc/issue')), {_, v -> substitute(v, "\x1b\[[0-9;\?]\\{-}\\a", '', 'g')})
-  endif
+  let l:etc = expand('$PREFIX/etc/')
+  for l:fname in ['issue', 'motd']
+    if filereadable(l:etc . l:fname)
+      let g:startify_custom_header = map(readfile(l:etc . l:fname),
+            \ {_, v -> substitute(v, "\x1b\[[0-9;\?]\\{-}\\a", '', 'g')}
+            \ )
+      break
+    endif
+  endfor
   let g:startify_bookmarks = [
         \ {g:maplocalleader . 'v': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/init.vim'), ':~')},
         \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/autoload/init/coc.vim'), ':~')},

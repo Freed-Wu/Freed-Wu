@@ -1,0 +1,3 @@
+/*
+!/{{ filereadable('tsconfig.json') ? trim(get(get(json_decode(readfile('tsconfig.json')), 'compilerOptions', {}), 'outDir', 'out'), '/') : 'out' }}/
+*.map

@@ -1,8 +1,15 @@
-function! init#init#rime#includeexpr() abort
-  if !empty(findfile(v:fname))
-    return v:fname
+function! init#init#rime#includeexpr(fname) abort
+  " fname.yaml:/node/child_node/...
+  let l:fname = split(a:fname, ':')[0]
+  if !empty(findfile(l:fname))
+    return l:fname
   endif
-  return v:fname . '.yaml'
+  let l:fname = l:fname . '.yaml'
+  " fname:/node/child_node/...
+  if !empty(findfile(l:fname))
+    return l:fname
+  endif
+  return a:fname
 endfunction
 
 function! init#init#rime#switch() abort

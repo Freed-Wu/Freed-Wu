@@ -2,8 +2,13 @@
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 has_cmd() {
-	for opt in "$@"; do
-		command -v "$opt" >/dev/null
+	local opt
+	for opt; do
+		if command -v "$opt" >/dev/null; then
+			continue
+		else
+			return $?
+		fi
 	done
 }
 # adb shell doesn't have $LANG
@@ -23,8 +28,8 @@ elif [[ $OSTYPE == darwin ]]; then
 	export BROWSER=open
 fi
 if [[ $OSTYPE == linux-android ]]; then
-	PATH="$PATH${PATH:+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin:$HOME/.shortcuts"
-	if [[ -n $DISPLAY ]]; then
+	PATH="$PATH${PATH:+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin:$HOME/.shortcuts:$HOME/bin"
+	if [[ -n $DISPLAY ]] && has_cmd gio; then
 		export BROWSER='gio open'
 	else
 		export BROWSER=termux-open
@@ -82,9 +87,6 @@ else
 	FZF_HISTORY_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fzf"
 fi
 # fzf
-if [[ $OSTYPE == msys2 ]]; then
-	devnull=nul
-fi
 if has_cmd auto-sized-fzf.sh; then
 	fzf_opt="$(auto-sized-fzf.sh)"
 fi
@@ -94,7 +96,7 @@ fi
 # https://github.com/Aloxaf/fzf-tab/issues/282
 # -d$"\0"
 export FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
-2> ${devnull:-/dev/null} || less {1}'
+2> /dev/null || less {1}'
 -m
 -d:
 --ansi
@@ -135,7 +137,7 @@ export FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
 --bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'
 --history=$FZF_HISTORY_DIR/fzf.txt
 --preview-window=${fzf_opt:-right:50%},border-bottom,+{2}+4/4,~4"
-unset devnull fzf_opt
+unset fzf_opt
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true
@@ -155,10 +157,10 @@ export DIRENV_LOG_FORMAT=
 export MINICOM=-w
 if has_cmd git; then
 	# neomutt
-	EMAIL="$(git config user.email)"
+	EMAIL="$(git config --global user.email)"
 	export EMAIL
 	# debmake
-	DEBFULLNAME="$(git config user.name)"
+	DEBFULLNAME="$(git config --global user.name)"
 	export DEBFULLNAME
 	DEBEMAIL="$EMAIL"
 	export DEBEMAIL

@@ -1,1 +1,2 @@
-vncserver -kill :1 || vncserver "$@" &
+#!/data/data/com.termux/files/usr/bin/env sh
+vncserver -kill :1 || exec vncserver "$@" &

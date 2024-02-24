@@ -29,7 +29,6 @@
     "lua": ["luacheck"],
     "mail": ["write-good", "alex-text"],
     "markdown": ["write-good", "alex"],
-    "nix": ["nix-linter"],
     "perl": ["perl"],
     "php": ["phpstan", "psalm"],
     "sh": ["bash", "zsh"],
@@ -71,10 +70,6 @@
       "command": "asm-lsp",
       "filetypes": ["asm", "nasm"]
     },
-    "autotools": {
-      "command": "autotools-language-server",
-      "filetypes": ["config", "make", "automake"]
-    },
     "bash": {
       "command": "termux-language-server",
       "filetypes": ["sh"]
@@ -83,10 +78,9 @@
       "command": "bitbake-language-server",
       "filetypes": ["bitbake"]
     },
-    "dot": {
-      "command": "dot-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["dot"]
+    "config": {
+      "command": "autoconf-language-server",
+      "filetypes": ["config"]
     },
     "expect": {
       "command": "expect-language-server",
@@ -95,23 +89,19 @@
     "hdlChecker": {
       "command": "hdl_checker",
       "args": ["--lsp"],
-      "filetypes": ["vhdl", "verilog", "systemverilog"]
+      "filetypes": ["vhdl", "verilog"]
     },
     "jq": {
       "command": "jq-lsp",
       "filetypes": ["jq"]
     },
+    "make": {
+      "command": "make-language-server",
+      "filetypes": ["make"]
+    },
     "mutt": {
       "command": "mutt-language-server",
       "filetypes": ["muttrc"]
-    },
-    "mlir": {
-      "command": "mlir-lsp-server",
-      "filetypes": ["mlir"]
-    },
-    "nix": {
-      "command": "nixd",
-      "filetypes": ["nix"]
     },
     "requirements": {
       "command": "requirements-language-server",
@@ -124,10 +114,6 @@
     "svls": {
       "command": "svls",
       "filetypes": ["systemverilog"]
-    },
-    "tablegen": {
-      "command": "tblgen-lsp-server",
-      "filetypes": ["tablegen"]
     },
     "tmux": {
       "command": "tmux-language-server",
@@ -191,8 +177,8 @@
   "python.sortImports.path": "",
   "pyright.testing.provider": "pytest",
   "python.formatting.provider": "none",
-  "rime.enabled": false,
-  "rime.priority": 99,
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
   "ruff.enableExperimentalFormatter": true,
   "semanticTokens.enable": true,
   "session.directory": "~/.local/share/nvim/session",
