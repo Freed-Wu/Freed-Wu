@@ -22,7 +22,9 @@ def insert(event: KeyPressEvent, pre: str, post: str) -> None:
     :rtype: None
     """
     event.current_buffer.cursor_position += (
-        event.current_buffer.document.get_start_of_line_position(after_whitespace=True)
+        event.current_buffer.document.get_start_of_line_position(
+            after_whitespace=True
+        )
     )
     event.cli.current_buffer.insert_text(pre)
     event.current_buffer.cursor_position += (
