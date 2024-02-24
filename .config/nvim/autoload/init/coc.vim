@@ -15,24 +15,25 @@ function! init#coc#source() abort
         \
         \ 'coc-prettier',
         \
-        \ 'coc-tasks', 'coc-vimtex', 'coc-emmet',
-        \ 'coc-snippets', 'coc-translator', 'coc-zi',
+        \ 'coc-tasks', 'coc-vimtex', 'coc-emmet', 'coc-calc',
+        \ 'coc-snippets', 'coc-translator', 'coc-zi', 'coc-rime',
         \
         \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
         \ 'coc-gitignore', 'coc-license',
         \
         \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
         \
-        \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji', 'coc-syntax',
+        \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji',
+        \ 'coc-emoji-shortcodes', 'coc-syntax',
         \
         \ 'coc-copilot', 'coc-leetcode',
         \
         \ '@yaegassy/coc-marksman', 'coc-webview',
-        \ 'coc-markdown-preview-enhanced', 'coc-esbonio',
-        \ 'coc-texlab', 'coc-bibtex', 'coc-cmake',
+        \ 'coc-markdown-preview-enhanced', 'coc-esbonio', 'coc-graphviz',
+        \ 'coc-texlab', 'coc-bibtex', 'coc-cmake', 'coc-mlir', 'coc-nix',
         \ 'coc-json', 'coc-yaml', 'coc-toml',
         \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css',
-        \ 'coc-docker', 'coc-sql', 'coc-db',
+        \ 'coc-docker', 'coc-sql', 'coc-db', 'coc-bitbake',
         \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-eslint',
         \ '@yaegassy/coc-ruff', 'coc-pyright', 'coc-lua', 'coc-solargraph',
         \ 'coc-clangd',
@@ -40,7 +41,7 @@ function! init#coc#source() abort
   " https://github.com/tonyfettes/coc-rime/issues/6
   " don't support android
   if $PREFIX !=# '/data/data/com.termux/files/usr'
-    let g:coc_global_extensions += ['coc-tabnine', 'coc-rime']
+    let g:coc_global_extensions += ['coc-tabnine']
   endif
 
   let g:coc_snippet_next = '<Tab>'
@@ -71,6 +72,8 @@ function! init#coc#source() abort
         \ 'sbt': 'scala',
         \ 'eelixir': 'elixir',
         \ 'neomuttrc': 'muttrc',
+        \ 'automake': 'make',
+        \ 'gyp': 'python',
         \ }
   xmap if <Plug>(coc-funcobj-i)
   xmap af <Plug>(coc-funcobj-a)
@@ -170,7 +173,7 @@ function! init#coc#imap() abort
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
   inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"
   inoremap <silent><expr> <C-\> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
-  inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR><C-O>:call CocAction('toggleSource', 'word')<CR>
+  inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR>
 endfunction
 
 augroup init#coc

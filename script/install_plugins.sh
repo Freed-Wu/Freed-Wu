@@ -22,6 +22,7 @@ echo -e "\n\r::group::Install vim plugins"
 # git clone is needed
 [ -f ~/.local/share/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim ] ||
 	git clone --depth=1 https://github.com/Shougo/dein.vim ~/.local/share/nvim/repos/github.com/Shougo/dein.vim
+# https://github.com/kristijanhusak/vim-dadbod-ui/issues/224
 vi --headless -c'call dein#update() | quit'
 # 2>&1 is needed
 npm install -C ~/.config/coc/extensions $(script/install_plugins.vim 2>&1)

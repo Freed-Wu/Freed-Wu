@@ -1,10 +1,10 @@
-function! init#init#cmake#includeexpr() abort
-  if !empty(findfile(v:fname))
-    return v:fname
-  elseif !empty(findfile(v:fname . '.cmake'))
-    return v:fname . '.cmake'
-  elseif !empty(findfile(v:fname . '-config.cmake'))
-    return v:fname . '-config.cmake'
+function! init#init#cmake#includeexpr(fname) abort
+  if !empty(findfile(a:fname))
+    return a:fname
+  elseif !empty(findfile(a:fname . '.cmake'))
+    return a:fname . '.cmake'
+  elseif !empty(findfile(a:fname . '-config.cmake'))
+    return a:fname . '-config.cmake'
   endif
-  return 'Find' . v:fname . '.cmake'
+  return 'Find' . a:fname . '.cmake'
 endfunction

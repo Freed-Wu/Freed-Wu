@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/env sh
+# am broadcast -a com.osfans.trime.deploy "$@"
+exec rime_deployer --build /sdcard/rime /sdcard/rime-data /sdcard/rime/build "$@"

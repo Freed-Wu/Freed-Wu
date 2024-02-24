@@ -1,8 +1,0 @@
----
-patch:
-  __include: emoji_suggestion:/patch
-  # comment it on android mobile
-  # https://github.com/osfans/trime/wiki/trime.yaml-%E8%A9%B3%E8%A7%A3#2switches
-  switches/@prev:
-    name: _hide_candidate
-    reset: 1

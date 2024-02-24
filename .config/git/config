@@ -1,5 +1,5 @@
 [user]
-	name = Wu Zhenyu
+	name = Wu, Zhenyu
 	email = wuzhenyu@ustc.edu
 	signingKey = 0E07E1F8C0EC10AD
 [feature]
@@ -14,7 +14,7 @@
 	denyCurrentBranch = ignore
 [merge]
 	conflictstyle = diff3
-	tool = vimdiff
+	tool = vi -d
 [mergetool]
 	keepBackup = false
 	hideResolved = true
@@ -23,7 +23,7 @@
 [diff]
 	submodule = log
 	colorMoved = default
-	tool = vimdiff
+	tool = vi -d
 [color]
 	ui = auto
 [status]
@@ -34,7 +34,7 @@
 	symlink = true
 	quotepath = off
 [pager]
-	tag = cat
+	tag = sort -V
 	format-patch = cat
 	diff = delta
 	blame = delta
@@ -81,7 +81,7 @@
 	extendedRegexp = true
 [blame]
 	showEmail = true
-	ignoreRevsFile = ""
+	ignoreRevsFile =
 [rebase]
 	autoSquash = true
 [filter "lfs"]

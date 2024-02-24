@@ -1,0 +1,23 @@
+---
+__include: my/chasis-type:/
+style/horizontal: false
+style/layout/position: right_up
+# 0-9
+style/layout/max_entries: 10
+style/layout/sticky_lines: 10
+style/layout/min_length: 0
+style/layout/min_width: 0
+# width of tablet
+style/layout/max_length: 2200
+style/layout/max_width: 2200
+style/layout/real_margin: 0
+style/layout/spacing: 0
+style/layout/margin_x: 0
+style/layout/margin_y: 0
+style/layout/border: 0
+# 0.75
+style/layout/alpha: 0xbb
+# https://github.com/osfans/trime/issues/1255
+preset_keyboards/mini/height: 1
+preset_keyboards/mini/keyboard_height: 2
+preset_keyboards/mini/keys: []

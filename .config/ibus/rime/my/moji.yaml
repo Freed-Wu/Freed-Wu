@@ -1,0 +1,14 @@
+---
+__include: emoji_suggestion:/patch
+switches/@next 4:
+  name: kaomoji_suggestion
+  reset: 1
+  states:
+    - T_T
+    - ^_^
+"engine/filters/@before 1": simplifier@kaomoji_suggestion
+kaomoji_suggestion:
+  opencc_config: kaomoji.json
+  option_name: kaomoji_suggestion
+  tips: none
+  inherit_comment: false
