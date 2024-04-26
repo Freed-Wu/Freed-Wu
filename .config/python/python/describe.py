@@ -59,7 +59,9 @@ class Describe:
             "dtype",
             "requires_grad",
         ]:
-            if (k == "requires_grad" and self.requires_grad) or k != "requires_grad":
+            if (
+                k == "requires_grad" and self.requires_grad
+            ) or k != "requires_grad":
                 attrs += [k]
         texts = []
         for k in attrs:
@@ -139,7 +141,9 @@ def describe(
     import torch
 
     if isinstance(obj, torch.Tensor):
-        kwargs: dict[str, str | bool | float | torch.device | torch.dtype | None] = {}
+        kwargs: dict[
+            str, str | bool | float | torch.device | torch.dtype | None
+        ] = {}
         if not torch.is_complex(obj):
             if min:
                 kwargs["min"] = obj.min().item()
