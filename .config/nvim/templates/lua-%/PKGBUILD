@@ -1,7 +1,12 @@
 #!/usr/bin/env -S sh -c 'nvchecker -cnvchecker.toml --logger=json | jq -r '\''.version | sub("^v"; "") | split("-") | .[-1]'\'' | xargs -i{} sed -i "s/^\\(pkgver=\\).*/\\1{}/" $0'
 # shellcheck shell=bash disable=SC2034,SC2154
-# ex: nowrap
 # Maintainer: {{ g:snips_author }} <{{ g:snips_email }}>
+# Update this package by:
+#
+# ```sh
+# sudo pacman -S nvchecker jq pacman-contrib
+# ./PKGBUILD
+# ```
 _pkgname={{ substitute(expand('%:p:h:t'), '\.lua$', '', '') }}
 pkgname=(lua{,51,52,53}-"$_pkgname")
 pkgver=0.0.1
@@ -36,3 +41,4 @@ package_lua53-{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }}() {
 package_lua-{{ substitute(expand('%:p:h:t'), '.lua$', '', '') }}() {
 	_package $_lua_version
 }
+# ex: nowrap

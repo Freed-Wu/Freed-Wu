@@ -146,7 +146,6 @@ let g:yaml_schema = 'pyyaml'
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
 let g:netrw_home = expand('$XDG_CACHE_HOME/nvim/netrw')
-let g:netrw_nogx = 1
 let g:netrw_altfile = 1
 let g:netrw_winsize = 30
 if has('unix')
@@ -327,11 +326,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   call dein#add('yianwillis/vimcdoc')
   call dein#add('mhinz/vim-hugefile')
-  " need coc.nvim
-  call dein#add('Shougo/echodoc.vim', {
-        \ 'if': executable('node'),
-        \ 'hook_source': 'call init#echodoc#source()',
-        \ })
   call dein#add('pbrisbin/vim-mkdir')
   call dein#add('roxma/vim-tmux-clipboard', {
         \ 'if': !empty('$TMUX'),
@@ -591,10 +585,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('kana/vim-grex', {
         \ 'hook_source': 'call init#grex#source()',
         \ })
-  call dein#add('numToStr/Comment.nvim', {
-        \ 'if': has('nvim-0.5.0'),
-        \ 'hook_source': 'lua require"comment"',
-        \ })
   call dein#add('voldikss/vim-browser-search', {
         \ 'hook_source': 'call init#browser_search#source()',
         \ })
@@ -824,7 +814,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " 1}}} TextObject "
 
   " Tool {{{1 "
-  " LSP {{{2 "
+  " PackageManager {{{2 "
   " neoclide/coc.nvim_release
   call dein#add('neoclide/coc.nvim', {
         \ 'if': executable('node'),
@@ -832,7 +822,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'rev': 'release',
         \ 'hook_source': 'call init#coc#source()',
         \ })
-  " 2}}} LSP "
+  " 2}}} PackageManager "
 
   " FileCMD {{{2 "
   call dein#add('tpope/vim-eunuch', {

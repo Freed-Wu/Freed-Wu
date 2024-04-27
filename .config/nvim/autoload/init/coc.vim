@@ -94,16 +94,16 @@ function! init#coc#source() abort
   nmap g. <Plug>(coc-codeaction-selected)
   xmap g. <Plug>(coc-codeaction-selected)
   nmap g.. <Plug>(coc-codeaction)
-  nmap [k <Plug>(coc-diagnostic-prev)
-  nmap ]k <Plug>(coc-diagnostic-next)
-  nmap [K <Plug>(coc-diagnostic-prev-error)
-  nmap ]K <Plug>(coc-diagnostic-next-error)
+  nmap [d <Plug>(coc-diagnostic-prev)
+  nmap ]d <Plug>(coc-diagnostic-next)
+  nmap [D <Plug>(coc-diagnostic-prev-error)
+  nmap ]D <Plug>(coc-diagnostic-next-error)
   nnoremap <silent> gd :<C-U>call init#init#coc#action('definition', 'jumpDefinition', 'gd')<CR>
   nnoremap <silent> gD :<C-U>call init#init#coc#action('declaration', 'jumpDeclaration', 'gD')<CR>
   nnoremap <silent> 1gd :<C-U>call init#init#coc#action('typeDefinition', 'jumpTypeDefinition', '1gd')<CR>
   nnoremap <silent> 1gD :<C-U>call init#init#coc#action('implementation', 'jumpImplementation', '1gD')<CR>
-  nnoremap <silent> [d :<C-U>call init#init#coc#action('reference', 'jumpUsed', '1gD')<CR>
-  nnoremap <silent> ]d :<C-U>call init#init#coc#action('reference', 'jumpReference', '1gD')<CR>
+  nnoremap <silent> [r :<C-U>call init#init#coc#action('reference', 'jumpUsed', '1gD')<CR>
+  nnoremap <silent> ]r :<C-U>call init#init#coc#action('reference', 'jumpReference', '1gD')<CR>
   nnoremap <silent> gr :<C-U>call init#init#coc#action('rename', 'refactor', 'gr')<CR>
   nnoremap <silent> gR :<C-U>call init#init#coc#action('rename', 'rename', 'gR')<CR>
   nnoremap <silent> K :<C-U>call init#init#coc#action('hover', 'doHover', 'K')<CR>
@@ -111,10 +111,9 @@ function! init#coc#source() abort
   xnoremap gK K
   " https://github.com/neoclide/coc.nvim/issues/4831
   nnoremap <silent> gx :<C-U>call init#init#coc#openLink()<CR>
-  xnoremap <silent> gx :<C-U>call pandoc#hypertext#OpenSystem(getline('.')[col('v') - 1:col('''>') - 1])<CR>
 
-  nmap <C-W>d <C-W>s<Plug>(coc-definition)
-  nmap <C-W>D <C-W>s<Plug>(coc-declaration)
+  nmap <C-W>gd <C-W>s<Plug>(coc-definition)
+  nmap <C-W>gD <C-W>s<Plug>(coc-declaration)
 
   nmap gq <plug>(coc-format-selected)
   xnoremap <silent> gq :<C-U>call init#init#coc#format(v:true)<CR>
@@ -150,7 +149,7 @@ function! init#coc#source() abort
   nnoremap <silent> q' :<C-U>CocList quickfix<CR>
   nnoremap <silent> q" :<C-U>CocList locationlist<CR>
   nnoremap <silent> q[ :<C-U>CocList commands<CR>
-  nnoremap <silent> q] :<C-U>CocList diagnostics<CR>
+  nnoremap <silent> <C-W>d :<C-U>CocList diagnostics<CR>
   nnoremap <silent> q; :<C-U>CocList changes<CR>
   nnoremap <silent> q, :<C-U>CocList maps<CR>
   nnoremap <silent> q- :<C-U>CocList colors<CR>

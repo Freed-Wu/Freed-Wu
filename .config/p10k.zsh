@@ -39,6 +39,8 @@
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     my_brew_shell
+    my_rime
+    my_asciinema_rec
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
@@ -1594,7 +1596,7 @@
   # Show battery in yellow when it's discharging.
   typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=3
   # Battery pictograms going from low to high level of charge.
-  typeset -g POWERLEVEL9K_BATTERY_STAGES='\uf58d\uf579\uf57a\uf57b\uf57c\uf57d\uf57e\uf57f\uf580\uf581\uf578'
+  typeset -g POWERLEVEL9K_BATTERY_STAGES='\Uf008e\Uf007a\Uf007b\Uf007c\Uf007d\Uf007e\Uf007f\Uf0080\Uf0081\Uf0082\Uf0079'
   # Don't show the remaining time to charge/discharge.
   typeset -g POWERLEVEL9K_BATTERY_VERBOSE=false
   typeset -g POWERLEVEL9K_BATTERY_BACKGROUND=0
@@ -1651,9 +1653,22 @@
   # https://github.com/romkatv/powerlevel10k/issues/1986
   function prompt_my_brew_shell() {
     if [[ -n $HOMEBREW_DEBUG_INSTALL ]]; then
-      p10k segment -b yellow -f red -i ⭐
+      p10k segment -byellow -fred -i⭐
     fi
   }
+
+  function prompt_my_rime() {
+    if [[ -n $rime_schema_id ]]; then
+      p10k segment -bblack -fgreen -iㄓ -t$rime_schema_names[$rime_schema_ids[(I)$rime_schema_id]]
+    fi
+  }
+
+  function prompt_my_asciinema_rec() {
+    if [[ -n $ASCIINEMA_REC ]]; then
+      p10k segment -byellow -fblack -i
+    fi
+  }
+
   # https://github.com/romkatv/powerlevel10k/issues/2096
   if [[ $(ps -p1 -ocmd=) == '/sbin/docker-init '* ]]; then
     typeset -g my_init_start_time=${$(ps -p1 -ostart=)## *}
@@ -1666,7 +1681,7 @@
 
   function prompt_my_init_start_time() {
     if [[ -n $my_init_start_time ]]; then
-      p10k segment -b blue -f red -i  -t $(date -d"0 $(date +%s) sec - $(date -d $my_init_start_time +%s) sec" +%T)
+      p10k segment -bblue -fred -i -t$(date -d"0 $(date +%s) sec - $(date -d $my_init_start_time +%s) sec" +%T)
     fi
   }
 

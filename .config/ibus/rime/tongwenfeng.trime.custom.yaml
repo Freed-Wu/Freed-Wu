@@ -9,3 +9,7 @@ patch:
     text: ;
   preset_keyboards/mini/height: 5
   preset_keyboards/mini/keyboard_height: 3
+  preset_keyboards/default/keys:
+    __include: my/tongwenfeng:/
+  preset_keyboards/letter/keys:
+    __include: my/tongwenfeng:/

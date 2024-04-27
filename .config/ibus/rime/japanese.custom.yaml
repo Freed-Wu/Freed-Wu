@@ -4,51 +4,51 @@ patch:
   key_binder/bindings:
     __include: default:/key_binder/bindings
   key_binder/bindings/@next 0:
-    accept: "Control+Shift+n"
+    accept: Control+Shift+n
     select: japanese
     when: always
   key_binder/bindings/@next 1:
-    accept: "Control+Shift+N"
+    accept: Control+Shift+N
     select: japanese
     when: always
   key_binder/bindings/@next 2:
-    accept: "Control+Shift+k"
+    accept: Control+Shift+k
     select: korean
     when: always
   key_binder/bindings/@next 3:
-    accept: "Control+Shift+K"
+    accept: Control+Shift+K
     select: korean
     when: always
   key_binder/bindings/@next 4:
-    accept: "Control+Shift+v"
+    accept: Control+Shift+v
     select: vietnamese
     when: always
   key_binder/bindings/@next 5:
-    accept: "Control+Shift+V"
+    accept: Control+Shift+V
     select: vietnamese
     when: always
   key_binder/bindings/@next 6:
-    accept: "Control+Shift+j"
+    accept: Control+Shift+j
     select: double_jyutping_extra
     when: always
   key_binder/bindings/@next 7:
-    accept: "Control+Shift+J"
+    accept: Control+Shift+J
     select: double_jyutping_extra
     when: always
   key_binder/bindings/@next 8:
-    accept: "Control+Shift+m"
+    accept: Control+Shift+m
     select: td_pinyin_flypy_extra
     when: always
   key_binder/bindings/@next 9:
-    accept: "Control+Shift+M"
+    accept: Control+Shift+M
     select: td_pinyin_flypy_extra
     when: always
   key_binder/bindings/@next 10:
-    accept: "Control+Shift+l"
+    accept: Control+Shift+l
     select: international
     when: always
   key_binder/bindings/@next 11:
-    accept: "Control+Shift+L"
+    accept: Control+Shift+L
     select: international
     when: always
   switches:
@@ -69,8 +69,8 @@ patch:
     - name: full_shape
       reset: 0
       states:
-        - 半角
-        - 全角
+        - $$
+        - ＄
     - name: simplification
       reset: 0
       states:

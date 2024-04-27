@@ -1,6 +1,5 @@
 [
-  ["T&emplate", "1,1Template"],
-  ["&TemplateHere", "Template"],
+  ["T&emplate", "Template"],
   ["&Open Template", "execute 'edit' template#find(expand('%:p'))"],
   ["--"],
   [

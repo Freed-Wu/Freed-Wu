@@ -247,8 +247,6 @@ function! init#which_key#source() abort
   nnoremap ]I ]I
   nnoremap [<C-I> [<C-I>
   nnoremap ]<C-I> ]<C-I>
-  nnoremap [D [D
-  nnoremap ]D ]D
   nnoremap [<C-D> [<C-D>
   nnoremap ]<C-D> ]<C-D>
   " 1}}} show "

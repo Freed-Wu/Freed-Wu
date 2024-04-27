@@ -1,6 +1,5 @@
 #!/usr/bin/env -S sh -c 'nvchecker -cnvchecker.toml --logger=json | jq -r '\''.version | sub("^v"; "") | split("-") | .[-1]'\'' | xargs -i{} sed -i "s/^\\(pkgver=\\).*/\\1{}/" $0'
 # shellcheck shell=bash disable=SC2034,SC2154
-# ex: nowrap
 # Maintainer: {{ g:snips_author }} <{{ g:snips_email }}>
 _pkgname={{ substitute(substitute(expand('%:p:h:t'), '^perl-', '', ''), '-\|^', '\u', 'g') }}
 pkgname={{ expand('%:p:h:t') }}
@@ -35,3 +34,4 @@ package() {
   unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
   make install INSTALLDIRS=vendor DESTDIR="$pkgdir"
 }
+# ex: nowrap

@@ -5,6 +5,10 @@ Hover:
   ShowAKA: true
 CompileFlags:
   Compiler: gcc
+  # https://github.com/clangd/clangd/issues/662#issuecomment-1447233948
+  Remove:
+    - -m*
+    - -f*
   Add:
     - -Wall
     - -I/home/.local/include # android termux
