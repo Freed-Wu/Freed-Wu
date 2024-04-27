@@ -111,7 +111,6 @@ function! init#coc#source() abort
   xnoremap gK K
   " https://github.com/neoclide/coc.nvim/issues/4831
   nnoremap <silent> gx :<C-U>call init#init#coc#openLink()<CR>
-  xnoremap <silent> gx :<C-U>call pandoc#hypertext#OpenSystem(getline('.')[col('v') - 1:col('''>') - 1])<CR>
 
   nmap <C-W>d <C-W>s<Plug>(coc-definition)
   nmap <C-W>D <C-W>s<Plug>(coc-declaration)

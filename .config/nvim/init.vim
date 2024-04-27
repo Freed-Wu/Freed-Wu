@@ -146,7 +146,6 @@ let g:yaml_schema = 'pyyaml'
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
 let g:netrw_home = expand('$XDG_CACHE_HOME/nvim/netrw')
-let g:netrw_nogx = 1
 let g:netrw_altfile = 1
 let g:netrw_winsize = 30
 if has('unix')

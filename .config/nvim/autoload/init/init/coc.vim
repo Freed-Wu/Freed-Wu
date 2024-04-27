@@ -46,7 +46,7 @@ function! init#init#coc#openLink() abort
   if &buftype ==# ''
     call CocActionAsync('openLink')
   else
-    call pandoc#hypertext#OpenSystem()
+    call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
   endif
 endfunction
 
