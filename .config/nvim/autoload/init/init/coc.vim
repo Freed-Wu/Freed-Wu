@@ -45,8 +45,10 @@ endfunction
 function! init#init#coc#openLink() abort
   if &buftype ==# ''
     call CocActionAsync('openLink')
+  elseif has('nvim')
+    lua vim.ui.open(vim.fn.expand('<cfile>'))
   else
-    call pandoc#hypertext#OpenSystem()
+    call netrw#BrowseX(netrw#GX(), netrw#CheckIfRemote(netrw#GX()))
   endif
 endfunction
 

@@ -296,6 +296,7 @@ more information about me
   - [![kaggle](https://img.shields.io/badge/kaggle-gray?logo=kaggle)](https://www.kaggle.com/FreedWu)
   - [![poe](https://img.shields.io/badge/poe-gray?logo=poe)](https://poe.com/zhenyuwu)
   - [![leetcode](https://img.shields.io/badge/leetcode-gray?logo=leetcode)](https://leetcode.cn/u/freed-wu/)
+  - [![asciinema](https://img.shields.io/badge/asciinema-gray?logo=asciinema)](https://asciinema.org/~Freed-Wu)
 - forums for discusstion:
   - [![stackoverflow](https://img.shields.io/badge/stackoverflow-gray?logo=stackoverflow)](https://stackoverflow.com/users/16027269/wzy)
   - [![reddit](https://img.shields.io/badge/reddit-gray?logo=reddit)](https://www.reddit.com/user/freedwu)

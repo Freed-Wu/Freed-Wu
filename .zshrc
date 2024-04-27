@@ -83,7 +83,7 @@ fi
 autoload -Uz run-help
 autoload -Uz zcalc
 autoload -Uz zmv
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -D
 autoload -Uz zmathfunc && zmathfunc
 
 bindkey -e
@@ -102,10 +102,10 @@ bindkey '^[W' copy-region-as-kill
 bindkey '^[l' down-case-word
 # vi
 _complete_files () {
-  eval "$_comp_setup"
   _main_complete _files
 }
-compdef -k _complete_files complete-word '^X^F'
+zle -C complete-files expand-or-complete _complete_files
+bindkey '^X^F' complete-files
 bindkey '^[' vi-cmd-mode
 bindkey '^[i' expand-or-complete-prefix
 bindkey -Mvicmd cc vi-change-whole-line
@@ -120,8 +120,7 @@ autoload -Uz transpose-lines \
   && bindkey '^[T' transpose-lines
 
 zstyle ':completion:*' list-separator ''
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' \
-  'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{[:upper:][:lower:]-_}={[:lower:][:upper:]_-}'
 zstyle ':completion:*' muttrc \
   ${XDG_CONFIG_HOME:-$HOME/.config}/neomutt/neomuttrc
 zstyle ':completion:*' mail-directory ${XDG_CACHE_HOME:-$HOME/.cache}/neomutt
@@ -367,6 +366,16 @@ zinit id-as depth'1' wait lucid \
 zinit id-as depth'1' wait lucid \
   if'(($+commands[xdg-open] || $+commands[open]))' \
   for sineto/web-search
+zinit id-as depth'1' wait lucid \
+  if'(($+commands[nix-shell]))' \
+  for chisui/zsh-nix-shell
+# disable for android due to bug about build system
+zinit id-as depth'1' wait lucid \
+  if'((($+commands[rime_deployer] || $+commands[nix]) && ! $+PREFIX))' \
+  atload'bindkey "^[^I" rime-get-context
+bindkey "^[^N" rime-next-schema
+bindkey "^[^P" rime-previous-schema' \
+  for Freed-Wu/zsh-rime
 # 1}}} Function #
 
 # Compatible {{{1 #

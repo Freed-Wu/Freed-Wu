@@ -26,7 +26,6 @@
     "expect": ["nagelfar"],
     "gitcommit": ["write-good", "alex-text"],
     "html": ["alex-html"],
-    "lua": ["luacheck"],
     "mail": ["write-good", "alex-text"],
     "markdown": ["write-good", "alex"],
     "perl": ["perl"],

@@ -51,10 +51,6 @@ else
 	if [[ $OSTYPE != msys2 && -d $dir ]]; then
 		export PATH="$PATH${PATH:+:}$dir"
 	fi
-	dir=/usr/src/linux/scripts
-	if [[ -d $dir ]]; then
-		PATH="$PATH${PATH:+:}$dir/clang-tools:$dir"
-	fi
 	dir=$HOME/.local/state/nix/profile/bin
 	if [[ -d $dir ]]; then
 		PATH="$PATH${PATH:+:}$dir"

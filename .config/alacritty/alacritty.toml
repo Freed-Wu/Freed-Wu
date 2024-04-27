@@ -70,5 +70,5 @@ save_to_clipboard = true
 
 [window]
 opacity = 0.75
-# https://gitlab.gnome.org/GNOME/mutter/-/issues/3229
+# https://github.com/wez/wezterm/issues/3766
 # startup_mode = "Fullscreen"
