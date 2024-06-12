@@ -12,5 +12,7 @@
   ["CocU&pdate"],
   ["--"],
   ["&TSUpdate"],
-  ["TSInstall &all"]
+  ["TSInstall &all"],
+  ["--"],
+  ["Rocks s&ync"]
 ]

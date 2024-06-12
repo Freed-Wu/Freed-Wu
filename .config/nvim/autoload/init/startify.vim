@@ -55,7 +55,7 @@ function! init#startify#source() abort
         \ {g:maplocalleader . 'v': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/init.vim'), ':~')},
         \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/autoload/init/coc.vim'), ':~')},
         \ {g:maplocalleader . 'j': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/coc-settings.json'), ':~')},
-        \ {g:maplocalleader . 't': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/lua/treesitter.lua'), ':~')},
+        \ {g:maplocalleader . 'r': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/rocks.toml'), ':~')},
         \ {g:maplocalleader . 's': '~/.zshrc'},
         \ {g:maplocalleader . 'z': '~/.zprofile'},
         \ {g:maplocalleader . 'x': '~/.xprofile'},

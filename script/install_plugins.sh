@@ -27,6 +27,8 @@ vi --headless -c'call dein#update() | quit'
 # 2>&1 is needed
 npm install --ignore-scripts --no-lockfile --omit=dev --legacy-peer-deps --no-global \
 	-C ~/.config/coc/extensions $(script/install_plugins.vim 2>&1)
+luarocks --lua-version=5.1 --local install rocks.nvim
+vi --headless -c'Rocks sync | quit'
 echo -e "\n\r::endgroup::"
 echo -e "\n\r::group::Install python packages"
 sudo install -D ~/.config/pip/pip.conf -t /root/.config/pip

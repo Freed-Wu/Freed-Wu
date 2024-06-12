@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null disable=SC2016
+# shellcheck shell=bash source=/dev/null disable=SC2016,SC2154
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 has_cmd() {
@@ -89,8 +89,6 @@ fi
 # https://github.com/junegunn/fzf/blob/master/ADVANCED.md#ripgrep-integration
 # rg foo | fzf
 # --preview-window=...,~4 will avoid ps's preview provided by fzf-tab
-# $word = {2} make a wrong --preview-window
-# https://github.com/Aloxaf/fzf-tab/issues/282
 # -d$"\0"
 export FZF_DEFAULT_OPTS="--history=$FZF_HISTORY_DIR/fzf.txt
 --preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'
@@ -163,7 +161,6 @@ if has_cmd git; then
 fi
 # lua
 if has_cmd lua; then
-	version="$(~/script/get-version.lua)"
 	case $OSTYPE in
 	linux-*)
 		ext=so
@@ -175,21 +172,28 @@ if has_cmd lua; then
 		ext=dll
 		;;
 	esac
-	export LUA_PATH="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;\
+	for _version in '' 5.{1..4}; do
+		version=${_version:-5.1}
+		[ -z "$_version" ] || _version="_${_version//./_}"
+		path_name="LUA_PATH$_version" cpath_name="LUA_CPATH$_version"
+		export "$path_name"="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;\
 $HOME/.local/share/lua/$version/?.lua;\
 $HOME/.local/share/lua/$version/?/init.lua;\
 $HOME/.local/state/nix/profile/share/lua/$version/?.lua;\
 $HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
-	export LUA_CPATH="./lib/lua/$version/?.$ext;./?.$ext;\
+		export "$cpath_name"="./lib/lua/$version/?.$ext;./?.$ext;\
 ./lib/lua/$version/loadall.$ext;;\
 $HOME/.local/lib/lua/$version/?.$ext;\
 $HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
-	if [[ -f /run/current-system/nixos-version ]]; then
-		LUA_PATH="$LUA_PATH;/run/current-system/sw/share/lua/$version/?.lua;\
+		if [[ -f /run/current-system/nixos-version ]]; then
+			eval "lua_path=\$$path_name" "lua_cpath=\$$cpath_name"
+			export "$path_name"="$lua_path;/run/current-system/sw/share/lua/$version/?.lua;\
 /run/current-system/sw/share/lua/$version/?/init.lua"
-		LUA_CPATH="$LUA_CPATH;/run/current-system/sw/lib/lua/$version/?.$ext"
-	fi
-	unset version ext
+			export "$cpath_name"="$lua_cpath;/run/current-system/sw/lib/lua/$version/?.$ext"
+			unset lua_path lua_cpath
+		fi
+	done
+	unset version path_name cpath_name ext
 fi
 # node
 export NODE_ENV=development

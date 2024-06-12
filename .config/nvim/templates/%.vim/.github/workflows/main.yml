@@ -1,17 +1,7 @@
----
-"on":
-  push:
-    paths-ignore:
-      - "**.md"
-      - doc/*
-  pull_request:
-    paths-ignore:
-      - "**.md"
-      - doc/*
-  workflow_dispatch:
+{{ join(readfile(expand('~/.config/nvim/templates/%.nvim/.github/workflows/main.yml')), "\n") }}
 
-jobs:
   test:
+    needs: build
     strategy:
       fail-fast: false
       matrix:

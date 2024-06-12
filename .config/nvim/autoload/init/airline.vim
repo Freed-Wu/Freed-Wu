@@ -75,6 +75,8 @@ function! init#airline#source() abort
 
   let g:airline#extensions#windowswap#indicator_text = '✂'
 
+  let g:airline#extensions#xkblayout#enabled = 1
+
   let g:airline#extensions#zoomwintab#enabled = 1
   let g:airline#extensions#zoomwintab#status_zoomed_in = '󰍉'
 endfunction
