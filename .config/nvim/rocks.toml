@@ -1,5 +1,6 @@
 [plugins]
 "rocks.nvim" = "scm"
+"rocks-config.nvim" = "scm"
 nvim-treesitter = "scm"
 nvim-treesitter-textobjects = "scm"
 nvim-treesitter-context = "scm"
