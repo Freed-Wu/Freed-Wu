@@ -1,6 +1,7 @@
 function! init#treesitter#source() abort
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
+  set runtimepath+=~/.local/share/nvim/rocks/share/lua
   " lua/treesitter.lua
   lua require"treesitter"
 endfunction

@@ -444,16 +444,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
 
   " Filetype {{{1 "
   " Highlight {{{2 "
-  " TSUpdate need proxy
-  " conflict with ifdef-highlighting
-  call dein#add('nvim-treesitter/nvim-treesitter', {
-        \ 'if': has('nvim-0.5.0'),
-        \ 'hook_source': 'call init#treesitter#source()',
-        \ 'hook_post_update': 'TSUpdate',
-        \ })
-  call dein#add('nvim-treesitter/playground', {
-        \ 'if': has('nvim-0.5.0'),
-        \ })
   call dein#add('lambdalisue/glyph-palette.vim', {
         \ 'hook_post_source': 'call init#glyph_palette#post_source()',
         \ })
@@ -702,13 +692,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('wellle/targets.vim', {
         \ 'hook_source': 'call init#targets#source()',
         \ })
-  call dein#add('nvim-treesitter/nvim-treesitter-textobjects', {
-        \ 'if': has('nvim-0.5.0'),
-        \ })
-  call dein#add('nvim-treesitter/nvim-treesitter-context', {
-        \ 'if': has('nvim-0.5.0'),
-        \ 'hook_source': 'lua require"treesitter_context"',
-        \ })
   call dein#add('kana/vim-textobj-user')
   call dein#add('thinca/vim-textobj-between', {
         \ 'on_map': {'o': ['x', 'X'], 'x': ['x', 'X']},
@@ -890,4 +873,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
 endif
 call dein#call_hook('source')
 call dein#call_hook('post_source')
+
+if has('nvim')
+  lua require"init"
+  call init#treesitter#source()
+endif
 " ex: foldmethod=marker path=.,$XDG_DATA_HOME/nvim/repos/github.com,$XDG_DATA_HOME/nvim/repos

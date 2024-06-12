@@ -2,9 +2,6 @@
   ["&NR", "NR"],
   ["R&ainbowDelim", "RainbowDelim"],
   ["--"],
-  ["TS&HighlightCapturesUnderCursor", "TSHighlightCapturesUnderCursor"],
-  ["TSNode&UnderCursor", "TSNodeUnderCursor"],
-  ["--"],
   ["&Table-mode ▶", "call init#init#quickui#install('normal/table_mode')"],
   ["&Coc ▶", "call init#init#quickui#install('normal/coc')"]
 ]
