@@ -261,7 +261,7 @@
 !/.config/openbox/
 !/.config/wezterm/
 !/.config/luarocks/
-/.config/luarocks/lib/
+/.config/luarocks/*/
 /.config/luarocks/upload_config.lua
 !/.config/python_keyring/
 !/.config/nvim/

@@ -54,8 +54,3 @@ if not pcall(require, "rocks") then
 
     vim.fn.delete(rocks_location, "rf")
 end
-
-do
-    require "treesitter"
-    require "treesitter_context"
-end
