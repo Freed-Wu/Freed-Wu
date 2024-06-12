@@ -1,6 +1,9 @@
 [plugins]
 "rocks.nvim" = "scm"
 "rocks-config.nvim" = "scm"
+"rocks-dev.nvim" = "scm"
+"rocks-git.nvim" = "scm"
 nvim-treesitter = "scm"
 nvim-treesitter-textobjects = "scm"
 nvim-treesitter-context = "scm"
+"fcitx5-ui.nvim" = "scm"

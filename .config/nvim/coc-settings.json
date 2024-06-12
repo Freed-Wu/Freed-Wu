@@ -185,10 +185,10 @@
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "suggest.completionItemKindLabels": {
-    "text": "",
+    "text": "󰉿",
     "method": "",
     "function": "󰊕",
-    "constructor": "󰒓",
+    "constructor": "",
     "field": "",
     "variable": "",
     "class": "",

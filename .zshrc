@@ -146,7 +146,7 @@ alias rename='rename -i'
 if (($+commands[perl-rename])); then
   alias perl-rename='perl-rename -i'
 fi
-if (($+commands[bear])); then
+if (($+commands[bear] && $+commands[make])); then
   alias make='bear -- make'
 fi
 if (($+commands[eza])); then

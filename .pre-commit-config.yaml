@@ -30,7 +30,7 @@ repos:
     hooks:
       - id: remove-crlf
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
+    rev: v2.3.0
     hooks:
       - id: codespell
         additional_dependencies:
@@ -54,7 +54,7 @@ repos:
         exclude_types:
           - zsh
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.0
+    rev: v1.7.1
     hooks:
       - id: actionlint
   - repo: https://github.com/adrienverge/yamllint
@@ -83,7 +83,7 @@ repos:
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20240511"
+    rev: "20240511.03"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -91,12 +91,12 @@ repos:
     hooks:
       - id: shfmt
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.4
+    rev: v0.4.9
     hooks:
       - id: ruff
       - id: ruff-format
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.362
+    rev: v1.1.367
     hooks:
       - id: pyright
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -108,7 +108,7 @@ repos:
           - markdown
           - json
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v18.1.5
+    rev: v18.1.6
     hooks:
       - id: clang-format
         exclude_types:
@@ -125,11 +125,11 @@ repos:
         args:
           - .config/nvim
   - repo: https://github.com/lunarmodules/luacheck
-    rev: v1.1.2
+    rev: v1.2.0
     hooks:
       - id: luacheck
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.63.5
+    rev: v1.64.1
     hooks:
       - id: rubocop
   - repo: https://github.com/nix-community/nixpkgs-fmt

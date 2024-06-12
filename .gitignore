@@ -52,8 +52,6 @@
 !/.wishrc
 !/.minirc.dfl
 !/.manpath
-# for lua 5.2
-!/.luarocks
 !/.x11vncrc
 # https://github.com/priv-kweihmann/oelint-adv/issues/527
 !/.oelint.cfg
@@ -261,7 +259,6 @@
 !/.config/openbox/
 !/.config/wezterm/
 !/.config/luarocks/
-/.config/luarocks/*/
 /.config/luarocks/upload_config.lua
 !/.config/python_keyring/
 !/.config/nvim/

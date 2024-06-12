@@ -16,7 +16,7 @@ function! init#coc#source() abort
         \ 'coc-prettier',
         \
         \ 'coc-tasks', 'coc-vimtex', 'coc-emmet', 'coc-calc',
-        \ 'coc-snippets', 'coc-translator', 'coc-zi', 'coc-rime',
+        \ 'coc-snippets', 'coc-translator', 'coc-zi',
         \
         \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
         \ 'coc-gitignore', 'coc-license',
@@ -42,6 +42,9 @@ function! init#coc#source() abort
   " don't support android
   if $PREFIX !=# '/data/data/com.termux/files/usr'
     let g:coc_global_extensions += ['coc-tabnine']
+  endif
+  if !executable('fcitx5-remote')
+    let g:coc_global_extensions += ['coc-rime']
   endif
 
   let g:coc_snippet_next = '<Tab>'
@@ -172,7 +175,11 @@ function! init#coc#imap() abort
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
   inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"
   inoremap <silent><expr> <C-\> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
-  inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR>
+  if index(g:coc_global_extensions, 'coc-rime') != -1
+    inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR>
+  else
+    inoremap <C-^> <Cmd>lua require'fcitx5-ui'.toggle()<CR><Cmd>call init#init#buffer#map()<CR>
+  endif
 endfunction
 
 augroup init#coc

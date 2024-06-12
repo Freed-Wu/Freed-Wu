@@ -48,3 +48,16 @@ vim.api.nvim_create_autocmd("FileType", {
         -- vim.bo[args.buf].syntax = "on"
     end
 })
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.runtimepath:append("~/.local/share/lua")
+vim.api.nvim_create_autocmd("User", {
+    pattern = "AirlineAfterInit",
+    callback = function(_)
+        vim.g.airline_section_x = vim.fn["airline#section#create_right"]({
+            '%{empty(nvim_treesitter#statusline()) ? "" : '
+            .. 'nvim_treesitter#statusline() . g:airline_right_alt_sep}',
+            'filetype',
+        })
+    end
+})

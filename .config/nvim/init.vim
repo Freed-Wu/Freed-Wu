@@ -343,8 +343,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#xkbswitch#source()',
         \ })
   call dein#add('lilydjwg/fcitx.vim', {
-        \ 'if': executable('fcitx5-remote'),
-        \ 'hook_source': 'call init#fcitx#source()',
+        \ 'if': executable('fcitx5-remote') && !has('nvim'),
         \ })
   " 1}}} IME "
 
@@ -566,7 +565,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#chalk#source()',
         \ })
   call dein#add('tommcdo/vim-exchange', {
-        \ 'on_map': {'n': 'Q', 'x': 'Q'},
+        \ 'on_map': {'n': '-', 'x': '-'},
         \ 'hook_source': 'call init#exchange#source()',
         \ })
   call dein#add('kana/vim-operator-user', {
@@ -852,7 +851,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   " 2}}} VCS "
 
   " File {{{2 "
-  call dein#add('antoinemadec/FixCursorHold.nvim')
   call dein#add('lambdalisue/fern.vim', {
         \ 'hook_source': 'call init#fern#source()',
         \ })
@@ -876,6 +874,5 @@ call dein#call_hook('post_source')
 
 if has('nvim')
   lua require"init"
-  call init#treesitter#source()
 endif
 " ex: foldmethod=marker path=.,$XDG_DATA_HOME/nvim/repos/github.com,$XDG_DATA_HOME/nvim/repos
