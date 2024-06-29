@@ -710,7 +710,7 @@ c.ConnectionFileMixin.ip = "*"
 #  log : logging.Logger
 
 # # By default notebooks are saved on disk on a temporary file and then if
-#  succefully written, it replaces the old ones. This procedure, namely
+#  successfully written, it replaces the old ones. This procedure, namely
 #  'atomic_writing', causes some bugs on file system without operation order
 #  enforcement (like some networked fs). If set to False, the new notebook is
 #  written directly on the old one which could fail (eg: full filesystem or

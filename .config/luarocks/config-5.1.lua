@@ -11,7 +11,8 @@ rocks_servers = {
     "https://luarocks.cn",
     "https://luarocks.org"
 }
-os_getenv = os_getenv or function(_)
+os_getenv = os_getenv or function(varname)
+    return require "os".getenv(varname)
 end
 if os_getenv("NIXPKGS_CONFIG") == "/etc/nix/nixpkgs-config.nix" then
     external_deps_dirs = { "/run/current-system/sw", home .. "/.local/state/nix/profile" }

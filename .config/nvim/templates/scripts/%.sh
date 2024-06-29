@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 set -e
-cd "$(dirname "$(readlink -f "$0")")/.."
+cd "$(dirname "$(dirname "$(readlink -f "$0")")")"

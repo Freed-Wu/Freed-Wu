@@ -1,5 +1,6 @@
 " exclude = due to set option=path
 setlocal isfname=@,48-57,/,.,-,_,+,,,#,$,%,~
+setlocal commentstring=\"\ %s
 
 let b:chalk_space_before = 1
 
