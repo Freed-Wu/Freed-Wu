@@ -314,11 +314,16 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('mox-mox/vim-localsearch', {
         \ 'hook_post_source': 'call init#localsearch#post_source()',
         \ })
+  " https://github.com/nvim-neorocks/rocks.nvim/issues/111#issuecomment-2174528955
   call dein#add('glacambre/firenvim', {
         \ 'if': exists('##UIEnter')
         \ && $PREFIX !=# '/data/data/com.termux/files/usr',
         \ 'hook_post_update': 'call firenvim#install(0)',
         \ 'hook_source': 'call init#firenvim#source()',
+        \ })
+  " https://github.com/nvim-treesitter/nvim-treesitter/discussions/4307
+  call dein#add('nvim-treesitter/nvim-treesitter', {
+        \ 'if': has('nvim'),
         \ })
   call dein#add('Freed-Wu/vim-fencview', {
         \ 'if': has('iconv'),
@@ -343,7 +348,7 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#xkbswitch#source()',
         \ })
   call dein#add('lilydjwg/fcitx.vim', {
-        \ 'if': executable('fcitx5-remote') && !has('nvim'),
+        \ 'if': executable('fcitx5-remote') && has('pythonx'),
         \ })
   " 1}}} IME "
 
