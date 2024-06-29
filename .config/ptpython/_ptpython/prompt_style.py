@@ -37,7 +37,7 @@ class PythonPrompt(IPythonPrompt):
             ("class:in", "In ["),
             (
                 "class:in.number",
-                "%s" % self.python_input.current_statement_index,
+                f"{self.python_input.current_statement_index}",
             ),
             ("class:in", "]: "),
         ]

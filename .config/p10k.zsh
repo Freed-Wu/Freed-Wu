@@ -1658,8 +1658,8 @@
   }
 
   function prompt_my_rime() {
-    if [[ -n $rime_schema_id ]]; then
-      p10k segment -bblack -fgreen -iㄓ -t$rime_schema_names[$rime_schema_ids[(I)$rime_schema_id]]
+    if [[ -n $rime_schema_id ]] && (( $#rime_schema_list )); then
+      p10k segment -bblack -fgreen -iㄓ -t$rime_schema_list[$rime_schema_id]
     fi
   }
 

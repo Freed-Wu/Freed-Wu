@@ -130,6 +130,7 @@
 !/.config/electron-flags.conf
 !/.config/black
 !/.config/pylintrc
+!/.config/fsh/
 !/.config/zathura/
 /.config/zathura/*
 !/.config/zathura/zathura*
