@@ -1,3 +1,5 @@
+setlocal commentstring=//\ %s
+
 call init#init#c#main()
 
 nnoremap <silent><buffer> <LocalLeader>e :<C-U>CocCommand clangd.switchSourceHeader<CR>

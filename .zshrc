@@ -83,8 +83,10 @@ fi
 autoload -Uz run-help
 autoload -Uz zcalc
 autoload -Uz zmv
-autoload -Uz compinit && compinit -D
-autoload -Uz zmathfunc && zmathfunc
+autoload -Uz compinit &&
+  compinit -D
+autoload -Uz zmathfunc &&
+  zmathfunc
 
 bindkey -e
 bindkey "\x1b[13;2u" accept-line
@@ -92,8 +94,8 @@ bindkey -Mvicmd "\x1b[13;2u" accept-line
 bindkey "\x1b[13;5u" accept-line
 bindkey -Mvicmd "\x1b[13;5u" accept-line
 bindkey ^Xh _complete_help
-autoload -U edit-command-line \
-  && bindkey '^X^E' edit-command-line
+autoload -U edit-command-line &&
+  bindkey '^X^E' edit-command-line
 bindkey ^U backward-kill-line
 bindkey ^Q vi-quoted-insert
 bindkey '^]' vi-find-next-char
@@ -101,23 +103,23 @@ bindkey '^[]' vi-find-prev-char
 bindkey '^[W' copy-region-as-kill
 bindkey '^[l' down-case-word
 # vi
-_complete_files () {
+complete-files () {
   _main_complete _files
 }
-zle -C complete-files expand-or-complete _complete_files
+zle -C complete-files expand-or-complete complete-files
 bindkey '^X^F' complete-files
 bindkey '^[' vi-cmd-mode
 bindkey '^[i' expand-or-complete-prefix
 bindkey -Mvicmd cc vi-change-whole-line
-autoload -Uz replace-string \
-  && zle -N replace-regex replace-string \
-  && bindkey '^^' replace-regex
-autoload -Uz narrow-to-region \
-  && zle -N narrow-to-region \
-  && bindkey -Mvicmd ' ' narrow-to-region
-autoload -Uz transpose-lines \
-  && zle -N transpose-lines \
-  && bindkey '^[T' transpose-lines
+autoload -Uz replace-string &&
+  zle -N replace-string &&
+  bindkey '^[-' replace-string
+autoload -Uz narrow-to-region &&
+  zle -N narrow-to-region &&
+  bindkey -Mvicmd ' ' narrow-to-region
+autoload -Uz transpose-lines &&
+  zle -N transpose-lines &&
+  bindkey '^[T' transpose-lines
 
 zstyle ':completion:*' list-separator ''
 zstyle ':completion:*' matcher-list 'm:{[:upper:][:lower:]-_}={[:lower:][:upper:]_-}'
@@ -333,10 +335,7 @@ zinit id-as depth'1' wait lucid \
   atload'bindkey "^[/" redo
   bindkey "^[y" yank-pop' \
   for zdharma-continuum/zsh-editing-workbench
-zinit id-as depth'1' wait lucid for zdharma-continuum/zui
-# https://github.com/zdharma-continuum/zsh-cmd-architect/pull/1
 zinit id-as depth'1' wait lucid for zdharma-continuum/zsh-cmd-architect
-# https://github.com/joshskidmore/zsh-fzf-history-search/pull/20
 ZSH_FZF_HISTORY_SEARCH_FZF_ARGS='+s +m -x -e --preview-window=hidden'
 zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
@@ -372,9 +371,10 @@ zinit id-as depth'1' wait lucid \
 # disable for android due to bug about build system
 zinit id-as depth'1' wait lucid \
   if'((($+commands[rime_deployer] || $+commands[nix]) && ! $+PREFIX))' \
-  atload'bindkey "^[^I" rime-get-context
+  atload'bindkey "^[^I" rime-complete
 bindkey "^[^N" rime-next-schema
-bindkey "^[^P" rime-previous-schema' \
+bindkey "^[^P" rime-previous-schema
+bindkey "^^" rime-ime' \
   for Freed-Wu/zsh-rime
 # 1}}} Function #
 

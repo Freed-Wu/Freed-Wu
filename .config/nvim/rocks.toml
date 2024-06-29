@@ -6,4 +6,3 @@
 nvim-treesitter = "scm"
 nvim-treesitter-textobjects = "scm"
 nvim-treesitter-context = "scm"
-"fcitx5-ui.nvim" = "scm"
