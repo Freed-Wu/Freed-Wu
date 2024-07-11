@@ -1,0 +1,4 @@
+#!/usr/bin/env -S make -f
+
+%:
+	dh $@

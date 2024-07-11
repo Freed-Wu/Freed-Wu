@@ -1,0 +1,4 @@
+DEBUILD_DPKG_BUILDPACKAGE_OPTS='-i -I -us -uc'
+DEBUILD_LINTIAN_OPTS='-i -I --show-overrides'
+# debsign uses sh not bash
+DEBSIGN_KEYID="$(gpg --list-secret-keys | sed -n '4s/^\s*//p')"
