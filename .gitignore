@@ -55,6 +55,7 @@
 !/.x11vncrc
 # https://github.com/priv-kweihmann/oelint-adv/issues/527
 !/.oelint.cfg
+!/.devscripts
 
 # dotfiles
 !/.dosbox/
@@ -289,9 +290,11 @@
 !/.config/ibus/
 /.config/ibus/*
 !/.config/ibus/rime/
-/.config/ibus/rime/*
+/.config/ibus/rime/*.yaml
 !/.config/ibus/rime/*.custom.yaml
-!/.config/ibus/rime/my/
+/.config/ibus/rime/build/
+/.config/ibus/rime/*.userdb/
+/.config/ibus/rime/sync/
 # copied from handset.yaml or tablet.yaml
 /.config/ibus/rime/my/chasis-type.yaml
 !/.config/fontconfig/
