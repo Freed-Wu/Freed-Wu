@@ -9,6 +9,7 @@ function! init#init#pandoc#main() abort
 
   let b:browser_search_default_engine = 'google'
 
+  nnoremap <buffer> gK K
   nmap <buffer> <LocalLeader>lv <Plug>MarkdownPreviewToggle
   " nnoremap <buffer> <LocalLeader>lv :<C-U>CocCommand markdown-preview-enhanced.openPreview<CR>
   " nnoremap <buffer> <LocalLeader>li :<C-U>CocCommand markdown-preview-enhanced.openImageHelper<CR>

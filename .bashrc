@@ -42,19 +42,6 @@ source_file() {
 source_file blesh/ble.sh "$@"
 source_file zinit/plugins/zsh-colorize-functions/zsh-colorize-functions.plugin.zsh
 
-if [[ ${BLE_VERSION-} ]]; then
-	# https://github.com/akinomyoga/ble.sh/discussions/463
-	ble-face -s auto_complete fg=8
-	ble-face -s syntax_comment fg=63
-
-	bleopt import_path="${XDG_DATA_HOME:-$HOME/.local/share}/blesh/local:${PREFIX:-/usr}/share/blesh/contrib:/run/current-system/sw/share/blesh/contrib:$HOME/.local/state/nix/profile/share/blesh/contrib"
-	ble-import -d integration/fzf-completion
-	ble-import -d integration/fzf-key-bindings
-else
-	source_file fzf/completion.bash
-	source_file fzf/key-bindings.bash
-fi
-
 source_file bash-prompt/prompt.sh
 if [[ "$(type -t prompt_get_ps1)" == function ]]; then
 	PS1=$(prompt_get_ps1)
@@ -73,6 +60,23 @@ if [[ "$(type -t has_cmd)" != function ]]; then
 fi
 if [[ -e "$HOME/.zlogin" ]]; then
 	. "$HOME/.zlogin"
+fi
+
+if [[ ${BLE_VERSION-} ]]; then
+	# https://github.com/akinomyoga/ble.sh/discussions/463
+	ble-face -s auto_complete fg=8
+	ble-face -s syntax_comment fg=63
+
+	bleopt import_path="${XDG_DATA_HOME:-$HOME/.local/share}/blesh/local:${PREFIX:-/usr}/share/blesh/contrib:/run/current-system/sw/share/blesh/contrib:$HOME/.local/state/nix/profile/share/blesh/contrib"
+	if has_cmd fzf; then
+		ble-import -d integration/fzf-completion
+		ble-import -d integration/fzf-key-bindings
+	fi
+else
+	if has_cmd fzf; then
+		source_file fzf/completion.bash
+		source_file fzf/key-bindings.bash
+	fi
 fi
 
 source_file zinit/plugins/.pass/pass.sh

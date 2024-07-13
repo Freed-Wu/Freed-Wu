@@ -224,5 +224,6 @@
   "translator.engines": ["google"],
   "translator.proxy": "socks://127.0.0.1:1080",
   "yaml.format.singleQuote": true,
+  "yank.highlight.enable": false,
   "zi.hover": false
 }

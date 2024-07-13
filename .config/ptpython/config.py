@@ -8,9 +8,12 @@ import os
 import re
 import sys
 from contextlib import suppress
+from typing import Any
 
+from prompt_toolkit.application import Application
 from prompt_toolkit.application.current import get_app
 from prompt_toolkit.clipboard import ClipboardData
+from prompt_toolkit.cursor_shapes import CursorShape, ModalCursorShapeConfig
 from prompt_toolkit.enums import EditingMode
 from prompt_toolkit.filters import (
     Condition,
@@ -47,15 +50,37 @@ sys.path.insert(
         get_config_and_history_file(create_parser().parse_args([]))[0]
     ),
 )
-from _ptpython.cursor import (  # type: ignore
-    change_input_mode,  # noqa: E402, F401
-)
 from _ptpython.prompt_style import PythonPrompt  # noqa: E402  # type: ignore
 from _ptpython.utils.insert import insert  # noqa: E402  # type: ignore
 
 sys.path.pop(0)
-# https://github.com/TylerYep/torchinfo/issues/216
+# https://github.com/prompt-toolkit/ptpython/pull/593
 sys.ps1 = ">>> "
+
+
+# https://github.com/prompt-toolkit/python-prompt-toolkit/pull/1900
+def get_cursor_shape(self, application: "Application[Any]") -> CursorShape:
+    if application.editing_mode == EditingMode.VI:
+        if application.vi_state.input_mode in {
+            InputMode.INSERT,
+            InputMode.INSERT_MULTIPLE,
+        }:
+            return CursorShape.BEAM
+        if application.vi_state.input_mode in {
+            InputMode.NAVIGATION,
+        }:
+            return CursorShape.BLOCK
+        if application.vi_state.input_mode in {
+            InputMode.REPLACE,
+            InputMode.REPLACE_SINGLE,
+        }:
+            return CursorShape.UNDERLINE
+
+    # Default
+    return CursorShape.BEAM
+
+
+ModalCursorShapeConfig.get_cursor_shape = get_cursor_shape
 
 
 def configure(repl: PythonRepl) -> None:
@@ -119,7 +144,7 @@ def configure(repl: PythonRepl) -> None:
 
     # Vi mode.
     repl.vi_mode = False
-    repl.cursor_shape_config = "Beam"
+    repl.cursor_shape_config = "Modal (vi)"
 
     # Paste mode. (When True, don't insert whitespace after new line.)
     repl.paste_mode = False

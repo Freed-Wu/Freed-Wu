@@ -1,0 +1,5 @@
+[
+  ["&Echo", "call init#init#lua#echo('cWORD')"],
+  ["--"],
+  ["E&xecute", "call init#init#lua#execute('.')"]
+]
