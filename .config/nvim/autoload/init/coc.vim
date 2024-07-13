@@ -26,7 +26,7 @@ function! init#coc#source() abort
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji',
         \ 'coc-emoji-shortcodes', 'coc-syntax',
         \
-        \ 'coc-copilot', 'coc-leetcode', 'coc-rime',
+        \ 'coc-copilot', 'coc-leetcode',
         \
         \ '@yaegassy/coc-marksman', 'coc-webview',
         \ 'coc-markdown-preview-enhanced', 'coc-esbonio', 'coc-graphviz',
@@ -170,8 +170,7 @@ function! init#coc#imap() abort
   inoremap <silent><expr> <C-M-p> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
   inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"
-  inoremap <silent><expr> <C-\> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
-  inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR>
+  inoremap <silent><expr> <C-Z> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
 endfunction
 
 augroup init#coc

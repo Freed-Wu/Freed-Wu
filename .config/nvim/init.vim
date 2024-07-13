@@ -31,7 +31,7 @@ if !has('nvim')
 endif
 if has('gui_running')
   set guioptions=gtaAPd
-  if has('win32')
+  if has('win32') && !has('nvim')
     simalt ~x
   endif
 endif
@@ -175,9 +175,6 @@ augroup init
   endif
 augroup END
 
-if !has('nvim')
-  nnoremap <silent> zS :<C-U>Inspect<CR>
-endif
 cnoremap <C-G> <C-U><C-H>
 
 snoremap <C-B> <Left>
@@ -264,16 +261,6 @@ if !has('patch-8.2.000') && !has('nvim-0.8.0')
   finish
 endif
 set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
-if has('nvim') && executable('nvim-notify') || executable('notify-send')
-      \ || executable('osascript') || executable('terminal-notifier')
-  let g:dein#enable_notification = 1
-endif
-if executable('aria2c')
-  let g:dein#download_command = 'aria2c'
-endif
-let g:dein#notification_icon =
-      \ '/usr/share/icons/hicolor/128x128/apps/nvim.png'
-let g:dein#types#git#clone_depth = 1
 if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
   if executable('git')
     echo system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim '
@@ -283,6 +270,22 @@ if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/au
     finish
   endif
 endif
+let g:dein#enable_notification = 1
+if executable('aria2c')
+  let g:dein#download_command = 'aria2c'
+endif
+let s:prefix = getenv('PREFIX')
+if s:prefix == v:null
+  let s:prefix = '/usr'
+endif
+for s:prefix in [s:prefix, '/usr/local', '/run/current-system/sw']
+  let s:path = s:prefix . '/share/icons/hicolor/128x128/apps/nvim.png'
+  if filereadable(s:path)
+    let g:dein#notification_icon = s:path
+    break
+  endif
+endfor
+let g:dein#types#git#clone_depth = 1
 if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#begin(expand('$XDG_DATA_HOME/nvim'))
   " 1}}} PluginPrefix "
@@ -308,22 +311,15 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('tpope/vim-sensible')
   call dein#add('tpope/vim-sleuth')
   call dein#add('farmergreg/vim-lastplace')
-  call dein#add('editorconfig/editorconfig-vim', {
-        \ 'if': !has('nvim'),
-        \ })
   call dein#add('mox-mox/vim-localsearch', {
         \ 'hook_post_source': 'call init#localsearch#post_source()',
         \ })
-  " https://github.com/nvim-neorocks/rocks.nvim/issues/111#issuecomment-2174528955
+  " https://github.com/nvim-neorocks/rocks.nvim/issues/111#issuecomment-2243395949
   call dein#add('glacambre/firenvim', {
         \ 'if': exists('##UIEnter')
         \ && $PREFIX !=# '/data/data/com.termux/files/usr',
         \ 'hook_post_update': 'call firenvim#install(0)',
-        \ 'hook_source': 'call init#firenvim#source()',
-        \ })
-  " https://github.com/nvim-treesitter/nvim-treesitter/discussions/4307
-  call dein#add('nvim-treesitter/nvim-treesitter', {
-        \ 'if': has('nvim'),
+        \ 'hook_source': 'lua require"plugins.firenvim"',
         \ })
   call dein#add('Freed-Wu/vim-fencview', {
         \ 'if': has('iconv'),
@@ -341,29 +337,11 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ })
   " 1}}} Setting "
 
-  " IME {{{1 "
-  " https://github.com/grwlf/xkb-switch/issues/60
-  call dein#add('lyokha/vim-xkbswitch', {
-        \ 'if': executable('g3kb-switch') || executable('xkb-switch') ,
-        \ 'hook_source': 'call init#xkbswitch#source()',
-        \ })
-  call dein#add('lilydjwg/fcitx.vim', {
-        \ 'if': executable('fcitx5-remote') && has('pythonx'),
-        \ })
-  " 1}}} IME "
-
   " Log {{{1 "
-  " too slow, don't enable it on msys2
   call dein#add('wakatime/vim-wakatime', {
-        \ 'if': has('pythonx') && executable('wakatime-cli') && filereadable(
+        \ 'if': executable('wakatime-cli') && filereadable(
         \ expand('$HOME/.local/share/zinit/plugins/.pass/wakatime.sh')
         \ ),
-        \ })
-  call dein#add('https://gitlab.com/code-stats/code-stats-vim', {
-        \ 'if': has('pythonx') && filereadable(
-        \ expand('$HOME/.local/share/zinit/plugins/.pass/codestats.txt')
-        \ ),
-        \ 'hook_source': 'call init#code_stats#source()',
         \ })
   " 1}}} Log "
 
@@ -462,8 +440,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('dbmrq/vim-redacted', {
         \ 'hook_source': 'call init#redacted#source()',
         \ })
-  " https://github.com/neoclide/coc-yank/issues/36
-  call dein#add('machakann/vim-highlightedyank')
   " 2}}} Highlight "
 
   " Fold {{{2 "

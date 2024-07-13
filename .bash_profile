@@ -40,6 +40,8 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 	eval NIX_LD="$(~/script/get-NIX_LD.nix)"
 	export NIX_LD_LIBRARY_PATH
 	eval NIX_LD_LIBRARY_PATH="$(~/script/get-NIX_LD_LIBRARY_PATH.nix)"
+	export GI_TYPELIB_PATH
+	eval GI_TYPELIB_PATH="$(~/script/get-GI_TYPELIB_PATH.nix)"
 	if has_cmd python; then
 		PYTHONPATH="$HOME/.local/lib/python$(~/script/get-version.py)/site-packages"
 		export PYTHONPATH
@@ -205,6 +207,7 @@ if has_cmd node-prototype-repl; then
 	export NODE_REPL_EXTERNAL_MODULE
 fi
 # old bash doesn't support tmux-256color
-if [[ ${BASH_VERSION//.*/} -le 5 ]]; then
+if [[ -z $ZSH_VERSION && ${BASH_VERSION//.*/} -le 5 ]]; then
 	export TERM=xterm-256color
+	. ~/.bashrc
 fi

@@ -1,17 +1,26 @@
 ---luarocks config.
 
--- luacheck: ignore 111 113
+-- luacheck: ignore 111 113 211
 ---@diagnostic disable: lowercase-global
-home = home or ""
+if vim then
+    local rocks_trees
+    local rocks_servers
+    local external_deps_dirs
+    local cmake_generator
+    local variables
+end
+local home = home or ""
 rocks_trees = {
     { name = "user", root = home .. "/.local" }
 }
 rocks_servers = {
     "https://nvim-neorocks.github.io/rocks-binaries",
     "https://luarocks.cn",
-    "https://luarocks.org"
+    "https://luarocks.cn/dev",
+    "https://luarocks.org",
+    "https://luarocks.org/dev"
 }
-os_getenv = os_getenv or function(varname)
+local os_getenv = os_getenv or function(varname)
     return require "os".getenv(varname)
 end
 if os_getenv("NIXPKGS_CONFIG") == "/etc/nix/nixpkgs-config.nix" then

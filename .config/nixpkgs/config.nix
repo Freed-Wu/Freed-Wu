@@ -18,5 +18,9 @@
     nix-index-database = (
       builtins.getFlake "github:nix-community/nix-index-database"
     ).packages.${builtins.currentSystem}.default;
+    # https://github.com/xddxdd/nur-packages/issues/49
+    wechat-uos = (
+      builtins.getFlake "github:xddxdd/nur-packages"
+    ).packages.${builtins.currentSystem}.wechat-uos-without-sandbox;
   };
 }

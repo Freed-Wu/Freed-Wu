@@ -53,6 +53,7 @@ function! init#startify#source() abort
   endfor
   let g:startify_bookmarks = [
         \ {g:maplocalleader . 'v': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/init.vim'), ':~')},
+        \ {g:maplocalleader . 'l': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/lua/init.lua'), ':~')},
         \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/autoload/init/coc.vim'), ':~')},
         \ {g:maplocalleader . 'j': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/coc-settings.json'), ':~')},
         \ {g:maplocalleader . 'r': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/rocks.toml'), ':~')},

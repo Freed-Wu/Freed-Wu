@@ -29,7 +29,8 @@ return {
     keys = {
         -- disable them to avoid pressing `<prefix>, -` in tmux
         -- use `<C-S-->` to replace
-        { key = '-',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
+        { key = '-',         mods = 'CTRL',       action = act.SendString '\x1f' },
+        { key = '/',         mods = 'CTRL',       action = act.SendString '\x1f' },
         { key = '=',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
         { key = '0',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
         { key = 'Enter',     mods = 'ALT',        action = 'DisableDefaultAssignment' },

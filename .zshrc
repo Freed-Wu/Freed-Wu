@@ -150,6 +150,10 @@ if (( $+HOMEBREW_PREFIX )); then
 elif (( $+MSYSTEM_PREFIX )); then
   fpath+=$MSYSTEM_PREFIX/share/zsh/site-functions
 fi
+
+if (( $+aliases[mv] == 0 )); then
+  . ~/.zlogin
+fi
 # 1}}} Default #
 
 # Plugin {{{1 #

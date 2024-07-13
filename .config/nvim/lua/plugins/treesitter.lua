@@ -31,8 +31,7 @@ require "nvim-treesitter.configs".setup {
 }
 
 -- luacheck: ignore 111 112 113
----@diagnostic disable: lowercase-global
-vim = vim or {}
+---@diagnostic disable: undefined-global
 if vim.treesitter.language.register then
     -- https://github.com/nvim-treesitter/nvim-treesitter/pull/6096/
     vim.treesitter.language.register("comment", "text")
