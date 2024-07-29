@@ -47,7 +47,7 @@
 !/.replyrc
 !/.indentconfig.yaml
 # https://bugs.chromium.org/p/gerrit/issues/detail?id=16717
-!/.gitconfig
+# !/.gitconfig
 !/.tclshrc
 !/.wishrc
 !/.minirc.dfl

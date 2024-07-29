@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 local hostname = wezterm.hostname()
 local font_size
-if hostname == 'desktop' then -- 2560x2880
+if hostname == 'desktop' then    -- 2560x2880
     font_size = 16
 elseif hostname == 'laptop' then -- 3120x2080
     font_size = 12
@@ -18,8 +18,8 @@ wezterm.on('gui-startup', function(cmd)
 end)
 return {
     font = wezterm.font_with_fallback {
-        'JetBrainsMono NFM', -- 
-        'WenQuanYi Zen Hei Mono', -- ①
+        'JetBrainsMono NFM',       -- 
+        'WenQuanYi Zen Hei Mono',  -- ①
         'WenQuanYi Micro Hei Mono' -- ⇡
     },
     window_background_opacity = 0.75,
@@ -29,13 +29,17 @@ return {
     keys = {
         -- disable them to avoid pressing `<prefix>, -` in tmux
         -- use `<C-S-->` to replace
-        { key = '-',         mods = 'CTRL',       action = act.SendString '\x1f' },
-        { key = '/',         mods = 'CTRL',       action = act.SendString '\x1f' },
-        { key = '=',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
-        { key = '0',         mods = 'CTRL',       action = 'DisableDefaultAssignment' },
-        { key = 'Enter',     mods = 'ALT',        action = 'DisableDefaultAssignment' },
-        { key = 'Backspace', mods = 'SHIFT|CTRL', action = act.ToggleFullScreen },
-        { key = 'Enter',     mods = 'SHIFT',      action = act.SendString '\x1b[13;2u' },
-        { key = 'Enter',     mods = 'CTRL',       action = act.SendString '\x1b[13;5u' }
+        { key = '-',         mods = 'CTRL',           action = act.SendString '\x1f' },
+        { key = '/',         mods = 'CTRL',           action = act.SendString '\x1f' },
+        { key = '=',         mods = 'CTRL',           action = 'DisableDefaultAssignment' },
+        { key = '0',         mods = 'CTRL',           action = 'DisableDefaultAssignment' },
+        { key = 'Enter',     mods = 'ALT',            action = 'DisableDefaultAssignment' },
+        { key = 'Backspace', mods = 'SHIFT|CTRL',     action = act.ToggleFullScreen },
+        { key = 'Enter',     mods = 'SHIFT',          action = act.SendString '\x1b[13;2u' },
+        { key = 'Enter',     mods = 'SHIFT|ALT',      action = act.SendString '\x1b[13;3u' },
+        { key = 'Enter',     mods = 'CTRL',           action = act.SendString '\x1b[13;5u' },
+        { key = 'Enter',     mods = 'SHIFT|CTRL',     action = act.SendString '\x1b[13;6u' },
+        { key = 'Enter',     mods = 'ALT|CTRL',       action = act.SendString '\x1b[13;7u' },
+        { key = 'Enter',     mods = 'SHIFT|ALT|CTRL', action = act.SendString '\x1b[13;8u' }
     }
 }
