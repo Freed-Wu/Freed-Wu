@@ -1,5 +1,5 @@
-r"""Test {{ split(expand('%:t:r'), '_')[1] }}."""
-from {{ substitute(expand('%:p:h:h:t'), '-', '_', 'g') }}.{{ split(expand('%:t:r'), '_')[1] }} import {% here %}
+r"""Test {{ join(split(expand('%:t:r'), '_')[1:], ' ') }}."""
+from {{ substitute(expand('%:p:h:h:t'), '-', '_', 'g') }}.{{ join(split(expand('%:t:r'), '_')[1:], '_') }} import {% here %}
 
 
 class Test:

@@ -22,5 +22,7 @@
     wechat-uos = (
       builtins.getFlake "github:xddxdd/nur-packages"
     ).packages.${builtins.currentSystem}.wechat-uos-without-sandbox;
+    # https://github.com/rime/home/discussions/1206#discussioncomment-10092637
+    librime = (pkgs.librime.override { plugins = [ ]; });
   };
 }

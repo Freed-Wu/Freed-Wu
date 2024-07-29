@@ -1670,7 +1670,7 @@
   }
 
   # https://github.com/romkatv/powerlevel10k/issues/2096
-  if [[ $(ps -p1 -ocmd=) == '/sbin/docker-init '* ]]; then
+  if [[ ! $+MINGW_PREFIX && $(ps -p1 -ocmd=) == '/sbin/docker-init '* ]]; then
     typeset -g my_init_start_time=${$(ps -p1 -ostart=)## *}
     if [[ $my_init_start_time != *:*:* ]]; then
       my_init_start_time=

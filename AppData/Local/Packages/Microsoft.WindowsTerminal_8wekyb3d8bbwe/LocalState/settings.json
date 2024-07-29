@@ -1,14 +1,14 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
             "command": "paste",
             "keys": "ctrl+v"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "copy",
                 "singleLine": false
@@ -20,7 +20,7 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -31,19 +31,25 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{17da3cac-b318-431e-8a3e-7fcdefe6d114}",
+    "defaultProfile": "{fba69337-27c0-40ce-937a-14a2fa4e7f94}",
     "firstWindowPreference": "persistedWindowLayout",
     "launchMode": "fullscreen",
-    "profiles":
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
     {
-        "defaults":
+        "defaults": 
         {
             "closeOnExit": "always",
             "colorScheme": "Solarized Dark",
             "experimental.retroTerminalEffect": false,
-            "font":
+            "font": 
             {
-                "face": "JetBrainsMono NF"
+                "face": "JetBrainsMono Nerd Font Mono"
             },
             "opacity": 50,
             "padding": "0",
@@ -51,11 +57,11 @@
             "startingDirectory": "%USERPROFILE%",
             "useAcrylic": true
         },
-        "list":
+        "list": 
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                "font":
+                "font": 
                 {
                     "face": "JetBrainsMono NF"
                 },
@@ -67,7 +73,7 @@
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
-                "font":
+                "font": 
                 {
                     "face": "JetBrainsMono NF"
                 },
@@ -76,7 +82,7 @@
                 "name": "Command Prompt"
             },
             {
-                "font":
+                "font": 
                 {
                     "face": "JetBrainsMono NF"
                 },
@@ -106,10 +112,37 @@
                 "icon": "C:/msys64/msys2.ico",
                 "name": "MSYS / MSYS2",
                 "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -clang64",
+                "experimental.retroTerminalEffect": false,
+                "guid": "{be71e7f2-5458-4a4a-a1e6-d948cdf651d8}",
+                "hidden": false,
+                "icon": "C:/msys64/clang64.ico",
+                "name": "CLANG64 / MSYS2",
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -clang32",
+                "experimental.retroTerminalEffect": false,
+                "guid": "{33a32213-4259-4ad3-9478-1f95249c87d1}",
+                "hidden": false,
+                "icon": "C:/msys64/clang32.ico",
+                "name": "CLANG32 / MSYS2",
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64",
+                "experimental.retroTerminalEffect": false,
+                "guid": "{fba69337-27c0-40ce-937a-14a2fa4e7f94}",
+                "hidden": false,
+                "icon": "C:/msys64/ucrt64.ico",
+                "name": "UCRT64 / MSYS2",
+                "startingDirectory": "%USERPROFILE%"
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#0C0C0C",
@@ -320,5 +353,6 @@
         }
     ],
     "startOnUserLogin": true,
+    "themes": [],
     "windowingBehavior": "useAnyExisting"
 }
