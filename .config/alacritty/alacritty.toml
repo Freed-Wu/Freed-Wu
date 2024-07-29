@@ -61,9 +61,29 @@ key = "Return"
 mods = "Shift"
 
 [[keyboard.bindings]]
+chars = "\u001B[13;4u"
+key = "Return"
+mods = "Shift|Alt"
+
+[[keyboard.bindings]]
 chars = "\u001B[13;5u"
 key = "Return"
 mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[13;6u"
+key = "Return"
+mods = "Shift|Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[13;7u"
+key = "Return"
+mods = "Alt|Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[13;8u"
+key = "Return"
+mods = "Shift|Alt|Control"
 
 [selection]
 save_to_clipboard = true
