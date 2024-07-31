@@ -46,7 +46,9 @@ from ptpython.style import default_ui_style
 
 sys.path.insert(
     0,
-    os.path.dirname(get_config_and_history_file(create_parser().parse_args([]))[0]),
+    os.path.dirname(
+        get_config_and_history_file(create_parser().parse_args([]))[0]
+    ),
 )
 from _ptpython.prompt_style import PythonPrompt  # noqa: E402  # type: ignore
 from _ptpython.utils.insert import insert  # noqa: E402  # type: ignore
@@ -343,7 +345,9 @@ def configure(repl: PythonRepl) -> None:
         event.app.vi_state.input_mode = InputMode.INSERT
         buffer = event.current_buffer
 
-        deleted = buffer.delete(count=buffer.document.get_end_of_line_position())
+        deleted = buffer.delete(
+            count=buffer.document.get_end_of_line_position()
+        )
         event.app.clipboard.set_text(deleted)
 
     @repl.add_key_binding("c", "c", filter=ViNavigationMode())
@@ -685,7 +689,10 @@ def configure(repl: PythonRepl) -> None:
         :rtype: None
         """
         b = event.cli.current_buffer
-        if b.document.char_before_cursor == " " or b.document.cursor_position_col == 0:
+        if (
+            b.document.char_before_cursor == " "
+            or b.document.cursor_position_col == 0
+        ):
             b.insert_text("@")
         else:
             b.insert_text(" @ ")
@@ -745,7 +752,10 @@ def configure(repl: PythonRepl) -> None:
         :rtype: None
         """
         b = event.cli.current_buffer
-        if b.document.char_before_cursor == " " or b.document.cursor_position_col == 0:
+        if (
+            b.document.char_before_cursor == " "
+            or b.document.cursor_position_col == 0
+        ):
             b.insert_text("%")
         else:
             b.insert_text(" % ")
@@ -1279,7 +1289,9 @@ def configure(repl: PythonRepl) -> None:
             and app.current_buffer.document.is_cursor_at_the_end
         )
 
-    @repl.add_key_binding("right", filter=suggestion_available & ViInsertMode())
+    @repl.add_key_binding(
+        "right", filter=suggestion_available & ViInsertMode()
+    )
     @repl.add_key_binding("c-f", filter=suggestion_available & ViInsertMode())
     @repl.add_key_binding("right", filter=suggestion_available & emacs_mode)
     @repl.add_key_binding("c-f", filter=suggestion_available & emacs_mode)
@@ -1294,9 +1306,13 @@ def configure(repl: PythonRepl) -> None:
         suggestion = b.suggestion
 
         if suggestion and event.arg > 0:
-            b.insert_text(suggestion.text[0 : min(event.arg, len(suggestion.text))])
+            b.insert_text(
+                suggestion.text[0 : min(event.arg, len(suggestion.text))]
+            )
 
-    @repl.add_key_binding("c-]", Keys.Any, filter=suggestion_available & emacs_mode)
+    @repl.add_key_binding(
+        "c-]", Keys.Any, filter=suggestion_available & emacs_mode
+    )
     def _(event: "KeyPressEvent") -> None:
         """.
 
