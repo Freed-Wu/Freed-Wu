@@ -11,6 +11,11 @@ nvim-treesitter-context = "scm"
 
 "code-stats.nvim" = "scm"
 
+"cppinsights.nvim" = "scm"
+"tellenc.nvim" = "scm"
+firenvim = "scm"
+"fugit2.nvim" = "scm"
+
 tree-sitter-ada = "scm"
 tree-sitter-agda = "scm"
 tree-sitter-angular = "scm"

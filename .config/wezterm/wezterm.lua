@@ -17,6 +17,7 @@ wezterm.on('gui-startup', function(cmd)
     window:gui_window():toggle_fullscreen()
 end)
 return {
+    enable_kitty_keyboard = true,
     font = wezterm.font_with_fallback {
         'JetBrainsMono NFM',       -- 
         'WenQuanYi Zen Hei Mono',  -- ①

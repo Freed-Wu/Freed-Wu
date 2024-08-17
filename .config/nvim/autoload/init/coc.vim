@@ -31,7 +31,7 @@ function! init#coc#source() abort
         \ '@yaegassy/coc-marksman', 'coc-webview',
         \ 'coc-markdown-preview-enhanced', 'coc-esbonio', 'coc-graphviz',
         \ 'coc-texlab', 'coc-bibtex', 'coc-cmake', 'coc-mlir', 'coc-nix',
-        \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-jq',
+        \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-jq', 'coc-awk',
         \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css', 'coc-typst',
         \ 'coc-docker', 'coc-sql', 'coc-db', 'coc-bitbake', 'coc-meson',
         \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-eslint',

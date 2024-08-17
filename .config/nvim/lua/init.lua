@@ -27,6 +27,9 @@ if vim.fn.filereadable("/run/current-system/nixos-version") == 1 then
         .. ";" .. "/run/current-system/sw/lib/lua/" .. version .. "/?." .. ext
 end
 
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
 local augroup_id = vim.api.nvim_create_augroup("init", { clear = false })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup_id,
@@ -36,7 +39,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 do
-    if vim.fn.has('nvim-0.10.0') == 0 then
+    -- https://github.com/neovim/neovim/issues/30212
+    if vim.fn.has('nvim-0.10.0') == 0 or vim.fn.has('win32') == 1 then
         return
     end
     -- ~/.config/luarocks/config-5.1.lua

@@ -4,7 +4,10 @@
     "actions": 
     [
         {
-            "command": "paste",
+            "command": "paste"
+        },
+        {
+            "command": "unbound",
             "keys": "ctrl+v"
         },
         {
@@ -49,7 +52,8 @@
             "experimental.retroTerminalEffect": false,
             "font": 
             {
-                "face": "JetBrainsMono Nerd Font Mono"
+                "face": "JetBrainsMono Nerd Font Mono",
+                "size": 12.0
             },
             "opacity": 50,
             "padding": "0",

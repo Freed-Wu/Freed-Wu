@@ -52,11 +52,11 @@ function! init#startify#source() abort
     endif
   endfor
   let g:startify_bookmarks = [
-        \ {g:maplocalleader . 'v': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/init.vim'), ':~')},
-        \ {g:maplocalleader . 'l': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/lua/init.lua'), ':~')},
-        \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/autoload/init/coc.vim'), ':~')},
-        \ {g:maplocalleader . 'j': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/coc-settings.json'), ':~')},
-        \ {g:maplocalleader . 'r': fnamemodify(expand('$XDG_CONFIG_HOME/nvim/rocks.toml'), ':~')},
+        \ {g:maplocalleader . 'v': fnamemodify(expand('$XDG_CONFIG_NVIM/init.vim'), ':~')},
+        \ {g:maplocalleader . 'l': fnamemodify(expand('$XDG_CONFIG_NVIM/lua/init.lua'), ':~')},
+        \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_NVIM/autoload/init/coc.vim'), ':~')},
+        \ {g:maplocalleader . 'j': fnamemodify(expand('$XDG_CONFIG_NVIM/coc-settings.json'), ':~')},
+        \ {g:maplocalleader . 'r': fnamemodify(expand('$XDG_CONFIG_NVIM/rocks.toml'), ':~')},
         \ {g:maplocalleader . 's': '~/.zshrc'},
         \ {g:maplocalleader . 'z': '~/.zprofile'},
         \ {g:maplocalleader . 'x': '~/.xprofile'},
@@ -81,8 +81,14 @@ function! init#startify#source() abort
         \ 'header': ['󰍎 Local Histories'],
         \ 'indices': map(range(1, 9) + [0], {_, v -> '.' . v}),
         \ },
-        \ {'type': function('s:gitModified'),  'header': ['! Git Modified']},
-        \ {'type': function('s:gitUntracked'), 'header': ['? Git Untracked']},
+        \ ]
+  if !has('win32')
+    let g:startify_lists += [
+          \ {'type': function('s:gitModified'),  'header': ['! Git Modified']},
+          \ {'type': function('s:gitUntracked'), 'header': ['? Git Untracked']},
+          \ ]
+  endif
+  let g:startify_lists += [
         \ {'type': 'commands', 'header': [' Commands']},
         \ {'type': 'bookmarks', 'header': ['󰍑 Bookmarks']},
         \ ]
