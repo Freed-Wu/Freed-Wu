@@ -1,4 +1,4 @@
-setlocal path=.,$XDG_DATA_HOME/nvim/repos/github.com/honza/vim-snippets/UltiSnips,$XDG_DATA_HOME/nvim/repos/github.com/honza/vim-snippets/snippets
+setlocal path=.,$XDG_DATA_NVIM/repos/github.com/honza/vim-snippets/UltiSnips,$XDG_DATA_NVIM/repos/github.com/honza/vim-snippets/snippets
 setlocal includeexpr=substitute(v:fname,'$','.snippets','g')
 setlocal foldtext=CustomFoldText('\ ')
 nnoremap <silent><buffer> <C-W>d $:sfind %:p:h/<cword>.snippets<CR>

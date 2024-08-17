@@ -16,6 +16,6 @@ endfunction
 
 augroup init#fern
   autocmd!
-  " source ftplugin secondly to ensure $XDG_CONFIG_HOME/nvim is in runtimepath
+  " source ftplugin secondly to ensure $XDG_CONFIG_NVIM is in runtimepath
   autocmd VimEnter fern://* set filetype=fern
 augroup END

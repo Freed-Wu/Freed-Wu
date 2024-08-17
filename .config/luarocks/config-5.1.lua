@@ -9,7 +9,10 @@ if vim then
     local cmake_generator
     local variables
 end
-local home = home or ""
+local os_getenv = os_getenv or function(varname)
+    return require "os".getenv(varname)
+end
+local home = home or os_getenv("HOME")
 rocks_trees = {
     { name = "user", root = home .. "/.local" }
 }
@@ -20,9 +23,6 @@ rocks_servers = {
     "https://luarocks.org",
     "https://luarocks.org/dev"
 }
-local os_getenv = os_getenv or function(varname)
-    return require "os".getenv(varname)
-end
 if os_getenv("NIXPKGS_CONFIG") == "/etc/nix/nixpkgs-config.nix" then
     external_deps_dirs = { "/run/current-system/sw", home .. "/.local/state/nix/profile" }
 else

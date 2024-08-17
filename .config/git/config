@@ -32,7 +32,7 @@
 	recurse = true
 [core]
 	symlink = true
-	quotepath = off
+	quotepath = false
 [pager]
 	tag = sort -V
 	format-patch = cat

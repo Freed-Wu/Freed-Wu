@@ -1,0 +1,8 @@
+/* config.h.  Generated from config.h.in by xmake.  */
+
+#ifndef CONFIG_H
+#define CONFIG_H 1
+
+{% here %}
+
+#endif /* config.h */

@@ -50,7 +50,7 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 	export PKG_CONFIG_PATH
 else
 	dir="/${MINGW_ARCH:-mingw64}/bin"
-	if [[ $OSTYPE != msys2 && -d $dir ]]; then
+	if [[ $OSTYPE != msys && -d $dir ]]; then
 		export PATH="$PATH${PATH:+:}$dir"
 	fi
 	dir=$HOME/.local/state/nix/profile/bin
@@ -79,8 +79,8 @@ export C6X_C_OPTION
 export LESS='-r -M --mouse -S -I'
 # interactively
 export FZF_HISTORY_DIR
-if [[ $OSTYPE == msys2 ]] || [[ $OSTYPE == cygwin ]]; then
-	FZF_HISTORY_DIR="$(cygpath -w "${XDG_DATA_HOME:-$HOME/.cache}"/fzf | sed 's=\\=\\\\=g')"
+if [[ $OSTYPE == msys ]] || [[ $OSTYPE == cygwin ]]; then
+	FZF_HISTORY_DIR="$(cygpath -w "${XDG_DATA_HOME:-$HOME/.local/share}"/fzf | sed 's=\\=\\\\=g')"
 else
 	FZF_HISTORY_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fzf"
 fi

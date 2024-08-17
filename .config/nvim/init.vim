@@ -2,26 +2,26 @@
 scriptencoding utf-8
 " compatibility for vim
 if exists('*stdpath')
-  let $XDG_CONFIG_HOME = fnamemodify(stdpath('config'), ':h')
-  let $XDG_DATA_HOME = fnamemodify(stdpath('data'), ':h')
-  if has('nvim-0.8.0')
-    let $XDG_STATE_HOME = fnamemodify(stdpath('state'), ':h')
-  else
-    let $XDG_STATE_HOME = $XDG_DATA_HOME
-  endif
-  let $XDG_CACHE_HOME = fnamemodify(stdpath('cache'), ':h')
+  let $XDG_CONFIG_NVIM = stdpath('config')
+  let $XDG_DATA_NVIM = stdpath('data')
+  let $XDG_STATE_NVIM = has('nvim-0.8.0') ? stdpath('state') : $XDG_DATA_NVIM
+  let $XDG_CACHE_NVIM = stdpath('cache')
 else
   let s:expand = {var, default -> var == expand(var) ? expand(default) : var}
-  let $XDG_CONFIG_HOME = s:expand('$XDG_CONFIG_HOME', '$HOME/.config')
-  let $XDG_DATA_HOME = s:expand('$XDG_DATA_HOME', '$HOME/.local/share')
-  let $XDG_STATE_HOME = s:expand('$XDG_STATE_HOME', '$HOME/.local/state')
-  let $XDG_CACHE_HOME = s:expand('$XDG_CACHE_HOME', '$HOME/.cache')
+  let $XDG_CONFIG_NVIM = s:expand('$XDG_CONFIG_HOME/nvim', '$HOME/.config/nvim')
+  let $XDG_DATA_NVIM = s:expand('$XDG_DATA_HOME/nvim', '$HOME/.local/share/nvim')
+  let $XDG_STATE_NVIM = s:expand('$XDG_STATE_HOME/nvim', '$HOME/.local/state/nvim')
+  let $XDG_CACHE_NVIM = s:expand('$XDG_CACHE_HOME/nvim', '$HOME/.cache/nvim')
 endif
+let $XDG_CONFIG_HOME = fnamemodify($XDG_CONFIG_NVIM, ':h')
+let $XDG_DATA_HOME = fnamemodify($XDG_DATA_NVIM, ':h')
+let $XDG_STATE_HOME = fnamemodify($XDG_STATE_NVIM, ':h')
+let $XDG_CACHE_HOME = fnamemodify($XDG_CACHE_NVIM, ':h')
 if !has('nvim')
   " vint: next-line -ProhibitSetNoCompatible
   set nocompatible
-  set undodir=$XDG_STATE_HOME/nvim/undo
-  set directory=$XDG_STATE_HOME/nvim/swap
+  set undodir=$XDG_STATE_NVIM/undo
+  set directory=$XDG_STATE_NVIM/swap
   if !isdirectory(&undodir)
     call mkdir(&undodir, 'p')
   endif
@@ -35,7 +35,7 @@ if has('gui_running')
     simalt ~x
   endif
 endif
-set spellfile=$XDG_STATE_HOME/nvim/spell/en.utf-8.add
+set spellfile=$XDG_STATE_NVIM/spell/en.utf-8.add
 " firenvim use guifont although has('gui_running') == 0
 set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h
 " set fontsize is smaller than terminal by 6
@@ -47,9 +47,10 @@ elseif hostname() ==# 'laptop'
 else
   let &guifont .= '6'
 endif
-set runtimepath=$VIMRUNTIME
 " keep compatibility with vim
-set runtimepath+=/usr/share/vim/vimfiles
+if has('unix')
+  set runtimepath+=/usr/share/vim/vimfiles
+endif
 set belloff=
 set modelines=2
 set fileencoding=utf-8
@@ -145,7 +146,7 @@ let g:readline_has_bash = 1
 let g:yaml_schema = 'pyyaml'
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
-let g:netrw_home = expand('$XDG_CACHE_HOME/nvim/netrw')
+let g:netrw_home = expand('$XDG_CACHE_NVIM/netrw')
 let g:netrw_altfile = 1
 let g:netrw_winsize = 30
 if has('unix')
@@ -260,13 +261,13 @@ onoremap zK zkzMzv
 if !has('patch-8.2.000') && !has('nvim-0.8.0')
   finish
 endif
-set runtimepath+=$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim
-if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
+set runtimepath+=$XDG_DATA_NVIM/repos/github.com/Shougo/dein.vim
+if !filereadable(expand('$XDG_DATA_NVIM/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
   if executable('git')
     echo system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim '
-          \ . '$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
+          \ . '$XDG_DATA_NVIM/repos/github.com/Shougo/dein.vim'))
   endif
-  if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
+  if !filereadable(expand('$XDG_DATA_NVIM/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
     finish
   endif
 endif
@@ -286,12 +287,12 @@ for s:prefix in [s:prefix, '/usr/local', '/run/current-system/sw']
   endif
 endfor
 let g:dein#types#git#clone_depth = 1
-if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
-  call dein#begin(expand('$XDG_DATA_HOME/nvim'))
+if dein#load_state(expand('$XDG_DATA_NVIM'))
+  call dein#begin(expand('$XDG_DATA_NVIM'))
   " 1}}} PluginPrefix "
 
   " Plugin {{{1 "
-  call dein#add(expand('$XDG_CONFIG_HOME/nvim'), {
+  call dein#add(expand('$XDG_CONFIG_NVIM'), {
         \ 'frozen': 1,
         \ 'merged': 0,
         \ 'if': filereadable(expand('<sfile>:p:h')
@@ -313,17 +314,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('farmergreg/vim-lastplace')
   call dein#add('mox-mox/vim-localsearch', {
         \ 'hook_post_source': 'call init#localsearch#post_source()',
-        \ })
-  " https://github.com/nvim-neorocks/rocks.nvim/issues/111#issuecomment-2243395949
-  call dein#add('glacambre/firenvim', {
-        \ 'if': exists('##UIEnter')
-        \ && $PREFIX !=# '/data/data/com.termux/files/usr',
-        \ 'hook_post_update': 'call firenvim#install(0)',
-        \ 'hook_source': 'lua require"plugins.firenvim"',
-        \ })
-  call dein#add('Freed-Wu/vim-fencview', {
-        \ 'if': has('iconv'),
-        \ 'hook_source': 'call init#fencview#source()',
         \ })
   call dein#add('yianwillis/vimcdoc')
   call dein#add('mhinz/vim-hugefile')
@@ -495,9 +485,6 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'hook_source': 'call init#markdown_preview#source()',
         \ 'on_ft': ['markdown', 'pandoc', 'rmd'],
         \ 'build': 'sh -c "cd app && npx --yes yarn install"'
-        \ })
-  call dein#add('Freed-Wu/cppinsights.vim', {
-        \ 'if': executable('insights'),
         \ })
   " 2}}} Ftplugin "
   " 1}}} Filetype "
@@ -822,13 +809,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
 
   " VCS {{{2 "
   call dein#add('rhysd/committia.vim', {
+        \ 'if': !has('win32'),
         \ 'hook_source': 'call init#committia#source()',
         \ })
-  call dein#add('lambdalisue/gina.vim', {
-        \ 'hook_source': 'call init#gina#source()',
-        \ 'hook_post_source': 'call init#gina#post_source()',
-        \ })
-  call dein#add('APZelos/blamer.nvim')
   " 2}}} VCS "
 
   " File {{{2 "
@@ -856,4 +839,4 @@ call dein#call_hook('post_source')
 if has('nvim')
   lua require"init"
 endif
-" ex: foldmethod=marker path=.,$XDG_DATA_HOME/nvim/repos/github.com,$XDG_DATA_HOME/nvim/repos
+" ex: foldmethod=marker path=.,$XDG_DATA_NVIM/repos/github.com,$XDG_DATA_NVIM/repos

@@ -82,7 +82,7 @@
 !/.vnc/xstartup
 !/.cargo/
 /.cargo/*
-!/.cargo/config
+!/.cargo/config.toml
 !/.parallel/
 /.parallel/*
 !/.parallel/config
@@ -314,6 +314,7 @@
 !/.config/cabal/
 /.config/cabal/*
 !/.config/cabal/config
+!/.config/zellij/
 
 # $XDG_DATA_HOME
 !/.local/
@@ -372,6 +373,7 @@
 !/AppData/Local/
 /AppData/Local/*
 !/AppData/Local/nvim
+!/AppData/Local/nvim-data
 !/AppData/Local/Packages/
 /AppData/Local/Packages/*
 !/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/

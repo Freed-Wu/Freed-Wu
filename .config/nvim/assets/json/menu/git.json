@@ -1,5 +1,6 @@
 [
-  ["&Git", "Gina status"],
-  ["&Add All", "Gina add -A"],
-  ["Add &.", "call init#gina#add()"]
+  ["Fu&git2", "Fugit2"],
+  ["Fugit2&Blame", "Fugit2Blame"],
+  ["&Add All", "silent !git add -A"],
+  ["Add &.", "silent !git add %"]
 ]

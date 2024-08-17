@@ -27,12 +27,21 @@ zinit id-as'.brew' depth'1' \
   if'[ -x /home/linuxbrew/.linuxbrew/bin/brew ]' \
   for zdharma-continuum/null
 
+if [[ $OSTYPE == linux-gnu ]] && (($+commands[zellij])) \
+  && (( ! ($+TMUX || $+ZELLIJ || $+SSH_TTY || $+HOMEBREW_DEBUG_INSTALL))); then
+  if [[ $KITTY_WINDOW_ID == 1 || $WEZTERM_PANE == 0 ]] || (($+ALACRITTY_WINDOW_ID)); then
+    exec zellij a -c 0
+  elif [[ $TERM == linux ]]; then
+    zellij a -c 0
+  fi
+fi
+
 # tmux firstly avoid load ~/.zshrc twice
 # exec tmux will met bug in android
 # tmux on android and windows is slow because it cannot run in background
 # don't run tmux on them
 if [[ $OSTYPE == linux-gnu ]] && (($+commands[tmux])) \
-  && (( ! ($+TMUX || $+SSH_TTY || $+HOMEBREW_DEBUG_INSTALL))); then
+  && (( ! ($+TMUX || $+ZELLIJ || $+SSH_TTY || $+HOMEBREW_DEBUG_INSTALL))); then
   if [[ $KITTY_WINDOW_ID == 1 || $WEZTERM_PANE == 0 ]] || (($+ALACRITTY_WINDOW_ID)); then
     exec tmux new -As0
   elif [[ $TERM == linux ]]; then
@@ -240,7 +249,9 @@ zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   for Freed-Wu/fzf-tab-source
 
-zinit id-as depth'1' wait lucid for petronny/pinyin-completion
+zinit id-as depth'1' wait lucid \
+  if'(($+commands[pypinyin]))' \
+  for petronny/pinyin-completion
 # 1}}} Complete #
 
 # Log {{{1 #

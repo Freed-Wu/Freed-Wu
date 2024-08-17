@@ -1,5 +1,5 @@
 setlocal foldlevel=1
-if expand('%:p') ==# expand('$XDG_CONFIG_HOME/nvim/coc-settings.json')
+if expand('%:p') ==# expand('$XDG_CONFIG_NVIM/coc-settings.json')
   setlocal keywordprg=:call\ init#init#coc#keywordprg(expand('<cWORD>')[:-2])
   setlocal path=~/.config/coc/extensions/node_modules
   setlocal includeexpr=init#init#coc#includeexpr()
