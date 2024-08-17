@@ -27,6 +27,9 @@ if vim.fn.filereadable("/run/current-system/nixos-version") == 1 then
         .. ";" .. "/run/current-system/sw/lib/lua/" .. version .. "/?." .. ext
 end
 
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
 local augroup_id = vim.api.nvim_create_augroup("init", { clear = false })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup_id,
