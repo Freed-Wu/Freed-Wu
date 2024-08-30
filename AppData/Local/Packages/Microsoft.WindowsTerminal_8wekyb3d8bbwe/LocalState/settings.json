@@ -1,14 +1,14 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
+    "actions":
     [
         {
             "command": "paste",
             "keys": "ctrl+v"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "copy",
                 "singleLine": false
@@ -20,7 +20,7 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -34,20 +34,20 @@
     "defaultProfile": "{fba69337-27c0-40ce-937a-14a2fa4e7f94}",
     "firstWindowPreference": "persistedWindowLayout",
     "launchMode": "fullscreen",
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
             "closeOnExit": "always",
             "colorScheme": "Solarized Dark",
             "experimental.retroTerminalEffect": false,
-            "font": 
+            "font":
             {
                 "face": "JetBrainsMono Nerd Font Mono"
             },
@@ -57,11 +57,11 @@
             "startingDirectory": "%USERPROFILE%",
             "useAcrylic": true
         },
-        "list": 
+        "list":
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                "font": 
+                "font":
                 {
                     "face": "JetBrainsMono NF"
                 },
@@ -73,7 +73,7 @@
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
-                "font": 
+                "font":
                 {
                     "face": "JetBrainsMono NF"
                 },
@@ -82,7 +82,7 @@
                 "name": "Command Prompt"
             },
             {
-                "font": 
+                "font":
                 {
                     "face": "JetBrainsMono NF"
                 },
@@ -142,7 +142,7 @@
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#0C0C0C",
