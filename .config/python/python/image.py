@@ -63,7 +63,14 @@ def tensors2numpy(inputs: "Tensor") -> "np.ndarray":
     from torchvision.utils import make_grid
 
     # float() avoid float16
-    img = make_grid(inputs.clip(0, 1)).permute(1, 2, 0).detach().cpu().float().numpy()
+    img = (
+        make_grid(inputs.clip(0, 1))
+        .permute(1, 2, 0)
+        .detach()
+        .cpu()
+        .float()
+        .numpy()
+    )
     return img
 
 
