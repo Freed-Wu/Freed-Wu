@@ -112,9 +112,7 @@ def calc_batch_size(
     return b, m_rest
 
 
-def plot(
-    inputs: "Tensor | np.ndarray | list[str] | str", show: bool = True
-) -> None:
+def plot(inputs: "Tensor | np.ndarray | list[str] | str", show: bool = True) -> None:
     r"""Plot tensors or array. Clip to $[0, 1]$ by default.
 
     :param inputs:
@@ -158,9 +156,7 @@ def hist(
         plt.show()
 
 
-def save(
-    inputs: "Tensor | np.ndarray | list[str] | str", fname: str = "a.png"
-) -> None:
+def save(inputs: "Tensor | np.ndarray | list[str] | str", fname: str = "a.png") -> None:
     r"""Save tensors or array. Clip to $[0, 1]$ by default.
 
     :param inputs:

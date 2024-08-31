@@ -25,9 +25,7 @@ Report bugs to <{{ g:snips_email }}>.
 
 def get_parser() -> ArgumentParser:
     r"""Get a parser for unit test."""
-    parser = ArgumentParser(
-        epilog=EPILOG, formatter_class=RawDescriptionHelpFormatter
-    )
+    parser = ArgumentParser(epilog=EPILOG, formatter_class=RawDescriptionHelpFormatter)
     parser.add_argument("--version", version=VERSION, action="version")
     shtab.add_argument_to(parser)
     return parser

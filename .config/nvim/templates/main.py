@@ -36,11 +36,13 @@ except ImportError:
 
 __all__ = ["get_parser", "VERSION"]
 logger: Final = logging.getLogger(__name__)
-VERSION: Final = r"""{version}
+VERSION: Final = (
+    r"""{version}
 Copyright (C) {{ strftime('%Y') }}
 Written by {{ g:snips_author }}
 """.format(
-    version=__version__
+        version=__version__
+    )
 )
 
 
