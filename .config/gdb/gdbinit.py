@@ -24,9 +24,7 @@ for prefix in prefixs:
 
 for prefix in prefixs:
     for name in {".gdbinit", "gdbinit"}:
-        path = os.path.expanduser(
-            os.path.join(prefix, "share/gdb-dashboard/" + name)
-        )
+        path = os.path.expanduser(os.path.join(prefix, "share/gdb-dashboard/" + name))
         if os.path.isfile(path):
             gdb.execute("source " + path)
             break
