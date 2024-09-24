@@ -73,6 +73,11 @@ function! init#coc#source() abort
         \ 'neomuttrc': 'muttrc',
         \ 'automake': 'make',
         \ 'gyp': 'python',
+        \ 'expect': 'tcl',
+        \ 'xsct': 'tcl',
+        \ 'xdc': 'tcl',
+        \ 'lex': 'c',
+        \ 'yacc': 'c',
         \ }
   xmap if <Plug>(coc-funcobj-i)
   xmap af <Plug>(coc-funcobj-a)
