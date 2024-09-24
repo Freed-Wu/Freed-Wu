@@ -38,9 +38,10 @@
 	format-patch = cat
 	diff = delta
 	blame = delta
+# https://github.com/01mf02/jaq/issues/217
 # https://github.com/mrowa44/emojify/pull/57
-	log = emojify | perl -pe' '$([ -f ~/.gitmoji/gitmojis.json ] && jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json || :) | less
-	reflog = emojify | perl -pe' '$([ -f ~/.gitmoji/gitmojis.json ] && jq -j '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json || :) | less
+	log = emojify | perl -pe' '$([ -f ~/.gitmoji/gitmojis.json ] && jq -rj '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json || :) | less
+	reflog = emojify | perl -pe' '$([ -f ~/.gitmoji/gitmojis.json ] && jq -rj '.[] | \"s=\\(.code)=\\(.emoji)=g";"\"' ~/.gitmoji/gitmojis.json || :) | less
 	config = bat -pplproperties
 	remote = bat -ppltsv
 	ls-files = parallel eza --color=always --icons

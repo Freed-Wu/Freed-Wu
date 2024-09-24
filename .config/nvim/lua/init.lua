@@ -56,11 +56,11 @@ do
     end
     if vim.fn.filereadable("/run/current-system/nixos-version") == 1 then
         loadstring("variables.STDCPP_LIBDIR = " ..
-        io.popen(vim.fs.joinpath(os.getenv("HOME"), "script", "get-NIX_LD_LIBRARY_PATH.nix")):read())()
+            io.popen(vim.fs.joinpath(os.getenv("HOME"), "script", "get-NIX_LD_LIBRARY_PATH.nix")):read())()
         loadstring("variables.OPENSSL_INCDIR = " ..
-        io.popen(vim.fs.joinpath(os.getenv("HOME"), "script", "get-OPENSSL_INCDIR.nix")):read())()
+            io.popen(vim.fs.joinpath(os.getenv("HOME"), "script", "get-OPENSSL_INCDIR.nix")):read())()
         loadstring("variables.OPENSSL_LIBDIR = " ..
-        io.popen(vim.fs.joinpath(os.getenv("HOME"), "script", "get-OPENSSL_LIBDIR.nix")):read())()
+            io.popen(vim.fs.joinpath(os.getenv("HOME"), "script", "get-OPENSSL_LIBDIR.nix")):read())()
     end
     vim.g.rocks_nvim = {
         rocks_path = vim.fs.dirname(vim.fs.dirname(vim.fs.joinpath(vim.fn.stdpath("data")))),
@@ -72,6 +72,12 @@ do
             variables = variables,
         },
     }
+    ---@diagnostic disable: lowercase-global
+    rocks_trees = nil
+    rocks_servers = nil
+    external_deps_dirs = nil
+    cmake_generator = nil
+    variables = nil
 
     -- ~/.local/lib/luarocks/rocks-5.1/rocks.nvim
     vim.opt.runtimepath:append(vim.fs.joinpath(vim.g.rocks_nvim.rocks_path,

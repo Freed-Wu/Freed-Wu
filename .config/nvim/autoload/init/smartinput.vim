@@ -478,15 +478,9 @@ function! init#smartinput#post_source() abort
 
   call smartinput#map_to_trigger('i', ';', ';', ';')
   call smartinput#define_rule({
-        \ 'at': '\%#',
+        \ 'at': '([^)]*\%#',
         \ 'char': ';',
         \ 'input': '; ',
-        \ 'filetype': ['jq'],
-        \ })
-  call smartinput#define_rule({
-        \ 'at': '\%# ',
-        \ 'char': ';',
-        \ 'input': ';',
         \ })
 
   call smartinput#map_to_trigger('i', '!', '!', '!')
@@ -501,20 +495,6 @@ function! init#smartinput#post_source() abort
         \ 'at': '[^(}\*\+?]\%#',
         \ 'char': '?',
         \ 'input': '? ',
-        \ })
-
-  call smartinput#map_to_trigger('i', '++', '++', '++')
-  call smartinput#define_rule({
-        \ 'at': '\%#',
-        \ 'char': '++',
-        \ 'input': '++',
-        \ })
-
-  call smartinput#map_to_trigger('i', '+-', '+-', '+-')
-  call smartinput#define_rule({
-        \ 'at': '\%#',
-        \ 'char': '+-',
-        \ 'input': '+-',
         \ })
   " 1}}} One "
 
@@ -588,7 +568,7 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['python'],
         \ })
   call smartinput#define_rule({
-        \ 'at': '[^ ?]\%#',
+        \ 'at': '[^ ?+-*/%^|&.:>=<!~]\%#',
         \ 'char': '=',
         \ 'input': ' = ',
         \ })
@@ -615,7 +595,7 @@ function! init#smartinput#post_source() abort
 
   call smartinput#map_to_trigger('i', '+', '+', '+')
   call smartinput#define_rule({
-        \ 'at': '[^:\s\\]\%#\%([^=]\|$\)',
+        \ 'at': '[^:\s\\+$]\%#\%([^=]\|$\)',
         \ 'char': '+',
         \ 'input': ' + ',
         \ })
@@ -624,12 +604,6 @@ function! init#smartinput#post_source() abort
         \ 'char': '+',
         \ 'input': '+',
         \ 'filetype': ['sh', 'bash', 'zsh', 'make', 'automake'],
-        \ })
-  call smartinput#define_rule({
-        \ 'at': '$\%#',
-        \ 'char': '+',
-        \ 'input': '+',
-        \ 'filetype': ['sh', 'bash', 'zsh'],
         \ })
 
   call smartinput#map_to_trigger('i', '-', '-', '-')
@@ -647,7 +621,7 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['yaml'],
         \ })
   call smartinput#define_rule({
-        \ 'at': '[^ :\[{(]\%#',
+        \ 'at': '[^ :\[{(-+]\%#',
         \ 'char': '-',
         \ 'input': ' - ',
         \ 'filetype': ['python', 'c', 'cpp', 'java', 'cs', 'arduino'],
@@ -662,31 +636,37 @@ function! init#smartinput#post_source() abort
         \ })
 
   call smartinput#map_to_trigger('i', '*', '*', '*')
+  " f(*a)
   call smartinput#define_rule({
-        \ 'at': '[^/]\S\%#',
+        \ 'at': '[^( ]\%#',
         \ 'char': '*',
         \ 'input': ' * ',
-        \ 'filetype': ['python'],
         \ })
   call smartinput#define_rule({
-        \ 'at': '[,(]\s*\%#',
+        \ 'at': '[^( ]\%#',
         \ 'char': '*',
         \ 'input': '*',
-        \ 'filetype': ['python'],
+        \ 'filetype': ['c', 'cpp', 'cs', 'java', 'objc', 'objcpp', 'arduino'],
+        \ })
+  " /path/*
+  call smartinput#define_rule({
+        \ 'at': '/\%(\S\|\\ \)*\%#',
+        \ 'char': '*',
+        \ 'input': '*',
         \ })
 
   call smartinput#map_to_trigger('i', '**', '**', '**')
+  " f(**a)
   call smartinput#define_rule({
-        \ 'at': '\S\%#',
+        \ 'at': '[^( ]\%#',
         \ 'char': '**',
         \ 'input': ' ** ',
-        \ 'filetype': ['python'],
         \ })
+  " /path/**
   call smartinput#define_rule({
-        \ 'at': ',\s*\%#',
+        \ 'at': '/\%(\S\|\\ \)*\%#',
         \ 'char': '**',
         \ 'input': '**',
-        \ 'filetype': ['python'],
         \ })
   " 2}}} Operation "
 

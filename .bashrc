@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null
+# shellcheck shell=bash
 # /etc/skel/.bashrc
 #
 # This file is .d by all *interactive* bash shells on startup,
@@ -33,6 +33,7 @@ source_file() {
 	shift
 	for prefix in ~/.local/share /usr/share /run/current-system/sw/share; do
 		if [[ -f "$prefix/$file" ]]; then
+			# shellcheck source=/dev/null
 			. "$prefix/$file"
 			return
 		fi
