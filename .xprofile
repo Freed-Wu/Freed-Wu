@@ -9,9 +9,6 @@ export MOZ_USE_XINPUT2=1
 # man
 MANOPT=-Lzh_CN:zh_CHS:zh
 export MANOPT
-# pkg-config
-PKG_CONFIG_PATH="$HOME/.local/state/nix/profile/lib/pkgconfig:$HOME/.local/state/nix/profile/share/pkgconfig${PKG_CONFIG_PATH+:}$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH
 # cpanm
 export PERL_CPANM_OPT
 PERL_CPANM_OPT="-l $HOME/.local"

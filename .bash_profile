@@ -1,6 +1,11 @@
-# shellcheck shell=bash source=/dev/null disable=SC2016,SC2154
+# shellcheck shell=bash disable=SC2016,SC2154
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
+# for tty
+if [[ -f ~/.xprofile ]] && [[ -z $PYTHONSTARTUP ]]; then
+	# shellcheck source=.xprofile
+	. ~/.xprofile
+fi
 has_cmd() {
 	local opt
 	for opt; do
@@ -46,7 +51,8 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 		PYTHONPATH="$HOME/.local/lib/python$(~/script/get-version.py)/site-packages"
 		export PYTHONPATH
 	fi
-	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH:+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
+	# pkg-config
+	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH:+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig:$HOME/.local/state/nix/profile/lib/pkgconfig:$HOME/.local/state/nix/profile/share/pkgconfig"
 	export PKG_CONFIG_PATH
 else
 	dir="/${MINGW_ARCH:-mingw64}/bin"
@@ -72,9 +78,6 @@ if has_cmd manpager; then
 	MANPAGER='manpager | less --pattern=^\\S+'
 	export MANPAGER
 fi
-# ccstudio
-C6X_C_OPTION=--issue_remarks
-export C6X_C_OPTION
 # less
 export LESS='-r -M --mouse -S -I'
 # interactively
@@ -209,5 +212,6 @@ fi
 # old bash doesn't support tmux-256color
 if [[ -z $ZSH_VERSION && ${BASH_VERSION//.*/} -le 5 ]]; then
 	export TERM=xterm-256color
+	# shellcheck source=.bashrc
 	. ~/.bashrc
 fi

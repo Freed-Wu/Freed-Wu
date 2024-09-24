@@ -47,10 +47,6 @@ elseif hostname() ==# 'laptop'
 else
   let &guifont .= '6'
 endif
-" keep compatibility with vim
-if has('unix')
-  set runtimepath+=/usr/share/vim/vimfiles
-endif
 set belloff=
 set modelines=2
 set fileencoding=utf-8
