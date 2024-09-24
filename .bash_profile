@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null disable=SC2016,SC2154
+# shellcheck shell=bash disable=SC2016,SC2154
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 has_cmd() {
@@ -209,5 +209,6 @@ fi
 # old bash doesn't support tmux-256color
 if [[ -z $ZSH_VERSION && ${BASH_VERSION//.*/} -le 5 ]]; then
 	export TERM=xterm-256color
+	# shellcheck source=.bashrc
 	. ~/.bashrc
 fi
