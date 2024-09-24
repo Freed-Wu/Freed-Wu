@@ -3,10 +3,6 @@
 if [[ -f ~/.local/state/nix/profile/etc/profile.d/nix.sh ]]; then
 	. ~/.local/state/nix/profile/etc/profile.d/nix.sh
 fi
-# for tty
-if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
-	. ~/.xprofile
-fi
 if [[ -f ~/.bash_profile ]] && ((! $+DOCKER_BUILDKIT)); then
 	. ~/.bash_profile
 fi

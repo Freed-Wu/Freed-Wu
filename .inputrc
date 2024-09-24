@@ -1,6 +1,8 @@
 $include /etc/inputrc
 $include function rl_custom_complete /usr/lib/librl_custom_complete.so
 $include function rl_custom_isearch /usr/lib/librl_custom_isearch.so
+$include function rl_custom_rime /usr/lib/librl_custom_rime.so
+"\C-^": rl_custom_rime
 # C-I rl_custom_complete
 # C-R rl_custom_isearch
 # https://github.com/Dushistov/sdcv/issues/48
