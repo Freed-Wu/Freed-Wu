@@ -19,8 +19,8 @@ patch:
     - name: full_shape
       reset: 0
       states:
-        - $$
-        - ＄
+        - █
+        - ██
     - name: simplification
       reset: 1
       states:
