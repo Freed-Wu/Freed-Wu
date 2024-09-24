@@ -1,18 +1,11 @@
 ---luarocks config.
-
--- luacheck: ignore 111 113 211
----@diagnostic disable: lowercase-global
-if vim then
-    local rocks_trees
-    local rocks_servers
-    local external_deps_dirs
-    local cmake_generator
-    local variables
-end
+-- luacheck: ignore 111 113
+---@diagnostic disable: undefined-global
 local os_getenv = os_getenv or function(varname)
     return require "os".getenv(varname)
 end
 local home = home or os_getenv("HOME")
+---@diagnostic disable: lowercase-global
 rocks_trees = {
     { name = "user", root = home .. "/.local" }
 }
