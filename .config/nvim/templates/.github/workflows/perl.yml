@@ -70,9 +70,9 @@ jobs:
   deploy-aur:
     needs: build
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: Freed-Wu/update-aur-package@v1.0.11
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           package_name: perl-{{ tolower(expand('%:p:h:h:h:t')) }}
           ssh_private_key: ${{secrets.AUR_SSH_PRIVATE_KEY}}

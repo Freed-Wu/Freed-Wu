@@ -52,9 +52,13 @@ fi
 if (($+PAI_CONTAINER_ID)) && [[ -d /output && $USER == wzy ]]; then
 	sudo chown $USER /output
 fi
-if [[ -d /mnt/nfs/home/$USER ]]; then
-	nameddirs[nfs]=/mnt/nfs/home/$USER
+if [[ -d /mnt/server/home/$USER ]]; then
+	nameddirs[server]=/mnt/server/home/$USER
 fi
+if [[ -d /mnt/ustc/ghome/wuzy ]]; then
+	nameddirs[ustc]=/mnt/ustc/ghome/wuzy
+fi
+nameddirs[gentoo]=~/.local/share/gentoo
 
 typeset -F SECONDS
 WORDCHARS=
@@ -170,11 +174,11 @@ zinit id-as depth'1' for zdharma-continuum/z-a-bin-gem-node
 # 1}}} Plugin #
 
 # StatusLine {{{1 #
-# p10k cannot support any ice, see its README.md
+# p10k cannot support any ice according to its README.md
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   . "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# https://bugs.archlinux.org/task/80028
+# vi /etc/locale.gen && locale-gen
 if [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
   . /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 elif [[ -f /run/current-system/sw/share/zsh-powerlevel10k/powerlevel10k.zsh-theme ]]; then
@@ -213,14 +217,14 @@ zinit id-as'.pyenv' depth'1' wait lucid \
   for zdharma-continuum/null
 # https://github.com/Kaggle/kaggle-api/issues/446
 zinit id-as'.pass' depth'1' as'null' wait lucid \
-  atclone'echo "CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
-echo "export KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
-echo "export KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
-echo "export OPENAI_API_KEY=$(pass ls openai/api_key)" >> pass.sh
-echo echo "$(pass ls wakatime/api_key)" > wakatime.sh
-chmod +x wakatime.sh
-pass ls codestats/$HOST > codestats.txt' \
-  if'(($+commands[pass]))' \
+  atclone'(($+commands[gopass])) && PASS=gopass O=-o || PASS=pass
+echo "export KAGGLE_USERNAME=$($PASS show $O kaggle/username)
+export KAGGLE_KEY=$($PASS show $O kaggle/key)
+export OPENAI_API_KEY=$($PASS show $O openai/api_key)" > pass.sh
+echo "CODESTATS_API_KEY=$($PASS show $O codestats/$HOST)" > codestats.sh
+echo echo "$($PASS show $O wakatime/api_key)" > wakatime.sh
+chmod +x wakatime.sh' \
+  if'(($+commands[pass] || $+commands[gopass]))' \
   for zdharma-continuum/null
 zinit id-as depth'1' for mdumitru/last-working-dir
 zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
@@ -256,8 +260,11 @@ zinit id-as depth'1' wait lucid \
 
 # Log {{{1 #
 # must before suggest, see its README.md
+if [[ -f ~/.local/share/zinit/plugins/.pass/codestats.sh ]]; then
+  . ~/.local/share/zinit/plugins/.pass/codestats.sh
+fi
 zinit id-as depth'1' wait lucid from'gitlab' \
-  if'(($+CODESTATS_API_KEY))' \
+  if'[[ -f ~/.local/share/zinit/plugins/.pass/codestats.sh ]]' \
   for code-stats/code-stats-zsh
 ZSH_WAKATIME_PROJECT_DETECTION=true
 zinit id-as depth'1' wait lucid \

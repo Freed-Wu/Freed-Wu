@@ -27,6 +27,7 @@ fi
 stty -ixon
 HISTIGNORE='&: *'
 
+# source_file foo.sh --option=value
 source_file() {
 	local prefix file="$1"
 	# ble.sh parses $@
@@ -82,6 +83,7 @@ fi
 
 source_file zinit/plugins/.pass/pass.sh
 if has_cmd curl; then
+	source_file zinit/plugins/.pass/codestats.sh
 	source_file code-stats-bash/codestats.sh
 fi
 

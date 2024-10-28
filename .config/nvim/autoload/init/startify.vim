@@ -57,18 +57,14 @@ function! init#startify#source() abort
         \ {g:maplocalleader . 'c': fnamemodify(expand('$XDG_CONFIG_NVIM/autoload/init/coc.vim'), ':~')},
         \ {g:maplocalleader . 'j': fnamemodify(expand('$XDG_CONFIG_NVIM/coc-settings.json'), ':~')},
         \ {g:maplocalleader . 'r': fnamemodify(expand('$XDG_CONFIG_NVIM/rocks.toml'), ':~')},
-        \ {g:maplocalleader . 's': '~/.zshrc'},
-        \ {g:maplocalleader . 'z': '~/.zprofile'},
+        \ {g:maplocalleader . 'z': '~/.zshrc'},
+        \ {g:maplocalleader . 'b': '~/.bashrc'},
         \ {g:maplocalleader . 'x': '~/.xprofile'},
-        \ {g:maplocalleader . 'b': '~/.bash_profile'},
+        \ {g:maplocalleader . 'p': '~/.bash_profile'},
         \ {g:maplocalleader . 'y': fnamemodify(expand('$XDG_CONFIG_HOME/ptpython/config.py'), ':~')},
         \ {g:maplocalleader . 'p': fnamemodify(expand('$PYTHONSTARTUP'), ':~')},
+        \ {g:maplocalleader . 'n': '~/.local/share/gentoo/etc/nixos/configuration.nix'},
         \ ]
-  if filereadable('/etc/nixos/configuration.nix')
-    let g:startify_bookmarks += [
-          \ {g:maplocalleader . 'n': '/etc/nixos/configuration.nix'},
-          \ ]
-  endif
   let g:startify_custom_indices =
         \ map(range(0x61, 0x7a) + range(0x41, 0x5a), {_, v -> '.' . nr2char(v)})
   let g:startify_lists = [
