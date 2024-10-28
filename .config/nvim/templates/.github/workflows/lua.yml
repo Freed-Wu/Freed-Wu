@@ -6,7 +6,6 @@
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: Freed-Wu/update-aur-package@v1.0.11
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           package_name: lua-{{ substitute(expand('%:p:h:h:h:t'), '\.lua$', '', '') }}
           ssh_private_key: ${{secrets.AUR_SSH_PRIVATE_KEY}}

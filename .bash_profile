@@ -1,11 +1,29 @@
 # shellcheck shell=bash disable=SC2016,SC2154
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
+
+if [[ -f ~/.local/share/gentoo/startprefix ]] && [[ -z $EPREFIX ]] && [[ -z $ZSH_VERSION ]]; then
+	# old bash source it will exit 255
+	SHELL=zsh exec ~/.local/share/gentoo/startprefix
+fi
+
+# Add ~/.local/state/nix/profile/bin to $PATH
+if [[ -f ~/.local/state/nix/profile/etc/profile.d/nix.sh ]]; then
+	# shellcheck source=/dev/null
+	. ~/.local/state/nix/profile/etc/profile.d/nix.sh
+fi
+
 # for tty
 if [[ -f ~/.xprofile ]] && [[ -z $PYTHONSTARTUP ]]; then
 	# shellcheck source=.xprofile
 	. ~/.xprofile
 fi
+
+if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
+	# shellcheck source=/dev/null
+	. ~/.local/share/zinit/plugins/.pass/pass.sh
+fi
+
 has_cmd() {
 	local opt
 	for opt; do
@@ -79,7 +97,7 @@ if has_cmd manpager; then
 	export MANPAGER
 fi
 # less
-export LESS='-r -M --mouse -S -I'
+export LESS='-r -M -S -I --mouse'
 # interactively
 export FZF_HISTORY_DIR
 if [[ $OSTYPE == msys ]] || [[ $OSTYPE == cygwin ]]; then
@@ -209,9 +227,18 @@ if has_cmd node-prototype-repl; then
 	NODE_REPL_EXTERNAL_MODULE="$(command -v node-prototype-repl)"
 	export NODE_REPL_EXTERNAL_MODULE
 fi
-# old bash doesn't support tmux-256color
-if [[ -z $ZSH_VERSION && ${BASH_VERSION//.*/} -le 5 ]]; then
+if [[ -z $TMUX_PANE && $TERM == tmux-256color ]]; then
 	export TERM=xterm-256color
-	# shellcheck source=.bashrc
-	. ~/.bashrc
 fi
+
+# ccstudio
+# DM6467 needs c6000-cgt < 8.0.0
+compiler=c6000_7.4.24
+# compiler=ti-cgt-c6000_8.3.12
+dir="/opt/ccstudio/ccs/tools/compiler/$compiler"
+if [[ -d $dir ]]; then
+	C6X_C_DIR="$dir/include;$dir/lib"
+	PATH="$PATH${PATH:+:}$dir/bin"
+fi
+unset dir compiler
+export C6X_C_DIR

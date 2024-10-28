@@ -41,3 +41,6 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=1
 # proxychains-ng
 # https://github.com/rofl0r/proxychains-ng/issues/549
 export PROXYCHAINS_QUIET_MODE=1
+# https://bbs.archlinux.org/viewtopic.php?id=298064
+# https://github.com/grpc/grpc/issues/37178
+export GRPC_VERBOSITY=ERROR

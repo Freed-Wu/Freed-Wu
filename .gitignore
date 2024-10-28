@@ -20,6 +20,8 @@
 !/.xprofile
 !/.bash_profile
 !/.bashrc
+!/.bash_login
+!/.bash_logout
 !/.zprofile
 !/.zshrc
 !/.zlogin
@@ -315,6 +317,7 @@
 /.config/cabal/*
 !/.config/cabal/config
 !/.config/zellij/
+!/.config/sharpkeys/
 
 # $XDG_DATA_HOME
 !/.local/
@@ -342,13 +345,45 @@
 !/.local/share/jupyter/lab/user-settings/
 !/.local/share/supertux2/
 /.local/share/supertux2/addons/
-!/.local/share/portage/
-/.local/share/portage/*
-!/.local/share/portage/config/
-/.local/share/portage/config/*
-!/.local/share/portage/config/make.conf
-!/.local/share/portage/config/repos.conf
-!/.local/share/portage/config/package.use/
+!/.local/share/gentoo/
+/.local/share/gentoo/*
+!/.local/share/gentoo/etc/
+/.local/share/gentoo/etc/*
+!/.local/share/gentoo/etc/dispatch-conf.conf
+!/.local/share/gentoo/etc/portage/
+/.local/share/gentoo/etc/portage/make.profile
+/.local/share/gentoo/etc/portage/make.conf/0100_bootstrap_prefix_make.conf
+/.local/share/gentoo/etc/portage/repos.conf/eselect-repo.conf
+!/.local/share/gentoo/etc/README.md
+# Arch Linux
+!/.local/share/gentoo/etc/pacman.conf
+# Windows Msys2
+!/.local/share/gentoo/etc/nsswitch.conf
+!/.local/share/gentoo/etc/fstab
+# NixOS
+!/.local/share/gentoo/etc/nixos/
+/.local/share/gentoo/etc/nixos/hardware-configuration.nix
+# Linux/X11
+!/.local/share/gentoo/usr/
+/.local/share/gentoo/usr/*
+!/.local/share/gentoo/usr/share/
+/.local/share/gentoo/usr/share/*
+!/.local/share/gentoo/usr/share/X11/
+/.local/share/gentoo/usr/share/X11/*
+!/.local/share/gentoo/usr/share/X11/xkb/
+/.local/share/gentoo/usr/share/X11/xkb/*
+!/.local/share/gentoo/usr/share/X11/xkb/symbols/
+/.local/share/gentoo/usr/share/X11/xkb/symbols/*
+!/.local/share/gentoo/usr/share/X11/xkb/symbols/pc
+!/.local/share/gentoo/usr/share/X11/xkb/symbols/altwin
+# Linux/console
+!/.local/share/gentoo/usr/share/keymaps/
+/.local/share/gentoo/usr/share/keymaps/*
+!/.local/share/gentoo/usr/share/keymaps/i386/
+/.local/share/gentoo/usr/share/keymaps/i386/*
+!/.local/share/gentoo/usr/share/keymaps/i386/qwerty/
+/.local/share/gentoo/usr/share/keymaps/i386/qwerty/*
+!/.local/share/gentoo/usr/share/keymaps/i386/qwerty/us-custom.map.gz
 
 # $XDG_STATE_HOME
 !/.local/state/

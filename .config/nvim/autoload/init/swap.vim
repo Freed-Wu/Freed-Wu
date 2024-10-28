@@ -1,6 +1,7 @@
 function! init#swap#source() abort
-  xmap [<CR> <Plug>SwapSwapOperands
-  xmap ]<CR> <Plug>SwapSwapPivotOperands
-  nmap [<CR> <Plug>SwapSwapWithL_WORD
-  nmap ]<CR> <Plug>SwapSwapWithR_WORD
+  xmap [E <Plug>SwapSwapOperands
+  xmap ]E <Plug>SwapSwapPivotOperands
+  " unimpaired use [e and ]e to swap line
+  nmap [E <Plug>SwapSwapWithL_WORD
+  nmap ]E <Plug>SwapSwapWithR_WORD
 endfunction

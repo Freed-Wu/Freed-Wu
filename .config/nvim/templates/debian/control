@@ -6,9 +6,9 @@ Uploaders: {{ g:snips_author }} <{{ g:snips_email }}>
 Build-Depends: debhelper-compat (= 9)
 Rules-Requires-Root: no
 Standards-Version: 4.6.0
-Homepage: {{ g:snips_github }}
-Vcs-Git: {{ g:snips_github }}
-Vcs-Browser: {{ g:snips_github }}
+Homepage: {{ g:snips_github }}/{{ expand('%:p:h:h:t') }}
+Vcs-Git: {{ g:snips_github }}/{{ expand('%:p:h:h:t') }}
+Vcs-Browser: {{ g:snips_github }}/{{ expand('%:p:h:h:t') }}
 
 Package: {{ expand('%:p:h:h:t') }}
 Architecture: all

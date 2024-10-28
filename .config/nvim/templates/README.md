@@ -30,6 +30,12 @@
 [![github/repo-size](https://shields.io/github/repo-size/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }})](https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }})
 [![github/v](https://shields.io/github/v/release/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }})](https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }})
 
+[![aur/votes](https://img.shields.io/aur/votes/{{ expand('%:p:h:t') }})](https://aur.archlinux.org/packages/{{ expand('%:p:h:t') }})
+[![aur/popularity](https://img.shields.io/aur/popularity/{{ expand('%:p:h:t') }})](https://aur.archlinux.org/packages/{{ expand('%:p:h:t') }})
+[![aur/maintainer](https://img.shields.io/aur/maintainer/{{ expand('%:p:h:t') }})](https://aur.archlinux.org/packages/{{ expand('%:p:h:t') }})
+[![aur/last-modified](https://img.shields.io/aur/last-modified/{{ expand('%:p:h:t') }})](https://aur.archlinux.org/packages/{{ expand('%:p:h:t') }})
+[![aur/version](https://img.shields.io/aur/version/{{ expand('%:p:h:t') }})](https://aur.archlinux.org/packages/{{ expand('%:p:h:t') }})
+
 [![pypi/status](https://shields.io/pypi/status/{{ expand('%:p:h:t') }})](https://pypi.org/project/{{ expand('%:p:h:t') }}/#description)
 [![pypi/v](https://shields.io/pypi/v/{{ expand('%:p:h:t') }})](https://pypi.org/project/{{ expand('%:p:h:t') }}/#history)
 [![pypi/downloads](https://shields.io/pypi/dd/{{ expand('%:p:h:t') }})](https://pypi.org/project/{{ expand('%:p:h:t') }}/#files)
