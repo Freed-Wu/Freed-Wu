@@ -5,7 +5,7 @@ nnoremap <silent><buffer> <LeftMouse> :<C-U>call init#init#fern#leftmouse()<CR>
 nnoremap <silent><buffer> <2-LeftMouse> :<C-U>call init#init#fern#2leftmouse()<CR>
 nnoremap <silent><buffer> <C-LeftMouse> :<C-U>call init#init#fern#cleftmouse()<CR>
 nnoremap <silent><buffer> <MiddleMouse> :<C-U>call init#init#fern#middlemouse()<CR>
-nnoremap <silent><buffer> <RightMouse> :<C-U>call init#init#quickui#install('normal/rightmenu/fern')<CR>
+nnoremap <silent><buffer> <RightMouse> :<C-U>call init#init#quickui#install('assets/json/context/normal/rightmenu/fern.json')<CR>
 
 nmap <buffer> g? <Plug>(fern-action-help)
 nmap <buffer> g: <Plug>(fern-action-choice)

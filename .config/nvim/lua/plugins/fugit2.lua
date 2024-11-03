@@ -11,7 +11,7 @@ elseif vim.fn.has("win32") == 1 then
 end
 if vim.fn.filereadable("/run/current-system/nixos-version") == 1 then
     loadstring("setting.libgit2_path = " ..
-        io.popen(vim.fs.joinpath(os.getenv("HOME"), "script", "get-libgit2_path.nix")):read() ..
+        io.popen(vim.fs.joinpath(vim.fn.stdpath("config"), "scripts", "get-libgit2_path.nix")):read() ..
         " .. '" .. ext .. "'")()
 end
 require('fugit2').setup(setting)

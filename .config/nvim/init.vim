@@ -92,6 +92,11 @@ set textwidth=80
 set background=dark
 set titlestring=%<%F\ %{nerdfont#find()}%=%P%l/%L%c
 set clipboard=unnamed
+" call systemlist() will meet:
+" /usr/bin/zsh: can''t open input files: /s
+if &shell !~# 'cmd' && &shellcmdflag ==# '/c'
+  set shellcmdflag=-c
+endif
 " unnamed clipboard of (n)vim only work in X11, see `:help unnamedplus`
 if has('unnamedplus')
   set clipboard+=unnamedplus
@@ -189,7 +194,7 @@ nnoremap <silent> y<M-f>
       \ :<C-U>let @+ = join([expand('%:p'), line('.'), getline('.')], ':')<CR>
 nnoremap <silent> y<M-l> :<C-U>let @+ = join([expand('%:p'), line('.')], ':')<CR>
 nnoremap <silent> <2-LeftMouse> :call init#init#map#2leftmouse()<CR>
-nnoremap <silent> <RightMouse> :call init#init#quickui#install('normal/rightmenu/default')<CR>
+nnoremap <silent> <RightMouse> :call init#init#quickui#install('assets/json/context/normal/rightmenu/default.json')<CR>
 
 nnoremap S ch
 nnoremap s cl
@@ -197,6 +202,7 @@ xnoremap <silent> & :&<CR>
 nnoremap Y y$
 xnoremap Y $hy
 
+nnoremap g<C-E> <C-Y>
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
@@ -325,8 +331,8 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
 
   " Log {{{1 "
   call dein#add('wakatime/vim-wakatime', {
-        \ 'if': executable('wakatime-cli') && filereadable(
-        \ expand('$HOME/.local/share/zinit/plugins/.pass/wakatime.sh')
+        \ 'if': executable('wakatime-cli') && executable(
+        \   expand('$HOME/.local/share/zinit/plugins/_pass/wakatime.sh')
         \ ),
         \ })
   " 1}}} Log "
@@ -639,7 +645,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ })
   call dein#add('Freed-Wu/template.vim')
   call dein#add('mattn/emmet-vim', {
-        \ 'on_map': {'n': '<C-y>', 'v': '<C-y>', 'i': '<C-y>'},
+        \ 'hook_post_source': 'call init#emmet_vim#post_source()',
         \ })
   call dein#add('dhruvasagar/vim-table-mode', {
         \ 'hook_source': 'call init#table_mode#source()',

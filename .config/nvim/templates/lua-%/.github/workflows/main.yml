@@ -21,3 +21,26 @@
           -H "Accept: application/vnd.github.v3+json"
           -H "Authorization: Bearer ${{secrets.GH_TOKEN}}"
           https://api.github.com/repos/Freed-Wu/nur-packages/actions/workflows/version.yml/dispatches
+
+  deploy-ppa:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          n="{{ expand('%:p:h:h:h:t') }}-$GITHUB_REF_NAME"
+          cd ..
+          mv {{ expand('%:p:h:h:h:t') }} "$n"
+          tar vcaf ./"$n".tar.gz "$n"
+          mv ./*.tar.* "$n"
+          mv "$n" {{ expand('%:p:h:h:h:t') }}
+      - uses: yuezk/publish-ppa-package@main
+        with:
+          repository: freedwu/ppa
+          gpg_private_key: ${{secrets.GPG_PRIVATE_KEY}}
+          gpg_passphrase: ${{secrets.GPG_PASSPHRASE}}
+          tarball: ./*.tar.*
+          deb_email: ${{secrets.DEB_EMAIL}}
+          deb_fullname: freedwu

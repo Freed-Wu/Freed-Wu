@@ -1,17 +1,24 @@
-r"""Main
-========
+#!/usr/bin/env python
+r"""Get python version
+======================
 
-For all REPLs.
+Or real init script for all python REPLs.
 """
 
-from contextlib import suppress
+if __name__ == "__main__":
+    import sys
 
-from . import my  # noqa: F401
+    print(f"{sys.version_info[0]}.{sys.version_info[1]}")
 
-with suppress(ImportError):
-    from rich import print  # noqa: F401
+else:
+    from contextlib import suppress
 
-with suppress(ImportError):
-    from translate_shell.tools.repl.main import interact
+    from . import my  # noqa: F401
 
-    interact()
+    with suppress(ImportError):
+        from rich import print  # noqa: F401
+
+    with suppress(ImportError):
+        from translate_shell.tools.repl.main import interact
+
+        interact()

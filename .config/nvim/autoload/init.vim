@@ -1,8 +1,7 @@
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
-let s:json_dir = s:path . '/assets/json'
 
 function! init#get_json(json_name) abort
-  let l:json_path = s:json_dir . '/' . a:json_name . '.json'
+  let l:json_path = s:path . '/' . a:json_name
   return json_decode(join(readfile(l:json_path), ''))
 endfunction
 

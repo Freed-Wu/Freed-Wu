@@ -1,8 +1,8 @@
 set my_addr = $my_qq
 
 set folder = $my_imap_qq
-set imap_user = `pass ls neomutt/user/qq`
-set imap_pass = `pass ls neomutt/pass/qq`
+set imap_user = `$my_pass show neomutt/user/qq`
+set imap_pass = `$my_pass show neomutt/pass/qq`
 
 set from = $imap_user
 set smtp_url = smtps://$from@smtp.$my_addr

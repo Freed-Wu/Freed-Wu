@@ -8,11 +8,15 @@ function! init#airline#source() abort
   let g:airline_left_alt_sep = ''
   let g:airline_right_sep = ''
   let g:airline_right_alt_sep = ''
-  let g:airline_symbols = init#get_json('airline/symbols')
-  let g:airline_mode_map = init#get_json('airline/mode')
+  let g:airline_symbols = init#get_json('assets/json/airline/symbols.json')
+  let g:airline_mode_map = init#get_json('assets/json/airline/mode.json')
+  try
+    let g:airline_mode_map.n = nerdfont#platform#find()
+  catch /^Vim\%((\a\+)\)\=:E117:/
+  endtry
   if !has('unix') || has('unix') && !has('win32unix') && exists('*trim')
     let g:airline_filetype_overrides =
-          \ init#get_json('airline/filetype_overrides')
+          \ init#get_json('assets/json/airline/filetype_overrides.json')
   endif
 
   let g:airline#extensions#coc#error_symbol = '✗'
@@ -41,7 +45,7 @@ function! init#airline#source() abort
   let g:airline#extensions#tabline#buffer_idx_mode = 1
   " install wqy-zenhei
   let g:airline#extensions#tabline#buffer_idx_format =
-        \ init#get_json('airline/number')
+        \ init#get_json('assets/json/airline/number.json')
   nmap <C-W>1 <Plug>AirlineSelectTab1
   nmap <C-W>2 <Plug>AirlineSelectTab2
   nmap <C-W>3 <Plug>AirlineSelectTab3

@@ -124,6 +124,9 @@
 !/.vscode-remote/data/Machine/
 /.vscode-remote/data/Machine/*
 !/.vscode-remote/data/Machine/settings.json
+!/.xmake/
+/.xmake/*
+!/.xmake/xmake.conf
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -277,6 +280,7 @@
 !/.config/autostart/picom.desktop
 !/.config/picom/
 !/.config/visidata/
+/.config/visidata/input_history.jsonl
 !/.config/nixpkgs/
 !/.config/luacheck/
 !/.config/latexindent.yaml
@@ -353,7 +357,10 @@
 !/.local/share/gentoo/etc/portage/
 /.local/share/gentoo/etc/portage/make.profile
 /.local/share/gentoo/etc/portage/make.conf/0100_bootstrap_prefix_make.conf
-/.local/share/gentoo/etc/portage/repos.conf/eselect-repo.conf
+/.local/share/gentoo/etc/portage/repos.conf/eselect-repo.conf*
+# https://github.com/pkgcore/pkgcore/issues/438
+# cp ~/.local/share/gentoo/usr/share/portage/config/repos.conf ~/.local/share/gentoo/etc/portage/repos.conf/repos.conf
+/.local/share/gentoo/etc/portage/repos.conf/repos.conf
 !/.local/share/gentoo/etc/README.md
 # Arch Linux
 !/.local/share/gentoo/etc/pacman.conf

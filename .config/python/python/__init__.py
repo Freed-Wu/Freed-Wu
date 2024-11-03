@@ -1,7 +1,7 @@
 """$PYTHONSTARTUP
 =================
 
-Only import ``my``.
+Wrap ``__main__.py`` to ensure only ``my`` to be imported.
 """
 
 try:

@@ -19,10 +19,23 @@ if [[ -f ~/.xprofile ]] && [[ -z $PYTHONSTARTUP ]]; then
 	. ~/.xprofile
 fi
 
-if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
+if [[ -f ~/.local/share/zinit/plugins/_pass/pass.sh ]]; then
 	# shellcheck source=/dev/null
-	. ~/.local/share/zinit/plugins/.pass/pass.sh
+	. ~/.local/share/zinit/plugins/_pass/pass.sh
 fi
+
+if [[ -f ~/.local/share/zinit/plugins/_git/debmake.sh ]]; then
+	# shellcheck source=/dev/null
+	. ~/.local/share/zinit/plugins/_git/debmake.sh
+fi
+
+if [[ -f ~/.local/share/zinit/plugins/_perl/brew.sh ]]; then
+	# shellcheck source=/dev/null
+	. ~/.local/share/zinit/plugins/_perl/brew.sh
+fi
+
+# neomutt
+export EMAIL="$DEBEMAIL"
 
 has_cmd() {
 	local opt
@@ -60,13 +73,13 @@ if [[ $OSTYPE == linux-android ]]; then
 elif [[ -f /run/current-system/nixos-version ]]; then
 	# https://blog.thalheim.io/2022/12/31/nix-ld-a-clean-solution-for-issues-with-pre-compiled-executables-on-nixos/
 	export NIX_LD
-	eval NIX_LD="$(~/script/get-NIX_LD.nix)"
+	eval NIX_LD="$(~/script/nixos/get-NIX_LD.nix)"
 	export NIX_LD_LIBRARY_PATH
-	eval NIX_LD_LIBRARY_PATH="$(~/script/get-NIX_LD_LIBRARY_PATH.nix)"
+	eval NIX_LD_LIBRARY_PATH="$(~/script/nixos/get-NIX_LD_LIBRARY_PATH.nix)"
 	export GI_TYPELIB_PATH
-	eval GI_TYPELIB_PATH="$(~/script/get-GI_TYPELIB_PATH.nix)"
+	eval GI_TYPELIB_PATH="$(~/script/nixos/get-GI_TYPELIB_PATH.nix)"
 	if has_cmd python; then
-		PYTHONPATH="$HOME/.local/lib/python$(~/script/get-version.py)/site-packages"
+		PYTHONPATH="$HOME/.local/lib/python$(~/.config/python/python/__main__.py)/site-packages"
 		export PYTHONPATH
 	fi
 	# pkg-config
@@ -93,7 +106,17 @@ else
 	unset dir
 fi
 if has_cmd manpager; then
-	MANPAGER='manpager | less --pattern=^\\S+'
+	if has_cmd less; then
+		version="$(less --version)" version=${version#less } version=${version%% *}
+		if ((version > 600)); then
+			MANPAGER='manpager | less --pattern=^\\S+'
+		else
+			MANPAGER='manpager | less'
+		fi
+		unset version
+	else
+		MANPAGER=manpager
+	fi
 	export MANPAGER
 fi
 # less
@@ -105,17 +128,12 @@ if [[ $OSTYPE == msys ]] || [[ $OSTYPE == cygwin ]]; then
 else
 	FZF_HISTORY_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fzf"
 fi
-# fzf
-if has_cmd auto-sized-fzf.sh; then
-	fzf_opt="$(auto-sized-fzf.sh)"
-fi
 # https://github.com/junegunn/fzf/blob/master/ADVANCED.md#ripgrep-integration
 # rg foo | fzf
 # --preview-window=...,~4 will avoid ps's preview provided by fzf-tab
 # -d$"\0"
 export FZF_DEFAULT_OPTS="--history=$FZF_HISTORY_DIR/fzf.txt
 --preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'
---preview-window=${fzf_opt:-right:50%},border-bottom,+{2}+4/4
 -m
 -d:
 --ansi
@@ -154,16 +172,14 @@ export FZF_DEFAULT_OPTS="--history=$FZF_HISTORY_DIR/fzf.txt
 --bind='alt->:preview-bottom'
 --bind='ctrl-]:change-preview-window(bottom|right)'
 --bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'"
-unset fzf_opt
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.bfsu.edu.cn/homebrew-bottles
-export HOMEBREW_GITHUB_API_TOKEN=$GITHUB_TOKEN
-export HOMEBREW_GITHUB_PACKAGES_TOKEN=$GITHUB_TOKEN
-export HOMEBREW_GITHUB_PACKAGES_USER=$GITHUB_USER
-export HOMEBREW_GIT_EMAIL=$EMAIL
-export HOMEBREW_GIT_NAME=$GITHUB_USER
+export HOMEBREW_API_DOMAIN="$HOMEBREW_BOTTLE_DOMAIN/api"
+export HOMEBREW_GIT_NAME="$DEBFULLNAME"
+export HOMEBREW_GIT_EMAIL="$EMAIL"
+export HOMEBREW_GITHUB_API_TOKEN="$HOMEBREW_GITHUB_PACKAGES_TOKEN"
 # docker
 export DOCKER_BUILDKIT=1
 # repo
@@ -172,52 +188,40 @@ export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 export DIRENV_LOG_FORMAT=
 # minicom
 export MINICOM=-w
-if has_cmd git; then
-	# neomutt
-	EMAIL="$(git config --global user.email)"
-	export EMAIL
-	# debmake
-	DEBFULLNAME="$(git config --global user.name)"
-	export DEBFULLNAME
-	DEBEMAIL="$EMAIL"
-	export DEBEMAIL
-fi
 # lua
-if has_cmd lua; then
-	case $OSTYPE in
-	linux-*)
-		ext=so
-		;;
-	darwin*)
-		ext=dynlib
-		;;
-	*)
-		ext=dll
-		;;
-	esac
-	for _version in '' 5.{1..4}; do
-		version=${_version:-5.1}
-		[ -z "$_version" ] || _version="_${_version//./_}"
-		path_name="LUA_PATH$_version" cpath_name="LUA_CPATH$_version"
-		export "$path_name"="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;\
+case $OSTYPE in
+linux-*)
+	ext=so
+	;;
+darwin*)
+	ext=dynlib
+	;;
+*)
+	ext=dll
+	;;
+esac
+for _version in '' 5.{1..4}; do
+	version=${_version:-5.1}
+	[ -z "$_version" ] || _version="_${_version//./_}"
+	path_name="LUA_PATH$_version" cpath_name="LUA_CPATH$_version"
+	export "$path_name"="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;\
 $HOME/.local/share/lua/$version/?.lua;\
 $HOME/.local/share/lua/$version/?/init.lua;\
 $HOME/.local/state/nix/profile/share/lua/$version/?.lua;\
 $HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
-		export "$cpath_name"="./lib/lua/$version/?.$ext;./?.$ext;\
+	export "$cpath_name"="./lib/lua/$version/?.$ext;./?.$ext;\
 ./lib/lua/$version/loadall.$ext;;\
 $HOME/.local/lib/lua/$version/?.$ext;\
 $HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
-		if [[ -f /run/current-system/nixos-version ]]; then
-			eval "lua_path=\$$path_name" "lua_cpath=\$$cpath_name"
-			export "$path_name"="$lua_path;/run/current-system/sw/share/lua/$version/?.lua;\
+	if [[ -f /run/current-system/nixos-version ]]; then
+		eval "lua_path=\$$path_name" "lua_cpath=\$$cpath_name"
+		export "$path_name"="$lua_path;/run/current-system/sw/share/lua/$version/?.lua;\
 /run/current-system/sw/share/lua/$version/?/init.lua"
-			export "$cpath_name"="$lua_cpath;/run/current-system/sw/lib/lua/$version/?.$ext"
-			unset lua_path lua_cpath
-		fi
-	done
-	unset version path_name cpath_name ext
-fi
+		export "$cpath_name"="$lua_cpath;/run/current-system/sw/lib/lua/$version/?.$ext"
+		unset lua_path lua_cpath
+	fi
+done
+unset version path_name cpath_name ext
 # node
 export NODE_ENV=development
 if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then

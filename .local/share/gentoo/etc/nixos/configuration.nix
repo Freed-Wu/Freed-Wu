@@ -78,6 +78,10 @@ rec {
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
+  environment.shellAliases = {
+    l = null;
+    ll = null;
+  };
   # }}} basic #
 
   # GUI {{{ #
@@ -182,8 +186,24 @@ rec {
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
+    let
+      # https://github.com/NixOS/nixpkgs/pull/222667#issuecomment-1804096580
+      proxychains-symlinks = runCommand "proxychains" { } ''
+        install -d "$out"/{bin,share/zsh/site-functions}
+        ln -s "${if programs.proxychains ? package then programs.proxychains.package else proxychains}/bin/proxychains4" "$out/bin/proxychains"
+        echo -e '#compdef proxychains=proxychains4\n_proxychains4' > "$out/share/zsh/site-functions/_proxychains"
+      '';
+      gopass-symlinks = runCommand "gopass" { } ''
+        install -d "$out"/{bin,share/zsh/site-functions}
+        ln -s "${gopass}/bin/gopass" "$out/bin/pass"
+        echo -e '#compdef pass=gopass\n_gopass' > "$out/share/zsh/site-functions/_pass"
+      '';
+    in
     [
+      proxychains-symlinks
+      gopass-symlinks
       man-pages
       man-pages-posix
       glibcInfo
@@ -203,8 +223,7 @@ rec {
             # https://github.com/petronny/pinyin-completion
             pypinyin
             gdown
-            # https://github.com/NixOS/nixpkgs/issues/352426
-            # keyring-pass
+            keyring-pass
             # PKGBUILD
             nvchecker
             # develop
@@ -320,7 +339,6 @@ rec {
       manix
       nix-index-database
       tree-sitter
-      nixpkgs-fmt
       neocmakelsp
       # pre-commit needs it
       cargo
@@ -385,10 +403,11 @@ rec {
       nur.repos.Freed-Wu.bash-prompt
       # }}} shell #
       # haskell {{{ #
-      haskellPackages.nvfetcher
-      haskellPackages.ShellCheck
-      haskellPackages.pandoc-cli
-      haskellPackages.cachix
+      nixfmt-rfc-style
+      nvfetcher
+      shellcheck
+      pandoc
+      cachix
       # }}} haskell #
       # f# {{{ #
       marksman
