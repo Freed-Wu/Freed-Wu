@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+        <maintainer type="person">
+                <email>{{ g:snips_email }}</email>
+                <name>{{ g:snips_author }}</name>
+        </maintainer>
+        <upstream>
+                <remote-id type="pypi">{{ expand('%:p:h:t') }}</remote-id>
+                <remote-id type="github">{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}</remote-id>
+        </upstream>
+</pkgmetadata>

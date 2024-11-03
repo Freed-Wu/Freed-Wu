@@ -15,7 +15,4 @@ function! init#init#insert#main() abort
   inoremap <M-Bar> <C-O><Bar>
   inoremap <M-<> <C-O>gg
   inoremap <M->> <C-O>G
-  if index(coc#rpc#request('commandList', []), 'rime.toggle') != -1
-    inoremap <C-^> <C-O>:<C-U>CocCommand rime.toggle<CR>
-  endif
 endfunction

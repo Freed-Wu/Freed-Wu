@@ -15,8 +15,8 @@ function! init#init#sh#map() abort
 endfunction
 
 function! init#init#sh#context() abort
-  nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('normal/sh')<CR>
-  xnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('visual/sh')<CR>
+  nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('assets/json/context/normal/sh.json')<CR>
+  xnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('assets/json/context/visual/sh.json')<CR>
 endfunction
 
 function! init#init#sh#echo() abort

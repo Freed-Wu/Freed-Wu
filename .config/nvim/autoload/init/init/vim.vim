@@ -3,8 +3,8 @@
 "
 " assets/json/context/visual/vim.json
 function! init#init#vim#map() abort
-  nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('normal/vim')<CR>
-  xnoremap <silent><nowait><buffer> <LocalLeader> :<C-U>call init#init#quickui#install('visual/vim')<CR>
+  nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('assets/json/context/normal/vim.json')<CR>
+  xnoremap <silent><nowait><buffer> <LocalLeader> :<C-U>call init#init#quickui#install('assets/json/context/visual/vim.json')<CR>
 endfunction
 
 function! init#init#vim#set(...) abort

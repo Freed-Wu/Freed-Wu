@@ -2,6 +2,6 @@
   ["&NR", "NR"],
   ["R&ainbowDelim", "RainbowDelim"],
   ["--"],
-  ["&Table-mode ▶", "call init#init#quickui#install('normal/table_mode')"],
-  ["&Coc ▶", "call init#init#quickui#install('normal/coc')"]
+  ["&Table-mode ▶", "call init#init#quickui#install('assets/json/context/normal/table_mode.json')"],
+  ["&Coc ▶", "call init#init#quickui#install('assets/json/context/normal/coc.json')"]
 ]

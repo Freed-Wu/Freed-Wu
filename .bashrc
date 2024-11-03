@@ -81,9 +81,8 @@ else
 	fi
 fi
 
-source_file zinit/plugins/.pass/pass.sh
 if has_cmd curl; then
-	source_file zinit/plugins/.pass/codestats.sh
+	source_file zinit/plugins/_pass/codestats.sh
 	source_file code-stats-bash/codestats.sh
 fi
 

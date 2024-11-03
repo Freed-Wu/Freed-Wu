@@ -138,6 +138,7 @@ set my_imap_ustc = imaps://imaphz.$my_ustc
 set my_imap_njust = imaps://imap.$my_njust
 set my_imap_qq = imaps://imap.$my_qq
 set my_imap_gmail = imaps://imap.$my_gmail
+set my_pass = `command -v gopass > /dev/null && echo gopass || echo pass`
 source $my_config.ustc
 folder-hook $my_imap_ustc source $my_config.ustc
 folder-hook $my_imap_njust source $my_config.njust

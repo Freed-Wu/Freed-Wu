@@ -2,11 +2,16 @@
 /copyright
 /changelog
 
-/.debhelper/
-/debhelper-build-stamp
+# dch
+/changelog.dch
+
+# debuild
 /files
 /*.substvars
 *.log
+# dh
+/.debhelper/
+/debhelper-build-stamp
 *.debhelper
 
 DEBIAN/

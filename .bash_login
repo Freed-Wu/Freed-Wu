@@ -27,10 +27,7 @@ fi
 # sudo update-alternatives --install /usr/bin/fd fd /usr/bin/fdfind 50
 # old ubuntu uses pudb3
 # sudo update-alternatives --install /usr/bin/pudb pudb /usr/bin/pudb3 50
-# https://github.com/NixOS/nixpkgs/pull/222667#issuecomment-1804096580
-if has_cmd proxychains4 && ! has_cmd proxychains; then
-	alias proxychains=proxychains4
-fi
+# sudo update-alternatives --install /usr/bin/pass pass /usr/bin/gopass 50
 if has_cmd bear make; then
 	alias make='bear -- make'
 fi
@@ -43,3 +40,11 @@ elif has_cmd exa; then
 else
 	alias ls='ls --color=auto -h'
 fi
+
+# fzf
+if has_cmd auto-sized-fzf.sh; then
+  fzf_opt="$(auto-sized-fzf.sh)"
+fi
+FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--preview-window=${fzf_opt:-right:50%},border-bottom,+{2}+4/4"
+unset fzf_opt

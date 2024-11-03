@@ -7,8 +7,8 @@ else
 endif
 let &l:path = join(s:path, ',')
 
-nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('normal/python')<CR>
-xnoremap <silent><nowait><buffer> <LocalLeader> :<C-U>call init#init#quickui#install('visual/python')<CR>
+nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('assets/json/context/normal/python.json')<CR>
+xnoremap <silent><nowait><buffer> <LocalLeader> :<C-U>call init#init#quickui#install('assets/json/context/visual/python.json')<CR>
 
 let b:browser_search_default_engine = 'pypi'
 

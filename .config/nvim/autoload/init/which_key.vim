@@ -21,8 +21,8 @@ function! s:which_key() abort
   xnoremap <silent> Z :<C-U>WhichKeyVisual 'Z'<CR>
   nnoremap <silent> g :<C-U>WhichKey 'g'<CR>
   xnoremap <silent> g :<C-U>WhichKeyVisual 'g'<CR>
-  nnoremap <silent> <C-W> :WhichKey '<lt>C-w>'<CR>
-  xnoremap <silent> <C-W> :WhichKeyVisual '<lt>C-w>'<CR>
+  nnoremap <silent> <C-W> :WhichKey '<lt>C-W>'<CR>
+  xnoremap <silent> <C-W> :WhichKeyVisual '<lt>C-W>'<CR>
   " override targets.vim
   xnoremap <silent> i :<C-U>WhichKeyVisual 'i'<CR>
   xnoremap <silent> a :<C-U>WhichKeyVisual 'a'<CR>

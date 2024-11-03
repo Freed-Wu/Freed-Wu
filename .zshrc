@@ -21,10 +21,9 @@ if ((! $+DOCKER_BUILDKIT)); then
 fi
 
 # brew add some paths which may contain tmux
-zinit id-as'.brew' depth'1' \
-  atclone'/home/linuxbrew/.linuxbrew/bin/brew shellenv > brew.sh
-  zcompile *.sh' \
-  if'[ -x /home/linuxbrew/.linuxbrew/bin/brew ]' \
+zinit id-as'_brew' depth'1' \
+  atclone'. ~/script/zinit/_brew/atclone.zsh' \
+  if'[[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]' \
   for zdharma-continuum/null
 
 if [[ $OSTYPE == linux-gnu ]] && (($+commands[zellij])) \
@@ -198,32 +197,29 @@ MODE_CURSOR_SEARCH=underline
 MODE_CURSOR_VISUAL=block
 MODE_CURSOR_VLINE=bar
 zinit id-as depth'1' wait lucid \
-  atload'vim_mode_set_keymap $(vim-mode-initial-keymap)
-  bindkey -Mvisual s add-surround
-  bindkey -e' \
+  atload'. ~/script/zinit/vim-mode/atload.zsh' \
   for softmoth/zsh-vim-mode
 # 1}}} Cursor #
 
 # Hook {{{1 #
-zinit id-as'.direnv' depth'1' wait lucid \
-  atclone'direnv hook zsh > direnv.sh
-  zcompile *.sh' \
+zinit id-as'_direnv' depth'1' wait lucid \
+  atclone'. ~/script/zinit/_direnv/atclone.zsh' \
   if'(($+commands[direnv]))' \
   for zdharma-continuum/null
-zinit id-as'.pyenv' depth'1' wait lucid \
-  atclone'pyenv init - > pyenv.sh
-  zcompile *.sh' \
+zinit id-as'_pyenv' depth'1' wait lucid \
+  atclone'. ~/script/zinit/_pyenv/atclone.zsh' \
   if'(($+commands[pyenv]))' \
   for zdharma-continuum/null
-# https://github.com/Kaggle/kaggle-api/issues/446
-zinit id-as'.pass' depth'1' as'null' wait lucid \
-  atclone'(($+commands[gopass])) && PASS=gopass O=-o || PASS=pass
-echo "export KAGGLE_USERNAME=$($PASS show $O kaggle/username)
-export KAGGLE_KEY=$($PASS show $O kaggle/key)
-export OPENAI_API_KEY=$($PASS show $O openai/api_key)" > pass.sh
-echo "CODESTATS_API_KEY=$($PASS show $O codestats/$HOST)" > codestats.sh
-echo echo "$($PASS show $O wakatime/api_key)" > wakatime.sh
-chmod +x wakatime.sh' \
+zinit id-as'_perl' depth'1' as'null' wait lucid \
+  atclone'. ~/script/zinit/_perl/atclone.zsh' \
+  if'(($+commands[perl])) && [[ -r ~/.git-credentials ]] && [[ -f ~/.config/gh/hosts.yml ]]' \
+  for zdharma-continuum/null
+zinit id-as'_git' depth'1' as'null' wait lucid \
+  atclone'. ~/script/zinit/_git/atclone.zsh' \
+  if'(($+commands[git]))' \
+  for zdharma-continuum/null
+zinit id-as'_pass' depth'1' as'null' wait lucid \
+  atclone'. ~/script/zinit/_pass/atclone.zsh' \
   if'(($+commands[pass] || $+commands[gopass]))' \
   for zdharma-continuum/null
 zinit id-as depth'1' for mdumitru/last-working-dir
@@ -233,10 +229,9 @@ zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
 # 1}}} Hook #
 
 # Complete {{{1 #
-zinit id-as'.vivid' depth'1' wait lucid \
-  atclone'echo "export LS_COLORS=\"$(vivid generate molokai)\"" > vivid.sh
-  zcompile *.sh' \
-  atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
+zinit id-as'_vivid' depth'1' wait lucid \
+  atclone'. ~/script/zinit/_vivid/atclone.zsh' \
+  atload'. ~/script/zinit/_vivid/atload.zsh' \
   if'(($+commands[vivid]))' \
   for zdharma-continuum/null
 
@@ -260,11 +255,11 @@ zinit id-as depth'1' wait lucid \
 
 # Log {{{1 #
 # must before suggest, see its README.md
-if [[ -f ~/.local/share/zinit/plugins/.pass/codestats.sh ]]; then
-  . ~/.local/share/zinit/plugins/.pass/codestats.sh
+if [[ -f ~/.local/share/zinit/plugins/_pass/codestats.sh ]]; then
+  . ~/.local/share/zinit/plugins/_pass/codestats.sh
 fi
 zinit id-as depth'1' wait lucid from'gitlab' \
-  if'[[ -f ~/.local/share/zinit/plugins/.pass/codestats.sh ]]' \
+  if'[[ -f ~/.local/share/zinit/plugins/_pass/codestats.sh ]]' \
   for code-stats/code-stats-zsh
 ZSH_WAKATIME_PROJECT_DETECTION=true
 zinit id-as depth'1' wait lucid \

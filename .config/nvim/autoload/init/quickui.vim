@@ -7,7 +7,7 @@ endfunction
 ""
 " assets/json/menu
 function! init#quickui#install(menu_name, json_name) abort
-  let l:menu = init#get_json('menu/' . a:json_name)
+  let l:menu = init#get_json('assets/json/menu/' . a:json_name . '.json')
   let l:menu = init#quickui#process(l:menu)
   call quickui#menu#install(a:menu_name, l:menu)
 endfunction
@@ -21,8 +21,8 @@ function! init#quickui#source() abort
   let g:quickui_border_style = 2
   nnoremap <silent> <Space> :<C-U>call quickui#menu#open()<CR>
   xnoremap <silent> <Space> :<C-U>call quickui#menu#open()<CR>
-  nnoremap <silent> , :<C-U>call init#init#quickui#install('normal/global')<CR>
-  xnoremap <silent> , :<C-U>call init#init#quickui#install('visual/global')<CR>
+  nnoremap <silent> , :<C-U>call init#init#quickui#install('assets/json/context/normal/global.json')<CR>
+  xnoremap <silent> , :<C-U>call init#init#quickui#install('assets/json/context/visual/global.json')<CR>
 endfunction
 
 function! init#quickui#post_source() abort

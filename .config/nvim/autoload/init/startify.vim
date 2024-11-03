@@ -60,7 +60,7 @@ function! init#startify#source() abort
         \ {g:maplocalleader . 'z': '~/.zshrc'},
         \ {g:maplocalleader . 'b': '~/.bashrc'},
         \ {g:maplocalleader . 'x': '~/.xprofile'},
-        \ {g:maplocalleader . 'p': '~/.bash_profile'},
+        \ {g:maplocalleader . 's': '~/.bash_profile'},
         \ {g:maplocalleader . 'y': fnamemodify(expand('$XDG_CONFIG_HOME/ptpython/config.py'), ':~')},
         \ {g:maplocalleader . 'p': fnamemodify(expand('$PYTHONSTARTUP'), ':~')},
         \ {g:maplocalleader . 'n': '~/.local/share/gentoo/etc/nixos/configuration.nix'},
