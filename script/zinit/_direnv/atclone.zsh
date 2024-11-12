@@ -1,3 +1,7 @@
 #!/usr/bin/env zsh
-direnv hook zsh > direnv.sh
-zcompile *.sh
+() {
+  local src="$(direnv hook zsh)"
+  src="${src/\/nix\/store\/*\///run/current-system/sw/}"
+  echo "$src" > direnv.sh
+  zcompile *.sh
+}

@@ -16,7 +16,7 @@ function! init#coc#source() abort
         \ 'coc-prettier',
         \
         \ 'coc-tasks', 'coc-vimtex', 'coc-emmet', 'coc-calc',
-        \ 'coc-snippets', 'coc-translator', 'coc-zi',
+        \ 'coc-snippets', 'coc-translator',
         \
         \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
         \ 'coc-gitignore', 'coc-license',
@@ -36,7 +36,7 @@ function! init#coc#source() abort
         \ 'coc-docker', 'coc-sql', 'coc-db', 'coc-bitbake', 'coc-meson',
         \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-eslint',
         \ '@yaegassy/coc-ruff', 'coc-pyright', 'coc-lua', 'coc-solargraph',
-        \ 'coc-clangd',
+        \ 'coc-clangd', 'coc-alex', 'coc-write-good',
         \ ]
   " tabnine don't support android
   if $PREFIX !=# '/data/data/com.termux/files/usr'
@@ -52,6 +52,7 @@ function! init#coc#source() abort
   " ~/.local/share/nvim/repos/github.com/nvim-treesitter/nvim-treesitter/lua/nvim-treesitter/parsers.lua
   " https://code.visualstudio.com/docs/languages/identifiers#_known-language-identifiers
   let g:coc_filetype_map = {
+        \ 'text': 'plaintext',
         \ 'bash': 'sh',
         \ 'PKGBUILD': 'sh',
         \ 'ebuild': 'sh',
@@ -170,8 +171,10 @@ function! init#coc#source() abort
 endfunction
 
 function! init#coc#imap() abort
-  inoremap <silent><expr> <M-p> "\<C-R>=coc#float#scroll(0)\<cr>"
-  inoremap <silent><expr> <M-n> "\<C-R>=coc#float#scroll(1)\<cr>"
+  inoremap <silent><expr> <M-p> "\<C-R>=coc#float#scroll(0)\<CR>"
+  inoremap <silent><expr> <M-n> "\<C-R>=coc#float#scroll(1)\<CR>"
+  inoremap <silent><expr> <C-P> coc#pum#visible() ? coc#pum#prev(1) : pumvisible() ? "\<C-P>" : "\<Up>"
+  inoremap <silent><expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : pumvisible() ? "\<C-N>" : "\<Down>"
   inoremap <silent><expr> <C-M-p> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
   inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"

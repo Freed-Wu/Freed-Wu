@@ -1,7 +1,6 @@
 From: "{{ g:snips_author }}" <{{ g:snips_email }}>
 To: dongeliu@ustc.edu.cn
 Cc: sunxiaoyan@ustc.edu.cn
-Bcc: lil1@ustc.edu.cn, zhyuey@ustc.edu.cn
 Subject: Report
 Reply-To:
 

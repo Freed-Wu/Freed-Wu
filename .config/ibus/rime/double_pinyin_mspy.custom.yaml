@@ -1,6 +1,7 @@
 ---
 patch:
   __include: my/moji:/
+  schema/name: 微软双拼
   switches:
     - name: keyboard
       reset: 0

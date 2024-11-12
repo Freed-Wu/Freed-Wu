@@ -8,6 +8,7 @@ nvim-treesitter-context = "scm"
 
 "rime.nvim" = "scm"
 "ime.nvim" = "scm"
+"jieba.nvim" = "scm"
 
 "code-stats.nvim" = "scm"
 

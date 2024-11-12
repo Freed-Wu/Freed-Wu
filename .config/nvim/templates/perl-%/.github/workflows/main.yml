@@ -95,14 +95,11 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: {{ expand('%:p:h:h:h:t') }}-${{github.ref_name}}
       - name: Build
         run: |
-          n="{{ expand('%:p:h:h:h:t') }}-$GITHUB_REF_NAME"
-          cd ..
-          mv {{ expand('%:p:h:h:h:t') }} "$n"
-          tar vcaf ./"$n".tar.gz "$n"
-          mv ./*.tar.* "$n"
-          mv "$n" {{ expand('%:p:h:h:h:t') }}
+          tar vcaf {{ expand('%:p:h:h:h:t') }}-${{github.ref_name}}.tar.gz {{ expand('%:p:h:h:h:t') }}-${{github.ref_name}}
       - uses: yuezk/publish-ppa-package@main
         with:
           repository: freedwu/ppa
@@ -111,3 +108,4 @@ jobs:
           tarball: ./*.tar.*
           deb_email: ${{secrets.DEB_EMAIL}}
           deb_fullname: freedwu
+          debmake_arguments: -mb{{ expand('%:p:h:h:h:t') }}:perl

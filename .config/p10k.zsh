@@ -39,6 +39,7 @@
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     my_brew_shell
+    my_toolbox
     my_rime
     my_asciinema_rec
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -1654,6 +1655,16 @@
   function prompt_my_brew_shell() {
     if [[ -n $HOMEBREW_DEBUG_INSTALL ]]; then
       p10k segment -byellow -fred -i⭐
+    fi
+  }
+
+  # https://docs.fedoraproject.org/en-US/fedora-silverblue/tips-and-tricks/#_working_with_toolbx
+  function prompt_my_toolbox() {
+    if [[ -f /run/.toolboxenv && -f /run/.containerenv ]]; then
+      if [[ -z $POWERLEVEL9K_TOOLBOX ]]; then
+        POWERLEVEL9K_TOOLBOX="$(grep -oP "(?<=name=\")[^\";]+" /run/.containerenv)"
+      fi
+      p10k segment -bgreen -fblack -i -t"$POWERLEVEL9K_TOOLBOX"
     fi
   }
 
