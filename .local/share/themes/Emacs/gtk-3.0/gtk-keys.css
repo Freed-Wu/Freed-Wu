@@ -34,8 +34,12 @@
 /*
  * https://wiki.archlinux.org/title/GTK#Emacs_key_bindings
  *
- * gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
- * xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
+ * gnome:
+ *   gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
+ * xfce:
+ *   xfconf-query -c xsettings -p /Gtk/KeyThemeName -s Emacs
+ * lxqt/kde:
+ *   echo gtk-theme-name=windows10 >> ~/.config/gtk-3.0/settings.ini
  */
 @binding-set gtk-emacs-text-entry
 {

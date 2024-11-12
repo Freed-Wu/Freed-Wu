@@ -53,14 +53,6 @@ do
             break
         end
     end
-    if vim.fn.filereadable("/run/current-system/nixos-version") == 1 then
-        loadstring("variables.STDCPP_LIBDIR = " ..
-            io.popen(vim.fn.expand("~/script/nixos/get-NIX_LD_LIBRARY_PATH.nix")):read())()
-        loadstring("variables.OPENSSL_INCDIR = " ..
-            io.popen(vim.fs.joinpath(vim.fn.stdpath("config"), "scripts", "get-OPENSSL_INCDIR.nix")):read())()
-        loadstring("variables.OPENSSL_LIBDIR = " ..
-            io.popen(vim.fs.joinpath(vim.fn.stdpath("config"), "scripts", "get-OPENSSL_LIBDIR.nix")):read())()
-    end
     vim.g.rocks_nvim = {
         rocks_path = vim.fs.dirname(vim.fs.dirname(vim.fs.joinpath(vim.fn.stdpath("data")))),
         luarocks_config = {

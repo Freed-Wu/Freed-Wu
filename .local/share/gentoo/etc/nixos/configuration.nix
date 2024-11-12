@@ -2,24 +2,27 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
-let
-  rimeDataPkgs = with pkgs; [
-    rime-data
-    nur.repos.Freed-Wu.rime-kaomoji
-    nur.repos.Freed-Wu.rime-japanese
-  ];
-in
 rec {
   # basic {{{ #
-  imports =
-    [
-      # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-    ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.trusted-users = [ "root" "@wheel" ];
+  imports = [
+    # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+  ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
   nix.settings.substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
   nix.settings.use-xdg-base-directories = true;
 
@@ -59,7 +62,13 @@ rec {
   users.defaultUserShell = pkgs.zsh;
   users.users.wzy.isNormalUser = true;
   users.users.wzy.description = "Wu, Zhenyu";
-  users.users.wzy.extraGroups = [ "wheel" "networkmanager" "input" "docker" "dialout" ];
+  users.users.wzy.extraGroups = [
+    "wheel"
+    "networkmanager"
+    "input"
+    "docker"
+    "dialout"
+  ];
 
   # List services that you want to enable:
 
@@ -88,16 +97,12 @@ rec {
   # Select internationalisation properties.
   i18n.inputMethod.enable = true;
   i18n.inputMethod.type =
-    if
-      services.displayManager.defaultSession == "gnome" then
-      "ibus"
-    else
-      "fcitx5";
+    if services.displayManager.defaultSession == "gnome" then "ibus" else "fcitx5";
   i18n.inputMethod.fcitx5.addons = with pkgs; [
-    (fcitx5-rime.override { rimeDataPkgs = rimeDataPkgs; })
+    fcitx5-rime
   ];
   i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [
-    (rime.override { rimeDataPkgs = rimeDataPkgs; })
+    rime
   ];
 
   fonts.fontDir.enable = true;
@@ -105,18 +110,30 @@ rec {
   fonts.packages = with pkgs; [
     wqy_zenhei
     wqy_microhei
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerdfonts
   ];
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.libinput.enable = true;
   # Configure keymap in X11
-  services.displayManager.defaultSession = "gnome";
+  # gnome 47.1 and plasma on wayland display incorrectly for HiDPI
+  services.displayManager.defaultSession = "plasma";
   services.xserver.desktopManager.gnome.enable = services.displayManager.defaultSession == "gnome";
   services.xserver.displayManager.gdm.enable = services.displayManager.defaultSession == "gnome";
 
   services.xserver.desktopManager.plasma5.enable = services.displayManager.defaultSession == "plasma";
   services.displayManager.sddm.enable = services.displayManager.defaultSession == "plasma";
+  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.settings = {
+    # https://wiki.archlinux.org/title/SDDM#Enable_HiDPI
+    General = {
+      GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=2,QT_FONT_DPI=96";
+    };
+    # https://wiki.archlinux.org/title/SDDM#DPI_settings
+    X11 = {
+      ServerArguments = "-nolisten tcp -dpi 94";
+    };
+  };
 
   services.xserver.desktopManager.lxqt.enable = services.displayManager.defaultSession == "lxqt";
 
@@ -128,7 +145,9 @@ rec {
   # services.fprintd.enable = true;
   # services.fprintd.tod.enable = true;
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
-  services.picom.enable = services.displayManager.defaultSession != "gnome" && services.displayManager.defaultSession != "plasma";
+  services.picom.enable =
+    services.displayManager.defaultSession != "gnome"
+    && services.displayManager.defaultSession != "plasma";
   services.picom.fade = true;
   services.picom.inactiveOpacity = 0.95;
   services.picom.settings = {
@@ -192,7 +211,9 @@ rec {
       # https://github.com/NixOS/nixpkgs/pull/222667#issuecomment-1804096580
       proxychains-symlinks = runCommand "proxychains" { } ''
         install -d "$out"/{bin,share/zsh/site-functions}
-        ln -s "${if programs.proxychains ? package then programs.proxychains.package else proxychains}/bin/proxychains4" "$out/bin/proxychains"
+        ln -s "${
+          if programs.proxychains ? package then programs.proxychains.package else proxychains
+        }/bin/proxychains4" "$out/bin/proxychains"
         echo -e '#compdef proxychains=proxychains4\n_proxychains4' > "$out/share/zsh/site-functions/_proxychains"
       '';
       gopass-symlinks = runCommand "gopass" { } ''
@@ -216,53 +237,49 @@ rec {
       nur.repos.Freed-Wu.stardict-jmdict-ja-en
       nur.repos.Freed-Wu.stardict-jmdict-en-ja
       # python {{{ #
-      (
-        python3.withPackages (
-          p: with p; [
-            # tool
-            # https://github.com/petronny/pinyin-completion
-            pypinyin
-            gdown
-            keyring-pass
-            # PKGBUILD
-            nvchecker
-            # develop
-            pip
-            build
-            # debug
-            ptpython
-            pudb
-            pytest
-            pytest-pudb
-            # data science
-            beautifulsoup4
-            lxml
-            pandas
-            # deep learning
-            openai
-            # https://github.com/NixOS/nixpkgs/issues/280861
-            # wandb
-            tensorboard
-            torchWithoutCuda
-            torchvision
-            torchmetrics
-            # misc
-            # wxpython doesn't support python 3.12
-            # nur.repos.Freed-Wu.mulimgviewer
-            nur.repos.Freed-Wu.pyrime
-            nur.repos.Freed-Wu.translate-shell
-            nur.repos.Freed-Wu.mutt-language-server
-            nur.repos.Freed-Wu.tmux-language-server
-            nur.repos.Freed-Wu.zathura-language-server
-            nur.repos.Freed-Wu.autotools-language-server
-            nur.repos.Freed-Wu.termux-language-server
-            nur.repos.Freed-Wu.requirements-language-server
-            nur.repos.Freed-Wu.sublime-syntax-language-server
-            nur.repos.Freed-Wu.expect-language-server
-            nur.repos.Freed-Wu.xilinx-language-server
-          ]
-        )
-      )
+      (python3.withPackages (
+        p: with p; [
+          # tool
+          gdown
+          keyring-pass
+          # PKGBUILD
+          nvchecker
+          # develop
+          pip
+          build
+          # debug
+          ptpython
+          pudb
+          pytest
+          pytest-pudb
+          # data science
+          beautifulsoup4
+          lxml
+          pandas
+          # deep learning
+          openai
+          # https://github.com/NixOS/nixpkgs/issues/280861
+          # wandb
+          tensorboard
+          torchWithoutCuda
+          torchvision
+          torchmetrics
+          # misc
+          # wxpython doesn't support python 3.12
+          # nur.repos.Freed-Wu.mulimgviewer
+          nur.repos.Freed-Wu.pyrime
+          nur.repos.Freed-Wu.translate-shell
+          nur.repos.Freed-Wu.mutt-language-server
+          nur.repos.Freed-Wu.tmux-language-server
+          nur.repos.Freed-Wu.zathura-language-server
+          nur.repos.Freed-Wu.autotools-language-server
+          nur.repos.Freed-Wu.termux-language-server
+          nur.repos.Freed-Wu.requirements-language-server
+          nur.repos.Freed-Wu.sublime-syntax-language-server
+          nur.repos.Freed-Wu.expect-language-server
+          nur.repos.Freed-Wu.xilinx-language-server
+        ]
+      ))
       # mesonlsp needs it
       meson
       vim-vint
@@ -281,36 +298,29 @@ rec {
       nur.repos.mic92.gdb-dashboard
       # }}} python #
       # perl {{{ #
-      (
-        perl.withPackages (
-          p: with p; [
-            PerlTidy
-            PerlLanguageServer
-          ]
-        )
-      )
+      (perl.withPackages (
+        p: with p; [
+          PerlTidy
+          PerlLanguageServer
+        ]
+      ))
       rename
       exiftool
       parallel
       # }}} perl #
       # ruby {{{ #
-      (
-        ruby.withPackages (
-          p: with p; [
-            solargraph
-            rubocop
-            pry
-          ]
-        )
-      )
+      (ruby.withPackages (
+        p: with p; [
+          solargraph
+          rubocop
+          pry
+        ]
+      ))
       # }}} ruby #
       # nodejs {{{ #
       nodejs
       yarn-berry
-      web-ext
       gitmoji-cli
-      alex
-      write-good
       nodePackages.ts-node
       # TODO: https://github.com/NixOS/nixpkgs/pull/245016
       # nodePackages.gitmoji-chanagelog
@@ -338,6 +348,7 @@ rec {
       taplo
       manix
       nix-index-database
+      nerdfix
       tree-sitter
       neocmakelsp
       # pre-commit needs it
@@ -403,6 +414,10 @@ rec {
       nur.repos.Freed-Wu.bash-prompt
       # }}} shell #
       # haskell {{{ #
+      # pre-commit needs it for haskell hooks
+      cabal-install
+      # pre-commit needs it for haskell hooks
+      ghc
       nixfmt-rfc-style
       nvfetcher
       shellcheck
@@ -471,7 +486,7 @@ rec {
       scrcpy
       texlive.combined.scheme-full
       linux-firmware
-      (p7zip.override { enableUnfree = true; })
+      p7zip
       w3m
       elinks
       jq
@@ -483,6 +498,10 @@ rec {
       num-utils
       espeak-classic
       fastfetch
+      # for lesspipe to view *.rpm
+      rpm
+      # for lesspipe to view *.deb
+      dpkg
       nur.repos.Freed-Wu.tmux-rime
       # }}} c #
       # c++ {{{ #
@@ -491,8 +510,6 @@ rec {
       cmake
       mesonlsp
       openai-triton-llvm
-      libreoffice-fresh
-      # wpsoffice
       watchman
       cppcheck
       nixd
@@ -512,30 +529,42 @@ rec {
       nur.repos.Freed-Wu.netease-cloud-music
       # nur.repos.xddxdd.qqmusic
       # }}} c++ #
-    ] ++ (lib.optionals services.xserver.desktopManager.gnome.enable
-      [
-        gnome-tweaks
-        gnome-randr
-        # https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/
-        gnomeExtensions.gtk4-desktop-icons-ng-ding
-        gnomeExtensions.clipboard-indicator
-        gnomeExtensions.appindicator
-        gnomeExtensions.screen-rotate
-      ]) ++ (lib.optionals
+    ]
+    # don't use libreoffice-fresh to avoid building
+    ++ (if services.xserver.desktopManager.plasma5.enable then [ libreoffice-qt ] else [ libreoffice ])
+    ++ (lib.optionals services.xserver.desktopManager.gnome.enable [
+      gnome-tweaks
+      gnome-randr
+      # https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/
+      gnomeExtensions.gtk4-desktop-icons-ng-ding
+      gnomeExtensions.clipboard-indicator
+      gnomeExtensions.appindicator
+      gnomeExtensions.screen-rotate
+    ])
+    ++ (lib.optionals
       (
-        hardware.graphics ? extraPackages && builtins.elem intel-compute-runtime hardware.graphics.extraPackages
+        hardware.graphics ? extraPackages
+        && builtins.elem intel-compute-runtime hardware.graphics.extraPackages
       )
       [
         intel-gpu-tools
-      ])
-    ++ (
-      # wl-clipboard breaks vim / firefox
-      # if services.xserver.displayManager.gdm ? wayland && ! services.xserver.displayManager.gdm.wayland then
-      [ xsel ]
-      # https://github.com/YaLTeR/wl-clipboard-rs/issues/8
-      # else [ wl-clipboard ]
+      ]
     )
-  ;
+    ++ (
+      if
+        services.xserver.displayManager.gdm ? wayland
+        && !services.xserver.displayManager.gdm.wayland
+        && services.xserver.displayManager.gdm.enable
+      then
+        [ xsel ]
+      # wl-clipboard breaks vim / firefox
+      # https://github.com/YaLTeR/wl-clipboard-rs/issues/8
+      else
+        [
+          xsel
+          # wayclip
+        ]
+    );
 
   # program {{{ #
   virtualisation.docker.enable = true;
@@ -569,7 +598,12 @@ rec {
   programs.zsh.enableBashCompletion = true;
   programs.zsh.enableGlobalCompInit = true;
   programs.zsh.autosuggestions.async = true;
-  programs.zsh.setOptions = [ "HIST_IGNORE_DUPS" "SHARE_HISTORY" "HIST_FCNTL_LOCK" "emacs" ];
+  programs.zsh.setOptions = [
+    "HIST_IGNORE_DUPS"
+    "SHARE_HISTORY"
+    "HIST_FCNTL_LOCK"
+    "emacs"
+  ];
   programs.zsh.histSize = 20000;
   programs.gnupg.agent.enable = true;
   programs.gnupg.agent.enableSSHSupport = true;

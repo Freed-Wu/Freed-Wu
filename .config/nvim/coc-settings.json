@@ -18,18 +18,12 @@
   "coc.source.word.shortcut": "",
   "dash-complete.shortcut": "-",
   "diagnostic-languageserver.filetypes": {
-    "bbcode": ["write-good", "alex-text"],
     "c": ["cppcheck"],
     "cpp": ["cppcheck"],
     "cmake": ["cmake-lint", "cmakelint"],
     "elixir": ["mix_credo", "mix_credo_compile"],
-    "gitcommit": ["write-good", "alex-text"],
-    "html": ["alex-html"],
-    "mail": ["write-good", "alex-text"],
-    "markdown": ["write-good", "alex"],
     "php": ["phpstan", "psalm"],
     "systemd": ["systemd-analyze"],
-    "text": ["write-good", "alex-text"],
     "tcl": ["nagelfar"],
     "vim": ["vint"],
     "yaml": ["yamllint", "actionlint"]

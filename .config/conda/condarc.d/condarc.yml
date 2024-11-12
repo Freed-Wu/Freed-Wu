@@ -1,0 +1,20 @@
+---
+channels:
+  - conda-forge
+# https://mamba.readthedocs.io/en/latest/user_guide/troubleshooting.html#mixing-the-defaults-and-conda-forge-channels
+default_channels: []
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
+# for mamba, pixi
+envs_dirs:
+  - ~/.local/envs
+# for mamba, pixi
+pkgs_dirs:
+  - ~/.local/pkgs
+# useless
+# conda: always true
+# memba: always false
+# show_channel_urls: true
+add_pip_as_python_dependency: false
+conda-build:
+  root-dir: ~/.local/share/conda-bld

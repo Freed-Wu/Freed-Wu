@@ -76,15 +76,11 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 	eval NIX_LD="$(~/script/nixos/get-NIX_LD.nix)"
 	export NIX_LD_LIBRARY_PATH
 	eval NIX_LD_LIBRARY_PATH="$(~/script/nixos/get-NIX_LD_LIBRARY_PATH.nix)"
-	export GI_TYPELIB_PATH
-	eval GI_TYPELIB_PATH="$(~/script/nixos/get-GI_TYPELIB_PATH.nix)"
-	if has_cmd python; then
-		PYTHONPATH="$HOME/.local/lib/python$(~/.config/python/python/__main__.py)/site-packages"
-		export PYTHONPATH
+	# https://github.com/Freed-Wu/ime.nvim#tips
+	if [[ -f ~/.local/share/lua/5.1/ime/get-GI_TYPELIB_PATH.nix ]]; then
+		export GI_TYPELIB_PATH
+		eval GI_TYPELIB_PATH="$(nix eval --impure -f ~/.local/share/lua/5.1/ime/get-GI_TYPELIB_PATH.nix)"
 	fi
-	# pkg-config
-	PKG_CONFIG_PATH="$PKG_CONFIG_PATH${PKG_CONFIG_PATH:+:}/run/current-system/sw/lib/pkgconfig:/run/current-system/sw/share/pkgconfig:$HOME/.local/state/nix/profile/lib/pkgconfig:$HOME/.local/state/nix/profile/share/pkgconfig"
-	export PKG_CONFIG_PATH
 else
 	dir="/${MINGW_ARCH:-mingw64}/bin"
 	if [[ $OSTYPE != msys && -d $dir ]]; then

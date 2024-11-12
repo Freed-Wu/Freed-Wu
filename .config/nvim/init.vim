@@ -273,15 +273,24 @@ if !filereadable(expand('$XDG_DATA_NVIM/repos/github.com/Shougo/dein.vim/autoloa
     finish
   endif
 endif
+let g:dein#cache_directory = $XDG_CACHE_NVIM
+let g:dein#runtime_directory = expand('$XDG_DATA_NVIM/site/pack/dein/opt/_merged.vim')
 let g:dein#enable_notification = 1
 if executable('aria2c')
   let g:dein#download_command = 'aria2c'
 endif
 let s:prefix = getenv('PREFIX')
 if s:prefix == v:null
-  let s:prefix = '/usr'
+  let s:sh = getenv('SHELL')
+  if s:sh == v:null
+    let s:sh = '/bin/sh'
+  endif
+  let s:prefix = fnamemodify(s:sh, ':h:h')
 endif
-for s:prefix in [s:prefix, '/usr/local', '/run/current-system/sw']
+" /usr merge: /usr/bin/sh -> /usr/share
+" non /usr merge: /bin/sh -> /usr/share
+" nix-shell: /nix/store/XXXX/bin/sh -> /run/current-system/sw/share
+for s:prefix in [s:prefix, s:prefix . '/usr', '/run/current-system/sw']
   let s:path = s:prefix . '/share/icons/hicolor/128x128/apps/nvim.png'
   if filereadable(s:path)
     let g:dein#notification_icon = s:path
@@ -549,9 +558,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ })
   call dein#add('drwx/calutil.vim')
   call dein#add('JikkuJose/vim-visincr')
-  call dein#add('chrisbra/NrrwRgn', {
-        \ 'hook_source': 'call init#nrrwrgn#source()',
-        \ })
+  call dein#add('AndrewRadev/inline_edit.vim')
   call dein#add('LiquidFun/vim-comment-banners')
   call dein#add('tpope/vim-unimpaired', {
         \ 'on_map': {'n': ['yo', '[', ']', '>p', '<p', '=p', 'y<Space>']},
@@ -599,7 +606,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ })
   " bug
   call dein#add('justinmk/vim-sneak', {
-        \ 'if': !has('win32unix'),
         \ 'on_map': {'n': ['f', 'F', 't', 'T'],
         \ 'o': ['f', 'F', 't', 'T', 'z', 'Z'],
         \ 'x': ['f', 'F', 't', 'T'],
@@ -811,7 +817,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
 
   " VCS {{{2 "
   call dein#add('rhysd/committia.vim', {
-        \ 'if': !has('win32'),
         \ 'hook_source': 'call init#committia#source()',
         \ })
   " 2}}} VCS "
@@ -840,5 +845,8 @@ call dein#call_hook('post_source')
 
 if has('nvim')
   lua require"init"
+endif
+if has('pythonx') && exists('$PYTHONSTARTUP')
+  pyxfile $PYTHONSTARTUP
 endif
 " ex: foldmethod=marker path=.,$XDG_DATA_NVIM/repos/github.com,$XDG_DATA_NVIM/repos

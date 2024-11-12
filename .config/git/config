@@ -101,7 +101,7 @@
 	directory = *
 [sendemail]
 	suppresscc = author
-	sendmailCmd = neomutt
+	sendmailCmd = ~/.config/git/neomutt
 [fetch "fsck"]
 	badTimezone = warn
 [commit]

@@ -44,3 +44,7 @@ export PROXYCHAINS_QUIET_MODE=1
 # https://bbs.archlinux.org/viewtopic.php?id=298064
 # https://github.com/grpc/grpc/issues/37178
 export GRPC_VERBOSITY=ERROR
+# mamba
+export MAMBA_ROOT_PREFIX="$HOME/.local"
+# pixi
+export PIXI_HOME="$HOME/.local"

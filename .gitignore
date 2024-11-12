@@ -41,7 +41,8 @@
 !/.vintrc.yaml
 !/.chktexrc
 !/.sqliterc
-!/.gtkrc-2.0
+# both lxqt-config-appearance and kde modify them
+# !/.gtkrc-2.0
 !/.xinitrc
 !/.Xsession
 !/.pypirc
@@ -58,6 +59,8 @@
 # https://github.com/priv-kweihmann/oelint-adv/issues/527
 !/.oelint.cfg
 !/.devscripts
+# mamba
+!/.condarc
 
 # dotfiles
 !/.dosbox/
@@ -136,6 +139,9 @@
 !/.config/electron-flags.conf
 !/.config/black
 !/.config/pylintrc
+!/.config/khotkeysrc
+!/.config/kglobalshortcutsrc
+!/.config/kdeglobals
 !/.config/fsh/
 !/.config/zathura/
 /.config/zathura/*
@@ -242,9 +248,10 @@
 /.config/pacman/*
 !/.config/pacman/makepkg.conf
 !/.config/ripgreprc
-!/.config/gtk-3.0/
-/.config/gtk-3.0/*
-!/.config/gtk-3.0/settings.ini
+# both lxqt-config-appearance and kde modify them
+# !/.config/gtk-3.0/
+# /.config/gtk-3.0/*
+# !/.config/gtk-3.0/settings.ini
 !/.config/fcitx5/
 /.config/fcitx5/*
 !/.config/fcitx5/config
@@ -322,6 +329,7 @@
 !/.config/cabal/config
 !/.config/zellij/
 !/.config/sharpkeys/
+!/.config/pixi/
 
 # $XDG_DATA_HOME
 !/.local/
@@ -398,13 +406,6 @@
 !/.local/state/nix/
 /.local/state/nix/*
 !/.local/state/nix/channels
-
-# bin
-!/.local/bin/
-/.local/bin/*
-!/.local/bin/adb.py
-!/.local/bin/telnet.py
-!/.local/bin/neomutt
 
 # Windows
 !/.minttyrc
