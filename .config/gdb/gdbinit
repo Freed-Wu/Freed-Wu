@@ -6,7 +6,7 @@ set output-radix 16
 set logging overwrite on
 set disable-randomization on
 set confirm off
-source ~/.config/gdb/gdbinit.py
+source ~/.config/python/python/__init__.py
 
 define arg
   print *argv @ argc
