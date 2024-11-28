@@ -1,5 +1,5 @@
 PROJECT_NAME           = {{ expand('%:p:h:t') }}
-OUTPUT_DIRECTORY       = build
+OUTPUT_DIRECTORY       = _readthedocs
 USE_MDFILE_AS_MAINPAGE = README.md
 GENERATE_XML           = YES
 RECURSIVE              = YES

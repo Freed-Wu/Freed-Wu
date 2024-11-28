@@ -1,0 +1,44 @@
+snippet inc "myUltiSnips" b
+	\`include "$1.v"
+snippet def "myUltiSnips" b
+	\`define $1 $0
+snippet ifd "myUltiSnips" b
+	\`ifdef $1
+		$2
+	\`else
+		$3
+	\`endif
+snippet pa "myUltiSnips" b
+	parameter $1 = $2;
+snippet int "myUltiSnips" i
+	integer $1;
+snippet re "myUltiSnips" b
+	reg [$1:$2] $3;
+snippet wi "myUltiSnips" b
+	wire [$1:$2] $3;
+snippet as "myUltiSnips" b
+	assign $1 = $2;
+snippet po "myUltiSnips" i
+	posedge $0
+snippet ne "myUltiSnips" i
+	negedge $0
+snippet for "myUltiSnips" b
+	for($1;$2;$3)
+snippet in "myUltiSnips" b
+	initial begin
+		$0
+	end
+snippet ta "myUltiSnips" b
+	task $1;
+		$0
+	endtask
+snippet f "myUltiSnips" b
+	function $1
+		$0
+	endfunction
+snippet di
+	$display("%t: $1", $realtime, $2);
+snippet mo
+	$monitor("%t: $1", $realtime, $2);
+snippet fi
+	$finish;

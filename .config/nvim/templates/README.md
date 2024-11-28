@@ -1,6 +1,6 @@
 # {{ expand('%:p:h:t') }}
 
-[![readthedocs](https://shields.io/readthedocs/{{ expand('%:p:h:t') }})](https://{{ expand('%:p:h:t') }}.readthedocs.io)
+[![readthedocs](https://shields.io/readthedocs/{{ substitute(expand('%:p:h:t'), '\.', '-', 'g') }})](https://{{ substitute(expand('%:p:h:t'), '\.', '-', 'g') }}.readthedocs.io)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/main.svg)](https://results.pre-commit.ci/latest/github/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/main)
 [![github/workflow](https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/actions/workflows/main.yml/badge.svg)](https://github.com/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/actions)
 [![codecov](https://codecov.io/gh/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{ split(g:snips_github, '/')[-1] }}/{{ expand('%:p:h:t') }})

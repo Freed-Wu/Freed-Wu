@@ -18,9 +18,8 @@ function! init#init#vim#echo(...) abort
   if stridx(l:word, '(') == -1
     let l:word = substitute(l:word, ')$', '', '')
   endif
-  let l:word = substitute(l:word, '[|`]', '', 'g')
+  let l:word = substitute(l:word, '^[|`]\|[|`,]$', '', '')
   let l:word = substitute(l:word, '[lsa]\ze:', 'g', 'g')
-  let l:word = substitute(l:word, ',$', '', '')
   echo eval(l:word)
 endfunction
 
@@ -31,7 +30,7 @@ endfunction
 
 function! init#init#vim#autocmd(...) abort
   let l:word = init#parse(a:)
-  let l:word = substitute(l:word, '[|`]', '', 'g')
+  let l:word = substitute(l:word, '^[|`]\|[|`]$', '', 'g')
   execute 'autocmd' l:word
 endfunction
 

@@ -1,0 +1,25 @@
+snippet #! "myUltiSnips" b
+	#!/usr/bin/env python
+
+snippet cls "from dataclasses import dataclass" b
+	@dataclass
+	class $1:
+		$0
+
+snippet def "myUltiSnips" b
+	def $1(self, $2):
+		$0
+
+snippet wrap "from functools import wraps; from typing import Callable" b
+	def $1(f) -> Callable:
+		@wraps(f)
+		def wrapper(*args, **kwargs):
+			$0
+			return f(*args, **kwargs)
+		return wrapper
+
+snippet distbreak "from torch import distributed as dist" b
+	if dist.get_rank() == 0:
+		breakpoint()
+	else:
+		dist.barrier()

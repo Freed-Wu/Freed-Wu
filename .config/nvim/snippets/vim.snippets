@@ -1,0 +1,36 @@
+snippet f "myUltiSnips" b
+	function! `!v
+	expand('%') =~# 'autoload' ? substitute(matchstr(expand('%:p'), 'autoload/\zs.*\ze.vim'), '[/\\]', '#', 'g') . '#' : ''
+	`$1() abort
+		$0
+	endfunction
+snippet au "myUltiSnips" b
+	augroup $1
+		autocmd!
+		autocmd $0
+	augroup END
+snippet warn
+	echohl WarningMsg
+	echomsg '$1'
+	echohl None
+
+snippet Describe "myUltiSnips" b
+	Describe $1
+		$0
+	End
+snippet Context "myUltiSnips" b
+	Context $1
+		$0
+	End
+snippet It "myUltiSnips" b
+	It $1
+		$0
+	End
+snippet Before "myUltiSnips" b
+	Before ${1:all}
+		$0
+	End
+snippet After "myUltiSnips" b
+	After ${1:all}
+		$0
+	End

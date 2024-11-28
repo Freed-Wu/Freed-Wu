@@ -40,6 +40,9 @@ elif has_cmd exa; then
 else
 	alias ls='ls --color=auto -h'
 fi
+if has_cmd bat; then
+	alias cat='bat -pp'
+fi
 
 # fzf
 if has_cmd auto-sized-fzf.sh; then

@@ -106,7 +106,7 @@
 	badTimezone = warn
 [commit]
 	gpgsign = true
-	template = ~/.config/git/_COMMIT_EDITMSG
+	template = ~/.config/git/COMMIT_EDITMSG
 [tag]
 	# after git 2.23
 	gpgSign = true

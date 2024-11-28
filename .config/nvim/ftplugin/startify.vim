@@ -37,3 +37,7 @@ for b:startify_list in g:startify_lists
 endfor
 
 nnoremap <silent><nowait><buffer> . :<C-U>WhichKey '.'<CR>
+
+if exists(':AnyFoldActivate')
+  AnyFoldActivate
+endif

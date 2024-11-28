@@ -7,7 +7,7 @@
 # sudo pacman -S nvchecker jq pacman-contrib
 # ./PKGBUILD
 # ```
-_pkgname={{ substitute(expand('%:p:h:t'), '\.lua$', '', '') }}
+_pkgname={{ substitute(substitute(expand('%:p:h:t'), '\.lua$', '', ''), '^lua-', '', '') }}
 pkgname=(lua{,51,52,53}-"$_pkgname")
 pkgver=0.0.1
 pkgrel=1

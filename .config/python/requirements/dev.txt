@@ -1,7 +1,0 @@
-#!/usr/bin/env -S pip install -r
-
-gpustat
-ptpython
-pudb
-ruff-lsp
-torchinfo

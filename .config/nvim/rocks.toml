@@ -17,6 +17,9 @@ nvim-treesitter-context = "scm"
 firenvim = "scm"
 "fugit2.nvim" = "scm"
 
+"markview.nvim" = "scm"
+"helpview.nvim" = "scm"
+
 tree-sitter-ada = "scm"
 tree-sitter-agda = "scm"
 tree-sitter-angular = "scm"

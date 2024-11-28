@@ -82,22 +82,9 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 		eval GI_TYPELIB_PATH="$(nix eval --impure -f ~/.local/share/lua/5.1/ime/get-GI_TYPELIB_PATH.nix)"
 	fi
 else
-	dir="/${MINGW_ARCH:-mingw64}/bin"
-	if [[ $OSTYPE != msys && -d $dir ]]; then
-		export PATH="$PATH${PATH:+:}$dir"
-	fi
 	dir=$HOME/.local/state/nix/profile/bin
 	if [[ -d $dir ]]; then
 		PATH="$PATH${PATH:+:}$dir"
-	fi
-	dir="/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
-	if [[ -d $dir ]]; then
-		PATH="$PATH${PATH:+:}$dir"
-	fi
-	dir=/opt/ccstudio/ccs
-	# https://aur.archlinux.org/packages/ccstudio#comment-906326
-	if [[ -d $dir ]]; then
-		PATH="$PATH${PATH:+:}$dir/eclipse:$dir/ccs_base/common/uscif:$dir/ccs_base/scripting/bin"
 	fi
 	unset dir
 fi
@@ -184,40 +171,6 @@ export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 export DIRENV_LOG_FORMAT=
 # minicom
 export MINICOM=-w
-# lua
-case $OSTYPE in
-linux-*)
-	ext=so
-	;;
-darwin*)
-	ext=dynlib
-	;;
-*)
-	ext=dll
-	;;
-esac
-for _version in '' 5.{1..4}; do
-	version=${_version:-5.1}
-	[ -z "$_version" ] || _version="_${_version//./_}"
-	path_name="LUA_PATH$_version" cpath_name="LUA_CPATH$_version"
-	export "$path_name"="./share/lua/$version/?.lua;./?.lua;./?/init.lua;;\
-$HOME/.local/share/lua/$version/?.lua;\
-$HOME/.local/share/lua/$version/?/init.lua;\
-$HOME/.local/state/nix/profile/share/lua/$version/?.lua;\
-$HOME/.local/state/nix/profile/share/lua/$version/?/init.lua"
-	export "$cpath_name"="./lib/lua/$version/?.$ext;./?.$ext;\
-./lib/lua/$version/loadall.$ext;;\
-$HOME/.local/lib/lua/$version/?.$ext;\
-$HOME/.local/state/nix/profile/lib/lua/$version/?.$ext"
-	if [[ -f /run/current-system/nixos-version ]]; then
-		eval "lua_path=\$$path_name" "lua_cpath=\$$cpath_name"
-		export "$path_name"="$lua_path;/run/current-system/sw/share/lua/$version/?.lua;\
-/run/current-system/sw/share/lua/$version/?/init.lua"
-		export "$cpath_name"="$lua_cpath;/run/current-system/sw/lib/lua/$version/?.$ext"
-		unset lua_path lua_cpath
-	fi
-done
-unset version path_name cpath_name ext
 # node
 export NODE_ENV=development
 if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
@@ -230,15 +183,24 @@ fi
 if [[ -z $TMUX_PANE && $TERM == tmux-256color ]]; then
 	export TERM=xterm-256color
 fi
-
-# ccstudio
-# DM6467 needs c6000-cgt < 8.0.0
-compiler=c6000_7.4.24
-# compiler=ti-cgt-c6000_8.3.12
-dir="/opt/ccstudio/ccs/tools/compiler/$compiler"
-if [[ -d $dir ]]; then
-	C6X_C_DIR="$dir/include;$dir/lib"
-	PATH="$PATH${PATH:+:}$dir/bin"
+# web2c
+export LUAINPUTS_luajittex='$TEXMFDOTDIR;'"$HOME/.local/share/lua/5.1;$HOME/.local/state/nix/profile/share/lua/5.1"';$TEXMF/tex/{lualatex,latex,luatex,generic}//'
+export CLUAINPUTS_luajittex='$TEXMFDOTDIR;'"$HOME/.local/lib/lua/5.1;$HOME/.local/state/nix/profile/lib/lua/5.1"
+export LUAINPUTS_luatex='$TEXMFDOTDIR;'"$HOME/.local/share/lua/5.3;$HOME/.local/state/nix/profile/share/lua/5.3"';$TEXMF/tex/{lualatex,latex,luatex,generic}//'
+export CLUAINPUTS_luatex='$TEXMFDOTDIR;'"$HOME/.local/lib/lua/5.3;$HOME/.local/state/nix/profile/lib/lua/5.3"
+if [[ -f /run/current-system/nixos-version ]]; then
+	LUAINPUTS_luajittex="$LUAINPUTS_luajittex;/run/current-system/sw/share/lua/5.1"
+	CLUAINPUTS_luajittex="$CLUAINPUTS_luajittex;/run/current-system/sw/lib/lua/5.1"
+	LUAINPUTS_luatex="$LUAINPUTS_luatex;/run/current-system/sw/share/lua/5.3"
+	CLUAINPUTS_luatex="$CLUAINPUTS_luatex;/run/current-system/sw/lib/lua/5.3"
+else
+	LUAINPUTS_luajittex="$LUAINPUTS_luajittex;/usr/share/lua/5.1"
+	CLUAINPUTS_luajittex="$CLUAINPUTS_luajittex;/usr/lib/lua/5.1"
+	LUAINPUTS_luatex="$LUAINPUTS_luatex;/usr/share/lua/5.3"
+	CLUAINPUTS_luatex="$CLUAINPUTS_luatex;/usr/lib/lua/5.3"
 fi
-unset dir compiler
-export C6X_C_DIR
+export LUAINPUTS_luajithbtex="$LUAINPUTS_luajittex"
+export CLUAINPUTS_luajithbtex="$CLUAINPUTS_luajittex"
+export LUAINPUTS_luahbtex="$LUAINPUTS_luatex"
+export CLUAINPUTS_luahbtex="$CLUAINPUTS_luatex"
+export TEXMFCONFIG="$HOME/.config/texmf"

@@ -15,6 +15,7 @@
 !/script/
 !/.devcontainer/
 !/.mailmap
+!/.texlive/
 
 # dotfile
 !/.xprofile
@@ -95,9 +96,6 @@
 !/.cgdb/
 /.cgdb/*
 !/.cgdb/cgdbrc
-!/.texlive/
-/.texlive/*
-!/.texlive/texmf-config/
 !/.proxychains/
 !/.docker/
 /.docker/*
@@ -108,10 +106,6 @@
 !/.ssh/config
 !/.password-store/
 !/.gnupg/
-# https://github.com/LnL7/nix-darwin/issues/573
-!/.nixpkgs/
-/.nixpkgs/*
-!/.nixpkgs/darwin-configuration.nix
 !/.bundle/
 /.bundle/*
 !/.bundle/config
@@ -289,6 +283,7 @@
 !/.config/visidata/
 /.config/visidata/input_history.jsonl
 !/.config/nixpkgs/
+!/.config/nix-darwin/
 !/.config/luacheck/
 !/.config/latexindent.yaml
 !/.config/pry/
@@ -330,6 +325,8 @@
 !/.config/zellij/
 !/.config/sharpkeys/
 !/.config/pixi/
+!/.config/fennel/
+!/.config/texmf/
 
 # $XDG_DATA_HOME
 !/.local/

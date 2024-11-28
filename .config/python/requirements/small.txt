@@ -1,0 +1,6 @@
+#!/usr/bin/env -S pip install -r
+
+doq
+meson
+pre-commit
+pytest-pudb

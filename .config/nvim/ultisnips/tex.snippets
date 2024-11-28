@@ -1,1 +1,51 @@
-extends latex
+priority 100
+
+context "math()"
+snippet sym "pip install sympy" w
+sympy $1 endsympy
+endsnippet
+context "math()"
+snippet 'sympy(.*)endsympy' "\usepackage{txfonts}" wr
+`!p
+import sympy
+exec(sympy.interactive.session.preexec_source)
+snip.rv = latex(eval(match.group(1)))
+`
+endsnippet
+
+context "math()"
+snippet lim "\usepackage{txfonts}" i
+\lim_{${1:n} \to ${2:\infty}} $0
+endsnippet
+context "math()"
+snippet int "\usepackage{txfonts}" i
+\int_{${1:-\infty}}^${2:\infty} $0
+endsnippet
+context "math()"
+snippet sum "\usepackage{txfonts}" i
+\sum_{${1:i} = ${2:-\infty}}^${3:\infty} $0
+endsnippet
+context "math()"
+snippet pro "\usepackage{txfonts}" i
+\prod_{${1:i} = ${2:-\infty}}^${3:\infty} $0
+endsnippet
+context "math()"
+snippet "([A-Za-z'])(\d)" "myUltiSnips" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+context "math()"
+snippet "([A-Za-z'])_(\d\d)" "myUltiSnips" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+context "math()"
+snippet "([A-Za-z'])_" "myUltiSnips" wr
+`!p snip.rv = match.group(1)`_{${1:${VISUAL}}}
+endsnippet
+context "math()"
+snippet ^ "myUltiSnips" w
+^{${1:${VISUAL}}}
+endsnippet
+context "math()"
+snippet '([A-Za-z])\^(\d\d)' "myUltiSnips" wrA
+`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`}
+endsnippet

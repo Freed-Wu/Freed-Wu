@@ -32,21 +32,6 @@ require "nvim-treesitter.configs".setup {
 
 -- luacheck: ignore 111 112 113
 ---@diagnostic disable: undefined-global
-if vim.treesitter.language.register then
-    -- https://github.com/nvim-treesitter/nvim-treesitter/pull/6096/
-    vim.treesitter.language.register("comment", "text")
-    vim.treesitter.language.register("bash", "apkbuild")
-    vim.treesitter.language.register("bash", "PKGBUILD")
-    vim.treesitter.language.register("bash", "ebuild")
-end
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "liquid",
-    callback = function(args)
-        vim.treesitter.start(args.buf, vim.b.liquid_subtype)
-        -- only if additional legacy syntax is needed
-        -- vim.bo[args.buf].syntax = "on"
-    end
-})
 vim.api.nvim_create_autocmd("User", {
     pattern = "AirlineAfterInit",
     callback = function(_)
