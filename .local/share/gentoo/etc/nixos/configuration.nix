@@ -9,6 +9,11 @@
   ...
 }:
 
+let
+  nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+    inherit pkgs;
+  };
+in
 rec {
   # basic {{{ #
   imports = [
@@ -31,7 +36,32 @@ rec {
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.tmp.useTmpfs = true;
 
-  nixpkgs.config = import ~/.config/nixpkgs/config.nix;
+  nixpkgs.config = {
+    allowUnfree = true;
+    # https://github.com/NixOS/nixpkgs/issues/224921#issuecomment-1821202793
+    # result in rebuilding
+    # cudaSupport = true;
+    packageOverrides =
+      pkgs:
+      let
+        rimeDataPkgs = with pkgs; [
+          rime-data
+          rime-japanese
+          nur.repos.Freed-Wu.rime-kaomoji
+        ];
+      in
+      {
+        # https://github.com/nix-community/nix-index-database/issues/69
+        nix-index-database =
+          (builtins.getFlake "github:nix-community/nix-index-database")
+          .packages.${builtins.currentSystem}.default;
+        # https://github.com/rime/home/discussions/1206#discussioncomment-10092637
+        librime = (pkgs.librime.override { plugins = [ ]; });
+        p7zip = (pkgs.p7zip.override { enableUnfree = true; });
+        fcitx5-rime = (pkgs.fcitx5-rime.override { rimeDataPkgs = rimeDataPkgs; });
+        ibus-engines.rime = (pkgs.ibus-engines.rime.override { rimeDataPkgs = rimeDataPkgs; });
+      };
+  };
   hardware.enableAllFirmware = true;
   hardware.bluetooth.enable = true;
   hardware.sensor.iio.enable = true;
@@ -110,7 +140,7 @@ rec {
   fonts.packages = with pkgs; [
     wqy_zenhei
     wqy_microhei
-    nerdfonts
+    nerd-fonts.jetbrains-mono
   ];
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -189,17 +219,17 @@ rec {
   environment.xfce.excludePackages = [
     pkgs.xfce.xfce4-terminal
   ];
-  environment.gnome.excludePackages = [
-    pkgs.gnome-console
-    pkgs.gedit
-    pkgs.epiphany
-    pkgs.evince
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-console
+    gedit
+    epiphany
+    evince
   ];
-  environment.plasma5.excludePackages = [
-    pkgs.plasma5Packages.konsole
-    pkgs.plasma5Packages.kate
-    pkgs.plasma5Packages.konqueror
-    pkgs.plasma5Packages.okular
+  environment.plasma5.excludePackages = with pkgs.plasma5Packages; [
+    konsole
+    kate
+    konqueror
+    okular
   ];
   # }}} GUI #
 
@@ -207,27 +237,11 @@ rec {
   # $ nix search wget
   environment.systemPackages =
     with pkgs;
-    let
-      # https://github.com/NixOS/nixpkgs/pull/222667#issuecomment-1804096580
-      proxychains-symlinks = runCommand "proxychains" { } ''
-        install -d "$out"/{bin,share/zsh/site-functions}
-        ln -s "${
-          if programs.proxychains ? package then programs.proxychains.package else proxychains
-        }/bin/proxychains4" "$out/bin/proxychains"
-        echo -e '#compdef proxychains=proxychains4\n_proxychains4' > "$out/share/zsh/site-functions/_proxychains"
-      '';
-      gopass-symlinks = runCommand "gopass" { } ''
-        install -d "$out"/{bin,share/zsh/site-functions}
-        ln -s "${gopass}/bin/gopass" "$out/bin/pass"
-        echo -e '#compdef pass=gopass\n_gopass' > "$out/share/zsh/site-functions/_pass"
-      '';
-    in
     [
-      proxychains-symlinks
-      gopass-symlinks
+      nur.repos.Freed-Wu.proxychains-symlinks
+      nur.repos.Freed-Wu.gopass-symlinks
       man-pages
       man-pages-posix
-      glibcInfo
       windows10-icons
       nur.repos.Freed-Wu.windows10-themes
       # https://github.com/NixOS/nixpkgs/issues/298639
@@ -240,33 +254,11 @@ rec {
       (python3.withPackages (
         p: with p; [
           # tool
-          gdown
           keyring-pass
-          # PKGBUILD
-          nvchecker
           # develop
-          pip
-          build
-          # debug
-          ptpython
+          uv
           pudb
-          pytest
-          pytest-pudb
-          # data science
-          beautifulsoup4
-          lxml
-          pandas
-          # deep learning
-          openai
-          # https://github.com/NixOS/nixpkgs/issues/280861
-          # wandb
-          tensorboard
-          torchWithoutCuda
-          torchvision
-          torchmetrics
           # misc
-          # wxpython doesn't support python 3.12
-          # nur.repos.Freed-Wu.mulimgviewer
           nur.repos.Freed-Wu.pyrime
           nur.repos.Freed-Wu.translate-shell
           nur.repos.Freed-Wu.mutt-language-server
@@ -327,6 +319,8 @@ rec {
       # }}} nodejs #
       # lua {{{ #
       lua-language-server
+      fennel-ls
+      fnlfmt
       (
         # rocks.nvim needs luarocks 5.1
         luajit.withPackages (
@@ -335,6 +329,8 @@ rec {
             luarocks-nix
             luasec
             nur.repos.Freed-Wu.luajit-prompt-style
+            fennel
+            readline
           ]
         )
       )
@@ -348,8 +344,6 @@ rec {
       taplo
       manix
       nix-index-database
-      nerdfix
-      tree-sitter
       neocmakelsp
       # pre-commit needs it
       cargo
@@ -391,8 +385,6 @@ rec {
       gdu
       shfmt
       git-lfs
-      cog
-      nix-build-uncached
       # }}} go #
       # jq {{{ #
       nur.repos.Freed-Wu.jq-emojify
@@ -402,9 +394,6 @@ rec {
       hr
       has
       lesspipe
-      bats
-      bats.libraries.bats-support
-      bats.libraries.bats-assert
       blesh
       bash-completion
       zsh-completions
@@ -418,35 +407,24 @@ rec {
       cabal-install
       # pre-commit needs it for haskell hooks
       ghc
-      nixfmt-rfc-style
-      nvfetcher
       shellcheck
-      pandoc
-      cachix
+      # nixd uses it
+      nixfmt-rfc-style
       # }}} haskell #
       # f# {{{ #
       marksman
       # }}} f# #
       # java {{{ #
-      jdk
       plantuml
       pdftk
       ltex-ls
       # }}} java #
       # c {{{ #
       # info {{{ #
-      glxinfo
-      vulkan-tools
-      drm_info
-      clinfo
-      libinput
-      evtest
       pciutils
       usbutils
-      ethtool
       psmisc
       progress
-      dmidecode
       # }}} info #
       # build {{{ #
       # meson needs it
@@ -463,18 +441,15 @@ rec {
       nur.repos.Freed-Wu.gdb-prompt
       # }}} debug #
       # pyproject-build needs it
-      gcc
+      stdenv.cc
       tmux
       lsof
       poppler_utils
-      minicom
-      socat
       nmap
       fontconfig
       imagemagick
       sqlite
       hello
-      lsb-release
       neomutt
       wget
       curl
@@ -522,25 +497,41 @@ rec {
       luaformatter
       chafa
       patchelf
-      ansifilter
+      # https://github.com/NixOS/nixpkgs/pull/354332
       wechat-uos
+      # https://github.com/NixOS/nixpkgs/pull/360662
       nur.repos.linyinfeng.wemeet
       # TODO: https://github.com/NixOS/nixpkgs/pull/243429
       nur.repos.Freed-Wu.netease-cloud-music
-      # nur.repos.xddxdd.qqmusic
+      # https://github.com/NixOS/nixpkgs/pull/312961
+      nur.repos.xddxdd.qqmusic
       # }}} c++ #
     ]
     # don't use libreoffice-fresh to avoid building
-    ++ (if services.xserver.desktopManager.plasma5.enable then [ libreoffice-qt ] else [ libreoffice ])
-    ++ (lib.optionals services.xserver.desktopManager.gnome.enable [
-      gnome-tweaks
-      gnome-randr
-      # https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/
-      gnomeExtensions.gtk4-desktop-icons-ng-ding
-      gnomeExtensions.clipboard-indicator
-      gnomeExtensions.appindicator
-      gnomeExtensions.screen-rotate
-    ])
+    ++ (
+      if services.xserver.desktopManager.plasma5.enable then
+        [
+          libreoffice-qt
+          plasma5Packages.kdeconnect-kde
+        ]
+      else if services.xserver.desktopManager.plasma5.enable then
+        [
+          libreoffice
+          gnome-tweaks
+          gnome-randr
+          # https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/
+          gnomeExtensions.gtk4-desktop-icons-ng-ding
+          gnomeExtensions.clipboard-indicator
+          gnomeExtensions.appindicator
+          gnomeExtensions.screen-rotate
+          gnomeExtensions.valent
+        ]
+      else
+        [
+          libreoffice-qt
+          kdePackages.kdeconnect-kde
+        ]
+    )
     ++ (lib.optionals
       (
         hardware.graphics ? extraPackages

@@ -87,5 +87,6 @@ exclude_lines = [
 [tool.cibuildwheel]
 archs = ["all"]
 skip = "*37-* *38-* *39-*"
+build-frontend = "build[uv]"
 before-test = "pip install -rrequirements.txt -rrequirements/dev.txt"
 test-command = "pytest {project}"
