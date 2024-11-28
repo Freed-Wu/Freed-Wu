@@ -77,6 +77,7 @@ function! init#coc#source() abort
         \ 'expect': 'tcl',
         \ 'xsct': 'tcl',
         \ 'xdc': 'tcl',
+        \ 'swig': 'c',
         \ 'lex': 'c',
         \ 'yacc': 'c',
         \ }
