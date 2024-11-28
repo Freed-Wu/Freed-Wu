@@ -226,6 +226,7 @@ more information about me
   - [![Crates.io](https://img.shields.io/badge/crates.io-gray?logo=rust)](https://crates.io/users/Freed-Wu)
   - [![openuserjs](https://img.shields.io/badge/openuserjs-gray?logo=javascript)](https://openuserjs.org/users/Freed-Wu/scripts)
   - [![greasyfork](https://img.shields.io/badge/greasyfork-gray?logo=javascript)](https://greasyfork.org/users/Freed-Wu/scripts)
+  - [![gnome extensions](https://img.shields.io/badge/gnome%20extensions-gray?logo=gnome)](https://extensions.gnome.org/accounts/profile/Freed_Wu)
 - host packages of some software distributions:
   - [![AUR](https://img.shields.io/badge/AUR-gray?logo=Archlinux)](https://aur.Archlinux.org/packages?K=Freed&SeB=m)
   - [![NUR](https://img.shields.io/badge/NUR-gray?logo=NixOS)](https://nur.nix-community.org/repos/freed-wu)
