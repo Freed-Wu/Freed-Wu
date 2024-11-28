@@ -230,15 +230,3 @@ fi
 if [[ -z $TMUX_PANE && $TERM == tmux-256color ]]; then
 	export TERM=xterm-256color
 fi
-
-# ccstudio
-# DM6467 needs c6000-cgt < 8.0.0
-compiler=c6000_7.4.24
-# compiler=ti-cgt-c6000_8.3.12
-dir="/opt/ccstudio/ccs/tools/compiler/$compiler"
-if [[ -d $dir ]]; then
-	C6X_C_DIR="$dir/include;$dir/lib"
-	PATH="$PATH${PATH:+:}$dir/bin"
-fi
-unset dir compiler
-export C6X_C_DIR
