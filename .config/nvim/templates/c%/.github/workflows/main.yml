@@ -12,24 +12,15 @@
 permissions:
   contents: write
 
-env:
-  python-version: 3.x
-  cache: pip
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{env.python-version}}
-          cache: ${{env.cache}}
-          cache-dependency-path: |-
-            requirements.txt
       - name: Install dependencies
         run: |
-          pip install -rrequirements.txt
+          sudo apt-get -y update
+          sudo apt-get -y install meson
       - name: Build
         run: |
           meson setup build -Db_coverage=true

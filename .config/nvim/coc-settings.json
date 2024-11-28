@@ -13,7 +13,6 @@
   "coc.source.emoji.shortcut": "😀",
   "coc.source.file.shortcut": "",
   "coc.source.issues.shortcut": "",
-  "coc.source.syntax.shortcut": "󱔁",
   "coc.source.tag.shortcut": "󰓹",
   "coc.source.word.shortcut": "",
   "dash-complete.shortcut": "-",
@@ -32,6 +31,7 @@
     "blade": "blade-formatter",
     "dart": "dartfmt",
     "elixir": "mix_format",
+    "fennel": "fnlfmt",
     "fish": "fish_indent",
     "verilog": "iStyle"
   },
@@ -71,6 +71,10 @@
     "expect": {
       "command": "expect-language-server",
       "filetypes": ["expect"]
+    },
+    "fennel": {
+      "command": "fennel-ls",
+      "filetypes": ["fennel"]
     },
     "hdlChecker": {
       "command": "hdl_checker",

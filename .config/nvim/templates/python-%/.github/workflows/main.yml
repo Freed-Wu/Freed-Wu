@@ -67,10 +67,10 @@ jobs:
             requirements/dev.txt
       - name: Install dependencies
         run: |
-          pip install build
+          pip install uv
       - name: Build
         run: |
-          pyproject-build
+          uv build
       - uses: pypa/gh-action-pypi-publish@release/v1
         if: runner.os == 'Linux' && startsWith(github.ref, 'refs/tags/')
         with:

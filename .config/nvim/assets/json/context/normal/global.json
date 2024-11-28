@@ -1,5 +1,5 @@
 [
-  ["&NR", "NR"],
+  ["&InlineEdit", "InlineEdit"],
   ["R&ainbowDelim", "RainbowDelim"],
   ["--"],
   ["&Table-mode ▶", "call init#init#quickui#install('assets/json/context/normal/table_mode.json')"],
