@@ -1,5 +1,16 @@
 " Prefix {{{1 "
 scriptencoding utf-8
+if has('nvim')
+  lua require"init"
+endif
+if get(g:, 'script_name', '') !=# ''
+  set runtimepath-=~/.config/nvim
+  finish
+endif
+if has('pythonx') && exists('$PYTHONSTARTUP')
+  pyxfile $PYTHONSTARTUP
+endif
+
 " compatibility for vim
 if exists('*stdpath')
   let $XDG_CONFIG_NVIM = stdpath('config')
@@ -842,11 +853,4 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
 endif
 call dein#call_hook('source')
 call dein#call_hook('post_source')
-
-if has('nvim')
-  lua require"init"
-endif
-if has('pythonx') && exists('$PYTHONSTARTUP')
-  pyxfile $PYTHONSTARTUP
-endif
 " ex: foldmethod=marker path=.,$XDG_DATA_NVIM/repos/github.com,$XDG_DATA_NVIM/repos
