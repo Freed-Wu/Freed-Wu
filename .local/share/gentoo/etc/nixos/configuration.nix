@@ -487,7 +487,6 @@ rec {
       watchman
       cppcheck
       nixd
-      qq
       clang-tools
       cling
       aria2
@@ -495,14 +494,13 @@ rec {
       yuview
       chafa
       patchelf
+      qq
       # https://github.com/NixOS/nixpkgs/pull/354332
       wechat-uos
-      # https://github.com/NixOS/nixpkgs/pull/360662
-      nur.repos.linyinfeng.wemeet
+      wemeet
+      qqmusic
       # TODO: https://github.com/NixOS/nixpkgs/pull/243429
-      nur.repos.Freed-Wu.netease-cloud-music
-      # https://github.com/NixOS/nixpkgs/pull/312961
-      nur.repos.xddxdd.qqmusic
+      # nur.repos.Freed-Wu.netease-cloud-music
       # }}} c++ #
     ]
     # don't use libreoffice-fresh to avoid building
@@ -512,7 +510,7 @@ rec {
           libreoffice-qt
           plasma5Packages.kdeconnect-kde
         ]
-      else if services.xserver.desktopManager.plasma5.enable then
+      else if services.xserver.desktopManager.gnome.enable then
         [
           libreoffice
           gnome-tweaks
@@ -523,6 +521,7 @@ rec {
           gnomeExtensions.appindicator
           gnomeExtensions.screen-rotate
           gnomeExtensions.valent
+          valent
         ]
       else
         [

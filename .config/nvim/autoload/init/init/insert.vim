@@ -6,6 +6,7 @@ function! init#init#insert#main() abort
   inoremap <silent> <M-.> <C-R>=split(getline(line('.') - 1))[-1]<CR>
   inoremap <M-c> <C-O>~<C-O>gue<S-Right>
   inoremap <silent> <C-K> <C-O>:set virtualedit +=onemore<CR><C-O>d$<C-O>:set virtualedit -=onemore<CR>
+  inoremap <M-k> <C-K>
   inoremap <C-_> <C-O>u
   inoremap <M-a> <C-O>(
   inoremap <M-e> <C-O>)

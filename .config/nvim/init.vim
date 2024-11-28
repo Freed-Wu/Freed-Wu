@@ -103,6 +103,7 @@ set textwidth=80
 set background=dark
 set titlestring=%<%F\ %{nerdfont#find()}%=%P%l/%L%c
 set clipboard=unnamed
+set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-CursorIM/lCursorIM,r-cr-o:hor20-CursorIM/lCursorIM
 " call systemlist() will meet:
 " /usr/bin/zsh: can''t open input files: /s
 if &shell !~# 'cmd' && &shellcmdflag ==# '/c'
@@ -473,7 +474,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
 
   " Conceal {{{2 "
   call dein#add('Freed-Wu/conceal.vim')
-  call dein#add('MrPicklePinosaur/typst-conceal.vim')
   call dein#add('Yggdroot/indentLine', {
         \ 'hook_source': 'call init#indentline#source()',
         \ })
