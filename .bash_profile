@@ -82,22 +82,9 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 		eval GI_TYPELIB_PATH="$(nix eval --impure -f ~/.local/share/lua/5.1/ime/get-GI_TYPELIB_PATH.nix)"
 	fi
 else
-	dir="/${MINGW_ARCH:-mingw64}/bin"
-	if [[ $OSTYPE != msys && -d $dir ]]; then
-		export PATH="$PATH${PATH:+:}$dir"
-	fi
 	dir=$HOME/.local/state/nix/profile/bin
 	if [[ -d $dir ]]; then
 		PATH="$PATH${PATH:+:}$dir"
-	fi
-	dir="/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
-	if [[ -d $dir ]]; then
-		PATH="$PATH${PATH:+:}$dir"
-	fi
-	dir=/opt/ccstudio/ccs
-	# https://aur.archlinux.org/packages/ccstudio#comment-906326
-	if [[ -d $dir ]]; then
-		PATH="$PATH${PATH:+:}$dir/eclipse:$dir/ccs_base/common/uscif:$dir/ccs_base/scripting/bin"
 	fi
 	unset dir
 fi
@@ -230,15 +217,3 @@ fi
 if [[ -z $TMUX_PANE && $TERM == tmux-256color ]]; then
 	export TERM=xterm-256color
 fi
-
-# ccstudio
-# DM6467 needs c6000-cgt < 8.0.0
-compiler=c6000_7.4.24
-# compiler=ti-cgt-c6000_8.3.12
-dir="/opt/ccstudio/ccs/tools/compiler/$compiler"
-if [[ -d $dir ]]; then
-	C6X_C_DIR="$dir/include;$dir/lib"
-	PATH="$PATH${PATH:+:}$dir/bin"
-fi
-unset dir compiler
-export C6X_C_DIR
