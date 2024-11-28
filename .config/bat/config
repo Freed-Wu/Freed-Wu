@@ -1,6 +1,10 @@
 # https://github.com/wofr06/lesspipe/pull/117
 # https://github.com/wofr06/lesspipe/commit/708fec400c189cfb1b94390078873a44c7f8d401
 --style=full
+# replace less by `bat -p`
+# replace cat by `bat -pp`
+--paging=always
+
 -m'entry_points.txt:INI'
 -m'*.BUILD:Python'
 -m'BUILD:Python'

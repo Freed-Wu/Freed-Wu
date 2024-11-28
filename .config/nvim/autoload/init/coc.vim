@@ -19,7 +19,7 @@ function! init#coc#source() abort
         \ 'coc-snippets', 'coc-translator',
         \
         \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
-        \ 'coc-gitignore', 'coc-license',
+        \ 'coc-gitignore', 'coc-license', 'coc-nerdfont',
         \
         \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
         \
@@ -77,6 +77,7 @@ function! init#coc#source() abort
         \ 'expect': 'tcl',
         \ 'xsct': 'tcl',
         \ 'xdc': 'tcl',
+        \ 'swig': 'c',
         \ 'lex': 'c',
         \ 'yacc': 'c',
         \ }
