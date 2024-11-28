@@ -18,7 +18,7 @@ else:
 
     if os.path.isfile("/run/current-system/nixos-version"):
         sys.path.insert(
-            1 if sys.path[0] == "" else 0,
+            2,
             os.path.expanduser(
                 f"~/.local/lib/python{__version__}/site-packages"
             ),

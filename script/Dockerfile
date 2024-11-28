@@ -55,12 +55,18 @@ RUN sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 
 # python packages installed by nix-env cannot find systemside packages
 # `. "$HOME/.nix-profile/etc/profile.d/nix.sh"` cannot work
+# install some programs related to zsh plugins
 RUN export PATH=~/.nix-profile/bin:$PATH && \
       install -d ~/.config/nix && \
       echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' > ~/.config/nix/nix.conf && \
-      nix-env -iA nixpkgs.neovim nixpkgs.tmux nixpkgs.vivid nixpkgs.eza nixpkgs.bat nixpkgs.ripgrep nixpkgs.fd nixpkgs.delta nixpkgs.fzf nixpkgs.zsh-powerlevel10k nixpkgs.chafa nixpkgs.parallel nixpkgs.exiftool \
-      nixpkgs.git nixpkgs.jq nixpkgs.nodejs nixpkgs.lesspipe nixpkgs.file nixpkgs.less && \
+      nix-env -iA nixpkgs.neovim nixpkgs.tmux nixpkgs.zsh-powerlevel10k nixpkgs.vivid nixpkgs.fzf && \
       sudo ln -s ~/.nix-profile/bin/nvim /usr/bin/vi
 
+# install others programs
+RUN nix-env -iA nixpkgs.eza nixpkgs.bat nixpkgs.ripgrep nixpkgs.fd \
+      nixpkgs.delta nixpkgs.chafa nixpkgs.parallel nixpkgs.exiftool \
+      nixpkgs.git nixpkgs.jq nixpkgs.nodejs nixpkgs.lesspipe nixpkgs.file nixpkgs.less
+
+# cannot cache
 COPY --chown=$user . .
 RUN script/install_plugins.sh
