@@ -32,6 +32,7 @@
     "blade": "blade-formatter",
     "dart": "dartfmt",
     "elixir": "mix_format",
+    "fennel": "fnlfmt",
     "fish": "fish_indent",
     "verilog": "iStyle"
   },
@@ -71,6 +72,10 @@
     "expect": {
       "command": "expect-language-server",
       "filetypes": ["expect"]
+    },
+    "fennel": {
+      "command": "fennel-ls",
+      "filetypes": ["fennel"]
     },
     "hdlChecker": {
       "command": "hdl_checker",
