@@ -8,10 +8,7 @@ setlocal keywordprg=:help
 call init#textobj#map('help')
 call init#init#vim#map()
 
-if exists('##CmdlineEnter')
-  augroup init_help
-    autocmd!
-    autocmd CmdlineEnter <buffer> call init#init#help#set()
-    autocmd CmdlineLeave <buffer> call init#init#help#unset()
-  augroup END
+if exists(':Helpview') && get(b:, 'helpview', 0) == 0
+  Helpview enable
+  let b:helpview = 1
 endif

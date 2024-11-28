@@ -18,7 +18,7 @@ else:
 
     if os.path.isfile("/run/current-system/nixos-version"):
         sys.path.insert(
-            1 if sys.path[0] == "" else 0,
+            2,
             os.path.expanduser(
                 f"~/.local/lib/python{__version__}/site-packages"
             ),
@@ -29,7 +29,15 @@ else:
     with suppress(ImportError):
         from rich import print  # noqa: F401
 
+    # https://github.com/prompt-toolkit/ptpython/issues/546
+    is_gdb = False
+    with suppress(ImportError):
+        from .gdbinit import gdb  # noqa: F401
+
+        is_gdb = True
+
     with suppress(ImportError):
         from translate_shell.tools.repl.main import interact
 
-        interact()
+        # https://github.com/davidhalter/jedi/issues/2046
+        interact(wakatime=not is_gdb, codestats=not is_gdb, jedi=not is_gdb)
