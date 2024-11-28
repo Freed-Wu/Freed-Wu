@@ -189,17 +189,17 @@ rec {
   environment.xfce.excludePackages = [
     pkgs.xfce.xfce4-terminal
   ];
-  environment.gnome.excludePackages = [
-    pkgs.gnome-console
-    pkgs.gedit
-    pkgs.epiphany
-    pkgs.evince
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-console
+    gedit
+    epiphany
+    evince
   ];
-  environment.plasma5.excludePackages = [
-    pkgs.plasma5Packages.konsole
-    pkgs.plasma5Packages.kate
-    pkgs.plasma5Packages.konqueror
-    pkgs.plasma5Packages.okular
+  environment.plasma5.excludePackages = with pkgs; [
+    konsole
+    kate
+    konqueror
+    okular
   ];
   # }}} GUI #
 
@@ -207,24 +207,9 @@ rec {
   # $ nix search wget
   environment.systemPackages =
     with pkgs;
-    let
-      # https://github.com/NixOS/nixpkgs/pull/222667#issuecomment-1804096580
-      proxychains-symlinks = runCommand "proxychains" { } ''
-        install -d "$out"/{bin,share/zsh/site-functions}
-        ln -s "${
-          if programs.proxychains ? package then programs.proxychains.package else proxychains
-        }/bin/proxychains4" "$out/bin/proxychains"
-        echo -e '#compdef proxychains=proxychains4\n_proxychains4' > "$out/share/zsh/site-functions/_proxychains"
-      '';
-      gopass-symlinks = runCommand "gopass" { } ''
-        install -d "$out"/{bin,share/zsh/site-functions}
-        ln -s "${gopass}/bin/gopass" "$out/bin/pass"
-        echo -e '#compdef pass=gopass\n_gopass' > "$out/share/zsh/site-functions/_pass"
-      '';
-    in
     [
-      proxychains-symlinks
-      gopass-symlinks
+      nur.repos.Freed-Wu.proxychains-symlinks
+      nur.repos.Freed-Wu.gopass-symlinks
       man-pages
       man-pages-posix
       glibcInfo
@@ -258,8 +243,6 @@ rec {
           pandas
           # deep learning
           openai
-          # https://github.com/NixOS/nixpkgs/issues/280861
-          # wandb
           tensorboard
           torchWithoutCuda
           torchvision
@@ -402,9 +385,6 @@ rec {
       hr
       has
       lesspipe
-      bats
-      bats.libraries.bats-support
-      bats.libraries.bats-assert
       blesh
       bash-completion
       zsh-completions
@@ -531,7 +511,15 @@ rec {
       # }}} c++ #
     ]
     # don't use libreoffice-fresh to avoid building
-    ++ (if services.xserver.desktopManager.plasma5.enable then [ libreoffice-qt ] else [ libreoffice ])
+    ++ (
+      if services.xserver.desktopManager.plasma5.enable then
+        [
+          libreoffice-qt
+          kdeconnect
+        ]
+      else
+        [ libreoffice ]
+    )
     ++ (lib.optionals services.xserver.desktopManager.gnome.enable [
       gnome-tweaks
       gnome-randr
@@ -540,6 +528,7 @@ rec {
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.appindicator
       gnomeExtensions.screen-rotate
+      gnomeExtensions.valent
     ])
     ++ (lib.optionals
       (

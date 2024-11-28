@@ -108,10 +108,6 @@
 !/.ssh/config
 !/.password-store/
 !/.gnupg/
-# https://github.com/LnL7/nix-darwin/issues/573
-!/.nixpkgs/
-/.nixpkgs/*
-!/.nixpkgs/darwin-configuration.nix
 !/.bundle/
 /.bundle/*
 !/.bundle/config
@@ -289,6 +285,7 @@
 !/.config/visidata/
 /.config/visidata/input_history.jsonl
 !/.config/nixpkgs/
+!/.config/nix-darwin/
 !/.config/luacheck/
 !/.config/latexindent.yaml
 !/.config/pry/

@@ -1,5 +1,5 @@
 function! init#init#python#echo(...) abort
-  let l:word = init#parse(a:)
+  let l:word = substitute(init#parse(a:), ':$', '', '')
   execute 'pyx print(' . l:word . ')'
 endfunction
 
