@@ -6,3 +6,4 @@ exec cpp -P "$0"
 #define STRING(x) __STRING(x)
 
 {% here %}
+// ex: filetype=cmacro

@@ -13,18 +13,16 @@ function! init#coc#source() abort
         \
         \ 'coc-diagnostic', 'coc-spell-checker', 'coc-markdownlint', 'coc-ltex',
         \
-        \ 'coc-prettier',
-        \
         \ 'coc-tasks', 'coc-vimtex', 'coc-emmet', 'coc-calc',
         \ 'coc-snippets', 'coc-translator',
         \
         \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
-        \ 'coc-gitignore', 'coc-license',
+        \ 'coc-gitignore', 'coc-license', 'coc-nerdfont',
         \
         \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
         \
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji',
-        \ 'coc-emoji-shortcodes', 'coc-syntax',
+        \ 'coc-emoji-shortcodes',
         \
         \ 'coc-copilot', 'coc-leetcode',
         \
@@ -34,9 +32,9 @@ function! init#coc#source() abort
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'coc-jq', 'coc-awk',
         \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css', 'coc-typst',
         \ 'coc-docker', 'coc-sql', 'coc-db', 'coc-bitbake', 'coc-meson',
-        \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-eslint',
+        \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-biome',
         \ '@yaegassy/coc-ruff', 'coc-pyright', 'coc-lua', 'coc-solargraph',
-        \ 'coc-clangd', 'coc-alex', 'coc-write-good',
+        \ 'coc-clangd', 'coc-hyuga', 'coc-alex', 'coc-write-good',
         \ ]
   " tabnine don't support android
   if $PREFIX !=# '/data/data/com.termux/files/usr'
@@ -77,8 +75,11 @@ function! init#coc#source() abort
         \ 'expect': 'tcl',
         \ 'xsct': 'tcl',
         \ 'xdc': 'tcl',
+        \ 'swig': 'c',
         \ 'lex': 'c',
         \ 'yacc': 'c',
+        \ 'gel': 'cpp',
+        \ 'lnk': 'c',
         \ }
   xmap if <Plug>(coc-funcobj-i)
   xmap af <Plug>(coc-funcobj-a)
