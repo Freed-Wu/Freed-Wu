@@ -206,10 +206,6 @@ zinit id-as'_direnv' depth'1' wait lucid \
   atclone'. ~/script/zinit/_direnv/atclone.zsh' \
   if'(($+commands[direnv]))' \
   for zdharma-continuum/null
-zinit id-as'_pyenv' depth'1' wait lucid \
-  atclone'. ~/script/zinit/_pyenv/atclone.zsh' \
-  if'(($+commands[pyenv]))' \
-  for zdharma-continuum/null
 zinit id-as'_perl' depth'1' as'null' wait lucid \
   atclone'. ~/script/zinit/_perl/atclone.zsh' \
   if'(($+commands[perl])) && [[ -r ~/.git-credentials ]] && [[ -f ~/.config/gh/hosts.yml ]]' \

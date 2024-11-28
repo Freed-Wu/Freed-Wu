@@ -24,6 +24,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
@@ -86,6 +87,8 @@ exclude_lines = [
 
 [tool.cibuildwheel]
 archs = ["all"]
-skip = "*37-* *38-* *39-*"
-before-test = "pip install -rrequirements.txt -rrequirements/dev.txt"
+# https://github.com/astral-sh/uv/issues/10260
+skip = "*37-* *38-* *39-* *-musllinux_s390x *-musllinux_ppc64*"
+build-frontend = "build[uv]"
+before-test = "pip install .[dev]"
 test-command = "pytest {project}"
