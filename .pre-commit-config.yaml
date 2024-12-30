@@ -59,7 +59,7 @@ repos:
         exclude_types:
           - zsh
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.4
+    rev: v1.7.5
     hooks:
       - id: actionlint
   - repo: https://github.com/adrienverge/yamllint
@@ -81,13 +81,13 @@ repos:
           - mdformat-config
           - mdformat-web
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.16.0
+    rev: v0.17.0
     hooks:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20240903.08"
+    rev: "20240903.09"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
