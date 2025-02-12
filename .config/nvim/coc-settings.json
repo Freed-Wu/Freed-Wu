@@ -165,6 +165,7 @@
   "markdown-preview-enhanced.enableScriptExecution": true,
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
   "mesonbuild.downloadLanguageServer": false,
+  "ruff.nativeServer": true,
   "perl.p::ls.enable": true,
   "perl.p::ls.disableCache": true,
   "pydocstring.enableFileAction": true,
