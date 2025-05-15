@@ -13,8 +13,6 @@ rocks_trees = {
 root_dir = rocks_trees[1].root
 rocks_servers = {
     "https://nvim-neorocks.github.io/rocks-binaries",
-    "https://luarocks.cn",
-    "https://luarocks.cn/dev",
     "https://luarocks.org",
     "https://luarocks.org/dev"
 }
