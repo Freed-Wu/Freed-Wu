@@ -15,6 +15,7 @@ nvim-treesitter-context = "scm"
 "tellenc.nvim" = "scm"
 firenvim = "scm"
 "fugit2.nvim" = "scm"
+"screenkey.nvim" = "2.4.2"
 
 "markview.nvim" = "scm"
 "helpview.nvim" = "scm"
