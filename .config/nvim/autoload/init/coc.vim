@@ -8,7 +8,7 @@ function! init#coc#source() abort
         \ 'coc-tasks', 'coc-vimtex', 'coc-emmet', 'coc-calc', 'coc-translator',
         \ 'coc-leetcode',
         \
-        \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gist',
+        \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-gist',
         \ 'coc-gitignore', 'coc-license', 'coc-nerdfont',
         \
         \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
@@ -33,6 +33,9 @@ function! init#coc#source() abort
   " tabnine don't support android
   if $PREFIX !=# '/data/data/com.termux/files/usr'
     let g:coc_global_extensions += ['coc-tabnine']
+  endif
+  if !has('win32')
+    let g:coc_global_extensions += ['coc-git']
   endif
 
   let g:coc_snippet_next = '<Tab>'

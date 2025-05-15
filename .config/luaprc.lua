@@ -13,7 +13,6 @@ if os.getenv("LUA_PATH_" .. version:gsub("%.", "_")) == nil then
     local ext = package.cpath:match('([^.]+)$')
     package.path = package.path
         .. ";./share/lua/" .. version .. "/?.lua;./?.lua;./?/init.lua;;"
-        .. ";" .. expand("~/.local/share/lua/") .. version .. "/?.lua"
         .. ";" .. expand("~/.local/share/lua/") .. version .. "/?/init.lua"
         .. ";" .. expand("~/.local/state/nix/profile/share/lua/") .. version .. "/?.lua"
         .. ";" .. expand("~/.local/state/nix/profile/share/lua/") .. version .. "/?/init.lua"

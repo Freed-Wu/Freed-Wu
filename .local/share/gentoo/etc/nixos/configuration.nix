@@ -272,8 +272,6 @@ rec {
           nur.repos.Freed-Wu.xilinx-language-server
         ]
       ))
-      # mesonlsp needs it
-      meson
       vim-vint
       yamllint
       trash-cli
@@ -433,14 +431,8 @@ rec {
       progress
       # }}} info #
       # build {{{ #
-      # meson needs it
-      pkg-config
       bear
-      # pre-comit call luarocks, then luarocks call it for building
-      gnumake
       # }}} build #
-      # uv build needs it
-      stdenv.cc
       tmux
       lsof
       poppler_utils
@@ -448,9 +440,7 @@ rec {
       fontconfig
       imagemagick
       sqlite
-      hello
       neomutt
-      wget
       curl
       git
       subversion
@@ -466,7 +456,6 @@ rec {
       elinks
       # calculator
       jq
-      acpi
       zathura
       ffmpeg
       moreutils
@@ -480,7 +469,9 @@ rec {
       # }}} c #
       # c++ {{{ #
       krita
-      # neocmakelsp needs it
+      # qmlls
+      kdePackages.qtdeclarative
+      # https://github.com/neocmakelsp/neocmakelsp/discussions/167
       cmake
       mesonlsp
       openai-triton-llvm
@@ -595,6 +586,7 @@ rec {
   programs.zsh.histSize = 20000;
   programs.gnupg.agent.enable = true;
   programs.gnupg.agent.enableSSHSupport = true;
+  programs.nano.enable = false;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.neovim.vimAlias = true;

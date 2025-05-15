@@ -54,12 +54,14 @@ fi
 # tty
 if [[ $OSTYPE == cygwin ]]; then
 	export BROWSER=start
+	export PYTHONUTF8=1
 	export CYGWIN=winsymlinks:nativestrict
-	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/cygwin"
+	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/cygwin${PATH:+:}$HOME/AppData/Local/Microsoft/WindowsApps"
 elif [[ $OSTYPE == msys ]]; then
 	export BROWSER=start
+	export PYTHONUTF8=1
 	export MSYS=winsymlinks:nativestrict
-	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/msys64"
+	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/msys64${PATH:+:}$HOME/AppData/Local/Microsoft/WindowsApps"
 elif [[ $OSTYPE == darwin* ]]; then
 	export BROWSER=open
 fi
@@ -115,8 +117,8 @@ fi
 # rg foo | fzf
 # --preview-window=...,~4 will avoid ps's preview provided by fzf-tab
 # -d$"\0"
+[ -d "$FZF_HISTORY_DIR" ] || mkdir -p "$FZF_HISTORY_DIR"
 export FZF_DEFAULT_OPTS="--history=$FZF_HISTORY_DIR/fzf.txt
---preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'
 -m
 -d:
 --ansi
@@ -155,6 +157,10 @@ export FZF_DEFAULT_OPTS="--history=$FZF_HISTORY_DIR/fzf.txt
 --bind='alt->:preview-bottom'
 --bind='ctrl-]:change-preview-window(bottom|right)'
 --bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'"
+if [[ $OS != Windows_NT ]]; then
+	FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'"
+fi
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true
