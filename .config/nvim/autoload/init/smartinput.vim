@@ -285,6 +285,13 @@ function! init#smartinput#post_source() abort
         \ 'filetype': ['text'],
         \ })
 
+  call smartinput#map_to_trigger('i', '<<<', '<<<', '<<<')
+  call smartinput#define_rule({
+        \ 'at': '\S\%#',
+        \ 'char': '<<<',
+        \ 'input': '<<<>>>' . left . left . left,
+        \ })
+
   call smartinput#map_to_trigger('i', '<', '<', '<')
   call smartinput#define_rule({
         \ 'at': '[^ $]\%#',

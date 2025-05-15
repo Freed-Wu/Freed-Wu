@@ -240,9 +240,13 @@ zinit id-as depth'1' wait lucid \
   if'(($+commands[fzf]))' \
   for Aloxaf/fzf-tab
 
-zinit id-as depth'1' wait lucid \
-  if'(($+commands[fzf]))' \
-  for Freed-Wu/fzf-tab-source
+# --preview
+# exec: zsh: excutable file not found
+if [[ $OS != Windows_NT ]]; then
+  zinit id-as depth'1' wait lucid \
+    if'(($+commands[fzf]))' \
+    for Freed-Wu/fzf-tab-source
+fi
 
 zinit id-as depth'1' wait lucid for petronny/pinyin-completion
 # 1}}} Complete #

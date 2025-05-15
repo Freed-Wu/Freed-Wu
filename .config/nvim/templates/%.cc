@@ -1,5 +1,5 @@
 #if 0
-bin="$(basename "$0")" && bin="${bin%%.*}" && c++ -g -Wall -o"$bin" "$0" && exec ./"$bin" "$@" || exit
+bin="$(basename "$0")" && bin="${bin%%.*}" && c++ -g -Wall -o"$bin" "$0" && exec ./"$bin" "$@" || exit $?
 #endif
 #include <cerrno>
 #include <cstdlib>

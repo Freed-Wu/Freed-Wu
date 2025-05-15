@@ -1,0 +1,6 @@
+source ~/.config/gdb/common/gdbinit
+set cuda break_on_launch application
+# Rn (n = 0..254) and URn (n = 0..63) are too many
+dashboard registers -style list 'R0 R1 R2 R3 R4 R5 R6 R7 P0 P1 P2 P3 P4 P5 P6 P7 UR0 UR1 UR2 UR3 UR4 UR5 UR6 UR7 UP0 UP1 UP2 UP3 UP4 UP5 UP6 UP7 pc CC RZ URZ'
+# CPU threads' information is unimportant
+dashboard threads

@@ -13,10 +13,7 @@ permissions:
   contents: write
 
 env:
-  CMAKE_GENERATOR: Ninja
   files: dist/*
-  python-version: 3.x
-  cache: pip
 
 jobs:
   build-wheels-and-test:
@@ -30,16 +27,10 @@ jobs:
     runs-on: ${{matrix.runs-on}}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{env.python-version}}
-          cache: ${{env.cache}}
-      - name: Install dependencies
-        run: |
-          pip install uv
+      - uses: astral-sh/setup-uv@v6
       - uses: docker/setup-qemu-action@v3
         if: runner.os == 'Linux'
-      - uses: pypa/cibuildwheel@v2.22
+      - uses: pypa/cibuildwheel@v2.23
       - uses: actions/upload-artifact@v4
         with:
           name: artifact-${{matrix.runs-on}}
@@ -52,13 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{env.python-version}}
-          cache: ${{env.cache}}
-      - name: Install dependencies
-        run: |
-          pip install uv
+      - uses: astral-sh/setup-uv@v6
       - name: Build sdist
         run: |
           uv build --sdist
@@ -73,7 +58,7 @@ jobs:
           pattern: artifact-*
           merge-multiple: true
           path: dist
-      - uses: softprops/action-gh-release@v1
+      - uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           # body_path: build/CHANGELOG.md

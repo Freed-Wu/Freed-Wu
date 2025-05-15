@@ -184,8 +184,7 @@
 /.config/kitty/*
 !/.config/kitty/*.conf
 !/.config/tmux/
-/.config/tmux/*
-!/.config/tmux/tmux.conf
+/.config/tmux/plugins/
 !/.config/browsh/
 /.config/browsh/*
 !/.config/browsh/config.toml
@@ -413,6 +412,7 @@
 /AppData/Roaming/*/
 !/AppData/Local/
 /AppData/Local/*
+!/AppData/Local/.xmake
 !/AppData/Local/nvim
 !/AppData/Local/nvim-data
 !/AppData/Local/Packages/
