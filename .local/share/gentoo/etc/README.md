@@ -22,7 +22,6 @@
   - [![homebrew](https://img.shields.io/badge/homebrew-gray?logo=Homebrew)](https://brew.sh)
     [packages](https://github.com/Homebrew/homebrew-core/commits?author=Freed-Wu)
     packaged by me.
-- [More](https://github.com/Freed-Wu?tab=repositories&q=dotfiles).
 
 ## Windows Msys2
 

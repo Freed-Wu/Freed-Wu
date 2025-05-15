@@ -54,7 +54,7 @@
     },
     "asm": {
       "command": "asm-lsp",
-      "filetypes": ["asm", "nasm"]
+      "filetypes": ["asm", "nasm", "fasm", "masm"]
     },
     "bash": {
       "command": "termux-language-server",
@@ -82,12 +82,16 @@
       "filetypes": ["vhdl", "verilog"]
     },
     "make": {
-      "command": "make-language-server",
+      "command": "katid",
       "filetypes": ["make"]
     },
     "mutt": {
       "command": "mutt-language-server",
       "filetypes": ["muttrc"]
+    },
+    "qmlls": {
+      "command": "qmlls",
+      "filetypes": ["qml"]
     },
     "requirements": {
       "command": "requirements-language-server",

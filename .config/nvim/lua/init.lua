@@ -15,8 +15,8 @@ for _, arg in ipairs(vim.v.argv) do
 end
 
 if vim.treesitter.language.register then
-    -- https://github.com/nvim-treesitter/nvim-treesitter/pull/6096/
     vim.treesitter.language.register("comment", "text")
+    -- https://github.com/nvim-treesitter/nvim-treesitter/pull/6096/
     vim.treesitter.language.register("bash", "apkbuild")
     vim.treesitter.language.register("bash", "PKGBUILD")
     vim.treesitter.language.register("bash", "ebuild")
@@ -42,10 +42,6 @@ if not vim.g.script_name then
 end
 
 do
-    -- https://github.com/neovim/neovim/issues/30212
-    if vim.fn.has('nvim-0.10.0') == 0 or vim.fn.has('win32') == 1 then
-        return
-    end
     local version, _ = _VERSION:gsub(".* ", "")
     -- ~/.config/luarocks/config-5.1.lua
     local luarocks_config = { require = require }

@@ -68,7 +68,7 @@ $CPAN::Config = {
     'use_prompt_default' => q[0],
     'use_sqlite'         => q[1],
     'version_timeout'    => q[15],
-    'wget'               => q[wget],
+    'curl'               => q[curl],
     'yaml_load_code'     => q[0],
     'yaml_module'        => q[YAML::Syck],
 };
