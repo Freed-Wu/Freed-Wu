@@ -31,7 +31,7 @@ jobs:
     runs-on: ${{matrix.runs-on}}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{env.python-version}}
           cache: ${{env.cache}}
@@ -44,7 +44,7 @@ jobs:
       - name: Test
         run: |
           pytest --cov
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
 
   build:
     needs: test
@@ -81,7 +81,7 @@ jobs:
           name: artifact-${{matrix.runs-on}}
           path: |
             ${{env.files}}
-      - uses: softprops/action-gh-release@v1
+      - uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           # body_path: build/CHANGELOG.md
