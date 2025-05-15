@@ -89,6 +89,10 @@
       "command": "mutt-language-server",
       "filetypes": ["muttrc"]
     },
+    "qmlls": {
+      "command": "qmlls",
+      "filetypes": ["qml"]
+    },
     "requirements": {
       "command": "requirements-language-server",
       "filetypes": ["requirements"]

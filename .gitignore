@@ -413,6 +413,7 @@
 /AppData/Roaming/*/
 !/AppData/Local/
 /AppData/Local/*
+!/AppData/Local/.xmake
 !/AppData/Local/nvim
 !/AppData/Local/nvim-data
 !/AppData/Local/Packages/
