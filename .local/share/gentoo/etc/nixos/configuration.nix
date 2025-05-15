@@ -147,10 +147,10 @@ rec {
   # Configure keymap in X11
   # gnome 47.1 and plasma on wayland display incorrectly for HiDPI
   services.displayManager.defaultSession = "plasma";
-  services.xserver.desktopManager.gnome.enable = services.displayManager.defaultSession == "gnome";
-  services.xserver.displayManager.gdm.enable = services.displayManager.defaultSession == "gnome";
+  services.desktopManager.gnome.enable = services.displayManager.defaultSession == "gnome";
+  services.displayManager.gdm.enable = services.displayManager.defaultSession == "gnome";
 
-  services.xserver.desktopManager.plasma5.enable = services.displayManager.defaultSession == "plasma";
+  services.desktopManager.plasma6.enable = services.displayManager.defaultSession == "plasma";
   services.displayManager.sddm.enable = services.displayManager.defaultSession == "plasma";
   services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sddm.settings = {
@@ -224,7 +224,7 @@ rec {
     epiphany
     evince
   ];
-  environment.plasma5.excludePackages = with pkgs.plasma5Packages; [
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
     kate
     konqueror
@@ -272,8 +272,6 @@ rec {
           nur.repos.Freed-Wu.xilinx-language-server
         ]
       ))
-      # mesonlsp needs it
-      meson
       vim-vint
       yamllint
       trash-cli
@@ -333,8 +331,9 @@ rec {
       fennel-ls
       fnlfmt
       (
-        # rocks.nvim needs luarocks 5.1
-        luajit.withPackages (
+        # https://github.com/luarocks/luarocks/issues/1797
+        # luaJIT doesn't support #table > 65536
+        lua5_1.withPackages (
           p: with p; [
             # pre-commit needs it
             luarocks
@@ -346,8 +345,6 @@ rec {
       nagelfar
       # }}} tcl #
       # rust {{{ #
-      # for neovim's tree-sitter-parsers
-      tree-sitter
       # pre-commit needs it
       cargo
       rustc
@@ -433,14 +430,8 @@ rec {
       progress
       # }}} info #
       # build {{{ #
-      # meson needs it
-      pkg-config
       bear
-      # pre-comit call luarocks, then luarocks call it for building
-      gnumake
       # }}} build #
-      # uv build needs it
-      stdenv.cc
       tmux
       lsof
       poppler_utils
@@ -448,9 +439,7 @@ rec {
       fontconfig
       imagemagick
       sqlite
-      hello
       neomutt
-      wget
       curl
       git
       subversion
@@ -466,7 +455,6 @@ rec {
       elinks
       # calculator
       jq
-      acpi
       zathura
       ffmpeg
       moreutils
@@ -480,7 +468,9 @@ rec {
       # }}} c #
       # c++ {{{ #
       krita
-      # neocmakelsp needs it
+      # qmlls
+      kdePackages.qtdeclarative
+      # https://github.com/neocmakelsp/neocmakelsp/discussions/167
       cmake
       mesonlsp
       openai-triton-llvm
@@ -505,12 +495,12 @@ rec {
     ]
     # don't use libreoffice-fresh to avoid building
     ++ (
-      if services.xserver.desktopManager.plasma5.enable then
+      if services.desktopManager.plasma6.enable then
         [
           libreoffice-qt
-          plasma5Packages.kdeconnect-kde
+          kdePackages.kdeconnect-kde
         ]
-      else if services.xserver.desktopManager.gnome.enable then
+      else if services.desktopManager.gnome.enable then
         [
           libreoffice
           gnome-tweaks
@@ -540,17 +530,14 @@ rec {
     )
     ++ (
       if
-        services.xserver.displayManager.gdm ? wayland
-        && !services.xserver.displayManager.gdm.wayland
-        && services.xserver.displayManager.gdm.enable
+        services.displayManager.gdm ? wayland
+        && !services.displayManager.gdm.wayland
+        && services.displayManager.gdm.enable
       then
         [ xsel ]
-      # wl-clipboard breaks vim / firefox
-      # https://github.com/YaLTeR/wl-clipboard-rs/issues/8
       else
         [
-          xsel
-          # wayclip
+          wayclip
         ]
     );
 
@@ -595,6 +582,7 @@ rec {
   programs.zsh.histSize = 20000;
   programs.gnupg.agent.enable = true;
   programs.gnupg.agent.enableSSHSupport = true;
+  programs.nano.enable = false;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.neovim.vimAlias = true;
