@@ -94,6 +94,7 @@ set wildcharm=<Tab>
 set iminsert=0
 set noshowmode
 set hidden
+set comments=
 set expandtab
 set tabstop=2
 set shiftwidth=2
@@ -106,7 +107,7 @@ set clipboard=unnamed
 set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-CursorIM/lCursorIM,r-cr-o:hor20-CursorIM/lCursorIM
 " call systemlist() will meet:
 " /usr/bin/zsh: can''t open input files: /s
-if &shell !~# 'cmd' && &shellcmdflag ==# '/c'
+if &shell !~# 'cmd'
   set shellcmdflag=-c
 endif
 " unnamed clipboard of (n)vim only work in X11, see `:help unnamedplus`
@@ -830,6 +831,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " VCS {{{2 "
   call dein#add('rhysd/committia.vim', {
         \ 'hook_source': 'call init#committia#source()',
+        \ 'if': !has('win32'),
         \ })
   " 2}}} VCS "
 

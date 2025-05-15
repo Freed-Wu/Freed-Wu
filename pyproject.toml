@@ -89,8 +89,12 @@ exclude_lines = [
 
 [tool.cibuildwheel]
 archs = ["all"]
-# https://github.com/astral-sh/uv/issues/10260
-skip = "*37-* *38-* *39-* *-musllinux_s390x *-musllinux_ppc64*"
+skip = "*37-* *38-* *39-*"
 build-frontend = "build[uv]"
 before-test = "pip install .[dev]"
 test-command = "pytest {project}"
+
+# https://github.com/astral-sh/uv/issues/10260
+[[tool.cibuildwheel.overrides]]
+select = ["*-musllinux_s390x", "*-musllinux_ppc64*"]
+build-frontend = "build"

@@ -1,0 +1,2 @@
+# python -m translate_shell.tools.generate_prompt --format "set extended-prompt {text}" --prompt-string '\n(gdb) ' --section WHITE BLUE ' \w' --section WHITE BLACK '󰊕 \f' --section BLACK YELLOW ' \t'
+set extended-prompt [37m[44m  \w [34m[40m[37m 󰊕 \f [30m[43m[30m  \t [33m[49m[0m\n(gdb) 
