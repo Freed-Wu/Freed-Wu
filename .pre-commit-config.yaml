@@ -95,7 +95,7 @@ repos:
     hooks:
       - id: shfmt
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.11
+    rev: v0.11.12
     hooks:
       - id: ruff
       - id: ruff-format
@@ -125,7 +125,7 @@ repos:
     hooks:
       - id: luacheck
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.75.7
+    rev: v1.75.8
     hooks:
       - id: rubocop
   # - repo: https://github.com/NixOS/nixfmt
