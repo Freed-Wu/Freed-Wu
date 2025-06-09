@@ -88,7 +88,7 @@ repos:
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20250311.06"
+    rev: "20250311.07"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -96,7 +96,7 @@ repos:
     hooks:
       - id: shfmt
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.12
+    rev: v0.11.13
     hooks:
       - id: ruff
       - id: ruff-format
@@ -126,7 +126,7 @@ repos:
     hooks:
       - id: luacheck
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.75.8
+    rev: v1.76.1
     hooks:
       - id: rubocop
   # - repo: https://github.com/NixOS/nixfmt
