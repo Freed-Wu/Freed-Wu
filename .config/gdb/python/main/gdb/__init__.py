@@ -6,12 +6,30 @@
 
 import os
 import sys
+from contextlib import suppress
 
-import gdb  # type: ignore
+import gdb
 
-path = "/run/current-system/sw/lib/python3.12/site-packages"
+from ..__main__ import __version__
+
+with suppress(ImportError):
+    from gdb import cuda  # noqa: F401
+
+    path = os.path.expanduser(
+        f"~/.local/lib/python{__version__}/site-packages"
+    )
+    if os.path.isdir(path):
+        sys.path.insert(1, path)
+
+path = f"/run/current-system/sw/lib/python{__version__}/site-packages"
 if os.path.isdir(path):
     sys.path.insert(-1, path)
+
+with suppress(ImportError):
+    from pyrime.prompt_toolkit.gdb import gdb
+
+with suppress(ImportError):
+    from repl_python_wakatime.gdb import gdb
 
 prefixs = {
     "/usr",
@@ -29,11 +47,3 @@ for prefix in prefixs:
         if os.path.isfile(path):
             gdb.execute("source " + path)
             break
-
-for prefix in prefixs:
-    path = os.path.expanduser(os.path.join(prefix, "share/gdb/gdb-hook.py"))
-    if os.path.isfile(path):
-        gdb.execute(f"""define hook-stop
-  source {path}
-end""")
-        break

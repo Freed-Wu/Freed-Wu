@@ -3,7 +3,7 @@ r"""Test patch_images"""
 import math
 
 import torch
-from python.my import patch_images
+from main.my import patch_images
 from torchvision.transforms.functional import crop
 
 
