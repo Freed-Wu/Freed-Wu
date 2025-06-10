@@ -274,7 +274,6 @@
 !/.config/nvim/doc/*
 # `:Rocks sync` will generate it
 /.config/nvim/doc/tags
-!/.config/python/
 !/.config/autostart/
 /.config/autostart/*
 !/.config/autostart/lxqt-config-monitor-autostart.desktop

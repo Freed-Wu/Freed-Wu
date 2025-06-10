@@ -14,8 +14,6 @@ permissions:
 
 env:
   files: dist/*
-  python-version: 3.x
-  cache: pip
 
 # disable windows
 # invalid path '.password-store/https:/test.pypi.org/legacy/__token__.gpg'
@@ -30,16 +28,10 @@ jobs:
     runs-on: ${{matrix.runs-on}}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{env.python-version}}
-          cache: ${{env.cache}}
-      - name: Install dependencies
-        run: |
-          pip install build
+      - uses: astral-sh/setup-uv@v6
       - name: Build
         run: |
-          pyproject-build
+          uv build
       - uses: actions/upload-artifact@v4
         if: ${{! startsWith(github.ref, 'refs/tags/')}}
         with:

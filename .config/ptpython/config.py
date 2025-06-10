@@ -32,12 +32,15 @@ from pyrime.parse_key import (
     CONTROL_SHIFT_CR,
     SHIFT_CR,
 )
-from pyrime.prompt_toolkit import Rime
+from pyrime.prompt_toolkit.plugins import Rime
 from pyrime.prompt_toolkit.plugins.autopair import autopair
 from pyrime.prompt_toolkit.plugins.autosuggestion import autosuggestion
 from pyrime.prompt_toolkit.plugins.smartinput import smartinput
 from pyrime.prompt_toolkit.plugins.viemacs import viemacs
-from pyrime.prompt_toolkit.utils.condition import InsertMode, any_condition
+from pyrime.prompt_toolkit.utils.condition import (
+    InsertMode,
+    any_condition,
+)
 from pyrime.prompt_toolkit.utils.insert import insert
 from pyrime.prompt_toolkit.utils.prompt_style import PythonPrompt
 
@@ -136,9 +139,10 @@ def configure(repl: PythonRepl) -> None:
     # Paste mode. (When True, don't insert whitespace after new line.)
     repl.paste_mode = False
 
-    repl.all_prompt_styles |= {"python": PythonPrompt(repl)}
     # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
     repl.prompt_style = "python"  # 'classic' or 'ipython'
+
+    repl.all_prompt_styles |= {"python": PythonPrompt(repl)}
 
     with suppress(ImportError):
         from repl_python_wakatime.ptpython import install_hook
@@ -216,6 +220,50 @@ def configure(repl: PythonRepl) -> None:
     repl.show_result = sys.displayhook  # type: ignore
     # 1}}} repl #
 
+    @repl.add_key_binding("c-j", filter=EmacsInsertMode())
+    def _(event: KeyPressEvent) -> None:
+        """.
+
+        :param event:
+        :type event: KeyPressEvent
+        :rtype: None
+        """
+        buffer = event.current_buffer
+        buffer.newline()
+
+    @repl.add_key_binding("c-x", "c-j", filter=EmacsInsertMode())
+    def _(event: KeyPressEvent) -> None:
+        """.
+
+        :param event:
+        :type event: KeyPressEvent
+        :rtype: None
+        """
+        buffer = event.current_buffer
+        buffer.join_next_line()
+
+    # Custom key binding for some simple autocorrection while typing.
+    # conflict with vi block insert mode
+    """
+    corrections = {
+    }
+
+    @repl.add_key_binding(" ")
+    def _(event: KeyPressEvent) -> None:
+        " When a space is pressed. Check & correct word before cursor. "
+        b = event.cli.current_buffer
+        w = b.document.get_word_before_cursor()
+
+        if w is not None:
+            if w in corrections:
+                b.delete_before_cursor(count=len(w))
+                b.insert_text(corrections[w])
+
+        b.insert_text(" ")
+    """
+
+    # gdb doesn't allow to load binary python module
+
     rime = Rime(repl)
     autopair(rime)
     autosuggestion(repl)
@@ -279,28 +327,6 @@ def configure(repl: PythonRepl) -> None:
         """
         buffer = event.current_buffer
         buffer.cancel_completion()
-
-    @repl.add_key_binding("c-j", filter=EmacsInsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
-
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        buffer = event.current_buffer
-        buffer.newline()
-
-    @repl.add_key_binding("c-x", "c-j", filter=EmacsInsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
-
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        buffer = event.current_buffer
-        buffer.join_next_line()
 
     @repl.add_key_binding(*ALT_SHIFT_CR, filter=rime.filter())
     @repl.add_key_binding(*SHIFT_CR, filter=rime.filter())
@@ -421,26 +447,6 @@ def configure(repl: PythonRepl) -> None:
         event.cli.current_buffer.insert_text("\nbreakpoint()\n")
 
     # 1}}} python #
-
-    # Custom key binding for some simple autocorrection while typing.
-    # conflict with vi block insert mode
-    """
-    corrections = {
-    }
-
-    @repl.add_key_binding(" ")
-    def _(event: KeyPressEvent) -> None:
-        " When a space is pressed. Check & correct word before cursor. "
-        b = event.cli.current_buffer
-        w = b.document.get_word_before_cursor()
-
-        if w is not None:
-            if w in corrections:
-                b.delete_before_cursor(count=len(w))
-                b.insert_text(corrections[w])
-
-        b.insert_text(" ")
-    """
 
 
 # ex: foldmethod=marker

@@ -32,7 +32,7 @@ else:
     # https://github.com/prompt-toolkit/ptpython/issues/546
     is_gdb = False
     with suppress(ImportError):
-        from .gdbinit import gdb  # noqa: F401
+        from .gdb import gdb  # noqa: F401
 
         is_gdb = True
 

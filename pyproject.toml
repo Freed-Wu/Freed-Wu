@@ -36,15 +36,15 @@ email = "wuzhenyu@ustc.edu"
 text = "GPL v3"
 
 [tool.setuptools.packages.find]
-where = [".config/python"]
+where = [".config/gdb/python"]
 
 # begin: scripts/update-pyproject.toml.pl
 [tool.setuptools.dynamic.optional-dependencies.dev]
-file = ".config/python/requirements/dev.txt"
+file = ".config/gdb/python/requirements/dev.txt"
 # end: scripts/update-pyproject.toml.pl
 
 [tool.setuptools_scm]
-write_to = ".config/python/python/_version.py"
+write_to = ".config/gdb/python/main/_version.py"
 
 [tool.mdformat]
 number = true

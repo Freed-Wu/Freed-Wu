@@ -1,7 +1,7 @@
 r"""Test describe"""
 
 import torch
-from python.describe import Describe, describe
+from main.describe import Describe, describe
 
 
 class Test:
