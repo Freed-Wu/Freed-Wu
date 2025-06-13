@@ -21,4 +21,4 @@ define pp
 end
 
 source ~/.config/gdb/cache/gdbinit
-source ~/.config/gdb/python/main/gdbinit.py
+source ~/.config/gdb/python/__main/gdbinit.py

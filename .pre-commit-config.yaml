@@ -88,7 +88,7 @@ repos:
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20250311.07"
+    rev: "20250616"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -101,11 +101,11 @@ repos:
       - id: ruff
       - id: ruff-format
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.401
+    rev: v1.1.402
     hooks:
       - id: pyright
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v20.1.5
+    rev: v20.1.6
     hooks:
       - id: clang-format
         exclude_types:

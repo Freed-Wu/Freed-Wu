@@ -7,6 +7,10 @@
             "command": "paste"
         },
         {
+            "command": "unbound",
+            "keys": "ctrl+v"
+        },
+        {
             "command": 
             {
                 "action": "copy",
@@ -14,10 +18,6 @@
             },
             "id": "User.copy.644BA8F2",
             "keys": "ctrl+c"
-        },
-        {
-            "command": "unbound",
-            "keys": "ctrl+v"
         },
         {
             "command": "find",
@@ -146,6 +146,18 @@
                 "icon": "C:/msys64/ucrt64.ico",
                 "name": "UCRT64 / MSYS2",
                 "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "guid": "{e781bdac-5d0a-5282-8954-626dd9e8e732}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{4e3b360a-33eb-52fa-bac2-e04e6edcc5e6}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
