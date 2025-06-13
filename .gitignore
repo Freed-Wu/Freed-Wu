@@ -357,6 +357,7 @@
 /.local/share/gentoo/*
 !/.local/share/gentoo/etc/
 /.local/share/gentoo/etc/*
+!/.local/share/gentoo/etc/hosts
 !/.local/share/gentoo/etc/dispatch-conf.conf
 !/.local/share/gentoo/etc/portage/
 /.local/share/gentoo/etc/portage/make.profile

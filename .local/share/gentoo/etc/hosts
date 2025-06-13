@@ -1,0 +1,11 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+127.0.0.1        localhost
+::1              localhost
+
+192.168.151.110 server
+192.168.151.111 desktop
+202.38.69.241   ustc
+202.38.95.226   bitahub
+210.45.123.248  vilab
+210.45.70.46    ivclab
