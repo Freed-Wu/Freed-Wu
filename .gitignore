@@ -357,6 +357,10 @@
 !/.local/share/gentoo/etc/
 /.local/share/gentoo/etc/*
 !/.local/share/gentoo/etc/hosts
+!/.local/share/gentoo/etc/X11/
+/.local/share/gentoo/etc/X11/*
+!/.local/share/gentoo/etc/X11/Xwrapper.conf
+!/.local/share/gentoo/etc/X11/xorg.conf.d/
 !/.local/share/gentoo/etc/dispatch-conf.conf
 !/.local/share/gentoo/etc/proxychains.conf
 !/.local/share/gentoo/etc/portage/

@@ -1,0 +1,8 @@
+#!/usr/bin/env -S pip install -r
+
+grc
+# apt install python-cryptography
+keyring-pass
+pudb
+pyrime[ptpython]
+translate-shell[repl]

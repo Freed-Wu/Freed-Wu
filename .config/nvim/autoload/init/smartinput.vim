@@ -435,7 +435,7 @@ function! init#smartinput#post_source() abort
         \ 'char': ':',
         \ 'input': ': ',
         \ 'filetype': ['text', 'json', 'jsonc', 'yaml', 'sublime_syntax',
-        \ 'python', 'c', 'javascript', 'typescript'],
+        \ 'python', 'c', 'javascript', 'typescript', 'markdown', 'typst'],
         \ })
   call smartinput#define_rule({
         \ 'at': '\(with\|if\|else\|elseif\|for\|while\) .*\%#',

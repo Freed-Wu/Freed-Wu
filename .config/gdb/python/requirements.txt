@@ -1,7 +1,4 @@
-#!/usr/bin/env -S pip install -r
+#!/usr/bin/env -S uv add -r
 
-grc
-# apt install python-cryptography
-keyring-pass
+pudb
 pyrime[ptpython]
-translate-shell[repl]

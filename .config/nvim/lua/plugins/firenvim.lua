@@ -9,7 +9,7 @@ vim.g.firenvim_config = {
             cmdline = 'firenvim',
             priority = 0,
         },
-        ['https://(poe|(www\\.google|.*\\.zhihu))\\.com'] = {
+        ['https://(poe|fanyi\\.baidu|(www|translate)\\.google|.*\\.zhihu)\\.com'] = {
             takeover = 'never',
             priority = 1,
         },
