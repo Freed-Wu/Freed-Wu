@@ -44,7 +44,7 @@ file = ".config/gdb/python/requirements/dev.txt"
 # end: scripts/update-pyproject.toml.pl
 
 [tool.setuptools_scm]
-write_to = ".config/gdb/python/main/_version.py"
+write_to = ".config/gdb/python/__main/_version.py"
 
 [tool.mdformat]
 number = true

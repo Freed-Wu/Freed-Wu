@@ -47,25 +47,32 @@ has_cmd() {
 		fi
 	done
 }
+
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then
 	export LANG=en_US.UTF-8
 fi
-# tty
+
+dirs=("${XDG_STATE_HOME:-"$HOME/.local/state"}/nix/profile/bin")
+for dir in "${dirs[@]}"; do
+	if [[ -d $dir ]]; then
+		PATH="$PATH${PATH:+:}$dir"
+	fi
+done
+if [[ $OS == Windows_NT ]]; then
+	export BROWSER=start
+	export PYTHONUTF8=1
+	export PATH="$PATH${PATH:+:}$HOME/AppData/Local/Microsoft/WindowsApps"
+fi
 if [[ $OSTYPE == cygwin ]]; then
-	export BROWSER=start
-	export PYTHONUTF8=1
 	export CYGWIN=winsymlinks:nativestrict
-	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/cygwin${PATH:+:}$HOME/AppData/Local/Microsoft/WindowsApps"
+	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/cygwin"
 elif [[ $OSTYPE == msys ]]; then
-	export BROWSER=start
-	export PYTHONUTF8=1
 	export MSYS=winsymlinks:nativestrict
-	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/msys64${PATH:+:}$HOME/AppData/Local/Microsoft/WindowsApps"
+	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/msys64"
 elif [[ $OSTYPE == darwin* ]]; then
 	export BROWSER=open
-fi
-if [[ $OSTYPE == linux-android ]]; then
+elif [[ $OSTYPE == linux-android ]]; then
 	PATH="$PATH${PATH:+:}/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin:$HOME/.shortcuts:$HOME/bin"
 	if [[ -n $DISPLAY ]] && has_cmd gio; then
 		export BROWSER='gio open'
@@ -84,12 +91,14 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 		eval GI_TYPELIB_PATH="$(nix eval --impure -f ~/.local/share/lua/5.1/ime/get-GI_TYPELIB_PATH.nix)"
 	fi
 else
-	dir=$HOME/.local/state/nix/profile/bin
-	if [[ -d $dir ]]; then
-		PATH="$PATH${PATH:+:}$dir"
-	fi
-	unset dir
+	dirs=(/nix/var/nix/profiles/default/bin)
+	for dir in "${dirs[@]}"; do
+		if [[ -d $dir ]]; then
+			PATH="$PATH${PATH:+:}$dir"
+		fi
+	done
 fi
+unset dirs dir
 if has_cmd manpager; then
 	if has_cmd less; then
 		version="$(less --version)" version=${version#less } version=${version%% *}
