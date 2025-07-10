@@ -27,5 +27,5 @@ end
 variables = {
     BUNZIP2 = "7z -y x",
     UNZIP = "7z -y x",
-    ZIP = "7z -y a"
+    ZIP = "7z -tzip -y a"
 }
