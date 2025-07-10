@@ -1,4 +1,4 @@
-# shellcheck shell=bash disable=SC2016,SC2154
+# shellcheck shell=bash disable=SC2016,SC2154,SC2123
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 
@@ -56,20 +56,25 @@ fi
 dirs=("${XDG_STATE_HOME:-"$HOME/.local/state"}/nix/profile/bin")
 for dir in "${dirs[@]}"; do
 	if [[ -d $dir ]]; then
-		PATH="$PATH${PATH:+:}$dir"
+		PATH="$dir${PATH:+:}$PATH"
 	fi
 done
+# interactively
+export FZF_HISTORY_DIR
 if [[ $OS == Windows_NT ]]; then
 	export BROWSER=start
 	export PYTHONUTF8=1
-	export PATH="$PATH${PATH:+:}$HOME/AppData/Local/Microsoft/WindowsApps"
+	PATH="$PATH${PATH:+:}$HOME/AppData/Local/Microsoft/WindowsApps"
+	FZF_HISTORY_DIR="$(cygpath -w "${XDG_DATA_HOME:-$HOME/.local/share}"/fzf | sed 's=\\=\\\\=g')"
+else
+	FZF_HISTORY_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fzf"
 fi
 if [[ $OSTYPE == cygwin ]]; then
 	export CYGWIN=winsymlinks:nativestrict
-	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/cygwin"
+	PATH="$PATH${PATH:+:}/proc/cygdrive/c/cygwin"
 elif [[ $OSTYPE == msys ]]; then
 	export MSYS=winsymlinks:nativestrict
-	export PATH="$PATH${PATH:+:}/proc/cygdrive/c/msys64"
+	PATH="$PATH${PATH:+:}/proc/cygdrive/c/msys64"
 elif [[ $OSTYPE == darwin* ]]; then
 	export BROWSER=open
 elif [[ $OSTYPE == linux-android ]]; then
@@ -94,11 +99,12 @@ else
 	dirs=(/nix/var/nix/profiles/default/bin)
 	for dir in "${dirs[@]}"; do
 		if [[ -d $dir ]]; then
-			PATH="$PATH${PATH:+:}$dir"
+			PATH="$dir${PATH:+:}$PATH"
 		fi
 	done
 fi
 unset dirs dir
+
 if has_cmd manpager; then
 	if has_cmd less; then
 		version="$(less --version)" version=${version#less } version=${version%% *}
@@ -113,15 +119,10 @@ if has_cmd manpager; then
 	fi
 	export MANPAGER
 fi
+
 # less
 export LESS='-r -M -S -I --mouse'
-# interactively
-export FZF_HISTORY_DIR
-if [[ $OSTYPE == msys ]] || [[ $OSTYPE == cygwin ]]; then
-	FZF_HISTORY_DIR="$(cygpath -w "${XDG_DATA_HOME:-$HOME/.local/share}"/fzf | sed 's=\\=\\\\=g')"
-else
-	FZF_HISTORY_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fzf"
-fi
+
 # https://github.com/junegunn/fzf/blob/master/ADVANCED.md#ripgrep-integration
 # rg foo | fzf
 # --preview-window=...,~4 will avoid ps's preview provided by fzf-tab
@@ -170,6 +171,7 @@ if [[ $OS != Windows_NT ]]; then
 	FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 --preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'"
 fi
+
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true
@@ -178,14 +180,19 @@ export HOMEBREW_API_DOMAIN="$HOMEBREW_BOTTLE_DOMAIN/api"
 export HOMEBREW_GIT_NAME="$DEBFULLNAME"
 export HOMEBREW_GIT_EMAIL="$EMAIL"
 export HOMEBREW_GITHUB_API_TOKEN="$HOMEBREW_GITHUB_PACKAGES_TOKEN"
+
 # docker
 export DOCKER_BUILDKIT=1
+
 # repo
 export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
+
 # direnv
 export DIRENV_LOG_FORMAT=
+
 # minicom
 export MINICOM=-w
+
 # node
 export NODE_ENV=development
 if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
@@ -198,6 +205,7 @@ fi
 if [[ -z $TMUX_PANE && $TERM == tmux-256color ]]; then
 	export TERM=xterm-256color
 fi
+
 # web2c
 export LUAINPUTS_luajittex='$TEXMFDOTDIR;'"$HOME/.local/share/lua/5.1;$HOME/.local/state/nix/profile/share/lua/5.1"';$TEXMF/tex/{lualatex,latex,luatex,generic}//'
 export CLUAINPUTS_luajittex='$TEXMFDOTDIR;'"$HOME/.local/lib/lua/5.1;$HOME/.local/state/nix/profile/lib/lua/5.1"
