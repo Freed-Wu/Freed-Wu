@@ -10,9 +10,14 @@
 }:
 
 let
-  nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-    inherit pkgs;
-  };
+  nur =
+    import
+      (builtins.fetchTarball {
+        url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+      })
+      {
+        inherit pkgs;
+      };
 in
 rec {
   # basic {{{ #
@@ -55,10 +60,9 @@ rec {
         nix-index-database =
           (builtins.getFlake "github:nix-community/nix-index-database")
           .packages.${builtins.currentSystem}.default;
-        # https://github.com/rime/home/discussions/1206#discussioncomment-10092637
-        librime = (pkgs.librime.override { plugins = [ ]; });
         fcitx5-rime = (pkgs.fcitx5-rime.override { rimeDataPkgs = rimeDataPkgs; });
         ibus-engines.rime = (pkgs.ibus-engines.rime.override { rimeDataPkgs = rimeDataPkgs; });
+        lux-cli = (builtins.getFlake "github:nvim-neorocks/lux").packages.${builtins.currentSystem}.default;
       };
   };
   hardware.enableAllFirmware = true;
@@ -254,22 +258,20 @@ rec {
         p: with p; [
           # tool
           keyring-pass
-          # develop
-          uv
           # misc
           # https://github.com/NixOS/nixpkgs/issues/373667
           # esbonio
           nur.repos.Freed-Wu.pyrime
           nur.repos.Freed-Wu.translate-shell
-          nur.repos.Freed-Wu.mutt-language-server
-          nur.repos.Freed-Wu.tmux-language-server
-          nur.repos.Freed-Wu.zathura-language-server
-          nur.repos.Freed-Wu.autotools-language-server
-          nur.repos.Freed-Wu.termux-language-server
-          nur.repos.Freed-Wu.requirements-language-server
-          nur.repos.Freed-Wu.sublime-syntax-language-server
-          nur.repos.Freed-Wu.expect-language-server
-          nur.repos.Freed-Wu.xilinx-language-server
+          # https://github.com/neomutt/lsp-tree-sitter/issues/4
+          # nur.repos.Freed-Wu.mutt-language-server
+          # nur.repos.Freed-Wu.tmux-language-server
+          # nur.repos.Freed-Wu.zathura-language-server
+          # nur.repos.Freed-Wu.termux-language-server
+          # nur.repos.Freed-Wu.requirements-language-server
+          # nur.repos.Freed-Wu.sublime-syntax-language-server
+          # nur.repos.Freed-Wu.expect-language-server
+          # nur.repos.Freed-Wu.xilinx-language-server
         ]
       ))
       vim-vint
@@ -282,8 +284,9 @@ rec {
       grc
       pre-commit
       doq
-      # https://github.com/NixOS/nixpkgs/issues/375763
-      # bitbake-language-server
+      bitbake-language-server
+      # https://github.com/Freed-Wu/autotools-language-server/issues/18
+      # autotools-language-server
       # }}} python #
       # perl {{{ #
       (perl.withPackages (
@@ -340,14 +343,16 @@ rec {
           ]
         )
       )
+      nur.repos.Freed-Wu.luahbtex
       # }}} lua #
       # tcl {{{ #
       nagelfar
       # }}} tcl #
       # rust {{{ #
-      # pre-commit needs it
-      cargo
-      rustc
+      # package manager
+      uv
+      bun
+      lux-cli
       # nix
       manix
       nix-index-database
@@ -383,8 +388,6 @@ rec {
       tinymist
       # }}} rust #
       # go {{{ #
-      # pre-commit needs it
-      go
       # tool
       git-lfs
       gopass
@@ -403,9 +406,6 @@ rec {
       jq-lsp
       # }}} go #
       # haskell {{{ #
-      # pre-commit needs it for haskell hooks
-      cabal-install
-      ghc
       # linter
       shellcheck
       # formatter
@@ -478,7 +478,6 @@ rec {
       cppcheck
       nixd
       clang-tools
-      cling
       aria2
       lftp
       yuview

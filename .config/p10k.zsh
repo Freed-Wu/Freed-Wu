@@ -38,6 +38,7 @@
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
+    my_lux_shell
     my_brew_shell
     my_toolbox
     my_rime
@@ -1696,6 +1697,11 @@
     fi
   }
 
+  function prompt_my_lux_shell() {
+    if [[ -n $LUX_SHELL ]]; then
+      p10k segment -bblack -fblue -i -tlux
+    fi
+  }
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
   # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.

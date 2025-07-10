@@ -151,7 +151,7 @@ def describe(
                 kwargs["max"] = obj.max().item()
         with suppress(RuntimeError):
             if var:
-                _mean, _var = torch.var_mean(obj)
+                _mean, _var = torch.var_mean(obj, unbiased=False)
                 if mean:
                     kwargs["mean"] = _mean.item()
                 kwargs["var"] = _var.item()

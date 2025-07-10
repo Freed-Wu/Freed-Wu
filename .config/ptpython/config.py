@@ -24,25 +24,17 @@ from ptpython.completer import CompletePrivateAttributes
 from ptpython.layout import CompletionVisualisation
 from ptpython.repl import PythonRepl
 from ptpython.style import default_ui_style
-from pyrime.parse_key import (
-    ALT_SHIFT_CR,
-    CONTROL_ALT_CR,
-    CONTROL_ALT_SHIFT_CR,
-    CONTROL_CR,
-    CONTROL_SHIFT_CR,
-    SHIFT_CR,
-)
-from pyrime.prompt_toolkit.plugins import Rime
-from pyrime.prompt_toolkit.plugins.autopair import autopair
-from pyrime.prompt_toolkit.plugins.autosuggestion import autosuggestion
-from pyrime.prompt_toolkit.plugins.smartinput import smartinput
-from pyrime.prompt_toolkit.plugins.viemacs import viemacs
-from pyrime.prompt_toolkit.utils.condition import (
+from pyrime.ptpython.plugins import Rime
+from pyrime.ptpython.plugins.autopair import autopair
+from pyrime.ptpython.plugins.autosuggestion import autosuggestion
+from pyrime.ptpython.plugins.smartinput import smartinput
+from pyrime.ptpython.plugins.viemacs import viemacs
+from pyrime.ptpython.utils.condition import (
     InsertMode,
     any_condition,
 )
-from pyrime.prompt_toolkit.utils.insert import insert
-from pyrime.prompt_toolkit.utils.prompt_style import PythonPrompt
+from pyrime.ptpython.utils.insert import insert
+from pyrime.ptpython.utils.prompt_style import PythonPrompt
 
 # https://github.com/prompt-toolkit/ptpython/pull/593
 sys.ps1 = ">>> "
@@ -327,21 +319,6 @@ def configure(repl: PythonRepl) -> None:
         """
         buffer = event.current_buffer
         buffer.cancel_completion()
-
-    @repl.add_key_binding(*ALT_SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_ALT_SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_ALT_CR, filter=rime.filter())
-    def _(event: KeyPressEvent) -> None:
-        """.
-
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        event.current_buffer.validate_and_handle()
 
     # python {{{1 #
     @repl.add_key_binding("K", filter=ViNavigationMode())

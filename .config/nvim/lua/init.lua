@@ -31,8 +31,13 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 if not vim.g.script_name then
-    vim.o.foldmethod = "expr"
     vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.api.nvim_create_autocmd("BufEnter", {
+        group = vim.api.nvim_create_augroup("init", { clear = false }),
+        callback = function()
+            vim.o.foldmethod = "expr"
+        end
+    })
     vim.api.nvim_create_autocmd("TextYankPost", {
         group = vim.api.nvim_create_augroup("init", { clear = false }),
         callback = function()
@@ -57,7 +62,7 @@ do
         if vim.fn.executable(bin) == 1 then
             ---@diagnostic disable-next-line: inject-field
             luarocks_config.variables.LUA_INCDIR = vim.fs.joinpath(
-            vim.fs.dirname(vim.fs.dirname(vim.uv.fs_realpath(bin))), "include")
+                vim.fs.dirname(vim.fs.dirname(vim.uv.fs_realpath(bin))), "include")
             break
         end
     end
