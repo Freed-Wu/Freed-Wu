@@ -325,6 +325,7 @@
 !/.config/pixi/
 !/.config/fennel/
 !/.config/texmf/
+!/.config/lux/
 
 # $XDG_DATA_HOME
 !/.local/
