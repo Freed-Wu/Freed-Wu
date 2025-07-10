@@ -26,10 +26,18 @@ if os.path.isdir(path):
     sys.path.insert(-1, path)
 
 with suppress(ImportError):
-    from pyrime.prompt_toolkit.gdb import gdb
+    from pyrime.ptpython.gdb import PtPythonCommand
+
+    PtPythonCommand()
 
 with suppress(ImportError):
-    from repl_python_wakatime.gdb import gdb
+    # Error occurred in Python: '_GdbFile' object has no attribute 'fileno'
+    # from repl_python_wakatime.backends.codestats import CodeStats
+    from repl_python_wakatime.backends.wakatime import Wakatime
+    from repl_python_wakatime.frontends.gdb import StopHook
+
+    StopHook(Wakatime())
+
 
 prefixs = {
     "/usr",

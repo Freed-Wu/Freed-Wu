@@ -29,15 +29,20 @@ else:
     with suppress(ImportError):
         from rich import print  # noqa: F401
 
-    # https://github.com/prompt-toolkit/ptpython/issues/546
-    is_gdb = False
-    with suppress(ImportError):
-        from .gdb import gdb  # noqa: F401
+    is_enabled = True
 
-        is_gdb = True
+    with suppress(ImportError):
+        from .gdb import StopHook  # noqa: F401
+
+        is_enabled = False
+
+    with suppress(ImportError):
+        import vim  # type: ignore  # noqa: F401
+
+        is_enabled = False
 
     with suppress(ImportError):
         from translate_shell.tools.repl.main import interact
 
         # https://github.com/davidhalter/jedi/issues/2046
-        interact(wakatime=not is_gdb, codestats=not is_gdb, jedi=not is_gdb)
+        interact(wakatime=is_enabled, codestats=is_enabled, jedi=is_enabled)

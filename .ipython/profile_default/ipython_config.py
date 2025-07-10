@@ -708,13 +708,15 @@ with suppress(ImportError):
     c.TerminalInteractiveShell.prompts_class = PowerlinePrompts
 
 with suppress(ImportError):
-    from repl_python_wakatime.ipython import install_hook
+    from repl_python_wakatime.backends.chainedhook import ChainedHook
+    from repl_python_wakatime.backends.codestats import CodeStats
+    from repl_python_wakatime.backends.wakatime import Wakatime
+    from repl_python_wakatime.frontends.ipython import Ipython
 
-    install_hook(c)
-    with suppress(ImportError):
-        from repl_python_wakatime.hooks.codestats import codestats_hook
-
-        install_hook(c, codestats_hook)
+    c.TerminalInteractiveShell.prompts_class = lambda *args, **kwargs: Ipython(
+        ChainedHook(hooks=(CodeStats(), Wakatime())),
+        c.TerminalInteractiveShell.prompts_class(*args, **kwargs),
+    )
 
 # # Deprecated since IPython 4.0 and ignored since 5.0, set
 #  TerminalInteractiveShell.prompts object directly.

@@ -94,5 +94,5 @@ test-command = "pytest {project}"
 
 # https://github.com/astral-sh/uv/issues/10260
 [[tool.cibuildwheel.overrides]]
-select = ["*-musllinux_s390x", "*-musllinux_ppc64*"]
+select = ["*-musllinux_s390x", "*-musllinux_ppc64*", "*-musllinux_riscv64"]
 build-frontend = "build"

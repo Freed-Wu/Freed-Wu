@@ -121,3 +121,5 @@
 # https://github.com/ghedo/p5-Dist-Zilla-Plugin-GitHub
 [github]
 	user = Freed-Wu
+[protocol "file"]
+	allow = always

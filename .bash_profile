@@ -91,9 +91,9 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 	export NIX_LD_LIBRARY_PATH
 	eval NIX_LD_LIBRARY_PATH="$(~/script/nixos/get-NIX_LD_LIBRARY_PATH.nix)"
 	# https://github.com/Freed-Wu/ime.nvim#tips
-	if [[ -f ~/.local/share/lua/5.1/ime/get-GI_TYPELIB_PATH.nix ]]; then
+	if [[ -f ~/.local/share/lua/5.1/ime/backends/scripts/get-GI_TYPELIB_PATH.nix ]]; then
 		export GI_TYPELIB_PATH
-		eval GI_TYPELIB_PATH="$(nix eval --impure -f ~/.local/share/lua/5.1/ime/get-GI_TYPELIB_PATH.nix)"
+		eval GI_TYPELIB_PATH="$(nix eval --impure -f ~/.local/share/lua/5.1/ime/backends/scripts/get-GI_TYPELIB_PATH.nix)"
 	fi
 else
 	dirs=(/nix/var/nix/profiles/default/bin)
@@ -104,6 +104,10 @@ else
 	done
 fi
 unset dirs dir
+
+if has_cmd nix-shell; then
+	export NIX_PATH=nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix:/nix/var/nix/profiles/per-user/root/channels
+fi
 
 if has_cmd manpager; then
 	if has_cmd less; then
@@ -206,24 +210,7 @@ if [[ -z $TMUX_PANE && $TERM == tmux-256color ]]; then
 	export TERM=xterm-256color
 fi
 
-# web2c
-export LUAINPUTS_luajittex='$TEXMFDOTDIR;'"$HOME/.local/share/lua/5.1;$HOME/.local/state/nix/profile/share/lua/5.1"';$TEXMF/tex/{lualatex,latex,luatex,generic}//'
-export CLUAINPUTS_luajittex='$TEXMFDOTDIR;'"$HOME/.local/lib/lua/5.1;$HOME/.local/state/nix/profile/lib/lua/5.1"
-export LUAINPUTS_luatex='$TEXMFDOTDIR;'"$HOME/.local/share/lua/5.3;$HOME/.local/state/nix/profile/share/lua/5.3"';$TEXMF/tex/{lualatex,latex,luatex,generic}//'
-export CLUAINPUTS_luatex='$TEXMFDOTDIR;'"$HOME/.local/lib/lua/5.3;$HOME/.local/state/nix/profile/lib/lua/5.3"
-if [[ -f /run/current-system/nixos-version ]]; then
-	LUAINPUTS_luajittex="$LUAINPUTS_luajittex;/run/current-system/sw/share/lua/5.1"
-	CLUAINPUTS_luajittex="$CLUAINPUTS_luajittex;/run/current-system/sw/lib/lua/5.1"
-	LUAINPUTS_luatex="$LUAINPUTS_luatex;/run/current-system/sw/share/lua/5.3"
-	CLUAINPUTS_luatex="$CLUAINPUTS_luatex;/run/current-system/sw/lib/lua/5.3"
-else
-	LUAINPUTS_luajittex="$LUAINPUTS_luajittex;/usr/share/lua/5.1"
-	CLUAINPUTS_luajittex="$CLUAINPUTS_luajittex;/usr/lib/lua/5.1"
-	LUAINPUTS_luatex="$LUAINPUTS_luatex;/usr/share/lua/5.3"
-	CLUAINPUTS_luatex="$CLUAINPUTS_luatex;/usr/lib/lua/5.3"
+# ssh
+if [[ -n $SSH_TTY ]]; then
+	export GPG_TTY=$SSH_TTY
 fi
-export LUAINPUTS_luajithbtex="$LUAINPUTS_luajittex"
-export CLUAINPUTS_luajithbtex="$CLUAINPUTS_luajittex"
-export LUAINPUTS_luahbtex="$LUAINPUTS_luatex"
-export CLUAINPUTS_luahbtex="$CLUAINPUTS_luatex"
-export TEXMFCONFIG="$HOME/.config/texmf"

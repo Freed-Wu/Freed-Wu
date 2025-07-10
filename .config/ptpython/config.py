@@ -11,7 +11,11 @@ from typing import Any
 from prompt_toolkit.application import Application
 from prompt_toolkit.cursor_shapes import CursorShape, ModalCursorShapeConfig
 from prompt_toolkit.enums import EditingMode
-from prompt_toolkit.filters import EmacsInsertMode, ViNavigationMode
+from prompt_toolkit.filters.app import (
+    emacs_insert_mode,
+    vi_insert_mode,
+    vi_navigation_mode,
+)
 from prompt_toolkit.key_binding.bindings.named_commands import (
     backward_char,
     forward_char,
@@ -24,25 +28,6 @@ from ptpython.completer import CompletePrivateAttributes
 from ptpython.layout import CompletionVisualisation
 from ptpython.repl import PythonRepl
 from ptpython.style import default_ui_style
-from pyrime.parse_key import (
-    ALT_SHIFT_CR,
-    CONTROL_ALT_CR,
-    CONTROL_ALT_SHIFT_CR,
-    CONTROL_CR,
-    CONTROL_SHIFT_CR,
-    SHIFT_CR,
-)
-from pyrime.prompt_toolkit.plugins import Rime
-from pyrime.prompt_toolkit.plugins.autopair import autopair
-from pyrime.prompt_toolkit.plugins.autosuggestion import autosuggestion
-from pyrime.prompt_toolkit.plugins.smartinput import smartinput
-from pyrime.prompt_toolkit.plugins.viemacs import viemacs
-from pyrime.prompt_toolkit.utils.condition import (
-    InsertMode,
-    any_condition,
-)
-from pyrime.prompt_toolkit.utils.insert import insert
-from pyrime.prompt_toolkit.utils.prompt_style import PythonPrompt
 
 # https://github.com/prompt-toolkit/ptpython/pull/593
 sys.ps1 = ">>> "
@@ -139,20 +124,6 @@ def configure(repl: PythonRepl) -> None:
     # Paste mode. (When True, don't insert whitespace after new line.)
     repl.paste_mode = False
 
-    # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
-    repl.prompt_style = "python"  # 'classic' or 'ipython'
-
-    repl.all_prompt_styles |= {"python": PythonPrompt(repl)}
-
-    with suppress(ImportError):
-        from repl_python_wakatime.ptpython import install_hook
-
-        install_hook(repl)
-        with suppress(ImportError):
-            from repl_python_wakatime.hooks.codestats import codestats_hook
-
-            install_hook(repl, codestats_hook)
-
     # Don't insert a blank line after the output.
     repl.insert_blank_line_after_output = False
 
@@ -220,28 +191,6 @@ def configure(repl: PythonRepl) -> None:
     repl.show_result = sys.displayhook  # type: ignore
     # 1}}} repl #
 
-    @repl.add_key_binding("c-j", filter=EmacsInsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
-
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        buffer = event.current_buffer
-        buffer.newline()
-
-    @repl.add_key_binding("c-x", "c-j", filter=EmacsInsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
-
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        buffer = event.current_buffer
-        buffer.join_next_line()
-
     # Custom key binding for some simple autocorrection while typing.
     # conflict with vi block insert mode
     """
@@ -262,189 +211,246 @@ def configure(repl: PythonRepl) -> None:
         b.insert_text(" ")
     """
 
-    # gdb doesn't allow to load binary python module
+    with suppress(ImportError):
+        from pyrime.ptpython import RIME
+        from pyrime.ptpython.plugins.autopair import autopair
+        from pyrime.ptpython.plugins.autosuggestion import autosuggestion
+        from pyrime.ptpython.plugins.smartinput import smartinput
+        from pyrime.ptpython.plugins.viemacs import viemacs
+        from pyrime.ptpython.utils.insert import insert
+        from pyrime.ptpython.utils.prompt_style import PythonPrompt
 
-    rime = Rime(repl)
-    autopair(rime)
-    autosuggestion(repl)
-    smartinput(rime)
-    viemacs(rime)
+        repl.all_prompt_styles["python"] = PythonPrompt(repl)
+        # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
+        repl.prompt_style = "python"  # 'classic' or 'ipython'
 
-    @repl.add_key_binding(
-        "c-^",
-        filter=any_condition(InsertMode, rime.mode(["c-^"])),
-    )
-    def _(event: KeyPressEvent) -> None:
-        rime.toggle()
+        rime = RIME(repl)
+        autopair(rime)
+        autosuggestion(repl)
+        smartinput(rime)
+        viemacs(rime)
 
-    @repl.add_key_binding("escape", "m", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+        @repl.add_key_binding(
+            "c-^",
+            filter=(emacs_insert_mode | vi_insert_mode) & rime.filter(),
+        )
+        def _(event: KeyPressEvent) -> None:
+            rime.is_enabled = not rime.is_enabled
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        b = event.cli.current_buffer
-        c: int = 0
-        while b.document.char_before_cursor == " ":
-            backward_char(event)
-            c += 1
-        w: str = b.document.get_word_before_cursor()
-        for _ in range(c):
-            forward_char(event)
-        event.cli.current_buffer.insert_text(w)
+        @repl.add_key_binding("c-j", filter=emacs_insert_mode)
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "w", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            buffer = event.current_buffer
+            buffer.newline()
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        unix_word_rubout(event)
+        @repl.add_key_binding("c-x", "c-j", filter=emacs_insert_mode)
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("c-x", "c-e", filter=InsertMode())
-    @repl.add_key_binding("g", "h", filter=ViNavigationMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            buffer = event.current_buffer
+            buffer.join_next_line()
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        buffer = event.current_buffer
-        buffer.open_in_editor()
+        @repl.add_key_binding(
+            "escape", "m", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("c-\\", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            b = event.cli.current_buffer
+            c: int = 0
+            while b.document.char_before_cursor == " ":
+                backward_char(event)
+                c += 1
+            w: str = b.document.get_word_before_cursor()
+            for _ in range(c):
+                forward_char(event)
+            event.cli.current_buffer.insert_text(w)
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        buffer = event.current_buffer
-        buffer.cancel_completion()
+        @repl.add_key_binding(
+            "escape", "w", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding(*ALT_SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_ALT_SHIFT_CR, filter=rime.filter())
-    @repl.add_key_binding(*CONTROL_ALT_CR, filter=rime.filter())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            unix_word_rubout(event)
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        event.current_buffer.validate_and_handle()
+        @repl.add_key_binding(
+            "c-x", "c-e", filter=emacs_insert_mode | vi_insert_mode
+        )
+        @repl.add_key_binding("g", "h", filter=vi_navigation_mode)
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    # python {{{1 #
-    @repl.add_key_binding("K", filter=ViNavigationMode())
-    @repl.add_key_binding("escape", "c-h", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            buffer = event.current_buffer
+            buffer.open_in_editor()
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, "help(", ")")
+        @repl.add_key_binding(
+            "c-\\", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-p", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            buffer = event.current_buffer
+            buffer.cancel_completion()
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, "print(", ")")
+        # python {{{1 #
+        @repl.add_key_binding("K", filter=vi_navigation_mode)
+        @repl.add_key_binding(
+            "escape", "c-h", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-_", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, "help(", ")")
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, 'import numpy as np; np.lookfor("', '")')
+        @repl.add_key_binding(
+            "escape", "c-p", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-o", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, "print(", ")")
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, 'import numpy as np; np.source("', '")')
+        @repl.add_key_binding(
+            "escape", "c-_", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-l", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, 'import numpy as np; np.lookfor("', '")')
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, "list(", ")")
+        @repl.add_key_binding(
+            "escape", "c-o", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-d", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, 'import numpy as np; np.source("', '")')
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, "dict(", ")")
+        @repl.add_key_binding(
+            "escape", "c-l", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-t", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, "list(", ")")
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, "type(", ")")
+        @repl.add_key_binding(
+            "escape", "c-d", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-n", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, "dict(", ")")
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, "next(iter(", "))")
+        @repl.add_key_binding(
+            "escape", "c-t", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    @repl.add_key_binding("escape", "c-e", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, "type(", ")")
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        insert(event, "len(", ")")
+        @repl.add_key_binding(
+            "escape", "c-n", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
 
-    # Add custom key binding for PDB.
-    @repl.add_key_binding("escape", "c-b", filter=InsertMode())
-    def _(event: KeyPressEvent) -> None:
-        """.
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, "next(iter(", "))")
 
-        :param event:
-        :type event: KeyPressEvent
-        :rtype: None
-        """
-        event.cli.current_buffer.insert_text("\nbreakpoint()\n")
+        @repl.add_key_binding(
+            "escape", "c-e", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
+
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            insert(event, "len(", ")")
+
+        # Add custom key binding for PDB.
+        @repl.add_key_binding(
+            "escape", "c-b", filter=emacs_insert_mode | vi_insert_mode
+        )
+        def _(event: KeyPressEvent) -> None:
+            """.
+
+            :param event:
+            :type event: KeyPressEvent
+            :rtype: None
+            """
+            event.cli.current_buffer.insert_text("\nbreakpoint()\n")
+
+    with suppress(ImportError):
+        from repl_python_wakatime.backends.chainedhook import ChainedHook
+        from repl_python_wakatime.backends.codestats import CodeStats
+        from repl_python_wakatime.backends.wakatime import Wakatime
+        from repl_python_wakatime.frontends.ptpython import Ptpython
+
+        repl.all_prompt_styles[repl.prompt_style] = Ptpython(
+            ChainedHook(hooks=(CodeStats(), Wakatime())),
+            repl.all_prompt_styles[repl.prompt_style],
+        )
 
     # 1}}} python #
 

@@ -1,5 +1,5 @@
 -- luacheck: ignore 113
 ---@diagnostic disable: undefined-global
-vim.keymap.set('i', '<C-^>', require('rime.nvim').toggle)
--- https://github.com/rime/librime/issues/917
-vim.keymap.set('i', '<C-\\>', require('rime.nvim'):callback('<C-\\>'))
+local rime = require('rime.nvim')
+vim.keymap.set('i', '<C-^>', rime.toggle)
+vim.keymap.set('i', '<C-\\>', rime.callback('<C-\\>'))

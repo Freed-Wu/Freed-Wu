@@ -1,15 +1,15 @@
 function! init#init#sh#map() abort
   call init#init#sh#context()
-  nnoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}\w\+(\s*)\_s*{<CR>:let @/ = ''<CR>
-  nnoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}\w\+(\s*)\_s*{<CR>:let @/ = ''<CR>
+  nnoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>:let @/ = ''<CR>
+  nnoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>:let @/ = ''<CR>
   nnoremap <silent><buffer> [] ?^\s*}$<CR>:let @/ = ''<CR>
   nnoremap <silent><buffer> ][ /^\s*}$<CR>:let @/ = ''<CR>
-  xnoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}\w\+(\s*)\_s*{<CR>
-  xnoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}\w\+(\s*)\_s*{<CR>
+  xnoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
+  xnoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
   xnoremap <silent><buffer> [] ?^\s*}$<CR>
   xnoremap <silent><buffer> ][ /^\s*}$<CR>
-  onoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}\w\+(\s*)\_s*{<CR>
-  onoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}\w\+(\s*)\_s*{<CR>
+  onoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
+  onoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
   onoremap <silent><buffer> [] ?^\s*}$<CR>
   onoremap <silent><buffer> ][ /^\s*}$<CR>
 endfunction

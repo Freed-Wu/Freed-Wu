@@ -1,5 +1,5 @@
 [
-  ["&InlineEdit", "InlineEdit"],
+  ["&InlineEdit", "*InlineEdit"],
   ["--"],
   ["&Table-mode ▶", "call init#init#quickui#install('assets/json/context/visual/table_mode.json')"],
   ["&Coc ▶", "call init#init#quickui#install('assets/json/context/visual/coc.json')"]

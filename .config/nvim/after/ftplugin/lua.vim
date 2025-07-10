@@ -18,7 +18,3 @@ onoremap <silent><buffer> [] ?^\s*endfunction$<CR>
 onoremap <silent><buffer> ][ /^\s*endfunction$<CR>
 
 let b:browser_search_default_engine = 'luarocks'
-" https://github.com/nvim-treesitter/nvim-treesitter-context/issues/594
-if exists(':TSContextDisable')
-  TSContextDisable
-endif
