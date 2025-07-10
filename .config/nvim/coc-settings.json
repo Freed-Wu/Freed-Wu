@@ -97,6 +97,10 @@
       "command": "requirements-language-server",
       "filetypes": ["requirements"]
     },
+    "scala": {
+      "command": "metals",
+      "filetypes": ["scala"]
+    },
     "sublime-syntax": {
       "command": "sublime-syntax-language-server",
       "filetypes": ["syntax_test"]
@@ -227,5 +231,6 @@
   "translator.proxy": "socks://127.0.0.1:1080",
   "tinymist.formatterMode": "typstyle",
   "yaml.format.singleQuote": true,
-  "yank.highlight.enable": false
+  "yank.highlight.enable": false,
+  "snippets.ultisnips.pythonPrompt": false
 }
