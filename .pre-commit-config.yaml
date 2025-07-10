@@ -12,7 +12,7 @@ exclude: |-
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: fix-byte-order-marker
@@ -24,6 +24,7 @@ repos:
       - id: end-of-file-fixer
       - id: detect-private-key
       - id: check-symlinks
+        exclude: ^AppData/Local/nvim-data$
       - id: check-ast
       - id: debug-statements
       - id: requirements-txt-fixer
@@ -88,24 +89,24 @@ repos:
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20250616.02"
+    rev: "20250711"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.11.0-1
+    rev: v3.12.0-2
     hooks:
       - id: shfmt
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.1
+    rev: v0.12.8
     hooks:
       - id: ruff
       - id: ruff-format
   - repo: https://github.com/kumaraditya303/mirrors-pyright
-    rev: v1.1.402
+    rev: v1.1.403
     hooks:
       - id: pyright
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v20.1.7
+    rev: v20.1.8
     hooks:
       - id: clang-format
         exclude_types:
@@ -126,16 +127,17 @@ repos:
     hooks:
       - id: luacheck
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.77.0
+    rev: v1.79.2
     hooks:
       - id: rubocop
-  # - repo: https://github.com/NixOS/nixfmt
-  #   rev: 300657710e59990d2fd12413ccae44deb80d754a
-  #   hooks:
-  #     - id: nixfmt
+  - repo: https://github.com/NixOS/nixfmt
+    rev: v1.0.0
+    hooks:
+      - id: nixfmt
 
 ci:
   skip:
+    - nixfmt
     - shellcheck
     - pyright
   autoupdate_branch: dev

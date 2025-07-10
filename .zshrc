@@ -373,7 +373,7 @@ zinit id-as depth'1' wait lucid \
 bindkey "^[^N" rime-next-schema
 bindkey "^[^P" rime-previous-schema
 bindkey "^^" rime-ime' \
-  for Freed-Wu/zsh-rime
+  for rimeinn/zsh-rime
 # 1}}} Function #
 
 # Compatible {{{1 #
