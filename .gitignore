@@ -265,8 +265,6 @@
 # https://discourse.nixos.org/t/where-is-environment-xfce-excludepackages/28380
 !/.config/openbox/
 !/.config/wezterm/
-!/.config/luarocks/
-/.config/luarocks/upload_config.lua
 !/.config/python_keyring/
 !/.config/nvim/
 /.config/nvim/doc/
@@ -317,14 +315,14 @@
 !/.config/conda/
 !/.config/nvimpager/
 !/.config/paru/
-!/.config/cabal/
-/.config/cabal/*
-!/.config/cabal/config
 !/.config/zellij/
 !/.config/sharpkeys/
 !/.config/pixi/
 !/.config/fennel/
 !/.config/texmf/
+!/.config/lux/
+!/.config/luarocks/
+/.config/luarocks/upload_config.lua
 
 # $XDG_DATA_HOME
 !/.local/
