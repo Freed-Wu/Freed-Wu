@@ -19,7 +19,6 @@
   "diagnostic-languageserver.filetypes": {
     "c": ["cppcheck"],
     "cpp": ["cppcheck"],
-    "cmake": ["cmake-lint", "cmakelint"],
     "elixir": ["mix_credo", "mix_credo_compile"],
     "php": ["phpstan", "psalm"],
     "systemd": ["systemd-analyze"],
@@ -76,11 +75,6 @@
       "command": "fennel-ls",
       "filetypes": ["fennel"]
     },
-    "hdlChecker": {
-      "command": "hdl_checker",
-      "args": ["--lsp"],
-      "filetypes": ["vhdl", "verilog"]
-    },
     "make": {
       "command": "katid",
       "filetypes": ["make"]
@@ -96,6 +90,10 @@
     "requirements": {
       "command": "requirements-language-server",
       "filetypes": ["requirements"]
+    },
+    "scala": {
+      "command": "metals",
+      "filetypes": ["scala"]
     },
     "sublime-syntax": {
       "command": "sublime-syntax-language-server",
@@ -227,5 +225,6 @@
   "translator.proxy": "socks://127.0.0.1:1080",
   "tinymist.formatterMode": "typstyle",
   "yaml.format.singleQuote": true,
-  "yank.highlight.enable": false
+  "yank.highlight.enable": false,
+  "snippets.ultisnips.pythonPrompt": false
 }

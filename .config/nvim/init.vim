@@ -1,15 +1,5 @@
 " Prefix {{{1 "
 scriptencoding utf-8
-if has('nvim')
-  lua require"init"
-endif
-if get(g:, 'script_name', '') !=# ''
-  set runtimepath-=~/.config/nvim
-  finish
-endif
-if has('pythonx') && exists('$PYTHONSTARTUP')
-  pyxfile $PYTHONSTARTUP
-endif
 
 " compatibility for vim
 if exists('*stdpath')
@@ -269,6 +259,18 @@ xnoremap zJ zjzMzv
 xnoremap zK zkzMzv
 onoremap zJ zjzMzv
 onoremap zK zkzMzv
+
+if has('nvim')
+  lua require"init"
+endif
+if get(g:, 'script_name', '') !=# ''
+  " don't load any config for plugins
+  set runtimepath-=~/.config/nvim
+  finish
+endif
+if has('pythonx') && exists('$PYTHONSTARTUP')
+  pyxfile $PYTHONSTARTUP
+endif
 " 1}}} Prefix "
 
 " PluginPrefix {{{1 "
@@ -457,9 +459,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " 2}}} Highlight "
 
   " Fold {{{2 "
-  call dein#add('Konfekt/FastFold', {
-        \ 'hook_source': 'call init#fastfold#source()',
-        \ })
   call dein#add('embear/vim-foldsearch', {
         \ 'hook_source': 'call init#foldsearch#source()',
         \ })

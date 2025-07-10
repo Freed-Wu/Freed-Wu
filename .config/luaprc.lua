@@ -9,7 +9,7 @@ local function expand(dir)
 end
 
 local version, _ = _VERSION:gsub(".* ", "")
-if os.getenv("LUA_PATH_" .. version:gsub("%.", "_")) == nil then
+if os.getenv "LUA_PATH" == nil or os.getenv("LUA_PATH_" .. version:gsub("%.", "_")) == nil then
     local ext = package.cpath:match('([^.]+)$')
     package.path = package.path
         .. ";./share/lua/" .. version .. "/?.lua;./?.lua;./?/init.lua;;"

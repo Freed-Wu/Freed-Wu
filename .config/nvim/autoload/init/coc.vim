@@ -188,9 +188,6 @@ augroup init#coc
   autocmd VimLeavePre * if exists(':CocCommand')
         \ | CocCommand mru.validate
         \ | endif
-  autocmd VimLeavePre * if get(g:, 'coc_process_pid', 0)
-        \ | call system('kill -9 '.g:coc_process_pid)
-        \ | endif
   autocmd SourcePost rsi.vim call init#coc#imap()
 augroup END
 " ex: path=,.,$XDG_CONFIG_HOME/coc/extensions/node_modules
