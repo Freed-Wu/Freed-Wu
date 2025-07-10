@@ -254,8 +254,6 @@ rec {
         p: with p; [
           # tool
           keyring-pass
-          # develop
-          uv
           # misc
           # https://github.com/NixOS/nixpkgs/issues/373667
           # esbonio
@@ -345,9 +343,10 @@ rec {
       nagelfar
       # }}} tcl #
       # rust {{{ #
-      # pre-commit needs it
-      cargo
-      rustc
+      # package manager
+      uv
+      bun
+      lux-cli
       # nix
       manix
       nix-index-database
@@ -383,8 +382,6 @@ rec {
       tinymist
       # }}} rust #
       # go {{{ #
-      # pre-commit needs it
-      go
       # tool
       git-lfs
       gopass
@@ -403,9 +400,6 @@ rec {
       jq-lsp
       # }}} go #
       # haskell {{{ #
-      # pre-commit needs it for haskell hooks
-      cabal-install
-      ghc
       # linter
       shellcheck
       # formatter
@@ -478,7 +472,6 @@ rec {
       cppcheck
       nixd
       clang-tools
-      cling
       aria2
       lftp
       yuview
