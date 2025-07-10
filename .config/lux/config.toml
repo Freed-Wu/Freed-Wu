@@ -1,0 +1,10 @@
+extra_servers = [
+  "https://nvim-neorocks.github.io/rocks-binaries/",
+  "https://ustctug.github.io/texrocks/",
+]
+lua_version = "5.3"
+
+[variables]
+BUNZIP2 = "7z -y x"
+UNZIP = "7z -y x"
+ZIP = "7z -tzip -y a"
