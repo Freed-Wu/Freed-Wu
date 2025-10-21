@@ -90,11 +90,6 @@ elif [[ -f /run/current-system/nixos-version ]]; then
 	eval NIX_LD="$(~/script/nixos/get-NIX_LD.nix)"
 	export NIX_LD_LIBRARY_PATH
 	eval NIX_LD_LIBRARY_PATH="$(~/script/nixos/get-NIX_LD_LIBRARY_PATH.nix)"
-	# https://github.com/Freed-Wu/ime.nvim#tips
-	if [[ -f ~/.local/share/lua/5.1/ime/backends/scripts/get-GI_TYPELIB_PATH.nix ]]; then
-		export GI_TYPELIB_PATH
-		eval GI_TYPELIB_PATH="$(nix eval --impure -f ~/.local/share/lua/5.1/ime/backends/scripts/get-GI_TYPELIB_PATH.nix)"
-	fi
 else
 	dirs=(/nix/var/nix/profiles/default/bin)
 	for dir in "${dirs[@]}"; do

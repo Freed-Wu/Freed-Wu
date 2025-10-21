@@ -4,8 +4,9 @@
 Configure ``visidata``.
 """
 
+import contextlib
 import os
-import sys
+from shutil import which
 
 from visidata import IndexSheet, TableSheet, vd
 from visidata.canvas import Canvas
@@ -14,15 +15,32 @@ from visidata.main import options
 from visidata.settings import _get_config_file
 from visidata.shell import BaseSheet, Sheet
 
-sys.path.insert(0, os.path.dirname(_get_config_file()))
-from _visidata import sort  # type: ignore  # noqa: F401
 
-sys.path.pop(0)
+@contextlib.contextmanager
+def _add_to_sys_path(path):
+    r"""Copied from ``torch.hub``"""
+    import os
+    import sys
 
-options.cmdlog_histfile = "~/.cache/visidata/visidata.tsv"  # type: ignore
+    path = os.path.expanduser(path)
+    sys.path.insert(0, path)
+    try:
+        yield
+    finally:
+        sys.path.remove(path)
+
+
+with _add_to_sys_path(os.path.dirname(_get_config_file())):
+    from _visidata import sort  # type: ignore  # noqa: F401
+
+# https://github.com/saulpw/visidata/discussions/2902
+if which("xsel"):
+    options.clipboard_copy_cmd = "xsel -ib"
+    options.clipboard_paste_cmd = "xsel -ob"
+elif which("waycopy"):
+    options.clipboard_copy_cmd = "wl-copy"
+    options.clipboard_paste_cmd = "wl-paste"
 options.color_default = "white"  # type: ignore
-options.clipboard_copy_cmd = "xsel -ib"  # type: ignore
-options.clipboard_paste_cmd = "xsel -ob"  # type: ignore
 options.incr_base = 0  # type: ignore
 options.visidata_dir = "~/.config/visidata"  # type: ignore
 options.disp_status_fmt = (  # type: ignore

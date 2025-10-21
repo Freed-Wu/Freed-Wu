@@ -1,6 +1,7 @@
 -- https://github.com/nvim-neorocks/rocks.nvim#rocket-bootstrapping-script
 -- luacheck: ignore 111 112 113
 ---@diagnostic disable: undefined-global
+local luv = require 'luv'
 loadfile(vim.fn.expand("~/.config/luaprc.lua"))()
 
 local l_flag = false
@@ -60,9 +61,8 @@ do
     for path in os.getenv("PATH"):gmatch('([^:]+)') do
         local bin = vim.fs.joinpath(path, "lua")
         if vim.fn.executable(bin) == 1 then
-            ---@diagnostic disable-next-line: inject-field
             luarocks_config.variables.LUA_INCDIR = vim.fs.joinpath(
-                vim.fs.dirname(vim.fs.dirname(vim.uv.fs_realpath(bin))), "include")
+                vim.fs.dirname(vim.fs.dirname(luv.fs_realpath(bin))), "include")
             break
         end
     end

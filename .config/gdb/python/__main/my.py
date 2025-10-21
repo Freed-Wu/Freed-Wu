@@ -7,18 +7,11 @@ from contextlib import suppress
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from .describe import describe  # noqa: F401
-from .image import inputs2tensors
-
 if TYPE_CHECKING:
     from collections.abc import Callable
 
     import numpy as np
     from torch import Tensor, nn
-
-if "torch" in sys.modules:
-    with suppress(ImportError):
-        from torchinfo import summary  # noqa: F401
 
 
 @dataclass
@@ -147,6 +140,8 @@ def hist(
     :rtype: None
     """
     from matplotlib import pyplot as plt
+
+    from .image import inputs2tensors
 
     channels = ["R", "G", "B"]
     tensors = inputs2tensors(inputs)

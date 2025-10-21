@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       # Avoid slow speed of github actions to access mirrors, liquid syntax
       # error, wrong symlinks
       - run: |
@@ -26,6 +26,6 @@ jobs:
           key: ${{runner.os}}-gems-${{hashFiles('**/Gemfile.lock')}}
           restore-keys: |
             ${{runner.os}}-gems-
-      - uses: jeffreytse/jekyll-deploy-action@v0.6.0
+      - uses: jeffreytse/jekyll-deploy-action@v0.7.0
         with:
           token: ${{secrets.GH_TOKEN}}

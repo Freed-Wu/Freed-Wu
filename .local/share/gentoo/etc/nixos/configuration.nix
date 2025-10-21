@@ -353,8 +353,6 @@ rec {
       # GUI
       firefox
       # https://github.com/wez/wezterm/issues/792
-      # https://github.com/wez/wezterm/issues/3766
-      # https://github.com/alacritty/alacritty/issues/4070
       alacritty
       # tool
       eza
@@ -389,7 +387,7 @@ rec {
       fzf
       direnv
       gh
-      wakatime
+      wakatime-cli
       scc
       gdu
       # linter
@@ -428,7 +426,7 @@ rec {
       # }}} build #
       tmux
       lsof
-      poppler_utils
+      poppler-utils
       nmap
       fontconfig
       imagemagick
@@ -464,10 +462,9 @@ rec {
       krita
       # qmlls
       kdePackages.qtdeclarative
-      # https://github.com/neocmakelsp/neocmakelsp/discussions/167
+      # https://github.com/NixOS/nixpkgs/issues/414811
       cmake
       mesonlsp
-      openai-triton-llvm
       watchman
       cppcheck
       nixd
@@ -478,8 +475,7 @@ rec {
       chafa
       patchelf
       qq
-      # https://github.com/NixOS/nixpkgs/pull/354332
-      wechat-uos
+      wechat
       wemeet
       qqmusic
       # TODO: https://github.com/NixOS/nixpkgs/pull/243429
@@ -498,7 +494,6 @@ rec {
           libreoffice
           gnome-tweaks
           gnome-randr
-          # https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/
           gnomeExtensions.gtk4-desktop-icons-ng-ding
           gnomeExtensions.clipboard-indicator
           gnomeExtensions.appindicator
@@ -530,7 +525,7 @@ rec {
         [ xsel ]
       else
         [
-          wayclip
+          wl-clipboard-rs
         ]
     );
 

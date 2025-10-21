@@ -23,7 +23,7 @@ sudo ln -sf ~/.local/share/gentoo/usr/share/X11/xkb/symbols/{pc,altwin} /usr/sha
 
 ```sh
 sudo ln -s \
-~/.local/share/gentoo/usr/share/keymaps/i386/qwerty/us-custom.map.gz /usr/share/keymaps/i386/qwerty
+    ~/.local/share/gentoo/usr/share/keymaps/i386/qwerty/us-custom.map.gz /usr/share/keymaps/i386/qwerty
 echo KEYMAP=us-custom | sudo tee /etc/vconsole.conf
 ```
 
