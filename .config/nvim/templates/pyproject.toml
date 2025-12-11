@@ -76,6 +76,10 @@ number = true
 [tool.doq]
 template_path = "templates"
 
+[tool.jinja-lsp]
+templates = "templates"
+template_extensions = ["txt"]
+
 {{ join(readfile(expand('~/.config/ruff/pyproject.toml')), "\n") }}
 
 [tool.coverage.report]

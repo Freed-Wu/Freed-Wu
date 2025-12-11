@@ -119,6 +119,13 @@ rec {
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
+  environment.variables = {
+    GI_TYPELIB_PATH =
+      let
+        suffix = "lib/girepository-1.0";
+      in
+      "${pkgs.glib.out}/${suffix}:${pkgs.gobject-introspection}/${suffix}:${pkgs.gobject-introspection.unwrapped}/${suffix}";
+  };
   environment.shellAliases = {
     l = null;
     ll = null;
@@ -286,6 +293,8 @@ rec {
       (perl.withPackages (
         p: with p; [
           PerlTidy
+          # https://github.com/latex-lsp/texlab/wiki/Configuration#texlablatexformatter
+          LatexIndent
           PerlLanguageServer
         ]
       ))
@@ -378,6 +387,8 @@ rec {
       asm-lsp
       texlab
       tinymist
+      jinja-lsp
+      ts_query_ls
       # }}} rust #
       # go {{{ #
       # tool
@@ -412,7 +423,7 @@ rec {
       jre_minimal
       plantuml
       pdftk
-      ltex-ls
+      ltex-ls-plus
       # }}} java #
       # c {{{ #
       # info {{{ #

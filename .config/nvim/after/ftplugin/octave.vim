@@ -1,8 +1,6 @@
-call vimtex#init()
-call init#init#tex#main()
-
 setlocal foldexpr=MatlabFoldExpr()
 setlocal foldtext=MatlabFoldText()
+
 let &l:path = '.,' . trim(system('octave-config -p DATAROOTDIR')) . '/octave/' . trim(system('octave-config -p VERSION')) . '/m/**2,'
 let &l:path .= trim(system('octave-config --m-site-dir')) . '/**2'
 if filereadable('.octave_packages')

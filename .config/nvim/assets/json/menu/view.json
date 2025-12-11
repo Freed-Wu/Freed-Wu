@@ -5,5 +5,7 @@
   ["&InspectTree", "InspectTree"],
   ["S&tartify", "Startify"],
   ["&Undotree", "UndotreeToggle"],
-  ["Filet&ype", "call init#init#filetype#edit()"]
+  ["Filet&ype", "call init#init#filetype#edit()"],
+  ["--"],
+  ["&View", "lua require'zhihu.article'.open()"]
 ]

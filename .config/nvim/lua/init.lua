@@ -69,6 +69,7 @@ do
     vim.g.rocks_nvim = {
         rocks_path = vim.fs.dirname(vim.fs.dirname(vim.fs.joinpath(vim.fn.stdpath("data")))),
         luarocks_config = luarocks_config,
+        autosync = "disable",
     }
 
     -- ~/.local/lib/luarocks/rocks-5.1/rocks.nvim

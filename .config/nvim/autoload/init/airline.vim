@@ -27,14 +27,6 @@ function! init#airline#source() abort
 
   let g:airline#extensions#hunks#coc_git = 1
 
-  let g:airline#extensions#vimtex#left = ''
-  let g:airline#extensions#vimtex#right = ''
-  let g:airline#extensions#vimtex#sub_main = '☆'
-  let g:airline#extensions#vimtex#sub_local = ''
-  let g:airline#extensions#vimtex#compiled = '✔'
-  let g:airline#extensions#vimtex#continuous = ''
-  let g:airline#extensions#vimtex#viewer = ''
-
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#show_close_button = 1
   let g:airline#extensions#tabline#buffers_label =

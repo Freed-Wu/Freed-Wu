@@ -77,11 +77,11 @@ set relativenumber
 set number
 set cursorline
 set cursorcolumn
+set conceallevel=2
 set lazyredraw
 set shortmess+=Ic
 set termguicolors
 set wildcharm=<Tab>
-set iminsert=0
 set noshowmode
 set hidden
 set comments=
@@ -491,11 +491,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ })
   call dein#add('tpope/vim-dadbod')
   call dein#add('kristijanhusak/vim-dadbod-ui')
-  " https://github.com/lervag/vimtex/issues/237
-  call dein#add('lervag/vimtex', {
-        \ 'merged': 0,
-        \ 'hook_source': 'call init#vimtex#source()',
-        \ })
   call dein#add('tpope/vim-scriptease', {
         \ 'hook_source': 'call init#scriptease#source()',
         \ })

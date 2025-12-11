@@ -75,6 +75,14 @@
       "command": "fennel-ls",
       "filetypes": ["fennel"]
     },
+    "jinja": {
+      "command": "jinja-lsp",
+      "filetypes": ["jinja"]
+    },
+    "ltex": {
+      "command": "ltex-ls-plus",
+      "filetypes": ["plaintext", "markdown", "latex", "bibtex"]
+    },
     "make": {
       "command": "katid",
       "filetypes": ["make"]
@@ -83,9 +91,13 @@
       "command": "mutt-language-server",
       "filetypes": ["muttrc"]
     },
-    "qmlls": {
+    "qml": {
       "command": "qmlls",
       "filetypes": ["qml"]
+    },
+    "query": {
+      "command": "ts_query_ls",
+      "filetypes": ["query"]
     },
     "requirements": {
       "command": "requirements-language-server",
@@ -163,7 +175,6 @@
   },
   "list.source.bibtex.files": ["*.bib", "refs/*.bib"],
   "list.source.files.args": ["--hidden", "--files"],
-  "ltex.completionEnabled": true,
   "markdown-preview-enhanced.enableScriptExecution": true,
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
   "mesonbuild.downloadLanguageServer": false,

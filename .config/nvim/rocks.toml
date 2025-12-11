@@ -2,19 +2,19 @@
 "rocks-config.nvim" = "3.1.2-1"
 
 firenvim = "0.2.16-1"
-"markview.nvim" = "25.9.0-1"
+"math-conceal.nvim" = "0.1.4-1"
 "helpview.nvim" = "2.1.2-1"
 "screenkey.nvim" = "2.4.2-1"
 "fugit2.nvim" = "0.2.1-1"
 "git2.nvim" = "0.0.6-1"
 "cppinsights.nvim" = "20.1-1"
 
-"tellenc.nvim" = "1.22-1"
-
 "code-stats.nvim" = "0.1.0-1"
 
+"zhihu.nvim" = "0.0.3-1"
+"tellenc.nvim" = "1.22-1"
 "jieba.nvim" = "5.6.0-1"
-"rime.nvim" = "0.2.12-1"
+"rime.nvim" = "0.2.17-1"
 "ime.nvim" = "0.0.8-1"
 
 nvim-treesitter-textobjects = "scm-1"

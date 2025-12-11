@@ -84,12 +84,6 @@ elif [[ $OSTYPE == linux-android ]]; then
 	else
 		export BROWSER=termux-open
 	fi
-elif [[ -f /run/current-system/nixos-version ]]; then
-	# https://blog.thalheim.io/2022/12/31/nix-ld-a-clean-solution-for-issues-with-pre-compiled-executables-on-nixos/
-	export NIX_LD
-	eval NIX_LD="$(~/script/nixos/get-NIX_LD.nix)"
-	export NIX_LD_LIBRARY_PATH
-	eval NIX_LD_LIBRARY_PATH="$(~/script/nixos/get-NIX_LD_LIBRARY_PATH.nix)"
 else
 	dirs=(/nix/var/nix/profiles/default/bin)
 	for dir in "${dirs[@]}"; do

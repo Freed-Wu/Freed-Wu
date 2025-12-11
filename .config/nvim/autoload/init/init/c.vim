@@ -14,8 +14,6 @@ function! init#init#c#main() abort
     setlocal path+=/usr/local/include,/usr/src/linux/include,/usr/src/linux/arch/*/include
   endif
 
-  nnoremap <silent><buffer> <LocalLeader>o :set paste<CR>i<C-R>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<CR><Esc>='[:set nopaste<CR>
-  nnoremap <silent><buffer> <LocalLeader>O :set paste<CR>i<C-R>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({'includeNS': 0})<CR><Esc>='[:set nopaste<CR>
   nnoremap <silent><buffer> [[ ?{<CR>:let @/ = ''<CR>w99[{
   nnoremap <silent><buffer> ]] /}<CR>:let @/ = ''<CR>b99]}
   nnoremap <silent><buffer> ][ j0[[%/{<CR>:let @/ = ''<CR>

@@ -5,7 +5,7 @@ function! init#coc#source() abort
   let g:coc_global_extensions = [
         \ 'coc-highlight',
         \
-        \ 'coc-tasks', 'coc-vimtex', 'coc-emmet', 'coc-calc', 'coc-translator',
+        \ 'coc-tasks', 'coc-emmet', 'coc-calc', 'coc-translator',
         \ 'coc-leetcode',
         \
         \ 'coc-marketplace', 'coc-lists', 'coc-yank', 'coc-gist',
@@ -13,12 +13,12 @@ function! init#coc#source() abort
         \
         \ 'coc-dash-complete', 'coc-dot-complete', 'coc-just-complete',
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji',
-        \ 'coc-emoji-shortcodes', 'coc-ci', 'coc-snippets',
+        \ 'coc-emoji-shortcodes', 'coc-snippets',
         \
         \ 'coc-copilot', 'coc-diagnostic',
         \
         \ 'coc-spell-checker', 'write-good-linter', 'coc-markdownlint',
-        \ 'coc-ltex', 'coc-pydocstring',
+        \ 'coc-pydocstring',
         \
         \ '@yaegassy/coc-marksman', 'coc-webview',
         \ 'coc-markdown-preview-enhanced', 'coc-esbonio', 'coc-graphviz',
@@ -31,7 +31,7 @@ function! init#coc#source() abort
         \ 'coc-clangd', 'hyuga-vscode-client', 'coc-alex'
         \ ]
   " tabnine don't support android
-  if $PREFIX !=# '/data/data/com.termux/files/usr'
+  if $ANDROID_DATA !=# '/data' && $ANDROID_ROOT !=# '/system'
     let g:coc_global_extensions += ['coc-tabnine']
   endif
   if !has('win32')
@@ -44,9 +44,9 @@ function! init#coc#source() abort
   let g:coc_status_warning_sign = ''
   " https://github.com/neoclide/coc.nvim/issues/4282
   " https://github.com/neoclide/coc.nvim/discussions/4892
-  " ~/.local/share/nvim/repos/github.com/nvim-treesitter/nvim-treesitter/lua/nvim-treesitter/parsers.lua
   " https://code.visualstudio.com/docs/languages/identifiers#_known-language-identifiers
   let g:coc_filetype_map = {
+        \ 'plaintex': 'latex',
         \ 'text': 'plaintext',
         \ 'bash': 'sh',
         \ 'PKGBUILD': 'sh',
@@ -78,6 +78,7 @@ function! init#coc#source() abort
         \ 'gel': 'cpp',
         \ 'lnk': 'c',
         \ 'teal': 'lua',
+        \ 'text.vim_template': 'jinja',
         \ }
   xmap if <Plug>(coc-funcobj-i)
   xmap af <Plug>(coc-funcobj-a)
@@ -122,9 +123,6 @@ function! init#coc#source() abort
   nmap gq <plug>(coc-format-selected)
   xnoremap <silent> gq :<C-U>call init#init#coc#format(v:true)<CR>
   nnoremap <silent> gqq :<C-U>call init#init#coc#format(v:false)<CR>
-
-  nmap w <Plug>(coc-ci-w)
-  nmap b <Plug>(coc-ci-b)
 
   inoremap <silent><expr> <TAB> coc#expandableOrJumpable()
         \ ? "\<C-R>=coc#rpc#request('doKeymap',

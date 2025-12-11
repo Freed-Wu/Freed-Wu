@@ -7,7 +7,11 @@ function! init#init#fern#current_file_dir() abort
   let l:dir = substitute(l:dir, '^suda://', '', 'g')
   " https://github.com/vim-scripts/sudo.vim
   let l:dir = substitute(l:dir, '^sudo://', '', 'g')
-  execute 'Fern -drawer' fnameescape(l:dir)
+  if isdirectory(l:dir)
+    execute 'Fern -drawer' fnameescape(l:dir)
+  else
+    Fern -drawer .
+  endif
 endfunction
 
 function! init#init#fern#leftmouse() abort

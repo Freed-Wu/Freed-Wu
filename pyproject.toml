@@ -55,6 +55,10 @@ ignore-words-list = "inout, hist, ist, acn, fot, inactivate, doubleclick, rime, 
 [tool.doq]
 template_path = ".config/nvim/templates/templates"
 
+[tool.jinja-lsp]
+templates = ".config/nvim/templates"
+template_extensions = ["txt"]
+
 [tool.ruff]
 line-length = 79
 
