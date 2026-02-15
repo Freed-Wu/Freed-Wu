@@ -7,5 +7,5 @@
   ["&Undotree", "UndotreeToggle"],
   ["Filet&ype", "call init#init#filetype#edit()"],
   ["--"],
-  ["&View", "lua require'zhihu.article'.open()"]
+  ["&View", "lua require'zhihu.nvim'.open()"]
 ]

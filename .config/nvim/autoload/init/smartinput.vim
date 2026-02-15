@@ -569,7 +569,7 @@ function! init#smartinput#post_source() abort
   call smartinput#map_to_trigger('i', '=', '=', '=')
   " cannot add \S
   call smartinput#define_rule({
-        \ 'at': '^[^(]\+\%#',
+        \ 'at': '^[^(]\+\S\%#',
         \ 'char': '=',
         \ 'input': ' = ',
         \ 'filetype': ['python'],

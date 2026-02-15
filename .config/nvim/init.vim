@@ -371,7 +371,9 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#quickui#source()',
         \ 'hook_post_source': 'call init#quickui#post_source()',
         \ })
-  call dein#add('lambdalisue/nerdfont.vim')
+  call dein#add('lambdalisue/nerdfont.vim', {
+        \ 'hook_source': 'call init#nerdfont#source()',
+        \ })
   call dein#add('mhinz/vim-startify', {
         \ 'hook_source': 'call init#startify#source()',
         \ })
@@ -410,7 +412,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   call dein#add('vim-airline/vim-airline', {
         \ 'hook_source': 'call init#airline#source()',
         \ })
-  call dein#add('Freed-Wu/airline-renderer-nerdfont.vim')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('enricobacis/vim-airline-clock', {
         \ 'hook_source': 'call init#airline#clock#source()',
@@ -504,6 +505,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'on_ft': ['markdown', 'pandoc', 'rmd'],
         \ 'build': 'sh -c "cd app && npx --yes yarn install"'
         \ })
+  call dein#add('Freed-Wu/pdftk.vim')
   " 2}}} Ftplugin "
   " 1}}} Filetype "
 

@@ -174,8 +174,8 @@ function! init#coc#imap() abort
   inoremap <silent><expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : pumvisible() ? "\<C-N>" : "\<Down>"
   inoremap <silent><expr> <C-M-p> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
-  inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-Y>"
-  inoremap <silent><expr> <C-Z> coc#pum#visible() ? coc#pum#cancel() : "\<C-E>"
+  inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-E>"
+  inoremap <silent><expr> <C-Z> coc#pum#visible() ? coc#pum#cancel() : "\<C-Y>"
 endfunction
 
 augroup init#coc

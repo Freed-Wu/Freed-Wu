@@ -42,16 +42,20 @@ if os.getenv "LUA_PATH" == nil or os.getenv("LUA_PATH_" .. version:gsub("%.", "_
     end
 end
 
-local ok, prompt = pcall(require, "prompt")
-if ok then
-    local os = require "os"
-    local style = require "prompt.style"
+-- luacheck: ignore 111 113
+---@diagnostic disable: undefined-global
+if not vim or vim.g.script_name then
+    local ok, prompt = pcall(require, "prompt")
+    if ok then
+        local os = require "os"
+        local style = require "prompt.style"
 
-    -- luacheck: ignore 111 113
-    ---@diagnostic disable: undefined-global
-    if vim then
-        prompt.name = "nvim"
+        -- luacheck: ignore 111 113
+        ---@diagnostic disable: undefined-global
+        if vim then
+            prompt.name = "nvim"
+        end
+        prompt.prompts = { style.generate_ps1(), "    " }
+        prompt.history = os.getenv("HOME") .. "/.lua_history"
     end
-    prompt.prompts = { style.generate_ps1(), "    " }
-    prompt.history = os.getenv("HOME") .. "/.lua_history"
 end

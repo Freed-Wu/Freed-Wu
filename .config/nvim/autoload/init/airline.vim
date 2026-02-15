@@ -28,6 +28,8 @@ function! init#airline#source() abort
   let g:airline#extensions#hunks#coc_git = 1
 
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#formatter = 'nerdfont'
+  let g:airline#extensions#tabline#formatters#nerdfont#formatter = 'zhihu'
   let g:airline#extensions#tabline#show_close_button = 1
   let g:airline#extensions#tabline#buffers_label =
         \ '%{fnamemodify(getcwd(), ":~")}'
