@@ -1,4 +1,7 @@
 #!/usr/bin/env -S pip install -r
 
-pyrime
+grc
+# apt install python-cryptography
+keyring-pass
+pyrime[ptpython]
 translate-shell[repl]

@@ -1,0 +1,84 @@
+---
+"on":
+  push:
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+# https://github.com/softprops/action-gh-release/issues/236
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install meson
+      - name: Build
+        run: |
+          meson setup build -Db_coverage=true
+          meson compile -Cbuild
+          meson test -Cbuild
+          meson dist -Cbuild
+      - uses: codecov/codecov-action@v4
+      - uses: actions/upload-artifact@v4
+        if: "! startsWith(github.ref, 'refs/tags/')"
+        with:
+          path: |
+            build/meson-dist/*.tar.xz
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          # body_path: build/CHANGELOG.md
+          files: |
+            build/meson-dist/*.tar.xz
+
+  deploy-aur:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: Freed-Wu/update-aur-package@v1.0.11
+        with:
+          package_name: {{ expand('%:p:h:h:h:t') }}
+          ssh_private_key: ${{secrets.AUR_SSH_PRIVATE_KEY}}
+
+  deploy-nur:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Trigger Workflow
+        run: >
+          curl -X POST -d '{"ref": "main"}'
+          -H "Accept: application/vnd.github.v3+json"
+          -H "Authorization: Bearer ${{secrets.GH_TOKEN}}"
+          https://api.github.com/repos/Freed-Wu/nur-packages/actions/workflows/version.yml/dispatches
+
+  deploy-ppa:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: {{ expand('%:p:h:h:h:t') }}-${{github.ref_name}}
+      - name: Build
+        run: |
+          tar vcaf {{ expand('%:p:h:h:h:t') }}-${{github.ref_name}}.tar.gz {{ expand('%:p:h:h:h:t') }}-${{github.ref_name}}
+      - uses: yuezk/publish-ppa-package@main
+        with:
+          repository: freedwu/ppa
+          gpg_private_key: ${{secrets.GPG_PRIVATE_KEY}}
+          gpg_passphrase: ${{secrets.GPG_PASSPHRASE}}
+          tarball: ./*.tar.*
+          deb_email: ${{secrets.DEB_EMAIL}}
+          deb_fullname: freedwu
+          debmake_arguments: -m

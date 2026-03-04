@@ -9,6 +9,8 @@ local home = home or os_getenv("HOME")
 rocks_trees = {
     { name = "user", root = home .. "/.local" }
 }
+-- https://github.com/luarocks/luarocks/issues/1161
+root_dir = rocks_trees[1].root
 rocks_servers = {
     "https://nvim-neorocks.github.io/rocks-binaries",
     "https://luarocks.cn",

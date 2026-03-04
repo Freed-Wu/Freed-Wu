@@ -13,7 +13,6 @@
   "coc.source.emoji.shortcut": "😀",
   "coc.source.file.shortcut": "",
   "coc.source.issues.shortcut": "",
-  "coc.source.syntax.shortcut": "󱔁",
   "coc.source.tag.shortcut": "󰓹",
   "coc.source.word.shortcut": "",
   "dash-complete.shortcut": "-",
@@ -32,6 +31,7 @@
     "blade": "blade-formatter",
     "dart": "dartfmt",
     "elixir": "mix_format",
+    "fennel": "fnlfmt",
     "fish": "fish_indent",
     "verilog": "iStyle"
   },
@@ -72,6 +72,10 @@
       "command": "expect-language-server",
       "filetypes": ["expect"]
     },
+    "fennel": {
+      "command": "fennel-ls",
+      "filetypes": ["fennel"]
+    },
     "hdlChecker": {
       "command": "hdl_checker",
       "args": ["--lsp"],
@@ -100,6 +104,14 @@
     "tmux": {
       "command": "tmux-language-server",
       "filetypes": ["tmux"]
+    },
+    "typst": {
+      "command": "tinymist",
+      "args": ["lsp"],
+      "settings": {
+        "formatterMode": "typstyle"
+      },
+      "filetypes": ["typst"]
     },
     "xilinx": {
       "command": "xilinx-language-server",
@@ -155,7 +167,6 @@
   "mesonbuild.downloadLanguageServer": false,
   "perl.p::ls.enable": true,
   "perl.p::ls.disableCache": true,
-  "prettier.ignorePath": ".gitignore",
   "pydocstring.enableFileAction": true,
   "python.sortImports.path": "",
   "pyright.testing.provider": "pytest",
@@ -210,7 +221,7 @@
   "translator.enableHover": true,
   "translator.engines": ["google"],
   "translator.proxy": "socks://127.0.0.1:1080",
+  "tinymist.formatterMode": "typstyle",
   "yaml.format.singleQuote": true,
-  "yank.highlight.enable": false,
-  "zi.hover": false
+  "yank.highlight.enable": false
 }

@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@girs/gnome-shell": "^46.0.0-beta6"
+  },
+  "scripts": {
+    "pack": "gnome-extensions pack --extra-source=node_modules --force"
+  }
+}

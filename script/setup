@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2046
+# setup Ubuntu focal of github codespace
 # Debug:
 # 	gh cs cp -e remote:/workspaces/.codespaces/.persistedshare/creation.log .
 # 	less creation.log
@@ -23,7 +24,10 @@ sh -c "$(curl -fsSL https://mirrors.bfsu.edu.cn/nix/latest/install)"
 cp -r .git ~
 cd
 git reset --hard
-nix-env -iA nixpkgs.{neovim,tmux,vivid,eza,bat,ripgrep,fd,delta,fzf,zsh-powerlevel10k,chafa,parallel,exiftool}
+nix-env -iA nixpkgs.{neovim,tmux,zsh-powerlevel10k,vivid,fzf}
 sudo ln -sf ~/.nix-profile/bin/nvim /usr/bin/vi
 
+# let user enter zsh quickly
 source script/install_plugins.sh
+
+nix-env -iA nixpkgs.{eza,bat,ripgrep,fd,delta,chafa,parallel,exiftool}

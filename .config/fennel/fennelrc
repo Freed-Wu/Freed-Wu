@@ -1,0 +1,4 @@
+(case package.loaded.readline
+  rl [(rl.set_options {:histfile  "~/.local/share/fennel/history.fnl"})
+      (rl.set_readline_name "fennel")]
+  )

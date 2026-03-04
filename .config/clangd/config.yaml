@@ -4,21 +4,9 @@ Diagnostics:
 Hover:
   ShowAKA: true
 CompileFlags:
-  Compiler: gcc
   # https://github.com/clangd/clangd/issues/662#issuecomment-1447233948
   Remove:
     - -m*
     - -f*
   Add:
     - -Wall
-    # - -I${HOME}/.local/include
-    - -I/data/data/com.termux/files/home/.local/include # android termux
-    - -I/proc/cygdrive/c/Users/wzy/.local/include # windows msys2
-    - -I/home/wzy/.local/include # gnu/linux
-    - -I/Users/wzy/.local/include # macOS
-    # - -I${HOME}/.local/state/nix/profile/include
-    - -I/home/wzy/.local/state/nix/profile/include # nix
-    # - -I${HOMEBREW_PREFIX}/include
-    - -I/usr/local/include # BSD or homebrew (macOS x86)
-    - -I/opt/include # homebrew (macOS arm)
-    - -I/home/linuxbrew/.linuxbrew/include # homebrew (linux)

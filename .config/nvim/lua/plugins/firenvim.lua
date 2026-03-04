@@ -59,6 +59,20 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 vim.api.nvim_create_autocmd('BufEnter', {
     group = augroup_id,
+    pattern = 'fennel-lang.org_see_TEXTAREA-id-fennel-source_*.txt',
+    callback = function()
+        vim.bo.filetype = 'fennel'
+    end
+})
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = augroup_id,
+    pattern = 'fennel-lang.org_see_TEXTAREA-id-lua-source_*.txt',
+    callback = function()
+        vim.bo.filetype = 'lua'
+    end
+})
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = augroup_id,
     pattern = 'colab.research.google.com_*.txt',
     callback = function()
         vim.bo.filetype = 'python'

@@ -1,0 +1,10 @@
+{
+  "name": "{{ substitute(expand('%:p:h:t'), '^gnome-shell-extension-', '', 'g') }}",
+  "description": "{% here %}",
+  "url": "{{ g:snips_github }}/{{ expand('%:p:h:t') }}",
+  "uuid": "{{ substitute(expand('%:p:h:t'), '^gnome-shell-extension-', '', 'g') }}@freed-wu.io",
+  "settings-schema": "org.gnome.shell.extensions.{{ substitute(expand('%:p:h:t'), '^gnome-shell-extension-', '', 'g') }}",
+  "shell-version": [
+    "47"
+  ]
+}

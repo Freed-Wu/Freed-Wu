@@ -29,10 +29,17 @@ jobs:
           yarn pack
         env:
           NODE_ENV: production
-      - uses: softprops/action-gh-release@v1
+      - uses: actions/upload-artifact@v4
+        if: "! startsWith(github.ref, 'refs/tags/')"
+        with:
+          name: artifact
+          path: |
+            *.tgz
+      - uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: "*.tgz"
+          files: |
+            *.tgz
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}

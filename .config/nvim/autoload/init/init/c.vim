@@ -6,7 +6,7 @@ function! init#init#c#nix() abort
 endfunction
 
 function! init#init#c#main() abort
-  set path+=~/.local/include,~/.local/state/nix/profile/include
+  setlocal path+=~/.local/include,~/.local/state/nix/profile/include
   if filereadable('/run/current-system/nixos-version')
     setlocal path-=/usr/include
     let &l:path .= ',' . init#init#c#nix()

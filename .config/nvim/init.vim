@@ -1,5 +1,16 @@
 " Prefix {{{1 "
 scriptencoding utf-8
+if has('nvim')
+  lua require"init"
+endif
+if get(g:, 'script_name', '') !=# ''
+  set runtimepath-=~/.config/nvim
+  finish
+endif
+if has('pythonx') && exists('$PYTHONSTARTUP')
+  pyxfile $PYTHONSTARTUP
+endif
+
 " compatibility for vim
 if exists('*stdpath')
   let $XDG_CONFIG_NVIM = stdpath('config')
@@ -92,6 +103,7 @@ set textwidth=80
 set background=dark
 set titlestring=%<%F\ %{nerdfont#find()}%=%P%l/%L%c
 set clipboard=unnamed
+set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-CursorIM/lCursorIM,r-cr-o:hor20-CursorIM/lCursorIM
 " call systemlist() will meet:
 " /usr/bin/zsh: can''t open input files: /s
 if &shell !~# 'cmd' && &shellcmdflag ==# '/c'
@@ -842,11 +854,4 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
 endif
 call dein#call_hook('source')
 call dein#call_hook('post_source')
-
-if has('nvim')
-  lua require"init"
-endif
-if has('pythonx') && exists('$PYTHONSTARTUP')
-  pyxfile $PYTHONSTARTUP
-endif
 " ex: foldmethod=marker path=.,$XDG_DATA_NVIM/repos/github.com,$XDG_DATA_NVIM/repos
