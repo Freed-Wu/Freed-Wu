@@ -25,7 +25,7 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.runs-on }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ env.python-version }}
@@ -53,12 +53,12 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           repository: tmux-plugins/tpm
           path: .config/tmux/plugins/tpm
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           repository: Shougo/dein.vim
           path: .local/share/nvim/repos/github.com/Shougo/dein.vim
