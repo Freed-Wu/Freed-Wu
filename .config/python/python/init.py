@@ -12,7 +12,5 @@ from python.rich import print
 del print
 
 if sys.argv == [""]:
-    from python._python import sys
-
-with suppress(ImportError):
-    import readline
+    with suppress(ImportError):
+        from python._python import sys

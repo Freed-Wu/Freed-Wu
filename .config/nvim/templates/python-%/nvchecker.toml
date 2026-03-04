@@ -1,0 +1,3 @@
+[{{ substitute(expand('%:p:h:t'), '^python-', '', '') }}]
+source = "pypi"
+pypi = "{{ substitute(expand('%:p:h:t'), '^python-', '', '') }}"

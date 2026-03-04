@@ -113,3 +113,9 @@
 # ManifestInvalidRevisionError
 # [url "https://mirrors.bfsu.edu.cn/git/LineageOS/LineageOS"]
 	# insteadof = https://github.com/LineageOS
+# https://github.com/romkatv/powerlevel10k/issues/2232
+[index]
+	skipHash = false
+# https://github.com/ghedo/p5-Dist-Zilla-Plugin-GitHub
+[github]
+	user = Freed-Wu

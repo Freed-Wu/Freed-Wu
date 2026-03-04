@@ -1,0 +1,6 @@
+#compdef {{ substitute(expand('%:t'), '^_', '', 'g') }}
+
+_arguments -s -S \
+  "(- : *)"{-V,--version}"[Show version]" \
+  "(- : *)"{-h,--help}"[Show list of command-line options]" \
+  '*: :_files'

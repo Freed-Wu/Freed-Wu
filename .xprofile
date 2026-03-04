@@ -3,14 +3,15 @@
 PATH="$HOME/.local/bin:$PATH"
 export VISUAL=vi
 export EDITOR=$VISUAL
-# `gtk-launch $(xdg-mime query default text/html) about:blank` cannot work
 export BROWSER=firefox
+# firefox
+export MOZ_USE_XINPUT2=1
 # man
-MANPATH="$HOME/.local/share/man:$MANPATH"
-MANOPT=-Lzh_CN.UTF-8
+MANOPT=-Lzh_CN:zh_CHS:zh
 export MANOPT
-MANSECT='1:1p:8:3:3p:0:0p:2:5:4:9:6:7:n:l'
-export MANSECT
+# pkg-config
+PKG_CONFIG_PATH="$HOME/.local/state/nix/profile/lib/pkgconfig:/run/current-system/sw/share/pkgconfig"
+export PKG_CONFIG_PATH
 # cpanm
 export PERL_CPANM_OPT
 PERL_CPANM_OPT="-l $HOME/.local"
@@ -28,8 +29,6 @@ export RIPGREP_CONFIG_PATH
 # kitty
 # https://sw.kovidgoyal.net/kitty/glossary/#envvar-GLFW_IM_MODULE
 export GLFW_IM_MODULE=ibus
-# minicom
-export MINICOM='-m -w -8 -c on -C /tmp/minicom.log'
 # has
 export HAS_ALLOW_UNSAFE=y
 # ccache
@@ -46,5 +45,8 @@ export LESSQUIET=1
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --color=always'
 # mdcat
-export MDCAT_PAGER='less --pattern=^┄(┄|)'
+export MDCAT_PAGER='less --pattern=┄+'
+# cmake
+export CMAKE_GENERATOR=Ninja
+export CMAKE_EXPORT_COMPILE_COMMANDS=1
 # ex: filetype=sh

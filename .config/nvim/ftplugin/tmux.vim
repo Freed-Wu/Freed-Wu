@@ -1,4 +1,7 @@
 setlocal path=.,$TMUX_PLUGIN_MANAGER_PATH
+if expand('%:p:t') ==# 'tmux.conf'
+   setlocal includeexpr=init#init#zinit#includeexpr()
+endif
 
 nnoremap <silent><buffer> K :<C-U>call CocAction('doHover')<CR>
 nnoremap <silent><buffer> gK :<C-U>call tmux#man()<CR>

@@ -97,14 +97,20 @@ endif
 if exists('&inccommand')
   set inccommand=nosplit
 endif
-if executable('ps2pdf')
+if executable('ps2pdf') && !has('nvim')
   set printexpr=system(join(['ps2pdf']+[v:fname_in])).delete(v:fname_in)+v:shell_error
 endif
 if executable('rg')
   set grepprg=rg\ -ni
 endif
-let g:maplocalleader = ';'
+" https://github.com/vim/vim/issues/12683
+highlight default link shebang Special
+augroup Shebang
+  autocmd!
+  autocmd BufEnter * syntax match shebang /\%^#!.*$/ display
+augroup END
 
+let g:maplocalleader = ';'
 let g:tex_flavor = 'latex'
 let g:filetype_m = 'octave'
 let g:asmsyntax = 'masm'
@@ -121,6 +127,7 @@ let g:vimsyn_folding = 'af'
 let g:xml_syntax_folding = 1
 let g:python_highlight_all = 1
 let g:readline_has_bash = 1
+let g:yaml_schema = 'pyyaml'
 
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
@@ -246,11 +253,12 @@ endif
 let g:dein#notification_icon =
       \ '/usr/share/icons/hicolor/128x128/apps/nvim.png'
 let g:dein#types#git#clone_depth = 1
-if !isdirectory(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
+if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
   if executable('git')
-    call system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim '
+    echo system(expand('git clone --depth=1 https://github.com/Shougo/dein.vim '
           \ . '$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim'))
-  else
+  endif
+  if !filereadable(expand('$XDG_DATA_HOME/nvim/repos/github.com/Shougo/dein.vim/autoload/dein.vim'))
     finish
   endif
 endif
@@ -434,6 +442,11 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
         \ 'merged': 0,
         \ 'hook_source': 'call init#polyglot#source()',
         \ })
+  call dein#add('pboettch/vim-cmake-syntax')
+  call dein#add('vim-scripts/bats.vim')
+  call dein#add('vito-c/jq.vim')
+  call dein#add('kaarmu/typst.vim')
+  call dein#add('kergoth/vim-bitbake')
   call dein#add('lambdalisue/glyph-palette.vim', {
         \ 'hook_post_source': 'call init#glyph_palette#post_source()',
         \ })
@@ -500,7 +513,9 @@ if dein#load_state(expand('$XDG_DATA_HOME/nvim'))
   call dein#add('liuchengxu/graphviz.vim')
   call dein#add('tmux-plugins/vim-tmux')
   call dein#add('neomutt/neomutt.vim')
-  call dein#add('tpope/vim-scriptease')
+  call dein#add('tpope/vim-scriptease', {
+        \ 'hook_source': 'call init#scriptease#source()',
+        \ })
   " https://github.com/vim-jp/vital.vim/issues/574
   call dein#add('vim-jp/vital.vim', {
         \ 'merged': 0,

@@ -1,0 +1,6 @@
+# Machine-generated file - use setup menu in minicom to change parameters.
+pu escape-key       ^Q
+pu rtscts           No
+pu port             /dev/ttyUSB0
+pu logfname         /tmp/minicom.log
+pu linewrap         Yes

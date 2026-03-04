@@ -1,9 +1,6 @@
 # shellcheck shell=bash source=/dev/null
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
-if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
-	. ~/.local/share/zinit/plugins/.pass/pass.sh
-fi
 # adb shell doesn't have $LANG
 if [[ -z $LANG ]]; then
 	export LANG=en_US.UTF-8
@@ -19,34 +16,33 @@ elif [[ $OSTYPE == msys ]]; then
 	export PATH=$PATH:/proc/cygdrive/c/msys64
 elif [[ $OSTYPE == darwin ]]; then
 	export BROWSER=open
-elif [[ -z $DISPLAY ]]; then
-	export BROWSER=w3m
 fi
 if [[ $OSTYPE != msys2 ]]; then
 	export PATH=$PATH:/${MINGW_ARCH:-mingw64}/bin
 fi
 if [[ $OSTYPE == linux-android ]]; then
-	export PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
-	export MANPAGER=batman
+	PATH=$PATH:/system/bin:/system/xbin:/vendor/bin:/product/bin:/sbin
 	if [[ -n $DISPLAY ]]; then
 		export BROWSER='gio open'
 	else
 		export BROWSER=termux-open
 	fi
+elif [[ ! -f /run/current-system/nixos-version ]]; then
+	PATH="$PATH:/opt/android-ndk/toolchains/llvm/prebuilt/$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)/bin"
+	# https://aur.archlinux.org/packages/ccstudio#comment-906326
+	PATH="$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin"
 else
-	export MANPAGER="sh -c 'col -bx | bat --color=always -plman | less --pattern=^[A-Z][A-Z\ ]+'"
+	# python
+	PYTHONPATH="$HOME/.local/lib/python$(python --version | cut -d' ' -f2 | cut -d. -f1-2)/site-packages"
+	export PYTHONPATH
 fi
-# https://aur.archlinux.org/packages/ccstudio#comment-906326
-export PATH=$PATH:/opt/ccstudio/ccs/eclipse:/opt/ccstudio/ccs/ccs_base/common/uscif:/opt/ccstudio/ccs/ccs_base/scripting/bin
+MANPAGER='manpager | less --pattern=^\\S+'
+export MANPAGER
 # ccstudio
-_C6X_C_DIR=$(find /opt/ccstudio/ccs/tools/compiler -name 'ti-cgt-c6000_*')
-export C6X_C_DIR
-C6X_C_DIR="$_C6X_C_DIR/include;$_C6X_C_DIR/lib"
-unset _C6X_C_DIR
-export C6X_C_OPTION
 C6X_C_OPTION=--issue_remarks
+export C6X_C_OPTION
 # less
-export LESS='--mouse --chop-long-lines -I -R -M'
+export LESS='-r -M --mouse -S -I'
 # interactively
 export FZF_HISTORY_DIR
 if [[ $OSTYPE == msys2 ]] || [[ $OSTYPE == cygwin ]]; then
@@ -106,6 +102,10 @@ export FZF_DEFAULT_OPTS="--preview='bat --color=always --highlight-line={2} {1}
 --bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'
 --history=$FZF_HISTORY_DIR/fzf.txt"
 unset devnull
+if command -v auto-sized-fzf.sh &>/dev/null; then
+	FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--preview-window=$(auto-sized-fzf.sh)"
+fi
 # brew
 export HOMEBREW_BAT=true
 export HOMEBREW_BOOTSNAP=true

@@ -4,6 +4,8 @@
 !/LICENSE
 !/README.md
 !/pyproject.toml
+!/_config.yml
+!/Gemfile
 !/.pre-commit-config.yaml
 !/.gitlint
 !/.yamllint.yaml
@@ -11,6 +13,7 @@
 !/.dockerignore
 !/.deepsource.toml
 !/script/
+!/.devcontainer/
 
 # dotfile
 !/.xprofile
@@ -25,10 +28,7 @@
 !/.inputrc
 !/.fbtermrc
 !/.astylerc
-!/.octaverc
 !/.procmailrc
-!/.clang-format
-!/.ccls
 !/.mailcap
 !/.signature
 !/.bastetrc
@@ -40,7 +40,6 @@
 !/.lessfilter
 !/.wgetrc
 !/.curlrc
-!/.nix-channels
 !/.vintrc.yaml
 !/.chktexrc
 !/.sqliterc
@@ -54,17 +53,15 @@
 !/.indentconfig.yaml
 # https://bugs.chromium.org/p/gerrit/issues/detail?id=16717
 !/.gitconfig
+!/.tclshrc
+!/.wishrc
+!/.minirc.dfl
+!/.manpath
 
 # dotfiles
 !/.dosbox/
 /.dosbox/*
 !/.dosbox/dosbox-*.conf
-!/.jupyter/
-/.jupyter/*
-!/.jupyter/jupyter_notebook_config.py
-!/.jupyter/lab/
-/.jupyter/lab/*
-!/.jupyter/lab/user-settings/
 !/.vim/
 /.vim/*
 !/.vim/vimrc
@@ -105,13 +102,13 @@
 !/.docker/
 /.docker/*
 !/.docker/config.json
-!/.docker/Dockerfile
 !/.getmail/
 !/.ssh/
 /.ssh/*
 !/.ssh/config
 !/.password-store/
 !/.gnupg/
+# https://github.com/LnL7/nix-darwin/issues/573
 !/.nixpkgs/
 /.nixpkgs/*
 !/.nixpkgs/darwin-configuration.nix
@@ -134,7 +131,6 @@
 # $XDG_CONFIG_HOME
 !/.config/
 /.config/*
-!/.config/mimeapps.list
 !/.config/user-dirs.dirs
 !/.config/user-dirs.locale
 !/.config/electron-flags.conf
@@ -271,11 +267,8 @@
 !/.config/lxqt/
 /.config/lxqt/lxqt-config*.conf
 /.config/lxqt/session.conf
-# .config/lxqt/panel.conf.in
-/.config/lxqt/panel.conf
+# https://discourse.nixos.org/t/where-is-environment-xfce-excludepackages/28380
 !/.config/openbox/
-/.config/openbox/*
-!/.config/openbox/rc.xml.in
 !/.config/wezterm/
 !/.config/luarocks/
 /.config/luarocks/*
@@ -289,12 +282,25 @@
 !/.config/nixpkgs/
 !/.config/luacheck/
 !/.config/latexindent.yaml
+!/.config/pry/
+!/.config/clangd/
+!/.config/cling/
+!/.config/octave/
+/.config/octave/*
+!/.config/octave/octaverc
+!/.config/fcitx/
+/.config/fcitx/*
+!/.config/fcitx/rime
+!/.config/ibus/
+/.config/ibus/*
+!/.config/ibus/rime
+!/.config/fontconfig/
+/.config/fontconfig/*
+!/.config/fontconfig/fonts.conf
 
 # $XDG_DATA_HOME
 !/.local/
 /.local/*
-# perl install manpage here, which is a symlink to share/man
-!/.local/man/
 !/.local/share/
 /.local/share/*
 !/.local/share/flatpak/
@@ -312,14 +318,29 @@
 /.local/share/fcitx5/rime/*
 !/.local/share/fcitx5/rime/*.custom.yaml
 !/.local/share/fzf/
+!/.local/share/jupyter/
+/.local/share/jupyter/*
+!/.local/share/jupyter/jupyter_notebook_config.py
+!/.local/share/jupyter/lab/
+/.local/share/jupyter/lab/*
+!/.local/share/jupyter/lab/user-settings/
+
+# $XDG_STATE_HOME
+!/.local/state/
+/.local/state/*
+!/.local/state/nix/
+/.local/state/nix/*
+!/.local/state/nix/channels
 
 # bin
 !/.local/bin/
 /.local/bin/*
+!/.local/bin/luap
 !/.local/bin/adb.py
 !/.local/bin/telnet.py
+!/.local/bin/xsct.py
+!/.local/bin/vivado.py
 !/.local/bin/git-neomutt
-!/.local/bin/batman
 
 # Windows
 !/.minttyrc

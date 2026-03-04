@@ -1,0 +1,6 @@
+[Service]
+ExecStart=/usr/bin/{{ expand('%:t:r') }}
+ExecReload=/bin/kill -SIGHUP $MAINPID
+
+[Install]
+WantedBy=default.target

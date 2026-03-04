@@ -1,5 +1,4 @@
 *
 !/.git/
-# action/checkout
-!/.config/tmux/plugins/tpm/
-!/.local/share/nvim/repos/github.com/Shougo/dein.vim/
+!/script/install_plugins.sh
+!/_config.yml

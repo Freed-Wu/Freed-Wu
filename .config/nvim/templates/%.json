@@ -1,0 +1,10 @@
+{
+  "$id": "https://json.schemastore.org/{{ expand('%:t') }}",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "{% here %}": {
+    }
+  },
+  "title": "JSON schema for {{ substitute(expand('%:t:r'), '-schema$', '', '') }}",
+  "type": "object"
+}

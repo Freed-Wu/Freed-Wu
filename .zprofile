@@ -1,5 +1,5 @@
 # shellcheck disable=all
-# Add some programs to $PATH before other commands
+# Add ~/.nix-profile/bin to $PATH
 if [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh
 fi
@@ -9,8 +9,15 @@ if [[ -f ~/.xprofile ]] && ((! $+PYTHONSTARTUP)); then
 fi
 if [[ -f ~/.bash_profile ]] && ((! $+DOCKER_BUILDKIT)); then
 	. ~/.bash_profile
-	for bin in /opt/ccstudio/ccs/tools/compiler/*/bin(N) /opt/android-ndk/toolchains/llvm/prebuilt/*/bin(N); do
-		export PATH=$PATH:$bin
-	done
-	unset bin
+fi
+if [[ -f ~/.local/share/zinit/plugins/.pass/pass.sh ]]; then
+	. ~/.local/share/zinit/plugins/.pass/pass.sh
+fi
+# NixOS
+if [[ -d /run/current-system/sw/share ]] &&
+	[[ ${XDG_DATA_DIRS#/run/current-system/sw/share:} == $XDG_DATA_DIRS ]]; then
+	XDG_DATA_DIRS="/run/current-system/sw/share:$XDG_DATA_DIRS"
+fi
+if [[ -z $C6X_C_DIR && -f ~/.bash_login ]]; then
+	. ~/.bash_login
 fi

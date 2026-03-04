@@ -4,7 +4,6 @@
   "Lua.hint.enable": true,
   "Lua.hint.setType": true,
   "cSpell.allowCompoundWords": true,
-  "clang-format-style-options.shortcut": "clang",
   "coc.preferences.enableMarkdown": true,
   "coc.source.emoji.shortcut": "😀",
   "dash-complete.shortcut": "-",
@@ -13,31 +12,28 @@
     "cmake": ["cmake-lint", "cmakelint"],
     "elixir": ["mix_credo", "mix_credo_compile"],
     "gitcommit": ["languagetool", "write-good", "alex-text"],
-    "html": "alex-html",
-    "jq": "jq",
-    "lua": "luacheck",
+    "html": ["alex-html"],
+    "jq": ["jq"],
+    "lua": ["luacheck"],
     "mail": ["languagetool", "write-good", "alex-text"],
     "markdown": ["languagetool", "write-good", "alex"],
-    "nix": "nix-linter",
-    "perl": "perl",
+    "nix": ["nix-linter"],
+    "perl": ["perl"],
     "php": ["phpstan", "psalm"],
-    "requirements": "pip-compile",
-    "sh": ["shellcheck", "bash", "zsh"],
-    "syntax_test": "syntest",
-    "systemd": "systemd-analyze",
+    "sh": ["bash", "zsh"],
+    "systemd": ["systemd-analyze"],
     "text": ["languagetool", "write-good", "alex-text"],
-    "vim": "vint",
-    "yaml": "yamllint"
+    "vim": ["vint"],
+    "yaml": ["yamllint", "actionlint"]
   },
   "diagnostic-languageserver.formatFiletypes": {
     "blade": "blade-formatter",
     "dart": "dartfmt",
     "elixir": "mix_format",
     "fish": "fish_indent",
-    "lua": "lua-format",
-    "nix": "nixpkgs-fmt",
     "perl": "perltidy",
-    "sh": "shfmt"
+    "sh": "shfmt",
+    "verilog": "iStyle"
   },
   "diagnostic.errorSign": "✗",
   "diagnostic.format": "%source%code: %message",
@@ -52,13 +48,54 @@
   "html.autoClosingTags": true,
   "just-complete.shortcut": "_",
   "languageserver": {
-    "cmake": {
-      "command": "cmake-language-server",
-      "filetypes": ["cmake"],
-      "rootPatterns": ["build/"],
-      "initializationOptions": {
-        "buildDirectory": "build"
-      }
+    "arduino": {
+      "command": "arduino-language-server",
+      "filetypes": ["arduino"]
+    },
+    "autoconf": {
+      "command": "autoconf-language-server",
+      "filetypes": ["config"]
+    },
+    "bitbake": {
+      "command": "bitbake-language-server",
+      "filetypes": ["bitbake"]
+    },
+    "hdlChecker": {
+      "command": "hdl_checker",
+      "args": ["--lsp"],
+      "filetypes": ["vhdl", "verilog", "systemverilog"]
+    },
+    "jq": {
+      "command": "jq-lsp",
+      "filetypes": ["jq"]
+    },
+    "nix": {
+      "command": "nixd",
+      "filetypes": ["nix"]
+    },
+    "PKGBUILD": {
+      "command": "pkgbuild-language-server",
+      "filetypes": ["sh"]
+    },
+    "portage": {
+      "command": "portage-language-server",
+      "filetypes": ["sh"]
+    },
+    "requirements": {
+      "command": "requirements-language-server",
+      "filetypes": ["requirements"]
+    },
+    "sublime-syntax": {
+      "command": "sublime-syntax-language-server",
+      "filetypes": ["syntax_test", "yaml"]
+    },
+    "svls": {
+      "command": "svls",
+      "filetypes": ["systemverilog"]
+    },
+    "termux": {
+      "command": "termux-language-server",
+      "filetypes": ["sh"]
     }
   },
   "list.insertMappings": {
@@ -98,8 +135,8 @@
   "list.source.bibtex.files": ["*.bib", "refs/*.bib"],
   "list.source.files.args": ["--hidden", "--files"],
   "markdown-preview-enhanced.enableScriptExecution": true,
+  "perl.disableCache": true,
   "prettier.ignorePath": ".gitignore",
-  "pydocstring.doqPath": "/usr/bin/doq",
   "pydocstring.enableFileAction": true,
   "pyright.organizeimports.provider": "isort",
   "python.formatting.provider": "black",
@@ -116,6 +153,7 @@
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "suggest.invalidInsertCharacters": ["(", "<", "{", "[", "\r", "\n"],
+  "suggest.removeDuplicateItems": true,
   "suggest.snippetIndicator": "",
   "suggest.triggerAfterInsertEnter": true,
   "tabnine.shortcut": "",
@@ -126,5 +164,10 @@
   "translator.enableHover": true,
   "translator.engines": ["google"],
   "translator.proxy": "socks://127.0.0.1:1080",
-  "yaml.format.singleQuote": true
+  "yaml.schemas": {
+    "https://json.schemastore.org/clang-format.json": ".clang-format"
+  },
+  "yaml.format.singleQuote": true,
+  "zi.hover": false,
+  "markdown-preview-enhanced.previewTheme": "atom-dark.css"
 }

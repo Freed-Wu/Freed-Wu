@@ -142,20 +142,8 @@ if (($+commands[exa])); then
 else
   alias ls='ls --color=auto -h'
 fi
-if (($+commands[bat])); then
-  bat-help() {
-    for opt in $@; do
-      alias -g -- "$opt=\\$opt | bat -plhelp --paging=never --color=always"
-    done
-  }
-  bat-help --help
-  # man
-  bat-help '-\?'
-  # x264
-  bat-help --longhelp --fullhelp
-  # gnome
-  bat-help --help-all --help-gapplication --help-gtk
-  unfunction bat-help
+if [[ -f /usr/share/fzf-tab-completion/node/fzf-node-completion.js ]]; then
+  alias node='node -r /usr/share/fzf-tab-completion/node/fzf-node-completion.js'
 fi
 
 if (( $+HOMEBREW_PREFIX )); then
@@ -218,8 +206,9 @@ zinit id-as'.lesspipe.sh' depth'1' wait lucid \
 # https://github.com/Kaggle/kaggle-api/issues/446
 zinit id-as'.pass' depth'1' as'null' wait lucid \
   atclone'echo "CODESTATS_API_KEY=$(pass ls codestats/$HOST)" > pass.sh
-echo "KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
-echo "KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
+echo "export KAGGLE_USERNAME=$(pass ls kaggle/username)" >> pass.sh
+echo "export KAGGLE_KEY=$(pass ls kaggle/key)" >> pass.sh
+echo "export OPENAI_API_KEY=$(pass ls openai/api_key)" >> pass.sh
 pass ls wakatime/api_key > wakatime.txt
 pass ls codestats/$HOST > codestats.txt' \
   if'(($+commands[pass]))' \
@@ -228,11 +217,6 @@ zinit id-as depth'1' for mdumitru/last-working-dir
 zinit id-as depth'1' for lljbash/zsh-renew-tmux-env
 zinit id-as depth'1' wait lucid for RobSis/zsh-reentry-hook
 zinit id-as depth'1' wait lucid for Freed-Wu/zsh-command-not-found
-zinit id-as depth'1' wait lucid \
-  atload'FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
-$(fzf_sizer_preview_window_settings)"' \
-  if'(($+commands[fzf] && $+commands[bc]))' \
-  for bigH/auto-sized-fzf
 # 1}}} Hook #
 
 # Complete {{{1 #
@@ -363,6 +347,7 @@ zinit id-as depth'1' wait lucid for hlissner/zsh-autopair
 # 1}}} Insert #
 
 # Colorize {{{1 #
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-help
 zinit id-as depth'1' wait lucid for zpm-zsh/colorize
 zinit id-as depth'1' wait lucid \
   if'(($+commands[mysql]))' \
@@ -376,6 +361,9 @@ zinit id-as depth'1' wait lucid \
 # 1}}} Function #
 
 # Compatible {{{1 #
+zinit id-as depth'1' wait lucid for Freed-Wu/zsh-completions-for-cross-compilers
+
+compdef _gnu_generic ffmpeg ffplay ffprobe file
 # https://github.com/3v1n0/zsh-bash-completions-fallback/issues/6
 compdef _python python
 compdef _pydoc pydoc
@@ -383,9 +371,5 @@ compdef _pip pip
 # after compinit
 zinit id-as depth'1' wait lucid for 3v1n0/zsh-bash-completions-fallback
 zinit id-as depth'1' null for zdharma-continuum/zinit
-zinit id-as depth'1' wait lucid for Freed-Wu/zsh-completions-for-cross-compilers
-# FIXME
-. ~/.local/share/zinit/plugins/zsh-completions-for-cross-compilers/*.plugin.zsh
-compdef _gnu_generic ffmpeg ffplay ffprobe file
 # 1}}} Compatible #
 # ex: foldmethod=marker
