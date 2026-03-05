@@ -12,14 +12,14 @@
 let
   nur =
     import
-      (builtins.fetchTarball {
-        url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+      (fetchTarball {
+        url = "https://github.com/nix-community/NUR/archive/2a187cd9c92887f2af5833696b510288844eb49b.tar.gz";
       })
       {
         inherit pkgs;
       };
 in
-rec {
+{
   # basic {{{ #
   imports = [
     # Include the results of the hardware scan.
@@ -136,7 +136,7 @@ rec {
   # Select internationalisation properties.
   i18n.inputMethod.enable = true;
   i18n.inputMethod.type =
-    if services.displayManager.defaultSession == "gnome" then "ibus" else "fcitx5";
+    if config.services.displayManager.defaultSession == "gnome" then "ibus" else "fcitx5";
   i18n.inputMethod.fcitx5.addons = with pkgs; [
     fcitx5-rime
   ];
@@ -154,14 +154,9 @@ rec {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.libinput.enable = true;
-  # Configure keymap in X11
-  # gnome 47.1 and plasma on wayland display incorrectly for HiDPI
-  services.displayManager.defaultSession = "plasma";
-  services.desktopManager.gnome.enable = services.displayManager.defaultSession == "gnome";
-  services.displayManager.gdm.enable = services.displayManager.defaultSession == "gnome";
-
-  services.desktopManager.plasma6.enable = services.displayManager.defaultSession == "plasma";
-  services.displayManager.sddm.enable = services.displayManager.defaultSession == "plasma";
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.gdm.enable = config.services.desktopManager.gnome.enable;
+  services.displayManager.sddm.enable = config.services.desktopManager.plasma6.enable;
   services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sddm.settings = {
     # https://wiki.archlinux.org/title/SDDM#Enable_HiDPI
@@ -174,9 +169,11 @@ rec {
     };
   };
 
-  services.xserver.desktopManager.lxqt.enable = services.displayManager.defaultSession == "lxqt";
+  services.xserver.desktopManager.lxqt.enable =
+    config.services.displayManager.defaultSession == "lxqt";
 
-  services.xserver.desktopManager.xfce.enable = services.displayManager.defaultSession == "xfce";
+  services.xserver.desktopManager.xfce.enable =
+    config.services.displayManager.defaultSession == "xfce";
 
   services.xserver.displayManager.lightdm.greeters.slick.font.name = "Ubuntu 24";
 
@@ -185,8 +182,8 @@ rec {
   # services.fprintd.tod.enable = true;
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
   services.picom.enable =
-    services.displayManager.defaultSession != "gnome"
-    && services.displayManager.defaultSession != "plasma";
+    config.services.displayManager.defaultSession != "gnome"
+    && config.services.displayManager.defaultSession != "plasma";
   services.picom.fade = true;
   services.picom.inactiveOpacity = 0.95;
   services.picom.settings = {
@@ -252,6 +249,7 @@ rec {
       man-pages
       man-pages-posix
       windows10-icons
+      # TODO: https://github.com/NixOS/nixpkgs/pull/484334
       nur.repos.Freed-Wu.windows10-themes
       nur.repos.Freed-Wu.stardict-ecdict
       nur.repos.Freed-Wu.stardict-langdao-ce-gb
@@ -264,7 +262,8 @@ rec {
           # tool
           keyring-pass
           # misc
-          nur.repos.Freed-Wu.pyrime
+          # TODO: https://github.com/NixOS/nixpkgs/pull/532063
+          # nur.repos.Freed-Wu.pyrime
           nur.repos.Freed-Wu.translate-shell
           nur.repos.Freed-Wu.mutt-language-server
           nur.repos.Freed-Wu.tmux-language-server
@@ -346,7 +345,6 @@ rec {
           ]
         )
       )
-      nur.repos.Freed-Wu.luahbtex
       # }}} lua #
       # tcl {{{ #
       nagelfar
@@ -355,13 +353,13 @@ rec {
       # package manager
       uv
       bun
-      lux-cli
       # nix
       manix
       nix-index-database
       # GUI
       firefox
       # https://github.com/wez/wezterm/issues/792
+      # wezterm on wayland will rapid flash
       alacritty
       # tool
       eza
@@ -372,6 +370,8 @@ rec {
       vivid
       onefetch
       asciinema-agg
+      tokei
+      wl-clipboard-rs
       # monitor
       bottom
       hyperfine
@@ -380,15 +380,20 @@ rec {
       delta
       mdcat
       # LSP
+      ty
       ruff
       biome
-      taplo
+      tombi
       neocmakelsp
       asm-lsp
       texlab
       tinymist
       jinja-lsp
       ts_query_ls
+      rust-analyzer
+      cargo
+      rustc
+      rustfmt
       # }}} rust #
       # go {{{ #
       # tool
@@ -399,7 +404,6 @@ rec {
       direnv
       gh
       wakatime-cli
-      scc
       gdu
       # linter
       actionlint
@@ -407,13 +411,14 @@ rec {
       shfmt
       # LSP
       jq-lsp
+      typescript-go
       # }}} go #
       # haskell {{{ #
       # linter
       shellcheck
       # formatter
       # nixd uses it
-      nixfmt-rfc-style
+      nixfmt
       # }}} haskell #
       # f# {{{ #
       marksman
@@ -495,12 +500,12 @@ rec {
     ]
     # don't use libreoffice-fresh to avoid building
     ++ (
-      if services.desktopManager.plasma6.enable then
+      if config.services.desktopManager.plasma6.enable then
         [
           libreoffice-qt
           kdePackages.kdeconnect-kde
         ]
-      else if services.desktopManager.gnome.enable then
+      else if config.services.desktopManager.gnome.enable then
         [
           libreoffice
           gnome-tweaks
@@ -520,24 +525,12 @@ rec {
     )
     ++ (lib.optionals
       (
-        hardware.graphics ? extraPackages
-        && builtins.elem intel-compute-runtime hardware.graphics.extraPackages
+        config.hardware.graphics ? extraPackages
+        && builtins.elem intel-compute-runtime config.hardware.graphics.extraPackages
       )
       [
         intel-gpu-tools
       ]
-    )
-    ++ (
-      if
-        services.displayManager.gdm ? wayland
-        && !services.displayManager.gdm.wayland
-        && services.displayManager.gdm.enable
-      then
-        [ xsel ]
-      else
-        [
-          wl-clipboard-rs
-        ]
     );
 
   # program {{{ #
@@ -553,6 +546,7 @@ rec {
   services.v2raya.enable = true;
 
   programs.nix-ld.enable = true;
+  programs.gamemode.enable = true;
   programs.proxychains.enable = true;
   programs.proxychains.proxies = {
     myproxy = {

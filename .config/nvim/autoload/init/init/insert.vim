@@ -1,6 +1,6 @@
 function! init#init#insert#main() abort
-  inoremap <C-F> <Right>
-  nnoremap <C-CR> <C-Y>
+  inoremap <C-L> <C-Y>
+  inoremap <C-J> <C-E>
   " readline
   inoremap <silent> <M-.> <C-R>=split(getline(line('.') - 1))[-1]<CR>
   inoremap <M-c> <C-O>~<C-O>gue<S-Right>

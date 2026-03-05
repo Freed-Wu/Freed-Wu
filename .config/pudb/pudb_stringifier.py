@@ -48,13 +48,11 @@ with suppress(ModuleNotFoundError):
             texts = []
             if range:
                 if isinstance(range[0], float):
-                    text = (
-                        "range=(" + ", ".join(f"{v:.3}" for v in range) + ")"
-                    )
+                    text = "(" + ", ".join(f"{v:.3}" for v in range) + ")"
                 else:
-                    text = f"{range=}"
+                    text = f"{range}"
                 texts += [text]
-            texts += [f"{shape=}"]
+            texts += [f"{shape}"]
             return f"{self.__class__.__name__}({', '.join(texts)})"
 
 

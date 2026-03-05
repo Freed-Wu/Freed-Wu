@@ -29,7 +29,7 @@ return {
     window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
     keys = {
         -- disable them to avoid pressing `<prefix>, -` in tmux
-        -- use `<C-S-->` to replace
+        -- use `<C-S-_>` to replace
         { key = '-',         mods = 'CTRL',           action = act.SendString '\x1f' },
         { key = '/',         mods = 'CTRL',           action = act.SendString '\x1f' },
         { key = '=',         mods = 'CTRL',           action = 'DisableDefaultAssignment' },

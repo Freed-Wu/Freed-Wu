@@ -15,7 +15,7 @@ function! init#coc#source() abort
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji',
         \ 'coc-emoji-shortcodes', 'coc-snippets',
         \
-        \ 'coc-copilot', 'coc-diagnostic',
+        \ 'coc-diagnostic', 'coc-vscode-loader',
         \
         \ 'coc-spell-checker', 'write-good-linter', 'coc-markdownlint',
         \ 'coc-pydocstring',
@@ -24,15 +24,14 @@ function! init#coc#source() abort
         \ 'coc-markdown-preview-enhanced', 'coc-esbonio', 'coc-graphviz',
         \ 'coc-texlab', 'coc-bibtex', 'coc-cmake', 'coc-mlir', 'coc-nix',
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'vscode-jq', 'coc-awk',
-        \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css',
+        \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css', 'coc-rust-analyzer',
         \ 'coc-docker', 'coc-sql', 'coc-db', 'coc-bitbake', 'coc-meson',
-        \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-tsserver', 'coc-biome',
-        \ '@yaegassy/coc-ruff', 'coc-pyright', 'coc-lua', 'coc-solargraph',
+        \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-biome',
+        \ '@yaegassy/coc-ruff', '@yaegassy/coc-ty', 'coc-lua', 'coc-solargraph',
         \ 'coc-clangd', 'hyuga-vscode-client', 'coc-alex'
         \ ]
-  " tabnine don't support android
   if $ANDROID_DATA !=# '/data' && $ANDROID_ROOT !=# '/system'
-    let g:coc_global_extensions += ['coc-tabnine']
+    let g:coc_global_extensions += ['coc-github-copilot']
   endif
   if !has('win32')
     let g:coc_global_extensions += ['coc-git']
@@ -99,18 +98,18 @@ function! init#coc#source() abort
   nmap g. <Plug>(coc-codeaction-selected)
   xmap g. <Plug>(coc-codeaction-selected)
   nmap g.. <Plug>(coc-codeaction)
-  nmap [d <Plug>(coc-diagnostic-prev)
-  nmap ]d <Plug>(coc-diagnostic-next)
-  nmap [D <Plug>(coc-diagnostic-prev-error)
-  nmap ]D <Plug>(coc-diagnostic-next-error)
+  nmap [d <Plug>(coc-diagnostic-prev-error)
+  nmap ]d <Plug>(coc-diagnostic-next-error)
+  nmap [D <Plug>(coc-diagnostic-prev)
+  nmap ]D <Plug>(coc-diagnostic-next)
   nnoremap <silent> gd :<C-U>call init#init#coc#action('definition', 'jumpDefinition', 'gd')<CR>
   nnoremap <silent> gD :<C-U>call init#init#coc#action('declaration', 'jumpDeclaration', 'gD')<CR>
   nnoremap <silent> 1gd :<C-U>call init#init#coc#action('typeDefinition', 'jumpTypeDefinition', '1gd')<CR>
   nnoremap <silent> 1gD :<C-U>call init#init#coc#action('implementation', 'jumpImplementation', '1gD')<CR>
   nnoremap <silent> [r :<C-U>call init#init#coc#action('reference', 'jumpUsed', '1gD')<CR>
   nnoremap <silent> ]r :<C-U>call init#init#coc#action('reference', 'jumpReference', '1gD')<CR>
-  nnoremap <silent> gr :<C-U>call init#init#coc#action('rename', 'refactor', 'gr')<CR>
-  nnoremap <silent> gR :<C-U>call init#init#coc#action('rename', 'rename', 'gR')<CR>
+  nnoremap <silent> gr :<C-U>call init#init#coc#action('rename', 'rename', 'gR')<CR>
+  nnoremap <silent> gR :<C-U>call init#init#coc#action('rename', 'refactor', 'gr')<CR>
   nnoremap <silent> K :<C-U>call init#init#coc#action('hover', 'doHover', 'K')<CR>
   nnoremap gK K
   xnoremap gK K
@@ -170,12 +169,18 @@ endfunction
 function! init#coc#imap() abort
   inoremap <silent><expr> <M-p> "\<C-R>=coc#float#scroll(0)\<CR>"
   inoremap <silent><expr> <M-n> "\<C-R>=coc#float#scroll(1)\<CR>"
+
   inoremap <silent><expr> <C-P> coc#pum#visible() ? coc#pum#prev(1) : pumvisible() ? "\<C-P>" : "\<Up>"
   inoremap <silent><expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : pumvisible() ? "\<C-N>" : "\<Down>"
   inoremap <silent><expr> <C-M-p> coc#pum#visible() ? coc#pum#scroll(0) : "\<PageUp>"
   inoremap <silent><expr> <C-M-n> coc#pum#visible() ? coc#pum#scroll(1) : "\<PageDown>"
-  inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-E>"
-  inoremap <silent><expr> <C-Z> coc#pum#visible() ? coc#pum#cancel() : "\<C-Y>"
+
+  inoremap <silent><expr> <C-B> coc#inline#visible() ? coc#inline#prev() : "\<Left>"
+  inoremap <silent><expr> <C-F> coc#inline#visible() ? coc#inline#next() : "\<Right>"
+
+  inoremap <silent><expr> <C-E> coc#inline#visible() ? coc#inline#accept() : "\<End>"
+  inoremap <silent><expr> <C-CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+  inoremap <silent><expr> <C-Z> coc#inline#visible() ? coc#inline#cancel() : coc#pum#visible() ? coc#pum#cancel() : ""
 endfunction
 
 augroup init#coc

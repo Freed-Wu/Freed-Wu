@@ -1,4 +1,4 @@
 # shellcheck disable=all
-if ((! $+DOCKER_BUILDKIT)); then
+if ((! $+EMAIL)); then
 	. ~/.bash_profile
 fi

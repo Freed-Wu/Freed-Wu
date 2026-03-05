@@ -6,4 +6,4 @@ require 'zhihu'.setup {
     }
 }
 
-vim.keymap.set({'i'}, '<C-L>', require'zhihu.nvim'.input)
+vim.keymap.set({'i'}, '<C-Q>', require'zhihu.nvim'.input)

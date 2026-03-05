@@ -63,6 +63,7 @@
 # mamba
 !/.condarc
 !/.web-ext-config.mjs
+!/.signature
 
 # dotfiles
 !/.dosbox/
@@ -124,6 +125,10 @@
 !/.xmake/
 /.xmake/*
 !/.xmake/xmake.conf
+!/.copilot/
+/.copilot/*
+!/.copilot/settings.json
+!/.copilot/lsp-config.json
 
 # $XDG_CONFIG_HOME
 !/.config/
@@ -131,6 +136,7 @@
 !/.config/user-dirs.dirs
 !/.config/user-dirs.locale
 !/.config/electron-flags.conf
+!/.config/tokei.toml
 !/.config/black
 !/.config/pylintrc
 !/.config/khotkeysrc
@@ -298,6 +304,7 @@
 !/.config/ibus/rime/*.custom.yaml
 /.config/ibus/rime/build/
 /.config/ibus/rime/*.userdb/
+/.config/ibus/rime/*.userdb.old/
 /.config/ibus/rime/sync/
 # copied from handset.yaml or tablet.yaml
 /.config/ibus/rime/my/chasis-type.yaml
@@ -349,6 +356,8 @@
 /.local/share/jupyter/lab/*
 !/.local/share/jupyter/lab/user-settings/
 !/.local/share/supertux2/
+/.local/share/supertux2/*/info
+/.local/share/supertux2/*/*.old
 /.local/share/supertux2/addons/
 !/.local/share/gentoo/
 /.local/share/gentoo/*

@@ -15,7 +15,6 @@ rocks_trees = {
 local_by_default = true
 rocks_servers = {
     "https://lumen-oss.github.io/rocks-binaries",
-    "https://ustctug.github.io/texrocks",
     "https://luarocks.org",
 }
 if os_getenv("NIXPKGS_CONFIG") == "/etc/nix/nixpkgs-config.nix" then

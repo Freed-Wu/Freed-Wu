@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     import numpy as np
-    from torch import Tensor
+    from torch import Tensor, nn
 
 
 def inputs2tensors(
@@ -86,3 +86,35 @@ def str2tensor(input: str) -> "Tensor":
 
     img = ToTensor()(Image.open(os.path.expanduser(input)).convert("RGB"))
     return img
+
+
+def topk(
+    tensor: "Tensor", k: int = 1, largest: bool = True, sorted: bool = True
+) -> tuple["Tensor", "Tensor"]:
+    r"""全局topk操作
+
+    Args:
+        tensor: 任意维度张量
+        k: 要获取的元素数量
+        largest: True获取最大，False获取最小
+        sorted: 是否排序
+    """
+    import torch
+
+    flat = tensor.flatten()
+    values, flat_idx = torch.topk(flat, k=k, largest=largest, sorted=sorted)
+
+    # 转换为多维索引
+    indices = []
+    for i, dim_size in enumerate(tensor.shape):
+        prod = 1
+        for size in tensor.shape[i + 1 :]:
+            prod *= size
+        idx = (flat_idx // prod) % dim_size
+        indices.append(idx)
+
+    return values, torch.stack(indices, dim=1)
+
+
+def count_parameters(model: "nn.Module") -> int:
+    return sum(p.numel() for p in model.parameters())

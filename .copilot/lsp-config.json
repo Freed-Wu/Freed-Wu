@@ -1,0 +1,46 @@
+{
+  "lspServers": {
+    "asm": {
+      "command": "asm-lsp",
+      "fileExtensions": {".asm": "asm", ".nasm": "asm", ".fasm": "asm", ".masm": "asm"}
+    },
+    "bash": {
+      "command": "termux-language-server",
+      "fileExtensions": {".sh": "sh", ".ebuild": "sh"}
+    },
+    "bitbake": {
+      "command": "bitbake-language-server",
+      "fileExtensions": {".bb": "bitbake", ".bbclass": "bitbake"}
+    },
+    "jinja": {
+      "command": "jinja-lsp",
+      "fileExtensions": {".jinja": "jinja"}
+    },
+    "ltex": {
+      "command": "ltex-ls-plus",
+      "fileExtensions": {".txt": "plaintext", ".md": "markdown", ".tex": "latex", ".bib": "bibtex"}
+    },
+    "make": {
+      "command": "make-ls",
+      "fileExtensions": {".mk": "make"}
+    },
+    "query": {
+      "command": "ts_query_ls",
+      "fileExtensions": {".scm": "query"}
+    },
+    "scala": {
+      "command": "metals",
+      "fileExtensions": {".scala": "scala"}
+    },
+    "typst": {
+      "command": "tinymist",
+      "args": ["lsp"],
+      "fileExtensions": {".typ": "typst"}
+    },
+    "typescript": {
+      "command": "tsgo",
+      "args": ["--lsp", "--stdio"],
+      "fileExtensions": {".ts": "typescript", ".tsx": "typescriptreact", ".js": "javascript", ".jsx": "javascriptreact"}
+    }
+  }
+}

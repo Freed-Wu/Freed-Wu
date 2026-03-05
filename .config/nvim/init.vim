@@ -371,9 +371,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#quickui#source()',
         \ 'hook_post_source': 'call init#quickui#post_source()',
         \ })
-  call dein#add('lambdalisue/nerdfont.vim', {
-        \ 'hook_source': 'call init#nerdfont#source()',
-        \ })
+  call dein#add('lambdalisue/nerdfont.vim')
   call dein#add('mhinz/vim-startify', {
         \ 'hook_source': 'call init#startify#source()',
         \ })
@@ -474,7 +472,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " 2}}} Fold "
 
   " Conceal {{{2 "
-  call dein#add('Freed-Wu/conceal.vim')
+  call dein#add('Vim-cn/conceal.vim')
   call dein#add('Yggdroot/indentLine', {
         \ 'hook_source': 'call init#indentline#source()',
         \ })
@@ -505,7 +503,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'on_ft': ['markdown', 'pandoc', 'rmd'],
         \ 'build': 'sh -c "cd app && npx --yes yarn install"'
         \ })
-  call dein#add('Freed-Wu/pdftk.vim')
+  call dein#add('Vim-cn/pdftk.vim')
   " 2}}} Ftplugin "
   " 1}}} Filetype "
 
@@ -516,6 +514,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#smartinput#source()',
         \ 'hook_post_source': 'call init#smartinput#post_source()',
         \ })
+  call dein#add('Vim-cn/vim-smartinput-extra')
   " 2}}} InsertCmdline "
 
   " Abbreviate {{{2 "
@@ -658,7 +657,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   call dein#add('honza/vim-snippets', {
         \ 'hook_source': 'call init#snippets#source()',
         \ })
-  call dein#add('Freed-Wu/template.vim')
+  call dein#add('Vim-cn/template.vim')
   call dein#add('mattn/emmet-vim', {
         \ 'hook_post_source': 'call init#emmet_vim#post_source()',
         \ })
@@ -837,8 +836,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ })
   call dein#add('lambdalisue/fern-ssh')
   call dein#add('lambdalisue/fern-hijack.vim')
-  call dein#add('lambdalisue/fern-git-status.vim')
-  call dein#add('lambdalisue/fern-mapping-git.vim')
   call dein#add('lambdalisue/fern-renderer-nerdfont.vim')
   call dein#add('lambdalisue/fern-mapping-project-top.vim')
   call dein#add('lambdalisue/fern-mapping-quickfix.vim')

@@ -16,7 +16,7 @@ fi
 
 # some terminal emulators don't start $SHELL with -l,
 # which will not source .zprofile
-if ((! $+DOCKER_BUILDKIT)); then
+if ((! $+EMAIL)); then
   . ~/.zprofile
 fi
 

@@ -1,0 +1,219 @@
+(supertux-savegame
+  (version 2)
+  (save
+    (title "额外 I 岛 (30/30)")
+    (save-version 1)
+    (tux
+      (num_players 1)
+      (bonus "none")
+      (item-pocket "none")
+      (coins 100)
+      (tuxdolls 0)
+      (worldmap-sprite "/images/worldmap/common/tux.sprite")
+      (last-worldmap "")
+      (title-level "")
+    )
+    (state
+      (ambient_b 1)
+      (ambient_g 1)
+      (ambient_r 1)
+      (antigravity #f)
+      ("worlds"
+        ("/levels/bonus1/worldmap.stwm"
+          ("main"
+            ("levels"
+              ("all_that_glistens.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("another_cold_day.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("area_42.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("bonus_dias.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("castle_in_sky.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("cave_of_mirrors.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("crumbel_cavern.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("end_of_ice_age.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("fire_in_the_sky.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("fjerd.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("flanders_ice_field.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("high_gravity.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("ice_test.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("let_us_snow.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("lies.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("luft_airship.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("mario.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("maze_in_sky.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("mysterious_house_of_ice.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("noloks_party_pit.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("penguins_cant_fly.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("pipe_down_over_there.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("refisherator.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("semi_frozen.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("snow_bowling.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("snowmans_land.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("snowy_sunset.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("tip_of_iceberg.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("train_leaves_in_one_minute.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("where_everything_possible.stl"
+                (perfect #f)
+                (solved #t)
+              )
+            )
+            (music "/music/antarctic/worldmap_ice.music")
+            ("sprite-changes"
+              ("1856_2112"
+                (show-stay-action #f)
+              )
+              ("1856_2151"
+                (show-stay-action #t)
+              )
+              ("2528_1543"
+                (show-stay-action #f)
+              )
+              ("2560_1536"
+                (show-stay-action #t)
+              )
+            )
+            ("tilemaps"
+              ("Land_foreground_1"
+                (alpha 1)
+              )
+              ("Land_foreground_2"
+                (alpha 1)
+              )
+              ("Land_foreground_3"
+                (alpha 1)
+              )
+              ("Land_foreground_4"
+                (alpha 1)
+              )
+              ("UG_mountians"
+                (alpha 1)
+              )
+              ("UG_mountians2"
+                (alpha 1)
+              )
+              ("Underground_cover"
+                (alpha 0)
+              )
+              ("deco"
+                (alpha 1)
+              )
+              ("front_waves"
+                (alpha 1)
+              )
+              ("high"
+                (alpha 1)
+              )
+              ("higher"
+                (alpha 1)
+              )
+              ("land"
+                (alpha 1)
+              )
+              ("ocean"
+                (alpha 1)
+              )
+              ("ocean_deco"
+                (alpha 1)
+              )
+              ("pathing"
+                (alpha 1)
+              )
+            )
+            ("tux"
+              (back "south")
+              (x 71)
+              (y 38)
+            )
+          )
+          (sector "main")
+        )
+      )
+    )
+  )
+)

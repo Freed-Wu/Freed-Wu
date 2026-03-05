@@ -9,10 +9,20 @@ set from = $imap_user
 set smtp_url = smtps://$from@smtphz.$my_addr
 set smtp_pass = $imap_pass
 
-set spool_file = +Inbox
-set postponed = +Draft
-set record = +Sent
-set trash = +Trash
+set my_spool_file = INBOX
+set my_postponed = 草稿箱
+set my_record = 已发送
+set my_trash = 已删除
+set my_spam = 垃圾邮件
+set spool_file = +$my_spool_file
+set postponed = +$my_postponed
+set record = +$my_record
+set trash = +$my_trash
 unmailboxes *
-mailboxes $spool_file $postponed $record $trash \
-+Spam
+named-mailboxes $my_spool_file_icon$my_spool_file $spool_file
+named-mailboxes $my_postponed_icon$my_postponed $postponed
+named-mailboxes $my_record_icon$my_record $record
+named-mailboxes $my_trash_icon$my_trash $trash
+named-mailboxes $my_spam_icon$my_spam +$my_spam
+set my_folder = 广告邮件
+named-mailboxes $my_spam_icon$my_folder +$my_folder

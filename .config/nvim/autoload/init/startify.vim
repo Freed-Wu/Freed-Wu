@@ -25,13 +25,13 @@ function! s:startify() abort
 endfunction
 
 function! s:gitModified() abort
-  let files = systemlist('git ls-files -m 2>/dev/null')
-  return map(files, "{'line': v:val, 'path': v:val}")
+  let files = v:lua.require('git2.status').ls(v:true)
+  return map(files, {_, v -> {'line': nerdfont#find(v) . g:startify#renderer#nerdfont#padding . v, 'path': v}})
 endfunction
 
 function! s:gitUntracked() abort
-  let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-  return map(files, "{'line': v:val, 'path': v:val}")
+  let files = v:lua.require('git2.status').ls(v:false, v:true)
+  return map(files, {_, v -> {'line': nerdfont#find(v) . g:startify#renderer#nerdfont#padding . v, 'path': v}})
 endfunction
 
 function! init#startify#source() abort
@@ -78,7 +78,7 @@ function! init#startify#source() abort
         \ 'indices': map(range(1, 9) + [0], {_, v -> '.' . v}),
         \ },
         \ ]
-  if !has('win32')
+  if has('nvim')
     let g:startify_lists += [
           \ {'type': function('s:gitModified'),  'header': ['! Git Modified']},
           \ {'type': function('s:gitUntracked'), 'header': ['? Git Untracked']},

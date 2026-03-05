@@ -1,0 +1,80 @@
+(supertux-savegame
+  (version 2)
+  (save
+    (title "Revenge in Redmond (8/8)")
+    (save-version 1)
+    (tux
+      (num_players 1)
+      (bonus "none")
+      (item-pocket "none")
+      (coins 100)
+      (tuxdolls 0)
+      (worldmap-sprite "images/worldmap/common/tux.sprite")
+      (last-worldmap "")
+      (title-level "")
+    )
+    (state
+      ("worlds"
+        ("/levels/revenge_in_redmond/worldmap.stwm"
+          ("main"
+            ("levels"
+              ("antarctica.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("get_to_choppa.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("intro.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("long_office_nights.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("outro.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("redmond_headquarters.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("where_my_super_cape.stl"
+                (perfect #f)
+                (solved #t)
+              )
+              ("who_is_gown.stl"
+                (perfect #f)
+                (solved #t)
+              )
+            )
+            (music "/music/retro/worldmap_old.music")
+            ("tilemaps"
+              ("decoration"
+                (alpha 1)
+              )
+              ("land"
+                (alpha 1)
+              )
+              ("ocean"
+                (alpha 1)
+              )
+              ("pathing"
+                (alpha 1)
+              )
+            )
+            ("tux"
+              (back "south")
+              (x 18)
+              (y 8)
+            )
+          )
+          (sector "main")
+        )
+      )
+    )
+  )
+)

@@ -174,9 +174,6 @@ export HOMEBREW_GIT_NAME="$DEBFULLNAME"
 export HOMEBREW_GIT_EMAIL="$EMAIL"
 export HOMEBREW_GITHUB_API_TOKEN="$HOMEBREW_GITHUB_PACKAGES_TOKEN"
 
-# docker
-export DOCKER_BUILDKIT=1
-
 # repo
 export REPO_URL=https://mirrors.bfsu.edu.cn/git/git-repo
 
