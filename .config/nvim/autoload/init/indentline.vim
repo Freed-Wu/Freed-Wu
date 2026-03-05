@@ -5,8 +5,8 @@ function! init#indentline#source() abort
   let g:indentLine_bufTypeExclude = ['terminal']
   let g:indentLine_faster = 1
   let g:indentLine_setConceal = 0
-  let g:indentLine_color_term = 'blue'
-  let g:indentLine_color_gui = 'blue'
+  let g:indentLine_color_term = 'cyan'
+  let g:indentLine_color_gui = 'cyan'
 endfunction
 
 augroup init#indentline

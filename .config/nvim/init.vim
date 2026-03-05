@@ -371,9 +371,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#quickui#source()',
         \ 'hook_post_source': 'call init#quickui#post_source()',
         \ })
-  call dein#add('lambdalisue/nerdfont.vim', {
-        \ 'hook_source': 'call init#nerdfont#source()',
-        \ })
+  call dein#add('lambdalisue/nerdfont.vim')
   call dein#add('mhinz/vim-startify', {
         \ 'hook_source': 'call init#startify#source()',
         \ })
