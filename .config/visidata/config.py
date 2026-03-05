@@ -31,7 +31,7 @@ def _add_to_sys_path(path):
 
 
 with _add_to_sys_path(os.path.dirname(_get_config_file())):
-    from _visidata import sort  # type: ignore  # noqa: F401
+    import _visidata  # type: ignore  # noqa: F401
 
 # https://github.com/saulpw/visidata/discussions/2902
 if which("xsel"):

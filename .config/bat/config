@@ -31,6 +31,8 @@
 -m'*.markdown.out:LaTeX'  # markdown
 -m'*.ldf:LaTeX'  # babel
 -m'*.tikz:LaTeX'  # tikz
+-m'*.reanim:XML'
+-m'*.ksy:YAML'
 -m'.condarc:YAML'
 -m'*.aux:LaTeX'
 -m'*.ldf:LaTeX'

@@ -8,13 +8,22 @@ set from = $imap_user
 set smtp_url = smtps://$from@smtp.$my_addr
 set smtp_pass = $imap_pass
 
-set spool_file = +Inbox
-set postponed = +Drafts
-set record = '+Sent Messages'
-set trash = '+Deleted Messages'
+set my_spool_file = INBOX
+set my_postponed = Drafts
+set my_record = 'Sent Messages'
+set my_trash = 'Deleted Messages'
+set my_spam = Junk
+set spool_file = +$my_spool_file
+set postponed = +$my_postponed
+set record = +$my_record
+set trash = +$my_trash
 unmailboxes *
-mailboxes $spool_file $postponed $record $trash \
-+Junk \
-+其他文件夹 \
-+其他文件夹/github +其他文件夹/bugzilla +其他文件夹/wakatime \
-+其他文件夹/people +其他文件夹/class +其他文件夹/QQ邮件订阅
+named-mailboxes $my_spool_file_icon$my_spool_file $spool_file
+named-mailboxes $my_postponed_icon$my_postponed $postponed
+named-mailboxes $my_record_icon$my_record $record
+named-mailboxes $my_trash_icon$my_trash $trash
+named-mailboxes $my_spam_icon$my_spam +$my_spam
+set my_folder = 其他文件夹
+named-mailboxes $my_folder_icon$my_folder +$my_folder
+mailboxes +其他文件夹/github +其他文件夹/bugzilla +其他文件夹/wakatime \
+  +其他文件夹/people +其他文件夹/class +其他文件夹/QQ邮件订阅

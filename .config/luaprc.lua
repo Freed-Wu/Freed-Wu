@@ -57,5 +57,7 @@ if not vim or vim.g.script_name then
         end
         prompt.prompts = { style.generate_ps1(), "    " }
         prompt.history = os.getenv("HOME") .. "/.lua_history"
+        -- https://github.com/dpapavas/luaprompt/pull/23
+        prompt.escape_strings = false
     end
 end

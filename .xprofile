@@ -48,3 +48,5 @@ export GRPC_VERBOSITY=ERROR
 export MAMBA_ROOT_PREFIX="$HOME/.local"
 # pixi
 export PIXI_HOME="$HOME/.local"
+# go
+export GOPATH="$HOME/.local"

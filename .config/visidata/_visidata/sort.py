@@ -3,11 +3,11 @@ r"""`<https://github.com/saulpw/visidata/issues/1762>`_"""
 from typing import Any
 
 from visidata import vd
-from visidata.shell import Sheet
+from visidata.sheets import TableSheet
 
 
 # https://github.com/saulpw/visidata/issues/1762
-@Sheet.before
+@TableSheet.before
 def orderBy(sheet, *args: Any, **kwargs: Any) -> None:
     r"""Orderby.
 
@@ -22,7 +22,7 @@ def orderBy(sheet, *args: Any, **kwargs: Any) -> None:
         sheet.origSortedRows = list(sheet.rows)
 
 
-@Sheet.api
+@TableSheet.api
 def sort_disable(sheet) -> None:
     r"""Sort disable.
 
@@ -33,7 +33,7 @@ def sort_disable(sheet) -> None:
     sheet.rows = sheet.origSortedRows
 
 
-Sheet.addCommand(  # type: ignore
+TableSheet.addCommand(  # type: ignore
     "",
     "sort-disable",
     "sort_disable()",

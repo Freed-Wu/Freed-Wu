@@ -9,6 +9,10 @@ local function expand(dir)
     return dir
 end
 
+loadfile(expand("~/.config/luaprc.lua"))()
+local fs = require "vim.fs"
+local version = require("version")
+
 ---get index
 ---@param array string[]
 ---@param value string
@@ -21,47 +25,26 @@ local function indexOf(array, value)
     end
 end
 
-local function sort(a, b)
-    local a_ = a
-    local b_ = b
-    if a:sub(1, 2) == '# ' then
-        a_ = a:sub(3)
-    end
-    if b:sub(1, 2) == '# ' then
-        b_ = b:sub(3)
-    end
-    return a_ < b_
-end
-
-loadfile(expand("~/.config/luaprc.lua"))()
-local version = require("version")
-
 -- luacheck: ignore 111 113
 ---@diagnostic disable: undefined-global
--- loadfile(expand("~/.cache/luarocks/https___nvim-neorocks.github.io_rocks-binaries-dev/manifest-5.1"))()
--- local repository_dev = repository
-loadfile(expand("~/.cache/luarocks/https___nvim-neorocks.github.io_rocks-binaries/manifest-5.1"))()
+loadfile(arg[1])()
 local lines = {}
-local disabled_languages = { "c", "lua", "query", "vim", "vimdoc", "markdown", "markdown_inline" }
--- https://github.com/nvim-neorocks/rocks-binaries/issues/7
-for _, language in ipairs({ "systemverilog" }) do
-    table.insert(disabled_languages, language)
+
+local prefix = os.getenv("PREFIX") or "/usr"
+local f = io.open("/run/current-system/nixos-version")
+if f then
+    f:close()
+    prefix = "/run/current-system/sw"
 end
-for _, language in ipairs({ "idris", "org", "runescript" }) do
-    table.insert(disabled_languages, language)
+-- https://github.com/lumen-oss/nurr/issues/57
+local disabled_languages = { "cli", "systemverilog", "idris", "org", "runescript" }
+for file in fs.dir(fs.joinpath(prefix, "lib/nvim/parser")) do
+    table.insert(disabled_languages, file:match("^[^.]+"))
 end
 local scm_languages = {}
 for name, repo in pairs(repository) do
     if name:sub(1, 12) == "tree-sitter-" then
         local latest_v = "0.0.1-1"
-        -- if repository_dev[name] then
-        --     for _, info in pairs(repository_dev[name]["scm-1"]) do
-        --         if info.arch == "linux-x86_64" then
-        --             latest_v = "scm-1"
-        --             break
-        --         end
-        --     end
-        -- end
         if indexOf(scm_languages, name:sub(13)) ~= nil then
             latest_v = "scm-1"
         end
@@ -80,5 +63,7 @@ for name, repo in pairs(repository) do
         table.insert(lines, string.format('%s%s = "%s"', comment, name, latest_v))
     end
 end
-table.sort(lines, sort)
+table.sort(lines, function(a, b)
+    return a:match('^%s*#*%s*(.*)') < b:match('^%s*#*%s*(.*)')
+end)
 print(table.concat(lines, "\n"))

@@ -24,7 +24,7 @@ with suppress(ModuleNotFoundError):
             """
             super().__init__()
             self._shape = tuple(self.shape)
-            self._range = ()
+            self._range: tuple[float, ...] = ()
             # torch.complex(torch.ones(1), torch.ones(1)).min()
             # duck type
             # from_hp(torch.rand(1, 1), (1, 1), torch.int8).min()
@@ -48,13 +48,11 @@ with suppress(ModuleNotFoundError):
             texts = []
             if range:
                 if isinstance(range[0], float):
-                    text = (
-                        "range=(" + ", ".join(f"{v:.3}" for v in range) + ")"
-                    )
+                    text = "(" + ", ".join(f"{v:.3}" for v in range) + ")"
                 else:
-                    text = f"{range=}"
+                    text = f"{range}"
                 texts += [text]
-            texts += [f"{shape=}"]
+            texts += [f"{shape}"]
             return f"{self.__class__.__name__}({', '.join(texts)})"
 
 

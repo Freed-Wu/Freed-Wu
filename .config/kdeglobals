@@ -140,28 +140,29 @@ DirSelectDialog Size=844,598
 History Items[$e]=file:$HOME/Pictures/Screenshots
 
 [General]
-ColorSchemeHash=9f63c7711a13123582e720791ea0f8c0172977d2
+ColorSchemeHash=35c73fb379a4940e5f22982a33078640b27cf788
 
 [Icons]
 Theme=windows10
 
+[KDE]
+contrast=4
+frameContrast=0.2
+
 [KFileDialog Settings]
 Allow Expansion=false
 Automatically select filename extension=true
-Breadcrumb Navigation=true
+Breadcrumb Navigation=false
 Decoration position=2
-LocationCombo Completionmode=5
-PathCombo Completionmode=5
-Show Bookmarks=false
 Show Full Path=false
 Show Inline Previews=true
 Show Preview=false
 Show Speedbar=true
-Show hidden files=true
+Show hidden files=false
 Sort by=Name
 Sort directories first=true
 Sort hidden files last=false
-Sort reversed=false
+Sort reversed=true
 Speedbar Width=138
 View Style=DetailTree
 

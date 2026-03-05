@@ -42,6 +42,7 @@
   "git.gitlab.hosts": ["gitlab.com", "gitee.com"],
   "git.showCommitInFloating": true,
   "git.virtualTextPrefix": "",
+  "github-copilot.statusIcon": "",
   "highlight.colors.enable": true,
   "highlight.document.enable": true,
   "html.autoClosingTags": true,
@@ -84,7 +85,7 @@
       "filetypes": ["plaintext", "markdown", "latex", "bibtex"]
     },
     "make": {
-      "command": "katid",
+      "command": "make-ls",
       "filetypes": ["make"]
     },
     "mutt": {
@@ -126,6 +127,12 @@
         "formatterMode": "typstyle"
       },
       "filetypes": ["typst"]
+    },
+    "typescript": {
+      "command": "tsgo",
+      "args": ["--lsp", "--stdio"],
+      "filetypes": ["typescript", "typescriptreact", "javascript", "javascriptreact"],
+      "rootPatterns": ["tsconfig.json", "jsconfig.json", ".git/"]
     },
     "xilinx": {
       "command": "xilinx-language-server",
@@ -190,10 +197,12 @@
   "session.directory": "~/.local/share/nvim/session",
   "session.saveOnVimLeave": false,
   "snippets.shortcut": "",
+  "snippets.ultisnips.pythonPrompt": false,
   "snippets.userSnippetsDirectory": "~/.config/nvim/ultisnips",
   "solargraph.autoformat": true,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
+  "cSpell.status-bar-text": "Ꞩ",
   "suggest.completionItemKindLabels": {
     "text": "󰉿",
     "method": "",
@@ -225,7 +234,6 @@
   "suggest.invalidInsertCharacters": ["(", "<", "{", "[", "\r", "\n"],
   "suggest.snippetIndicator": "",
   "suggest.triggerAfterInsertEnter": true,
-  "tabnine.shortcut": "",
   "tasks.shortcut": "",
   "texlab.chktex.onEdit": true,
   "texlab.chktex.onOpenAndSave": true,
@@ -233,8 +241,11 @@
   "translator.enableHover": true,
   "translator.engines": ["google"],
   "translator.proxy": "socks://127.0.0.1:1080",
-  "tinymist.formatterMode": "typstyle",
+  "workspace.ignoredFolders": [
+    "$HOME",
+    "$HOME/.cargo/**",
+    "$HOME/.rustup/**"
+  ],
   "yaml.format.singleQuote": true,
-  "yank.highlight.enable": false,
-  "snippets.ultisnips.pythonPrompt": false
+  "yank.highlight.enable": false
 }

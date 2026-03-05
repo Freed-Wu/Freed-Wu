@@ -1,6 +1,11 @@
 setlocal nonumber
 setlocal norelativenumber
 
+if has('nvim')
+    call fern#scheme#file#hook#git#init()
+    nnoremap <buffer><nowait> < :<C-U>call fern#scheme#file#mapping#git#stage()<CR>
+    nnoremap <buffer><nowait> > :<C-U>call fern#scheme#file#mapping#git#unstage()<CR>
+endif
 nnoremap <silent><buffer> <LeftMouse> :<C-U>call init#init#fern#leftmouse()<CR>
 nnoremap <silent><buffer> <2-LeftMouse> :<C-U>call init#init#fern#2leftmouse()<CR>
 nnoremap <silent><buffer> <C-LeftMouse> :<C-U>call init#init#fern#cleftmouse()<CR>
@@ -108,6 +113,3 @@ nmap <buffer> g<C-P> <Plug>(fern-action-loclist:replace)
 nmap <buffer> yop <Plug>(fern-action-preview:auto:toggle)
 nmap <buffer> <M-p> <Plug>(fern-action-preview:scroll:up:half)
 nmap <buffer> <M-n> <Plug>(fern-action-preview:scroll:down:half)
-
-nmap <buffer> <nowait> <lt> <Plug>(fern-action-git-stage)
-nmap <buffer> <nowait> > <Plug>(fern-action-git-unstage)
