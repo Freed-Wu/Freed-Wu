@@ -200,8 +200,8 @@ This repository contains my [dotfiles](https://dotfiles.github.io):
 If you are my junior :boy:, you can find all my homework as a reference :eye:.
 
 - homework :chart_with_upwards_trend:
-  - [postgradute](https://github.com/Freed-Wu?tab=repositories&q=homework+ustc)
-  - undergradute
+  - [postgraduate](https://github.com/Freed-Wu?tab=repositories&q=homework+ustc)
+  - undergraduate
     - [major](https://github.com/Freed-Wu?tab=repositories&q=homework+njust+electronics)
     - [minor](https://github.com/Freed-Wu?tab=repositories&q=homework+njust+accountancy)
 - [competition code :memo:](https://github.com/Freed-Wu?tab=repositories&q=competition)
@@ -279,7 +279,7 @@ more information about me
   - [![leetcode](https://img.shields.io/badge/leetcode-gray?logo=leetcode)](https://leetcode.cn/u/freed-wu/)
   - [![asciinema](https://img.shields.io/badge/asciinema-gray?logo=asciinema)](https://asciinema.org/~Freed-Wu)
   - [![coderwall](https://img.shields.io/badge/coderwall-gray?logo=coderwall)](https://coderwall.com/Zhenyu%20Wu)
-- forums for discusstion:
+- forums for discussion:
   - [![stackoverflow](https://img.shields.io/badge/stackoverflow-gray?logo=stackoverflow)](https://stackoverflow.com/users/16027269/wzy)
   - [![reddit](https://img.shields.io/badge/reddit-gray?logo=reddit)](https://www.reddit.com/user/freedwu)
   - [![v2ex](https://img.shields.io/badge/v2ex-gray?logo=v2ex)](https://www.v2ex.com/member/freedwu)
