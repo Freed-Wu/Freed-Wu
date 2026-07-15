@@ -36,8 +36,7 @@ if f then
     f:close()
     prefix = "/run/current-system/sw"
 end
--- https://github.com/lumen-oss/nurr/issues/57
-local disabled_languages = { "cli", "systemverilog", "idris", "org", "runescript" }
+local disabled_languages = { "cli" }
 for file in fs.dir(fs.joinpath(prefix, "lib/nvim/parser")) do
     table.insert(disabled_languages, file:match("^[^.]+"))
 end

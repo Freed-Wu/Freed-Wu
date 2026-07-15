@@ -1,1 +1,1 @@
-call init#init#sh#context()
+call init#init#sh#map()

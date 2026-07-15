@@ -11,6 +11,5 @@ function! init#init#markdown#main() abort
   nnoremap <silent><buffer> <LocalLeader>= :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,=<CR>
   nnoremap <silent><buffer> <LocalLeader>- :<C-U>CommentBanner -w auto -1 spaces:0 -p 1,-<CR>
 
-  call init#textobj#map('pandoc')
   call init#init#sphinx#set()
 endfunction

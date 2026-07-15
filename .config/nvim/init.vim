@@ -148,6 +148,7 @@ let g:xml_syntax_folding = 1
 let g:python_highlight_all = 1
 let g:readline_has_bash = 1
 let g:yaml_schema = 'pyyaml'
+let g:no_pod_maps = 1
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
 let g:netrw_home = expand('$XDG_CACHE_NVIM/netrw')
@@ -465,14 +466,12 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   call dein#add('pseewald/vim-anyfold', {
         \ 'on_cmd': 'AnyFoldActivate',
         \ })
-  call dein#add('djoshea/vim-matlab-fold')
+  " https://github.com/neovim/tree-sitter-vimdoc/issues/166
   call dein#add('thinca/vim-ft-help_fold')
-  call dein#add('sgeb/vim-diff-fold')
   call dein#add('matcatc/vim-asciidoc-folding')
   " 2}}} Fold "
 
   " Conceal {{{2 "
-  call dein#add('Vim-cn/conceal.vim')
   call dein#add('Yggdroot/indentLine', {
         \ 'hook_source': 'call init#indentline#source()',
         \ })
@@ -483,9 +482,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
 
   " Ftplugin {{{2 "
   call dein#add('Freed-Wu/sublime-syntax-language-server', {
-        \ 'rev': 'release',
-        \ })
-  call dein#add('Freed-Wu/xilinx-language-server', {
         \ 'rev': 'release',
         \ })
   call dein#add('tpope/vim-dadbod')
@@ -687,12 +683,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#textobj#quote#source()',
         \ 'hook_post_source': 'call init#textobj#quote#post_source()',
         \ })
-  call dein#add('preservim/vim-textobj-sentence', {
-        \ 'hook_post_source': 'call init#textobj#sentence#post_source()',
-        \ })
-  call dein#add('whatyouhide/vim-textobj-xmlattr', {
-        \ 'on_map': {'o': ['ix', 'ax'], 'x': ['ix', 'ax']},
-        \ })
   " 2}}} TextObjChar "
 
   " TextObjSymbol {{{2 "
@@ -733,9 +723,9 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   call dein#add('kana/vim-textobj-syntax', {
         \ 'on_map': {'o': ['iy', 'ay'], 'x': ['iy', 'ay']},
         \ })
-  call dein#add('glts/vim-textobj-comment', {
-        \ 'on_map': {'o': ['ir', 'ar', 'aR'], 'x': ['ir', 'ar', 'aR']},
-        \ 'hook_source': 'call init#textobj#comment#source()',
+  " https://github.com/nvim-treesitter/nvim-treesitter-textobjects/discussions/897
+  call dein#add('rsrchboy/vim-textobj-heredocs', {
+        \ 'on_map': {'o': ['iH', 'aH'], 'x': ['iH', 'aH']},
         \ })
   " 2}}} TextObjSyntax "
 
@@ -746,9 +736,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   call dein#add('Chun-Yang/vim-textobj-chunk', {
         \ 'on_map': {'o': ['iB', 'aB'], 'x': ['iB', 'aB']},
         \ 'hook_source': 'call init#textobj#chunk#source()',
-        \ })
-  call dein#add('rsrchboy/vim-textobj-heredocs', {
-        \ 'on_map': {'o': ['iH', 'aH'], 'x': ['iH', 'aH']},
         \ })
   call dein#add('kana/vim-textobj-datetime', {
         \ 'on_map': {'o': ['iT', 'aT', 'iY', 'aY', 'iZ'],
@@ -765,18 +752,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#textobj#uri#source()',
         \ })
   " 2}}} TextObjContent "
-
-  " TextObjMarkUp {{{2 "
-  call dein#add('kana/vim-textobj-diff', {
-        \ 'on_ft': 'diff',
-        \ 'hook_source': 'call init#textobj#diff#source()',
-        \ })
-  call dein#add('kana/vim-textobj-help')
-  call dein#add('coachshea/vim-textobj-markdown', {
-        \ 'hook_source': 'call init#textobj#markdown#source()',
-        \ })
-  call dein#add('rbonvall/vim-textobj-latex')
-  " 2}}} TextObjMarkUp "
   " 1}}} TextObject "
 
   " Tool {{{1 "

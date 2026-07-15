@@ -7,5 +7,3 @@ elseif expand('%:t') ==# 'setup.cfg'
 elseif expand('%:t') ==# 'dist.ini'
   let b:browser_search_default_engine = 'cpan'
 endif
-
-call init#init#dosini#main()

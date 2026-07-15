@@ -199,10 +199,6 @@ function! init#which_key#source() abort
   onoremap ]s ]s
   onoremap [S [S
   onoremap ]S ]S
-  onoremap [m [m
-  onoremap ]m ]m
-  onoremap [M [M
-  onoremap ]M ]M
   nnoremap [( [(
   nnoremap [) [)
   nnoremap ]( ](
@@ -227,18 +223,6 @@ function! init#which_key#source() abort
   onoremap [} v[}
   onoremap ]{ v]{
   onoremap ]} v]}
-  nnoremap [[ [[
-  nnoremap ]] ]]
-  nnoremap [] []
-  nnoremap ][ ][
-  xnoremap [[ [[
-  xnoremap ]] ]]
-  xnoremap [] []
-  xnoremap ][ ][
-  onoremap [[ [[
-  onoremap ]] ]]
-  onoremap [] []
-  onoremap ][ ][
   " 1}}} featureMoveCursor "
   " show {{{1 "
   nnoremap [i [i

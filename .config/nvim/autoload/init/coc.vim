@@ -15,7 +15,7 @@ function! init#coc#source() abort
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji',
         \ 'coc-emoji-shortcodes', 'coc-snippets',
         \
-        \ 'coc-diagnostic', 'coc-vscode-loader',
+        \ 'coc-diagnostic',
         \
         \ 'coc-spell-checker', 'write-good-linter', 'coc-markdownlint',
         \ 'coc-pydocstring',
@@ -52,7 +52,7 @@ function! init#coc#source() abort
         \ 'ebuild': 'sh',
         \ 'apkbuild': 'sh',
         \ 'zsh': 'sh',
-        \ 'systemverilog': 'verilog',
+        \ 'octave': 'matlab',
         \ 'pandoc': 'markdown',
         \ 'rmd': 'markdown',
         \ 'quarto': 'markdown',
@@ -79,14 +79,17 @@ function! init#coc#source() abort
         \ 'teal': 'lua',
         \ 'text.vim_template': 'jinja',
         \ }
-  xmap if <Plug>(coc-funcobj-i)
-  xmap af <Plug>(coc-funcobj-a)
-  xmap ic <Plug>(coc-classobj-i)
-  xmap ac <Plug>(coc-classobj-a)
-  omap if <Plug>(coc-funcobj-i)
-  omap af <Plug>(coc-funcobj-a)
-  omap ic <Plug>(coc-classobj-i)
-  omap ac <Plug>(coc-classobj-a)
+  " nvim-treesitter-textobjects
+  if !has('nvim')
+    xmap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    xmap ic <Plug>(coc-classobj-i)
+    xmap ac <Plug>(coc-classobj-a)
+    omap if <Plug>(coc-funcobj-i)
+    omap af <Plug>(coc-funcobj-a)
+    omap ic <Plug>(coc-classobj-i)
+    omap ac <Plug>(coc-classobj-a)
+  endif
   if has('nvim-0.4.0') || has('patch-8.2.0750')
     nnoremap <expr> <M-n> coc#float#scroll(1)
     nnoremap <expr> <M-p> coc#float#scroll(0)

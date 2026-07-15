@@ -6,7 +6,7 @@ let b:current_compiler = 'sphinx'
 let s:save_cpoptions = &cpoptions
 set cpoptions&vim
 
-CompilerSet makeprg=sphinx-build\ docs\ docs/_build/html
+CompilerSet makeprg=sphinx-build\ docs\ _readthedocs/html
 
 let &cpoptions = s:save_cpoptions
 unlet s:save_cpoptions

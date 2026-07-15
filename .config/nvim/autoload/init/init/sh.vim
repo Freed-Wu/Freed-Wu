@@ -1,20 +1,4 @@
 function! init#init#sh#map() abort
-  call init#init#sh#context()
-  nnoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>:let @/ = ''<CR>
-  nnoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>:let @/ = ''<CR>
-  nnoremap <silent><buffer> [] ?^\s*}$<CR>:let @/ = ''<CR>
-  nnoremap <silent><buffer> ][ /^\s*}$<CR>:let @/ = ''<CR>
-  xnoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
-  xnoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
-  xnoremap <silent><buffer> [] ?^\s*}$<CR>
-  xnoremap <silent><buffer> ][ /^\s*}$<CR>
-  onoremap <silent><buffer> [[ ?^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
-  onoremap <silent><buffer> ]] /^\s*\%(function\s\+\)\{0,1}[-_a-zA-Z0-9]\+\s*(\s*)\_s*{<CR>
-  onoremap <silent><buffer> [] ?^\s*}$<CR>
-  onoremap <silent><buffer> ][ /^\s*}$<CR>
-endfunction
-
-function! init#init#sh#context() abort
   nnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('assets/json/context/normal/sh.json')<CR>
   xnoremap <silent><nowait><buffer> <LocalLeader> :call init#init#quickui#install('assets/json/context/visual/sh.json')<CR>
 endfunction

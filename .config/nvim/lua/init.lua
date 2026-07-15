@@ -15,30 +15,9 @@ for _, arg in ipairs(vim.v.argv) do
     end
 end
 
-if vim.treesitter.language.register then
-    vim.treesitter.language.register("comment", "text")
-    -- https://github.com/nvim-treesitter/nvim-treesitter/pull/6096/
-    vim.treesitter.language.register("bash", "apkbuild")
-    vim.treesitter.language.register("bash", "PKGBUILD")
-    vim.treesitter.language.register("bash", "ebuild")
-end
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "liquid",
-    callback = function(args)
-        vim.treesitter.start(args.buf, vim.b.liquid_subtype)
-        -- only if additional legacy syntax is needed
-        -- vim.bo[args.buf].syntax = "on"
-    end
-})
-
 if not vim.g.script_name then
     vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-    vim.api.nvim_create_autocmd("BufEnter", {
-        group = vim.api.nvim_create_augroup("init", { clear = false }),
-        callback = function()
-            vim.o.foldmethod = "expr"
-        end
-    })
+    vim.o.foldmethod = "expr"
     vim.api.nvim_create_autocmd("TextYankPost", {
         group = vim.api.nvim_create_augroup("init", { clear = false }),
         callback = function()

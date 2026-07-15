@@ -22,7 +22,6 @@
     "elixir": ["mix_credo", "mix_credo_compile"],
     "php": ["phpstan", "psalm"],
     "systemd": ["systemd-analyze"],
-    "tcl": ["nagelfar"],
     "vim": ["vint"],
     "yaml": ["yamllint", "actionlint"]
   },
@@ -65,7 +64,7 @@
       "filetypes": ["bitbake"]
     },
     "config": {
-      "command": "autoconf-language-server",
+      "command": "autotools-language-server",
       "filetypes": ["config"]
     },
     "expect": {
@@ -87,6 +86,10 @@
     "make": {
       "command": "make-ls",
       "filetypes": ["make"]
+    },
+    "matlab": {
+      "command": "octave-lsp",
+      "filetypes": ["matlab"]
     },
     "mutt": {
       "command": "mutt-language-server",
@@ -135,8 +138,8 @@
       "rootPatterns": ["tsconfig.json", "jsconfig.json", ".git/"]
     },
     "xilinx": {
-      "command": "xilinx-language-server",
-      "filetypes": ["xdc", "xsct"]
+      "command": "tcl-ls",
+      "filetypes": ["tcl"]
     },
     "zathura": {
       "command": "zathura-language-server",

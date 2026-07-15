@@ -32,11 +32,11 @@ if has_cmd bear make; then
 	alias make='bear -- make'
 fi
 if has_cmd eza; then
-	alias ls='eza --icons --git -h'
-	alias tree='eza --icons -T'
+	alias ls='eza --git --icons=auto -h'
+	alias tree='eza --git --icons=auto -hT'
 elif has_cmd exa; then
 	alias ls='exa --icons -h'
-	alias tree='exa --icons -T'
+	alias tree='exa --icons -hT'
 else
 	alias ls='ls --color=auto -h'
 fi

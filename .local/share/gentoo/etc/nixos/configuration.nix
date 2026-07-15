@@ -13,7 +13,7 @@ let
   nur =
     import
       (fetchTarball {
-        url = "https://github.com/nix-community/NUR/archive/2a187cd9c92887f2af5833696b510288844eb49b.tar.gz";
+        url = "https://github.com/nix-community/NUR/archive/5f08ce8e58b86e4cdbad40cefc702a3e462dcf0d.tar.gz";
       })
       {
         inherit pkgs;
@@ -262,8 +262,7 @@ in
           # tool
           keyring-pass
           # misc
-          # TODO: https://github.com/NixOS/nixpkgs/pull/532063
-          # nur.repos.Freed-Wu.pyrime
+          nur.repos.Freed-Wu.pyrime
           nur.repos.Freed-Wu.translate-shell
           nur.repos.Freed-Wu.mutt-language-server
           nur.repos.Freed-Wu.tmux-language-server
@@ -271,8 +270,6 @@ in
           nur.repos.Freed-Wu.termux-language-server
           nur.repos.Freed-Wu.requirements-language-server
           nur.repos.Freed-Wu.sublime-syntax-language-server
-          nur.repos.Freed-Wu.expect-language-server
-          nur.repos.Freed-Wu.xilinx-language-server
         ]
       ))
       vim-vint
@@ -286,7 +283,7 @@ in
       pre-commit
       doq
       bitbake-language-server
-      autotools-language-server
+      # autotools-language-server
       # }}} python #
       # perl {{{ #
       (perl.withPackages (
