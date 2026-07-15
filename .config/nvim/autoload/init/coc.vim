@@ -15,7 +15,7 @@ function! init#coc#source() abort
         \ 'coc-dictionary', 'coc-tag', 'coc-word', 'coc-emoji',
         \ 'coc-emoji-shortcodes', 'coc-snippets',
         \
-        \ 'coc-diagnostic', 'coc-vscode-loader',
+        \ 'coc-diagnostic',
         \
         \ 'coc-spell-checker', 'write-good-linter', 'coc-markdownlint',
         \ 'coc-pydocstring',

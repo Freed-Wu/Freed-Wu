@@ -65,7 +65,7 @@
       "filetypes": ["bitbake"]
     },
     "config": {
-      "command": "autoconf-language-server",
+      "command": "autotools-language-server",
       "filetypes": ["config"]
     },
     "expect": {

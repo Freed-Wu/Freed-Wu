@@ -1,4 +1,5 @@
 # Setting {{{1 #
+source ~/.local/lib/luarocks/rocks-5.1/tree-sitter-muttrc/0.1.1-1/conf/neomuttrc
 set sleep_time = 0
 set real_name = $DEBFULLNAME
 set history_file = ~/.local/share/neomutt/neomuttrc
@@ -39,8 +40,6 @@ set ssl_starttls = yes
 set ssl_force_tls = yes
 set mbox = ''
 auto_view text/html application/msword application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.ms-excel
-
-source ~/.local/lib/luarocks/rocks-5.1/tree-sitter-muttrc/0.1.0-1/conf/neomuttrc
 # 1}}} Setting #
 
 # Hotkey {{{1 #

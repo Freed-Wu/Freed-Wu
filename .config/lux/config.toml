@@ -1,8 +1,3 @@
-extra_servers = [
-  # for lua 5.1
-  # "https://lumen-oss.github.io/rocks-binaries/",
-  "https://ustctug.github.io/texrocks/",
-]
 lua_version = "5.3"
 
 [variables]
