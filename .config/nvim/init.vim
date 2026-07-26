@@ -9,10 +9,10 @@ if exists('*stdpath')
   let $XDG_CACHE_NVIM = stdpath('cache')
 else
   let s:expand = {var, default -> var == expand(var) ? expand(default) : var}
-  let $XDG_CONFIG_NVIM = s:expand('$XDG_CONFIG_HOME/nvim', '$HOME/.config/nvim')
-  let $XDG_DATA_NVIM = s:expand('$XDG_DATA_HOME/nvim', '$HOME/.local/share/nvim')
-  let $XDG_STATE_NVIM = s:expand('$XDG_STATE_HOME/nvim', '$HOME/.local/state/nvim')
-  let $XDG_CACHE_NVIM = s:expand('$XDG_CACHE_HOME/nvim', '$HOME/.cache/nvim')
+  let $XDG_CONFIG_NVIM = s:expand('$XDG_CONFIG_HOME/nvim', '~/.config/nvim')
+  let $XDG_DATA_NVIM = s:expand('$XDG_DATA_HOME/nvim', '~/.local/share/nvim')
+  let $XDG_STATE_NVIM = s:expand('$XDG_STATE_HOME/nvim', '~/.local/state/nvim')
+  let $XDG_CACHE_NVIM = s:expand('$XDG_CACHE_HOME/nvim', '~/.cache/nvim')
 endif
 let $XDG_CONFIG_HOME = fnamemodify($XDG_CONFIG_NVIM, ':h')
 let $XDG_DATA_HOME = fnamemodify($XDG_DATA_NVIM, ':h')
@@ -357,7 +357,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " Log {{{1 "
   call dein#add('wakatime/vim-wakatime', {
         \ 'if': executable('wakatime-cli') && executable(
-        \   expand('$HOME/.local/share/zinit/plugins/_pass/wakatime.sh')
+        \   expand('~/.local/share/zinit/plugins/_pass/wakatime.sh')
         \ ),
         \ })
   " 1}}} Log "
