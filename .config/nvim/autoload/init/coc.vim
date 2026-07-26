@@ -20,7 +20,7 @@ function! init#coc#source() abort
         \ 'coc-spell-checker', 'write-good-linter', 'coc-markdownlint',
         \ 'coc-pydocstring',
         \
-        \ '@yaegassy/coc-marksman', 'coc-webview',
+        \ 'coc-webview',
         \ 'coc-markdown-preview-enhanced', 'coc-esbonio', 'coc-graphviz',
         \ 'coc-texlab', 'coc-bibtex', 'coc-cmake', 'coc-mlir', 'coc-nix',
         \ 'coc-json', 'coc-yaml', 'coc-toml', 'vscode-jq', 'coc-awk',
@@ -81,12 +81,12 @@ function! init#coc#source() abort
         \ }
   " nvim-treesitter-textobjects
   if !has('nvim')
-    xmap if <Plug>(coc-funcobj-i)
-    xmap af <Plug>(coc-funcobj-a)
+    xmap im <Plug>(coc-funcobj-i)
+    xmap am <Plug>(coc-funcobj-a)
+    omap im <Plug>(coc-funcobj-i)
+    omap am <Plug>(coc-funcobj-a)
     xmap ic <Plug>(coc-classobj-i)
     xmap ac <Plug>(coc-classobj-a)
-    omap if <Plug>(coc-funcobj-i)
-    omap af <Plug>(coc-funcobj-a)
     omap ic <Plug>(coc-classobj-i)
     omap ac <Plug>(coc-classobj-a)
   endif
@@ -114,6 +114,7 @@ function! init#coc#source() abort
   nnoremap <silent> gr :<C-U>call init#init#coc#action('rename', 'rename', 'gR')<CR>
   nnoremap <silent> gR :<C-U>call init#init#coc#action('rename', 'refactor', 'gr')<CR>
   nnoremap <silent> K :<C-U>call init#init#coc#action('hover', 'doHover', 'K')<CR>
+  nnoremap <silent> gO :<C-U>call init#init#coc#action('documentSymbol', 'showOutline', 'gO')<CR>
   nnoremap gK K
   xnoremap gK K
   " https://github.com/neoclide/coc.nvim/issues/4831

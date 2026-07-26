@@ -31,11 +31,12 @@ extensions = [
     "sphinx.ext.viewcode",
     "myst_parser",
     "sphinxcontrib.autofile",
-    "sphinxcontrib.requirements_txt",
+    "sphinxcontrib.tree_sitter",
 ]
 
 myst_heading_anchors = 3
 myst_title_to_header = True
+myst_enable_extensions = ["tasklist"]
 todo_include_todos = True
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,7 +52,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
+html_theme = "furo"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

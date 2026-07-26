@@ -269,7 +269,6 @@ in
           nur.repos.Freed-Wu.zathura-language-server
           nur.repos.Freed-Wu.termux-language-server
           nur.repos.Freed-Wu.requirements-language-server
-          nur.repos.Freed-Wu.sublime-syntax-language-server
         ]
       ))
       vim-vint
@@ -367,7 +366,6 @@ in
       vivid
       onefetch
       asciinema-agg
-      tokei
       wl-clipboard-rs
       # monitor
       bottom
@@ -391,6 +389,7 @@ in
       cargo
       rustc
       rustfmt
+      panache
       # }}} rust #
       # go {{{ #
       # tool
@@ -402,6 +401,7 @@ in
       gh
       wakatime-cli
       gdu
+      scc
       # linter
       actionlint
       # formatter
@@ -417,9 +417,6 @@ in
       # nixd uses it
       nixfmt
       # }}} haskell #
-      # f# {{{ #
-      marksman
-      # }}} f# #
       # java {{{ #
       # coc-xml needs it
       jre_minimal

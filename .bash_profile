@@ -8,9 +8,9 @@ if [[ -f ~/.local/share/gentoo/startprefix ]] && [[ -z $EPREFIX ]] && [[ -z $ZSH
 fi
 
 # Add ~/.local/state/nix/profile/bin to $PATH
-if [[ -f ~/.local/state/nix/profile/etc/profile.d/nix.sh ]]; then
+if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]] && [[ -z $NIX_SSL_CERT_FILE ]]; then
 	# shellcheck source=/dev/null
-	. ~/.local/state/nix/profile/etc/profile.d/nix.sh
+	. /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 fi
 
 # for tty

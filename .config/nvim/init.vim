@@ -9,10 +9,10 @@ if exists('*stdpath')
   let $XDG_CACHE_NVIM = stdpath('cache')
 else
   let s:expand = {var, default -> var == expand(var) ? expand(default) : var}
-  let $XDG_CONFIG_NVIM = s:expand('$XDG_CONFIG_HOME/nvim', '$HOME/.config/nvim')
-  let $XDG_DATA_NVIM = s:expand('$XDG_DATA_HOME/nvim', '$HOME/.local/share/nvim')
-  let $XDG_STATE_NVIM = s:expand('$XDG_STATE_HOME/nvim', '$HOME/.local/state/nvim')
-  let $XDG_CACHE_NVIM = s:expand('$XDG_CACHE_HOME/nvim', '$HOME/.cache/nvim')
+  let $XDG_CONFIG_NVIM = s:expand('$XDG_CONFIG_HOME/nvim', '~/.config/nvim')
+  let $XDG_DATA_NVIM = s:expand('$XDG_DATA_HOME/nvim', '~/.local/share/nvim')
+  let $XDG_STATE_NVIM = s:expand('$XDG_STATE_HOME/nvim', '~/.local/state/nvim')
+  let $XDG_CACHE_NVIM = s:expand('$XDG_CACHE_HOME/nvim', '~/.cache/nvim')
 endif
 let $XDG_CONFIG_HOME = fnamemodify($XDG_CONFIG_NVIM, ':h')
 let $XDG_DATA_HOME = fnamemodify($XDG_DATA_NVIM, ':h')
@@ -109,9 +109,7 @@ if exists('+makeencoding')
 endif
 set diffopt+=vertical,algorithm:patience
 set signcolumn=number
-if $PREFIX !=# '/data/data/com.termux/files/usr'
-  set wildignorecase
-endif
+set wildignorecase
 " &inccommand only exists on nvim
 if exists('&inccommand')
   set inccommand=nosplit
@@ -122,33 +120,25 @@ endif
 if executable('rg')
   set grepprg=rg\ -ni
 endif
-" https://github.com/vim/vim/issues/12683
-highlight default link shebang Special
-augroup Shebang
-  autocmd!
-  autocmd BufEnter * syntax match shebang /\%^#!.*$/ display
-augroup END
 
 let g:maplocalleader = ';'
+" ftdetect
 let g:tex_flavor = 'latex'
 let g:pandoc#filetypes#pandoc_markdown = 1
 let g:filetype_m = 'octave'
+" syntax
 let g:octave_use_matlab_end = 1
 let g:load_doxygen_syntax = 1
 let g:c_syntax_for_h = 1
-let g:javaScript_fold = 1
-let g:perl_fold = 1
-let g:php_folding = 1
 let g:r_syntax_folding = 1
-let g:ruby_fold = 1
-let g:sh_fold_enabled = 7
-let g:zsh_fold_enable = 1
 let g:vimsyn_folding = 'af'
 let g:xml_syntax_folding = 1
 let g:python_highlight_all = 1
 let g:readline_has_bash = 1
 let g:yaml_schema = 'pyyaml'
-let g:no_pod_maps = 1
+" nvim-treesitter-textobjects
+let g:no_plugin_maps = 1
+
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3
 let g:netrw_home = expand('$XDG_CACHE_NVIM/netrw')
@@ -357,7 +347,7 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " Log {{{1 "
   call dein#add('wakatime/vim-wakatime', {
         \ 'if': executable('wakatime-cli') && executable(
-        \   expand('$HOME/.local/share/zinit/plugins/_pass/wakatime.sh')
+        \   expand('~/.local/share/zinit/plugins/_pass/wakatime.sh')
         \ ),
         \ })
   " 1}}} Log "
@@ -393,15 +383,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " 2}}} Colorscheme "
 
   " Transparent {{{2 "
-  call dein#add('mattn/vimtweak', {
-        \ 'if': has('gui_win32'),
-        \ })
-  call dein#add('mattn/transparency-windows-vim', {
-        \ 'if': has('gui_win32'),
-        \ })
-  call dein#add('t9md/vim-macvim-transparency', {
-        \ 'if': has('gui_mac'),
-        \ })
   call dein#add('Kjwon15/vim-transparent', {
         \ 'if': !has('gui_running'),
         \ })
@@ -432,12 +413,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#undotree#source()',
         \ })
   " 2}}} Sign "
-
-  " Font {{{2 "
-  call dein#add('drmikehenry/vim-fontsize', {
-        \ 'if': has('gui_running'),
-        \ })
-  " 2}}} Font "
   " 1}}} UI "
 
   " Filetype {{{1 "
@@ -466,9 +441,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   call dein#add('pseewald/vim-anyfold', {
         \ 'on_cmd': 'AnyFoldActivate',
         \ })
-  " https://github.com/neovim/tree-sitter-vimdoc/issues/166
-  call dein#add('thinca/vim-ft-help_fold')
-  call dein#add('matcatc/vim-asciidoc-folding')
   " 2}}} Fold "
 
   " Conceal {{{2 "
@@ -481,9 +453,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " 2}}} Conceal "
 
   " Ftplugin {{{2 "
-  call dein#add('Freed-Wu/sublime-syntax-language-server', {
-        \ 'rev': 'release',
-        \ })
   call dein#add('tpope/vim-dadbod')
   call dein#add('kristijanhusak/vim-dadbod-ui')
   call dein#add('tpope/vim-scriptease', {
@@ -491,13 +460,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ })
   call dein#add('mechatroner/rainbow_csv', {
         \ 'hook_source': 'call init#rainbow_csv#source()',
-        \ })
-  " https://github.com/weirongxu/coc-markdown-preview-enhanced/issues/25
-  call dein#add('iamcco/markdown-preview.nvim', {
-        \ 'if': executable('npx'),
-        \ 'hook_source': 'call init#markdown_preview#source()',
-        \ 'on_ft': ['markdown', 'pandoc', 'rmd'],
-        \ 'build': 'sh -c "cd app && npx --yes yarn install"'
         \ })
   call dein#add('Vim-cn/pdftk.vim')
   " 2}}} Ftplugin "
@@ -544,18 +506,9 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " 2}}} Repeat "
 
   " Operator {{{2 "
-  call dein#add('dbmrq/vim-chalk', {
-        \ 'hook_source': 'call init#chalk#source()',
-        \ })
   call dein#add('tommcdo/vim-exchange', {
         \ 'on_map': {'n': '-', 'x': '-'},
         \ 'hook_source': 'call init#exchange#source()',
-        \ })
-  call dein#add('kana/vim-operator-user', {
-        \ 'hook_post_source': 'call init#operator_user#post_source()',
-        \ })
-  call dein#add('kana/vim-grex', {
-        \ 'hook_source': 'call init#grex#source()',
         \ })
   call dein#add('voldikss/vim-browser-search', {
         \ 'hook_source': 'call init#browser_search#source()',
@@ -568,10 +521,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'on_map': {'n': ['yo', '[', ']', '>p', '<p', '=p', 'y<Space>']},
         \ 'hook_source': 'call init#unimpaired#source()',
         \ 'hook_post_source': 'call init#unimpaired#post_source()',
-        \ })
-  call dein#add('tommcdo/vim-express', {
-        \ 'on_map': ['g:', 'g!'],
-        \ 'hook_source': 'call init#express#source()',
         \ })
   call dein#add('tpope/vim-abolish', {
         \ 'on_map': 'cr',
@@ -589,11 +538,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'i': ['<C-G>s', '<C-G>S', '<C-S>'],
         \ },
         \ 'hook_source': 'call init#surround#source()',
-        \ })
-  call dein#add('junegunn/vim-easy-align', {
-        \ 'on_map': 'gz',
-        \ 'on_cmd': ['EasyAlign', 'LiveEasyAlign'],
-        \ 'hook_source': 'call init#easy_align#source()',
         \ })
   call dein#add('dominikduda/vim_yank_with_context')
   " 2}}} Operator "
@@ -639,10 +583,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   " 2}}} Search "
 
   " Replace {{{2 "
-  call dein#add('kurkale6ka/vim-swap', {
-        \ 'hook_source': 'call init#swap#source()',
-        \ })
-  call dein#add('lambdalisue/reword.vim')
   call dein#add('tpope/vim-speeddating')
   " 2}}} Replace "
 
@@ -656,9 +596,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
   call dein#add('Vim-cn/template.vim')
   call dein#add('mattn/emmet-vim', {
         \ 'hook_post_source': 'call init#emmet_vim#post_source()',
-        \ })
-  call dein#add('dhruvasagar/vim-table-mode', {
-        \ 'hook_source': 'call init#table_mode#source()',
         \ })
   " 2}}} Snippet "
   " 1}}} Hotkey "
@@ -786,17 +723,6 @@ if dein#load_state(expand('$XDG_DATA_NVIM'))
         \ 'hook_source': 'call init#vimux#source()',
         \ })
   " 2}}} Debug "
-
-  " Async {{{2 "
-  call dein#add('skywind3000/asyncrun.vim', {
-        \ 'on_cmd': ['AsyncRun', 'AsyncStop'],
-        \ 'hook_source': 'call init#asyncrun#source()',
-        \ })
-  call dein#add('skywind3000/asynctasks.vim', {
-        \ 'on_cmd': ['AsyncTask', 'AsyncTaskEdit', 'AsyncTaskList',
-        \ 'AsyncTaskMacro', 'AsyncTaskProfile'],
-        \ })
-  " 2}}} Async "
 
   " VCS {{{2 "
   call dein#add('rhysd/committia.vim', {

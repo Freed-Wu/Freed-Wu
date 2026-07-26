@@ -5,10 +5,10 @@ local os_getenv = os_getenv or
     function(varname)
         return require "os".getenv(varname)
     end
-local home = home or os_getenv("HOME")
+local home = home or os_getenv("HOME") or '.'
 ---@diagnostic disable: lowercase-global
 rocks_trees = {
-    { name = "user", root = home .. "/.local" },
+    { name = "user",   root = home .. "/.local" },
     { name = "system", root = "/usr" }
 }
 -- https://github.com/luarocks/luarocks/issues/1817
