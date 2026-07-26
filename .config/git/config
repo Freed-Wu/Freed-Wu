@@ -72,6 +72,8 @@
 [init]
 	defaultBranch = main
 	templateDir = ~/.config/git/templates
+	; https://github.com/libgit2/libgit2/issues/5352
+	defaultRefFormat = files
 [fetch]
 	prune = true
 	pruneTags = true

@@ -102,8 +102,6 @@ fi
 autoload -Uz run-help
 autoload -Uz zcalc
 autoload -Uz zmv
-autoload -Uz compinit &&
-  compinit -D
 autoload -Uz zmathfunc &&
   zmathfunc
 
@@ -147,6 +145,7 @@ zstyle ':completion:*' muttrc \
 zstyle ':completion:*' mail-directory ${XDG_CACHE_HOME:-$HOME/.cache}/neomutt
 zstyle ':completion:*' word true
 zstyle ':completion::complete:*' use-cache true
+zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 zstyle ':completion::complete:*' call-command true
 zstyle ':completion:*:processes' command "ps -wu$USER -opid,user,comm"
 zstyle ':completion:*:git-checkout:*' sort false
@@ -161,6 +160,16 @@ if (( $+HOMEBREW_PREFIX )); then
 # https://github.com/msys2/MSYS2-packages/issues/2997
 elif (( $+MSYSTEM_PREFIX )); then
   fpath+=$MSYSTEM_PREFIX/share/zsh/site-functions
+fi
+
+# after fpath
+autoload -Uz compinit &&
+  # https://github.com/NixOS/nixpkgs/issues/556921
+if [[ ${SHELL#$HOME/.local/share/gentoo} != $SHELL ]]; then
+  # not -C will cost 17 s
+  compinit -Cd ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump
+else
+  compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump
 fi
 
 if (( $+aliases[mv] == 0 )); then

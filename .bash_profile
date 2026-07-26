@@ -2,15 +2,15 @@
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 
-if [[ -f ~/.local/share/gentoo/startprefix ]] && [[ -z $EPREFIX ]] && [[ -z $ZSH_VERSION ]]; then
+if [[ -f ~/.local/share/gentoo/startprefix ]] && [[ -z $ZSH_VERSION ]]; then
 	# old bash source it will exit 255
 	SHELL=zsh exec ~/.local/share/gentoo/startprefix
 fi
 
 # Add ~/.local/state/nix/profile/bin to $PATH
-if [[ -f ~/.local/state/nix/profile/etc/profile.d/nix.sh ]]; then
+if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]] && [[ -z $NIX_SSL_CERT_FILE ]]; then
 	# shellcheck source=/dev/null
-	. ~/.local/state/nix/profile/etc/profile.d/nix.sh
+	. /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 fi
 
 # for tty
@@ -84,6 +84,8 @@ elif [[ $OSTYPE == linux-android ]]; then
 	else
 		export BROWSER=termux-open
 	fi
+elif [[ "${SHELL#"$HOME"/.local/share/gentoo}" != "$SHELL" ]]; then
+	PATH="/usr/local/sbin:/usr/local/bin${PATH:+:}$PATH"
 else
 	dirs=(/nix/var/nix/profiles/default/bin)
 	for dir in "${dirs[@]}"; do

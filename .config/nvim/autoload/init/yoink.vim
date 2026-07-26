@@ -12,10 +12,10 @@ function! init#yoink#source() abort
   nmap gP <Plug>(YoinkPaste_gP)
   nmap <C-P> <Plug>(YoinkPostPasteSwapBack)
   nmap <C-N> <Plug>(YoinkPostPasteSwapForward)
-  nmap [k <Plug>(YoinkRotateBack)
-  nmap ]k <Plug>(YoinkRotateForward)
-  nnoremap <silent> [K :<C-U>Yanks<CR>
-  nnoremap <silent> ]K :<C-U>ClearYanks<CR>
+  nmap [Y <Plug>(YoinkRotateBack)
+  nmap ]Y <Plug>(YoinkRotateForward)
+  nnoremap <silent> [X :<C-U>Yanks<CR>
+  nnoremap <silent> ]X :<C-U>ClearYanks<CR>
   nmap y <Plug>(YoinkYankPreserveCursorPosition)
   xmap y <Plug>(YoinkYankPreserveCursorPosition)
 endfunction

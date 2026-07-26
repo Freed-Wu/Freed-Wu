@@ -7,6 +7,7 @@ build-backend = "setuptools.build_meta"
 name = "python"
 readme = "README.md"
 requires-python = ">= 3.10"
+license = "GPL-3.0-or-later"
 keywords = [""]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -31,9 +32,6 @@ dynamic = ["version", "dependencies", "optional-dependencies"]
 [[project.authors]]
 name = "Wu, Zhenyu"
 email = "wuzhenyu@ustc.edu"
-
-[project.license]
-text = "GPL v3"
 
 [tool.setuptools.packages.find]
 where = [".config/gdb/python"]
@@ -93,7 +91,7 @@ exclude_lines = [
 
 [tool.cibuildwheel]
 archs = ["all"]
-skip = "*37-* *38-* *39-*"
+skip = "*38-* *39-*"
 build-frontend = "build[uv]"
 before-test = "pip install .[dev]"
 test-command = "pytest {project}"
