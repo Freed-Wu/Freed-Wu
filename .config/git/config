@@ -72,6 +72,8 @@
 [init]
 	defaultBranch = main
 	templateDir = ~/.config/git/templates
+	# https://github.com/libgit2/libgit2/issues/5352
+	defaultRefFormat = files
 [fetch]
 	prune = true
 	pruneTags = true
@@ -110,11 +112,11 @@
 [tag]
 	# after git 2.23
 	gpgSign = true
-[url "https://mirrors.bfsu.edu.cn/git/AOSP/"]
+[url "https://mirrors.bfsu.edu.cn/git/AOSP"]
 	insteadof = https://android.googlesource.com
 # ManifestInvalidRevisionError
 # [url "https://mirrors.bfsu.edu.cn/git/LineageOS/LineageOS"]
-	# insteadof = https://github.com/LineageOS
+# 	insteadof = https://github.com/LineageOS
 # https://github.com/romkatv/powerlevel10k/issues/2232
 [index]
 	skipHash = false

@@ -1,3 +1,7 @@
+extra_servers = [
+  "https://lux.lumen-labs.org/lux-treesitter-binaries/",
+  "https://ustctug.github.io/texrocks/",
+]
 lua_version = "5.3"
 
 [variables]

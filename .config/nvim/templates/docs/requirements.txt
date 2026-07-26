@@ -1,6 +1,3 @@
 #!/usr/bin/env -S pip install -r
 
--e .
-myst-parser
-sphinxcontrib-autofile
-sphinxcontrib-requirements-txt
+-e .[docs]

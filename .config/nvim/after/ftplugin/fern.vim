@@ -1,7 +1,7 @@
 setlocal nonumber
 setlocal norelativenumber
 
-if has('nvim')
+if has('nvim') && exists('*fern#scheme#file#hook#git#init')
     call fern#scheme#file#hook#git#init()
     nnoremap <buffer><nowait> < :<C-U>call fern#scheme#file#mapping#git#stage()<CR>
     nnoremap <buffer><nowait> > :<C-U>call fern#scheme#file#mapping#git#unstage()<CR>

@@ -28,12 +28,15 @@ end
 
 do
     local version, _ = _VERSION:gsub(".* ", "")
+    local function os_getenv(varname)
+        return require "os".getenv(varname)
+    end
+    local luarocks_config = { os_getenv = os_getenv, home = os_getenv("HOME") or '.' }
     -- ~/.config/luarocks/config-5.1.lua
-    local luarocks_config = { require = require }
     loadfile(vim.fs.normalize(vim.fs.joinpath(
         vim.fs.dirname(vim.fn.stdpath("config")), "luarocks", "config-" .. version .. ".lua"
     )), "t", luarocks_config)()
-    luarocks_config.require = nil
+    luarocks_config.os_getenv = nil
     if luarocks_config.variables == nil then
         luarocks_config.variables = {}
     end

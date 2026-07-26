@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 # /etc/skel/.bashrc
 #
-# This file is .d by all *interactive* bash shells on startup,
+# This file is sourced by all *interactive* bash shells on startup,
 # including some apparently interactive shells such as scp and rcp
 # that can't tolerate any output.  So make sure this doesn't display
 # anything or bad things will happen !

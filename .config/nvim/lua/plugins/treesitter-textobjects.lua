@@ -1,5 +1,13 @@
 -- luacheck: ignore 111 113
 ---@diagnostic disable: undefined-global
+-- https://github.com/kurkale6ka/vim-swap
+vim.keymap.set("n", "[E", function()
+  require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.inner"
+end)
+vim.keymap.set("n", "]E", function()
+  require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
+end)
+
 vim.keymap.set({ "x", "o" }, "am", function()
   require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
 end)

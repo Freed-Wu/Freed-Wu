@@ -1,52 +1,270 @@
 {
-  "parser-directories": [".."],
+  "parser-directories": [
+    "$HOME/Projects"
+  ],
   "theme": {
-    "module": 136,
-    "constructor": 136,
-    "tag": 18,
-    "variable.parameter": {
-      "underline": true
+    "-": {
+      "color": "#AE81FFA0"
     },
-    "function.builtin": {
-      "bold": true,
-      "color": 26
-    },
-    "property": 124,
-    "punctuation.bracket": 239,
     "attribute": {
-      "italic": true,
-      "color": 124
-    },
-    "number": {
-      "color": 94,
-      "bold": true
-    },
-    "punctuation.delimiter": 239,
-    "string": 28,
-    "constant.builtin": {
-      "color": 94,
-      "bold": true
-    },
-    "variable.builtin": {
-      "bold": true
+      "color": "#A6E22E"
     },
     "comment": {
+      "color": "#88846f"
+    },
+    "comment.error": {
+      "color": "#f44747"
+    },
+    "comment.note": {
+      "color": "#6796e6"
+    },
+    "comment.todo": {
+      "color": "#b267e6"
+    },
+    "constant": {
+      "color": "#66D9EF"
+    },
+    "constant.character": {
+      "color": "#AE81FF"
+    },
+    "constant.language": {
+      "color": "#AE81FF"
+    },
+    "constant.numeric": {
+      "color": "#AE81FF"
+    },
+    "constant.numeric.line-number.find-in-files": {
+      "color": "#AE81FFA0"
+    },
+    "constant.other": {
+      "color": "#AE81FF"
+    },
+    "constructor": {
+      "color": "#66D9EF",
+      "italic": true
+    },
+    "entity.name.class": {
+      "color": "#A6E22E",
+      "underline": true
+    },
+    "entity.name.filename.find-in-files": {
+      "color": "#E6DB74"
+    },
+    "entity.name.function": {
+      "color": "#A6E22E"
+    },
+    "entity.name.namespace": {
+      "color": "#A6E22E",
+      "underline": true
+    },
+    "entity.name.scope-resolution": {
+      "color": "#A6E22E",
+      "underline": true
+    },
+    "entity.name.tag": {
+      "color": "#F92672"
+    },
+    "entity.name.type": {
+      "color": "#A6E22E",
+      "underline": true
+    },
+    "entity.other.attribute-name": {
+      "color": "#A6E22E"
+    },
+    "entity.other.inherited-class": {
+      "color": "#A6E22E",
       "italic": true,
-      "color": 245
+      "underline": true
     },
-    "constant": 94,
-    "string.special": 30,
-    "embedded": null,
+    "function": {
+      "color": "#66D9EF"
+    },
+    "invalid": {
+      "color": "#F44747"
+    },
+    "invalid.deprecated": {
+      "color": "#F44747"
+    },
+    "keyword": {
+      "color": "#F92672"
+    },
+    "markup.bold": {
+      "color": "#66D9EF"
+    },
+    "markup.bold.markdown": {
+      "bold": true
+    },
+    "markup.changed": {
+      "color": "#E6DB74"
+    },
+    "markup.deleted": {
+      "color": "#F92672"
+    },
+    "markup.heading": {
+      "color": "#A6E22E"
+    },
+    "markup.heading.markdown": {
+      "bold": true
+    },
+    "markup.heading.setext": {
+      "bold": true,
+      "color": "#A6E22E"
+    },
+    "markup.inline.raw": {
+      "color": "#FD971F"
+    },
+    "markup.inserted": {
+      "color": "#A6E22E"
+    },
+    "markup.italic": {
+      "color": "#66D9EF"
+    },
+    "markup.italic.markdown": {
+      "italic": true
+    },
+    "markup.list": {
+      "color": "#E6DB74"
+    },
+    "markup.list.numbered.markdown": {
+      "color": "#f8f8f2"
+    },
+    "markup.list.unnumbered.markdown": {
+      "color": "#f8f8f2"
+    },
+    "markup.quote": {
+      "color": "#F92672"
+    },
+    "markup.quote.markdown": {
+      "color": "#75715E",
+      "italic": true
+    },
+    "markup.strikethrough": {
+      "strikethrough": true
+    },
+    "markup.underline.link.image.markdown": {
+      "color": "#E6DB74"
+    },
+    "markup.underline.link.markdown": {
+      "color": "#E6DB74"
+    },
+    "match": {
+      "color": "#AE81FFA0"
+    },
+    "meta.diff": {
+      "color": "#75715E"
+    },
+    "meta.diff.header": {
+      "color": "#75715E"
+    },
+    "meta.embedded": {
+      "color": "#F8F8F2"
+    },
+    "meta.structure.dictionary.json": {
+      "color": "#CFCFC2"
+    },
+    "meta.template.expression": {
+      "color": "#F8F8F2"
+    },
+    "module": {
+      "color": "#F92672"
+    },
+    "number": {
+      "color": "#66D9EF"
+    },
     "operator": {
-      "color": 239,
-      "bold": true
+      "color": "#F92672"
     },
-    "type.builtin": {
-      "color": 23,
-      "bold": true
+    "property": {
+      "color": "#66D9EF"
     },
-    "keyword": 56,
-    "function": 26,
-    "type": 23
+    "punctuation": {
+      "color": "#F92672"
+    },
+    "punctuation.definition.list.begin.markdown": {
+      "color": "#A6E22E"
+    },
+    "punctuation.definition.template-expression": {
+      "color": "#F92672"
+    },
+    "punctuation.section.embedded": {
+      "color": "#F92672"
+    },
+    "punctuation.separator.namespace.ruby": {
+      "color": "#A6E22E",
+      "italic": true,
+      "underline": true
+    },
+    "source.groovy.embedded": {
+      "color": "#F8F8F2"
+    },
+    "storage": {
+      "color": "#F92672"
+    },
+    "storage.type": {
+      "color": "#66D9EF",
+      "italic": true
+    },
+    "string": {
+      "color": "#E6DB74"
+    },
+    "string meta.image.inline.markdown": {
+      "color": "#F8F8F2"
+    },
+    "string.other.link.description.markdown": {
+      "color": "#AE81FF"
+    },
+    "string.other.link.title.markdown": {
+      "color": "#AE81FF"
+    },
+    "string.quoted.double.json": {
+      "color": "#CFCFC2"
+    },
+    "support.class": {
+      "color": "#66D9EF",
+      "italic": true
+    },
+    "support.constant": {
+      "color": "#66D9EF"
+    },
+    "support.function": {
+      "color": "#66D9EF"
+    },
+    "support.other.variable": {},
+    "support.type": {
+      "color": "#66D9EF",
+      "italic": true
+    },
+    "tag": {
+      "color": "#F92672"
+    },
+    "token.debug-token": {
+      "color": "#b267e6"
+    },
+    "token.error-token": {
+      "color": "#f44747"
+    },
+    "token.info-token": {
+      "color": "#6796e6"
+    },
+    "token.warn-token": {
+      "color": "#cd9731"
+    },
+    "type": {
+      "color": "#A6E22E",
+      "underline": true
+    },
+    "variable": {
+      "color": "#F8F8F2"
+    },
+    "variable.language": {
+      "color": "#FD971F"
+    },
+    "variable.legacy.builtin.python": {
+      "color": "#F8F8F2"
+    },
+    "variable.parameter": {
+      "color": "#FD971F",
+      "italic": true
+    }
   }
 }
