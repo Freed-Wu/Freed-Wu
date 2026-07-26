@@ -49,6 +49,11 @@ function! init#thematic#source() abort
         \ 'airline-theme': 'luna',
         \ 'background': 'dark',
         \ },
+        \ 'SerialExperimentsLain' :{
+        \ 'colorscheme': 'SerialExperimentsLain',
+        \ 'airline-theme': 'dark',
+        \ 'background': 'dark',
+        \ },
         \ 'dracula' :{
         \ 'colorscheme': 'dracula',
         \ 'airline-theme': 'dracula',
