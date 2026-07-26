@@ -1,5 +1,5 @@
 # Setting {{{1 #
-source ~/.local/lib/luarocks/rocks-5.1/tree-sitter-muttrc/0.1.1-1/conf/neomuttrc
+source ~/.local/lib/luarocks/rocks-5.1/tree-sitter-muttrc/0.1.4-1/conf/neomuttrc
 set sleep_time = 0
 set real_name = $DEBFULLNAME
 set history_file = ~/.local/share/neomutt/neomuttrc

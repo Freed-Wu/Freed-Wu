@@ -25,13 +25,21 @@ function! s:startify() abort
 endfunction
 
 function! s:gitModified() abort
-  let files = v:lua.require('git2.status').ls(v:true)
-  return map(files, {_, v -> {'line': nerdfont#find(v) . g:startify#renderer#nerdfont#padding . v, 'path': v}})
+  try
+    let files = v:lua.require('git2.status').ls(v:true)
+    return map(files, {_, v -> {'line': nerdfont#find(v) . g:startify#renderer#nerdfont#padding . v, 'path': v}})
+  catch /.*/
+  endtry
+  return []
 endfunction
 
 function! s:gitUntracked() abort
-  let files = v:lua.require('git2.status').ls(v:false, v:true)
-  return map(files, {_, v -> {'line': nerdfont#find(v) . g:startify#renderer#nerdfont#padding . v, 'path': v}})
+  try
+    let files = v:lua.require('git2.status').ls(v:false, v:true)
+    return map(files, {_, v -> {'line': nerdfont#find(v) . g:startify#renderer#nerdfont#padding . v, 'path': v}})
+  catch /.*/
+  endtry
+  return []
 endfunction
 
 function! init#startify#source() abort

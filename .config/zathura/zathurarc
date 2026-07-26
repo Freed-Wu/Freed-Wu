@@ -1,6 +1,8 @@
 include desktop/zathurarc
 set recolor false
+# https://github.com/latex-lsp/texlab/wiki/Previewing#zathura
 set synctex true
+set synctex-editor-command "texlab inverse-search -i %{input} -l %{line}"
 set statusbar-home-tilde true
 set window-icon-document true
 set window-title-home-tilde true
