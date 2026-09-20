@@ -325,8 +325,6 @@ in
       # nodejs {{{ #
       nodejs
       gitmoji-cli
-      # TODO: https://github.com/NixOS/nixpkgs/pull/245016
-      # nodePackages.gitmoji-chanagelog
       # }}} nodejs #
       # lua {{{ #
       lua-language-server
@@ -343,9 +341,6 @@ in
         )
       )
       # }}} lua #
-      # tcl {{{ #
-      nagelfar
-      # }}} tcl #
       # rust {{{ #
       # package manager
       uv
