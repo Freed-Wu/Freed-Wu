@@ -1,7 +1,11 @@
 function! init#init#markdown#main() abort
   setlocal iskeyword+=-
 
-  let b:browser_search_default_engine = 'google'
+  if expand('%:p:r') =~# '^zhihu://'
+    let b:browser_search_default_engine = 'zhihu'
+  else
+    let b:browser_search_default_engine = 'google'
+  endif
 
   nnoremap <silent><buffer> <LocalLeader>lv :<C-U>CocCommand markdown-preview-enhanced.openPreview<CR>
   nnoremap <silent><buffer> <LocalLeader>li :<C-U>CocCommand markdown-preview-enhanced.openImageHelper<CR>

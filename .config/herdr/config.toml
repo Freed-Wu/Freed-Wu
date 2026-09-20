@@ -1,0 +1,17 @@
+onboarding = false
+
+[ui]
+prompt_new_tab_name = false
+agent_panel_sort = "spaces"
+sidebar_start_collapsed = true
+sidebar_collapsed_mode = "hidden"
+pane_outer_borders = false
+pane_gaps = false
+
+[experimental]
+pane_history = true
+
+[keys]
+prefix = "ctrl+q"
+split_vertical = "prefix+|"
+detach = "prefix+d"

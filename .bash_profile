@@ -1,4 +1,4 @@
-# shellcheck shell=bash disable=SC2016,SC2154,SC2123
+# shellcheck shell=bash disable=SC1091,SC2016,SC2154,SC2123
 # https://github.com/koalaman/shellcheck/issues/1845
 # /etc/skel/.bash_profile
 

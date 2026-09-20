@@ -27,7 +27,7 @@ function! init#coc#source() abort
         \ 'coc-xml', 'coc-svg', 'coc-html', 'coc-css', 'coc-rust-analyzer',
         \ 'coc-docker', 'coc-sql', 'coc-db', 'coc-meson',
         \ 'coc-sh', 'coc-vimlsp', 'coc-perl', 'coc-biome',
-        \ '@yaegassy/coc-ruff', '@yaegassy/coc-ty', 'coc-lua', 'coc-solargraph',
+        \ '@yaegassy/coc-ruff', '@yaegassy/coc-ty', 'coc-luals', 'coc-solargraph',
         \ 'coc-clangd', 'hyuga-vscode-client', 'coc-alex'
         \ ]
   if $ANDROID_DATA !=# '/data' && $ANDROID_ROOT !=# '/system'
@@ -76,7 +76,6 @@ function! init#coc#source() abort
         \ 'yacc': 'c',
         \ 'gel': 'cpp',
         \ 'lnk': 'c',
-        \ 'teal': 'lua',
         \ 'text.vim_template': 'jinja',
         \ }
   " nvim-treesitter-textobjects

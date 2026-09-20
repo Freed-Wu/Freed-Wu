@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2046
+# shellcheck disable=SC1091,SC2046
 # setup Ubuntu focal of github codespace
 # Debug:
 # 	gh cs cp -e remote:/workspaces/.codespaces/.persistedshare/creation.log .

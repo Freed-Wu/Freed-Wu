@@ -15,8 +15,8 @@ rocks_trees = {
 local_by_default = true
 rocks_servers = {
     "https://lux.lumen-labs.org/lux-treesitter-binaries/",
-    "https://ustctug.github.io/texrocks/",
     "https://luarocks.org/",
+    "https://ustctug.github.io/texrocks/",
 }
 if os_getenv("NIXPKGS_CONFIG") == "/etc/nix/nixpkgs-config.nix" then
     external_deps_dirs = { "/run/current-system/sw", home .. "/.local/state/nix/profile" }

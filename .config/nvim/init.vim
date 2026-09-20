@@ -1,4 +1,7 @@
 " Prefix {{{1 "
+if has('nvim') && v:lua.require('plugins').main()
+  finish
+endif
 scriptencoding utf-8
 
 " compatibility for vim
@@ -251,14 +254,6 @@ xnoremap zK zkzMzv
 onoremap zJ zjzMzv
 onoremap zK zkzMzv
 
-if has('nvim')
-  lua require"init"
-endif
-if get(g:, 'script_name', '') !=# ''
-  " don't load any config for plugins
-  set runtimepath-=~/.config/nvim
-  finish
-endif
 if has('pythonx') && exists('$PYTHONSTARTUP')
   pyxfile $PYTHONSTARTUP
 endif
