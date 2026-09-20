@@ -13,7 +13,7 @@ let
   nur =
     import
       (fetchTarball {
-        url = "https://github.com/nix-community/NUR/archive/5f08ce8e58b86e4cdbad40cefc702a3e462dcf0d.tar.gz";
+        url = "https://github.com/nix-community/NUR/archive/50f6a4cb9e9eb66efe33ad966f07e4f0f12cf135.tar.gz";
       })
       {
         inherit pkgs;
@@ -249,7 +249,8 @@ in
       nur.repos.Freed-Wu.gopass-symlinks
       man-pages
       man-pages-posix
-      windows10-icons
+      # Inherits=breeze,hicolor
+      # windows10-icons
       # TODO: https://github.com/NixOS/nixpkgs/pull/484334
       nur.repos.Freed-Wu.windows10-themes
       nur.repos.Freed-Wu.stardict-ecdict
@@ -325,8 +326,6 @@ in
       # nodejs {{{ #
       nodejs
       gitmoji-cli
-      # TODO: https://github.com/NixOS/nixpkgs/pull/245016
-      # nodePackages.gitmoji-chanagelog
       # }}} nodejs #
       # lua {{{ #
       lua-language-server
@@ -343,9 +342,6 @@ in
         )
       )
       # }}} lua #
-      # tcl {{{ #
-      nagelfar
-      # }}} tcl #
       # rust {{{ #
       # package manager
       uv
@@ -364,7 +360,6 @@ in
       ripgrep-all
       fd
       hexyl
-      vivid
       onefetch
       asciinema-agg
       wl-clipboard-rs
@@ -410,7 +405,7 @@ in
       shfmt
       # LSP
       jq-lsp
-      typescript-go
+      typescript
       # }}} go #
       # haskell {{{ #
       # linter
