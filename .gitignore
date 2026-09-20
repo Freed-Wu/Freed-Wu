@@ -328,6 +328,8 @@
 !/.config/lux/
 !/.config/luarocks/
 /.config/luarocks/upload_config.lua
+# https://github.com/koalaman/shellcheck/pull/3513
+!/.config/editorconfig.ini
 
 # $XDG_DATA_HOME
 !/.local/

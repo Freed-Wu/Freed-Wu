@@ -19,7 +19,6 @@ octave = "matlab"
 "math-conceal.nvim" = "0.2.2-1"
 "helpview.nvim" = "2.2.0-1"
 "screenkey.nvim" = "2.4.2-1"
-"fugit2.nvim" = "0.2.1-1"
 
 nvim-treesitter-textobjects = "scm-3"
 nvim-treesitter-context = "1.0.0-1"
