@@ -125,11 +125,11 @@ and
 my recent status
 </summary>
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=Freed-Wu&theme=dracula&column=-1&no-bg=true&no-frame=true)](https://github.com/Freed-Wu)
+[![trophy](https://github-profile-trophy-mu-pink.vercel.app/?username=Freed-Wu&theme=dracula&column=-1&no-bg=true&no-frame=true)](https://github.com/Freed-Wu)
 
-[![stats](https://github-readme-stats.vercel.app/api?username=Freed-Wu&theme=dracula&show_icons=true&count_private=true&line_height=28)](https://github.com/Freed-Wu)
-[![top langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Freed-Wu&theme=dracula&layout=compact&langs_count=10)](https://github.com/Freed-Wu)
-[![wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=wzy&theme=dracula&layout=compact&langs_count=10&range=last_7_days)](https://wakatime.com/@wzy)
+[![stats](https://github-stats-extended.vercel.app/api?username=Freed-Wu&theme=dracula&show_icons=true&count_private=true&line_height=28)](https://github.com/Freed-Wu)
+[![top langs](https://github-stats-extended.vercel.app/api/top-langs/?username=Freed-Wu&theme=dracula&layout=compact&langs_count=10)](https://github.com/Freed-Wu)
+[![wakatime stats](https://github-stats-extended.vercel.app/api/wakatime?username=wzy&theme=dracula&layout=compact&langs_count=10&range=last_7_days)](https://wakatime.com/@wzy)
 
 </details>
 

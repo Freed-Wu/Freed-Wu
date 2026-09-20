@@ -6,6 +6,7 @@
   ["S&tartify", "Startify"],
   ["&Undotree", "UndotreeToggle"],
   ["Filet&ype", "call init#init#filetype#edit()"],
+  ["&CocLocalConfig", "CocLocalConfig"],
   ["--"],
   ["&View", "lua require'zhihu.nvim'.open()"]
 ]

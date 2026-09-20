@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=bash disable=SC1091
 # /etc/skel/.bashrc
 #
 # This file is sourced by all *interactive* bash shells on startup,

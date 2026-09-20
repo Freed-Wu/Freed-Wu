@@ -1,6 +1,7 @@
 $out_dir = 'build';
 
 $show_time               = 1;
+# without Makefile
 $dependents_phony        = 1;
 $do_cd                   = 1;
 $preview_continuous_mode = 1;
@@ -10,6 +11,7 @@ $bibtex_use              = 1.5;
 push @default_files, '*.dtx';
 push @default_files, '*.tikz';
 
+# xelatex
 $pdf_mode = 5;
 $pdflatex = 'pdflatex -shell-escape -file-line-error -synctex=1 %O %S';
 $xelatex =
