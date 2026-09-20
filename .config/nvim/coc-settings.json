@@ -182,7 +182,7 @@
   "markdown-preview-enhanced.enableScriptExecution": true,
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
   "mesonbuild.downloadLanguageServer": false,
-  "perl.enable": true,
+  "perlnavigator.enable": true,
   "pydocstring.enableFileAction": true,
   "python.sortImports.path": "",
   "pyright.testing.provider": "pytest",

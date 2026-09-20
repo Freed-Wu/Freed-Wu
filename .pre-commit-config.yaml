@@ -59,11 +59,6 @@ repos:
     rev: 3.0.0
     hooks:
       - id: check-mailmap
-      # https://github.com/koalaman/shellcheck/issues/2909
-      - id: shellcheck
-        exclude: /PKGBUILD\.vim$
-        exclude_types:
-          - zsh
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.12
     hooks:
@@ -87,13 +82,13 @@ repos:
           - mdformat-config
           - mdformat-web
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.2
+    rev: v0.23.3
     hooks:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20260826.01"
+    rev: "20260826.02"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -101,10 +96,13 @@ repos:
     hooks:
       - id: shfmt
         exclude: /PKGBUILD\.vim$
-        exclude_types:
-          - zsh
+  - repo: https://github.com/Freed-Wu/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+      - id: shellcheck
+        exclude: /PKGBUILD\.vim$
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.7
+    rev: v0.16.8
     hooks:
       - id: ruff-check
       - id: ruff-format
@@ -138,7 +136,8 @@ repos:
 
 ci:
   skip:
+    # https://github.com/pre-commit-ci/runner-image/pull/342
     - nixfmt
-    # - ty
     - shellcheck
+    # - ty
   autoupdate_branch: dev
