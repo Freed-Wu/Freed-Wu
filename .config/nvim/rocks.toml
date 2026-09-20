@@ -7,10 +7,11 @@ text = "comment"
 octave = "matlab"
 
 [plugins]
-"rocks-config.nvim" = "3.1.2-1"
+"rocks-config.nvim" = "3.2.0-1"
 
-"prompt-style" = "0.0.13-1"
-"git2.nvim" = "0.0.15-1"
+"nvimp" = "0.1.1-1"
+"nvim-notify" = "3.15.0-1"
+"git2.nvim" = "0.0.19-1"
 "ime.nvim" = "0.0.9-1"
 "code-stats.nvim" = "0.1.2-1"
 "zhihu.nvim" = "0.1.4-1"
@@ -19,7 +20,6 @@ octave = "matlab"
 "math-conceal.nvim" = "0.2.2-1"
 "helpview.nvim" = "2.2.0-1"
 "screenkey.nvim" = "2.4.2-1"
-"fugit2.nvim" = "0.2.1-1"
 
 nvim-treesitter-textobjects = "scm-3"
 nvim-treesitter-context = "1.0.0-1"
@@ -378,7 +378,7 @@ version = "5.6.3-1"
 pin = true
 
 [plugins."rime.nvim"]
-version = "0.2.17-1"
+version = "0.2.18-1"
 pin = true
 
 [plugins."tellenc.nvim"]

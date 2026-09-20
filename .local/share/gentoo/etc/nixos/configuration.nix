@@ -13,7 +13,7 @@ let
   nur =
     import
       (fetchTarball {
-        url = "https://github.com/nix-community/NUR/archive/5f08ce8e58b86e4cdbad40cefc702a3e462dcf0d.tar.gz";
+        url = "https://github.com/nix-community/NUR/archive/b713edd796ca5a318b05a4018e8c740dbe021462.tar.gz";
       })
       {
         inherit pkgs;
@@ -325,8 +325,6 @@ in
       # nodejs {{{ #
       nodejs
       gitmoji-cli
-      # TODO: https://github.com/NixOS/nixpkgs/pull/245016
-      # nodePackages.gitmoji-chanagelog
       # }}} nodejs #
       # lua {{{ #
       lua-language-server
@@ -343,9 +341,6 @@ in
         )
       )
       # }}} lua #
-      # tcl {{{ #
-      nagelfar
-      # }}} tcl #
       # rust {{{ #
       # package manager
       uv
@@ -364,7 +359,6 @@ in
       ripgrep-all
       fd
       hexyl
-      vivid
       onefetch
       asciinema-agg
       wl-clipboard-rs
@@ -410,7 +404,7 @@ in
       shfmt
       # LSP
       jq-lsp
-      typescript-go
+      typescript
       # }}} go #
       # haskell {{{ #
       # linter

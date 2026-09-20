@@ -1,6 +1,5 @@
 [
-  ["Fu&git2", "Fugit2"],
-  ["Fugit2&Blame", "Fugit2Blame"],
+  ["Git &Blame", "Git blame"],
   ["&Add All", "Git add -A"],
   ["Add %(&.)", "Git add %"]
 ]
