@@ -1,10 +1,7 @@
-#import "@preview/cetz:0.4.2"
-#import cetz.draw: rect, line
+#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 
 #set page(width: auto, height: auto, margin: 0pt)
 
-#let arrow_style = (end: "stealth", fill: black, scale: 0.7)
-
-#cetz.canvas({
+#diagram(
   {% here %}
-})
+)
