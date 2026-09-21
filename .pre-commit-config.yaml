@@ -82,13 +82,13 @@ repos:
           - mdformat-config
           - mdformat-web
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.2
+    rev: v0.23.3
     hooks:
       - id: markdownlint-cli2
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20260826.01"
+    rev: "20260826.02"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -97,12 +97,12 @@ repos:
       - id: shfmt
         exclude: /PKGBUILD\.vim$
   - repo: https://github.com/Freed-Wu/shellcheck-precommit
-    rev: 0.11.0
+    rev: v0.11.0
     hooks:
       - id: shellcheck
         exclude: /PKGBUILD\.vim$
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.7
+    rev: v0.16.8
     hooks:
       - id: ruff-check
       - id: ruff-format
