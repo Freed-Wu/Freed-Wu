@@ -88,7 +88,7 @@ repos:
         additional_dependencies:
           - markdown-it-texmath
   - repo: https://github.com/perltidy/perltidy
-    rev: "20260826.02"
+    rev: "20260826.03"
     hooks:
       - id: perltidy
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -102,7 +102,7 @@ repos:
       - id: shellcheck
         exclude: /PKGBUILD\.vim$
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.8
+    rev: v0.16.9
     hooks:
       - id: ruff-check
       - id: ruff-format
