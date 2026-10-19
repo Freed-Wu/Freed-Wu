@@ -68,7 +68,7 @@ function M.main()
     vim.g.rocks_nvim = M.get_rocks_nvim()
     -- add ~/.local/lib/luarocks/rocks-5.1/rocks.nvim/X.Y.Z-1 to runtimepath
     vim.opt.runtimepath:append(M.get_runtimepath())
-    M.set_path()
+    M.set_path(vim.g.rocks_nvim.luarocks_config.rocks_trees)
     if M.is_batch(vim.v.argv) then
         return true
     end
@@ -103,22 +103,26 @@ end
 
 ---add ~/.local/share/lua/5.1 to package.path
 ---add ~/.local/lib/lua/5.1 to package.cpath
-function M.set_path()
+---@param trees table
+function M.set_path(trees)
     if M.is_venv() then
         return
     end
     local expand = vim.fn.expand
     local version = M.get_version()
     local ext = package.cpath:match('([^.]+)$')
+    for _, tree in ipairs(trees) do
+        local lua_dir = tree.lua_dir or tree.root .. "/share/lua/" .. version
+        local lib_dir = tree.lib_dir or tree.root .. "/lib/lua/" .. version
+        package.path = package.path .. ";" .. lua_dir .. "/?.lua;" .. lua_dir .. "/?/init.lua"
+        package.cpath = package.cpath .. ";" .. lib_dir .. "/?." .. ext
+    end
     package.path = package.path
         .. ";./share/lua/" .. version .. "/?.lua;./?.lua;./?/init.lua;;"
-        .. ";" .. expand("~/.local/share/lua/") .. version .. "/?.lua"
-        .. ";" .. expand("~/.local/share/lua/") .. version .. "/?/init.lua"
         .. ";" .. expand("~/.local/state/nix/profile/share/lua/") .. version .. "/?.lua"
         .. ";" .. expand("~/.local/state/nix/profile/share/lua/") .. version .. "/?/init.lua"
     package.cpath = package.cpath
         .. ";./lib/lua/" .. version .. "/?." .. ext .. ";./?." .. ext
-        .. ";" .. expand("~/.local/lib/lua/") .. version .. "/?." .. ext
         .. ";" .. expand("~/.local/state/nix/profile/share/lua/") .. version .. "/?." .. ext
     local f = io.open("/run/current-system/nixos-version")
     if f then
