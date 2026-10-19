@@ -1,4 +1,14 @@
 {
+  "Lua.codeLens.enable": true,
+  "Lua.completion.callSnippet": "Both",
+  "Lua.hint.setType": true,
+  "Lua.misc.executablePath": "lua-language-server",
+  "Lua.misc.parameters": [
+    "--metapath",
+    "~/.cache/lua-language-server/meta",
+    "--logpath",
+    "~/.cache/lua-language-server/log"
+  ],
   "cmake.lsp.enable": true,
   "cSpell.allowCompoundWords": true,
   "coc.preferences.enableMarkdown": true,
@@ -12,13 +22,30 @@
   "coc.source.word.shortcut": "",
   "dash-complete.shortcut": "-",
   "diagnostic-languageserver.filetypes": {
-    "c": ["cppcheck"],
-    "cpp": ["cppcheck"],
-    "elixir": ["mix_credo", "mix_credo_compile"],
-    "php": ["phpstan", "psalm"],
-    "systemd": ["systemd-analyze"],
-    "vim": ["vint"],
-    "yaml": ["yamllint", "actionlint"]
+    "c": [
+      "cppcheck"
+    ],
+    "cpp": [
+      "cppcheck"
+    ],
+    "elixir": [
+      "mix_credo",
+      "mix_credo_compile"
+    ],
+    "php": [
+      "phpstan",
+      "psalm"
+    ],
+    "systemd": [
+      "systemd-analyze"
+    ],
+    "vim": [
+      "vint"
+    ],
+    "yaml": [
+      "yamllint",
+      "actionlint"
+    ]
   },
   "diagnostic-languageserver.formatFiletypes": {
     "blade": "blade-formatter",
@@ -33,7 +60,10 @@
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
   "dot-complete.shortcut": ".",
-  "git.gitlab.hosts": ["gitlab.com", "gitee.com"],
+  "git.gitlab.hosts": [
+    "gitlab.com",
+    "gitee.com"
+  ],
   "git.showCommitInFloating": true,
   "git.virtualTextPrefix": "",
   "github-copilot.statusIcon": "",
@@ -42,106 +72,174 @@
   "languageserver": {
     "arduino": {
       "command": "arduino-language-server",
-      "filetypes": ["arduino"]
+      "filetypes": [
+        "arduino"
+      ]
     },
     "asm": {
       "command": "asm-lsp",
-      "filetypes": ["asm", "nasm", "fasm", "masm"]
+      "filetypes": [
+        "asm",
+        "nasm",
+        "fasm",
+        "masm"
+      ]
     },
     "bash": {
       "command": "termux-language-server",
-      "filetypes": ["sh"]
+      "filetypes": [
+        "sh"
+      ]
     },
     "bitbake": {
       "command": "bitbake-language-server",
-      "filetypes": ["bitbake"]
+      "filetypes": [
+        "bitbake"
+      ]
     },
     "config": {
       "command": "autotools-language-server",
-      "filetypes": ["config"]
+      "filetypes": [
+        "config"
+      ]
     },
     "expect": {
       "command": "expect-language-server",
-      "filetypes": ["expect"]
+      "filetypes": [
+        "expect"
+      ]
     },
     "fennel": {
       "command": "fennel-ls",
-      "filetypes": ["fennel"]
+      "filetypes": [
+        "fennel"
+      ]
     },
     "jinja": {
       "command": "jinja-lsp",
-      "filetypes": ["jinja"]
+      "filetypes": [
+        "jinja"
+      ]
     },
     "ltex": {
       "command": "ltex-ls-plus",
-      "filetypes": ["plaintext", "markdown", "latex", "bibtex"]
+      "filetypes": [
+        "plaintext",
+        "markdown",
+        "latex",
+        "bibtex"
+      ]
     },
     "make": {
       "command": "make-ls",
-      "filetypes": ["make"]
+      "filetypes": [
+        "make"
+      ]
     },
     "markdown": {
       "command": "panache",
-      "args": ["lsp"],
-      "filetypes": ["markdown"]
+      "args": [
+        "lsp"
+      ],
+      "filetypes": [
+        "markdown"
+      ]
     },
     "matlab": {
       "command": "octave-lsp",
-      "filetypes": ["matlab"]
+      "filetypes": [
+        "matlab"
+      ]
     },
     "mutt": {
       "command": "mutt-language-server",
-      "filetypes": ["muttrc"]
+      "filetypes": [
+        "muttrc"
+      ]
     },
     "qml": {
       "command": "qmlls",
-      "filetypes": ["qml"]
+      "filetypes": [
+        "qml"
+      ]
     },
     "query": {
       "command": "ts_query_ls",
-      "filetypes": ["query"]
+      "filetypes": [
+        "query"
+      ]
     },
     "requirements": {
       "command": "requirements-language-server",
-      "filetypes": ["requirements"]
+      "filetypes": [
+        "requirements"
+      ]
     },
     "scala": {
       "command": "metals",
-      "filetypes": ["scala"]
+      "filetypes": [
+        "scala"
+      ]
     },
     "svls": {
       "command": "svls",
-      "filetypes": ["systemverilog"]
+      "filetypes": [
+        "systemverilog"
+      ]
     },
     "teal": {
       "command": "teal-language-server",
-      "filetypes": ["teal"]
+      "filetypes": [
+        "teal"
+      ]
     },
     "tcl": {
       "command": "tcl-ls",
-      "filetypes": ["tcl"]
+      "filetypes": [
+        "tcl"
+      ]
     },
     "tmux": {
       "command": "tmux-language-server",
-      "filetypes": ["tmux"]
+      "filetypes": [
+        "tmux"
+      ]
     },
     "typst": {
       "command": "tinymist",
-      "args": ["lsp"],
+      "args": [
+        "lsp"
+      ],
       "settings": {
         "formatterMode": "typstyle"
       },
-      "filetypes": ["typst"]
+      "filetypes": [
+        "typst"
+      ]
     },
     "typescript": {
       "command": "tsgo",
-      "args": ["--lsp", "--stdio"],
-      "filetypes": ["typescript", "typescriptreact", "javascript", "javascriptreact"],
-      "rootPatterns": ["tsconfig.json", "jsconfig.json", ".git/"]
+      "args": [
+        "--lsp",
+        "--stdio"
+      ],
+      "filetypes": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact"
+      ],
+      "rootPatterns": [
+        "tsconfig.json",
+        "jsconfig.json",
+        ".git/"
+      ]
     },
     "zathura": {
       "command": "zathura-language-server",
-      "filetypes": ["zathurarc"]
+      "filetypes": [
+        "zathurarc"
+      ]
     }
   },
   "leetcode.language": "cpp",
@@ -177,7 +275,10 @@
     "u": "feedkeys:<PageUp>",
     "x": "action:delete"
   },
-  "list.source.files.args": ["--hidden", "--files"],
+  "list.source.files.args": [
+    "--hidden",
+    "--files"
+  ],
   "luals.nvimLua.enable": true,
   "markdown-preview-enhanced.enableScriptExecution": true,
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
@@ -225,20 +326,34 @@
     "typeParameter": "",
     "default": ""
   },
-  "suggest.invalidInsertCharacters": ["(", "<", "{", "[", "\r", "\n"],
+  "suggest.invalidInsertCharacters": [
+    "(",
+    "<",
+    "{",
+    "[",
+    "\r",
+    "\n"
+  ],
   "suggest.snippetIndicator": "",
   "suggest.triggerAfterInsertEnter": true,
   "tasks.shortcut": "",
   "texlab.build.onSave": true,
   "texlab.build.executable": "llmk",
-  "texlab.build.args": ["%f"],
+  "texlab.build.args": [
+    "%f"
+  ],
   "texlab.build.forwardSearchAfter": true,
   "texlab.chktex.onEdit": true,
   "texlab.chktex.onOpenAndSave": true,
   "texlab.forwardSearch.executable": "zathura",
-  "texlab.forwardSearch.args": ["--synctex-forward=%l:1:%f", "%p"],
+  "texlab.forwardSearch.args": [
+    "--synctex-forward=%l:1:%f",
+    "%p"
+  ],
   "translator.enableHover": true,
-  "translator.engines": ["google"],
+  "translator.engines": [
+    "google"
+  ],
   "translator.proxy": "socks://127.0.0.1:1080",
   "yaml.format.singleQuote": true,
   "yank.highlight.enable": false
