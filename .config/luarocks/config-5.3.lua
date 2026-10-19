@@ -9,7 +9,12 @@ local home = home or os_getenv("HOME") or '.'
 ---@diagnostic disable: lowercase-global
 rocks_trees = {
     { name = "user",   root = home .. "/.local" },
-    { name = "system", root = "/usr" }
+    {
+        name = "system",
+        root = os_getenv("PREFIX") or
+            os_getenv("MINGW_PREFIX") or os_getenv("NIX_PATH") and
+            "/run/current-system/sw" or "/usr"
+    }
 }
 -- https://github.com/luarocks/luarocks/issues/1817
 local_by_default = true

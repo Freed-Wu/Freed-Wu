@@ -12,8 +12,8 @@ octave = "matlab"
 "nvimp" = "0.1.1"
 "nvim-notify" = "3.15.0"
 "git2.nvim" = "0.0.19"
-"ime.nvim" = "0.0.9"
-"code-stats.nvim" = "0.1.2"
+"ime.nvim" = "0.0.10"
+"code-stats.nvim" = "0.1.4"
 "zhihu.nvim" = "0.1.4"
 
 "wordmotion.nvim" = "0.0.10"
@@ -378,7 +378,7 @@ version = "5.6.3"
 pin = true
 
 [plugins."rime.nvim"]
-version = "0.2.19"
+version = "0.2.20"
 pin = true
 
 [plugins."tellenc.nvim"]
