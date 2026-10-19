@@ -67,7 +67,6 @@ set wrapscan
 set ignorecase
 set hlsearch
 set showmatch
-set foldmethod=syntax
 set showcmd
 set scrolloff=3
 set virtualedit=block
@@ -98,6 +97,9 @@ set background=dark
 set titlestring=%<%F\ %{nerdfont#find()}%=%P%l/%L%c
 set clipboard=unnamed
 set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-CursorIM/lCursorIM,r-cr-o:hor20-CursorIM/lCursorIM
+if &foldmethod ==# 'manual'
+  set foldmethod=syntax
+endif
 " call systemlist() will meet:
 " /usr/bin/zsh: can''t open input files: /s
 if &shell !~# 'cmd'
@@ -140,7 +142,9 @@ let g:python_highlight_all = 1
 let g:readline_has_bash = 1
 let g:yaml_schema = 'pyyaml'
 " nvim-treesitter-textobjects
-let g:no_plugin_maps = 1
+if has('nvim')
+  let g:no_plugin_maps = 1
+endif
 
 let g:netrw_banner = 0
 let g:netrw_liststyle= 3

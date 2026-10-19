@@ -14,9 +14,6 @@
 permissions:
   contents: write
 
-env:
-  files: dist/*
-
 # disable windows
 # invalid path '.password-store/https:/test.pypi.org/legacy/__token__.gpg'
 jobs:
@@ -29,8 +26,8 @@ jobs:
           - macos-latest
     runs-on: ${{matrix.runs-on}}
     steps:
+      - uses: astral-sh/setup-uv@v10.3.3
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
       - name: Build
         run: |
           uv build
@@ -39,12 +36,12 @@ jobs:
         with:
           name: artifact-${{matrix.runs-on}}
           path: |
-            ${{env.files}}
-      - uses: softprops/action-gh-release@v2
+            dist/*
+      - uses: softprops/action-gh-release@v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ${{env.files}}
+            dist/*
 
   publish:
     runs-on: ubuntu-latest
@@ -52,7 +49,12 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: |
+            ${{secrets.DOCKER_USERNAME}}/freed-wu
+            ghcr.io/${{github.repository}}
       - uses: docker/login-action@v4
         if: github.event_name != 'pull_request'
         with:
@@ -64,12 +66,6 @@ jobs:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
-      - id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ${{secrets.DOCKER_USERNAME}}/freed-wu
-            ghcr.io/${{github.repository}}
       - uses: docker/build-push-action@v7
         with:
           context: .
