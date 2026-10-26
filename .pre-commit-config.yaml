@@ -82,7 +82,7 @@ repos:
           - mdformat-config
           - mdformat-web
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.3
+    rev: v0.24.0
     hooks:
       - id: markdownlint-cli2
         additional_dependencies:
@@ -102,7 +102,7 @@ repos:
       - id: shellcheck
         exclude: /PKGBUILD\.vim$
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.1
+    rev: v0.17.2
     hooks:
       - id: ruff-check
       - id: ruff-format
@@ -126,7 +126,7 @@ repos:
     hooks:
       - id: luacheck
   - repo: https://github.com/rubocop/rubocop
-    rev: v1.92.0
+    rev: v1.92.1
     hooks:
       - id: rubocop
   - repo: https://github.com/NixOS/nixfmt
